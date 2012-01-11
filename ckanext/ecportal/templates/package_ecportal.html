@@ -1,16 +1,3 @@
-<!-- <form id="package-edit" class="package_create_form ckan" method="post"  -->
-<!--   py:attrs="{'class':'has-errors'} if errors else {}" -->
-<!--   xmlns:i18n="http://genshi.edgewall.org/i18n" -->
-<!--   xmlns:py="http://genshi.edgewall.org/" -->
-<!--   xmlns:xi="http://www.w3.org/2001/XInclude"> -->
-
-<!-- <div class="error-explanation" py:if="error_summary"> -->
-<!-- <h2>Errors in form</h2> -->
-<!-- <p>The form contains invalid entries:</p> -->
-<!-- <ul> -->
-<!--   <li py:for="key, error in error_summary.items()">${"%s: %s" % (key, error)}</li> -->
-<!-- </ul> -->
-<!-- </div> -->
 <form id="dataset-edit" method="post" 
   py:attrs="{'class':'has-errors'} if errors else {}"
   xmlns:i18n="http://genshi.edgewall.org/i18n"
@@ -318,17 +305,6 @@
     <dd class="instructions further">This should be taken from The National Archives' Legislation website, and where possible be a link directly to the relevant section of the Act.</dd>
     <dd class="hints">For example Public Record Act s.2 would be: http://www.legislation.gov.uk/id/ukpga/Eliz2/6-7/51/section/2</dd>
 
-    <dt><label class="field_opt" for="license_id">Licence *</label></dt>
-    <dd>
-      <select id="license_id" name="license_id">
-        <py:for each="licence_desc, licence_id in c.licences">
-          <option value="${licence_id}" py:attrs="{'selected': 'selected' if data.get('license_id', 'uk-ogl') == licence_id else None}" >${licence_desc}</option>
-        </py:for>
-      </select>
-    </dd>
-    <dd class="instructions basic">The licence under which the dataset is released.</dd>
-    <dd class="instructions further">For most situations of central Departments' and Local Authority data, this should be the 'Open Government Licence'. If you wish to release the data under a different licence, please contact the <a href="mailto:PublicData@nationalarchives.gsi.gov.uk">Public Data and Transparency Team</a>.</dd>
-
     <dt><label class="field_opt" for="tags">Tags</label></dt>
     <dd>
       <input class="long tagComplete" data-tagcomplete-queryparam="incomplete" 
@@ -348,30 +324,6 @@
 
   </dl>
 </fieldset>
-
-<!-- <hr /> -->
-<!-- <label for="log_message">Edit summary (briefly describe the changes you have made)</label> -->
-<!-- <textarea id="log_message" name="log_message" class="short wide"></textarea> -->
-
-<!-- <div class="ckan-logged-in" style="display: none;"> -->
-<!--   <p>Author: ${c.author}</p> -->
-<!-- </div> -->
-<!-- <div class="ckan-logged-out"> -->
-<!--   <label>Author: ${c.author}</label> -->
-<!--   <p class="hints"> -->
-<!--   Since you have not signed in this will just be your IP address. -->
-<!--   <a href="${h.url_for(controller='user', action='login', id=None)}" target="_blank">Click here to sign in</a> before saving (opens in new window). -->
-<!--   </p> -->
-<!-- </div> -->
-
-<!-- <div class="submit"> -->
-<!--   <input name="preview" type="submit" value="Preview" /> -->
-<!--   <input id="save" name="save" type="submit" value="Save" /> -->
-<!-- </div> -->
-<!-- <p class="hints"> -->
-<!-- <strong>Important:</strong> By submitting content, you agree to release your contributions -->
-<!--   under the open license specified on the <a href="/license">license page</a>. Please <strong>refrain</strong> from editing this page if you are <strong>not</strong> happy to do this. -->
-<!-- </p> -->
 
 <label for="log_message" class="edit-summary">Edit summary (briefly describe the changes you have made)</label>
 <textarea id="log_message" name="log_message" class="edit-summary short wide">${data.get('log_message', '')}</textarea>
