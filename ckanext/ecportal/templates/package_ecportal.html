@@ -124,12 +124,12 @@
     <dd class="instructions basic">The organisation (usually a public body) credited with or associated with the publication of this data.</dd>
     <dd class="instructions further">Often datasets are associated with both a government department and an outside agency, in which case this field should store the department and "Published via" should store the agency. When an organisation is not listed, please request it using the form found in your data.gov.uk user page under the "Publishers" tab. An asterisk (*) denotes an pre-existing value for this field, which is allowed, but the current user's permissions would not be able to change a package\s publisher to this value.</dd>
 
-    <!-- <dt><label class="field_opt" for="date_released">Date released</label></dt> -->
-    <!-- <dd><input id="date_released" name="date_released" size="40" type="text" value="${data.get('date_released', '')}" /></dd> -->
-    <!-- <dd class="instructions basic">The date of the official release of the initial version of the dataset</dd> -->
-    <!-- <dd class="instructions further">This is probably not the date that it is uploaded to data.gov.uk. Be careful not to confuse a new 'version' of some data with a new dataset covering another time period or geographic area.</dd> -->
-    <!-- <dd class="hints">DD/MM/YYYY</dd> -->
-    <!-- <dd class="field_error" py:if="errors.get('date_released', '')">${errors.get('date_released', '')}</dd> -->
+    <dt><label class="field_opt" for="release_date">Release Date</label></dt>
+    <dd><input id="release_date" name="release_date" size="40" type="text" value="${data.get('release_date', '')}" /></dd>
+    <dd class="instructions basic">The date of the official release of the initial version of the dataset</dd>
+    <!-- <dd class="instructions further"></dd> -->
+    <dd class="hints">YYYY-MM-DD</dd>
+    <dd class="field_error" py:if="errors.get('release_date', '')">${errors.get('release_date', '')}</dd>
 
     <!-- <dt><label class="field_opt" for="date_updated">Date updated</label></dt> -->
     <!-- <dd><input id="date_updated" name="date_updated" size="40" type="text" value="${data.get('date_updated', '')}"/></dd> -->
