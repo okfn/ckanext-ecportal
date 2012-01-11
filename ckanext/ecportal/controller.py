@@ -13,40 +13,11 @@ import ckan.logic.validators as val
 import ckan.logic.schema as default_schema
 from ckan.controllers.package import PackageController
 from field_types import GeoCoverageType
+from field_values import type_of_dataset, publishers, geographic_granularity,\
+    update_frequency, temporal_granularity 
 
 import logging
 log = logging.getLogger(__name__)
-
-type_of_dataset = [('', ''),
-                   ('primary legal materials', 'primary legal materials'),
-                   ('government operation records', 'government operation records'),
-                   ('civic capital', 'civic capital')]
-
-geographic_granularity = [('', ''),
-                          ('national', 'national'),
-                          ('regional', 'regional'),
-                          ('local authority', 'local authority'),
-                          ('ward', 'ward'),
-                          ('point', 'point'),
-                          ('other', 'other - please specify')]
-
-update_frequency = [('', ''),
-                    ('never', 'never'),
-                    ('discontinued', 'discontinued'),
-                    ('annual', 'annual'),
-                    ('quarterly', 'quarterly'),
-                    ('monthly', 'monthly'),
-                    ('other', 'other - please specify')]
-
-temporal_granularity = [("",""),
-                       ("year","year"),
-                       ("quarter","quarter"),
-                       ("month","month"),
-                       ("week","week"),
-                       ("day","day"),
-                       ("hour","hour"),
-                       ("point","point"),
-                       ("other","other - please specify")]
 
 
 class ECPortalController(PackageController):
@@ -55,12 +26,11 @@ class ECPortalController(PackageController):
     def _setup_template_variables(self, context, data_dict=None):
         c.licences = [('', '')] + model.Package.get_license_options()
         c.type_of_dataset = type_of_dataset
+        c.publishers = publishers
 
         c.geographic_granularity = geographic_granularity
         c.update_frequency = update_frequency
         c.temporal_granularity = temporal_granularity 
-
-        c.publishers = self.get_publishers()
 
         c.is_sysadmin = Authorizer().is_sysadmin(c.user)
         c.resource_columns = model.Resource.get_columns()
@@ -153,9 +123,6 @@ class ECPortalController(PackageController):
 
     def _check_data_dict(self, data_dict):
         return
-
-    def get_publishers(self):
-        return [('pub1', 'pub2')]
 
 def date_to_db(value, context):
     try:
