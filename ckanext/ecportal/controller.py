@@ -17,6 +17,11 @@ from field_types import GeoCoverageType
 import logging
 log = logging.getLogger(__name__)
 
+type_of_dataset = [('', ''),
+                   ('primary legal materials', 'primary legal materials'),
+                   ('government operation records', 'government operation records'),
+                   ('civic capital', 'civic capital')]
+
 geographic_granularity = [('', ''),
                           ('national', 'national'),
                           ('regional', 'regional'),
@@ -49,6 +54,8 @@ class ECPortalController(PackageController):
 
     def _setup_template_variables(self, context, data_dict=None):
         c.licences = [('', '')] + model.Package.get_license_options()
+        c.type_of_dataset = type_of_dataset
+
         c.geographic_granularity = geographic_granularity
         c.update_frequency = update_frequency
         c.temporal_granularity = temporal_granularity 
@@ -70,6 +77,10 @@ class ECPortalController(PackageController):
             'name': [not_empty, unicode, val.name_validator, val.package_name_validator],
             'notes': [not_empty, unicode],
 
+            'type_of_dataset': [ignore_missing, unicode, convert_to_extras],
+            'responsible_department': [ignore_missing, unicode, convert_to_extras],
+            'published_by': [not_empty, unicode, convert_to_extras],
+
             'date_released': [date_to_db, convert_to_extras],
             'date_updated': [date_to_db, convert_to_extras],
             'date_update_future': [date_to_db, convert_to_extras],
@@ -88,7 +99,6 @@ class ECPortalController(PackageController):
 
             'resources': default_schema.default_resource_schema(),
             
-            'published_by': [not_empty, unicode, convert_to_extras],
             'published_via': [ignore_missing, unicode, convert_to_extras],
             'author': [ignore_missing, unicode],
             'author_email': [ignore_missing, unicode],
@@ -107,6 +117,10 @@ class ECPortalController(PackageController):
     
     def _db_to_form_schema(data):
         schema = {
+            'type_of_dataset': [convert_from_extras, ignore_missing],
+            'responsible_department': [convert_from_extras, ignore_missing],
+            'published_by': [convert_from_extras, ignore_missing],
+
             'date_released': [convert_from_extras, ignore_missing, date_to_form],
             'date_updated': [convert_from_extras, ignore_missing, date_to_form],
             'date_update_future': [convert_from_extras, ignore_missing, date_to_form],
@@ -129,7 +143,6 @@ class ECPortalController(PackageController):
                 '__extras': [keep_extras]
             },
             
-            'published_by': [convert_from_extras, ignore_missing],
             'published_via': [convert_from_extras, ignore_missing],
             'mandate': [convert_from_extras, ignore_missing],
             'national_statistic': [convert_from_extras, ignore_missing],
@@ -159,15 +172,12 @@ def date_to_form(value, context):
     return value
 
 def convert_to_extras(key, data, errors, context):
-
     extras = data.get(('extras',), [])
     if not extras:
         data[('extras',)] = extras
-
     extras.append({'key': key[-1], 'value': data[key]})
 
 def convert_from_extras(key, data, errors, context):
-
     for data_key, data_value in data.iteritems():
         if (data_key[0] == 'extras' 
             and data_key[-1] == 'key'
@@ -175,14 +185,12 @@ def convert_from_extras(key, data, errors, context):
             data[key] = data[('extras', data_key[1], 'value')]
 
 def use_other(key, data, errors, context):
-
     other_key = key[-1] + '-other'
     other_value = data.get((other_key,), '').strip()
     if other_value:
         data[key] = other_value
 
 def extract_other(option_list):
-
     def other(key, data, errors, context):
         value = data[key]
         if value in dict(option_list).keys():
@@ -197,17 +205,14 @@ def extract_other(option_list):
     return other
             
 def convert_geographic_to_db(value, context):
-
     if isinstance(value, list):
         regions = value
     elif value:
         regions = [value]
     else:
         regions = []
-        
     return GeoCoverageType.get_instance().form_to_db(regions)
 
 def convert_geographic_to_form(value, context):
-
     return GeoCoverageType.get_instance().db_to_form(value)
 
