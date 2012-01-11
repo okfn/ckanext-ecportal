@@ -1,9 +1,10 @@
 import os
-from ckan.plugins import implements, SingletonPlugin
-from ckan.plugins import IRoutes
-from ckan.plugins import IConfigurer
-# from ckan.plugins import IGenshiStreamFilter
+from genshi.input import HTML
+from genshi.filters import Transformer
+from ckan.plugins import implements, SingletonPlugin, IRoutes, IConfigurable,\
+    IConfigurer, IGenshiStreamFilter
 import ckanext.ecportal
+import html
 
 from logging import getLogger
 log = getLogger(__name__)
@@ -27,7 +28,9 @@ def configure_served_directory(config, relative_path, config_var):
 
 class ECPortalPlugin(SingletonPlugin):
     implements(IRoutes)
+    implements(IConfigurable)
     implements(IConfigurer)
+    implements(IGenshiStreamFilter)
 
     def before_map(self, map):
         map.connect('/dataset/new', controller='ckanext.ecportal.controller:ECPortalController', action='new')
@@ -37,8 +40,25 @@ class ECPortalPlugin(SingletonPlugin):
     def after_map(self, map):
         return map
 
+    def configure(self, config):
+        self.site_url = config.get('ckan.site_url')
+
     def update_config(self, config):
         configure_template_directory(config, 'templates')
+        configure_public_directory(config, 'public')
+
+    def filter(self, stream):
+        from pylons import request
+        routes = request.environ.get('pylons.routes_dict')
+
+        # add javascript file to new dataset form so slug is generated correctly
+        if routes and 'ECPortalController' in routes.get('controller') and \
+            routes.get('action') == 'new':
+                stream = stream | Transformer('body').append(
+                    HTML(html.JS % {'site_url': self.site_url})
+                )
+
+        return stream
 
 
 # class FormApiPlugin(SingletonPlugin):

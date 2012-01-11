@@ -58,14 +58,13 @@ class ECPortalController(PackageController):
         c.is_sysadmin = Authorizer().is_sysadmin(c.user)
         c.resource_columns = model.Resource.get_columns()
 
-        ## This is messy as auths take domain object not data_dict
+        # This is messy as auths take domain object not data_dict
         pkg = context.get('package') or c.pkg
         if pkg:
             c.auth_for_change_state = Authorizer().am_authorized(
                 c, model.Action.CHANGE_STATE, pkg)
 
     def _form_to_db_schema(self):
-
         schema = {
             'title': [not_empty, unicode],
             'name': [not_empty, unicode, val.name_validator, val.package_name_validator],
