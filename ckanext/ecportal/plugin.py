@@ -52,11 +52,12 @@ class ECPortalPlugin(SingletonPlugin):
         routes = request.environ.get('pylons.routes_dict')
 
         # add javascript file to new dataset form so slug is generated correctly
+        # add css file so description field is displayed
         if routes and 'ECPortalController' in routes.get('controller') and \
             routes.get('action') == 'new':
-                stream = stream | Transformer('body').append(
-                    HTML(html.JS % {'site_url': self.site_url})
-                )
+                data = {'site_url': self.site_url}
+                stream = stream | Transformer('head').append(HTML(html.CSS % data))
+                stream = stream | Transformer('body').append(HTML(html.JS % data))
 
         return stream
 

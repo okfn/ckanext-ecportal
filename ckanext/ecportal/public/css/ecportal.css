@@ -1,0 +1,3 @@
+.dataset-create-form dt.description-label, .dataset-create-form dd.description-field, .dataset-create-form dd.description-instructions {
+    display: block;
+}
