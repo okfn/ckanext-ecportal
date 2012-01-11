@@ -2,7 +2,6 @@ from ckan.lib.base import c, model
 from ckan.lib.field_types import DateType, DateConvertError
 from ckan.authz import Authorizer
 from ckan.lib.navl.dictization_functions import Invalid
-from fields import GeoCoverageType
 from ckan.lib.navl.dictization_functions import missing
 from ckan.lib.navl.validators import (ignore_missing,
                                       not_empty,
@@ -13,6 +12,7 @@ from ckan.lib.navl.validators import (ignore_missing,
 import ckan.logic.validators as val
 import ckan.logic.schema as default_schema
 from ckan.controllers.package import PackageController
+from field_types import GeoCoverageType
 
 import logging
 log = logging.getLogger(__name__)
