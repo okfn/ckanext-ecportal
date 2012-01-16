@@ -53,9 +53,9 @@ class ECPortalController(PackageController):
             'published_by': [ignore_missing, unicode, convert_to_extras],
             'release_date': [ecportal_date_to_db, convert_to_extras],
             'modified_date': [ecportal_date_to_db, convert_to_extras],
+            'update_frequency': [use_other, unicode, convert_to_extras],
+            'update_frequency-other': [],
 
-            # 'update_frequency': [use_other, unicode, convert_to_extras],
-            # 'update_frequency-other': [],
             # 'precision': [unicode, convert_to_extras],
             # 'geographic_granularity': [use_other, unicode, convert_to_extras],
             # 'geographic_granularity-other': [],
@@ -92,8 +92,8 @@ class ECPortalController(PackageController):
             'published_by': [convert_from_extras, ignore_missing],
             'release_date': [convert_from_extras, ignore_missing],
             'modified_date': [convert_from_extras, ignore_missing],
+            'update_frequency': [convert_from_extras, ignore_missing, extract_other(update_frequency)],
 
-            # 'update_frequency': [convert_from_extras, ignore_missing, extract_other(update_frequency)],
             # 'precision': [convert_from_extras, ignore_missing],
             # 'geographic_granularity': [convert_from_extras, ignore_missing, extract_other(geographic_granularity)],
             'geographic_coverage': [convert_from_extras, ignore_missing, convert_geographic_to_form],
