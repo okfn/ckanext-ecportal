@@ -154,6 +154,15 @@
     <dd class="instructions further">For one-off data, use 'never'. For those once updated but now discontinued, use 'discontinued'.</dd>
     <dd class="field_error" py:if="errors.get('update_frequency', '')">${errors.get('update_frequency', '')}</dd>
 
+    <dt><label class="field_opt" for="temporal_coverage">Temporal coverage</label></dt>
+    <dd>
+      <input class="medium-width" id="temporal_coverage_from" name="temporal_coverage_from" type="text" value="${data.get('temporal_coverage_from', '')}" /> - 
+      <input class="medium-width" id="temporal_coverage_to" name="temporal_coverage_to" type="text" value="${data.get('temporal_coverage_to', '')}" />
+    </dd>
+    <dd class="instructions basic">The temporal coverage of this dataset.</dd>
+    <dd class="instructions further">If available, please indicate the time as well as the date. Where data covers only a single day, the 'To' sub-element can be left blank.</dd>
+    <dd class="hints">e.g. 2010-01-01 - 2012-01-01</dd>
+
     <!-- <dt><label class="field_opt" for="precision">Precision</label></dt> -->
     <!-- <dd><input id="precision" name="precision" size="40" type="text" value="${data.get('precision', '')}"/></dd> -->
     <!-- <dd class="instructions basic">Indicate the level of precision in the data, to avoid over-interpretation.</dd> -->
@@ -216,15 +225,6 @@
     <!-- </dd> -->
     <!-- <dd class="instructions basic">The lowest level of temporal detail granularity</dd> -->
     <!-- <dd class="instructions further">This should give the lowest level of temporal detail given in the dataset if it is aggregated, expressed as an interval of time. If the data is not aggregated over time, and so the dataset goes down to the instants that reported events occurred (such as the timings of high and low tides), use 'point'. If none of the choices is appropriate or the granularity varies, please specify in the 'other' element.</dd> -->
-
-    <!-- <dt><label class="field_opt" for="temporal_coverage">Temporal coverage</label></dt> -->
-    <!-- <dd> -->
-    <!--   <input class="medium-width" id="temporal_coverage-from" name="temporal_coverage-from" type="text" value="${data.get('temporal_coverage-from', '')}" /> -  -->
-    <!--   <input class="medium-width" id="temporal_coverage-to" name="temporal_coverage-to" type="text" value="${data.get('temporal_coverage-to', '')}" /> -->
-    <!-- </dd> -->
-    <!-- <dd class="instructions basic">The temporal coverage of this dataset.</dd> -->
-    <!-- <dd class="instructions further">If available, please indicate the time as well as the date. Where data covers only a single day, the 'To' sub-element can be left blank.</dd> -->
-    <!-- <dd class="hints">e.g. 21/03/2007 - 03/10/2009 or 07:45 31/03/2006</dd> -->
 
     <!-- <dt><label class="field_opt" for="url">URL</label></dt> -->
     <!-- <dd><input id="url" name="url" type="text" value="${data.get('url', '')}"/></dd> -->
