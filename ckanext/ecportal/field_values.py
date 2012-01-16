@@ -140,12 +140,12 @@ update_frequency = [
 temporal_granularity = [
     ("",""),
     ("year","year"),
-    ("quarter","quarter"),
+    # ("quarter","quarter"),
     ("month","month"),
     ("week","week"),
     ("day","day"),
-    ("hour","hour"),
-    ("point","point"),
+    # ("hour","hour"),
+    # ("point","point"),
     ("other","other - please specify")
 ]
 

@@ -28,11 +28,9 @@ class ECPortalController(PackageController):
         c.licences = [('', '')] + model.Package.get_license_options()
         c.type_of_dataset = type_of_dataset
         c.publishers = publishers
-
-        c.geographic_granularity = geographic_granularity
         c.update_frequency = update_frequency
         c.temporal_granularity = temporal_granularity 
-
+        c.geographic_granularity = geographic_granularity
         c.is_sysadmin = Authorizer().is_sysadmin(c.user)
         c.resource_columns = model.Resource.get_columns()
 
@@ -57,13 +55,13 @@ class ECPortalController(PackageController):
             'update_frequency-other': [],
             'temporal_coverage_from': [ignore_missing, ecportal_date_to_db, convert_to_extras],
             'temporal_coverage_to': [ignore_missing, ecportal_date_to_db, convert_to_extras],
+            'temporal_granularity': [use_other, unicode, convert_to_extras],
+            'temporal_granularity-other': [],
 
             # 'precision': [unicode, convert_to_extras],
             # 'geographic_granularity': [use_other, unicode, convert_to_extras],
             # 'geographic_granularity-other': [],
             'geographic_coverage': [ignore_missing, convert_geographic_to_db, convert_to_extras],
-            # 'temporal_granularity': [use_other, unicode, convert_to_extras],
-            # 'temporal_granularity-other': [],
             'url': [unicode],
             # 'taxonomy_url': [unicode, convert_to_extras],
 
@@ -93,13 +91,13 @@ class ECPortalController(PackageController):
             'release_date': [convert_from_extras, ignore_missing],
             'modified_date': [convert_from_extras, ignore_missing],
             'update_frequency': [convert_from_extras, ignore_missing, extract_other(update_frequency)],
-            'temporal_coverage_from': [convert_from_extras, ignore_missing, date_to_form],
-            'temporal_coverage_to': [convert_from_extras, ignore_missing, date_to_form],
+            'temporal_coverage_from': [convert_from_extras, ignore_missing],
+            'temporal_coverage_to': [convert_from_extras, ignore_missing],
+            'temporal_granularity': [convert_from_extras, ignore_missing, extract_other(temporal_granularity)],
 
             # 'precision': [convert_from_extras, ignore_missing],
             # 'geographic_granularity': [convert_from_extras, ignore_missing, extract_other(geographic_granularity)],
             'geographic_coverage': [convert_from_extras, ignore_missing, convert_geographic_to_form],
-            # 'temporal_granularity': [convert_from_extras, ignore_missing, extract_other(temporal_granularity)],
             # 'taxonomy_url': [convert_from_extras, ignore_missing],
 
             'resources': default_schema.default_resource_schema(),
