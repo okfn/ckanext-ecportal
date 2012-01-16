@@ -124,6 +124,8 @@ class ECPortalController(PackageController):
         return
 
 def ecportal_date_to_db(value, context):
+    if not value:
+        return
     try:
         timedate_dict = DateType.parse_timedate(value, 'db')
     except DateConvertError, e:
