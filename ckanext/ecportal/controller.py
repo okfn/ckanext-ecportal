@@ -10,6 +10,7 @@ from ckan.lib.navl.validators import (ignore_missing,
                                       keep_extras,
                                      )
 import ckan.logic.validators as val
+from ckan.logic.converters import convert_from_extras, convert_to_extras, date_to_form
 import ckan.logic.schema as default_schema
 from ckan.controllers.package import PackageController
 from field_types import GeoCoverageType
@@ -50,11 +51,8 @@ class ECPortalController(PackageController):
             'type_of_dataset': [ignore_missing, unicode, convert_to_extras],
             'responsible_department': [ignore_missing, unicode, convert_to_extras],
             'published_by': [ignore_missing, unicode, convert_to_extras],
-            'release_date': [date_to_db, convert_to_extras],
+            'release_date': [ecportal_date_to_db, convert_to_extras],
 
-            'date_released': [date_to_db, convert_to_extras],
-            'date_updated': [date_to_db, convert_to_extras],
-            'date_update_future': [date_to_db, convert_to_extras],
             # 'update_frequency': [use_other, unicode, convert_to_extras],
             # 'update_frequency-other': [],
             # 'precision': [unicode, convert_to_extras],
@@ -63,8 +61,8 @@ class ECPortalController(PackageController):
             'geographic_coverage': [ignore_missing, convert_geographic_to_db, convert_to_extras],
             # 'temporal_granularity': [use_other, unicode, convert_to_extras],
             # 'temporal_granularity-other': [],
-            'temporal_coverage-from': [date_to_db, convert_to_extras],
-            'temporal_coverage-to': [date_to_db, convert_to_extras],
+            'temporal_coverage-from': [ignore_missing, ecportal_date_to_db, convert_to_extras],
+            'temporal_coverage-to': [ignore_missing, ecportal_date_to_db, convert_to_extras],
             'url': [unicode],
             # 'taxonomy_url': [unicode, convert_to_extras],
 
@@ -91,11 +89,8 @@ class ECPortalController(PackageController):
             'type_of_dataset': [convert_from_extras, ignore_missing],
             'responsible_department': [convert_from_extras, ignore_missing],
             'published_by': [convert_from_extras, ignore_missing],
-            'release_date': [convert_from_extras, ignore_missing, date_to_form],
+            'release_date': [convert_from_extras, ignore_missing],
 
-            'date_released': [convert_from_extras, ignore_missing, date_to_form],
-            'date_updated': [convert_from_extras, ignore_missing, date_to_form],
-            'date_update_future': [convert_from_extras, ignore_missing, date_to_form],
             # 'update_frequency': [convert_from_extras, ignore_missing, extract_other(update_frequency)],
             # 'precision': [convert_from_extras, ignore_missing],
             # 'geographic_granularity': [convert_from_extras, ignore_missing, extract_other(geographic_granularity)],
@@ -126,32 +121,18 @@ class ECPortalController(PackageController):
     def _check_data_dict(self, data_dict):
         return
 
-def date_to_db(value, context):
+def ecportal_date_to_db(value, context):
     try:
-        value = DateType.form_to_db(value)
+        timedate_dict = DateType.parse_timedate(value, 'db')
     except DateConvertError, e:
+        # Cannot parse
+        raise Invalid(str(e))
+    try:
+        value = DateType.format(timedate_dict, 'db')
+    except DateConvertError, e:
+        # Values out of range
         raise Invalid(str(e))
     return value
-
-def date_to_form(value, context):
-    try:
-        value = DateType.db_to_form(value)
-    except DateConvertError, e:
-        raise Invalid(str(e))
-    return value
-
-def convert_to_extras(key, data, errors, context):
-    extras = data.get(('extras',), [])
-    if not extras:
-        data[('extras',)] = extras
-    extras.append({'key': key[-1], 'value': data[key]})
-
-def convert_from_extras(key, data, errors, context):
-    for data_key, data_value in data.iteritems():
-        if (data_key[0] == 'extras' 
-            and data_key[-1] == 'key'
-            and data_value == key[-1]):
-            data[key] = data[('extras', data_key[1], 'value')]
 
 def use_other(key, data, errors, context):
     other_key = key[-1] + '-other'
