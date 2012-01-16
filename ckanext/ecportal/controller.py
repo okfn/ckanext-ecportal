@@ -52,6 +52,7 @@ class ECPortalController(PackageController):
             'responsible_department': [ignore_missing, unicode, convert_to_extras],
             'published_by': [ignore_missing, unicode, convert_to_extras],
             'release_date': [ecportal_date_to_db, convert_to_extras],
+            'modified_date': [ecportal_date_to_db, convert_to_extras],
 
             # 'update_frequency': [use_other, unicode, convert_to_extras],
             # 'update_frequency-other': [],
@@ -90,6 +91,7 @@ class ECPortalController(PackageController):
             'responsible_department': [convert_from_extras, ignore_missing],
             'published_by': [convert_from_extras, ignore_missing],
             'release_date': [convert_from_extras, ignore_missing],
+            'modified_date': [convert_from_extras, ignore_missing],
 
             # 'update_frequency': [convert_from_extras, ignore_missing, extract_other(update_frequency)],
             # 'precision': [convert_from_extras, ignore_missing],

@@ -131,18 +131,11 @@
     <dd class="hints">YYYY-MM-DD</dd>
     <dd class="field_error" py:if="errors.get('release_date', '')">${errors.get('release_date', '')}</dd>
 
-    <!-- <dt><label class="field_opt" for="date_updated">Date updated</label></dt> -->
-    <!-- <dd><input id="date_updated" name="date_updated" size="40" type="text" value="${data.get('date_updated', '')}"/></dd> -->
-    <!-- <dd class="instructions basic">The date of release of the most recent version of the dataset</dd> -->
-    <!-- <dd class="instructions further">This is not necessarily the date when it was updated on data.gov.uk. As with 'Date released', this is for updates to a particular dataset, such as corrections or refinements, not for that of a new time period.</dd> -->
-    <!-- <dd class="hints">DD/MM/YYYY</dd> -->
-    <!-- <dd class="field_error" py:if="errors.get('date_updated', '')">${errors.get('date_updated', '')}</dd> -->
-
-    <!-- <dt><label class="field_opt" for="date_update_future">Date to be published</label></dt> -->
-    <!-- <dd><input id="date_update_future" name="date_update_future" size="40" type="text" value="${data.get('date_update_future', '')}"/></dd> -->
-    <!-- <dd class="instructions basic">When the dataset will be updated in the future, if appropriate</dd> -->
-    <!-- <dd class="hints">DD/MM/YYYY</dd> -->
-    <!-- <dd class="field_error" py:if="errors.get('date_updated', '')">${errors.get('date_updated', '')}</dd> -->
+    <dt><label class="field_opt" for="modified_date">Date updated</label></dt>
+    <dd><input id="modified_date" name="modified_date" size="40" type="text" value="${data.get('modified_date', '')}"/></dd>
+    <dd class="instructions basic">Most recent date on which the dataset was changed, updated or modified.</dd>
+    <dd class="hints">DD/MM/YYYY</dd>
+    <dd class="field_error" py:if="errors.get('modified_date', '')">${errors.get('modified_date', '')}</dd>
 
     <!-- <dt><label class="field_opt" for="update_frequency">Update frequency</label></dt> -->
     <!-- <dd> -->
