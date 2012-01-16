@@ -10,10 +10,9 @@ from ckan.lib.navl.validators import (ignore_missing,
                                       keep_extras,
                                      )
 import ckan.logic.validators as val
-from ckan.logic.converters import convert_from_extras, convert_to_extras, date_to_form
+from ckan.logic.converters import convert_from_extras, convert_to_extras
 import ckan.logic.schema as default_schema
 from ckan.controllers.package import PackageController
-from field_types import GeoCoverageType
 from field_values import type_of_dataset, publishers, geographic_granularity,\
     update_frequency, temporal_granularity 
 
@@ -45,6 +44,7 @@ class ECPortalController(PackageController):
             'title': [not_empty, unicode],
             'name': [not_empty, unicode, val.name_validator, val.package_name_validator],
             'notes': [not_empty, unicode],
+            'url': [unicode],
 
             'type_of_dataset': [ignore_missing, unicode, convert_to_extras],
             'responsible_department': [ignore_missing, unicode, convert_to_extras],
@@ -57,13 +57,10 @@ class ECPortalController(PackageController):
             'temporal_coverage_to': [ignore_missing, ecportal_date_to_db, convert_to_extras],
             'temporal_granularity': [use_other, unicode, convert_to_extras],
             'temporal_granularity-other': [],
+            'geographical_coverage': [ignore_missing, unicode, convert_to_extras],
 
-            # 'precision': [unicode, convert_to_extras],
             # 'geographic_granularity': [use_other, unicode, convert_to_extras],
             # 'geographic_granularity-other': [],
-            'geographic_coverage': [ignore_missing, convert_geographic_to_db, convert_to_extras],
-            'url': [unicode],
-            # 'taxonomy_url': [unicode, convert_to_extras],
 
             'resources': default_schema.default_resource_schema(),
             
@@ -94,11 +91,9 @@ class ECPortalController(PackageController):
             'temporal_coverage_from': [convert_from_extras, ignore_missing],
             'temporal_coverage_to': [convert_from_extras, ignore_missing],
             'temporal_granularity': [convert_from_extras, ignore_missing, extract_other(temporal_granularity)],
+            'geographical_coverage': [convert_from_extras, ignore_missing],
 
-            # 'precision': [convert_from_extras, ignore_missing],
             # 'geographic_granularity': [convert_from_extras, ignore_missing, extract_other(geographic_granularity)],
-            'geographic_coverage': [convert_from_extras, ignore_missing, convert_geographic_to_form],
-            # 'taxonomy_url': [convert_from_extras, ignore_missing],
 
             'resources': default_schema.default_resource_schema(),
             'extras': {
@@ -156,15 +151,15 @@ def extract_other(option_list):
             data[(other_key,)] = value
     return other
             
-def convert_geographic_to_db(value, context):
-    if isinstance(value, list):
-        regions = value
-    elif value:
-        regions = [value]
-    else:
-        regions = []
-    return GeoCoverageType.get_instance().form_to_db(regions)
+# def convert_geographic_to_db(value, context):
+#     if isinstance(value, list):
+#         regions = value
+#     elif value:
+#         regions = [value]
+#     else:
+#         regions = []
+#     return GeoCoverageType.get_instance().form_to_db(regions)
 
-def convert_geographic_to_form(value, context):
-    return GeoCoverageType.get_instance().db_to_form(value)
+# def convert_geographic_to_form(value, context):
+#     return GeoCoverageType.get_instance().db_to_form(value)
 
