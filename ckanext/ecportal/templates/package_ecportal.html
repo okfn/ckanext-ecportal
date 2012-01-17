@@ -58,7 +58,7 @@
       <span class="hints">You can use <a href="http://daringfireball.net/projects/markdown/syntax" target="_blank">Markdown formatting</a> here.</span>
     </div></dd>
 
-    <dt class="homepage-label"><label class="field_opt" for="url">Home Page</label></dt>
+    <dt class="homepage-label"><label class="field_opt" for="url">URL</label></dt>
     <dd class="homepage-field"><input id="url" name="url" type="text" value="${data.get('url', '')}"/></dd>
     <dd class="homepage-instructions instructions basic">The URL for the web page describing the data (not the data itself).</dd>
     <dd class="homepage-instructions hints">e.g. http://www.example.com/growth-figures.html</dd>
@@ -76,6 +76,36 @@
   </dl>
 </fieldset>
 
+<fieldset id='further-information'>
+  <dl>
+    <dt><label class="field_opt" for="author">Author</label></dt>
+    <dd><input id="author" name="author" type="text" value="${data.get('author', '')}" /></dd>
+    <dd class="instructions basic">The name of the main contact, for enquiries about this particular dataset, using the e-mail address in the following field.</dd>
+
+    <dt><label class="field_opt" for="author_email">Author email</label></dt>
+    <dd><input id="author_email" name="author_email" type="text" value="${data.get('author_email', '')}" /></dd>
+
+    <dt><label class="field_opt" for="maintainer">Maintainer</label></dt>
+    <dd><input id="maintainer" name="maintainer" type="text" value="${data.get('maintainer', '')}" /></dd>
+    <dd class="instructions basic">If there is another important contact person (in addition to the person in the Author field) then provide details here.</dd>
+
+    <dt><label class="field_opt" for="maintainer_email">Maintainer email</label></dt>
+    <dd><input id="maintainer_email" name="maintainer_email" type="text" value="${data.get('maintainer_email', '')}" /></dd>
+
+    <dt><label class="field_opt" for="version">Version</label></dt>
+    <dd><input id="version" maxlength="100" name="version" type="text" value="${data.get('version', '')}" /></dd>
+    <dd class="instructions basic">A number representing the version (if applicable)</dd>
+    <dd class="hints">e.g. 1.2.0</dd>
+
+    <dt py:if="c.is_sysadmin or c.auth_for_change_state"><label class="field_opt" for="state">State</label></dt>
+    <dd py:if="c.is_sysadmin or c.auth_for_change_state">
+    <select id="state" name="state" >
+      <option py:attrs="{'selected': 'selected' if data.get('state') == 'active' else None}" value="active">active</option>
+      <option py:attrs="{'selected': 'selected' if data.get('state') == 'deleted' else None}" value="deleted">deleted</option>
+    </select>
+    </dd>
+  </dl>
+</fieldset>
 
 <fieldset id="details">
   <legend>Details</legend>
@@ -198,53 +228,46 @@
     </dd>
     <dd class="instructions basic">The lowest level of geographic detail</dd>
     <dd class="field_error" py:if="errors.get('geographical_granularity', '')">${errors.get('geographical_granularity', '')}</dd>
+  </dl>
+</fieldset>
 
-    <!-- <dt><label class="field_opt" for="url">URL</label></dt> -->
-    <!-- <dd><input id="url" name="url" type="text" value="${data.get('url', '')}"/></dd> -->
-    <!-- <dd class="instructions basic">The Internet link to a web page discussing the dataset.</dd> -->
-    <!-- <dd class="hints">e.g. http://www.somedept.gov.uk/growth-figures.html</dd> -->
-    <!-- <dd class="field_error" py:if="errors.get('url', '')">${errors.get('url', '')}</dd> -->
+<fieldset id="groups">
+  <!-- <h3>Groups</h3> -->
+  <!-- <dl> -->
+  <!--   <py:for each="num, group in enumerate(data.get('groups', []))"> -->
+  <!--       <?python -->
+  <!--       authorized_group = [group_authz for group_authz in c.groups_authz if group_authz['id'] == group['id']] -->
+  <!--       authorized_group = authorized_group[0] if authorized_group else None -->
+  <!--       ?> -->
 
-    <!-- <dt><label class="field_opt" for="taxonomy_url">Taxonomy URL</label></dt> -->
-    <!-- <dd><input id="taxonomy_url" name="taxonomy_url" size="40" type="text" value="${data.get('taxonomy_url', '')}"/></dd> -->
-    <!-- <dd class="instructions basic">An Internet link to a web page describing the taxonomies used in the dataset, if any, to ensure they understand any terms used.</dd> -->
-    <!-- <dd class="hints">e.g. http://www.somedept.gov.uk/growth-figures-technical-details.html</dd> -->
-    <!-- <dd class="field_error" py:if="errors.get('taxonomy_url', '')">${errors.get('taxonomy_url', '')}</dd> -->
+  <!--     <dt py:if="'id' in group"> -->
+  <!--     <input type="${'checkbox' if authorized_group else 'hidden'}" name="groups__${num}__id" checked="checked" value="${group['id']}" /> -->
+  <!--     <input type="hidden" name="groups__${num}__name" value="${group.get('name', authorized_group['name'] if authorized_group else '')}" /> -->
+  <!--     </dt>      -->
+  <!--     <dd py:if="'id' in group"><label for="groups__${num}__checked">${group.get('name', authorized_group['name'] if authorized_group else '')}</label></dd> -->
+  <!--   </py:for> -->
 
-    <!-- <dt><label class="field_opt" for="published_via">Published via</label></dt> -->
-    <!-- <dd> -->
-    <!--   <select id="published_via" name="published_via"> -->
-    <!--     <py:for each="published_name, published_desc in c.publishers"> -->
-    <!--       <option value="${published_name}" py:attrs="{'selected': 'selected' if data.get('published_via', '') == published_name else None}" > -->
-    <!--         ${published_desc} -->
-    <!--       </option> -->
-    <!--     </py:for> -->
-    <!--   </select> -->
-    <!-- </dd> -->
-    <!-- <dd class="instructions basic">A second organisation that is credited with or associated with the publication of this data.</dd> -->
-    <!-- <dd class="instructions further">Often datasets are associated with both a government department and an outside agency, in which case the "Published by" field should store the department and this field should store the agency. When an organisation is not listed, please request it using the form found in your data.gov.uk user page under the "Publishers" tab. An asterisk (*) denotes an pre-existing value for this field, which is allowed, but the current user's permissions would not be able to change a package\s publisher to this value.</dd> -->
+  <!--   <dt>Group</dt> -->
+  <!--   <dd py:if="c.groups_available">  -->
+  <!--     <select id="groups__${len(data.get('groups', []))}__id" name="groups__${len(data.get('groups', []))}__id"> -->
+  <!--       <option selected="selected" value="">(None)</option> -->
+  <!--       <py:for each="group in c.groups_available"> -->
+  <!--         <option value="${group['id']}" >${group['name']}</option> -->
+  <!--       </py:for> -->
+  <!--     </select> -->
+  <!--   </dd>  -->
+  <!--   <dd py:if="not c.groups_available"><em>Cannot add any groups.</em></dd> -->
+  <!-- </dl> -->
 
-    <dt><label class="field_opt" for="author">Contact</label></dt>
-    <dd><input id="author" name="author" type="text" value="${data.get('author', '')}"/></dd>
-    <dd class="instructions basic">The permanent contact point for the public to enquire about this particular dataset. In addition, the Public Data and Transparency Team will use it for any suggestions for changes, feedback, reports of mistakes in the datasets or metadata.</dd>
-    <dd class="instructions further">This should be the name of the section of the agency or Department responsible, and should not be a named person. Particular care should be taken in choosing this element.</dd>
-    <dd class="hints">Examples: Statistics team, Public consultation unit, FOI contact point</dd>
-
-    <dt><label class="field_opt" for="author_email">Contact email</label></dt>
-    <dd><input id="author_email" name="author_email" type="text" value="${data.get('author_email', '')}"/></dd>
-    <dd class="instructions basic">A generic official e-mail address for members of the public to contact, to match the 'Contact' element.</dd>
-    <dd class="instructions further">A new e-mail address may need to be created for this function.</dd>
-
-    <dt><label class="field_opt" for="tags">Tags</label></dt>
-    <dd>
-      <input class="long tagComplete" data-tagcomplete-queryparam="incomplete" 
-               data-tagcomplete-url="/api/2/util/tag/autocomplete" id="tag_string" name="tag_string" size="60" type="text" 
-               value="${data.get('tag_string') or ' '.join([tag['name'] for tag in data.get('tags', [])])}" />
+  <!-- <h3>Tags</h3> -->
+  <dl>
+    <dt class="tags-label"><label class="field_opt" for="tags">Tags</label></dt>
+    <dd class="tags-field">
+      <input class="long autocomplete-tag" id="tag_string" name="tag_string" size="60" type="text" 
+               value="${data.get('tag_string') or ', '.join([tag['name'] for tag in data.get('tags', [])])}" />
     </dd>
-    <dd class="instructions basic">Tags can be thought of as the way that the packages are categorised, so are of primary importance.</dd>
-    <dd class="instructions further">One or more tags should be added to give the government department and geographic location the data covers, as well as general descriptive words. The <a href="http://www.esd.org.uk/standards/ipsv_abridged/" target="_blank">Integrated Public Sector Vocabulary</a> may be helpful in forming these.</dd>
-    <dd class="hints">Format: Two or more lowercase alphanumeric or dash (-) characters; different tags separated by spaces. As tags cannot contain spaces, use dashes instead. e.g. for a dataset containing statistics on burns to the arms in the UK in 2009: nhs uk arm burns medical-statistics</dd>
-    <dd class="field_error" py:if="errors.get('tag_string', '')">${errors.get('tag_string', '')}</dd>
+    <dd class="tags-instructions instructions basic" i18n:msg="">Comma-separated terms that may link this dataset to similar ones. For more information on conventions, see <a href="http://wiki.okfn.org/ckan/doc/faq#TagConventions">this wiki page</a>.</dd>
+    <dd class="tags-instructions field_error" py:if="errors.get('tag_string', '')">${errors.get('tag_string', '')}</dd>
   </dl>
 </fieldset>
 
