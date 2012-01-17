@@ -119,43 +119,39 @@ publishers = [
 
 geographical_coverage = [
     ('', ''),
-    ('EU27', 'European Union')
-    ('BE', 'Belgium')
-    ('BG', 'Bulgaria')
-    ('CZ', 'Czech Republic')
-    ('DK', 'Denmark')
-    ('DE', 'Germany')
-    ('EE', 'Estonia')
-    ('IE', 'Ireland')
-    ('EL', 'Greece')
-    ('ES', 'Spain')
-    ('FR', 'France')
-    ('IT', 'Italy')
-    ('CY', 'Cyprus')
-    ('LV', 'Latvia')
-    ('LT', 'Lithuania')
-    ('LU', 'Luxembourg')
-    ('HU', 'Hungary')
-    ('MT', 'Malta')
-    ('NL', 'Netherlands')
-    ('AT', 'Austria')
-    ('PL', 'Poland')
-    ('PT', 'Portugal')
-    ('RO', 'Romania')
-    ('SI', 'Slovenia')
-    ('SK', 'Slovakia')
-    ('FI', 'Finland')
-    ('SE', 'Sweden')
+    ('EU27', 'European Union'),
+    ('BE', 'Belgium'),
+    ('BG', 'Bulgaria'),
+    ('CZ', 'Czech Republic'),
+    ('DK', 'Denmark'),
+    ('DE', 'Germany'),
+    ('EE', 'Estonia'),
+    ('IE', 'Ireland'),
+    ('EL', 'Greece'),
+    ('ES', 'Spain'),
+    ('FR', 'France'),
+    ('IT', 'Italy'),
+    ('CY', 'Cyprus'),
+    ('LV', 'Latvia'),
+    ('LT', 'Lithuania'),
+    ('LU', 'Luxembourg'),
+    ('HU', 'Hungary'),
+    ('MT', 'Malta'),
+    ('NL', 'Netherlands'),
+    ('AT', 'Austria'),
+    ('PL', 'Poland'),
+    ('PT', 'Portugal'),
+    ('RO', 'Romania'),
+    ('SI', 'Slovenia'),
+    ('SK', 'Slovakia'),
+    ('FI', 'Finland'),
+    ('SE', 'Sweden'),
     ('UK', 'United Kingdom')
 ]
 
-geographic_granularity = [
+geographical_granularity = [
     ('', ''),
-    ('national', 'national'),
-    ('regional', 'regional'),
-    ('local authority', 'local authority'),
-    ('ward', 'ward'),
-    ('point', 'point'),
+    ('country', 'country'),
     ('other', 'other - please specify')
 ]
 
