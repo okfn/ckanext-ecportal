@@ -271,36 +271,28 @@
   </dl>
 </fieldset>
 
-<fieldset>
-  <legend>Resources</legend>
-  <table class="flexitable">
+<fieldset id="resources">
+  <div class="instructions basic"><h3>Resources: the files and APIs associated with this dataset</h3></div>
+  <table class="resource-table-edit">
     <thead>
       <tr>
-        <th class="field_req resource-url">URL*</th>
-        <th class="field_opt resource-format">Format</th>
-        <th class="field_opt resource-description">Description</th>
-        <th class="field_opt resource-hash">Hash</th>
+        <th class="field_req resource-url">Resource</th>
+        <th class="resource-delete-link"></th>
       </tr>
     </thead>
-    <tbody>
-      <py:for each="num, res in enumerate(data.get('resources', []) + [{}])">
-      <tr>
-        <py:for each="col in c.resource_columns">
-        <td class="resource-${col}">
-          <input name="resources__${num}__${col}" type="text" value="${res.get(col, '')}" class="${'medium-width' if col=='description' else 'short'}" />
-        </td>
-        </py:for>
-        <td class="resource-id"><input name="resources__${num}__id" type="hidden" value="${res.get('id', '')}" /></td>
-      </tr>
-      </py:for>
+    <tbody class="js-resource-editor">
     </tbody>
   </table>
-  <div class="instructions basic">The files containing the data or address of the APIs for accessing it</div>
-  <div class="instructions further">These can be repeated as required. For example if the data is being supplied in multiple formats, or split into different areas or time periods, each file is a different 'resource' which should be described differently. They will all appear on the dataset page on data.gov.uk together.<br/> <b>URL:</b> This is the Internet link directly to the data - by selecting this link in a web browser, the user will immediately download the full data set. Note that datasets are not hosted by data.gov.uk, but by the responsible department<br/> e.g. http://www.somedept.gov.uk/growth-figures-2009.csv<br/><b>Format:</b> This should give the file format in which the data is supplied. You may supply the data in a form not listed here, constrained by the <a href="http://data.gov.uk/blog/new-public-sector-transparency-board-and-public-data-transparency-principles" target="_blank">Public Sector Transparency Board's principles</a> that require that all data is available in an 'open and standardised format' that can be read by a machine. Data can also be released in formats that are not machine-processable (e.g. PDF) alongside this.<br/></div>
-  <div class="hints">Format choices: CSV | RDF | XML | XBRL | SDMX | HTML+RDFa | Other as appropriate</div>
-  <div class="field_error" py:if="errors.get('resources', '')">Package resource(s) incomplete.</div>
-</fieldset>
 
+  <div class="resource-add">
+    <ul class="button-row">
+      <li><h4>Add a resource:</h4></li>
+      <li><button class="pretty-button js-link-file">Link to a file</button></li>
+      <li><button class="pretty-button js-link-api">Link to an API</button></li>
+      <li class="js-upload-file" style="display:none;"><button class="pretty-button js-upload-file">Upload a file</button></li>
+    </ul>
+  </div>
+</fieldset>
 
 <label for="log_message" class="edit-summary">Edit summary (briefly describe the changes you have made)</label>
 <textarea id="log_message" name="log_message" class="edit-summary short wide">${data.get('log_message', '')}</textarea>
