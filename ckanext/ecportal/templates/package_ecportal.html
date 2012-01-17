@@ -291,6 +291,34 @@
     <dd class="instructions basic">The lowest level of geographic detail</dd>
     <dd class="field_error" py:if="errors.get('geographical_granularity', '')">${errors.get('geographical_granularity', '')}</dd>
   </dl>
+
+  <h3>Eurostat Datasets</h3>
+  <dl>
+    <dt><label class="field_opt" for="code">Code</label></dt>
+    <dd><input id="code" name="code" size="40" type="text" value="${data.get('code', '')}" /></dd>
+    <dd class="instructions basic">Existing Eurostat identifier.</dd>
+    <dd class="hints">eg: rd_e_berdind</dd>
+
+    <dt><label class="field_opt" for="type">Type</label></dt>
+    <dd><input id="type" name="type" size="40" type="text" value="${data.get('type', '')}" /></dd>
+    <dd class="hints">dataset or table</dd>
+
+    <dt><label class="field_opt" for="theme">Theme</label></dt>
+    <dd><input id="theme" name="theme" size="40" type="text" value="${data.get('theme', '')}" /></dd>
+    <dd class="instructions basic">Eurostat publishes datasets in a hierarchical table of contents. 
+      The theme number field captures the titles under which the dataset is published</dd>
+    <dd class="hints">Example: theme1: Science and technology, theme2: Research and development</dd>
+
+    <dt><label class="field_opt" for="license_link">License link</label></dt>
+    <dd><input id="license_link" name="license_link" size="40" type="text" value="${data.get('license_link', '')}" /></dd>
+    <dd class="instructions basic">Link to the page where the license conditions related to the dataset are described.</dd>
+    <dd class="hints">Example: http://epp.eurostat.ec.europa.eu/portal/page/portal/about_eurostat/ corporate/copyright_licence_policy</dd>
+
+    <dt><label class="field_opt" for="support">Support</label></dt>
+    <dd><input id="support" name="support" size="40" type="text" value="${data.get('support', '')}" /></dd>
+    <dd class="instructions basic">Link to the page where support for the dataset can be obtained.</dd>
+    <dd class="hints">Example: http://epp.eurostat.ec.europa.eu/portal/page/portal/help/ user_support</dd>
+  </dl>
 </fieldset>
 
 <label for="log_message" class="edit-summary">Edit summary (briefly describe the changes you have made)</label>
