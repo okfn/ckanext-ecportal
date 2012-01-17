@@ -1,3 +1,31 @@
+/* ================================= */
+/* = Add Dataset Page              = */
+/* ================================= */
 .dataset-create-form dt.description-label, .dataset-create-form dd.description-field, .dataset-create-form dd.description-instructions {
     display: block;
 }
+
+/* ================================= */
+/* = Edit Dataset Page: Navigation = */
+/* ================================= */
+body.ECPortalController.edit div#content {
+  /* Flip the sidebar to the left-hand side */
+  margin-right: 29px;
+  margin-left: 0px;
+  float: right;
+  padding-right: 0;
+  padding-left: 20px;
+  border: none;
+  border-left: 1px solid #eee;
+}
+body.ECPortalController.edit div#sidebar {
+  /* Flip the sidebar to the left-hand side */
+  padding-left: 0px;
+  float: left;
+  margin-right: 0px;
+}
+body.ECPortalController.edit ul.widget-list {
+  margin-left: 1.5em;
+  margin-right: 0;
+}
+
