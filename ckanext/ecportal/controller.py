@@ -13,7 +13,7 @@ import ckan.logic.validators as val
 from ckan.logic.converters import convert_from_extras, convert_to_extras
 import ckan.logic.schema as default_schema
 from ckan.controllers.package import PackageController
-from field_values import type_of_dataset, publishers, geographic_granularity,\
+from field_values import type_of_dataset, publishers, geographical_granularity,\
     update_frequency, temporal_granularity 
 
 import logging
@@ -29,7 +29,7 @@ class ECPortalController(PackageController):
         c.publishers = publishers
         c.update_frequency = update_frequency
         c.temporal_granularity = temporal_granularity 
-        c.geographic_granularity = geographic_granularity
+        c.geographical_granularity = geographical_granularity
         c.is_sysadmin = Authorizer().is_sysadmin(c.user)
         c.resource_columns = model.Resource.get_columns()
 
@@ -45,6 +45,9 @@ class ECPortalController(PackageController):
             'name': [not_empty, unicode, val.name_validator, val.package_name_validator],
             'notes': [not_empty, unicode],
             'url': [unicode],
+            'author': [ignore_missing, unicode],
+            'author_email': [ignore_missing, unicode],
+            'license_id': [ignore_missing, unicode],
 
             'type_of_dataset': [ignore_missing, unicode, convert_to_extras],
             'responsible_department': [ignore_missing, unicode, convert_to_extras],
@@ -58,23 +61,25 @@ class ECPortalController(PackageController):
             'temporal_granularity': [use_other, unicode, convert_to_extras],
             'temporal_granularity-other': [],
             'geographical_coverage': [ignore_missing, unicode, convert_to_extras],
+            'geographical_granularity': [use_other, unicode, convert_to_extras],
+            'geographical_granularity_other': [],
+            'nr_of_values': [ignore_missing, unicode, convert_to_extras],
+            'unit_used': [ignore_missing, unicode, convert_to_extras],
+            'eurovoc_theme': [ignore_missing, unicode, convert_to_extras],
+            'eurovoc_tag': [ignore_missing, unicode, convert_to_extras],
 
-            # 'geographic_granularity': [use_other, unicode, convert_to_extras],
-            # 'geographic_granularity-other': [],
+            'code': [ignore_missing, unicode, convert_to_extras],
+            'type': [ignore_missing, unicode, convert_to_extras],
+            'theme': [ignore_missing, unicode, convert_to_extras],
+            'license_link': [ignore_missing, unicode, convert_to_extras],
+            'support': [ignore_missing, unicode, convert_to_extras],
+
+            'data_quality': [ignore_missing, unicode, convert_to_extras],
 
             'resources': default_schema.default_resource_schema(),
-            
-            'published_via': [ignore_missing, unicode, convert_to_extras],
-            'author': [ignore_missing, unicode],
-            'author_email': [ignore_missing, unicode],
-            'mandate': [ignore_missing, unicode, convert_to_extras],
-            'license_id': [ignore_missing, unicode],
             'tag_string': [ignore_missing, val.tag_string_convert],
-            'national_statistic': [ignore_missing, convert_to_extras],
             'state': [val.ignore_not_admin, ignore_missing],
-
             'log_message': [unicode, val.no_http],
-
             '__extras': [ignore],
             '__junk': [empty],
         }
@@ -92,8 +97,19 @@ class ECPortalController(PackageController):
             'temporal_coverage_to': [convert_from_extras, ignore_missing],
             'temporal_granularity': [convert_from_extras, ignore_missing, extract_other(temporal_granularity)],
             'geographical_coverage': [convert_from_extras, ignore_missing],
+            'geographical_granularity': [convert_from_extras, ignore_missing, extract_other(geographical_granularity)],
+            'nr_of_values': [convert_from_extras, ignore_missing],
+            'unit_used': [convert_from_extras, ignore_missing],
+            'eurovoc_theme': [convert_from_extras, ignore_missing],
+            'eurovoc_tag': [convert_from_extras, ignore_missing],
 
-            # 'geographic_granularity': [convert_from_extras, ignore_missing, extract_other(geographic_granularity)],
+            'code': [convert_from_extras, ignore_missing],
+            'type': [convert_from_extras, ignore_missing],
+            'theme': [convert_from_extras, ignore_missing],
+            'license_link': [convert_from_extras, ignore_missing],
+            'support': [convert_from_extras, ignore_missing],
+
+            'data_quality': [convert_from_extras, ignore_missing],
 
             'resources': default_schema.default_resource_schema(),
             'extras': {
@@ -104,10 +120,6 @@ class ECPortalController(PackageController):
             'tags': {
                 '__extras': [keep_extras]
             },
-            
-            'published_via': [convert_from_extras, ignore_missing],
-            'mandate': [convert_from_extras, ignore_missing],
-            'national_statistic': [convert_from_extras, ignore_missing],
             '__extras': [keep_extras],
             '__junk': [ignore],
         }
