@@ -1,6 +1,6 @@
+from pylons.i18n import _
 from ckan.lib.field_types import DateType, DateConvertError
-from ckan.lib.navl.dictization_functions import Invalid
-from ckan.lib.navl.dictization_functions import missing
+from ckan.lib.navl.dictization_functions import Invalid, missing, unflatten
 from field_types import GeoCoverageType
 
 def ecportal_date_to_db(value, context):
@@ -49,4 +49,25 @@ def convert_geographic_to_db(value, context):
 
 def convert_geographic_to_form(value, context):
     return GeoCoverageType.get_instance().db_to_form(value)
+
+def convert_to_extras(key, data, errors, context):
+    # TODO: add flattened extras data here
+    extras = data.get(('extras',), [])
+    if not extras:
+        data[('extras',)] = extras
+    extras.append({'key': key[-1], 'value': data[key]})
+
+def duplicate_extras_key(key, data, errors, context):
+    '''Hardcode errors dict key for nicer messages'''
+    unflattened = unflatten(data)
+    extras = unflattened.get('extras', [])
+    extras_keys = []
+    for extra in extras:
+        if not extra.get('deleted'):
+            extras_keys.append(extra['key'])
+
+    for extra_key in set(extras_keys):
+        extras_keys.remove(extra_key)
+    if extras_keys:
+        errors['duplicate_extras_key'].append(_('Duplicate key "%s"') % extras_keys[0])
 
