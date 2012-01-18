@@ -1,14 +1,9 @@
+import json
 from ckan.lib.base import c, model
 from ckan.authz import Authorizer
-from ckan.lib.navl.validators import (ignore_missing,
-                                      not_empty,
-                                      empty,
-                                      ignore,
-                                      keep_extras,
-                                     )
-import ckan.logic.validators as val
+from ckan.lib.navl.validators import ignore_missing, not_empty, empty, ignore, keep_extras
 from ckan.logic.converters import convert_from_extras, convert_to_extras
-import ckan.logic.schema as default_schema
+from ckan.logic.schema import default_resource_schema, package_form_schema
 from ckan.controllers.package import PackageController
 from field_values import type_of_dataset, publishers, geographical_granularity,\
     update_frequency, temporal_granularity 
@@ -29,7 +24,14 @@ class ECPortalController(PackageController):
         c.temporal_granularity = temporal_granularity 
         c.geographical_granularity = geographical_granularity
         c.is_sysadmin = Authorizer().is_sysadmin(c.user)
-        c.resource_columns = model.Resource.get_columns()
+
+        # find extras that are not part of our schema
+        c.additional_extras = []
+        schema_keys = self._form_to_db_schema().keys()
+        extras = json.loads(c.pkg_json).get('extras', [])
+        for extra in extras:
+            if not extra['key'] in schema_keys:
+                c.additional_extras.append(extra)
 
         # This is messy as auths take domain object not data_dict
         pkg = context.get('package') or c.pkg
@@ -38,15 +40,8 @@ class ECPortalController(PackageController):
                 c, model.Action.CHANGE_STATE, pkg)
 
     def _form_to_db_schema(self):
-        schema = {
-            'title': [not_empty, unicode],
-            'name': [not_empty, unicode, val.name_validator, val.package_name_validator],
-            'notes': [not_empty, unicode],
-            'url': [unicode],
-            'author': [ignore_missing, unicode],
-            'author_email': [ignore_missing, unicode],
-            'license_id': [ignore_missing, unicode],
-
+        schema = package_form_schema()
+        schema.update({
             'type_of_dataset': [ignore_missing, unicode, convert_to_extras],
             'responsible_department': [ignore_missing, unicode, convert_to_extras],
             'published_by': [ignore_missing, unicode, convert_to_extras],
@@ -73,18 +68,12 @@ class ECPortalController(PackageController):
             'support': [ignore_missing, unicode, convert_to_extras],
 
             'data_quality': [ignore_missing, unicode, convert_to_extras],
-
-            'resources': default_schema.default_resource_schema(),
-            'tag_string': [ignore_missing, val.tag_string_convert],
-            'state': [val.ignore_not_admin, ignore_missing],
-            'log_message': [unicode, val.no_http],
-            '__extras': [ignore],
-            '__junk': [empty],
-        }
+        })
         return schema
     
     def _db_to_form_schema(data):
-        schema = {
+        schema = package_form_schema()
+        schema.update({
             'type_of_dataset': [convert_from_extras, ignore_missing],
             'responsible_department': [convert_from_extras, ignore_missing],
             'published_by': [convert_from_extras, ignore_missing],
@@ -108,19 +97,15 @@ class ECPortalController(PackageController):
             'support': [convert_from_extras, ignore_missing],
 
             'data_quality': [convert_from_extras, ignore_missing],
+        })
 
-            'resources': default_schema.default_resource_schema(),
-            'extras': {
-                'key': [],
-                'value': [],
-                '__extras': [keep_extras]
-            },
-            'tags': {
-                '__extras': [keep_extras]
-            },
-            '__extras': [keep_extras],
-            '__junk': [ignore],
-        }
+        # Remove isodate validator
+        schema['resources'].update({
+            'last_modified': [ignore_missing],
+            'cache_last_updated': [ignore_missing],
+            'webstore_last_updated': [ignore_missing]
+        })
+
         return schema
 
     def _check_data_dict(self, data_dict):

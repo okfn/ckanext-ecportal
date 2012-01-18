@@ -6,7 +6,7 @@
 }
 
 /* ================================= */
-/* = Edit Dataset Page: Navigation = */
+/* = Edit Dataset Page             = */
 /* ================================= */
 body.ECPortalController.edit div#content {
   /* Flip the sidebar to the left-hand side */
@@ -29,3 +29,6 @@ body.ECPortalController.edit ul.widget-list {
   margin-right: 0;
 }
 
+body.ECPortalController.edit input[type="checkbox"] {
+    vertical-align: middle;
+}

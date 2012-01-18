@@ -319,6 +319,30 @@
     <dd class="instructions basic">Link to the page where support for the dataset can be obtained.</dd>
     <dd class="hints">Example: http://epp.eurostat.ec.europa.eu/portal/page/portal/help/ user_support</dd>
   </dl>
+
+  <h3>Additional Extras</h3>
+  <dl>
+    <py:for each="num, extra in enumerate(c.additional_extras)">
+    <dt><label for="extras__${num}__value">${extra.get('key')}</label></dt>
+    <dd>
+      <input id="extras__${num}__key" name="extras__${num}__key" type="hidden" value="${extra.get('key')}" />
+      <input id="extras__${num}__value" name="extras__${num}__value" type="text" value="${extra.get('value')}" />
+      <input type="checkbox" name="extras__${num}__deleted" checked="${extra.get('deleted')}"> Delete </input>
+    </dd>
+    </py:for>
+  </dl>
+
+  <h3>New Extras</h3>
+  <dl>
+    <py:for each="num in range(len(c.additional_extras), len(c.additional_extras) + 4)">
+    <dt><label for="extras__${num}__key">New key</label></dt>
+    <dd>
+      <input class="medium-width" id="extras__${num}__key" name="extras__${num}__key" type="text" />
+      with value
+      <input class="medium-width" id="extras__${num}__value" name="extras__${num}__value" type="text" />
+    </dd>
+    </py:for>
+  </dl>
 </fieldset>
 
 <label for="log_message" class="edit-summary">Edit summary (briefly describe the changes you have made)</label>
