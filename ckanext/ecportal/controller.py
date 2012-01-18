@@ -63,7 +63,9 @@ class ECPortalController(PackageController):
 
             'code': [ignore_missing, unicode, convert_to_extras],
             'type': [ignore_missing, unicode, convert_to_extras],
-            'theme': [ignore_missing, unicode, convert_to_extras],
+            'theme1': [ignore_missing, unicode, convert_to_extras],
+            'theme2': [ignore_missing, unicode, convert_to_extras],
+            'theme3': [ignore_missing, unicode, convert_to_extras],
             'license_link': [ignore_missing, unicode, convert_to_extras],
             'support': [ignore_missing, unicode, convert_to_extras],
 
@@ -92,7 +94,9 @@ class ECPortalController(PackageController):
 
             'code': [convert_from_extras, ignore_missing],
             'type': [convert_from_extras, ignore_missing],
-            'theme': [convert_from_extras, ignore_missing],
+            'theme1': [convert_from_extras, ignore_missing],
+            'theme2': [convert_from_extras, ignore_missing],
+            'theme3': [convert_from_extras, ignore_missing],
             'license_link': [convert_from_extras, ignore_missing],
             'support': [convert_from_extras, ignore_missing],
 
