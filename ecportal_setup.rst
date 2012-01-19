@@ -263,11 +263,10 @@ Install the Source
    * `/var/lib/solr/data/`: This is where the index files are physically stored.
 
    You will obviously need to replace the default `schema.xml` file with the CKAN one. To do
-   so, create a symbolic link to the schema file in the config folder. Use the latest schema version
-   supported by the CKAN version you are installing (it will generally be the highest one)::
+   so, create a symbolic link to the schema file in the EC Portal extension source.::
 
        sudo mv /etc/solr/conf/schema.xml /etc/solr/conf/schema.xml.bak
-       sudo ln -s ~/ecportal/src/ckan/ckan/config/solr/schema-1.3.xml /etc/solr/conf/schema.xml
+       sudo ln -s ~/ecportal/src/ckanext-ecportal/ckanext/ecportal/solr/schema.xml /etc/solr/conf/schema.xml
        sudo service jetty stop
        sudo service jetty start
 
