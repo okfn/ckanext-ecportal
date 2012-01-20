@@ -28,10 +28,12 @@ class ECPortalController(PackageController):
         # find extras that are not part of our schema
         c.additional_extras = []
         schema_keys = self._form_to_db_schema().keys()
-        extras = json.loads(c.pkg_json).get('extras', [])
-        for extra in extras:
-            if not extra['key'] in schema_keys:
-                c.additional_extras.append(extra)
+        
+        if c.pkg_json:
+            extras = json.loads(c.pkg_json).get('extras', [])
+            for extra in extras:
+                if not extra['key'] in schema_keys:
+                    c.additional_extras.append(extra)
 
         # This is messy as auths take domain object not data_dict
         pkg = context.get('package') or c.pkg
