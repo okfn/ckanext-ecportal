@@ -16,7 +16,7 @@ log = logging.getLogger(__name__)
 class ECPortalController(PackageController):
     package_form = 'package_ecportal.html'
 
-    def _setup_template_variables(self, context, data_dict=None):
+    def _setup_template_variables(self, context, data_dict=None, package_type=None):
         c.licences = [('', '')] + model.Package.get_license_options()
         c.type_of_dataset = type_of_dataset
         c.publishers = publishers
@@ -41,7 +41,7 @@ class ECPortalController(PackageController):
             c.auth_for_change_state = Authorizer().am_authorized(
                 c, model.Action.CHANGE_STATE, pkg)
 
-    def _form_to_db_schema(self):
+    def _form_to_db_schema(self, package_type=None):
         schema = package_form_schema()
         schema.update({
             'type_of_dataset': [ignore_missing, unicode, convert_to_extras],
@@ -75,7 +75,7 @@ class ECPortalController(PackageController):
         })
         return schema
     
-    def _db_to_form_schema(data):
+    def _db_to_form_schema(data, package_type=None):
         schema = package_form_schema()
         schema.update({
             'type_of_dataset': [convert_from_extras, ignore_missing],
