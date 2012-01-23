@@ -22,9 +22,7 @@ setup(
     entry_points='''
         [ckan.plugins]
         ecportal = ckanext.ecportal.plugin:ECPortalPlugin
-
-        [ckan.forms]
-        ecportal_form = ckanext.ecportal.form:get_ecportal_fieldset
+        ecportal_form = ckanext.ecportal.forms:ECPortalDatasetForm
     ''',
     test_suite = 'nose.collector',
 )

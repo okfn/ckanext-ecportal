@@ -1,7 +1,7 @@
 import os
 from genshi.input import HTML
 from genshi.filters import Transformer
-from ckan.plugins import implements, SingletonPlugin, IRoutes, IConfigurable,\
+from ckan.plugins import implements, SingletonPlugin, IConfigurable,\
     IConfigurer, IGenshiStreamFilter
 import ckanext.ecportal
 import html
@@ -27,18 +27,9 @@ def configure_served_directory(config, relative_path, config_var):
             config[config_var] = absolute_path
 
 class ECPortalPlugin(SingletonPlugin):
-    implements(IRoutes)
     implements(IConfigurable)
     implements(IConfigurer)
     implements(IGenshiStreamFilter)
-
-    def before_map(self, map):
-        map.connect('/dataset/new', controller='ckanext.ecportal.controller:ECPortalController', action='new')
-        map.connect('/dataset/edit/{id}', controller='ckanext.ecportal.controller:ECPortalController', action='edit')
-        return map
-
-    def after_map(self, map):
-        return map
 
     def configure(self, config):
         self.site_url = config.get('ckan.site_url')
@@ -51,11 +42,11 @@ class ECPortalPlugin(SingletonPlugin):
         from pylons import request
         routes = request.environ.get('pylons.routes_dict')
 
-        if routes and 'ECPortalController' in routes.get('controller') and \
+        if routes and routes.get('controller') == 'package' and \
             routes.get('action') in ['new', 'edit']:
                 data = {'site_url': self.site_url}
                 stream = stream | Transformer('head').append(HTML(html.CSS % data))
-                stream = stream | Transformer('body').append(HTML(html.JS % data))
+                # stream = stream | Transformer('body').append(HTML(html.JS % data))
 
         return stream
 
