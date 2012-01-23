@@ -2,12 +2,12 @@ import json
 from ckan.lib.base import c, model
 from ckan.authz import Authorizer
 from ckan.lib.navl.validators import ignore_missing
-from ckan.logic.converters import convert_from_extras, convert_to_extras
+from ckan.logic.converters import convert_from_extras
 from ckan.logic.schema import package_form_schema
 from ckan.plugins import implements, SingletonPlugin, IDatasetForm
 from field_values import type_of_dataset, publishers, geographical_granularity,\
     update_frequency, temporal_granularity 
-from validators import use_other, extract_other, ecportal_date_to_db
+from validators import use_other, extract_other, ecportal_date_to_db, convert_to_extras
 
 import logging
 log = logging.getLogger(__name__)

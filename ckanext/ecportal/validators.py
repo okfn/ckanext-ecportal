@@ -51,11 +51,14 @@ def convert_geographic_to_form(value, context):
     return GeoCoverageType.get_instance().db_to_form(value)
 
 def convert_to_extras(key, data, errors, context):
-    # TODO: add flattened extras data here
-    extras = data.get(('extras',), [])
-    if not extras:
-        data[('extras',)] = extras
-    extras.append({'key': key[-1], 'value': data[key]})
+    # get current number of extras
+    extra_number = 0
+    for k in data.keys():
+        if k[0] == 'extras':
+            extra_number = max(extra_number, k[1] + 1)
+    # add a new extra
+    data[('extras', extra_number, 'key')] = key[0]
+    data[('extras', extra_number, 'value')] = data[key]
 
 def duplicate_extras_key(key, data, errors, context):
     '''Hardcode errors dict key for nicer messages'''
