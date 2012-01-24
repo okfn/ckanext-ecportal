@@ -104,7 +104,7 @@ Install the Source
    The ``--ignore-installed`` option ensures ``pip`` installs software into
    this virtual environment even if it is already present on the system.
 
-   WebOb has to be installed explicitly afterwards because by installing pylons with `--ignore-installed` you end up with a newer (incompatible) version than the one that Pylons and CKAN need.
+   WebOb has to be installed explicitly afterwards because by installing pylons with ``--ignore-installed`` you end up with a newer (incompatible) version than the one that Pylons and CKAN need.
 
    Now to install the remaining dependencies in requires/lucid_present.txt and you are using Ubuntu Lucid 10.04 you can install the system versions::
 
@@ -143,10 +143,6 @@ Install the Source
 
   Next you'll need to create a database user if one doesn't already exist.
 
-  .. tip ::
-
-      If you choose a database name, user or password which are different from the example values suggested below then you'll need to change the sqlalchemy.url value accordingly in the CKAN configuration file you'll create in the next step.
-
   Here we create a user called ``ecportal`` and will enter ``pass`` for the password when prompted:
 
   ::
@@ -159,30 +155,25 @@ Install the Source
 
       sudo -u postgres createdb -O ecportal ecportal
 
-9. Create a CKAN config file.
+9. Create the CKAN config file.
 
     Make sure you are in an activated environment (see step 3) so that Python
     Paste and other modules are put on the python path (your command prompt will
     start with ``(ecportal)`` if you have) then change into the ``ckan`` directory
     which will have been created when you installed CKAN in step 4 and create the
-    CKAN config file using Paste. These instructions call it ``development.ini`` since that is the required name for running the CKAN tests. But for a server deployment then you might want to call it say after the server hostname e.g. ``test.ckan.net.ini``.
+    CKAN config file using Paste. 
 
     ::
 
         cd ecportal/src/ckan
-        paster make-config ckan development.ini
+        paster make-config ckan ecportal.ini
 
-    If you used a different database name or password when creating the database
-    in step 5 you'll need to now edit ``development.ini`` and change the
+    You'll need to now edit ``ecportal.ini`` and change the
     ``sqlalchemy.url`` line, filling in the database name, user and password you used.
 
     ::
   
-        sqlalchemy.url = postgresql://ckanuser:pass@localhost/ckantest
-
-    If you're using a remote host with password authentication rather than SSL authentication, use::
-
-        sqlalchemy.url = postgresql://<user>:<password>@<remotehost>/ckan?sslmode=disable
+        sqlalchemy.url = postgresql://ecportal:pass@localhost/ecportal
 
     Change the path to the log file in the ckan config (line 197):
 
@@ -195,17 +186,11 @@ Install the Source
   Now that you have a configuration file that has the correct settings for
   your database, you'll need to create the tables. Make sure you are still in an
   activated environment with ``(ecportal)`` at the front of the command prompt and
-  then from the ``ecportal/src/ckan`` directory run this command.
+  then from the ``ecportal/src/ckan`` directory run this command:
 
-  If your config file is called development.ini:
+  ::
 
-   ::
-
-       paster --plugin=ckan db init
-
-  or if your config file is something else, you need to specify it. e.g.::
-
-       paster --plugin=ckan db init --config=test.ckan.net.ini
+       paster --plugin=ckan db init --config=ecportal.ini
 
   You should see ``Initialising DB: SUCCESS``. 
 
@@ -280,9 +265,10 @@ Install the Source
        solr_url=http://127.0.0.1:8983/solr
 
 
-13. [optional] Setup Apache
+13. (optional) Setup Apache
 
     ::
+
         sudo apt-get install apache2 libapache2-mod-wsgi
 
     Create a document root for the apache site:
