@@ -359,3 +359,22 @@ Install the Source
         sudo a2ensite ecportal
         sudo service apache2 restart
 
+14. Install the CKAN EC Portal Extension
+
+    First, clone the ``odp`` Git repository to the ``~/ecportal/src`` directory.
+    Make sure the ecportal virtualenv is active (see step 3. for details), and install the EC Portal extension:
+
+    ::
+
+        cd ~/ecportal/ckan/odp/sources/ckanext-ecportal
+        pip install -e .
+
+    Then, enable the plugin and the custom form in the ckan .ini file 
+    (which should be located at ``~/ecportal/src/ckan/ecportal.ini``):
+
+    ::
+
+        ckan.plugins = ecportal ecportal_form (list any other extensions here)
+
+    Finally, restart CKAN (or restart Apache, if step 13 was followed).
+
