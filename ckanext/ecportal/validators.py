@@ -61,7 +61,7 @@ def convert_to_extras(key, data, errors, context):
     data[('extras', extra_number, 'value')] = data[key]
 
 def duplicate_extras_key(key, data, errors, context):
-    '''Hardcode errors dict key for nicer messages'''
+    '''Test for a custom extra key being a duplicate of an existing (schema) key.'''
     unflattened = unflatten(data)
     extras = unflattened.get('extras', [])
     extras_keys = []
@@ -71,6 +71,8 @@ def duplicate_extras_key(key, data, errors, context):
 
     for extra_key in set(extras_keys):
         extras_keys.remove(extra_key)
+
     if extras_keys:
-        errors['duplicate_extras_key'].append(_('Duplicate key "%s"') % extras_keys[0])
+        for extra_key in extras_keys:
+            errors[(extra_key,)] = [_('Duplicate key for "%s" given') % extra_key]
 

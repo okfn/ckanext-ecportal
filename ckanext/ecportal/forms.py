@@ -7,7 +7,8 @@ from ckan.logic.schema import package_form_schema
 from ckan.plugins import implements, SingletonPlugin, IDatasetForm
 from field_values import type_of_dataset, publishers, geographical_granularity,\
     update_frequency, temporal_granularity 
-from validators import use_other, extract_other, ecportal_date_to_db, convert_to_extras
+from validators import use_other, extract_other, ecportal_date_to_db,\
+    convert_to_extras, duplicate_extras_key
 
 import logging
 log = logging.getLogger(__name__)
@@ -81,6 +82,8 @@ class ECPortalDatasetForm(SingletonPlugin):
             'support': [ignore_missing, unicode, convert_to_extras],
 
             'data_quality': [ignore_missing, unicode, convert_to_extras],
+
+            '__after': [duplicate_extras_key],
         })
         return schema
     
