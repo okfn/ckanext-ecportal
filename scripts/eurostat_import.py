@@ -25,7 +25,7 @@ def _add_dataset(file_path, ckan_url, ckan_api_key):
             if extras.get('responsable_department'):
                 department = extras['responsable_department']
                 del extras['responsable_department']
-                extras['responsable_department'] = department
+                extras['responsible_department'] = department
             # remove encoding of support extra
             if extras.get('support'):
                 extras['support'] = urllib.unquote(extras['support'])
