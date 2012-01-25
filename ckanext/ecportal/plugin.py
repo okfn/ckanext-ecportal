@@ -29,7 +29,7 @@ def configure_served_directory(config, relative_path, config_var):
 class ECPortalPlugin(SingletonPlugin):
     implements(IConfigurable)
     implements(IConfigurer)
-    implements(IGenshiStreamFilter)
+    # implements(IGenshiStreamFilter)
 
     def configure(self, config):
         self.site_url = config.get('ckan.site_url')
@@ -38,15 +38,14 @@ class ECPortalPlugin(SingletonPlugin):
         configure_template_directory(config, 'templates')
         configure_public_directory(config, 'public')
 
-    def filter(self, stream):
-        from pylons import request
-        routes = request.environ.get('pylons.routes_dict')
+    # def filter(self, stream):
+    #     from pylons import request
+    #     routes = request.environ.get('pylons.routes_dict')
 
-        if routes and routes.get('controller') == 'package' and \
-            routes.get('action') in ['new', 'edit']:
-                data = {'site_url': self.site_url}
-                stream = stream | Transformer('head').append(HTML(html.CSS % data))
-                # stream = stream | Transformer('body').append(HTML(html.JS % data))
+    #     if routes and routes.get('controller') == 'package' and \
+    #         routes.get('action') in ['new', 'edit']:
+    #             data = {'site_url': self.site_url}
+    #             stream = stream | Transformer('head').append(HTML(html.CSS % data))
 
-        return stream
+    #     return stream
 

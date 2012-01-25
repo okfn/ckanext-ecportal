@@ -18,7 +18,7 @@ class ECPortalDatasetForm(SingletonPlugin):
     implements(IDatasetForm, inherit=True)
 
     def package_form(self):
-        return 'package_ecportal.html'
+        return 'package/package_ecportal.html'
 
     def is_fallback(self):
         return True
