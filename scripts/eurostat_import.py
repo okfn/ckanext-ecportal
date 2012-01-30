@@ -4,6 +4,7 @@ import sys
 import os
 import glob
 import urllib
+import urlparse
 import json
 import ckanclient
 
@@ -49,7 +50,7 @@ if __name__ == '__main__':
         print 'Usage:', __file__, '<ckan url> <ckan api key> <Eurostat JSON file or directory with JSON files>'
         sys.exit(1)
 
-    ckan_url = sys.argv[1]
+    ckan_url = urlparse.urljoin(sys.argv[1], 'api')
     ckan_api_key = sys.argv[2]
     json_path = sys.argv[3]
 
