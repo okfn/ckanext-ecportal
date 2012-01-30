@@ -24,5 +24,6 @@ setup(
         ecportal = ckanext.ecportal.plugin:ECPortalPlugin
         ecportal_form = ckanext.ecportal.forms:ECPortalDatasetForm
     ''',
-    test_suite = 'nose.collector',
+    test_suite='nose.collector',
+    scripts=['scripts/eurostat_import.py'],
 )
