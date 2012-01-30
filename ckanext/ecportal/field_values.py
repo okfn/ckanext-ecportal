@@ -166,14 +166,39 @@ update_frequency = [
 ]
 
 temporal_granularity = [
-    ("",""),
-    ("year","year"),
-    # ("quarter","quarter"),
-    ("month","month"),
-    ("week","week"),
-    ("day","day"),
-    # ("hour","hour"),
-    # ("point","point"),
-    ("other","other - please specify")
+    ('', ''),
+    ('year', 'year'),
+    # ('quarter', 'quarter'),
+    ('month', 'month'),
+    ('week', 'week'),
+    ('day', 'day'),
+    # ('hour', 'hour'),
+    # ('point', 'point'),
+    ('other', 'other - please specify')
+]
+
+eurovoc_theme = [
+    ('', ''),
+    ('politics', 'Politics'),
+    ('international relations', 'International Relations'),
+    ('european communities', 'European Communities'),
+    ('law', 'Law'),
+    ('economics', 'Economics'),
+    ('trade', 'Trade'),
+    ('finance', 'Finance'),
+    ('social questions', 'Social Questions'),
+    ('education and communications', 'Education and Communications'),
+    ('science', 'Science'),
+    ('business and competition', 'Business and Competition'),
+    ('employment and working conditions', 'Employment and Working Conditions'),
+    ('transport', 'Transport'),
+    ('environment', 'Environment'),
+    ('agriculture, forestry and fisheries' ,'Agriculture, Forestry and Fisheries'),
+    ('agri-foodstuffs', 'Agri-Foodstuffs'),
+    ('production, technology and research', 'Production, Technology and Research'),
+    ('energy', 'Energy'),
+    ('industry', 'Industry'),
+    ('geography', 'Geography'),
+    ('international organisations', 'International Organisations')
 ]
 

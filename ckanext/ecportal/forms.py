@@ -6,12 +6,21 @@ from ckan.logic.converters import convert_from_extras
 from ckan.logic.schema import package_form_schema
 from ckan.plugins import implements, SingletonPlugin, IDatasetForm
 from field_values import type_of_dataset, publishers, geographical_granularity,\
-    update_frequency, temporal_granularity 
+    update_frequency, temporal_granularity, eurovoc_theme
 from validators import use_other, extract_other, ecportal_date_to_db,\
     convert_to_extras, duplicate_extras_key
 
 import logging
 log = logging.getLogger(__name__)
+
+# TODO: clarify these metadata changes (from MetadataModel.ods):
+#
+# note: Notes on the dataset. Can be multiple. Must be typed. (different to CKAN extras?)
+# license: Add EC license (and set as default) when available.
+# author_email: Is this needed?
+# maintainer_email: Is this needed?
+# responsible_department: Is this redundant (same as published_by)?
+# Do we still need the eurostat extras? Or should they be custom extras only? Set as custom for now.
 
 
 class ECPortalDatasetForm(SingletonPlugin):
@@ -33,6 +42,7 @@ class ECPortalDatasetForm(SingletonPlugin):
         c.update_frequency = update_frequency
         c.temporal_granularity = temporal_granularity 
         c.geographical_granularity = geographical_granularity
+        c.eurovoc_theme = eurovoc_theme
         c.is_sysadmin = Authorizer().is_sysadmin(c.user)
 
         # find extras that are not part of our schema
@@ -68,20 +78,16 @@ class ECPortalDatasetForm(SingletonPlugin):
             'geographical_coverage': [ignore_missing, unicode, convert_to_extras],
             'geographical_granularity': [use_other, unicode, convert_to_extras],
             'geographical_granularity_other': [],
-            'nr_of_values': [ignore_missing, unicode, convert_to_extras],
-            'unit_used': [ignore_missing, unicode, convert_to_extras],
             'eurovoc_theme': [ignore_missing, unicode, convert_to_extras],
-            'eurovoc_tag': [ignore_missing, unicode, convert_to_extras],
+            # 'eurovoc_tag': [ignore_missing, unicode, convert_to_extras],
 
-            'code': [ignore_missing, unicode, convert_to_extras],
-            'type': [ignore_missing, unicode, convert_to_extras],
-            'theme1': [ignore_missing, unicode, convert_to_extras],
-            'theme2': [ignore_missing, unicode, convert_to_extras],
-            'theme3': [ignore_missing, unicode, convert_to_extras],
-            'license_link': [ignore_missing, unicode, convert_to_extras],
-            'support': [ignore_missing, unicode, convert_to_extras],
-
-            'data_quality': [ignore_missing, unicode, convert_to_extras],
+            # 'code': [ignore_missing, unicode, convert_to_extras],
+            # 'type': [ignore_missing, unicode, convert_to_extras],
+            # 'theme1': [ignore_missing, unicode, convert_to_extras],
+            # 'theme2': [ignore_missing, unicode, convert_to_extras],
+            # 'theme3': [ignore_missing, unicode, convert_to_extras],
+            # 'license_link': [ignore_missing, unicode, convert_to_extras],
+            # 'support': [ignore_missing, unicode, convert_to_extras],
 
             '__after': [duplicate_extras_key],
         })
@@ -101,20 +107,16 @@ class ECPortalDatasetForm(SingletonPlugin):
             'temporal_granularity': [convert_from_extras, ignore_missing, extract_other(temporal_granularity)],
             'geographical_coverage': [convert_from_extras, ignore_missing],
             'geographical_granularity': [convert_from_extras, ignore_missing, extract_other(geographical_granularity)],
-            'nr_of_values': [convert_from_extras, ignore_missing],
-            'unit_used': [convert_from_extras, ignore_missing],
             'eurovoc_theme': [convert_from_extras, ignore_missing],
-            'eurovoc_tag': [convert_from_extras, ignore_missing],
+            # 'eurovoc_tag': [convert_from_extras, ignore_missing],
 
-            'code': [convert_from_extras, ignore_missing],
-            'type': [convert_from_extras, ignore_missing],
-            'theme1': [convert_from_extras, ignore_missing],
-            'theme2': [convert_from_extras, ignore_missing],
-            'theme3': [convert_from_extras, ignore_missing],
-            'license_link': [convert_from_extras, ignore_missing],
-            'support': [convert_from_extras, ignore_missing],
-
-            'data_quality': [convert_from_extras, ignore_missing],
+            # 'code': [convert_from_extras, ignore_missing],
+            # 'type': [convert_from_extras, ignore_missing],
+            # 'theme1': [convert_from_extras, ignore_missing],
+            # 'theme2': [convert_from_extras, ignore_missing],
+            # 'theme3': [convert_from_extras, ignore_missing],
+            # 'license_link': [convert_from_extras, ignore_missing],
+            # 'support': [convert_from_extras, ignore_missing],
         })
 
         # Remove isodate validator
