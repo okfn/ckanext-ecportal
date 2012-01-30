@@ -218,13 +218,13 @@
     <dd><input id="release_date" name="release_date" size="40" type="text" value="${data.get('release_date', '')}" /></dd>
     <dd class="instructions basic">The date of the official release of the initial version of the dataset</dd>
     <!-- <dd class="instructions further"></dd> -->
-    <dd class="hints">YYYY-MM-DD</dd>
+    <dd class="hints">Acceptable date formats: YYYY-MM-DD, YYYY-MM, YYYY</dd>
     <dd class="field_error" py:if="errors.get('release_date', '')">${errors.get('release_date', '')}</dd>
 
-    <dt><label class="field_opt" for="modified_date">Date updated</label></dt>
+    <dt><label class="field_opt" for="modified_date">Modified Date</label></dt>
     <dd><input id="modified_date" name="modified_date" size="40" type="text" value="${data.get('modified_date', '')}"/></dd>
     <dd class="instructions basic">Most recent date on which the dataset was changed, updated or modified.</dd>
-    <dd class="hints">DD/MM/YYYY</dd>
+    <dd class="hints">Acceptable date formats: YYYY-MM-DD, YYYY-MM, YYYY</dd>
     <dd class="field_error" py:if="errors.get('modified_date', '')">${errors.get('modified_date', '')}</dd>
 
     <dt><label class="field_opt" for="update_frequency">Update frequency</label></dt>
@@ -252,6 +252,7 @@
     <dd class="instructions basic">The temporal coverage of this dataset.</dd>
     <dd class="instructions further">If available, please indicate the time as well as the date. Where data covers only a single day, the 'To' sub-element can be left blank.</dd>
     <dd class="hints">e.g. 2010-01-01 - 2012-01-01</dd>
+    <dd class="hints">Acceptable date formats: YYYY-MM-DD, YYYY-MM, YYYY</dd>
 
     <dt><label class="field_opt" for="temporal_granularity">Temporal granularity</label></dt>
     <dd>
