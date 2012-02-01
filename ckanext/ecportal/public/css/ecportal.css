@@ -1,30 +1,57 @@
+.container {
+    margin: 0 auto;
+    width: 850px;
+}
+
+header {
+    padding: 0;
+    color: #ffffff;
+}
+
+.header.outer {
+    background-color: #ffffff;
+    background: url("/images/corporate.png") no-repeat scroll left top transparent;
+    border-bottom: none;
+    box-shadow: none;
+    margin-bottom: 10px;
+    padding-bottom: 5px;
+    width: 850px;
+	height: 88px;
+	margin: 0 auto 50px;
+}
+
+.header #services {
+	background: url("/images/corporate.png") repeat-y scroll right -88px transparent;
+    width: 850px;
+    color: #ffffff;
+    padding: 2px 0px 2px 0;
+    margin: 0;
+    text-align: right;
+    min-height: 17px;
+}
+
+#path {
+	background-color: #074a8b;
+    border-top: 1px solid #f2d34e;
+    color: #dbe1e6;
+    min-height: 20px;
+    margin-top: 10px;
+}
+
+.footer.outer {
+    background-color: #efefef;
+    background-image: -moz-linear-gradient(center top , #efefef, #ffffff);
+    border-top: 2px solid #cccccc;
+}
+
+.footer.outer.xoxo {
+    padding-left: 20px;
+}
+
 .dataset-create-form dt.description-label, .dataset-create-form dd.description-field, .dataset-create-form dd.description-instructions {
     display: block;
 }
 
 body.package.edit input[type="checkbox"] {
     vertical-align: middle;
-}
-
-.header.outer {
-    background-color: #efefef;
-    /* background-color: #0065a2; */
-    /* background-color: #cccccc; */
-    /* background-image: -moz-linear-gradient(center top , #E2E2E2, #CCCCCC); */
-    background-image: none;
-    border-bottom: 1px solid #cccccc;
-    /* border-bottom: 1px solid #074A8B; */
-    box-shadow: none;
-    margin-bottom: 20px;
-    padding-bottom: 5px;
-}
-
-.footer.outer {
-    background-color: #efefef;
-    background-image: -moz-linear-gradient(center top , #efefef, #FFFFFF);
-    border-top: 2px solid #CCCCCC;
-}
-
-.footer.outer.xoxo {
-    padding-left: 20px;
 }

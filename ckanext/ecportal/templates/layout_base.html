@@ -51,6 +51,9 @@
   <div id="wrap">
     <div class="header outer">
       <header class="container">
+
+        <div id="services">&nbsp;</div>
+
         <div class="menu account">
           <span class="ckan-logged-in" style="display: none;">
             <a href="${h.url_for(controller='user',action='me')}">${h.gravatar((c.userobj.email_hash if c and c.userobj else ''),size=16)} ${c.user}</a>
@@ -79,8 +82,12 @@
             ${h.nav_link(c, _('Groups'), controller='group', action='index')}
           </div>
         </div>
+
+        <div id="path"></div>
+
       </header>
     </div>
+
     <py:with vars="messages = list(h._flash.pop_messages())">
     <div class="flash-messages container">
       <div class="${m.category}" py:for="m in messages">
