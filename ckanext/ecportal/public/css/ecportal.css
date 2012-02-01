@@ -1,16 +1,15 @@
 .container {
     margin: 0 auto;
-    width: 850px;
+    width: 950px;
 }
 
 .header.outer {
-    background-color: #ffffff;
-    background: url("/images/corporate.png") no-repeat scroll left top transparent;
+    background: url("/images/corporate.png") no-repeat scroll left top #1f7dc4;
     border-bottom: none;
     box-shadow: none;
     margin-bottom: 10px;
     padding-bottom: 5px;
-    width: 850px;
+    width: 950px;
 	height: 88px;
 	margin: 0 auto 50px;
 }
@@ -58,7 +57,7 @@ header .account {
 
 .header #services {
 	background: url("/images/corporate.png") repeat-y scroll right -88px transparent;
-    width: 850px;
+    width: 950px;
     color: #ffffff;
     padding: 2px 0px 2px 0;
     margin: 0;
