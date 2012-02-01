@@ -3,11 +3,6 @@
     width: 850px;
 }
 
-header {
-    padding: 0;
-    color: #ffffff;
-}
-
 .header.outer {
     background-color: #ffffff;
     background: url("/images/corporate.png") no-repeat scroll left top transparent;
@@ -18,6 +13,47 @@ header {
     width: 850px;
 	height: 88px;
 	margin: 0 auto 50px;
+}
+
+header {
+    padding: 0;
+    color: #ffffff;
+}
+
+header #logo {
+    padding-left: 10px;
+}
+
+header #site-name {
+    color: #ffffff;
+    font-family: Ubuntu,sans-serif;
+    font-size: 1.4em;
+    padding: 5px 5px 2px 95px;
+    text-shadow: none;
+}
+header #site-name a {
+    color: #ffffff;
+}
+
+header .menu a {
+    color: #dddddd;
+    text-decoration: none;
+    text-shadow: none;
+}
+header .menu a:hover {
+    text-decoration: underline;
+}
+
+header .menu #mainmenu {
+    padding-left: 3px;
+}
+
+header .menu #menusearch {
+    padding-right: 10px;
+}
+
+header .account {
+    padding-right: 10px;
 }
 
 .header #services {
