@@ -361,12 +361,18 @@ Install the Source
 
 14. Install the CKAN EC Portal Extension
 
-    First, clone the ``odp`` Git repository to the ``~/ecportal/src`` directory.
+    First, clone the ``ckanext-ecportal`` Git repository to the ``~/ecportal/src`` directory:
+
+    ::
+
+        cd ~/ecportal/ckan/src
+        git clone https://github.com/okfn/ckanext-ecportal.git
+
     Make sure the ecportal virtualenv is active (see step 3. for details), and install the EC Portal extension:
 
     ::
 
-        cd ~/ecportal/ckan/odp/sources/ckanext-ecportal
+        cd ckanext-ecportal
         pip install -e .
 
     Then, enable the plugin and the custom form in the ckan .ini file 
