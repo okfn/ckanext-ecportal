@@ -74,13 +74,24 @@ header .account {
 }
 
 .footer.outer {
-    background-color: #efefef;
-    background-image: -moz-linear-gradient(center top , #efefef, #ffffff);
-    border-top: 2px solid #cccccc;
+    width: 950px;
+    margin: 0 auto;
+    background-color: #ffffff;
+    background-image: none;
+    border-top: 1px solid #074a8b;
 }
 
-.footer.outer.xoxo {
-    padding-left: 20px;
+footer h3 {
+    margin-bottom: 0.2em;
+}
+
+footer ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+footer li {
+    display: inline;
 }
 
 .dataset-create-form dt.description-label, .dataset-create-form dd.description-field, .dataset-create-form dd.description-instructions {

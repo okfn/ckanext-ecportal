@@ -126,44 +126,45 @@
   </div>
   <div class="footer outer">
     <footer class="container">
-        <div class="xoxo span-8">
-          <h3 class="widget-title">Sections</h3>
-          <div class="textwidget">
-            <ul>
-              <li>
-                <a href="${url(controller='user', action='index')}">
-                  Users
-                </a>
-              </li>
-              <li>
-                <a href="${url(controller='tag', action='index')}">
-                  Tags
-                </a>
-              </li>
-              <li py:if="'stats' in config.get('ckan.plugins','').split(' ')">
-                <a href="${url('stats')}">
-                  Statistics
-                </a>
-              </li>
-              <li>
-                <a href="${url(controller='revision', action='index')}">
-                  Revisions
-                </a>
-              </li>
-              <li>
-                <a href="${url(controller='authorization_group', action='index')}">
-                  Authorization Groups
-                </a>
-              </li>
-              <li>
-                <a href="${h.url_for('ckanadmin_index')}">
-                  Site Admin
-                </a>
-              </li>
-            </ul>
-          </div>
-        </div>
-        <div class="xoxo span-8">
+        <!-- <div class="xoxo span-8"> -->
+        <!--   <h3 class="widget-title">Sections</h3> -->
+        <!--   <div class="textwidget"> -->
+        <!--     <ul> -->
+        <!--       <li> -->
+        <!--         <a href="${url(controller='user', action='index')}"> -->
+        <!--           Users -->
+        <!--         </a> -->
+        <!--       </li> -->
+        <!--       <li> -->
+        <!--         <a href="${url(controller='tag', action='index')}"> -->
+        <!--           Tags -->
+        <!--         </a> -->
+        <!--       </li> -->
+        <!--       <li py:if="'stats' in config.get('ckan.plugins','').split(' ')"> -->
+        <!--         <a href="${url('stats')}"> -->
+        <!--           Statistics -->
+        <!--         </a> -->
+        <!--       </li> -->
+        <!--       <li> -->
+        <!--         <a href="${url(controller='revision', action='index')}"> -->
+        <!--           Revisions -->
+        <!--         </a> -->
+        <!--       </li> -->
+        <!--       <li> -->
+        <!--         <a href="${url(controller='authorization_group', action='index')}"> -->
+        <!--           Authorization Groups -->
+        <!--         </a> -->
+        <!--       </li> -->
+        <!--       <li> -->
+        <!--         <a href="${h.url_for('ckanadmin_index')}"> -->
+        <!--           Site Admin -->
+        <!--         </a> -->
+        <!--       </li> -->
+        <!--     </ul> -->
+        <!--   </div> -->
+        <!-- </div> -->
+
+        <div class="xoxo span-24">
           <h3 class="widget-title">Languages</h3>
           <div class="textwidget">
             <ul>
@@ -183,17 +184,17 @@
             </ul>
           </div>
         </div>
-        <div class="xoxo span-8 last">
+
+        <div class="xoxo span-24">
           <h3 class="widget-title">About</h3>
-          <p id="credits">
-            <div>&copy; 2012 European Commission</div>
-            Licensed under the <a href="http://opendatacommons.org/licenses/odbl/1.0/">Open Database License</a>
-            <a href="http://opendefinition.org/"><img alt="This Content and Data is Open" src="http://assets.okfn.org/images/ok_buttons/od_80x15_blue.png" style="border: none ; margin-bottom: -4px;"/></a>
-            
-            <br/><br/>
-            Powered by <a href="http://ckan.org">CKAN</a> v${c.__version__}.<br/>
-          </p>
+          <div>&copy; 2012 European Commission</div>
+          Licensed under the <a href="http://opendatacommons.org/licenses/odbl/1.0/">Open Database License</a>
+          <a href="http://opendefinition.org/"><img alt="This Content and Data is Open" src="http://assets.okfn.org/images/ok_buttons/od_80x15_blue.png" style="border: none ; margin-bottom: -4px;"/></a>
+          
+          <br/>
+          Powered by <a href="http://ckan.org">CKAN</a> v${c.__version__}.<br/>
         </div>
+
     </footer>
   </div> <!-- eo #container -->
 
