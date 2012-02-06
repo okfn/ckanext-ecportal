@@ -1,7 +1,7 @@
 import json
 from ckan.lib.base import c, model
 from ckan.authz import Authorizer
-from ckan.lib.navl.validators import ignore_missing
+from ckan.lib.navl.validators import ignore_missing, keep_extras
 from ckan.logic.converters import convert_from_extras
 from ckan.logic.schema import package_form_schema
 from ckan.plugins import implements, SingletonPlugin, IDatasetForm
@@ -96,6 +96,10 @@ class ECPortalDatasetForm(SingletonPlugin):
     def db_to_form_schema(data, package_type=None):
         schema = package_form_schema()
         schema.update({
+            'tags': {
+                '__extras': [keep_extras]
+            },
+
             'type_of_dataset': [convert_from_extras, ignore_missing],
             'responsible_department': [convert_from_extras, ignore_missing],
             'published_by': [convert_from_extras, ignore_missing],

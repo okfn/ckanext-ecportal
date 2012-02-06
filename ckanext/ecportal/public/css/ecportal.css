@@ -1,30 +1,103 @@
+.container {
+    margin: 0 auto;
+    width: 950px;
+}
+
+.header.outer {
+    background: url("/images/corporate.png") no-repeat scroll left top #1f7dc4;
+    border-bottom: none;
+    box-shadow: none;
+    margin-bottom: 10px;
+    padding-bottom: 5px;
+    width: 950px;
+	height: 88px;
+	margin: 0 auto 50px;
+}
+
+header {
+    padding: 0;
+    color: #ffffff;
+}
+
+header #logo {
+    padding-left: 10px;
+}
+
+header #site-name {
+    color: #ffffff;
+    font-family: Ubuntu,sans-serif;
+    font-size: 1.4em;
+    padding: 5px 5px 2px 95px;
+    text-shadow: none;
+}
+header #site-name a {
+    color: #ffffff;
+}
+
+header .menu a {
+    color: #dddddd;
+    text-decoration: none;
+    text-shadow: none;
+}
+header .menu a:hover {
+    text-decoration: underline;
+}
+
+header .menu #mainmenu {
+    padding-left: 3px;
+}
+
+header .menu #menusearch {
+    padding-right: 10px;
+}
+
+header .account {
+    padding-right: 10px;
+}
+
+.header #services {
+	background: url("/images/corporate.png") repeat-y scroll right -88px transparent;
+    width: 950px;
+    color: #ffffff;
+    padding: 2px 0px 2px 0;
+    margin: 0;
+    text-align: right;
+    min-height: 17px;
+}
+
+#path {
+	background-color: #074a8b;
+    border-top: 1px solid #f2d34e;
+    color: #dbe1e6;
+    min-height: 20px;
+    margin-top: 10px;
+}
+
+.footer.outer {
+    width: 950px;
+    margin: 0 auto;
+    background-color: #ffffff;
+    background-image: none;
+    border-top: 1px solid #074a8b;
+}
+
+footer h3 {
+    margin-bottom: 0.2em;
+}
+
+footer ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+footer li {
+    display: inline;
+}
+
 .dataset-create-form dt.description-label, .dataset-create-form dd.description-field, .dataset-create-form dd.description-instructions {
     display: block;
 }
 
 body.package.edit input[type="checkbox"] {
     vertical-align: middle;
-}
-
-.header.outer {
-    background-color: #efefef;
-    /* background-color: #0065a2; */
-    /* background-color: #cccccc; */
-    /* background-image: -moz-linear-gradient(center top , #E2E2E2, #CCCCCC); */
-    background-image: none;
-    border-bottom: 1px solid #cccccc;
-    /* border-bottom: 1px solid #074A8B; */
-    box-shadow: none;
-    margin-bottom: 20px;
-    padding-bottom: 5px;
-}
-
-.footer.outer {
-    background-color: #efefef;
-    background-image: -moz-linear-gradient(center top , #efefef, #FFFFFF);
-    border-top: 2px solid #CCCCCC;
-}
-
-.footer.outer.xoxo {
-    padding-left: 20px;
 }
