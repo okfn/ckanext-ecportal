@@ -129,18 +129,26 @@
         <div class="xoxo span-24">
           <h3 class="widget-title">Languages</h3>
           <div class="textwidget">
-            <ul>
+            <ul class="language-dd-selector">
 <?python
   current_url = request.environ['CKAN_CURRENT_URL'].encode('utf-8')
+  current_locale = h.get_locales_dict().get(request.environ['CKAN_LANG'])
 ?>
-              <li py:for="locale in h.get_available_locales()">
+              <li class="selected">
+				  ${current_locale.display_name or current_locale.english_name} (${current_locale})
+				  <!-- FIXME use local image -->
+				  <img border="0" alt="" src="http://ec.europa.eu/wel/template-2012/images/arrows-down.gif" />
+              </li>
+              <py:for each="locale in h.get_available_locales()">
+              <li py:if="str(locale) != str(current_locale)">
               <a href="${h.url(current_url, locale=str(locale))}">
-                  ${locale.display_name or locale.english_name}
+				  ${locale.display_name or locale.english_name} (${locale})
                 </a>
               </li>
+			  </py:for>
             </ul>
           </div>
-        </div>
+	  </div>&nbsp;<br />
         <div class="xoxo span-24">
           <h3 class="widget-title">About</h3>
           <div>&copy; 2012 European Commission</div>
@@ -174,6 +182,7 @@
   <script type="text/javascript" src="${h.url_for_static('/scripts/templates.js')}"></script>
 
   <script src="${h.url_for_static('/scripts/vendor/modernizr/1.7/modernizr.min.js')}"></script>
+  <script type="text/javascript" src="${h.url_for_static('/scripts/ecportal.js')}"></script>
 
   <script type="text/javascript">
     CKAN.plugins = [ 

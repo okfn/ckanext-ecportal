@@ -101,3 +101,33 @@ footer li {
 body.package.edit input[type="checkbox"] {
     vertical-align: middle;
 }
+
+/* START Language selector */
+ul.language-dd-selector {
+	border:1px solid #9AB;
+	background-color:#FFF;
+	width:200px;
+	position:absolute;
+}
+ul.language-dd-selector li img{
+	float:right;
+}
+ul.language-dd-selector li a{
+	display:block;
+	color:#396EA2;
+}
+ul.language-dd-selector li a:hover{
+	color:#036;
+}
+ul.language-dd-selector li{
+	display:none;
+	color:#396EA2;
+}
+ul.language-dd-selector li.selected{
+	display:block;
+}
+ul.language-dd-selector li:hover{
+	background-color:#DEF;
+	color:#036;
+}
+/* END Language selector */
