@@ -61,6 +61,14 @@
           <strong>${group_dict['title']} has ${group_dict['packages']} datasets.</strong>
         </div>
       </py:for>
+      <div class="span-8 action-box" style="margin-top:1em;">
+        <div class="action-box-inner">
+            <h1>Recently Changed Datasets</h1>
+                <div class="activity-stream">
+                ${c.recently_changed_packages_activity_stream}
+                </div>
+        </div>
+      </div>
   </div>
   <xi:include href="layout.html" />
 </html>
