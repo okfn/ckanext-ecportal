@@ -92,7 +92,7 @@
 
     <!-- English -->
 
-    <fieldType name="text_english" class="solr.TextField" positionIncrementGap="100">
+    <fieldType name="text_en" class="solr.TextField" positionIncrementGap="100">
         <analyzer type="index">
             <tokenizer class="solr.WhitespaceTokenizerFactory"/>
             <filter class="solr.StopFilterFactory"
@@ -121,7 +121,7 @@
 
     <!-- French -->
 
-    <fieldType name="text_french" class="solr.TextField" positionIncrementGap="100">
+    <fieldType name="text_fr" class="solr.TextField" positionIncrementGap="100">
         <analyzer type="index">
             <tokenizer class="solr.WhitespaceTokenizerFactory"/>
             <filter class="solr.StopFilterFactory"
@@ -152,7 +152,7 @@
 
     <!-- German -->
 
-    <fieldType name="text_german" class="solr.TextField" positionIncrementGap="100">
+    <fieldType name="text_de" class="solr.TextField" positionIncrementGap="100">
         <analyzer type="index">
             <tokenizer class="solr.WhitespaceTokenizerFactory"/>
             <filter class="solr.StopFilterFactory"
@@ -181,7 +181,7 @@
 
     <!-- Spanish -->
 
-    <fieldType name="text_spanish" class="solr.TextField" positionIncrementGap="100">
+    <fieldType name="text_es" class="solr.TextField" positionIncrementGap="100">
         <analyzer type="index">
             <tokenizer class="solr.WhitespaceTokenizerFactory"/>
             <filter class="solr.StopFilterFactory"
@@ -210,7 +210,7 @@
 
     <!-- Italian -->
 
-    <fieldType name="text_italian" class="solr.TextField" positionIncrementGap="100">
+    <fieldType name="text_it" class="solr.TextField" positionIncrementGap="100">
         <analyzer type="index">
             <tokenizer class="solr.WhitespaceTokenizerFactory"/>
             <filter class="solr.StopFilterFactory"
@@ -239,7 +239,7 @@
 
     <!-- Dutch -->
 
-    <fieldType name="text_dutch" class="solr.TextField" positionIncrementGap="100">
+    <fieldType name="text_nl" class="solr.TextField" positionIncrementGap="100">
         <analyzer type="index">
             <tokenizer class="solr.WhitespaceTokenizerFactory"/>
             <filter class="solr.StopFilterFactory"
@@ -268,7 +268,7 @@
 
     <!-- Romanian -->
 
-    <fieldType name="text_romanian" class="solr.TextField" positionIncrementGap="100">
+    <fieldType name="text_ro" class="solr.TextField" positionIncrementGap="100">
         <analyzer type="index">
             <tokenizer class="solr.WhitespaceTokenizerFactory"/>
             <filter class="solr.StopFilterFactory"
@@ -297,7 +297,7 @@
 
     <!-- Portuguese -->
 
-    <fieldType name="text_portuguese" class="solr.TextField" positionIncrementGap="100">
+    <fieldType name="text_pt" class="solr.TextField" positionIncrementGap="100">
         <analyzer type="index">
             <tokenizer class="solr.WhitespaceTokenizerFactory"/>
             <filter class="solr.StopFilterFactory"
@@ -324,10 +324,9 @@
         </analyzer>
     </fieldType>
 
-</types>
     <!-- Polish -->
 
-    <fieldType name="text_polish" class="solr.TextField" positionIncrementGap="100">
+    <fieldType name="text_pl" class="solr.TextField" positionIncrementGap="100">
         <analyzer type="index">
             <tokenizer class="solr.WhitespaceTokenizerFactory"/>
             <filter class="solr.StopFilterFactory" ignoreCase="true" words="polish_stop.txt" enablePositionIncrements="true" />
@@ -347,6 +346,7 @@
         </analyzer>
     </fieldType>
 
+</types>
 
 <fields>
     <field name="index_id" type="string" indexed="true" stored="true" required="true" />
@@ -395,6 +395,34 @@
     <field name="metadata_modified" type="date" indexed="true" stored="true" multiValued="false"/>
 
     <field name="indexed_ts" type="date" indexed="true" stored="true" default="NOW" multiValued="false"/>
+     
+    <!-- Multilingual -->
+    <field name="text_en" type="text_en" indexed="true" stored="true"/>
+    <field name="title_en" type="text_en" indexed="true" stored="true"/>
+
+    <field name="text_fr" type="text_fr" indexed="true" stored="true"/>
+    <field name="title_fr" type="text_fr" indexed="true" stored="true"/>
+
+    <field name="text_de" type="text_de" indexed="true" stored="true"/>
+    <field name="title_de" type="text_de" indexed="true" stored="true"/>
+
+    <field name="text_es" type="text_es" indexed="true" stored="true"/>
+    <field name="title_es" type="text_es" indexed="true" stored="true"/>
+
+    <field name="text_it" type="text_it" indexed="true" stored="true"/>
+    <field name="title_it" type="text_it" indexed="true" stored="true"/>
+
+    <field name="text_nl" type="text_nl" indexed="true" stored="true"/>
+    <field name="title_nl" type="text_nl" indexed="true" stored="true"/>
+
+    <field name="text_ro" type="text_ro" indexed="true" stored="true"/>
+    <field name="title_ro" type="text_ro" indexed="true" stored="true"/>
+
+    <field name="text_pt" type="text_pt" indexed="true" stored="true"/>
+    <field name="title_pt" type="text_pt" indexed="true" stored="true"/>
+
+    <field name="text_pl" type="text_pl" indexed="true" stored="true"/>
+    <field name="title_pl" type="text_pl" indexed="true" stored="true"/>
 
     <dynamicField name="extras_*" type="text" indexed="true" stored="true" multiValued="false"/>
     <dynamicField name="*" type="string" indexed="true"  stored="false"/>
