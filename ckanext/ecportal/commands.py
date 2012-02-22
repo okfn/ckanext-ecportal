@@ -1,6 +1,7 @@
 import os
 import json
 from ckan import model
+from ckan.logic import get_action, NotFound
 from ckan.lib.cli import CkanCommand
 
 import logging
@@ -84,22 +85,42 @@ class ECPortalCommand(CkanCommand):
                     groups[group]['children'].append(child)
 
         # create CKAN groups
-        rev = model.repo.new_revision()
-        rev.message = u'Importing EC Portal Publisher Info'
+        user = get_action('get_site_user')({'model': model, 'ignore_auth': True}, {})
+        context = {'model': model, 'session': model.Session, 'user': user['name']}
+
         for group in groups:
-            g = model.Group.get(group)
-            if not g:
+            try:
+                g = get_action('group_show')(context, {'id': group})
+            except NotFound:
                 # use the english title if we have one
                 title_langs = [k.keys()[0] for k in groups[group]['titles']]
                 if 'eng' in title_langs:
-                    group_title = [t['eng'] for t in groups[group]['titles'] if t.get('eng')][0]
+                    group_title = groups[group]['titles'][0]['eng']
                 else:
                     group_title = groups[group]['titles'][0][title_langs[0]]
 
-                g = model.Group(name=group, title=group_title, type=u'publisher')
-                model.Session.add(g)
-            groups[group]['id'] = g.id
+                group_data = {
+                    'name': group,
+                    'title': group_title,
+                    'type': u'publisher'
+                }
+                g = get_action('group_create')(context, group_data)
+            groups[group]['dict'] = g
 
-        # TODO: setup group heirarchy
+        # setup group heirarchy
+        for group in groups:
+            if not groups[group]['children']:
+                continue
 
-        model.repo.commit_and_remove()
+            parent = groups[group]['dict']
+            for child in groups[group]['children']:
+                child_dict = {
+                    'name': groups[child]['dict']['name'],
+                    'capacity': u'member'
+                }
+                if 'groups' in parent:
+                    parent['groups'].append(child_dict)
+                else:
+                    parent['groups'] = [child_dict]
+
+            get_action('group_update')(context, parent)
