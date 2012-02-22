@@ -98,8 +98,8 @@ class ECPortalCommand(CkanCommand):
                     group_title = groups[group]['titles'].values()[0]
 
                 group_data = {
-                    'name': group,
-                    'title': group_title,
+                    'name': unicode(group),
+                    'title': unicode(group_title),
                     'type': u'publisher'
                 }
                 g = get_action('group_create')(context, group_data)
@@ -120,7 +120,7 @@ class ECPortalCommand(CkanCommand):
                     continue
 
                 child_dict = {
-                    'name': groups[child]['dict']['name'],
+                    'name': unicode(groups[child]['dict']['name']),
                     'capacity': u'member'
                 }
                 if 'groups' in parent:
@@ -129,3 +129,22 @@ class ECPortalCommand(CkanCommand):
                     parent['groups'] = [child_dict]
 
             get_action('group_update')(context, parent)
+
+        # update French translation
+        log.info("Updating French translations")
+        term_translations = []
+        for group in groups:
+            if not 'eng' in groups[group]['titles'] or\
+               not 'fra' in groups[group]['titles']:
+                continue
+
+            term = groups[group]['titles']['eng']
+            translation = groups[group]['titles']['fra']
+            term_translations.append({
+                'term': unicode(term),
+                'term_translation': unicode(translation),
+                'lang_code': u'fr'
+            })
+        get_action('term_translation_update_many')(
+            context, {'data': term_translations}
+        )
