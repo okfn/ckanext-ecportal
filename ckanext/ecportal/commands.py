@@ -64,16 +64,14 @@ class ECPortalCommand(CkanCommand):
         log.info("Reading group structure and names/translations")
         groups = {}
         for group in translations['results']['bindings']:
-            translation = {}
             name_uri = group['s']['value']
             group_name = name_uri.split('/')[-1].lower()
             lang_uri = group['lang']['value']
             lang_name = lang_uri.split('/')[-1].lower()
-            translation[lang_name] = group['f']['value']
             if not group_name in groups:
                 groups[group_name] = {}
-                groups[group_name]['titles'] = []
-            groups[group_name]['titles'].append(translation)
+                groups[group_name]['titles'] = {}
+            groups[group_name]['titles'][lang_name] = group['f']['value']
 
         # get list of child groups for each group
         for group in groups:
@@ -95,11 +93,9 @@ class ECPortalCommand(CkanCommand):
                 g = get_action('group_show')(context, {'id': group})
             except NotFound:
                 # use the english title if we have one
-                title_langs = [k.keys()[0] for k in groups[group]['titles']]
-                if 'eng' in title_langs:
-                    group_title = groups[group]['titles'][0]['eng']
-                else:
-                    group_title = groups[group]['titles'][0][title_langs[0]]
+                group_title = groups[group]['titles'].get('eng')
+                if not group_title:
+                    group_title = groups[group]['titles'].values()[0]
 
                 group_data = {
                     'name': group,
