@@ -2,7 +2,6 @@ import re
 from pylons.i18n import _
 from ckan.lib.field_types import DateType, DateConvertError
 from ckan.lib.navl.dictization_functions import Invalid, missing, unflatten
-from field_types import GeoCoverageType
 
 # parse_timedate function is similar to the one in ckan.lib.field_types.DateType
 # changes:
@@ -13,7 +12,7 @@ class ECPortalDateType(DateType):
     def parse_timedate(cls, timedate_str, format_type):
         '''Takes a timedate and returns a dictionary of the fields.
         * Little validation is done.
-        * If it can\'t understand the layout it raises DateConvertError
+        * If it can't understand the layout it raises DateConvertError
         '''
         assert format_type in cls.format_types
         if not hasattr(cls, 'matchers'):
@@ -91,18 +90,6 @@ def extract_other(option_list):
             data[(other_key,)] = value
     return other
             
-def convert_geographic_to_db(value, context):
-    if isinstance(value, list):
-        regions = value
-    elif value:
-        regions = [value]
-    else:
-        regions = []
-    return GeoCoverageType.get_instance().form_to_db(regions)
-
-def convert_geographic_to_form(value, context):
-    return GeoCoverageType.get_instance().db_to_form(value)
-
 def convert_to_extras(key, data, errors, context):
     # get current number of extras
     extra_number = 0
@@ -128,4 +115,3 @@ def duplicate_extras_key(key, data, errors, context):
     if extras_keys:
         for extra_key in extras_keys:
             errors[(extra_key,)] = [_('Duplicate key for "%s" given') % extra_key]
-

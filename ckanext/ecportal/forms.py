@@ -5,22 +5,13 @@ from ckan.lib.navl.validators import ignore_missing, keep_extras
 from ckan.logic.converters import convert_from_extras
 from ckan.logic.schema import package_form_schema
 from ckan.plugins import implements, SingletonPlugin, IDatasetForm
-from field_values import type_of_dataset, publishers, geographical_granularity,\
-    update_frequency, temporal_granularity, eurovoc_theme
+from field_values import type_of_dataset, publishers, update_frequency,\
+    temporal_granularity
 from validators import use_other, extract_other, ecportal_date_to_db,\
     convert_to_extras, duplicate_extras_key
 
 import logging
 log = logging.getLogger(__name__)
-
-# TODO: clarify these metadata changes (from MetadataModel.ods):
-#
-# note: Notes on the dataset. Can be multiple. Must be typed. (different to CKAN extras?)
-# license: Add EC license (and set as default) when available.
-# author_email: Is this needed?
-# maintainer_email: Is this needed?
-# responsible_department: Is this redundant (same as published_by)?
-# Do we still need the eurostat extras? Or should they be custom extras only? Set as custom for now.
 
 
 class ECPortalDatasetForm(SingletonPlugin):
@@ -40,15 +31,13 @@ class ECPortalDatasetForm(SingletonPlugin):
         c.type_of_dataset = type_of_dataset
         c.publishers = publishers
         c.update_frequency = update_frequency
-        c.temporal_granularity = temporal_granularity 
-        c.geographical_granularity = geographical_granularity
-        c.eurovoc_theme = eurovoc_theme
+        c.temporal_granularity = temporal_granularity
         c.is_sysadmin = Authorizer().is_sysadmin(c.user)
 
         # find extras that are not part of our schema
         c.additional_extras = []
         schema_keys = self.form_to_db_schema().keys()
-        
+
         if c.pkg_json:
             extras = json.loads(c.pkg_json).get('extras', [])
             for extra in extras:
@@ -76,19 +65,6 @@ class ECPortalDatasetForm(SingletonPlugin):
             'temporal_granularity': [use_other, unicode, convert_to_extras],
             'temporal_granularity-other': [],
             'geographical_coverage': [ignore_missing, unicode, convert_to_extras],
-            'geographical_granularity': [use_other, unicode, convert_to_extras],
-            'geographical_granularity_other': [],
-            'eurovoc_theme': [ignore_missing, unicode, convert_to_extras],
-            # 'eurovoc_tag': [ignore_missing, unicode, convert_to_extras],
-
-            # 'code': [ignore_missing, unicode, convert_to_extras],
-            # 'type': [ignore_missing, unicode, convert_to_extras],
-            # 'theme1': [ignore_missing, unicode, convert_to_extras],
-            # 'theme2': [ignore_missing, unicode, convert_to_extras],
-            # 'theme3': [ignore_missing, unicode, convert_to_extras],
-            # 'license_link': [ignore_missing, unicode, convert_to_extras],
-            # 'support': [ignore_missing, unicode, convert_to_extras],
-
             '__after': [duplicate_extras_key],
         })
         return schema
@@ -110,17 +86,6 @@ class ECPortalDatasetForm(SingletonPlugin):
             'temporal_coverage_to': [convert_from_extras, ignore_missing],
             'temporal_granularity': [convert_from_extras, ignore_missing, extract_other(temporal_granularity)],
             'geographical_coverage': [convert_from_extras, ignore_missing],
-            'geographical_granularity': [convert_from_extras, ignore_missing, extract_other(geographical_granularity)],
-            'eurovoc_theme': [convert_from_extras, ignore_missing],
-            # 'eurovoc_tag': [convert_from_extras, ignore_missing],
-
-            # 'code': [convert_from_extras, ignore_missing],
-            # 'type': [convert_from_extras, ignore_missing],
-            # 'theme1': [convert_from_extras, ignore_missing],
-            # 'theme2': [convert_from_extras, ignore_missing],
-            # 'theme3': [convert_from_extras, ignore_missing],
-            # 'license_link': [convert_from_extras, ignore_missing],
-            # 'support': [convert_from_extras, ignore_missing],
         })
 
         # Remove isodate validator
@@ -134,4 +99,3 @@ class ECPortalDatasetForm(SingletonPlugin):
 
     def check_data_dict(self, data_dict):
         return
-
