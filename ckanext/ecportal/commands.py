@@ -61,6 +61,7 @@ class ECPortalCommand(CkanCommand):
         Create publisher groups based on translations and structure JSON objects.
         '''
         # get group names and title translations
+        log.info("Reading group structure and names/translations")
         groups = {}
         for group in translations['results']['bindings']:
             translation = {}
@@ -85,6 +86,7 @@ class ECPortalCommand(CkanCommand):
                     groups[group]['children'].append(child)
 
         # create CKAN groups
+        log.info("Creating CKAN group objects")
         user = get_action('get_site_user')({'model': model, 'ignore_auth': True}, {})
         context = {'model': model, 'session': model.Session, 'user': user['name']}
 
@@ -107,13 +109,20 @@ class ECPortalCommand(CkanCommand):
                 g = get_action('group_create')(context, group_data)
             groups[group]['dict'] = g
 
-        # setup group heirarchy
+        # updating group heirarchy
+        log.info("Updating group hierarchy")
         for group in groups:
             if not groups[group]['children']:
                 continue
 
             parent = groups[group]['dict']
             for child in groups[group]['children']:
+
+                # check that child is not already in the group
+                child_names = [g['name'] for g in parent.get('groups', [])]
+                if child in child_names:
+                    continue
+
                 child_dict = {
                     'name': groups[child]['dict']['name'],
                     'capacity': u'member'
