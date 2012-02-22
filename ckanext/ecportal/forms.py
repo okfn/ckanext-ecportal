@@ -27,7 +27,7 @@ class ECPortalDatasetForm(SingletonPlugin):
         return ['dataset']
 
     def setup_template_variables(self, context, data_dict=None, package_type=None):
-        c.licences = [('', '')] + model.Package.get_license_options()
+        c.licences = model.Package.get_license_options()
         c.type_of_dataset = type_of_dataset
         c.publishers = publishers
         c.update_frequency = update_frequency

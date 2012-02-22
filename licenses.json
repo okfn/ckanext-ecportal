@@ -1,0 +1,28 @@
+[
+  {
+    "domain_content": false, 
+    "domain_data": true, 
+    "domain_software": false, 
+    "family": "", 
+    "id": "ec-ol", 
+    "is_okd_compliant": true, 
+    "is_osi_compliant": false, 
+    "maintainer": "", 
+    "status": "active", 
+    "title": "European Commission Open License", 
+    "url": "http://www.opendefinition.org/licenses/ec-ol"
+  }, 
+  {
+    "domain_content": false, 
+    "domain_data": true, 
+    "domain_software": false, 
+    "family": "", 
+    "id": "ec-eurostat", 
+    "is_okd_compliant": true, 
+    "is_osi_compliant": false, 
+    "maintainer": "", 
+    "status": "active", 
+    "title": "Eurostat Copyright/License Policy", 
+    "url": "http://epp.eurostat.ec.europa.eu/portal/page/portal/about_eurostat/policies/copyright_licence_policy"
+  }
+]
