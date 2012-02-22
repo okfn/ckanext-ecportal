@@ -9,9 +9,14 @@ log = logging.getLogger()
 
 class ECPortalCommand(CkanCommand):
     '''
-    Usage::
+    Usage:
 
-        paster ecportal import-publishers <path to translations JSON file> <path to structure JSON file> -c <path to config file>
+        paster ecportal import-publishers <translations> <structure> -c <config>
+
+    Where:
+        <translations> = path to translations.json
+        <structure> = path to structure.json
+        <config> = path to your ckan config file
 
     The command should be run from the ckanext-ecportal directory.
     '''
@@ -44,7 +49,7 @@ class ECPortalCommand(CkanCommand):
                         self.import_publishers(json.loads(t.read()),
                                                json.loads(s.read()))
             else:
-                log.error('Could not open files %s and %s' % 
+                log.error('Could not open files %s and %s' %
                     (translations_path, structure_path)
                 )
         else:
