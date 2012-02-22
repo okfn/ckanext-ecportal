@@ -54,7 +54,6 @@ class ECPortalDatasetForm(SingletonPlugin):
         schema = package_form_schema()
         schema.update({
             'type_of_dataset': [ignore_missing, unicode, convert_to_extras],
-            'responsible_department': [ignore_missing, unicode, convert_to_extras],
             'published_by': [ignore_missing, unicode, convert_to_extras],
             'release_date': [ignore_missing, ecportal_date_to_db, convert_to_extras],
             'modified_date': [ignore_missing, ecportal_date_to_db, convert_to_extras],
@@ -63,7 +62,6 @@ class ECPortalDatasetForm(SingletonPlugin):
             'temporal_coverage_from': [ignore_missing, ecportal_date_to_db, convert_to_extras],
             'temporal_coverage_to': [ignore_missing, ecportal_date_to_db, convert_to_extras],
             'temporal_granularity': [use_other, unicode, convert_to_extras],
-            'temporal_granularity-other': [],
             'geographical_coverage': [ignore_missing, unicode, convert_to_extras],
             '__after': [duplicate_extras_key],
         })
@@ -77,14 +75,13 @@ class ECPortalDatasetForm(SingletonPlugin):
             },
 
             'type_of_dataset': [convert_from_extras, ignore_missing],
-            'responsible_department': [convert_from_extras, ignore_missing],
             'published_by': [convert_from_extras, ignore_missing],
             'release_date': [convert_from_extras, ignore_missing],
             'modified_date': [convert_from_extras, ignore_missing],
             'update_frequency': [convert_from_extras, ignore_missing, extract_other(update_frequency)],
             'temporal_coverage_from': [convert_from_extras, ignore_missing],
             'temporal_coverage_to': [convert_from_extras, ignore_missing],
-            'temporal_granularity': [convert_from_extras, ignore_missing, extract_other(temporal_granularity)],
+            'temporal_granularity': [convert_from_extras, ignore_missing],
             'geographical_coverage': [convert_from_extras, ignore_missing],
         })
 

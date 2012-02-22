@@ -197,23 +197,6 @@
     </dd>
     <dd class="field_error" py:if="errors.get('type_of_dataset', '')">${errors.get('type_of_dataset', '')}</dd>
 
-    <dt><label class="field_opt" for="responsible_department">Responsible Department</label></dt>
-    <dd><input id="responsible_department" name="responsible_department" type="text" value="${data.get('responsible_department', '')}"/></dd>
-    <dd class="instructions basic">The owner of/responsible for the dataset.</dd>
-
-    <dt><label class="field_req" for="published_by">Published by *</label></dt>
-    <dd>
-      <select id="published_by" name="published_by">
-        <py:for each="published_name, published_desc in c.publishers">
-          <option value="${published_name}" py:attrs="{'selected': 'selected' if data.get('published_by', '') == published_name else None}" >
-            ${published_desc}
-          </option>
-        </py:for>
-      </select>
-    </dd>
-    <dd class="instructions basic">The organisation (usually a public body) credited with or associated with the publication of this data.</dd>
-    <dd class="instructions further">Often datasets are associated with both a government department and an outside agency, in which case this field should store the department and "Published via" should store the agency. When an organisation is not listed, please request it using the form found in your data.gov.uk user page under the "Publishers" tab. An asterisk (*) denotes an pre-existing value for this field, which is allowed, but the current user's permissions would not be able to change a package\s publisher to this value.</dd>
-
     <dt><label class="field_opt" for="release_date">Release Date</label></dt>
     <dd><input id="release_date" name="release_date" size="40" type="text" value="${data.get('release_date', '')}" /></dd>
     <dd class="instructions basic">The date of the official release of the initial version of the dataset</dd>
@@ -263,9 +246,6 @@
           </option>
         </py:for>
       </select>
-      <label class="inline" for="temporal_granularity-other">Other: 
-        <input class="medium-width" id="temporal_granularity-other" name="temporal_granularity-other" type="text" value="${data.get('temporal_granularity-other', '')}"/>
-      </label>
     </dd>
     <dd class="instructions basic">The lowest level of temporal detail granularity</dd>
     <dd class="instructions further">This should give the lowest level of temporal detail given in the dataset if it is aggregated, expressed as an interval of time. If the data is not aggregated over time, and so the dataset goes down to the instants that reported events occurred (such as the timings of high and low tides), use 'point'. If none of the choices is appropriate or the granularity varies, please specify in the 'other' element.</dd>
