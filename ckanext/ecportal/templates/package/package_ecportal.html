@@ -248,7 +248,7 @@
 
 <fieldset id="extras">
   <h3>Extra Fields</h3>
-  <dl>
+  <dl py:if="c.additional_extras">
     <py:for each="num, extra in enumerate(c.additional_extras)">
     <dt><label for="extras__${num}__value">${extra.get('key')}</label></dt>
     <dd>
