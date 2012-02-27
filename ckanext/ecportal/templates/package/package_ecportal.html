@@ -36,15 +36,27 @@
         placeholder="${_('A short descriptive title for the dataset')}"
       />
     </dd>
+    <dd class="instructions basic">A short descriptive title for the data set. 
+    It should not be a description though - save that for the Description field. 
+    Do not give a trailing full stop. Do not use allcaps.</dd>
     <dd class="title-instructions field_error" py:if="errors.get('title', '')">${errors.get('title', '')}</dd>
 
-    <dt class="name-label"><label class="field_req" for="name">Url</label></dt>
+    <dt class="name-label"><label class="field_req" for="name">Name</label></dt>
     <dd class="name-field">
-      <span class="js-url-text url-text">${g.site_url + h.url(controller='package', action='index')+'/'}<span class="js-url-viewmode js-url-suffix">&nbsp;</span><a href="#" style="display: none;" class="url-edit js-url-editlink js-url-viewmode">(edit)</a></span>
-      <input style="display: none;" id="name" maxlength="100" name="name" type="text" class="url-input js-url-editmode js-url-input" value="${data.get('name', '')}" />
+      <span class="js-url-text url-text">
+        <span class="js-url-viewmode js-url-suffix">&nbsp;</span>
+        (${g.site_url + h.url(controller='package', action='index')+'/'}<span class="js-url-viewmode js-url-suffix">&nbsp;</span>)
+        <a href="#" style="display: none;" class="url-edit js-url-editlink js-url-viewmode">(edit)</a>
+      </span>
+      <input style="display: none;" id="name" maxlength="100" name="name" type="text" 
+             class="url-input js-url-editmode js-url-input" value="${data.get('name', '')}" />
       <p class="js-url-is-valid">&nbsp;</p>
     </dd>
-    <dd style="display: none;" class="js-url-editmode name-instructions basic">2+ characters, lowercase, using only 'a-z0-9' and '-_'</dd>
+    <dd style="display: none;" class="js-url-editmode name-instructions basic">
+      A unique identifier for the package. It should be broadly humanly readable, in the spirit of Semantic Web URIs. 
+      Only use an acronym if it is widely recognised. Renaming is possible but discouraged.
+      2+ characters, lowercase, using only 'a-z0-9' and '-_' include date (yyyy-mm-dd) if a static dataset.
+    </dd>
     <dd class="js-url-editmode name-instructions field_error" py:if="errors.get('name', '')">${errors.get('name', '')}</dd>
 
     <dt class="description-label"><label class="field_req" for="notes">Description</label></dt>
@@ -57,8 +69,12 @@
       <div class="markdown-preview" style="display: none;"></div>
       <span class="hints">You can use <a href="http://daringfireball.net/projects/markdown/syntax" target="_blank">Markdown formatting</a> here.</span>
     </div></dd>
+    <dd class="instructions basic">
+    The main description of the dataset.  It is often displayed with the package title. 
+    In particular, it should start with a short sentence that describes the data set succinctly, 
+    because the first few words alone may be used in some views of the data sets.</dd>
 
-    <dt class="homepage-label"><label class="field_opt" for="url">Home Page</label></dt>
+    <dt class="homepage-label"><label class="field_opt" for="url">URL</label></dt>
     <dd class="homepage-field"><input id="url" name="url" type="text" value="${data.get('url', '')}"/></dd>
     <dd class="homepage-instructions instructions basic">The URL for the web page describing the data (not the data itself).</dd>
     <dd class="homepage-instructions hints">e.g. http://www.example.com/growth-figures.html</dd>
@@ -78,32 +94,92 @@
 
 <fieldset id='further-information'>
   <dl>
-    <dt><label class="field_opt" for="author">Author</label></dt>
-    <dd><input id="author" name="author" type="text" value="${data.get('author', '')}" /></dd>
-    <dd class="instructions basic">The name of the main contact, for enquiries about this particular dataset, using the e-mail address in the following field.</dd>
+    <dt><label class="field_opt" for="type_of_dataset">Type of Dataset</label></dt>
+    <dd>
+      <select class="short" id="type_of_dataset" name="type_of_dataset">
+        <py:for each="name, desc in c.type_of_dataset">
+          <option value="${name}" py:attrs="{'selected': 'selected' if data.get('type_of_dataset', '') == name else None}" >
+            ${desc}
+          </option>
+        </py:for>
+      </select>
+    </dd>
+    <dd class="instructions basic">The type of dataset.</dd>
+    <dd class="instructions further">
+    <p>Primary legal materials include documents of primary authority issued by governmental bodies, such as court opinions, 
+    statutes, and regulations. They also include the supporting documents and other media issued and maintained by those bodies, 
+    such as dockets, hearings, forms, oral arguments, and legislative histories. These materials can be found in every branch, 
+    at every level, national, tribal, state and local, and should be available to anyone with the will and the heart to obtain them.</p>
+    <p>Government operational records are typically administrative records (rather than legal records) that are useful for the 
+    public to identify conflicts of interest and to perform oversight. Contracts/grants, personal financial disclosures, etc. 
+    These documents have little utility aside from oversight.</p>
+    <p>The last category "civic capital" are government records that have utility that have nothing to do with government per se. 
+    Environmental and weather data, health and safety data, corporate compliance records. These records can save lives, 
+    make markets more efficient, etc. These records are closest to Government as a Platform.</p>
+    </dd>
+    <dd class="field_error" py:if="errors.get('type_of_dataset', '')">${errors.get('type_of_dataset', '')}</dd>
 
-    <dt><label class="field_opt" for="author_email">Author email</label></dt>
-    <dd><input id="author_email" name="author_email" type="text" value="${data.get('author_email', '')}" /></dd>
+    <dt><label class="field_opt" for="release_date">Release Date</label></dt>
+    <dd><input id="release_date" name="release_date" size="40" type="text" value="${data.get('release_date', '')}" /></dd>
+    <dd class="instructions basic">Date of formal issuance (e.g., publication) of the dataset.</dd>
+    <dd class="hints">Acceptable date formats: YYYY-MM-DD, YYYY-MM, YYYY</dd>
+    <dd class="field_error" py:if="errors.get('release_date', '')">${errors.get('release_date', '')}</dd>
 
-    <dt><label class="field_opt" for="maintainer">Maintainer</label></dt>
-    <dd><input id="maintainer" name="maintainer" type="text" value="${data.get('maintainer', '')}" /></dd>
-    <dd class="instructions basic">If there is another important contact person (in addition to the person in the Author field) then provide details here.</dd>
+    <dt><label class="field_opt" for="modified_date">Modified Date</label></dt>
+    <dd><input id="modified_date" name="modified_date" size="40" type="text" value="${data.get('modified_date', '')}"/></dd>
+    <dd class="instructions basic">Most recent date on which the dataset was changed, updated or modified.</dd>
+    <dd class="hints">Acceptable date formats: YYYY-MM-DD, YYYY-MM, YYYY</dd>
+    <dd class="field_error" py:if="errors.get('modified_date', '')">${errors.get('modified_date', '')}</dd>
 
-    <dt><label class="field_opt" for="maintainer_email">Maintainer email</label></dt>
-    <dd><input id="maintainer_email" name="maintainer_email" type="text" value="${data.get('maintainer_email', '')}" /></dd>
+    <dt><label class="field_opt" for="update_frequency">Update frequency</label></dt>
+    <dd>
+      <select class="short" id="update_frequency" name="update_frequency">
+        <py:for each="freq_name, freq_desc in c.update_frequency">
+          <option value="${freq_name}" py:attrs="{'selected': 'selected' if data.get('update_frequency', '') == freq_name else None}" >
+            ${freq_desc}
+          </option>
+        </py:for>
+      </select>
+      <label class="inline" for="update_frequency-other">Other: 
+        <input class="medium-width" id="update_frequency-other" name="update_frequency-other" type="text" value="${data.get('update_frequency-other', '')}"/>
+      </label>
+    </dd>
+    <dd class="instructions basic">The frequency with which dataset is published.</dd>
+    <dd class="field_error" py:if="errors.get('update_frequency', '')">${errors.get('update_frequency', '')}</dd>
+
+    <dt><label class="field_opt" for="temporal_coverage">Temporal coverage</label></dt>
+    <dd>
+      <input class="medium-width" id="temporal_coverage_from" name="temporal_coverage_from" type="text" value="${data.get('temporal_coverage_from', '')}" /> - 
+      <input class="medium-width" id="temporal_coverage_to" name="temporal_coverage_to" type="text" value="${data.get('temporal_coverage_to', '')}" />
+    </dd>
+    <dd class="instructions basic">The start and end of the temporal series used in this dataset.</dd>
+    <dd class="hints">e.g. 2010-01-01 - 2012-01-01</dd>
+    <dd class="hints">Acceptable date formats: YYYY-MM-DD, YYYY-MM, YYYY</dd>
+
+    <dt><label class="field_opt" for="temporal_granularity">Temporal granularity</label></dt>
+    <dd>
+      <select class="short" id="temporal_granularity" name="temporal_granularity">
+        <py:for each="temporal_name, temporal_desc in c.temporal_granularity">
+          <option value="${temporal_name}" py:attrs="{'selected': 'selected' if data.get('temporal_granularity', '') == temporal_name else None}" >
+            ${temporal_name}
+          </option>
+        </py:for>
+      </select>
+    </dd>
+    <dd class="instructions basic">This should give the lowest level of temporal detail given in the dataset 
+    if it is aggregated, expressed as an interval of time. 
+    </dd>
+
+    <dt><label class="field_opt" for="geographical_coverage">Geographical coverage</label></dt>
+    <dd><input id="geographical_coverage" name="geographical_coverage" size="40" type="text" value="${data.get('geographical_coverage', '')}" /></dd>
+    <dd class="instructions basic">The geographical coverage of this dataset.</dd>
+    <dd class="instructions further">Separate multiple entries with a comma.</dd>
 
     <dt><label class="field_opt" for="version">Version</label></dt>
     <dd><input id="version" maxlength="100" name="version" type="text" value="${data.get('version', '')}" /></dd>
     <dd class="instructions basic">A number representing the version (if applicable)</dd>
     <dd class="hints">e.g. 1.2.0</dd>
 
-    <dt py:if="c.is_sysadmin or c.auth_for_change_state"><label class="field_opt" for="state">State</label></dt>
-    <dd py:if="c.is_sysadmin or c.auth_for_change_state">
-    <select id="state" name="state" >
-      <option py:attrs="{'selected': 'selected' if data.get('state') == 'active' else None}" value="active">active</option>
-      <option py:attrs="{'selected': 'selected' if data.get('state') == 'deleted' else None}" value="deleted">deleted</option>
-    </select>
-    </dd>
   </dl>
 </fieldset>
 
@@ -171,92 +247,6 @@
 </fieldset>
 
 <fieldset id="extras">
-  <dl>
-    <dt><label class="field_opt" for="type_of_dataset">Type of Dataset</label></dt>
-    <dd>
-      <select class="short" id="type_of_dataset" name="type_of_dataset">
-        <py:for each="name, desc in c.type_of_dataset">
-          <option value="${name}" py:attrs="{'selected': 'selected' if data.get('type_of_dataset', '') == name else None}" >
-            ${desc}
-          </option>
-        </py:for>
-      </select>
-    </dd>
-    <dd class="instructions basic">The type of dataset.</dd>
-    <dd class="instructions further">
-    <p>Primary legal materials include documents of primary authority issued by governmental bodies, such as court opinions, 
-    statutes, and regulations. They also include the supporting documents and other media issued and maintained by those bodies, 
-    such as dockets, hearings, forms, oral arguments, and legislative histories. These materials can be found in every branch, 
-    at every level, national, tribal, state and local, and should be available to anyone with the will and the heart to obtain them.</p>
-    <p>Government operational records are typically administrative records (rather than legal records) that are useful for the 
-    public to identify conflicts of interest and to perform oversight. Contracts/grants, personal financial disclosures, etc. 
-    These documents have little utility aside from oversight.</p>
-    <p>The last category "civic capital" are government records that have utility that have nothing to do with government per se. 
-    Environmental and weather data, health and safety data, corporate compliance records. These records can save lives, 
-    make markets more efficient, etc. These records are closest to Government as a Platform.</p>
-    </dd>
-    <dd class="field_error" py:if="errors.get('type_of_dataset', '')">${errors.get('type_of_dataset', '')}</dd>
-
-    <dt><label class="field_opt" for="release_date">Release Date</label></dt>
-    <dd><input id="release_date" name="release_date" size="40" type="text" value="${data.get('release_date', '')}" /></dd>
-    <dd class="instructions basic">The date of the official release of the initial version of the dataset</dd>
-    <!-- <dd class="instructions further"></dd> -->
-    <dd class="hints">Acceptable date formats: YYYY-MM-DD, YYYY-MM, YYYY</dd>
-    <dd class="field_error" py:if="errors.get('release_date', '')">${errors.get('release_date', '')}</dd>
-
-    <dt><label class="field_opt" for="modified_date">Modified Date</label></dt>
-    <dd><input id="modified_date" name="modified_date" size="40" type="text" value="${data.get('modified_date', '')}"/></dd>
-    <dd class="instructions basic">Most recent date on which the dataset was changed, updated or modified.</dd>
-    <dd class="hints">Acceptable date formats: YYYY-MM-DD, YYYY-MM, YYYY</dd>
-    <dd class="field_error" py:if="errors.get('modified_date', '')">${errors.get('modified_date', '')}</dd>
-
-    <dt><label class="field_opt" for="update_frequency">Update frequency</label></dt>
-    <dd>
-      <select class="short" id="update_frequency" name="update_frequency">
-        <py:for each="freq_name, freq_desc in c.update_frequency">
-          <option value="${freq_name}" py:attrs="{'selected': 'selected' if data.get('update_frequency', '') == freq_name else None}" >
-            ${freq_desc}
-          </option>
-        </py:for>
-      </select>
-      <label class="inline" for="update_frequency-other">Other: 
-        <input class="medium-width" id="update_frequency-other" name="update_frequency-other" type="text" value="${data.get('update_frequency-other', '')}"/>
-      </label>
-    </dd>
-    <dd class="instructions basic">The frequency with which dataset is published.</dd>
-    <dd class="instructions further">For one-off data, use 'never'. For those once updated but now discontinued, use 'discontinued'.</dd>
-    <dd class="field_error" py:if="errors.get('update_frequency', '')">${errors.get('update_frequency', '')}</dd>
-
-    <dt><label class="field_opt" for="temporal_coverage">Temporal coverage</label></dt>
-    <dd>
-      <input class="medium-width" id="temporal_coverage_from" name="temporal_coverage_from" type="text" value="${data.get('temporal_coverage_from', '')}" /> - 
-      <input class="medium-width" id="temporal_coverage_to" name="temporal_coverage_to" type="text" value="${data.get('temporal_coverage_to', '')}" />
-    </dd>
-    <dd class="instructions basic">The temporal coverage of this dataset.</dd>
-    <dd class="instructions further">If available, please indicate the time as well as the date. Where data covers only a single day, the 'To' sub-element can be left blank.</dd>
-    <dd class="hints">e.g. 2010-01-01 - 2012-01-01</dd>
-    <dd class="hints">Acceptable date formats: YYYY-MM-DD, YYYY-MM, YYYY</dd>
-
-    <dt><label class="field_opt" for="temporal_granularity">Temporal granularity</label></dt>
-    <dd>
-      <select class="short" id="temporal_granularity" name="temporal_granularity">
-        <py:for each="temporal_name, temporal_desc in c.temporal_granularity">
-          <option value="${temporal_name}" py:attrs="{'selected': 'selected' if data.get('temporal_granularity', '') == temporal_name else None}" >
-            ${temporal_name}
-          </option>
-        </py:for>
-      </select>
-    </dd>
-    <dd class="instructions basic">The lowest level of temporal detail granularity</dd>
-    <dd class="instructions further">This should give the lowest level of temporal detail given in the dataset if it is aggregated, expressed as an interval of time. If the data is not aggregated over time, and so the dataset goes down to the instants that reported events occurred (such as the timings of high and low tides), use 'point'. If none of the choices is appropriate or the granularity varies, please specify in the 'other' element.</dd>
-
-    <dt><label class="field_opt" for="geographical_coverage">Geographic coverage</label></dt>
-    <dd><input id="geographical_coverage" name="geographical_coverage" size="40" type="text" value="${data.get('geographical_coverage', '')}" /></dd>
-    <dd class="instructions basic">The geographical coverage of this dataset.</dd>
-    <dd class="instructions further">Separate multiple entries with a comma.</dd>
-
-  </dl>
-
   <h3>Extra Fields</h3>
   <dl>
     <py:for each="num, extra in enumerate(c.additional_extras)">
