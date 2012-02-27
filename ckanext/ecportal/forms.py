@@ -7,7 +7,7 @@ from ckan.logic.converters import convert_from_extras
 from ckan.logic.schema import package_form_schema
 from ckan.logic.converters import convert_to_tags, convert_from_tags, free_tags_only
 from ckan.plugins import implements, SingletonPlugin, IDatasetForm
-from field_values import type_of_dataset, publishers, update_frequency,\
+from field_values import type_of_dataset, update_frequency,\
     temporal_granularity
 from validators import use_other, extract_other, ecportal_date_to_db,\
     convert_to_extras, duplicate_extras_key
@@ -33,7 +33,7 @@ class ECPortalDatasetForm(SingletonPlugin):
     def setup_template_variables(self, context, data_dict=None, package_type=None):
         c.licences = model.Package.get_license_options()
         c.type_of_dataset = type_of_dataset
-        c.publishers = publishers
+        c.publishers = []
         c.update_frequency = update_frequency
         c.temporal_granularity = temporal_granularity
         c.is_sysadmin = Authorizer().is_sysadmin(c.user)
