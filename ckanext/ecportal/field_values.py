@@ -7,7 +7,6 @@ type_of_dataset = [
 ]
 
 geographical_coverage = [
-    ('', ''),
     ('EU27', 'European Union'),
     ('BE', 'Belgium'),
     ('BG', 'Bulgaria'),

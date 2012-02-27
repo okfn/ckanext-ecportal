@@ -3,6 +3,8 @@ import json
 from ckan import model
 from ckan.logic import get_action, NotFound
 from ckan.lib.cli import CkanCommand
+import forms
+import field_values
 
 import logging
 log = logging.getLogger()
@@ -10,16 +12,17 @@ log = logging.getLogger()
 
 class ECPortalCommand(CkanCommand):
     '''
-    Usage:
+    Commands:
 
         paster ecportal import-publishers <translations> <structure> -c <config>
+        paster ecportal create-geo-vocab -c <config>
 
     Where:
         <translations> = path to translations.json
         <structure> = path to structure.json
         <config> = path to your ckan config file
 
-    The command should be run from the ckanext-ecportal directory.
+    The commands should be run from the ckanext-ecportal directory.
     '''
     summary = __doc__.split('\n')[0]
     usage = __doc__
@@ -53,6 +56,8 @@ class ECPortalCommand(CkanCommand):
                 log.error('Could not open files %s and %s' %
                     (translations_path, structure_path)
                 )
+        elif cmd == 'create-geo-vocab':
+            self.create_geo_vocab()
         else:
             log.error('Command "%s" not recognized' % (cmd,))
 
@@ -148,3 +153,21 @@ class ECPortalCommand(CkanCommand):
         get_action('term_translation_update_many')(
             context, {'data': term_translations}
         )
+
+    def create_geo_vocab(self):
+        log.info("Creating vocabulary for geographical coverage")
+        user = get_action('get_site_user')({'model': model, 'ignore_auth': True}, {})
+        context = {'model': model, 'session': model.Session, 'user': user['name']}
+
+        try:
+            data = {'id': forms.GEO_VOCAB_NAME}
+            get_action('vocabulary_show')(context, data)
+            log.error("Vocabulary %s already exists." % forms.GEO_VOCAB_NAME)
+        except NotFound:
+            data = {'name': forms.GEO_VOCAB_NAME}
+            vocab = get_action('vocabulary_create')(context, data)
+            for country_code in field_values.geographical_coverage:
+                log.info("Adding tag %s to vocab %s" %
+                         (country_code[0], forms.GEO_VOCAB_NAME))
+                data = {'name': country_code[0], 'vocabulary_id': vocab['id']}
+                get_action('tag_create')(context, data)
