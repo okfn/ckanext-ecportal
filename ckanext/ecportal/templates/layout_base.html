@@ -159,6 +159,7 @@
   <script type="text/javascript" src="${h.url_for_static('/scripts/vendor/json2.js')}"></script>
   <script type="text/javascript" src="${h.url_for_static('/scripts/vendor/jquery.tmpl/beta1/jquery.tmpl.js')}"></script>
   <script type="text/javascript" src="${h.url_for_static('/scripts/vendor/jquery.cookie/jquery.cookie.min.js')}"></script>
+  <script type="text/javascript" src="${h.url_for_static('/scripts/vendor/jquery.chosen/0.9.7/chosen.js')}"></script>
   <script type="text/javascript" src="${h.url_for_static('/scripts/vendor/jquery.placeholder/jquery.placeholder.js')}"></script>
   <script type="text/javascript" src="${h.url_for_static('/scripts/vendor/jqueryui/1.8.14/jquery-ui.min.js')}"></script>
   <!-- for ckanjs etc -->
@@ -180,14 +181,21 @@
       // Declare js array from Python string
       ${['\'%s\', '%s  for s in config.get('ckan.plugins','').split(' ')]}
     ];
-    CKAN.SITE_URL = '${g.site_url}';
+    <py:if test="config.get('ckan.storage.bucket', '')">
+    CKAN.plugins.push('storage');
+    </py:if>
+    CKAN.SITE_URL = '${h.url('/')}';
+    // later use will add offsets with leading '/' so ensure no trailing slash
+    CKAN.SITE_URL = CKAN.SITE_URL.replace(/\/$/, '');
     $(document).ready(function() {
-        var ckan_user = $.cookie("ckan_display_name");
+        var ckan_user = '${c.user}';
         if (ckan_user) {
             $(".ckan-logged-out").hide();
             $(".ckan-logged-in").show();
         }
         $('input[placeholder], textarea[placeholder]').placeholder();
+
+		$(".chzn-select").chosen();
     });
   </script>
 

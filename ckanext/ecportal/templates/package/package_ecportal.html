@@ -171,9 +171,18 @@
     </dd>
 
     <dt><label class="field_opt" for="geographical_coverage">Geographical Coverage</label></dt>
-    <dd><input id="geographical_coverage" name="geographical_coverage" size="40" type="text" value="${data.get('geographical_coverage', '')}" /></dd>
+    <dd class="tags-field">
+      <select id="geographical_coverage" class="chzn-select" name="geographical_coverage" multiple="multiple" style="width: 30em;">
+        <py:for each="tag in c.geographical_coverage">
+          <py:choose test="">
+          <option py:when="tag in data.get('geographical_coverage', [])" selected="selected" value="${tag}">${tag}</option>
+          <option py:otherwise="" value="${tag}">${tag}</option>
+          </py:choose>
+        </py:for>
+      </select>
+    </dd>
     <dd class="instructions basic">The geographical coverage of this dataset.</dd>
-    <dd class="instructions further">Separate multiple entries with a comma.</dd>
+    <dd class="tags-instructions field_error" py:if="errors.get('geographical_coverage', '')">${errors.get('geographical_coverage', '')}</dd>
 
     <dt><label class="field_opt" for="version">Version</label></dt>
     <dd><input id="version" maxlength="100" name="version" type="text" value="${data.get('version', '')}" /></dd>
