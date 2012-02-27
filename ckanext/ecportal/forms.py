@@ -64,7 +64,7 @@ class ECPortalDatasetForm(SingletonPlugin):
             'temporal_coverage_from': [ignore_missing, ecportal_date_to_db, convert_to_extras],
             'temporal_coverage_to': [ignore_missing, ecportal_date_to_db, convert_to_extras],
             'temporal_granularity': [use_other, unicode, convert_to_extras],
-            'geographical_coverage': [ignore_missing, unicode, convert_to_tags(GEO_VOCAB_NAME)],
+            'geographical_coverage': [ignore_missing, convert_to_tags(GEO_VOCAB_NAME)],
             '__after': [duplicate_extras_key],
         })
         return schema
