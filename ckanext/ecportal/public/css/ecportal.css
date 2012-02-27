@@ -102,12 +102,12 @@ body.package.edit input[type="checkbox"] {
     vertical-align: middle;
 }
 
-.chzn-choices {
-    padding: 0;
-}
-.chzn-choices li {
-    list-style-type: none;
-}
-.chzn-choices input {
-    width: 30em;
-}
+/* .chzn-choices { */
+/*     padding: 0; */
+/* } */
+/* .chzn-choices li { */
+/*     list-style-type: none; */
+/* } */
+/* .chzn-choices input { */
+/*     width: 30em; */
+/* } */
