@@ -2,7 +2,8 @@ import json
 from ckan.lib.base import c, model
 from ckan.authz import Authorizer
 from ckan.lib.navl.validators import ignore_missing, keep_extras
-from ckan.logic import get_action, NotFound
+from ckan.logic import get_action, check_access
+from ckan.logic import NotFound, NotAuthorized
 from ckan.logic.converters import convert_from_extras
 from ckan.logic.schema import package_form_schema
 from ckan.logic.converters import convert_to_tags, convert_from_tags, free_tags_only
@@ -51,6 +52,18 @@ class ECPortalDatasetForm(SingletonPlugin):
             for extra in extras:
                 if not extra['key'] in schema_keys:
                     c.additional_extras.append(extra)
+
+        # This is messy as auths take domain object not data_dict
+        context_pkg = context.get('package',None)
+        pkg = context_pkg or c.pkg
+        if pkg:
+            try:
+                if not context_pkg:
+                    context['package'] = pkg
+                check_access('package_change_state', context)
+                c.auth_for_change_state = True
+            except NotAuthorized:
+                c.auth_for_change_state = False
 
     def form_to_db_schema(self, package_type=None):
         schema = package_form_schema()
