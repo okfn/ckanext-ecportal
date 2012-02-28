@@ -11,7 +11,7 @@ from ckan.plugins import implements, SingletonPlugin, IDatasetForm
 from field_values import type_of_dataset, update_frequency,\
     temporal_granularity
 from validators import use_other, extract_other, ecportal_date_to_db,\
-    convert_to_extras, duplicate_extras_key
+    convert_to_extras, duplicate_extras_key, publisher_exists
 
 import logging
 log = logging.getLogger(__name__)
@@ -71,7 +71,7 @@ class ECPortalDatasetForm(SingletonPlugin):
         schema = package_form_schema()
         schema.update({
             'type_of_dataset': [ignore_missing, unicode, convert_to_extras],
-            'published_by': [ignore_missing, unicode, convert_to_extras],
+            'published_by': [ignore_missing, unicode, publisher_exists, convert_to_extras],
             'release_date': [ignore_missing, ecportal_date_to_db, convert_to_extras],
             'modified_date': [ignore_missing, ecportal_date_to_db, convert_to_extras],
             'update_frequency': [use_other, unicode, convert_to_extras],

@@ -2,6 +2,7 @@ import re
 from pylons.i18n import _
 from ckan.lib.field_types import DateType, DateConvertError
 from ckan.lib.navl.dictization_functions import Invalid, missing, unflatten
+from ckan.logic import get_action, NotFound
 
 # parse_timedate function is similar to the one in ckan.lib.field_types.DateType
 # changes:
@@ -115,3 +116,14 @@ def duplicate_extras_key(key, data, errors, context):
     if extras_keys:
         for extra_key in extras_keys:
             errors[(extra_key,)] = [_('Duplicate key for "%s" given') % extra_key]
+
+def publisher_exists(publisher_name, context):
+    """Raises Invalid if the given publisher_name does not exist in the model given
+    in the context, otherwise returns the given publisher_name.
+
+    """
+    try:
+        get_action('group_show')(context, {'id': publisher_name})
+    except NotFound:
+        raise Invalid('%s: %s' % (_('Publisher not found'), publisher_name))
+    return publisher_name

@@ -99,6 +99,7 @@
       </select>
     </dd>
     <dd class="instructions basic">The publisher of the dataset.</dd>
+    <dd class="field_error" py:if="errors.get('published_by', '')">${errors.get('published_by', '')}</dd>
   </dl>
 </fieldset>
 
