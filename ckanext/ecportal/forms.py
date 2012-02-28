@@ -54,7 +54,7 @@ class ECPortalDatasetForm(SingletonPlugin):
                     c.additional_extras.append(extra)
 
         # This is messy as auths take domain object not data_dict
-        context_pkg = context.get('package',None)
+        context_pkg = context.get('package', None)
         pkg = context_pkg or c.pkg
         if pkg:
             try:
@@ -76,8 +76,15 @@ class ECPortalDatasetForm(SingletonPlugin):
             'update_frequency-other': [],
             'temporal_coverage_from': [ignore_missing, ecportal_date_to_db, convert_to_extras],
             'temporal_coverage_to': [ignore_missing, ecportal_date_to_db, convert_to_extras],
-            'temporal_granularity': [use_other, unicode, convert_to_extras],
+            'temporal_granularity': [unicode, convert_to_extras],
             'geographical_coverage': [ignore_missing, convert_to_tags(GEO_VOCAB_NAME)],
+            'skos_note': [ignore_missing, unicode, convert_to_extras],
+            'change_note': [ignore_missing, unicode, convert_to_extras],
+            'definition_note': [ignore_missing, unicode, convert_to_extras],
+            'editorial_note': [ignore_missing, unicode, convert_to_extras],
+            'history_note': [ignore_missing, unicode, convert_to_extras],
+            'scope_note': [ignore_missing, unicode, convert_to_extras],
+            'example_note': [ignore_missing, unicode, convert_to_extras],
             '__after': [duplicate_extras_key],
         })
         return schema
@@ -98,6 +105,13 @@ class ECPortalDatasetForm(SingletonPlugin):
             'temporal_coverage_to': [convert_from_extras, ignore_missing],
             'temporal_granularity': [convert_from_extras, ignore_missing],
             'geographical_coverage': [convert_from_tags(GEO_VOCAB_NAME), ignore_missing],
+            'skos_note': [convert_from_extras, ignore_missing],
+            'change_note': [convert_from_extras, ignore_missing],
+            'definition_note': [convert_from_extras, ignore_missing],
+            'editorial_note': [convert_from_extras, ignore_missing],
+            'history_note': [convert_from_extras, ignore_missing],
+            'scope_note': [convert_from_extras, ignore_missing],
+            'example_note': [convert_from_extras, ignore_missing],
         })
 
         # Remove isodate validator

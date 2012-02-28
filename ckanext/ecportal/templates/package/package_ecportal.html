@@ -255,6 +255,38 @@
   </dl>
 </fieldset>
 
+<fieldset id="notes">
+  <dl>
+    <dt><label class="field_opt" for="skos_note">SKOS Note</label></dt>
+    <dd><input id="skos_note" name="skos_note" size="40" type="text" value="${data.get('skos_note', '')}" /></dd>
+    <dd class="field_error" py:if="errors.get('skos_note', '')">${errors.get('skos_note', '')}</dd>
+
+    <dt><label class="field_opt" for="change_note">Change Note</label></dt>
+    <dd><input id="change_note" name="change_note" size="40" type="text" value="${data.get('change_note', '')}" /></dd>
+    <dd class="field_error" py:if="errors.get('change_note', '')">${errors.get('change_note', '')}</dd>
+
+    <dt><label class="field_opt" for="definition_note">Definition Note</label></dt>
+    <dd><input id="definition_note" name="definition_note" size="40" type="text" value="${data.get('definition_note', '')}" /></dd>
+    <dd class="field_error" py:if="errors.get('definition_note', '')">${errors.get('definition_note', '')}</dd>
+
+    <dt><label class="field_opt" for="editorial_note">Editorial Note</label></dt>
+    <dd><input id="editorial_note" name="editorial_note" size="40" type="text" value="${data.get('editorial_note', '')}" /></dd>
+    <dd class="field_error" py:if="errors.get('editorial_note', '')">${errors.get('editorial_note', '')}</dd>
+
+    <dt><label class="field_opt" for="history_note">History Note</label></dt>
+    <dd><input id="history_note" name="history_note" size="40" type="text" value="${data.get('history_note', '')}" /></dd>
+    <dd class="field_error" py:if="errors.get('history_note', '')">${errors.get('history_note', '')}</dd>
+
+    <dt><label class="field_opt" for="scope_note">Scope Note</label></dt>
+    <dd><input id="scope_note" name="scope_note" size="40" type="text" value="${data.get('scope_note', '')}" /></dd>
+    <dd class="field_error" py:if="errors.get('scope_note', '')">${errors.get('scope_note', '')}</dd>
+
+    <dt><label class="field_opt" for="example_note">Example Note</label></dt>
+    <dd><input id="example_note" name="example_note" size="40" type="text" value="${data.get('example_note', '')}" /></dd>
+    <dd class="field_error" py:if="errors.get('example_note', '')">${errors.get('example_note', '')}</dd>
+  </dl>
+</fieldset>
+
 <fieldset id="extras">
   <h3>Extra Fields</h3>
   <dl py:if="c.additional_extras">
@@ -284,7 +316,7 @@
   <dl>
     <dt>Delete</dt>
     <dd>
-      <p>Do you really want to change the state of this dataset? &nbsp;&nbsp;<button class="dataset-delete pretty-button">Yes!</button></p>
+      This dataset is&nbsp;&nbsp; 
       <span>
       This dataset is&nbsp;&nbsp;
       <select id="state" class="dataset-delete" name="state" style="display:inline;">
