@@ -9,6 +9,10 @@
     <!-- Overview Section -->
     <div id="dataset-overview">
 
+    <div py:if="c.pkg_dict.get('state') == 'deleted'" class="dataset-deleted-message">
+      This dataset is "deleted"
+    </div>
+
       <!-- Description -->
       <div class="notes" py:if="str(c.pkg_notes_formatted).strip()">
         ${c.pkg_notes_formatted}
