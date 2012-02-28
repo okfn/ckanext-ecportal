@@ -34,10 +34,12 @@ class ECPortalDatasetForm(SingletonPlugin):
     def setup_template_variables(self, context, data_dict=None, package_type=None):
         c.licences = model.Package.get_license_options()
         c.type_of_dataset = type_of_dataset
-        c.publishers = []
         c.update_frequency = update_frequency
         c.temporal_granularity = temporal_granularity
         c.is_sysadmin = Authorizer().is_sysadmin(c.user)
+
+        groups = get_action('group_list')(context, {'all_fields': True})
+        c.publishers = [(g['title'], g['name']) for g in groups if g.get('type') == u'publisher']
 
         try:
             c.geographical_coverage = get_action('tag_list')(context, {'vocabulary_id': GEO_VOCAB_NAME})
