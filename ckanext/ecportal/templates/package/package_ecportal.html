@@ -243,9 +243,9 @@
     <dd py:if="not c.groups_available"><em>Cannot add any groups.</em></dd>
   </dl>
 
-  <h3>Tags</h3>
+  <h3>Keywords</h3>
   <dl>
-    <dt class="tags-label"><label class="field_opt" for="tags">Tags</label></dt>
+    <dt class="tags-label"><label class="field_opt" for="tags">Keywords</label></dt>
     <dd class="tags-field">
       <input class="long autocomplete-tag" id="tag_string" name="tag_string" size="60" type="text" 
                value="${data.get('tag_string') or ', '.join([tag['name'] for tag in data.get('tags', [])])}" />
