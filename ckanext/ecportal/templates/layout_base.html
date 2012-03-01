@@ -56,6 +56,28 @@
     <div class="header outer">
       <header class="container">
 
+			<!-- Language Selector -->
+          <div class="textwidget" id="language-holder">
+            <ul class="language-dd-selector">
+<?python
+  current_url = request.environ['CKAN_CURRENT_URL'].encode('utf-8')
+  current_locale = h.get_locales_dict().get(request.environ['CKAN_LANG'])
+?>
+              <li class="selected">
+				  ${current_locale.display_name or current_locale.english_name} (${current_locale})
+				  <!-- FIXME use local image -->
+				  <img border="0" alt="" src="http://ec.europa.eu/wel/template-2012/images/arrows-down.gif" />
+              </li>
+              <py:for each="locale in h.get_available_locales()">
+              <li py:if="str(locale) != str(current_locale)">
+              <a href="${h.url(current_url, locale=str(locale))}">
+				  ${locale.display_name or locale.english_name} (${locale})
+                </a>
+              </li>
+			  </py:for>
+            </ul>
+		</div>
+			<!-- / Language Selector -->
         <div id="services">&nbsp;</div>
 
         <div class="menu account">
@@ -130,29 +152,6 @@
   </div>
   <div class="footer outer">
     <footer class="container">
-        <div class="xoxo span-24">
-          <h3 class="widget-title">Languages</h3>
-          <div class="textwidget">
-            <ul class="language-dd-selector">
-<?python
-  current_url = request.environ['CKAN_CURRENT_URL'].encode('utf-8')
-  current_locale = h.get_locales_dict().get(request.environ['CKAN_LANG'])
-?>
-              <li class="selected">
-				  ${current_locale.display_name or current_locale.english_name} (${current_locale})
-				  <!-- FIXME use local image -->
-				  <img border="0" alt="" src="http://ec.europa.eu/wel/template-2012/images/arrows-down.gif" />
-              </li>
-              <py:for each="locale in h.get_available_locales()">
-              <li py:if="str(locale) != str(current_locale)">
-              <a href="${h.url(current_url, locale=str(locale))}">
-				  ${locale.display_name or locale.english_name} (${locale})
-                </a>
-              </li>
-			  </py:for>
-            </ul>
-          </div>
-	  </div>&nbsp;<br />
         <div class="xoxo span-24">
           <h3 class="widget-title">About</h3>
           <div>

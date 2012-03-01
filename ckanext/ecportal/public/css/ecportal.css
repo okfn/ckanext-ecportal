@@ -111,11 +111,18 @@ body.package.edit input[type="checkbox"] {
 }
 
 /* START Language selector */
+#language-holder {
+	position:absolute;
+	width:950px;
+}
 ul.language-dd-selector {
 	border:1px solid #9AB;
 	background-color:#FFF;
-	width:200px;
-	position:absolute;
+	width:216px;
+	list-style-type: none;
+	padding-left:0px;
+	margin-right:10px;
+	float:right;
 }
 ul.language-dd-selector li img{
 	float:right;
@@ -128,6 +135,7 @@ ul.language-dd-selector li a:hover{
 	color:#036;
 }
 ul.language-dd-selector li{
+	padding-left:3px;
 	display:none;
 	color:#396EA2;
 }
