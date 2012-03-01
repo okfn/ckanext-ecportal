@@ -31,10 +31,14 @@
 
   <link rel="stylesheet" href="${h.url_for_static('/scripts/vendor/jqueryui/1.8.14/css/jquery-ui.custom.css')}" type="text/css" media="screen, print" />
   <link rel="stylesheet" href="${h.url_for_static('/css/boilerplate.css?v=2')}" />
+  <link rel="stylesheet" href="${h.url_for_static('/css/chosen.css')}" type="text/css" />
   <link rel="stylesheet" href="${h.url_for_static('/css/blueprint/screen.css')}" type="text/css" media="screen, projection" />
   <link rel="stylesheet" href="${h.url_for_static('/css/blueprint/print.css')}" type="text/css" media="print" />
   <!--[if lt IE 8]>
     <link rel="stylesheet" href="${h.url_for_static('/css/blueprint/ie.css')}" type="text/css" media="screen, projection">
+  <![endif]-->
+  <!--[if lt IE 9]>
+    <script type="text/javascript" src="${h.url_for_static('/scripts/vendor/html5shiv/html5.js')}"></script>
   <![endif]-->
   <link rel="stylesheet" href="${h.url_for_static('/css/style.css?v=2')}" />
   <link rel="stylesheet" href="${h.url_for_static('/css/ecportal.css')}" />
@@ -151,7 +155,11 @@
 	  </div>&nbsp;<br />
         <div class="xoxo span-24">
           <h3 class="widget-title">About</h3>
-          <div>&copy; 2012 European Commission</div>
+          <div>
+            &copy; 2012
+            <img src="http://assets.okfn.org/images/logo/okf_logo_white_and_green_tiny.png" id="footer-okf-logo" />
+            <a href="http://okfn.org/">Open Knowledge Foundation</a>
+          </div>
           Licensed under the <a href="http://opendatacommons.org/licenses/odbl/1.0/">Open Database License</a>
           <a href="http://opendefinition.org/"><img alt="This Content and Data is Open" src="http://assets.okfn.org/images/ok_buttons/od_80x15_blue.png" style="border: none ; margin-bottom: -4px;"/></a>
           
@@ -167,6 +175,7 @@
   <script type="text/javascript" src="${h.url_for_static('/scripts/vendor/json2.js')}"></script>
   <script type="text/javascript" src="${h.url_for_static('/scripts/vendor/jquery.tmpl/beta1/jquery.tmpl.js')}"></script>
   <script type="text/javascript" src="${h.url_for_static('/scripts/vendor/jquery.cookie/jquery.cookie.min.js')}"></script>
+  <script type="text/javascript" src="${h.url_for_static('/scripts/vendor/jquery.chosen/0.9.7/chosen.js')}"></script>
   <script type="text/javascript" src="${h.url_for_static('/scripts/vendor/jquery.placeholder/jquery.placeholder.js')}"></script>
   <script type="text/javascript" src="${h.url_for_static('/scripts/vendor/jqueryui/1.8.14/jquery-ui.min.js')}"></script>
   <!-- for ckanjs etc -->
@@ -189,14 +198,21 @@
       // Declare js array from Python string
       ${['\'%s\', '%s  for s in config.get('ckan.plugins','').split(' ')]}
     ];
-    CKAN.SITE_URL = '${g.site_url}';
+    <py:if test="config.get('ckan.storage.bucket', '')">
+    CKAN.plugins.push('storage');
+    </py:if>
+    CKAN.SITE_URL = '${h.url('/')}';
+    // later use will add offsets with leading '/' so ensure no trailing slash
+    CKAN.SITE_URL = CKAN.SITE_URL.replace(/\/$/, '');
     $(document).ready(function() {
-        var ckan_user = $.cookie("ckan_display_name");
+        var ckan_user = '${c.user}';
         if (ckan_user) {
             $(".ckan-logged-out").hide();
             $(".ckan-logged-in").show();
         }
         $('input[placeholder], textarea[placeholder]').placeholder();
+
+		$(".chzn-select").chosen();
     });
   </script>
 
@@ -207,6 +223,3 @@
 ${h.literal(getattr(g, 'template_footer_end', ''))}
 </body>
 </html>
-
-
-

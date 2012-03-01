@@ -102,6 +102,14 @@ body.package.edit input[type="checkbox"] {
     vertical-align: middle;
 }
 
+.dataset-deleted-message {
+    padding: 0.8em;
+    margin-bottom: 1em;
+    background: #fbe3e4;
+    color: #8a1f11;
+    border: 1px solid #fbc2c4;
+}
+
 /* START Language selector */
 ul.language-dd-selector {
 	border:1px solid #9AB;

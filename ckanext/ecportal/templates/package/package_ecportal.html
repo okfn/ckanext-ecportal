@@ -36,15 +36,27 @@
         placeholder="${_('A short descriptive title for the dataset')}"
       />
     </dd>
+    <dd class="instructions basic">A short descriptive title for the data set. 
+    It should not be a description though - save that for the Description field. 
+    Do not give a trailing full stop. Do not use allcaps.</dd>
     <dd class="title-instructions field_error" py:if="errors.get('title', '')">${errors.get('title', '')}</dd>
 
-    <dt class="name-label"><label class="field_req" for="name">Url</label></dt>
+    <dt class="name-label"><label class="field_req" for="name">Name</label></dt>
     <dd class="name-field">
-      <span class="js-url-text url-text">${g.site_url + h.url(controller='package', action='index')+'/'}<span class="js-url-viewmode js-url-suffix">&nbsp;</span><a href="#" style="display: none;" class="url-edit js-url-editlink js-url-viewmode">(edit)</a></span>
-      <input style="display: none;" id="name" maxlength="100" name="name" type="text" class="url-input js-url-editmode js-url-input" value="${data.get('name', '')}" />
+      <span class="js-url-text url-text">
+        <span class="js-url-viewmode js-url-suffix">&nbsp;</span>
+        (${g.site_url + h.url(controller='package', action='index')+'/'}<span class="js-url-viewmode js-url-suffix">&nbsp;</span>)
+        <a href="#" style="display: none;" class="url-edit js-url-editlink js-url-viewmode">(edit)</a>
+      </span>
+      <input style="display: none;" id="name" maxlength="100" name="name" type="text" 
+             class="url-input js-url-editmode js-url-input" value="${data.get('name', '')}" />
       <p class="js-url-is-valid">&nbsp;</p>
     </dd>
-    <dd style="display: none;" class="js-url-editmode name-instructions basic">2+ characters, lowercase, using only 'a-z0-9' and '-_'</dd>
+    <dd style="display: none;" class="js-url-editmode name-instructions basic">
+      A unique identifier for the package. It should be broadly humanly readable, in the spirit of Semantic Web URIs. 
+      Only use an acronym if it is widely recognised. Renaming is possible but discouraged.
+      2+ characters, lowercase, using only 'a-z0-9' and '-_' include date (yyyy-mm-dd) if a static dataset.
+    </dd>
     <dd class="js-url-editmode name-instructions field_error" py:if="errors.get('name', '')">${errors.get('name', '')}</dd>
 
     <dt class="description-label"><label class="field_req" for="notes">Description</label></dt>
@@ -57,8 +69,12 @@
       <div class="markdown-preview" style="display: none;"></div>
       <span class="hints">You can use <a href="http://daringfireball.net/projects/markdown/syntax" target="_blank">Markdown formatting</a> here.</span>
     </div></dd>
+    <dd class="instructions basic">
+    The main description of the dataset.  It is often displayed with the package title. 
+    In particular, it should start with a short sentence that describes the data set succinctly, 
+    because the first few words alone may be used in some views of the data sets.</dd>
 
-    <dt class="homepage-label"><label class="field_opt" for="url">Home Page</label></dt>
+    <dt class="homepage-label"><label class="field_opt" for="url">URL</label></dt>
     <dd class="homepage-field"><input id="url" name="url" type="text" value="${data.get('url', '')}"/></dd>
     <dd class="homepage-instructions instructions basic">The URL for the web page describing the data (not the data itself).</dd>
     <dd class="homepage-instructions hints">e.g. http://www.example.com/growth-figures.html</dd>
@@ -73,104 +89,21 @@
       </select>
     </dd>
     <dd class="license-instructions instructions basic">The licence under which the dataset is released.</dd>
+
+    <dt class="publisher-label"><label class="field_opt" for="published_by">Published By</label></dt>
+    <dd class="publisher-field">
+      <select id="published_by" name="published_by">
+        <py:for each="publisher_desc, publisher_id in c.publishers">
+          <option value="${publisher_id}" py:attrs="{'selected': 'selected' if data.get('published_by', '') == publisher_id else None}" >${publisher_desc}</option>
+        </py:for>
+      </select>
+    </dd>
+    <dd class="instructions basic">The publisher of the dataset.</dd>
+    <dd class="field_error" py:if="errors.get('published_by', '')">${errors.get('published_by', '')}</dd>
   </dl>
 </fieldset>
 
 <fieldset id='further-information'>
-  <dl>
-    <dt><label class="field_opt" for="author">Author</label></dt>
-    <dd><input id="author" name="author" type="text" value="${data.get('author', '')}" /></dd>
-    <dd class="instructions basic">The name of the main contact, for enquiries about this particular dataset, using the e-mail address in the following field.</dd>
-
-    <dt><label class="field_opt" for="author_email">Author email</label></dt>
-    <dd><input id="author_email" name="author_email" type="text" value="${data.get('author_email', '')}" /></dd>
-
-    <dt><label class="field_opt" for="maintainer">Maintainer</label></dt>
-    <dd><input id="maintainer" name="maintainer" type="text" value="${data.get('maintainer', '')}" /></dd>
-    <dd class="instructions basic">If there is another important contact person (in addition to the person in the Author field) then provide details here.</dd>
-
-    <dt><label class="field_opt" for="maintainer_email">Maintainer email</label></dt>
-    <dd><input id="maintainer_email" name="maintainer_email" type="text" value="${data.get('maintainer_email', '')}" /></dd>
-
-    <dt><label class="field_opt" for="version">Version</label></dt>
-    <dd><input id="version" maxlength="100" name="version" type="text" value="${data.get('version', '')}" /></dd>
-    <dd class="instructions basic">A number representing the version (if applicable)</dd>
-    <dd class="hints">e.g. 1.2.0</dd>
-
-    <dt py:if="c.is_sysadmin or c.auth_for_change_state"><label class="field_opt" for="state">State</label></dt>
-    <dd py:if="c.is_sysadmin or c.auth_for_change_state">
-    <select id="state" name="state" >
-      <option py:attrs="{'selected': 'selected' if data.get('state') == 'active' else None}" value="active">active</option>
-      <option py:attrs="{'selected': 'selected' if data.get('state') == 'deleted' else None}" value="deleted">deleted</option>
-    </select>
-    </dd>
-  </dl>
-</fieldset>
-
-<fieldset id="resources">
-  <div class="instructions basic"><h3>Resources: the files and APIs associated with this dataset</h3></div>
-  <table class="resource-table-edit">
-    <thead>
-      <tr>
-        <th class="field_req resource-url">Resource</th>
-        <th class="resource-delete-link"></th>
-      </tr>
-    </thead>
-    <tbody class="js-resource-editor">
-    </tbody>
-  </table>
-
-  <div class="resource-add">
-    <ul class="button-row">
-      <li><h4>Add a resource:</h4></li>
-      <li><button class="pretty-button js-link-file">Link to a file</button></li>
-      <li><button class="pretty-button js-link-api">Link to an API</button></li>
-      <li class="js-upload-file" style="display:none;"><button class="pretty-button js-upload-file">Upload a file</button></li>
-    </ul>
-  </div>
-</fieldset>
-
-<fieldset id="groups">
-  <h3>Groups</h3>
-  <dl>
-    <py:for each="num, group in enumerate(data.get('groups', []))">
-        <?python
-        authorized_group = [group_authz for group_authz in c.groups_authz if group_authz['id'] == group['id']]
-        authorized_group = authorized_group[0] if authorized_group else None
-        ?>
-
-      <dt py:if="'id' in group">
-      <input type="${'checkbox' if authorized_group else 'hidden'}" name="groups__${num}__id" checked="checked" value="${group['id']}" />
-      <input type="hidden" name="groups__${num}__name" value="${group.get('name', authorized_group['name'] if authorized_group else '')}" />
-      </dt>     
-      <dd py:if="'id' in group"><label for="groups__${num}__checked">${group.get('name', authorized_group['name'] if authorized_group else '')}</label></dd>
-    </py:for>
-
-    <dt>Group</dt>
-    <dd py:if="c.groups_available"> 
-      <select id="groups__${len(data.get('groups', []))}__id" name="groups__${len(data.get('groups', []))}__id">
-        <option selected="selected" value="">(None)</option>
-        <py:for each="group in c.groups_available">
-          <option value="${group['id']}" >${group['name']}</option>
-        </py:for>
-      </select>
-    </dd> 
-    <dd py:if="not c.groups_available"><em>Cannot add any groups.</em></dd>
-  </dl>
-
-  <h3>Tags</h3>
-  <dl>
-    <dt class="tags-label"><label class="field_opt" for="tags">Tags</label></dt>
-    <dd class="tags-field">
-      <input class="long autocomplete-tag" id="tag_string" name="tag_string" size="60" type="text" 
-               value="${data.get('tag_string') or ', '.join([tag['name'] for tag in data.get('tags', [])])}" />
-    </dd>
-    <dd class="tags-instructions instructions basic" i18n:msg="">Comma-separated terms that may link this dataset to similar ones. For more information on conventions, see <a href="http://wiki.okfn.org/ckan/doc/faq#TagConventions">this wiki page</a>.</dd>
-    <dd class="tags-instructions field_error" py:if="errors.get('tag_string', '')">${errors.get('tag_string', '')}</dd>
-  </dl>
-</fieldset>
-
-<fieldset id="extras">
   <dl>
     <dt><label class="field_opt" for="type_of_dataset">Type of Dataset</label></dt>
     <dd>
@@ -197,27 +130,9 @@
     </dd>
     <dd class="field_error" py:if="errors.get('type_of_dataset', '')">${errors.get('type_of_dataset', '')}</dd>
 
-    <dt><label class="field_opt" for="responsible_department">Responsible Department</label></dt>
-    <dd><input id="responsible_department" name="responsible_department" type="text" value="${data.get('responsible_department', '')}"/></dd>
-    <dd class="instructions basic">The owner of/responsible for the dataset.</dd>
-
-    <dt><label class="field_req" for="published_by">Published by *</label></dt>
-    <dd>
-      <select id="published_by" name="published_by">
-        <py:for each="published_name, published_desc in c.publishers">
-          <option value="${published_name}" py:attrs="{'selected': 'selected' if data.get('published_by', '') == published_name else None}" >
-            ${published_desc}
-          </option>
-        </py:for>
-      </select>
-    </dd>
-    <dd class="instructions basic">The organisation (usually a public body) credited with or associated with the publication of this data.</dd>
-    <dd class="instructions further">Often datasets are associated with both a government department and an outside agency, in which case this field should store the department and "Published via" should store the agency. When an organisation is not listed, please request it using the form found in your data.gov.uk user page under the "Publishers" tab. An asterisk (*) denotes an pre-existing value for this field, which is allowed, but the current user's permissions would not be able to change a package\s publisher to this value.</dd>
-
     <dt><label class="field_opt" for="release_date">Release Date</label></dt>
     <dd><input id="release_date" name="release_date" size="40" type="text" value="${data.get('release_date', '')}" /></dd>
-    <dd class="instructions basic">The date of the official release of the initial version of the dataset</dd>
-    <!-- <dd class="instructions further"></dd> -->
+    <dd class="instructions basic">Date of formal issuance (e.g., publication) of the dataset.</dd>
     <dd class="hints">Acceptable date formats: YYYY-MM-DD, YYYY-MM, YYYY</dd>
     <dd class="field_error" py:if="errors.get('release_date', '')">${errors.get('release_date', '')}</dd>
 
@@ -227,7 +142,7 @@
     <dd class="hints">Acceptable date formats: YYYY-MM-DD, YYYY-MM, YYYY</dd>
     <dd class="field_error" py:if="errors.get('modified_date', '')">${errors.get('modified_date', '')}</dd>
 
-    <dt><label class="field_opt" for="update_frequency">Update frequency</label></dt>
+    <dt><label class="field_opt" for="update_frequency">Update Frequency</label></dt>
     <dd>
       <select class="short" id="update_frequency" name="update_frequency">
         <py:for each="freq_name, freq_desc in c.update_frequency">
@@ -241,20 +156,18 @@
       </label>
     </dd>
     <dd class="instructions basic">The frequency with which dataset is published.</dd>
-    <dd class="instructions further">For one-off data, use 'never'. For those once updated but now discontinued, use 'discontinued'.</dd>
     <dd class="field_error" py:if="errors.get('update_frequency', '')">${errors.get('update_frequency', '')}</dd>
 
-    <dt><label class="field_opt" for="temporal_coverage">Temporal coverage</label></dt>
+    <dt><label class="field_opt" for="temporal_coverage">Temporal Coverage</label></dt>
     <dd>
       <input class="medium-width" id="temporal_coverage_from" name="temporal_coverage_from" type="text" value="${data.get('temporal_coverage_from', '')}" /> - 
       <input class="medium-width" id="temporal_coverage_to" name="temporal_coverage_to" type="text" value="${data.get('temporal_coverage_to', '')}" />
     </dd>
-    <dd class="instructions basic">The temporal coverage of this dataset.</dd>
-    <dd class="instructions further">If available, please indicate the time as well as the date. Where data covers only a single day, the 'To' sub-element can be left blank.</dd>
+    <dd class="instructions basic">The start and end of the temporal series used in this dataset.</dd>
     <dd class="hints">e.g. 2010-01-01 - 2012-01-01</dd>
     <dd class="hints">Acceptable date formats: YYYY-MM-DD, YYYY-MM, YYYY</dd>
 
-    <dt><label class="field_opt" for="temporal_granularity">Temporal granularity</label></dt>
+    <dt><label class="field_opt" for="temporal_granularity">Temporal Granularity</label></dt>
     <dd>
       <select class="short" id="temporal_granularity" name="temporal_granularity">
         <py:for each="temporal_name, temporal_desc in c.temporal_granularity">
@@ -263,91 +176,108 @@
           </option>
         </py:for>
       </select>
-      <label class="inline" for="temporal_granularity-other">Other: 
-        <input class="medium-width" id="temporal_granularity-other" name="temporal_granularity-other" type="text" value="${data.get('temporal_granularity-other', '')}"/>
-      </label>
     </dd>
-    <dd class="instructions basic">The lowest level of temporal detail granularity</dd>
-    <dd class="instructions further">This should give the lowest level of temporal detail given in the dataset if it is aggregated, expressed as an interval of time. If the data is not aggregated over time, and so the dataset goes down to the instants that reported events occurred (such as the timings of high and low tides), use 'point'. If none of the choices is appropriate or the granularity varies, please specify in the 'other' element.</dd>
+    <dd class="instructions basic">This should give the lowest level of temporal detail given in the dataset 
+    if it is aggregated, expressed as an interval of time. 
+    </dd>
 
-    <dt><label class="field_opt" for="geographical_coverage">Geographic coverage</label></dt>
-    <dd><input id="geographical_coverage" name="geographical_coverage" size="40" type="text" value="${data.get('geographical_coverage', '')}" /></dd>
+    <dt><label class="field_opt" for="geographical_coverage">Geographical Coverage</label></dt>
+    <dd class="tags-field">
+      <select id="geographical_coverage" class="chzn-select" name="geographical_coverage" multiple="multiple" style="width: 30em;">
+        <py:for each="tag in c.geographical_coverage">
+          <py:choose test="">
+          <option py:when="tag in data.get('geographical_coverage', [])" selected="selected" value="${tag}">${tag}</option>
+          <option py:otherwise="" value="${tag}">${tag}</option>
+          </py:choose>
+        </py:for>
+      </select>
+    </dd>
     <dd class="instructions basic">The geographical coverage of this dataset.</dd>
-    <dd class="instructions further">Separate multiple entries with a comma.</dd>
+    <dd class="tags-instructions field_error" py:if="errors.get('geographical_coverage', '')">${errors.get('geographical_coverage', '')}</dd>
 
-    <dt><label class="field_opt" for="geographical_granularity">Geographical granularity</label></dt>
-    <dd>
-      <select class="short" id="geographical_granularity" name="geographical_granularity">
-        <py:for each="geog_name, geog_desc in c.geographical_granularity">
-          <option value="${geog_name}" py:attrs="{'selected': 'selected' if data.get('geographical_granularity', '') == geog_name else None}" >
-            ${geog_desc}
-          </option>
-        </py:for>
-      </select>
-      <label class="inline" for="geographical_granularity-other">Other: 
-        <input class="medium-width" id="geographical_granularity-other" 
-        name="geographical_granularity-other" type="text" value="${data.get('geographical_granularity-other', '')}"/>
-      </label>
-    </dd>
-    <dd class="instructions basic">The lowest level of geographic detail</dd>
-    <dd class="field_error" py:if="errors.get('geographical_granularity', '')">${errors.get('geographical_granularity', '')}</dd>
-
-    <dt><label class="field_req" for="eurovoc_theme">Eurovoc Theme</label></dt>
-    <dd>
-      <select id="eurovoc_theme" name="eurovoc_theme">
-        <py:for each="name, desc in c.eurovoc_theme">
-          <option value="${name}" py:attrs="{'selected': 'selected' if data.get('eurovoc_theme', '') == name else None}" >
-            ${desc}
-          </option>
-        </py:for>
-      </select>
-    </dd>
-    <dd class="instructions basic">Keyword concept from the Eurovoc thesaurus.</dd>
+    <dt><label class="field_opt" for="version">Version</label></dt>
+    <dd><input id="version" maxlength="100" name="version" type="text" value="${data.get('version', '')}" /></dd>
+    <dd class="instructions basic">A number representing the version (if applicable)</dd>
+    <dd class="hints">e.g. 1.2.0</dd>
 
   </dl>
+</fieldset>
 
-  <!-- <h3>Eurostat Datasets</h3> -->
-  <!-- <dl> -->
-  <!--   <dt><label class="field_opt" for="code">Code</label></dt> -->
-  <!--   <dd><input id="code" name="code" size="40" type="text" value="${data.get('code', '')}" /></dd> -->
-  <!--   <dd class="instructions basic">Existing Eurostat identifier.</dd> -->
-  <!--   <dd class="hints">eg: rd_e_berdind</dd> -->
+<fieldset id="resources">
+  <div class="instructions basic"><h3>Resources: the files and APIs associated with this dataset</h3></div>
+  <table class="resource-table-edit">
+    <thead>
+      <tr>
+        <th class="field_req resource-url">Resource</th>
+        <th class="resource-delete-link"></th>
+      </tr>
+    </thead>
+    <tbody class="js-resource-editor">
+    </tbody>
+  </table>
 
-  <!--   <dt><label class="field_opt" for="type">Type</label></dt> -->
-  <!--   <dd><input id="type" name="type" size="40" type="text" value="${data.get('type', '')}" /></dd> -->
-  <!--   <dd class="hints">dataset or table</dd> -->
+  <div class="resource-add">
+    <ul class="button-row">
+      <li><h4>Add a resource:</h4></li>
+      <li><button class="pretty-button js-link-file">Link to a file</button></li>
+      <li><button class="pretty-button js-link-api">Link to an API</button></li>
+      <li class="js-upload-file" style="display:none;"><button class="pretty-button js-upload-file">Upload a file</button></li>
+    </ul>
+  </div>
+</fieldset>
 
-  <!--   <dt><label class="field_opt" for="theme1">Theme 1</label></dt> -->
-  <!--   <dd><input id="theme1" name="theme1" size="40" type="text" value="${data.get('theme1', '')}" /></dd> -->
-  <!--   <dd class="instructions basic">Eurostat publishes datasets in a hierarchical table of contents.  -->
-  <!--     The theme field captures the titles under which the dataset is published</dd> -->
-  <!--   <dd class="hints">Example: Science and technology, Research and development, etc</dd> -->
-
-  <!--   <dt><label class="field_opt" for="theme2">Theme 2</label></dt> -->
-  <!--   <dd><input id="theme2" name="theme2" size="40" type="text" value="${data.get('theme2', '')}" /></dd> -->
-  <!--   <dd class="instructions basic">Eurostat publishes datasets in a hierarchical table of contents.  -->
-  <!--     The theme field captures the titles under which the dataset is published</dd> -->
-  <!--   <dd class="hints">Example: Science and technology, Research and development, etc</dd> -->
-
-  <!--   <dt><label class="field_opt" for="theme3">Theme 3</label></dt> -->
-  <!--   <dd><input id="theme3" name="theme3" size="40" type="text" value="${data.get('theme3', '')}" /></dd> -->
-  <!--   <dd class="instructions basic">Eurostat publishes datasets in a hierarchical table of contents.  -->
-  <!--     The theme field captures the titles under which the dataset is published</dd> -->
-  <!--   <dd class="hints">Example: Science and technology, Research and development, etc</dd> -->
-
-  <!--   <dt><label class="field_opt" for="license_link">License link</label></dt> -->
-  <!--   <dd><input id="license_link" name="license_link" size="40" type="text" value="${data.get('license_link', '')}" /></dd> -->
-  <!--   <dd class="instructions basic">Link to the page where the license conditions related to the dataset are described.</dd> -->
-  <!--   <dd class="hints">Example: http://epp.eurostat.ec.europa.eu/portal/page/portal/about_eurostat/ corporate/copyright_licence_policy</dd> -->
-
-  <!--   <dt><label class="field_opt" for="support">Support</label></dt> -->
-  <!--   <dd><input id="support" name="support" size="40" type="text" value="${data.get('support', '')}" /></dd> -->
-  <!--   <dd class="instructions basic">Link to the page where support for the dataset can be obtained.</dd> -->
-  <!--   <dd class="hints">Example: http://epp.eurostat.ec.europa.eu/portal/page/portal/help/ user_support</dd> -->
-  <!-- </dl> -->
-
-  <h3>Extra Fields</h3>
+<fieldset id="keywords">
   <dl>
+    <dt class="tags-label"><label class="field_opt" for="tags">Keywords</label></dt>
+    <dd class="tags-field">
+      <input class="long autocomplete-tag" id="tag_string" name="tag_string" size="60" type="text" 
+               value="${data.get('tag_string') or ', '.join([tag['name'] for tag in data.get('tags', [])])}" />
+    </dd>
+    <dd class="tags-instructions instructions basic" i18n:msg="">Comma-separated terms that may link this dataset to similar ones. For more information on conventions, see <a href="http://wiki.okfn.org/ckan/doc/faq#TagConventions">this wiki page</a>.</dd>
+    <dd class="instructions further">
+      Keywords must be alphanumeric characters or symbols: -_.
+      Keywords must not be uppercase words in phrases connected with hyphen.
+    </dd>
+    <dd class="hints">e.g. pollution rivers water-quality</dd>
+    <dd class="tags-instructions field_error" py:if="errors.get('tag_string', '')">${errors.get('tag_string', '')}</dd>
+  </dl>
+</fieldset>
+
+<fieldset id="notes">
+  <dl>
+    <dt><label class="field_opt" for="skos_note">SKOS Note</label></dt>
+    <dd><input id="skos_note" name="skos_note" size="40" type="text" value="${data.get('skos_note', '')}" /></dd>
+    <dd class="field_error" py:if="errors.get('skos_note', '')">${errors.get('skos_note', '')}</dd>
+
+    <dt><label class="field_opt" for="change_note">Change Note</label></dt>
+    <dd><input id="change_note" name="change_note" size="40" type="text" value="${data.get('change_note', '')}" /></dd>
+    <dd class="field_error" py:if="errors.get('change_note', '')">${errors.get('change_note', '')}</dd>
+
+    <dt><label class="field_opt" for="definition_note">Definition Note</label></dt>
+    <dd><input id="definition_note" name="definition_note" size="40" type="text" value="${data.get('definition_note', '')}" /></dd>
+    <dd class="field_error" py:if="errors.get('definition_note', '')">${errors.get('definition_note', '')}</dd>
+
+    <dt><label class="field_opt" for="editorial_note">Editorial Note</label></dt>
+    <dd><input id="editorial_note" name="editorial_note" size="40" type="text" value="${data.get('editorial_note', '')}" /></dd>
+    <dd class="field_error" py:if="errors.get('editorial_note', '')">${errors.get('editorial_note', '')}</dd>
+
+    <dt><label class="field_opt" for="history_note">History Note</label></dt>
+    <dd><input id="history_note" name="history_note" size="40" type="text" value="${data.get('history_note', '')}" /></dd>
+    <dd class="field_error" py:if="errors.get('history_note', '')">${errors.get('history_note', '')}</dd>
+
+    <dt><label class="field_opt" for="scope_note">Scope Note</label></dt>
+    <dd><input id="scope_note" name="scope_note" size="40" type="text" value="${data.get('scope_note', '')}" /></dd>
+    <dd class="field_error" py:if="errors.get('scope_note', '')">${errors.get('scope_note', '')}</dd>
+
+    <dt><label class="field_opt" for="example_note">Example Note</label></dt>
+    <dd><input id="example_note" name="example_note" size="40" type="text" value="${data.get('example_note', '')}" /></dd>
+    <dd class="field_error" py:if="errors.get('example_note', '')">${errors.get('example_note', '')}</dd>
+  </dl>
+</fieldset>
+
+<fieldset id="extras">
+  <h3>Extra Fields</h3>
+  <dl py:if="c.additional_extras">
     <py:for each="num, extra in enumerate(c.additional_extras)">
     <dt><label for="extras__${num}__value">${extra.get('key')}</label></dt>
     <dd>
@@ -369,6 +299,24 @@
     </py:for>
   </dl>
 </fieldset>
+
+<fieldset id='delete' py:if="c.is_sysadmin or c.auth_for_change_state">
+  <dl>
+    <dt>Delete</dt>
+    <dd>
+      This dataset is&nbsp;&nbsp; 
+      <span>
+      This dataset is&nbsp;&nbsp;
+      <select id="state" class="dataset-delete" name="state" style="display:inline;">
+        <option py:attrs="{'selected': 'selected' if data.get('state') == 'active' else None}" value="active">active</option>
+        <option py:attrs="{'selected': 'selected' if data.get('state') == 'deleted' else None}" value="deleted">deleted</option>
+      </select>
+      </span>
+    </dd>
+  </dl>
+</fieldset>
+
+<div id="unsaved-warning"></div>
 
 <label for="log_message" class="edit-summary">Edit summary (briefly describe the changes you have made)</label>
 <textarea id="log_message" name="log_message" class="edit-summary short wide">${data.get('log_message', '')}</textarea>
@@ -396,4 +344,3 @@
 </div>
 
 </form>
-

@@ -6,7 +6,7 @@ setup(
     name='ckanext-ecportal',
     version=__version__,
     long_description='CKAN EC Portal Extension',
-    classifiers=[], # Get strings from http://pypi.python.org/pypi?%3Aaction=list_classifiers
+    classifiers=[],
     namespace_packages=['ckanext', 'ckanext.ecportal'],
     zip_safe=False,
     author='Open Knowledge Foundation',
@@ -23,7 +23,10 @@ setup(
         [ckan.plugins]
         ecportal = ckanext.ecportal.plugin:ECPortalPlugin
         ecportal_form = ckanext.ecportal.forms:ECPortalDatasetForm
+
+        [paste.paster_command]
+        ecportal=ckanext.ecportal.commands:ECPortalCommand
     ''',
     test_suite='nose.collector',
-    scripts=['scripts/eurostat_import.py'],
+    scripts=['scripts/odp_eurostat_importer.py'],
 )
