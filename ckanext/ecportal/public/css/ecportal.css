@@ -23,6 +23,7 @@ header {
 	height: 162px;
     background-color: #ffffff;
     position: relative;
+    color: #0065a2;
 }
 
 header #site-name {
