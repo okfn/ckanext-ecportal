@@ -1,80 +1,221 @@
+body {
+	font-family: Verdana, Arial, Helvetica, "DejaVu Sans", sans-serif;
+}
 .container {
     margin: 0 auto;
-    width: 950px;
+    width: 984px;
 }
 
+/****************************************************************************/
+/* Header
+/****************************************************************************/
 .header.outer {
-    background: url("/images/corporate.png") no-repeat scroll left top #1f7dc4;
-    border-bottom: none;
+    line-height: 1.4;
+    border: 1px solid #369;
     box-shadow: none;
     margin-bottom: 10px;
-    padding-bottom: 5px;
-    width: 950px;
-	height: 88px;
+    width: 984px;
 	margin: 0 auto 50px;
 }
 
 header {
     padding: 0;
-    color: #ffffff;
-}
-
-header #logo {
-    padding-left: 10px;
+	height: 162px;
+    background-color: #ffffff;
+    position: relative;
 }
 
 header #site-name {
-    color: #ffffff;
-    font-family: Ubuntu,sans-serif;
-    font-size: 1.4em;
-    padding: 5px 5px 2px 95px;
+    color:#0065a2;
+    position:absolute;
+    top:65px;
+    font-size:28px;
+	font-family: Verdana, Arial, Helvetica, "DejaVu Sans", sans-serif;
+    line-height:1.2;
+    padding-left:240px;
+    padding-top: 0px;
     text-shadow: none;
+    margin:0;
+    border:0;
 }
 header #site-name a {
-    color: #ffffff;
+    text-decoration: none;
+    color: #0065a2;
+}
+
+header #services {
+	position:absolute;
+    width:984px;
+    padding-top: 4px;
+    z-index: 10;
+}
+
+header #services-menu {
+    font-size: 10px;
+    position: absolute;
+    right: 216px;
+    text-align: right;
+    padding-top: 2px;
+}
+
+header #services-menu ul li {
+	display:inline;
+	margin:0;
+}
+
+header #services-menu ul li a,
+header #services-menu ul li a:visited {
+	color:#396ea2;
+	text-decoration:none;
+	padding:0 0 3px 5px;
+	border:0;
+	font-weight:normal;
+	display:inline-block;
+}
+
+header #services-menu ul li a:focus,
+header #services-menu ul li a:hover,
+header #services-menu ul li a:active {
+	text-decoration:underline;
+}
+
+ul.language-dd-selector {
+	border:1px solid #9AB;
+	background-color:#FFF;
+	width:216px;
+	list-style-type: none;
+	padding-left:0px;
+	margin-right:1px;
+	float:right;
+}
+ul.language-dd-selector li img{
+	float:right;
+}
+ul.language-dd-selector li a{
+	display:block;
+}
+ul.language-dd-selector li a:hover{
+	color:#036;
+}
+ul.language-dd-selector li{
+	padding-left:3px;
+	display:none;
+}
+ul.language-dd-selector li.selected{
+	display:block;
+}
+ul.language-dd-selector li:hover{
+	background-color:#DEF;
+	color:#036;
 }
 
 header .menu a {
-    color: #dddddd;
     text-decoration: none;
     text-shadow: none;
+    font-size: 10px;
+	color:#396ea2;
+    padding-right: 5px;
 }
+
 header .menu a:hover {
     text-decoration: underline;
 }
 
-header .menu #mainmenu {
-    padding-left: 3px;
-}
-
-header .menu #menusearch {
-    padding-right: 10px;
-}
-
-header .account {
-    padding-right: 10px;
-}
-
-.header #services {
-	background: url("/images/corporate.png") repeat-y scroll right -88px transparent;
-    width: 950px;
-    color: #ffffff;
-    padding: 2px 0px 2px 0;
-    margin: 0;
+header .menu.account {
+    position: absolute;
+    top: 30px;
     text-align: right;
-    min-height: 17px;
+    width: 984px;
+    z-index: 5;
+}
+
+header #mainmenu {
+    position: absolute;
+    top: 60px;
+    text-align: right;
+    width: 984px;
+    z-index: 5;
+}
+
+header #banner-flag {
+	position:absolute;
+	left:40px;
+	top:15px;
+	color:#000;
+	width:172px;
+	height:119px;
+    z-index: 10;
+}
+
+div#banner-image-title {
+	position:absolute;
+	left:0;
+	top:0;
+	height:145px;
+	width:100%;
+}
+
+#header-row2 {
+	position: absolute;
+	top: 100px;
+    width: 744px;
+    padding: 5px 0px 15px 240px;
+    background-color: #0065a2;
+	font-size: 21px;
+	line-height: 1.2;
+}
+
+#site-description {
+    position: relative;
+    top: 0;
+    color: #ffffff;
 }
 
 #path {
-	background-color: #074a8b;
-    border-top: 1px solid #f2d34e;
-    color: #dbe1e6;
-    min-height: 20px;
-    margin-top: 10px;
+    position: absolute;
+    top: 145px;
+    width: 984px;
+    background-color: #074a8b;
+    color: #ffffff;
+    font-size: 10px;
+    height: 17px;
 }
 
+#path ul{
+	position:relative;
+    padding: 2px 0px 0px 10px;
+}
+	
+#path li {
+	white-space: nowrap;
+	display: inline;
+    padding: 0; 
+	float: left;
+}
+
+#path li.separator {
+    padding:0px 2px 0px 2px;
+}
+
+#path a,
+#path a:visited,
+#path a:focus,
+#path a:active {
+	color:#fff;
+	text-decoration:none;
+	border:0;
+}
+
+#path a:hover {
+    text-decoration: underline;
+}
+
+/****************************************************************************/
+/* Footer                                                                   */
+/****************************************************************************/
+
 .footer.outer {
-    width: 950px;
+    width: 984px;
     margin: 0 auto;
     background-color: #ffffff;
     background-image: none;
@@ -94,6 +235,9 @@ footer li {
     display: inline;
 }
 
+/****************************************************************************/
+/* Dataset
+/****************************************************************************/
 .dataset-create-form dt.description-label, .dataset-create-form dd.description-field, .dataset-create-form dd.description-instructions {
     display: block;
 }
@@ -109,41 +253,3 @@ body.package.edit input[type="checkbox"] {
     color: #8a1f11;
     border: 1px solid #fbc2c4;
 }
-
-/* START Language selector */
-#language-holder {
-	position:absolute;
-	width:950px;
-}
-ul.language-dd-selector {
-	border:1px solid #9AB;
-	background-color:#FFF;
-	width:216px;
-	list-style-type: none;
-	padding-left:0px;
-	margin-right:10px;
-	float:right;
-}
-ul.language-dd-selector li img{
-	float:right;
-}
-ul.language-dd-selector li a{
-	display:block;
-	color:#396EA2;
-}
-ul.language-dd-selector li a:hover{
-	color:#036;
-}
-ul.language-dd-selector li{
-	padding-left:3px;
-	display:none;
-	color:#396EA2;
-}
-ul.language-dd-selector li.selected{
-	display:block;
-}
-ul.language-dd-selector li:hover{
-	background-color:#DEF;
-	color:#036;
-}
-/* END Language selector */
