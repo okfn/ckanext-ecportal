@@ -1,10 +1,12 @@
 import json
 from ckan.lib.base import c, model
 from ckan.authz import Authorizer
-from ckan.lib.navl.validators import ignore_missing, keep_extras
+from ckan.lib.navl.validators import ignore_missing, keep_extras, empty
 from ckan.logic import get_action, check_access
 from ckan.logic import NotFound, NotAuthorized
 from ckan.logic.converters import convert_from_extras
+from ckan.logic.validators import package_id_not_changed,\
+    name_validator, package_name_validator
 from ckan.logic.schema import package_form_schema, default_tags_schema
 from ckan.logic.converters import convert_to_tags, convert_from_tags, free_tags_only
 from ckan.plugins import implements, SingletonPlugin, IDatasetForm
@@ -70,12 +72,24 @@ class ECPortalDatasetForm(SingletonPlugin):
 
     def form_to_db_schema_options(self, options):
         'Use ODP schema for WUI and API calls'
-        return self.form_to_db_schema()
+        schema = self.form_to_db_schema()
+
+        if options.get('api'):
+            schema.update({'keywords': default_tags_schema()})
+            if options.get('type') == 'create':
+                schema.update({'id': [empty]})
+            else:
+                schema.update({
+                    'id': [ignore_missing, package_id_not_changed],
+                    'name': [ignore_missing, name_validator, package_name_validator, unicode],
+                    'title': [ignore_missing, unicode]
+                })
+
+        return schema
 
     def form_to_db_schema(self, package_type=None):
         schema = package_form_schema()
         schema.update({
-            'keywords': default_tags_schema(),
             'keyword_string': [ignore_missing, keyword_string_convert],
             'type_of_dataset': [ignore_missing, unicode, convert_to_extras],
             'published_by': [ignore_missing, unicode, publisher_exists, convert_to_extras],
