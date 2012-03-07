@@ -5,13 +5,14 @@ from ckan.lib.navl.validators import ignore_missing, keep_extras
 from ckan.logic import get_action, check_access
 from ckan.logic import NotFound, NotAuthorized
 from ckan.logic.converters import convert_from_extras
-from ckan.logic.schema import package_form_schema
+from ckan.logic.schema import package_form_schema, default_tags_schema
 from ckan.logic.converters import convert_to_tags, convert_from_tags, free_tags_only
 from ckan.plugins import implements, SingletonPlugin, IDatasetForm
 from field_values import type_of_dataset, update_frequency,\
     temporal_granularity
 from validators import use_other, extract_other, ecportal_date_to_db,\
-    convert_to_extras, duplicate_extras_key, publisher_exists
+    convert_to_extras, duplicate_extras_key, publisher_exists,\
+    keyword_string_convert, rename
 
 import logging
 log = logging.getLogger(__name__)
@@ -67,18 +68,24 @@ class ECPortalDatasetForm(SingletonPlugin):
             except NotAuthorized:
                 c.auth_for_change_state = False
 
+    def form_to_db_schema_options(self, options):
+        'Use ODP schema for WUI and API calls'
+        return self.form_to_db_schema()
+
     def form_to_db_schema(self, package_type=None):
         schema = package_form_schema()
         schema.update({
+            'keywords': default_tags_schema(),
+            'keyword_string': [ignore_missing, keyword_string_convert],
             'type_of_dataset': [ignore_missing, unicode, convert_to_extras],
             'published_by': [ignore_missing, unicode, publisher_exists, convert_to_extras],
             'release_date': [ignore_missing, ecportal_date_to_db, convert_to_extras],
             'modified_date': [ignore_missing, ecportal_date_to_db, convert_to_extras],
-            'update_frequency': [use_other, unicode, convert_to_extras],
-            'update_frequency-other': [],
+            'update_frequency': [ignore_missing, use_other, unicode, convert_to_extras],
+            'update_frequency-other': [ignore_missing, unicode],
             'temporal_coverage_from': [ignore_missing, ecportal_date_to_db, convert_to_extras],
             'temporal_coverage_to': [ignore_missing, ecportal_date_to_db, convert_to_extras],
-            'temporal_granularity': [unicode, convert_to_extras],
+            'temporal_granularity': [ignore_missing, unicode, convert_to_extras],
             'geographical_coverage': [ignore_missing, convert_to_tags(GEO_VOCAB_NAME)],
             'skos_note': [ignore_missing, unicode, convert_to_extras],
             'change_note': [ignore_missing, unicode, convert_to_extras],
@@ -87,7 +94,7 @@ class ECPortalDatasetForm(SingletonPlugin):
             'history_note': [ignore_missing, unicode, convert_to_extras],
             'scope_note': [ignore_missing, unicode, convert_to_extras],
             'example_note': [ignore_missing, unicode, convert_to_extras],
-            '__after': [duplicate_extras_key],
+            '__after': [duplicate_extras_key, rename('keywords', 'tags')],
         })
         return schema
 

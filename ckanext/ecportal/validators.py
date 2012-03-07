@@ -1,8 +1,10 @@
 import re
+from itertools import count
 from pylons.i18n import _
 from ckan.lib.field_types import DateType, DateConvertError
 from ckan.lib.navl.dictization_functions import Invalid, missing, unflatten
 from ckan.logic import get_action, NotFound
+from ckan.logic.validators import tag_name_validator, tag_length_validator
 
 # parse_timedate function is similar to the one in ckan.lib.field_types.DateType
 # changes:
@@ -11,7 +13,8 @@ from ckan.logic import get_action, NotFound
 class ECPortalDateType(DateType):
     @classmethod
     def parse_timedate(cls, timedate_str, format_type):
-        '''Takes a timedate and returns a dictionary of the fields.
+        '''
+        Takes a timedate and returns a dictionary of the fields.
         * Little validation is done.
         * If it can't understand the layout it raises DateConvertError
         '''
@@ -118,12 +121,49 @@ def duplicate_extras_key(key, data, errors, context):
             errors[(extra_key,)] = [_('Duplicate key for "%s" given') % extra_key]
 
 def publisher_exists(publisher_name, context):
-    """Raises Invalid if the given publisher_name does not exist in the model given
+    '''
+    Raises Invalid if the given publisher_name does not exist in the model given
     in the context, otherwise returns the given publisher_name.
 
-    """
+    '''
     try:
         get_action('group_show')(context, {'id': publisher_name})
     except NotFound:
         raise Invalid('%s: %s' % (_('Publisher not found'), publisher_name))
     return publisher_name
+
+def keyword_string_convert(key, data, errors, context):
+    '''Takes a list of tags that is a comma-separated string (in data[key])
+    and parses tag names. These are added to the data dict, enumerated. They
+    are also validated.'''
+    if isinstance(data[key], basestring):
+        tags = [tag.strip() \
+                for tag in data[key].split(',') \
+                if tag.strip()]
+    else:
+        tags = data[key]
+
+    current_index = max([int(k[1]) for k in data.keys() if len(k) == 3 and k[0] == 'keywords'] + [-1])
+
+    for num, tag in zip(count(current_index + 1), tags):
+        data[('keywords', num, 'name')] = tag
+
+    for tag in tags:
+        tag_length_validator(tag, context)
+        tag_name_validator(tag, context)
+
+def rename(old, new):
+    '''
+    Rename a schema field from old to new.
+    Should be used in __after.
+    '''
+    def rename_field(key, data, errors, context):
+        # import pprint
+        # pprint.pprint(data)
+        for field_name in data.keys():
+            if field_name[0] == old:
+                new_field_name = list(field_name)
+                new_field_name[0] = new
+                data[tuple(new_field_name)] = data[field_name]
+                data.pop(field_name)
+    return rename_field
