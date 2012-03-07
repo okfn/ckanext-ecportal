@@ -27,6 +27,5 @@ setup(
         [paste.paster_command]
         ecportal=ckanext.ecportal.commands:ECPortalCommand
     ''',
-    test_suite='nose.collector',
-    scripts=['scripts/odp_eurostat_importer.py'],
+    test_suite='nose.collector'
 )
