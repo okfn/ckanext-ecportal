@@ -1,7 +1,7 @@
 import json
 from ckan.lib.base import c, model
 from ckan.authz import Authorizer
-from ckan.lib.navl.validators import ignore_missing, keep_extras, empty
+from ckan.lib.navl.validators import ignore, ignore_missing, keep_extras, empty
 from ckan.logic import get_action, check_access
 from ckan.logic import NotFound, NotAuthorized
 from ckan.logic.converters import convert_from_extras
@@ -75,7 +75,15 @@ class ECPortalDatasetForm(SingletonPlugin):
         schema = self.form_to_db_schema()
 
         if options.get('api'):
-            schema.update({'keywords': default_tags_schema()})
+            schema.update({
+                'keywords': default_tags_schema(),
+                'groups': {
+                    'id': [ignore_missing, unicode],
+                    'name': [ignore_missing, unicode],
+                    '__extras': [ignore],
+                }
+            })
+
             if options.get('type') == 'create':
                 schema.update({'id': [empty]})
             else:
