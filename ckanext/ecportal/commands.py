@@ -1,7 +1,7 @@
 import os
-import glob
 import json
 import urllib
+import xml.etree.ElementTree as ET
 from ckan import model
 from ckan.logic import get_action, NotFound
 from ckan.lib.cli import CkanCommand
@@ -21,7 +21,7 @@ class ECPortalCommand(CkanCommand):
         paster ecportal create-geo-vocab -c <config>
 
     Where:
-        <data> = path to json file, or directory containing json files
+        <data> = path to XML file (format of the Eurostat bulk import metadata file)
         <translations> = path to translations.json
         <structure> = path to structure.json
         <config> = path to your ckan config file
@@ -46,7 +46,12 @@ class ECPortalCommand(CkanCommand):
             if not len(self.args) == 2:
                 print ECPortalCommand.__doc__
                 return
-            self.import_data(self.args[1])
+            data = self.args[1]
+
+            if 'http://' in data:
+                self.import_data(urllib.ulropen(data))
+            else:
+                self.import_data(data)
 
         elif cmd == 'import-publishers':
             if not len(self.args) == 3:
@@ -72,16 +77,64 @@ class ECPortalCommand(CkanCommand):
         else:
             log.error('Command "%s" not recognized' % (cmd,))
 
-    def import_data(self, path):
-        if os.path.isfile(path):
-            self.import_dataset(path)
-        elif os.path.isdir(path):
-            for file_path in glob.glob(os.path.join(path, '*.json')):
-                self.import_dataset(file_path)
-        else:
-            log.error('Error: can not add %s' % path)
+    def _import_data_node(self, node, parents, namespace=''):
+        if node.tag == ('{%s}leaf' % namespace):
+            dataset = {}
+            dataset['name'] = node.find('{%s}code' % namespace).text
+            dataset['title'] = node.find('{%s}title[@language="en"]' % namespace).text
 
-    def import_dataset(self, path):
+            # TODO: add title translations to translation table
+
+            # TODO: make sure dates are in correct ISO format
+            dataset['last_modified'] = node.find('{%s}lastUpdate' % namespace).text
+            dataset['temporal_coverage_from'] = node.find('{%s}dataStart' % namespace).text
+            dataset['temporal_coverage_to'] = node.find('{%s}dataEnd' % namespace).text
+
+            dataset['url'] = node.find('{%s}metadata' % namespace).text
+
+            # TODO: create 'theme' extras from list of parent nodes
+
+            dataset['resources'] = []
+            resources = node.findall('{%s}downloadLink' % namespace)
+            for resource in resources:
+                dataset['resources'].append({
+                    'url': resource.text,
+                    'format': resource.attrib['format']
+                })
+
+            log.info("Adding dataset: %s" % dataset['name'])
+            import pprint
+            pprint.pprint(dataset)
+            # user = get_action('get_site_user')({'model': model, 'ignore_auth': True}, {})
+            # context = {'model': model, 'session': model.Session, 'user': user['name']}
+            # get_action('package_create')(context, dataset)
+
+        elif node.tag == ('{%s}branch' % namespace):
+            parents.add(node)
+            for child in node:
+                self._import_data_node(child, parents, namespace)
+
+        elif node.tag == ('{%s}title' % namespace):
+            # TODO: add title translations to translation table
+            pass
+
+        elif node.tag == ('{%s}children' % namespace):
+            for child in node:
+                self._import_data_node(child, parents, namespace)
+
+    def import_data(self, xml_file):
+        '''
+        Import datasets in the format of the Eurostat bulk downloads
+        metadata XML file.
+        '''
+        tree = ET.parse(xml_file)
+        namespace = tree.getroot().tag[1:].split("}")[0]
+        self._import_data_node(tree.getroot()[0], set(), namespace)
+
+    def _import_dataset_json(self, path):
+        '''
+        Import JSON datasets from the proof-of-concept site.
+        '''
         with open(path, 'r') as f:
             dataset = json.loads(f.read())
             extras = dataset.get('extras')
