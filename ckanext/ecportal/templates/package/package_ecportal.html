@@ -45,7 +45,7 @@
     <dd class="name-field">
       <span class="js-url-text url-text">
         <span class="js-url-viewmode js-url-suffix">&nbsp;</span>
-        (${g.site_url + h.url(controller='package', action='index')+'/'}<span class="js-url-viewmode js-url-suffix">&nbsp;</span>)
+        (${g.site_url + h.url(controller='package', action='search')+'/'}<span class="js-url-viewmode js-url-suffix">&nbsp;</span>)
         <a href="#" style="display: none;" class="url-edit js-url-editlink js-url-viewmode">(edit)</a>
       </span>
       <input style="display: none;" id="name" maxlength="100" name="name" type="text" 
@@ -317,9 +317,6 @@
 </fieldset>
 
 <div id="unsaved-warning"></div>
-
-<label for="log_message" class="edit-summary">Edit summary (briefly describe the changes you have made)</label>
-<textarea id="log_message" name="log_message" class="edit-summary short wide">${data.get('log_message', '')}</textarea>
 
 <div class="ckan-logged-in" style="display: none;">
   <p>Author: ${c.author}</p>
