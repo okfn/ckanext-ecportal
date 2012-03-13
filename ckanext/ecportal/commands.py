@@ -58,12 +58,7 @@ class ECPortalCommand(CkanCommand):
         user = get_action('get_site_user')(
             {'model': model, 'ignore_auth': True}, {}
         )
-        self.context = {
-            'model': model,
-            'session': model.Session,
-            'user': user['name'],
-            'extras_as_string': True
-        }
+        self.user_name = user['name']
 
         if cmd == 'import-data':
             if not len(self.args) in [2, 3]:
@@ -71,7 +66,7 @@ class ECPortalCommand(CkanCommand):
                 return
             data = self.args[1]
             if len(self.args) == 3:
-                self.context['user'] = self.args[2]
+                self.user_name = self.args[2]
 
             if 'http://' in data:
                 self.import_data(urllib.ulropen(data))
@@ -107,6 +102,8 @@ class ECPortalCommand(CkanCommand):
             dataset = {}
             dataset['name'] = unicode(node.find('{%s}code' % namespace).text)
             dataset['title'] = unicode(node.find('{%s}title[@language="en"]' % namespace).text)
+            dataset['license_id'] = u'ec-eurostat'
+            dataset['published_by'] = u'estat'
 
             # convert modified date to one of yyyy-mm-dd
             modified = node.find('{%s}lastUpdate' % namespace).text
@@ -196,7 +193,9 @@ class ECPortalCommand(CkanCommand):
 
             # add dataset to CKAN instance
             log.info('Adding dataset: %s' % dataset['name'])
-            get_action('package_create')(self.context, dataset)
+            context = {'model': model, 'session': model.Session,
+                        'user': self.user_name, 'extras_as_string': True}
+            get_action('package_create')(context, dataset)
 
             # add title translations to translation table
             log.info('Updating translations for dataset %s' % dataset['name'])
@@ -213,7 +212,7 @@ class ECPortalCommand(CkanCommand):
 
             if translations:
                 get_action('term_translation_update_many')(
-                    self.context, {'data': translations}
+                    context, {'data': translations}
                 )
 
         elif node.tag == ('{%s}branch' % namespace):
@@ -233,8 +232,10 @@ class ECPortalCommand(CkanCommand):
                         })
 
                 if translations:
+                    context = {'model': model, 'session': model.Session,
+                                'user': self.user_name, 'extras_as_string': True}
                     get_action('term_translation_update_many')(
-                        self.context, {'data': translations}
+                        context, {'data': translations}
                     )
 
             # add this node as a parent and import child nodes
