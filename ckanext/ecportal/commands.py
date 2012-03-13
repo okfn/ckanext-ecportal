@@ -2,7 +2,7 @@ import os
 import re
 import json
 import urllib
-import xml.etree.ElementTree as ET
+import lxml.etree
 from ckan import model
 from ckan.logic import get_action, NotFound, ValidationError
 from ckan.lib.cli import CkanCommand
@@ -255,7 +255,7 @@ class ECPortalCommand(CkanCommand):
         Import datasets in the format of the Eurostat bulk downloads
         metadata XML file.
         '''
-        tree = ET.parse(xml_file)
+        tree = lxml.etree.parse(xml_file)
         namespace = tree.getroot().tag[1:].split('}')[0]
         self._import_data_node(tree.getroot()[0], [], namespace)
 
