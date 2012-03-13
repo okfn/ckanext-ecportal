@@ -243,9 +243,8 @@ class ECPortalCommand(CkanCommand):
                     )
 
             # add this node as a parent and import child nodes
-            parents.append(node)
             for child in node:
-                self._import_data_node(child, parents, namespace)
+                self._import_data_node(child, parents + [node], namespace)
 
         elif node.tag == ('{%s}children' % namespace):
             for child in node:
