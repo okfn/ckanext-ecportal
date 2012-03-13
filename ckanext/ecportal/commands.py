@@ -96,8 +96,8 @@ class ECPortalCommand(CkanCommand):
     def _import_data_node(self, node, parents, namespace=''):
         if node.tag == ('{%s}leaf' % namespace):
             dataset = {}
-            dataset['name'] = node.find('{%s}code' % namespace).text
-            dataset['title'] = node.find('{%s}title[@language="en"]' % namespace).text
+            dataset['name'] = unicode(node.find('{%s}code' % namespace).text)
+            dataset['title'] = unicode(node.find('{%s}title[@language="en"]' % namespace).text)
 
             # convert modified date to one of yyyy-mm-dd
             modified = node.find('{%s}lastUpdate' % namespace).text
@@ -106,65 +106,65 @@ class ECPortalCommand(CkanCommand):
                     dd = modified.split('.')[0]
                     mm = modified.split('.')[1]
                     yyyy = modified.split('.')[2]
-                dataset['modified_date'] = '%s-%s-%s' % (yyyy, mm, dd)
+                dataset['modified_date'] = u'%s-%s-%s' % (yyyy, mm, dd)
 
             # convert temporal coverage dates to yyyy-mm-dd, yyyy-mm  or yyyy
             tc_from = node.find('{%s}dataStart' % namespace).text
             if tc_from:
                 if self.year.match(tc_from):
-                    dataset['temporal_coverage_from'] = tc_from
-                    dataset['temporal_granularity'] = 'year'
+                    dataset['temporal_coverage_from'] = unicode(tc_from)
+                    dataset['temporal_granularity'] = u'year'
                 elif self.year_month.match(tc_from):
                     yyyy = tc_from.split('M')[0]
                     mm = tc_from.split('M')[1]
-                    dataset['temporal_coverage_from'] = '%s-%s' % (yyyy, mm)
-                    dataset['temporal_granularity'] = 'month'
+                    dataset['temporal_coverage_from'] = u'%s-%s' % (yyyy, mm)
+                    dataset['temporal_granularity'] = u'month'
                 elif self.year_month_day.match(tc_from):
                     yyyy = tc_from.split('M')[0]
                     mm_dd = tc_from.split('M')[1]
                     mm = mm_dd.split('D')[0]
                     dd = mm_dd.split('D')[1]
-                    dataset['temporal_coverage_from'] = '%s-%s-%s' % (yyyy, mm, dd)
-                    dataset['temporal_granularity'] = 'day'
+                    dataset['temporal_coverage_from'] = u'%s-%s-%s' % (yyyy, mm, dd)
+                    dataset['temporal_granularity'] = u'day'
                 elif self.year_quarter.match(tc_from):
                     yyyy = tc_from.split('Q')[0]
                     q = int(tc_from.split('Q')[1])
                     mm = ((q - 1) * 3) + 1
-                    dataset['temporal_coverage_from'] = '%s-%02d' % (yyyy, mm)
-                    dataset['temporal_granularity'] = 'month'
+                    dataset['temporal_coverage_from'] = u'%s-%02d' % (yyyy, mm)
+                    dataset['temporal_granularity'] = u'month'
                 elif self.year_half.match(tc_from):
                     yyyy = tc_from.split('S')[0]
                     h = int(tc_from.split('S')[1])
                     mm = ((h - 1) * 6) + 1
-                    dataset['temporal_coverage_from'] = '%s-%02d' % (yyyy, mm)
-                    dataset['temporal_granularity'] = 'month'
+                    dataset['temporal_coverage_from'] = u'%s-%02d' % (yyyy, mm)
+                    dataset['temporal_granularity'] = u'month'
 
             tc_to = node.find('{%s}dataEnd' % namespace).text
             if tc_to:
                 if self.year.match(tc_to):
-                    dataset['temporal_coverage_to'] = tc_to
+                    dataset['temporal_coverage_to'] = unicode(tc_to)
                 elif self.year_month.match(tc_to):
                     yyyy = tc_to.split('M')[0]
                     mm = tc_to.split('M')[1]
-                    dataset['temporal_coverage_to'] = '%s-%s' % (yyyy, mm)
+                    dataset['temporal_coverage_to'] = u'%s-%s' % (yyyy, mm)
                 elif self.year_month_day.match(tc_to):
                     yyyy = tc_to.split('M')[0]
                     mm_dd = tc_to.split('M')[1]
                     mm = mm_dd.split('D')[0]
                     dd = mm_dd.split('D')[1]
-                    dataset['temporal_coverage_to'] = '%s-%s-%s' % (yyyy, mm, dd)
+                    dataset['temporal_coverage_to'] = u'%s-%s-%s' % (yyyy, mm, dd)
                 elif self.year_quarter.match(tc_to):
                     yyyy = tc_to.split('Q')[0]
                     q = int(tc_to.split('Q')[1])
                     mm = ((q - 1) * 3) + 1
-                    dataset['temporal_coverage_to'] = '%s-%02d' % (yyyy, mm)
+                    dataset['temporal_coverage_to'] = u'%s-%02d' % (yyyy, mm)
                 elif self.year_half.match(tc_to):
                     yyyy = tc_to.split('S')[0]
                     h = int(tc_to.split('S')[1])
                     mm = ((h - 1) * 6) + 1
-                    dataset['temporal_coverage_to'] = '%s-%02d' % (yyyy, mm)
+                    dataset['temporal_coverage_to'] = u'%s-%02d' % (yyyy, mm)
 
-            dataset['url'] = node.find('{%s}metadata' % namespace).text
+            dataset['url'] = unicode(node.find('{%s}metadata' % namespace).text)
 
             # add themes as extras
             dataset['extras'] = []
@@ -181,12 +181,12 @@ class ECPortalCommand(CkanCommand):
             resources = node.findall('{%s}downloadLink' % namespace)
             for resource in resources:
                 dataset['resources'].append({
-                    'url': resource.text,
-                    'format': resource.attrib['format']
+                    'url': unicode(resource.text),
+                    'format': unicode(resource.attrib['format'])
                 })
 
             # add dataset to CKAN instance
-            log.info("Adding dataset: %s" % dataset['name'])
+            log.info('Adding dataset: %s' % dataset['name'])
             if self.user_name:
                 context = {'model': model, 'session': model.Session,
                            'user': self.user_name, 'extras_as_string': True}
@@ -198,7 +198,24 @@ class ECPortalCommand(CkanCommand):
                            'user': user['name']}
             get_action('package_create')(context, dataset)
 
-            # TODO: add title translations to translation table
+            # add title translations to translation table
+            log.info('Updating translations for dataset %s' % dataset['name'])
+            translations = []
+            langs = [u'fr', u'de']
+
+            for lang in langs:
+                lang_node = node.find('{%s}title[@language="%s"]' % (namespace, lang))
+                if lang_node is not None:
+                    translations.append({
+                        'term': dataset['title'],
+                        'term_translation': unicode(lang_node.text),
+                        'lang_code': lang
+                    })
+
+            if translations:
+                get_action('term_translation_update_many')(
+                    context, {'data': translations}
+                )
 
         elif node.tag == ('{%s}branch' % namespace):
             parents.append(node)
@@ -219,7 +236,7 @@ class ECPortalCommand(CkanCommand):
         metadata XML file.
         '''
         tree = ET.parse(xml_file)
-        namespace = tree.getroot().tag[1:].split("}")[0]
+        namespace = tree.getroot().tag[1:].split('}')[0]
         self._import_data_node(tree.getroot()[0], [], namespace)
 
     def _import_dataset_json(self, path):
@@ -261,7 +278,7 @@ class ECPortalCommand(CkanCommand):
                 dataset[u'keywords'] = dataset['tags']
                 dataset.pop('tags')
 
-            log.info("Adding dataset: %s" % dataset['name'])
+            log.info('Adding dataset: %s' % dataset['name'])
             user = get_action('get_site_user')({'model': model, 'ignore_auth': True}, {})
             context = {'model': model, 'session': model.Session, 'user': user['name']}
             get_action('package_create')(context, dataset)
@@ -271,7 +288,7 @@ class ECPortalCommand(CkanCommand):
         Create publisher groups based on translations and structure JSON objects.
         '''
         # get group names and title translations
-        log.info("Reading group structure and names/translations")
+        log.info('Reading group structure and names/translations')
         groups = {}
         for group in translations['results']['bindings']:
             name_uri = group['s']['value']
@@ -294,7 +311,7 @@ class ECPortalCommand(CkanCommand):
                     groups[group]['children'].append(child)
 
         # create CKAN groups
-        log.info("Creating CKAN group objects")
+        log.info('Creating CKAN group objects')
         user = get_action('get_site_user')({'model': model, 'ignore_auth': True}, {})
         context = {'model': model, 'session': model.Session, 'user': user['name']}
 
@@ -316,7 +333,7 @@ class ECPortalCommand(CkanCommand):
             groups[group]['dict'] = g
 
         # updating group heirarchy
-        log.info("Updating group hierarchy")
+        log.info('Updating group hierarchy')
         for group in groups:
             if not groups[group]['children']:
                 continue
@@ -341,7 +358,7 @@ class ECPortalCommand(CkanCommand):
             get_action('group_update')(context, parent)
 
         # update French translation
-        log.info("Updating French translations")
+        log.info('Updating French translations')
         term_translations = []
         for group in groups:
             if not 'eng' in groups[group]['titles'] or\
@@ -360,19 +377,19 @@ class ECPortalCommand(CkanCommand):
         )
 
     def create_geo_vocab(self):
-        log.info("Creating vocabulary for geographical coverage")
+        log.info('Creating vocabulary for geographical coverage')
         user = get_action('get_site_user')({'model': model, 'ignore_auth': True}, {})
         context = {'model': model, 'session': model.Session, 'user': user['name']}
 
         try:
             data = {'id': forms.GEO_VOCAB_NAME}
             get_action('vocabulary_show')(context, data)
-            log.error("Vocabulary %s already exists." % forms.GEO_VOCAB_NAME)
+            log.error('Vocabulary %s already exists.' % forms.GEO_VOCAB_NAME)
         except NotFound:
             data = {'name': forms.GEO_VOCAB_NAME}
             vocab = get_action('vocabulary_create')(context, data)
             for country_code in field_values.geographical_coverage:
-                log.info("Adding tag %s to vocab %s" %
+                log.info('Adding tag %s to vocab %s' %
                          (country_code[0], forms.GEO_VOCAB_NAME))
                 data = {'name': country_code[0], 'vocabulary_id': vocab['id']}
                 get_action('tag_create')(context, data)
