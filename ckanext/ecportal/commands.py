@@ -41,9 +41,8 @@ class ECPortalCommand(CkanCommand):
     year_half = re.compile('\d\d\d\dS\d\Z')
     day_month_year = re.compile('\d\d\.\d\d\.\d\d\d\d\Z')
 
-    # user name to perform actions as
-    # if not specified, will use the instance site_user
-    user_name = None
+    # data-import: languages with translations in the imported metadata file
+    data_import_langs = [u'fr', u'de']
 
     def command(self):
         '''
@@ -56,13 +55,23 @@ class ECPortalCommand(CkanCommand):
         cmd = self.args[0]
         self._load_config()
 
+        user = get_action('get_site_user')(
+            {'model': model, 'ignore_auth': True}, {}
+        )
+        self.context = {
+            'model': model,
+            'session': model.Session,
+            'user': user['name'],
+            'extras_as_string': True
+        }
+
         if cmd == 'import-data':
             if not len(self.args) in [2, 3]:
                 print ECPortalCommand.__doc__
                 return
             data = self.args[1]
             if len(self.args) == 3:
-                self.user_name = self.args[2]
+                self.context['user'] = self.args[2]
 
             if 'http://' in data:
                 self.import_data(urllib.ulropen(data))
@@ -187,23 +196,13 @@ class ECPortalCommand(CkanCommand):
 
             # add dataset to CKAN instance
             log.info('Adding dataset: %s' % dataset['name'])
-            if self.user_name:
-                context = {'model': model, 'session': model.Session,
-                           'user': self.user_name, 'extras_as_string': True}
-            else:
-                user = get_action('get_site_user')(
-                    {'model': model, 'ignore_auth': True}, {}
-                )
-                context = {'model': model, 'session': model.Session, 
-                           'user': user['name']}
-            get_action('package_create')(context, dataset)
+            get_action('package_create')(self.context, dataset)
 
             # add title translations to translation table
             log.info('Updating translations for dataset %s' % dataset['name'])
             translations = []
-            langs = [u'fr', u'de']
 
-            for lang in langs:
+            for lang in self.data_import_langs:
                 lang_node = node.find('{%s}title[@language="%s"]' % (namespace, lang))
                 if lang_node is not None:
                     translations.append({
@@ -214,17 +213,34 @@ class ECPortalCommand(CkanCommand):
 
             if translations:
                 get_action('term_translation_update_many')(
-                    context, {'data': translations}
+                    self.context, {'data': translations}
                 )
 
         elif node.tag == ('{%s}branch' % namespace):
+            # add title translations to translation table
+            title = node.find('{%s}title[@language="en"]' % namespace)
+            if title is not None:
+                log.info('Updating translations for theme %s' % title.text)
+                translations = []
+
+                for lang in self.data_import_langs:
+                    lang_node = node.find('{%s}title[@language="%s"]' % (namespace, lang))
+                    if lang_node is not None:
+                        translations.append({
+                            'term': unicode(title.text),
+                            'term_translation': unicode(lang_node.text),
+                            'lang_code': lang
+                        })
+
+                if translations:
+                    get_action('term_translation_update_many')(
+                        self.context, {'data': translations}
+                    )
+
+            # add this node as a parent and import child nodes
             parents.append(node)
             for child in node:
                 self._import_data_node(child, parents, namespace)
-
-        elif node.tag == ('{%s}title' % namespace):
-            # TODO: add title translations to translation table
-            pass
 
         elif node.tag == ('{%s}children' % namespace):
             for child in node:
