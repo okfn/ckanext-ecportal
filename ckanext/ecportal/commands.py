@@ -153,7 +153,10 @@ class ECPortalCommand(CkanCommand):
 
             dataset['url'] = node.find('{%s}metadata' % namespace).text
 
-            # TODO: create 'theme' extras from list of parent nodes
+            themes = [n.find('{%s}title[@language="en"]' % namespace).text
+                      for n in parents[1:]]
+            for n, theme in enumerate(themes):
+                dataset['theme%d' % (n + 1)] = theme
 
             dataset['resources'] = []
             resources = node.findall('{%s}downloadLink' % namespace)
@@ -173,7 +176,7 @@ class ECPortalCommand(CkanCommand):
             # TODO: add title translations to translation table
 
         elif node.tag == ('{%s}branch' % namespace):
-            parents.add(node)
+            parents.append(node)
             for child in node:
                 self._import_data_node(child, parents, namespace)
 
@@ -192,7 +195,7 @@ class ECPortalCommand(CkanCommand):
         '''
         tree = ET.parse(xml_file)
         namespace = tree.getroot().tag[1:].split("}")[0]
-        self._import_data_node(tree.getroot()[0], set(), namespace)
+        self._import_data_node(tree.getroot()[0], [], namespace)
 
     def _import_dataset_json(self, path):
         '''
