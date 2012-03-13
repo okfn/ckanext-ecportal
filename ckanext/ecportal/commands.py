@@ -69,7 +69,7 @@ class ECPortalCommand(CkanCommand):
                 self.user_name = self.args[2]
 
             if 'http://' in data:
-                self.import_data(urllib.ulropen(data))
+                self.import_data(urllib.urlopen(data))
             else:
                 self.import_data(data)
 
@@ -195,7 +195,11 @@ class ECPortalCommand(CkanCommand):
             log.info('Adding dataset: %s' % dataset['name'])
             context = {'model': model, 'session': model.Session,
                         'user': self.user_name, 'extras_as_string': True}
-            get_action('package_create')(context, dataset)
+            try:
+                get_action('package_create')(context, dataset)
+            except ValidationError, ve:
+                log.error('Could not add dataset %s: %s' % 
+                          (dataset['name'], str(ve.error_dict)))
 
             # add title translations to translation table
             log.info('Updating translations for dataset %s' % dataset['name'])
