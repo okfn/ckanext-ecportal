@@ -32,6 +32,14 @@ class ECPortalCommand(CkanCommand):
     summary = __doc__.split('\n')[0]
     usage = __doc__
 
+    # date formats used in data-import command
+    year = re.compile('\d\d\d\d\Z')
+    year_month = re.compile('\d\d\d\dM\d\d\Z')
+    year_month_day = re.compile('\d\d\d\dM\d\dD\d\d\Z')
+    year_quarter = re.compile('\d\d\d\dQ\d\Z')
+    year_half = re.compile('\d\d\d\dS\d\Z')
+    day_month_year = re.compile('\d\d\.\d\d\.\d\d\d\d\Z')
+
     def command(self):
         '''
         Parse command line arguments and call appropriate method.
@@ -84,42 +92,40 @@ class ECPortalCommand(CkanCommand):
             dataset['name'] = node.find('{%s}code' % namespace).text
             dataset['title'] = node.find('{%s}title[@language="en"]' % namespace).text
 
-            dataset['modified_date'] = node.find('{%s}lastUpdate' % namespace).text
+            # convert modified date to one of yyyy-mm-dd
+            modified = node.find('{%s}lastUpdate' % namespace).text
+            if modified:
+                if self.day_month_year.match(modified):
+                    dd = modified.split('.')[0]
+                    mm = modified.split('.')[1]
+                    yyyy = modified.split('.')[2]
+                dataset['modified_date'] = '%s-%s-%s' % (yyyy, mm, dd)
 
-            # temporal coverage dates need to be converted
-            #
-            # allowing only dates that fit the following forms, so any other
-            # values will be ignored
-            year = re.compile('\d\d\d\d\Z')
-            year_month = re.compile('\d\d\d\dM\d\d\Z')
-            year_month_day = re.compile('\d\d\d\dM\d\dD\d\d\Z')
-            year_quarter = re.compile('\d\d\d\dQ\d\Z')
-            year_half = re.compile('\d\d\d\dS\d\Z')
-
+            # convert temporal coverage dates to yyyy-mm-dd, yyyy-mm  or yyyy
             tc_from = node.find('{%s}dataStart' % namespace).text
             if tc_from:
-                if year.match(tc_from):
+                if self.year.match(tc_from):
                     dataset['temporal_coverage_from'] = tc_from
                     dataset['temporal_granularity'] = 'year'
-                elif year_month.match(tc_from):
+                elif self.year_month.match(tc_from):
                     yyyy = tc_from.split('M')[0]
                     mm = tc_from.split('M')[1]
                     dataset['temporal_coverage_from'] = '%s-%s' % (yyyy, mm)
                     dataset['temporal_granularity'] = 'month'
-                elif year_month_day.match(tc_from):
+                elif self.year_month_day.match(tc_from):
                     yyyy = tc_from.split('M')[0]
                     mm_dd = tc_from.split('M')[1]
                     mm = mm_dd.split('D')[0]
                     dd = mm_dd.split('D')[1]
                     dataset['temporal_coverage_from'] = '%s-%s-%s' % (yyyy, mm, dd)
                     dataset['temporal_granularity'] = 'day'
-                elif year_quarter.match(tc_from):
+                elif self.year_quarter.match(tc_from):
                     yyyy = tc_from.split('Q')[0]
                     q = int(tc_from.split('Q')[1])
                     mm = ((q - 1) * 3) + 1
                     dataset['temporal_coverage_from'] = '%s-%02d' % (yyyy, mm)
                     dataset['temporal_granularity'] = 'month'
-                elif year_half.match(tc_from):
+                elif self.year_half.match(tc_from):
                     yyyy = tc_from.split('S')[0]
                     h = int(tc_from.split('S')[1])
                     mm = ((h - 1) * 6) + 1
@@ -128,24 +134,24 @@ class ECPortalCommand(CkanCommand):
 
             tc_to = node.find('{%s}dataEnd' % namespace).text
             if tc_to:
-                if year.match(tc_to):
+                if self.year.match(tc_to):
                     dataset['temporal_coverage_to'] = tc_to
-                elif year_month.match(tc_to):
+                elif self.year_month.match(tc_to):
                     yyyy = tc_to.split('M')[0]
                     mm = tc_to.split('M')[1]
                     dataset['temporal_coverage_to'] = '%s-%s' % (yyyy, mm)
-                elif year_month_day.match(tc_to):
+                elif self.year_month_day.match(tc_to):
                     yyyy = tc_to.split('M')[0]
                     mm_dd = tc_to.split('M')[1]
                     mm = mm_dd.split('D')[0]
                     dd = mm_dd.split('D')[1]
                     dataset['temporal_coverage_to'] = '%s-%s-%s' % (yyyy, mm, dd)
-                elif year_quarter.match(tc_to):
+                elif self.year_quarter.match(tc_to):
                     yyyy = tc_to.split('Q')[0]
                     q = int(tc_to.split('Q')[1])
                     mm = ((q - 1) * 3) + 1
                     dataset['temporal_coverage_to'] = '%s-%02d' % (yyyy, mm)
-                elif year_half.match(tc_to):
+                elif self.year_half.match(tc_to):
                     yyyy = tc_to.split('S')[0]
                     h = int(tc_to.split('S')[1])
                     mm = ((h - 1) * 6) + 1
