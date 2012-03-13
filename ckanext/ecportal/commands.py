@@ -4,7 +4,7 @@ import json
 import urllib
 import xml.etree.ElementTree as ET
 from ckan import model
-from ckan.logic import get_action, NotFound
+from ckan.logic import get_action, NotFound, ValidationError
 from ckan.lib.cli import CkanCommand
 import forms
 import field_values
@@ -17,12 +17,13 @@ class ECPortalCommand(CkanCommand):
     '''
     Commands:
 
-        paster ecportal import-data <data> -c <config>
+        paster ecportal import-data <data> <user> -c <config>
         paster ecportal import-publishers <translations> <structure> -c <config>
         paster ecportal create-geo-vocab -c <config>
 
     Where:
         <data> = path to XML file (format of the Eurostat bulk import metadata file)
+        <user> = perform actions as this CKAN user (name)
         <translations> = path to translations.json
         <structure> = path to structure.json
         <config> = path to your ckan config file
@@ -40,6 +41,10 @@ class ECPortalCommand(CkanCommand):
     year_half = re.compile('\d\d\d\dS\d\Z')
     day_month_year = re.compile('\d\d\.\d\d\.\d\d\d\d\Z')
 
+    # user name to perform actions as
+    # if not specified, will use the instance site_user
+    user_name = None
+
     def command(self):
         '''
         Parse command line arguments and call appropriate method.
@@ -52,10 +57,12 @@ class ECPortalCommand(CkanCommand):
         self._load_config()
 
         if cmd == 'import-data':
-            if not len(self.args) == 2:
+            if not len(self.args) in [2, 3]:
                 print ECPortalCommand.__doc__
                 return
             data = self.args[1]
+            if len(self.args) == 3:
+                self.user_name = self.args[2]
 
             if 'http://' in data:
                 self.import_data(urllib.ulropen(data))
@@ -159,11 +166,17 @@ class ECPortalCommand(CkanCommand):
 
             dataset['url'] = node.find('{%s}metadata' % namespace).text
 
+            # add themes as extras
+            dataset['extras'] = []
             themes = [n.find('{%s}title[@language="en"]' % namespace).text
                       for n in parents[1:]]
             for n, theme in enumerate(themes):
-                dataset['theme%d' % (n + 1)] = theme
+                dataset['extras'].append({
+                    'key': u'theme%d' % (n + 1),
+                    'value': unicode(theme)
+                })
 
+            # add resources
             dataset['resources'] = []
             resources = node.findall('{%s}downloadLink' % namespace)
             for resource in resources:
@@ -172,12 +185,18 @@ class ECPortalCommand(CkanCommand):
                     'format': resource.attrib['format']
                 })
 
+            # add dataset to CKAN instance
             log.info("Adding dataset: %s" % dataset['name'])
-            import pprint
-            pprint.pprint(dataset)
-            # user = get_action('get_site_user')({'model': model, 'ignore_auth': True}, {})
-            # context = {'model': model, 'session': model.Session, 'user': user['name']}
-            # get_action('package_create')(context, dataset)
+            if self.user_name:
+                context = {'model': model, 'session': model.Session,
+                           'user': self.user_name, 'extras_as_string': True}
+            else:
+                user = get_action('get_site_user')(
+                    {'model': model, 'ignore_auth': True}, {}
+                )
+                context = {'model': model, 'session': model.Session, 
+                           'user': user['name']}
+            get_action('package_create')(context, dataset)
 
             # TODO: add title translations to translation table
 
