@@ -7,7 +7,6 @@ from ckan import model
 from ckan.logic import get_action, NotFound, ValidationError
 from ckan.lib.cli import CkanCommand
 import forms
-import field_values
 
 import logging
 log = logging.getLogger()
@@ -23,13 +22,15 @@ class ECPortalCommand(CkanCommand):
 
         paster ecportal import-data <data> <user> -c <config>
         paster ecportal import-publishers <translations> <structure> -c <config>
-        paster ecportal create-geo-vocab -c <config>
+        paster ecportal create-geo-vocab <ntu translations> <ntu types> -c <config>
 
     Where:
         <data> = path to XML file (format of the Eurostat bulk import metadata file)
         <user> = perform actions as this CKAN user (name)
         <translations> = path to translations.json
         <structure> = path to structure.json
+        <ntu translations> = path to ntu_translations.json
+        <ntu types> = path to ntu_types.json
         <config> = path to your ckan config file
 
     The commands should be run from the ckanext-ecportal directory.
@@ -68,6 +69,7 @@ class ECPortalCommand(CkanCommand):
             if not len(self.args) in [2, 3]:
                 print ECPortalCommand.__doc__
                 return
+
             data = self.args[1]
             if len(self.args) == 3:
                 self.user_name = self.args[2]
@@ -81,6 +83,7 @@ class ECPortalCommand(CkanCommand):
             if not len(self.args) == 3:
                 print ECPortalCommand.__doc__
                 return
+
             translations_path = self.args[1]
             structure_path = self.args[2]
 
@@ -96,7 +99,23 @@ class ECPortalCommand(CkanCommand):
                 )
 
         elif cmd == 'create-geo-vocab':
-            self.create_geo_vocab()
+            if not len(self.args) == 3:
+                print ECPortalCommand.__doc__
+                return
+
+            translations_path = self.args[1]
+            types_path = self.args[2]
+
+            if os.path.isfile(translations_path) and \
+               os.path.isfile(types_path):
+                with open(translations_path, 'r') as tr:
+                    with open(types_path, 'r') as ty:
+                        self.create_geo_vocab(json.loads(tr.read()),
+                                              json.loads(ty.read()))
+            else:
+                log.error('Could not open files %s and %s' %
+                    (translations_path, types_path)
+                )
 
         else:
             log.error('Command "%s" not recognized' % (cmd,))
@@ -411,20 +430,83 @@ class ECPortalCommand(CkanCommand):
             context, {'data': term_translations}
         )
 
-    def create_geo_vocab(self):
-        log.info('Creating vocabulary for geographical coverage')
-        user = get_action('get_site_user')({'model': model, 'ignore_auth': True}, {})
-        context = {'model': model, 'session': model.Session, 'user': user['name']}
+    def _get_countries(self, translations):
+        '''
+        Return a list of the JSON dicts in the translations dict that refer
+        to countries.
+        '''
+        bindings = translations['results']['bindings']
+        type1 = 'http://publications.europa.eu/resource/authority/ntu/type/1'
+        return [b for b in bindings if b['t']['value'] == type1]
 
+    def _get_country_codes(self, countries):
+        codes = set([u'EU27'])
+        for c in countries:
+            codes.add(c['s']['value'].split('/')[-1].upper())
+        return list(codes)
+
+    def _get_name_translations(self, country_code, countries):
+        '''
+        Return all translations of the full name of country_code.
+        '''
+        name_translations = {}
+        for c in countries:
+            if c['s']['value'].split('/')[-1].upper() == country_code:
+                lang = c['lang']['value'].split('/')[-1].lower()
+                name_translations[lang] = c['f']['value']
+        return name_translations
+
+    def _lang_uri_to_code(self, uri):
+        '''
+        Convert language URIs in ntu_translations.json to 2 letter
+        language codes.
+        '''
+        return ''
+
+    def create_geo_vocab(self, translations, types):
+        context = {'model': model, 'session': model.Session,
+                   'user': self.user_name}
         try:
-            data = {'id': forms.GEO_VOCAB_NAME}
-            get_action('vocabulary_show')(context, data)
-            log.error('Vocabulary %s already exists.' % forms.GEO_VOCAB_NAME)
-        except NotFound:
-            data = {'name': forms.GEO_VOCAB_NAME}
-            vocab = get_action('vocabulary_create')(context, data)
-            for country_code in field_values.geographical_coverage:
-                log.info('Adding tag %s to vocab %s' %
-                         (country_code[0], forms.GEO_VOCAB_NAME))
-                data = {'name': country_code[0], 'vocabulary_id': vocab['id']}
-                get_action('tag_create')(context, data)
+            log.info('Creating vocabulary "%s"' % forms.GEO_VOCAB_NAME)
+            vocab = get_action('vocabulary_create')(
+                context, {'name': forms.GEO_VOCAB_NAME}
+            )
+        except ValidationError, ve:
+            # ignore errors about the vocab already existing
+            # if it's a different error, reraise
+            if not 'name is already in use' in str(ve.error_dict):
+                raise ve
+            log.info('Vocabulary "%s" already exists' % forms.GEO_VOCAB_NAME)
+            vocab = get_action('vocabulary_show')(
+                context, {'id': forms.GEO_VOCAB_NAME}
+            )
+
+        countries = self._get_countries(translations)
+        country_codes = self._get_country_codes(countries)
+
+        for country_code in self._get_country_codes(countries):
+            # add tag
+            try:
+                log.info('Adding tag "%s" to vocab "%s"' %
+                         (country_code, forms.GEO_VOCAB_NAME))
+                tag_data = {'name': country_code, 'vocabulary_id': vocab['id']}
+                get_action('tag_create')(context, tag_data)
+            except ValidationError, ve:
+                # ignore errors about the tag already belong to the vocab
+                # if it's a different error, reraise
+                if not 'already belongs to vocabulary' in str(ve.error_dict):
+                    raise ve
+                log.info('Tag "%s" already belongs to vocab "%s"' %
+                         (country_code, forms.GEO_VOCAB_NAME))
+
+            # no translations for 'EU27'
+            if country_code == 'EU27':
+                continue
+
+            # get all translations of the country name
+            name_translations = self._get_name_translations(country_code, countries)
+            name = name_translations['eng']
+
+            # TODO: add to list of translations
+
+        # TODO: add additional translations from types dict
