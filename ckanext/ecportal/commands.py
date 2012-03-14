@@ -456,12 +456,53 @@ class ECPortalCommand(CkanCommand):
                 name_translations[lang] = c['f']['value']
         return name_translations
 
-    def _lang_uri_to_code(self, uri):
+    def _lang_code_convert(self, lang):
         '''
-        Convert language URIs in ntu_translations.json to 2 letter
-        language codes.
+        Convert 3 letter language codes (ISO 639-2) from URIs in ntu_translations.json
+        to 2 letter language codes (ISO 639-1).
         '''
-        return ''
+        language_codes = {
+            'eng': u'en',
+            'fra': u'fr',
+            'deu': u'de',
+            'spa': u'es',
+            'ita': u'it',
+            'roh': u'rm',
+            'dan': u'da',
+            'ron': u'ro',
+            'por': u'pt',
+            'gle': u'ga',
+            'pol': u'pl',
+            'nld': u'nl',
+            'cat': u'ca',
+            'mkd': u'mk',
+            'ell': u'el',
+            'hrv': u'hr',
+            'swe': u'sv',
+            'ukr': u'uk',
+            'lit': u'lt',
+            'fin': u'fi',
+            'tur': u'tr',
+            'eus': u'eu',
+            'hun': u'hu',
+            'isl': u'is',
+            'sqi': u'sq',
+            'est': u'et',
+            'ces': u'cs',
+            'fao': u'fo',
+            'bul': u'bg',
+            'rus': u'ru',
+            'lav': u'lv',
+            'nor': u'no',
+            'bel': u'be',
+            'slv': u'sl',
+            'bos': u'bs',
+            'glg': u'gl',
+            'srp': u'sr',
+            'mlt': u'mt',
+            'slk': u'sk'
+        }
+        return language_codes[lang]
 
     def create_geo_vocab(self, translations, types):
         context = {'model': model, 'session': model.Session,
@@ -482,7 +523,7 @@ class ECPortalCommand(CkanCommand):
             )
 
         countries = self._get_countries(translations)
-        country_codes = self._get_country_codes(countries)
+        term_translations = []
 
         for country_code in self._get_country_codes(countries):
             # add tag
@@ -505,8 +546,20 @@ class ECPortalCommand(CkanCommand):
 
             # get all translations of the country name
             name_translations = self._get_name_translations(country_code, countries)
-            name = name_translations['eng']
-
-            # TODO: add to list of translations
+            for name in name_translations:
+                try:
+                    term_translations.append({
+                        'term': country_code,
+                        'term_translation': name_translations[name],
+                        'lang_code': self._lang_code_convert(name)
+                    })
+                except KeyError:
+                    log.info('No language code found for lang "%s"' % name)
 
         # TODO: add additional translations from types dict
+
+        # save translations
+        log.info('Adding translations')
+        get_action('term_translation_update_many')(
+            context, {'data': term_translations}
+        )
