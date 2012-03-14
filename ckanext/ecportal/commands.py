@@ -13,6 +13,10 @@ import logging
 log = logging.getLogger()
 
 
+class InvalidDateFormat(Exception):
+    pass
+
+
 class ECPortalCommand(CkanCommand):
     '''
     Commands:
@@ -97,127 +101,138 @@ class ECPortalCommand(CkanCommand):
         else:
             log.error('Command "%s" not recognized' % (cmd,))
 
+    def _temporal_granularity(self, isodate):
+        '''
+        Return the granularity (string) of isodate: year, month or day.
+        '''
+        if len(isodate) == 4:
+            return 'year'
+        elif len(isodate) == 7:
+            return 'month'
+        elif len(isodate) == 10:
+            return 'day'
+        else:
+            raise InvalidDateFormat
+
+    def _isodate(self, date):
+        '''
+        Return a unicode string consisting of date converted to ISO 8601 format
+        (YYYY-MM-DD, YYYY-MM or YYYY).
+        '''
+        if not date:
+            return None
+
+        isodate = None
+
+        if self.day_month_year.match(date):
+            dd = date.split('.')[0]
+            mm = date.split('.')[1]
+            yyyy = date.split('.')[2]
+            isodate = u'%s-%s-%s' % (yyyy, mm, dd)
+        elif self.year.match(date):
+            isodate = unicode(date)
+        elif self.year_month.match(date):
+            yyyy = date.split('M')[0]
+            mm = date.split('M')[1]
+            isodate = u'%s-%s' % (yyyy, mm)
+        elif self.year_month_day.match(date):
+            yyyy = date.split('M')[0]
+            mm_dd = date.split('M')[1]
+            mm = mm_dd.split('D')[0]
+            dd = mm_dd.split('D')[1]
+            isodate = u'%s-%s-%s' % (yyyy, mm, dd)
+        elif self.year_quarter.match(date):
+            yyyy = date.split('Q')[0]
+            q = int(date.split('Q')[1])
+            mm = ((q - 1) * 3) + 1
+            isodate = u'%s-%02d' % (yyyy, mm)
+        elif self.year_half.match(date):
+            yyyy = date.split('S')[0]
+            h = int(date.split('S')[1])
+            mm = ((h - 1) * 6) + 1
+            isodate = u'%s-%02d' % (yyyy, mm)
+
+        return isodate
+
+    def _import_dataset(self, node, parents, namespace=''):
+        '''
+        From a leaf node in the Eurostat metadata, create and add
+        a CKAN dataset.
+        '''
+        dataset = {}
+        dataset['name'] = unicode(node.find('{%s}code' % namespace).text)
+        dataset['title'] = unicode(node.find('{%s}title[@language="en"]' % namespace).text)
+        dataset['license_id'] = u'ec-eurostat'
+        dataset['published_by'] = u'estat'
+
+        # modified date
+        modified = self._isodate(node.find('{%s}lastUpdate' % namespace).text)
+        if modified:
+            dataset['modified_date'] = modified
+
+        # temporal coverage and granularity
+        tc_from = self._isodate(node.find('{%s}dataStart' % namespace).text)
+        if tc_from:
+            dataset['temporal_coverage_from'] = tc_from
+            dataset['temporal_granularity'] = self._temporal_granularity(tc_from)
+        tc_to = self._isodate(node.find('{%s}dataEnd' % namespace).text)
+        if tc_to:
+            dataset['temporal_coverage_to'] = tc_to
+
+        url = node.find('{%s}metadata' % namespace).text
+        if url:
+            dataset['url'] = unicode(url)
+
+        # themes as extras
+        dataset['extras'] = []
+        themes = [n.find('{%s}title[@language="en"]' % namespace).text
+                  for n in parents[1:]]
+        for n, theme in enumerate(themes):
+            dataset['extras'].append({
+                'key': u'theme%d' % (n + 1),
+                'value': unicode(theme)
+            })
+
+        # add resources
+        dataset['resources'] = []
+        resources = node.findall('{%s}downloadLink' % namespace)
+        for resource in resources:
+            dataset['resources'].append({
+                'url': unicode(resource.text),
+                'format': unicode(resource.attrib['format'])
+            })
+
+        # add dataset to CKAN instance
+        log.info('Adding dataset: %s' % dataset['name'])
+        context = {'model': model, 'session': model.Session,
+                    'user': self.user_name, 'extras_as_string': True}
+        try:
+            get_action('package_create')(context, dataset)
+        except ValidationError, ve:
+            log.error('Could not add dataset %s: %s' % 
+                      (dataset['name'], str(ve.error_dict)))
+
+        # add title translations to translation table
+        log.info('Updating translations for dataset %s' % dataset['name'])
+        translations = []
+
+        for lang in self.data_import_langs:
+            lang_node = node.find('{%s}title[@language="%s"]' % (namespace, lang))
+            if lang_node is not None:
+                translations.append({
+                    'term': dataset['title'],
+                    'term_translation': unicode(lang_node.text),
+                    'lang_code': lang
+                })
+
+        if translations:
+            get_action('term_translation_update_many')(
+                context, {'data': translations}
+            )
+
     def _import_data_node(self, node, parents, namespace=''):
         if node.tag == ('{%s}leaf' % namespace):
-            dataset = {}
-            dataset['name'] = unicode(node.find('{%s}code' % namespace).text)
-            dataset['title'] = unicode(node.find('{%s}title[@language="en"]' % namespace).text)
-            dataset['license_id'] = u'ec-eurostat'
-            dataset['published_by'] = u'estat'
-
-            # convert modified date to one of yyyy-mm-dd
-            modified = node.find('{%s}lastUpdate' % namespace).text
-            if modified:
-                if self.day_month_year.match(modified):
-                    dd = modified.split('.')[0]
-                    mm = modified.split('.')[1]
-                    yyyy = modified.split('.')[2]
-                dataset['modified_date'] = u'%s-%s-%s' % (yyyy, mm, dd)
-
-            # convert temporal coverage dates to yyyy-mm-dd, yyyy-mm  or yyyy
-            tc_from = node.find('{%s}dataStart' % namespace).text
-            if tc_from:
-                if self.year.match(tc_from):
-                    dataset['temporal_coverage_from'] = unicode(tc_from)
-                    dataset['temporal_granularity'] = u'year'
-                elif self.year_month.match(tc_from):
-                    yyyy = tc_from.split('M')[0]
-                    mm = tc_from.split('M')[1]
-                    dataset['temporal_coverage_from'] = u'%s-%s' % (yyyy, mm)
-                    dataset['temporal_granularity'] = u'month'
-                elif self.year_month_day.match(tc_from):
-                    yyyy = tc_from.split('M')[0]
-                    mm_dd = tc_from.split('M')[1]
-                    mm = mm_dd.split('D')[0]
-                    dd = mm_dd.split('D')[1]
-                    dataset['temporal_coverage_from'] = u'%s-%s-%s' % (yyyy, mm, dd)
-                    dataset['temporal_granularity'] = u'day'
-                elif self.year_quarter.match(tc_from):
-                    yyyy = tc_from.split('Q')[0]
-                    q = int(tc_from.split('Q')[1])
-                    mm = ((q - 1) * 3) + 1
-                    dataset['temporal_coverage_from'] = u'%s-%02d' % (yyyy, mm)
-                    dataset['temporal_granularity'] = u'month'
-                elif self.year_half.match(tc_from):
-                    yyyy = tc_from.split('S')[0]
-                    h = int(tc_from.split('S')[1])
-                    mm = ((h - 1) * 6) + 1
-                    dataset['temporal_coverage_from'] = u'%s-%02d' % (yyyy, mm)
-                    dataset['temporal_granularity'] = u'month'
-
-            tc_to = node.find('{%s}dataEnd' % namespace).text
-            if tc_to:
-                if self.year.match(tc_to):
-                    dataset['temporal_coverage_to'] = unicode(tc_to)
-                elif self.year_month.match(tc_to):
-                    yyyy = tc_to.split('M')[0]
-                    mm = tc_to.split('M')[1]
-                    dataset['temporal_coverage_to'] = u'%s-%s' % (yyyy, mm)
-                elif self.year_month_day.match(tc_to):
-                    yyyy = tc_to.split('M')[0]
-                    mm_dd = tc_to.split('M')[1]
-                    mm = mm_dd.split('D')[0]
-                    dd = mm_dd.split('D')[1]
-                    dataset['temporal_coverage_to'] = u'%s-%s-%s' % (yyyy, mm, dd)
-                elif self.year_quarter.match(tc_to):
-                    yyyy = tc_to.split('Q')[0]
-                    q = int(tc_to.split('Q')[1])
-                    mm = ((q - 1) * 3) + 1
-                    dataset['temporal_coverage_to'] = u'%s-%02d' % (yyyy, mm)
-                elif self.year_half.match(tc_to):
-                    yyyy = tc_to.split('S')[0]
-                    h = int(tc_to.split('S')[1])
-                    mm = ((h - 1) * 6) + 1
-                    dataset['temporal_coverage_to'] = u'%s-%02d' % (yyyy, mm)
-
-            dataset['url'] = unicode(node.find('{%s}metadata' % namespace).text)
-
-            # add themes as extras
-            dataset['extras'] = []
-            themes = [n.find('{%s}title[@language="en"]' % namespace).text
-                      for n in parents[1:]]
-            for n, theme in enumerate(themes):
-                dataset['extras'].append({
-                    'key': u'theme%d' % (n + 1),
-                    'value': unicode(theme)
-                })
-
-            # add resources
-            dataset['resources'] = []
-            resources = node.findall('{%s}downloadLink' % namespace)
-            for resource in resources:
-                dataset['resources'].append({
-                    'url': unicode(resource.text),
-                    'format': unicode(resource.attrib['format'])
-                })
-
-            # add dataset to CKAN instance
-            log.info('Adding dataset: %s' % dataset['name'])
-            context = {'model': model, 'session': model.Session,
-                        'user': self.user_name, 'extras_as_string': True}
-            try:
-                get_action('package_create')(context, dataset)
-            except ValidationError, ve:
-                log.error('Could not add dataset %s: %s' % 
-                          (dataset['name'], str(ve.error_dict)))
-
-            # add title translations to translation table
-            log.info('Updating translations for dataset %s' % dataset['name'])
-            translations = []
-
-            for lang in self.data_import_langs:
-                lang_node = node.find('{%s}title[@language="%s"]' % (namespace, lang))
-                if lang_node is not None:
-                    translations.append({
-                        'term': dataset['title'],
-                        'term_translation': unicode(lang_node.text),
-                        'lang_code': lang
-                    })
-
-            if translations:
-                get_action('term_translation_update_many')(
-                    context, {'data': translations}
-                )
+            self._import_dataset(node, parents, namespace)
 
         elif node.tag == ('{%s}branch' % namespace):
             # add title translations to translation table
