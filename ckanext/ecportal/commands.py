@@ -504,7 +504,7 @@ class ECPortalCommand(CkanCommand):
         }
         return language_codes[lang]
 
-    def create_geo_vocab(self, translations, types):
+    def create_geo_vocab(self, ntu_translations, ntu_types):
         context = {'model': model, 'session': model.Session,
                    'user': self.user_name}
         try:
@@ -522,7 +522,7 @@ class ECPortalCommand(CkanCommand):
                 context, {'id': forms.GEO_VOCAB_NAME}
             )
 
-        countries = self._get_countries(translations)
+        countries = self._get_countries(ntu_translations)
         term_translations = []
 
         for country_code in self._get_country_codes(countries):
@@ -556,7 +556,19 @@ class ECPortalCommand(CkanCommand):
                 except KeyError:
                     log.info('No language code found for lang "%s"' % name)
 
-        # TODO: add additional translations from types dict
+        # add additional translations from ntu_types dict
+        type_translations = self._get_countries(ntu_types)
+        # en_tt is just 'Country' for now, but this is here in case we want
+        # to import additional types and translations later
+        en_tt = [tt['label']['value'] for tt in type_translations
+                 if tt['label']['xml:lang'] == 'en'][0]
+        for tt in type_translations:
+            if not tt['label']['xml:lang'] == 'en':
+                term_translations.append({
+                    'term': unicode(en_tt),
+                    'term_translation': unicode(tt['label']['value']),
+                    'lang_code': unicode(tt['label']['xml:lang'])
+                })
 
         # save translations
         log.info('Adding translations')
