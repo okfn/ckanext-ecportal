@@ -17,8 +17,7 @@
     <dct:identifier>${c.pkg_dict['name']}</dct:identifier>
     <dct:dataDictionary>${ g.site_url + h.url_for(controller='package',action='read',id=c.pkg_dict['name'])}</dct:dataDictionary>
     <dct:description>${c.pkg_dict['notes']}</dct:description>
-    <dct:publisher py:if="len(c.pkg_dict.get('groups',''))"> 0">${c.pkg_dict['groups']['title']}</dct:publisher>
-
+    <dct:publisher py:if="c.pkg_dict.get('groups','')">${c.pkg_dict['groups'][0]['title']}</dct:publisher>
     <py:for each="rsc_dict in c.pkg_dict['resources']">
         <dcat:distribution>
             <dcat:Distribution>
@@ -28,6 +27,10 @@
             </dcat:Distribution>
         </dcat:distribution>
     </py:for>
+    <py:for each="tag_dict in c.pkg_dict['tags']">
+        <dcat:keyword>${ tag_dict["name"] }</dcat:keyword>
+    </py:for>
+
     <!-- Done to here -->
 
 
@@ -37,15 +40,8 @@
         <foaf:mbox  py:if="c.pkg_dict.get('maintainer_email', None)" rdf:resource="mailto:${c.pkg_dict['author_email']}"/>
       </rdf:Description>
     </dct:creator>
-    <dct:contributor py:if="c.pkg_dict.get('maintainer', None)">
-      <rdf:Description>
-        <foaf:name>${ c.pkg_dict['maintainer'] }</foaf:name>
-        <foaf:mbox  py:if="c.pkg_dict.get('maintainer_email', None)" rdf:resource="mailto:${c.pkg_dict['maintainer_email']}"/>
-      </rdf:Description>
-    </dct:contributor>
-    <py:for each="tag_dict in c.pkg_dict['tags']">
-        <dcat:keyword>${ tag_dict["name"] }</dcat:keyword>
-    </py:for>
+
+
     <dct:rights py:if="c.pkg_dict.get('license_url', None)" rdf:resource="${c.pkg_dict['license_url']}"/>
     <py:for each="extra_dict in c.pkg_dict.get('extras',None)">
         <dct:relation py:if="not extra_dict['key'] in c.additional_extras">
