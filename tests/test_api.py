@@ -32,7 +32,7 @@ class TestAPI(WsgiAppCase):
         # TODO: update this when package_show is updated to go through schema
         # validators/converters, the dataset should have keywords instead
         # of tags here
-        tags = [t['name'] for t in dataset['tags']]
+        tags = [t['name'] for t in dataset['keywords']]
         assert len(tags) == 1
         assert tag in tags
 
@@ -44,10 +44,11 @@ class TestAPI(WsgiAppCase):
         # TODO: update this when package_show is updated to go through schema
         # validators/converters, the dataset should have keywords instead
         # of tags here
+        old_tags = dataset.pop('keywords')
+        new_tags = old_tags[:]
         new_tag = u'test-keyword'
-        dataset['keywords'] = dataset['tags']
-        old_tags = dataset.pop('tags')
-        dataset['keywords'].append({'name': new_tag})
+        new_tags.append({'name': new_tag})
+        dataset['keywords'] = new_tags 
 
         params = json.dumps(dataset)
         response = self.app.post('/api/action/package_update', params=params,
@@ -55,7 +56,7 @@ class TestAPI(WsgiAppCase):
         updated_dataset = json.loads(response.body)['result']
 
         old_tag_names = [tag['name'] for tag in old_tags]
-        new_tag_names = [tag['name'] for tag in updated_dataset['tags']]
+        new_tag_names = [tag['name'] for tag in updated_dataset['keywords']]
 
         for tag in old_tag_names:
             assert tag in new_tag_names
