@@ -13,11 +13,11 @@ To run the tests with sqlite, from the CKAN directory run:
 
 ::
 
-    nosetests --ckan --with-pylons=../ckanext-eportal/test.ini ../ckanext-ecportal/tests
+    nosetests --ckan --with-pylons=../ckanext-ecportal/test.ini ../ckanext-ecportal/tests
 
 
 Or to run the postgres tests:
 
 ::
 
-    nosetests --ckan --with-pylons=../ckanext-eportal/test-core.ini ../ckanext-ecportal/tests
+    nosetests --ckan --with-pylons=../ckanext-ecportal/test-core.ini ../ckanext-ecportal/tests

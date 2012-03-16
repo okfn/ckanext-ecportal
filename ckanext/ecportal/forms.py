@@ -159,6 +159,7 @@ class ECPortalDatasetForm(SingletonPlugin):
             'history_note': [convert_from_extras, ignore_missing],
             'scope_note': [convert_from_extras, ignore_missing],
             'example_note': [convert_from_extras, ignore_missing],
+            '__after': [duplicate_extras_key, rename('tags', 'keywords')],
         })
 
         schema['groups'].update({
