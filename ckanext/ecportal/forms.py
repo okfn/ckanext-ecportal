@@ -34,6 +34,22 @@ class ECPortalDatasetForm(SingletonPlugin):
     def package_types(self):
         return ['dataset']
 
+    def new_template(self):
+        return 'package/new.html'
+
+    def comments_template(self):
+        return 'package/comments.html'
+
+    def search_template(self):
+        return 'package/search.html'
+
+    def read_template(self):
+        return 'package/read.html'
+
+    def history_template(self):
+        return 'package/history.html'
+
+
     def setup_template_variables(self, context, data_dict=None, package_type=None):
         c.licences = model.Package.get_license_options()
         c.type_of_dataset = type_of_dataset
@@ -143,6 +159,10 @@ class ECPortalDatasetForm(SingletonPlugin):
             'history_note': [convert_from_extras, ignore_missing],
             'scope_note': [convert_from_extras, ignore_missing],
             'example_note': [convert_from_extras, ignore_missing],
+        })
+
+        schema['groups'].update({
+            'title': [ignore_missing]
         })
 
         # Remove isodate validator
