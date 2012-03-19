@@ -1,4 +1,5 @@
 import json
+import pylons
 from ckan.lib.base import c, model
 from ckan.authz import Authorizer
 from ckan.lib.navl.validators import ignore, ignore_missing, keep_extras,\
@@ -60,8 +61,32 @@ class ECPortalDatasetForm(SingletonPlugin):
         groups = get_action('group_list')(context, {'all_fields': True})
         c.publishers = [(g['title'], g['name']) for g in groups if g.get('type') == u'publisher']
 
+        # get geo tag translations (full names)
+        # eg: 'UK' translates to 'United Kingdom' in English
         try:
-            c.geographical_coverage = get_action('tag_list')(context, {'vocabulary_id': GEO_VOCAB_NAME})
+            ckan_lang = pylons.request.environ['CKAN_LANG']
+            ckan_lang_fallback = pylons.config.get('ckan.locale_default', 'en')
+            geo_tags = get_action('tag_list')(context, {'vocabulary_id': GEO_VOCAB_NAME})
+
+            geographical_coverage = []
+            for geo_tag in geo_tags:
+                # try to get translation in current language
+                translation = get_action('term_translation_show')(
+                    {'model': model},
+                    {'term': geo_tag, 'lang_code': ckan_lang}
+                )
+                # try to use fallback language if no translation found
+                if not translation:
+                    translation = get_action('term_translation_show')(
+                        {'model': model},
+                        {'term': geo_tag, 'lang_code': ckan_lang_fallback}
+                    )
+
+                tag_translation = translation[0]['term_translation'] if translation else geo_tag
+                geographical_coverage.append((geo_tag, tag_translation))
+
+            c.geographical_coverage = geographical_coverage
+
         except NotFound:
             c.geographical_coverage = []
 
