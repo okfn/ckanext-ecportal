@@ -184,10 +184,10 @@
     <dt><label class="field_opt" for="geographical_coverage">Geographical Coverage</label></dt>
     <dd class="tags-field">
       <select id="geographical_coverage" class="chzn-select" name="geographical_coverage" multiple="multiple" style="width: 30em;">
-        <py:for each="tag in c.geographical_coverage">
+        <py:for each="tag_name, tag_translation in c.geographical_coverage">
           <py:choose test="">
-          <option py:when="tag in data.get('geographical_coverage', [])" selected="selected" value="${tag}">${tag}</option>
-          <option py:otherwise="" value="${tag}">${tag}</option>
+          <option py:when="tag_name in data.get('geographical_coverage', [])" selected="selected" value="${tag_name}">${tag_translation}</option>
+          <option py:otherwise="" value="${tag_name}">${tag_translation}</option>
           </py:choose>
         </py:for>
       </select>
