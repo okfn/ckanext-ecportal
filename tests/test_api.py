@@ -29,9 +29,6 @@ class TestAPI(WsgiAppCase):
                                  extra_environ={'Authorization': 'tester'})
         dataset = json.loads(response.body)['result']
 
-        # TODO: update this when package_show is updated to go through schema
-        # validators/converters, the dataset should have keywords instead
-        # of tags here
         tags = [t['name'] for t in dataset['keywords']]
         assert len(tags) == 1
         assert tag in tags
@@ -41,14 +38,11 @@ class TestAPI(WsgiAppCase):
         response = self.app.post('/api/action/package_show', params=params)
         dataset = json.loads(response.body)['result']
 
-        # TODO: update this when package_show is updated to go through schema
-        # validators/converters, the dataset should have keywords instead
-        # of tags here
         old_tags = dataset.pop('keywords')
         new_tags = old_tags[:]
         new_tag = u'test-keyword'
         new_tags.append({'name': new_tag})
-        dataset['keywords'] = new_tags 
+        dataset['keywords'] = new_tags
 
         params = json.dumps(dataset)
         response = self.app.post('/api/action/package_update', params=params,
