@@ -30,10 +30,13 @@
     <py:for each="tag_dict in c.pkg_dict['tags']">
         <dcat:keyword>${ tag_dict["name"] }</dcat:keyword>
     </py:for>
+    <dct:temporal>
+        <py:if test="pkg_dict.get('temporal_coverage_from', '')">start=${data.get('temporal_coverage_from', '')};</py:if><py:if test="pkg_dict.get('temporal_coverage_to', '')">end=${data.get('temporal_coverage_to', '')};</py:if>
+    </dct:temporal>
+    <dcat:granularity></dcat:granularity>
+    <dct:spatial></dct:spatial>
 
     <!-- Done to here -->
-
-
     <dct:creator  py:if="c.pkg_dict.get('author', None)">
       <rdf:Description>
         <foaf:name>${ c.pkg_dict['author'] }</foaf:name>
