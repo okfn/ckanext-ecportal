@@ -1,7 +1,8 @@
 import json
 from ckan.lib.base import c, model
 from ckan.authz import Authorizer
-from ckan.lib.navl.validators import ignore, ignore_missing, keep_extras, empty
+from ckan.lib.navl.validators import ignore, ignore_missing, keep_extras,\
+    empty, not_empty
 from ckan.logic import get_action, check_access
 from ckan.logic import NotFound, NotAuthorized
 from ckan.logic.converters import convert_from_extras
@@ -48,7 +49,6 @@ class ECPortalDatasetForm(SingletonPlugin):
 
     def history_template(self):
         return 'package/history.html'
-
 
     def setup_template_variables(self, context, data_dict=None, package_type=None):
         c.licences = model.Package.get_license_options()
@@ -142,7 +142,6 @@ class ECPortalDatasetForm(SingletonPlugin):
             'tags': {
                 '__extras': [keep_extras, free_tags_only]
             },
-
             'type_of_dataset': [convert_from_extras, ignore_missing],
             'published_by': [convert_from_extras, ignore_missing],
             'release_date': [convert_from_extras, ignore_missing],
@@ -163,6 +162,7 @@ class ECPortalDatasetForm(SingletonPlugin):
         })
 
         schema['groups'].update({
+            'name': [not_empty, unicode],
             'title': [ignore_missing]
         })
 
