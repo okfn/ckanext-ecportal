@@ -1,9 +1,11 @@
 import os
+import sys
 import re
 import json
 import urllib
 import lxml.etree
-from ckan import model
+import ckan
+import ckan.model as model
 from ckan.logic import get_action, NotFound, ValidationError
 from ckan.lib.cli import CkanCommand
 import forms
@@ -23,10 +25,12 @@ class ECPortalCommand(CkanCommand):
         paster ecportal import-data <data> <user> -c <config>
         paster ecportal import-publishers <translations> <structure> -c <config>
         paster ecportal create-geo-vocab <ntu translations> <ntu types> -c <config>
+        paster ecportal export-datasets <folder> -c <config>
 
     Where:
         <data> = path to XML file (format of the Eurostat bulk import metadata file)
         <user> = perform actions as this CKAN user (name)
+        <folder> = Output folder for dataset export
         <translations> = path to translations.json
         <structure> = path to structure.json
         <ntu translations> = path to ntu_translations.json
@@ -78,7 +82,11 @@ class ECPortalCommand(CkanCommand):
                 self.import_data(urllib.urlopen(data))
             else:
                 self.import_data(data)
-
+        elif cmd == 'export-datasets':
+            if not len(self.args) == 2:
+                print ECPortalCommand.__doc__
+                return
+            self.export_datasets( self.args[1] )
         elif cmd == 'import-publishers':
             if not len(self.args) == 3:
                 print ECPortalCommand.__doc__
@@ -228,7 +236,7 @@ class ECPortalCommand(CkanCommand):
         try:
             get_action('package_create')(context, dataset)
         except ValidationError, ve:
-            log.error('Could not add dataset %s: %s' % 
+            log.error('Could not add dataset %s: %s' %
                       (dataset['name'], str(ve.error_dict)))
 
         # add title translations to translation table
@@ -336,6 +344,38 @@ class ECPortalCommand(CkanCommand):
             user = get_action('get_site_user')({'model': model, 'ignore_auth': True}, {})
             context = {'model': model, 'session': model.Session, 'user': user['name']}
             get_action('package_create')(context, dataset)
+
+    def export_datasets(self, output_folder):
+        '''
+        Export datasets as RDF to an output folder.
+        '''
+        import pylons.config as config
+        import urlparse
+        import urllib2
+
+        user = get_action('get_site_user')({'model': model, 'ignore_auth': True}, {})
+        context = {'model': model, 'session': model.Session, 'user': user['name']}
+        dataset_names = get_action('package_list')(context, {})
+        for dataset_name in dataset_names:
+            dataset_dict = get_action('package_show')(context, {'id':dataset_name })
+            if not dataset_dict['state'] == 'active':
+                continue
+
+            url = ckan.lib.helpers.url_for( controller='package',
+                                                  action='read',
+                                                  id=dataset_dict['name'])
+            url = urlparse.urljoin(config['ckan.site_url'], url)
+            url = url + '.rdf'
+
+            try:
+                filename = os.path.join( output_folder, dataset_dict['name'] ) + ".rdf"
+                u = urllib2.urlopen(url)
+                with open(filename, 'wb') as f:
+                    f.write(u.read())
+                u.close()
+            except IOError, ioe:
+                sys.stderr.write( str(ioe) + "\n" )
+
 
     def import_publishers(self, translations, structure):
         '''

@@ -45,7 +45,7 @@
 </py:for>
 </py:if>
 
-  <dct:temporal py:if="c.pkg_dict.get('temporal_coverage_from', '') or pkg_dict.get('temporal_coverage_to', '') or c.temporal_granularity"><py:if test="c.pkg_dict.get('temporal_coverage_from', '')">start=${c.pkg_dict.get('temporal_coverage_from', '')};</py:if><py:if test="c.pkg_dict.get('temporal_coverage_to', '')">end=${c.pkg_dict.get('temporal_coverage_to', '')};</py:if></dct:temporal>
+  <dct:temporal py:if="c.pkg_dict.get('temporal_coverage_from', '') or c.pkg_dict.get('temporal_coverage_to', '') or c.temporal_granularity"><py:if test="c.pkg_dict.get('temporal_coverage_from', '')">start=${c.pkg_dict.get('temporal_coverage_from', '')};</py:if><py:if test="c.pkg_dict.get('temporal_coverage_to', '')">end=${c.pkg_dict.get('temporal_coverage_to', '')};</py:if></dct:temporal>
   <dcat:granularity py:if="c.pkg_dict.get('temporal_granularity','')">${c.pkg_dict['temporal_granularity']}</dcat:granularity>
 <py:if test="c.pkg_dict.get('geographical_coverage','')">
     <py:for each="tag,trans in c.pkg_dict['geographical_coverage']">
