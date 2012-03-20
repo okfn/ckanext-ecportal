@@ -9,15 +9,15 @@ CKAN EC Portal Extension
 Testing
 -------
 
-To run the tests with sqlite, from the CKAN directory run:
+To run the tests with sqlite, from the ckanext-ecportal directory run:
 
 ::
 
-    nosetests --ckan --with-pylons=../ckanext-ecportal/test.ini ../ckanext-ecportal/tests
+    nosetests --ckan --with-pylons=test.ini tests
 
 
 Or to run the postgres tests:
 
 ::
 
-    nosetests --ckan --with-pylons=../ckanext-ecportal/test-core.ini ../ckanext-ecportal/tests
+    nosetests --ckan --with-pylons=test-core.ini tests
