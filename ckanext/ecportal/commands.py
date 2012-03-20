@@ -23,6 +23,7 @@ class ECPortalCommand(CkanCommand):
         paster ecportal import-data <data> <user> -c <config>
         paster ecportal import-publishers <translations> <structure> -c <config>
         paster ecportal create-geo-vocab <ntu translations> <ntu types> -c <config>
+        paster ecportal delete-geo-vocab -c <config>
 
     Where:
         <data> = path to XML file (format of the Eurostat bulk import metadata file)
@@ -116,6 +117,9 @@ class ECPortalCommand(CkanCommand):
                 log.error('Could not open files %s and %s' %
                     (translations_path, types_path)
                 )
+
+        elif cmd == 'delete-geo-vocab':
+            self.delete_geo_vocab()
 
         else:
             log.error('Command "%s" not recognized' % (cmd,))
@@ -576,3 +580,12 @@ class ECPortalCommand(CkanCommand):
         get_action('term_translation_update_many')(
             context, {'data': term_translations}
         )
+
+    def delete_geo_vocab(self):
+        log.info('Deleting vocabulary "%s"' % forms.GEO_VOCAB_NAME)
+
+        context = {'model': model, 'session': model.Session, 'user': self.user_name}
+        vocab = get_action('vocabulary_show')(context, {'id': forms.GEO_VOCAB_NAME})
+        for tag in vocab.get('tags'):
+            get_action('tag_delete')(context, {'id': tag['id']})
+        get_action('vocabulary_delete')(context, {'id': vocab['id']})
