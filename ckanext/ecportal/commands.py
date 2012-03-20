@@ -500,7 +500,8 @@ class ECPortalCommand(CkanCommand):
             'glg': u'gl',
             'srp': u'sr',
             'mlt': u'mt',
-            'slk': u'sk'
+            'slk': u'sk',
+            'ltz': u'lb',
         }
         return language_codes[lang]
 
