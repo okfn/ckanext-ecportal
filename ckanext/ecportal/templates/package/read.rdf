@@ -16,14 +16,14 @@
   <dct:title>${c.pkg_dict['title']}</dct:title>
   <dct:identifier>${c.pkg_dict['name']}</dct:identifier>
   <dct:dataDictionary>${ g.site_url + h.url_for(controller='package',action='read',id=c.pkg_dict['name'])}</dct:dataDictionary>
-  <dct:description>${c.pkg_dict['notes']}</dct:description>
+  <dct:description>${c.pkg_dict.get('notes', '')}</dct:description>
   <dct:issued>${c.pkg_dict.get('release_date','')}</dct:issued>
   <dct:modified>${c.pkg_dict.get('modified_date','')}</dct:modified>
   <dct:license py:if="c.pkg_dict.get('license_url', None)" rdf:resource="${c.pkg_dict['license_url']}"/>
   <dct:publisher py:if="c.pkg_dict.get('published_by','')">${c.pkg_dict['published_by']}</dct:publisher>
 <py:if test="c.pkg_dict.get('resources', '')">
 <py:for each="rsc_dict in c.pkg_dict['resources']">
-<py:choose test="rsc_dict['resource_type'] in ['api','file.upload']">
+<py:choose test="rsc_dict.get('resource_type', '') in ['api','file.upload', '']">
 <py:when test="1">
   <dcat:distribution>
     <dcat:Distribution>

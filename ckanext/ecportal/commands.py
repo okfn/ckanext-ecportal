@@ -8,7 +8,9 @@ import ckan
 import ckan.model as model
 from ckan.logic import get_action, NotFound, ValidationError
 from ckan.lib.cli import CkanCommand
+import base64
 import forms
+import requests
 
 import logging
 log = logging.getLogger()
@@ -84,10 +86,10 @@ class ECPortalCommand(CkanCommand):
             else:
                 self.import_data(data)
         elif cmd == 'export-datasets':
-            if not len(self.args) == 2:
+            if not len(self.args) == 3:
                 print ECPortalCommand.__doc__
                 return
-            self.export_datasets( self.args[1] )
+            self.export_datasets( self.args[1], self.args[2] )
         elif cmd == 'import-publishers':
             if not len(self.args) == 3:
                 print ECPortalCommand.__doc__
@@ -349,13 +351,14 @@ class ECPortalCommand(CkanCommand):
             context = {'model': model, 'session': model.Session, 'user': user['name']}
             get_action('package_create')(context, dataset)
 
-    def export_datasets(self, output_folder):
+    def export_datasets(self, output_folder, fetch_url):
         '''
         Export datasets as RDF to an output folder.
         '''
         import pylons.config as config
         import urlparse
         import urllib2
+
 
         user = get_action('get_site_user')({'model': model, 'ignore_auth': True}, {})
         context = {'model': model, 'session': model.Session, 'user': user['name']}
@@ -368,15 +371,15 @@ class ECPortalCommand(CkanCommand):
             url = ckan.lib.helpers.url_for( controller='package',
                                                   action='read',
                                                   id=dataset_dict['name'])
-            url = urlparse.urljoin(config['ckan.site_url'], url)
-            url = url + '.rdf'
+
+            url = urlparse.urljoin(fetch_url, url[1:]) + '.rdf'
 
             try:
                 filename = os.path.join( output_folder, dataset_dict['name'] ) + ".rdf"
-                u = urllib2.urlopen(url)
+                print filename
+                r = requests.get(url, auth=('ec', 'ecportal'))
                 with open(filename, 'wb') as f:
-                    f.write(u.read())
-                u.close()
+                    f.write(r.content)
             except IOError, ioe:
                 sys.stderr.write( str(ioe) + "\n" )
 
