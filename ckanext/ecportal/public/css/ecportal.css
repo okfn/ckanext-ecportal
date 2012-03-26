@@ -11,6 +11,10 @@ textarea {
     width: 28.25em;
 }
 
+body.no-sidebar .content-outer {
+    width: 986px;
+}
+
 /****************************************************************************/
 /* Header
 /****************************************************************************/
@@ -55,12 +59,12 @@ header #services {
     width:984px;
     padding-top: 4px;
     z-index: 10;
+    font-size: 10px;
 }
 
 header #services-menu {
-    font-size: 10px;
     position: absolute;
-    right: 216px;
+    right: 225px;
     text-align: right;
     padding-top: 2px;
 }
@@ -190,7 +194,7 @@ div#banner-image-title {
 
 #path ul{
 	position:relative;
-    padding: 2px 0px 0px 10px;
+    margin-left: 10px;
 }
 	
 #path li {
@@ -277,4 +281,15 @@ body.package.edit input[type="checkbox"] {
     background: #fbe3e4;
     color: #8a1f11;
     border: 1px solid #fbc2c4;
+}
+
+/****************************************************************************/
+/* Search Page
+/****************************************************************************/
+input.search {
+    font-size: 1em;
+    padding: 0.5em 0 0.5em 0;
+}
+.dataset-search input.button {
+    margin-right: 0 !important;
 }

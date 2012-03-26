@@ -6,6 +6,8 @@
   py:strip=""
   >
 
+  <xi:include href="_util_activity_div.html" />
+
   <!--! Herein can be found generic helper methods for a whole bunch of common
         templating issues -->
 
@@ -40,7 +42,7 @@
       ${h.link_to(tag, h.url_for(controller='tag', action='read', id=tag))}
     </li>
   </ul>
- 
+
   <!--! List of users: pass in a collection of users and this renders the standard
           user listing -->
     <ul py:def="user_list(users)" class="users">
@@ -58,7 +60,7 @@
         <span class="title">
           ${h.link_to(package.title or package.name, h.url_for(controller='package', action='read', id=package.name))}
         </span>
-        
+
         <div class="search_meta">
           <py:if test="package.resources">
             <ul class="dataset_formats">
@@ -98,13 +100,12 @@
   </ul>
 
   <ul py:def="package_list_from_dict(packages)" class="datasets">
-    <li py:for="package in packages"
-        class="${'fullyopen' if (package.isopen and package.get('resources')) else None}">
+    <li py:for="package in packages">
         <div class="header">
       <span class="title">
         ${h.link_to(package.get('title') or package.get('name'), h.url_for(controller='package', action='read', id=package.get('name')))}
       </span>
-      
+
       <div class="search_meta">
         <py:if test="package.resources">
           <ul class="dataset_formats">
@@ -116,36 +117,17 @@
             </py:for>
           </ul>
         </py:if>
-        <ul class="openness">
-          <py:if test="package.isopen">
-            <li>
-              <a href="http://opendefinition.org/okd/" title="This dataset satisfies the Open Definition.">
-                  <img src="http://assets.okfn.org/images/ok_buttons/od_80x15_blue.png" alt="[Open Data]" />
-              </a>
-            </li>
-          </py:if>
-          <py:if test="not package.isopen">
-            <li>
-              <span class="closed">
-                ${h.icon('lock')} Not Openly Licensed
-              </span>
-            </li>
-          </py:if>
-        </ul>
       </div>
 		</div>
 		<div class="extract">
-			${h.markdown_extract(package.notes)}
+			${h.markdown_extract(package.get('notes', ''))}
 		</div>
-        <!--ul py:if="package.tags" class="tags">
-          <li py:for="tag in package.tags">${tag.name}</li>
-        </ul-->
     </li>
   </ul>
 
-  <!--! List of dataset groups: pass in a collection of dataset groups 
+  <!--! List of dataset groups: pass in a collection of dataset groups
         and this renders the standard group listing -->
-  <table py:def="group_list(groups)" class="groups">
+  <table class="table table-bordered table-striped table-condensed groups" py:def="group_list(groups)">
     <tr><th>Title</th><th>Number of datasets</th><th>Description</th></tr>
     <py:for each="group in groups">
     <tr>
@@ -156,22 +138,22 @@
     </py:for>
   </table>
 
-  <!--! List of dataset groups: pass in a collection of dataset groups 
+  <!--! List of dataset groups: pass in a collection of dataset groups
         and this renders the standard group listing. Same as the above, but using dictionaries -->
-  <table py:def="group_list_from_dict(groups)" class="groups">
+  <table class="table table-bordered table-striped table-condensed groups" py:def="group_list_from_dict(groups)">
     <tr><th>Title</th><th>Number of datasets</th><th>Description</th></tr>
     <py:for each="group in groups">
     <tr>
-      <td><a href="${h.url_for(controller='group', action='read', id=group['name'])}">${group['display_name']}</a></td>
+      <td><a href="${h.url_for( '%s_read' % str(group['type'])  , action='read', id=group['name'])}">${group['display_name']}</a></td>
       <td>${group['packages']}</td>
       <td>${h.truncate(group['description'], length=80, whole_word=True)}</td>
     </tr>
     </py:for>
   </table>
- 
-  <!--! List of authorization groups: pass in a collection of authorization groups and 
+
+  <!--! List of authorization groups: pass in a collection of authorization groups and
         this renders the standard group listing -->
-  <table py:def="authorization_group_list(authorization_groups)" class="authorization_groups">
+  <table class="table table-bordered table-striped table-condensed authorization_groups" py:def="authorization_group_list(authorization_groups)">
       <tr><th>Title</th><th>Number of members</th></tr>
       <py:for each="authorization_group in authorization_groups">
       <tr>
@@ -236,7 +218,7 @@
     </div>
   </div><!--! /rating-group -->
 
-  <table py:def="authz_form_table(id, roles, users, user_role_dict)">
+  <table class="table table-bordered table-striped table-condensed" py:def="authz_form_table(id, roles, users, user_role_dict)">
     <tr>
       <th> User </th>
       <py:for each="role in roles">
@@ -249,17 +231,17 @@
           ${h.linked_user(user)}
         </td>
         <py:for each="role in roles">
-          <td> 
+          <td>
             <input type="hidden" name="${ h.literal( '%s$%s' % (user,role)) }" value="submitted"/>
             <py:choose>
-              <py:when test="user_role_dict[(user,role)]"> 
-                <input type="checkbox" 
-                   name="${ h.literal( '%s$%s' % (user,role)) }" 
+              <py:when test="user_role_dict[(user,role)]">
+                <input type="checkbox"
+                   name="${ h.literal( '%s$%s' % (user,role)) }"
                    checked='checked'/>
               </py:when>
               <py:otherwise>
-                <input type="checkbox" 
-                       name="${ h.literal( '%s$%s' % (user,role)) }" 
+                <input type="checkbox"
+                       name="${ h.literal( '%s$%s' % (user,role)) }"
                        />
               </py:otherwise>
             </py:choose>
@@ -271,7 +253,7 @@
 
 <!--! Copy and paste of above table. Only difference when created was the h.linked_user for the  -->
 <!--! table rows. How to combine the two? -->
-  <table py:def="authz_form_group_table(id, roles, users, user_role_dict)">
+  <table class="table table-bordered table-striped table-condensed" py:def="authz_form_group_table(id, roles, users, user_role_dict)">
     <tr>
       <th>User Group</th>
       <py:for each="role in roles">
@@ -284,17 +266,17 @@
           ${h.linked_authorization_group(user)}
         </td>
         <py:for each="role in roles">
-          <td> 
+          <td>
             <input type="hidden" name="${ h.literal( '%s$%s' % (user,role)) }" value="submitted"/>
             <py:choose>
-              <py:when test="user_role_dict[(user,role)]"> 
-                <input type="checkbox" 
-                   name="${ h.literal( '%s$%s' % (user,role)) }" 
+              <py:when test="user_role_dict[(user,role)]">
+                <input type="checkbox"
+                   name="${ h.literal( '%s$%s' % (user,role)) }"
                    checked='checked'/>
               </py:when>
               <py:otherwise>
-                <input type="checkbox" 
-                       name="${ h.literal( '%s$%s' % (user,role)) }" 
+                <input type="checkbox"
+                       name="${ h.literal( '%s$%s' % (user,role)) }"
                        />
               </py:otherwise>
             </py:choose>
@@ -306,7 +288,7 @@
 
 
 
-  <table py:def="authz_add_table(roles)">
+  <table class="table table-bordered table-striped table-condensed" py:def="authz_add_table(roles)">
     <tr>
       <th>User</th>
       <py:for each="role in roles">
@@ -318,7 +300,7 @@
         <input type="textbox" name="new_user_name" class="autocomplete-user" />
       </td>
       <py:for each="role in roles">
-        <td> 
+        <td>
           <input type="hidden" name="${ h.literal( '%s' % role) }" value="submitted"/>
           <input type="checkbox" name="${ h.literal( '%s' % role) }"/>
         </td>
@@ -327,7 +309,7 @@
   </table>
 
   <!--! again, copy-and-paste of above, this time to attach different autocompletion -->
-  <table py:def="authz_add_group_table(roles)">
+  <table class="table table-bordered table-striped table-condensed" py:def="authz_add_group_table(roles)">
     <tr>
       <th>User Group</th>
       <py:for each="role in roles">
@@ -339,7 +321,7 @@
         <input type="textbox" name="new_user_name" class="autocomplete-authzgroup" />
       </td>
       <py:for each="role in roles">
-        <td> 
+        <td>
           <input type="hidden" name="${ h.literal( '%s' % role) }" value="submitted"/>
           <input type="checkbox" name="${ h.literal( '%s' % role) }"/>
         </td>
@@ -348,7 +330,7 @@
   </table>
 
 
-  <table py:def="revision_list(revisions, allow_compare=False)">
+  <table class="table table-bordered table-striped table-condensed" py:def="revision_list(revisions, allow_compare=False)">
     <tr>
       <th>Revision</th><th>Timestamp</th><th>Author</th><th>Entity</th><th>Log Message</th>
     </tr>
@@ -376,11 +358,11 @@
             >
             <py:if test="revision.state!='deleted'">
             <input type="hidden" name="action" value="delete"/>
-            <input type="submit" name="submit" value="Delete" class="pretty-button small-button" />
+            <input type="submit" name="submit" value="Delete" class="btn btn-small" />
             </py:if>
             <py:if test="revision.state=='deleted'">
             <input type="hidden" name="action" value="undelete"/>
-            <input type="submit" name="submit" value="Undelete" class="pretty-button small-button" />
+            <input type="submit" name="submit" value="Undelete" class="btn btn-small" />
             </py:if>
           </form>
         </div>
@@ -398,13 +380,10 @@
       </td>
       <td>${revision.message}</td>
     </tr>
-    <tr py:if="not any(revisions)" class="table-empty">
-      <td colspan="5">(none)</td>
-    </tr>
   </table>
 
-  
-  <table py:def="revision_list_from_dict(revisions, allow_compare=False)">
+
+  <table class="table table-bordered table-striped table-condensed" py:def="revision_list_from_dict(revisions, allow_compare=False)">
     <tr>
       <th>Revision</th><th>Timestamp</th><th>Author</th><th>Entity</th><th>Log Message</th>
     </tr>
@@ -430,10 +409,10 @@
                 id=revision['id'])}"
             >
             <py:if test="revision['state']!='deleted'">
-            <button type="submit" name="action" value="delete" class="pretty-button small-button">Delete</button>
+            <button type="submit" name="action" value="delete" class="btn btn-small">Delete</button>
             </py:if>
             <py:if test="revision['state']=='deleted'">
-            <button type="submit" name="action" value="undelete" class="pretty-button small-button">Undelete</button>
+            <button type="submit" name="action" value="undelete" class="btn btn-small">Undelete</button>
             </py:if>
           </form>
         </div>
@@ -453,41 +432,14 @@
     </tr>
   </table>
 
-  <div py:def="activity_div(actor, verb, object=None, target=None)"
-      class="activity">
-    <span class="actor">
-      ${actor}
-    </span>
-    <span class="verb">
-      ${verb}
-    </span>
-    <py:choose>
-      <span class="object" py:when="object">
-        ${object}
-      </span>
-      <py:otherwise>
-      </py:otherwise>
-    </py:choose>
-    <py:choose>
-      <span class="target" py:when="target">
-        ${target}
-      </span>
-      <py:otherwise>
-      </py:otherwise>
-    </py:choose>
-    <span class="date">
-      ${h.render_datetime(activity.timestamp)}
-    </span>
-  </div>
-
   <!--! jsConditionalForIe(ieVersion, tagContent, matchOperator): takes a
         IE version number, a tag or other HTML code that will be wrapped inside
         a IE conditional comment, and the comparison operator (lt, lte, etc..
         see http://msdn.microsoft.com/en-us/library/ms537512%28v=vs.85%29.aspx)
         returning Genshi stream ready to be shown in a template.
-        
+
         NOTE:
-        Internet Explorer Conditional Import are confused as Genshi comments 
+        Internet Explorer Conditional Import are confused as Genshi comments
         and python variables and method calls are not executed if inside them.
         This function helps to output tags with Python code inside conditional
         comments, eg ${h.url_for_static()} -->

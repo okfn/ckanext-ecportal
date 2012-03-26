@@ -3,25 +3,25 @@
   xmlns:xi="http://www.w3.org/2001/XInclude"
   py:strip="">
   
-  <py:def function="page_title">Welcome</py:def>
-  <py:def function="body_class">hide-sidebar</py:def>
+  <py:def function="body_class">no-sidebar</py:def>
 
-    <div py:match="//div[@id='content']" class="front-page">
-      <!-- <div class="span-24 last"> -->
-      <!--   <h1>Welcome to ${g.site_title}!</h1> -->
-      <!-- </div> -->
-      <div class="span-12 action-box">
+  <py:def function="page_title">Welcome</py:def>
+
+  <div py:match="//div[@id='content']" class="front-page">
+    <div class="row-fluid">
+      <div class="span6 action-box">
         <div class="action-box-inner find">
           <h1>Find data</h1>
 
           <form action="${h.url_for(controller='package', action='search')}" method="GET"> 
             <input name="q" value="" class="search-field" placeholder="${_('Find datasets')}" /> 
           </form> 
-          ${g.site_title} contains <a href="${h.url_for(controller='package', action='search')}">${c.package_count} datasets</a> that you can 
-          browse, learn about and download. 
+          ${g.site_title} contains 
+          <a href="${h.url_for(controller='package', action='search')}">${c.package_count} datasets</a>
+          that you can browse, learn about and download. 
         </div>
       </div>
-      <div class="span-12 action-box last">
+      <div class="span6 action-box last">
         <div class="action-box-inner share">
         <h1>Share data</h1>
 
@@ -36,9 +36,11 @@
         </py:choose>
         </div>
       </div>
-      <div class="span-6 action-box" style="margin-top:1em;">
-      </div>
-      <div class="span-12 action-box last" style="margin-top:1em;">
+    </div>
+    <div class="row-fluid">
+    <!-- <div class="span4 action-box" style="margin-top:1em;"> -->
+    <!-- </div> -->
+      <div class="span12 action-box last" style="margin-top:1em;">
         <div class="action-box-inner">
             <h1>Recently Changed Datasets</h1>
                 <div class="activity-stream">
@@ -46,7 +48,7 @@
                 </div>
         </div>
       </div>
+    </div>
   </div>
   <xi:include href="layout.html" />
 </html>
-
