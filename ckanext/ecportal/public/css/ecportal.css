@@ -7,10 +7,6 @@
     margin-top: 0;
 }
 
-textarea {
-    width: 28.25em;
-}
-
 body.no-sidebar .content-outer {
     width: 986px;
 }
@@ -271,6 +267,17 @@ footer li {
 /* Edit Dataset Page
 /****************************************************************************/
 
+#dataset-edit p {
+    margin:0 ;
+    line-height: 16px;
+}
+
+#dataset-edit input,
+#dataset-edit .markdown-editor,
+#dataset-edit select {
+    margin-bottom: 0.5em;
+}
+
 body.package.edit input[type="checkbox"] {
     vertical-align: middle;
 }
@@ -281,6 +288,14 @@ body.package.edit input[type="checkbox"] {
     background: #fbe3e4;
     color: #8a1f11;
     border: 1px solid #fbc2c4;
+}
+
+.markdown-editor textarea.markdown-input {
+width: 400px;
+height: 70px;
+margin-bottom: 5px;
+padding: 5px;
+display: block;
 }
 
 /****************************************************************************/

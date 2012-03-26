@@ -28,13 +28,7 @@ class ECPortalDatasetForm(SingletonPlugin):
     implements(IDatasetForm, inherit=True)
 
     def package_form(self):
-        return 'package/package_ecportal.html'
-
-    def is_fallback(self):
-        return True
-
-    def package_types(self):
-        return ['dataset']
+        return 'package/new_package_form.html'
 
     def new_template(self):
         return 'package/new.html'
@@ -50,6 +44,12 @@ class ECPortalDatasetForm(SingletonPlugin):
 
     def history_template(self):
         return 'package/history.html'
+
+    def is_fallback(self):
+        return True
+
+    def package_types(self):
+        return ['dataset']
 
     def setup_template_variables(self, context, data_dict=None, package_type=None):
         c.licences = model.Package.get_license_options()
