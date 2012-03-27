@@ -116,48 +116,72 @@
   </div>
 </fieldset>
 
-<fieldset id='further-information'>
-  <dl>
-    <dt><label class="field_opt" for="type_of_dataset">Type of Dataset</label></dt>
-    <dd>
-      <select class="short" id="type_of_dataset" name="type_of_dataset">
+<fieldset class="tab-pane fade" id="further-information">
+  <div class="control-group">
+    <label class="control-label" for="type_of_dataset">Type of Dataset</label>
+    <div class="controls">
+      <select id="type_of_dataset" name="type_of_dataset">
         <py:for each="name, desc in c.type_of_dataset">
           <option value="${name}" py:attrs="{'selected': 'selected' if data.get('type_of_dataset', '') == name else None}" >
             ${desc}
           </option>
         </py:for>
       </select>
-    </dd>
-    <dd class="instructions basic">The type of dataset.</dd>
-    <dd class="instructions further">
-    <p>Primary legal materials include documents of primary authority issued by governmental bodies, such as court opinions,
-    statutes, and regulations. They also include the supporting documents and other media issued and maintained by those bodies,
-    such as dockets, hearings, forms, oral arguments, and legislative histories. These materials can be found in every branch,
-    at every level, national, tribal, state and local, and should be available to anyone with the will and the heart to obtain them.</p>
-    <p>Government operational records are typically administrative records (rather than legal records) that are useful for the
-    public to identify conflicts of interest and to perform oversight. Contracts/grants, personal financial disclosures, etc.
-    These documents have little utility aside from oversight.</p>
-    <p>The last category "civic capital" are government records that have utility that have nothing to do with government per se.
-    Environmental and weather data, health and safety data, corporate compliance records. These records can save lives,
-    make markets more efficient, etc. These records are closest to Government as a Platform.</p>
-    </dd>
-    <dd class="field_error" py:if="errors.get('type_of_dataset', '')">${errors.get('type_of_dataset', '')}</dd>
+      <p>The type of dataset.</p>
+      <br />
+      <p>Primary legal materials include documents of primary authority issued by governmental bodies,
+      such as court opinions, statutes, and regulations. They also include the supporting documents 
+      and other media issued and maintained by those bodies, such as dockets, hearings, forms, 
+      oral arguments, and legislative histories. These materials can be found in every branch,
+      at every level, national, tribal, state and local, and should be available to anyone with the will 
+      and the heart to obtain them.</p>
+      <br />
+      <p>Government operational records are typically administrative records (rather than legal records) 
+      that are useful for the public to identify conflicts of interest and to perform oversight. 
+      Contracts/grants, personal financial disclosures, etc. These documents have little utility aside from oversight.</p>
+      <br />
+      <p>The last category "civic capital" are government records that have utility that have nothing to do 
+      with government per se.  Environmental and weather data, health and safety data, corporate compliance records.
+      These records can save lives, make markets more efficient, etc. These records are closest to 
+      Government as a Platform.</p>
+      <p class="field_error" py:if="errors.get('type_of_dataset', '')">${errors.get('type_of_dataset', '')}</p>
+    </div>
+  </div>
 
-    <dt><label class="field_opt" for="release_date">Release Date</label></dt>
-    <dd><input id="release_date" name="release_date" size="40" type="text" value="${data.get('release_date', '')}" /></dd>
-    <dd class="instructions basic">Date of formal issuance (e.g., publication) of the dataset.</dd>
-    <dd class="hints">Acceptable date formats: YYYY-MM-DD, YYYY-MM, YYYY</dd>
-    <dd class="field_error" py:if="errors.get('release_date', '')">${errors.get('release_date', '')}</dd>
+  <div class="control-group">
+    <label class="control-label" for="release_date">Release Date</label>
+    <div class="controls">
+      <input id="release_date"
+        class="js-title"
+        name="release_date" type="text"
+        value="${data.get('release_date', '')}"
+        placeholder="${_('YYYY-MM-DD, YYYY-MM or YYYY')}"
+      />
+      <p>Date of formal issuance (e.g., publication) of the dataset.</p>
+      <p>Acceptable date formats: YYYY-MM-DD, YYYY-MM, YYYY.</p>
+      <p class="field_error" py:if="errors.get('release_date', '')">${errors.get('release_date', '')}</p>
+    </div>
+  </div>
 
-    <dt><label class="field_opt" for="modified_date">Modified Date</label></dt>
-    <dd><input id="modified_date" name="modified_date" size="40" type="text" value="${data.get('modified_date', '')}"/></dd>
-    <dd class="instructions basic">Most recent date on which the dataset was changed, updated or modified.</dd>
-    <dd class="hints">Acceptable date formats: YYYY-MM-DD, YYYY-MM, YYYY</dd>
-    <dd class="field_error" py:if="errors.get('modified_date', '')">${errors.get('modified_date', '')}</dd>
+  <div class="control-group">
+    <label class="control-label" for="modified_date">Modified Date</label>
+    <div class="controls">
+      <input id="modified_date"
+        class="js-title"
+        name="modified_date" type="text"
+        value="${data.get('modified_date', '')}"
+        placeholder="${_('YYYY-MM-DD, YYYY-MM or YYYY')}"
+      />
+      <p>Most recent date on which the dataset was changed, updated or modified.</p>
+      <p>Acceptable date formats: YYYY-MM-DD, YYYY-MM, YYYY.</p>
+      <p class="field_error" py:if="errors.get('modified_date', '')">${errors.get('modified_date', '')}</p>
+    </div>
+  </div>
 
-    <dt><label class="field_opt" for="update_frequency">Update Frequency</label></dt>
-    <dd>
-      <select class="short" id="update_frequency" name="update_frequency">
+  <div class="control-group">
+    <label class="control-label" for="update_frequency">Update Frequency</label>
+    <div class="controls">
+      <select id="update_frequency" name="update_frequency">
         <py:for each="freq_name, freq_desc in c.update_frequency">
           <option value="${freq_name}" py:attrs="{'selected': 'selected' if data.get('update_frequency', '') == freq_name else None}" >
             ${freq_desc}
@@ -165,81 +189,81 @@
         </py:for>
       </select>
       <label class="inline" for="update_frequency-other">Other:
-        <input class="medium-width" id="update_frequency-other" name="update_frequency-other" type="text" value="${data.get('update_frequency-other', '')}"/>
+        <input class="medium-width" id="update_frequency-other" name="update_frequency-other" 
+          type="text" value="${data.get('update_frequency-other', '')}"/>
       </label>
-    </dd>
-    <dd class="instructions basic">The frequency with which dataset is published.</dd>
-    <dd class="field_error" py:if="errors.get('update_frequency', '')">${errors.get('update_frequency', '')}</dd>
+      <p>The frequency with which dataset is published.</p>
+      <p class="field_error" py:if="errors.get('update_frequency', '')">${errors.get('update_frequency', '')}</p>
+    </div>
+  </div>
 
-    <dt><label class="field_opt" for="temporal_coverage">Temporal Coverage</label></dt>
-    <dd>
-      <input class="medium-width" id="temporal_coverage_from" name="temporal_coverage_from" type="text" value="${data.get('temporal_coverage_from', '')}" /> -
-      <input class="medium-width" id="temporal_coverage_to" name="temporal_coverage_to" type="text" value="${data.get('temporal_coverage_to', '')}" />
-    </dd>
-    <dd class="instructions basic">The start and end of the temporal series used in this dataset.</dd>
-    <dd class="hints">e.g. 2010-01-01 - 2012-01-01</dd>
-    <dd class="hints">Acceptable date formats: YYYY-MM-DD, YYYY-MM, YYYY</dd>
+  <div class="control-group">
+    <label class="control-label" for="temporal_coverage">Temporal Coverage</label>
+    <div class="controls">
+      <input id="temporal_coverage_from" name="temporal_coverage_from"
+        class="js-title" type="text" value="${data.get('temporal_coverage_from', '')}"
+        placeholder="${_('YYYY-MM-DD, YYYY-MM or YYYY')}"
+      />
+      -
+      <input id="temporal_coverage_to" name="temporal_coverage_to"
+        class="js-title" type="text" value="${data.get('temporal_coverage_to', '')}"
+        placeholder="${_('YYYY-MM-DD, YYYY-MM or YYYY')}"
+      />
+      <p>The start and end of the temporal series used in this dataset.</p>
+      <p>e.g. 2010-01-01 - 2012-01-01</p>
+      <p>Acceptable date formats: YYYY-MM-DD, YYYY-MM, YYYY.</p>
+      <p class="field_error" py:if="errors.get('temporal_coverage_from', '')">
+        ${errors.get('temporal_coverage_from', '')}</p>
+      <p class="field_error" py:if="errors.get('temporal_coverage_to', '')">
+        ${errors.get('temporal_coverage_to', '')}</p>
+    </div>
+  </div>
 
-    <dt><label class="field_opt" for="temporal_granularity">Temporal Granularity</label></dt>
-    <dd>
-      <select class="short" id="temporal_granularity" name="temporal_granularity">
+  <div class="control-group">
+    <label class="control-label" for="temporal_granularity">Temporal Granularity</label>
+    <div class="controls">
+      <select id="temporal_granularity" name="temporal_granularity">
         <py:for each="temporal_name, temporal_desc in c.temporal_granularity">
           <option value="${temporal_name}" py:attrs="{'selected': 'selected' if data.get('temporal_granularity', '') == temporal_name else None}" >
             ${temporal_name}
           </option>
         </py:for>
       </select>
-    </dd>
-    <dd class="instructions basic">This should give the lowest level of temporal detail given in the dataset
-    if it is aggregated, expressed as an interval of time.
-    </dd>
+      <p>This should give the lowest level of temporal detail given in the dataset
+        if it is aggregated, expressed as an interval of time.</p>
+      <p class="field_error" py:if="errors.get('temporal_granularity', '')">${errors.get('temporal_granularity', '')}</p>
+    </div>
+  </div>
 
-    <dt><label class="field_opt" for="geographical_coverage">Geographical Coverage</label></dt>
-    <dd class="tags-field">
-      <select id="geographical_coverage" class="chzn-select" name="geographical_coverage" multiple="multiple" style="width: 30em;">
+  <div class="control-group">
+    <label class="control-label" for="geographical_coverage">Geographical Coverage</label>
+    <div class="controls">
+      <select id="geographical_coverage" class="chzn-select" name="geographical_coverage"
+        multiple="multiple" style="width: 30em;">
         <py:for each="tag_name, tag_translation in c.geographical_coverage">
           <py:choose test="">
-          <option py:when="tag_name in data.get('geographical_coverage', [])" selected="selected" value="${tag_name}">${tag_translation}</option>
-          <option py:otherwise="" value="${tag_name}">${tag_translation}</option>
+            <option py:when="tag_name in data.get('geographical_coverage', [])" 
+              selected="selected" value="${tag_name}">${tag_translation}</option>
+            <option py:otherwise="" value="${tag_name}">${tag_translation}</option>
           </py:choose>
         </py:for>
       </select>
-    </dd>
-    <dd class="instructions basic">The geographical coverage of this dataset.</dd>
-    <dd class="tags-instructions field_error" py:if="errors.get('geographical_coverage', '')">${errors.get('geographical_coverage', '')}</dd>
+      <p>The geographical coverage of this dataset.</p>
+      <p class="field_error" py:if="errors.get('geographical_coverage', '')">${errors.get('geographical_coverage', '')}</p>
+    </div>
+  </div>
 
-    <dt><label class="field_opt" for="version">Version</label></dt>
-    <dd><input id="version" maxlength="100" name="version" type="text" value="${data.get('version', '')}" /></dd>
-    <dd class="instructions basic">A number representing the version (if applicable)</dd>
-    <dd class="hints">e.g. 1.2.0</dd>
-
-  </dl>
-</fieldset>
-
-<fieldset id="resources">
-  <div class="instructions basic"><h3>Resources: the files and APIs associated with this dataset</h3></div>
-  <table class="resource-table-edit">
-    <thead>
-      <tr>
-        <th class="field_req resource-url">Resource</th>
-        <th class="resource-delete-link"></th>
-      </tr>
-    </thead>
-    <tbody class="js-resource-editor">
-    </tbody>
-  </table>
-
-  <div class="resource-add">
-    <ul class="button-row">
-      <li><h4>Add a resource:</h4></li>
-      <li><button class="pretty-button js-link-file">Link to a file</button></li>
-      <li><button class="pretty-button js-link-api">Link to an API</button></li>
-      <li class="js-upload-file" style="display:none;"><button class="pretty-button js-upload-file">Upload a file</button></li>
-    </ul>
+  <div class="control-group">
+    <label class="control-label field_opt" for="version">Version</label>
+    <div class="controls">
+      <input id="version" maxlength="100" name="version" type="text" value="${data.get('version', '')}" />
+      <p>A number representing the version (if applicable)</p>
+      <p>e.g. 1.2.0</p>
+    </div>
   </div>
 </fieldset>
 
-<fieldset id="keywords">
+<fieldset class="tab-pane fade" id="keywords">
   <dl>
     <dt class="tags-label"><label class="field_opt" for="tags">Keywords</label></dt>
     <dd class="tags-field">
@@ -256,7 +280,7 @@
   </dl>
 </fieldset>
 
-<fieldset id="notes">
+<fieldset class="tab-pane fade" id="notes-tab">
   <dl>
     <dt><label class="field_opt" for="skos_note">SKOS Note</label></dt>
     <dd><input id="skos_note" name="skos_note" size="40" type="text" value="${data.get('skos_note', '')}" /></dd>
@@ -288,7 +312,7 @@
   </dl>
 </fieldset>
 
-<fieldset id="extras">
+<fieldset class="tab-pane fade" id="extras">
   <h3>Extra Fields</h3>
   <dl py:if="c.additional_extras">
     <py:for each="num, extra in enumerate(c.additional_extras)">
@@ -313,13 +337,47 @@
   </dl>
 </fieldset>
 
-<fieldset id='delete' py:if="c.is_sysadmin or c.auth_for_change_state">
+<!-- <fieldset class="tab-pane fade" id='extras'> -->
+<!--   <p>This data will also appear under <strong>Additional Information</strong> when viewing the dataset.</p> -->
+<!--   <py:with vars="extras = data.get('extras', [])"> -->
+<!--     <py:for each="num, extra in enumerate(extras)"> -->
+<!--       <div class="control-group"> -->
+<!--         <label class="control-label" for="extras__${num}__value">${extra.get('key')}</label> -->
+<!--         <div class="controls"> -->
+<!--           <input id="extras__${num}__key" name="extras__${num}__key" type="hidden" value="${extra.get('key')}" /> -->
+<!--           <input id="extras__${num}__value" name="extras__${num}__value" type="text" value="${extra.get('value')}" /> -->
+<!--           <label class="checkbox" style="display: inline-block;"> -->
+<!--             <input type="checkbox" name="extras__${num}__deleted" checked="${extra.get('deleted')}" />Delete -->
+<!--           </label> -->
+<!--         </div> -->
+<!--       </div> -->
+<!--     </py:for> -->
+<!--     <hr py:if="len(extras)" class="extras-divider" /> -->
+<!--     <py:for each="num in range(len(extras), len(extras) + 4)"> -->
+<!--       <div class="control-group"> -->
+<!--         <label class="control-label" for="extras__${num}__key">Add...</label> -->
+<!--         <div class="controls"> -->
+<!--           <label> -->
+<!--             <span class="extras-label">Key =</span> -->
+<!--             <input class="medium-width" id="extras__${num}__key" name="extras__${num}__key" type="text" /> -->
+<!--           </label> -->
+<!--           <label> -->
+<!--             <span class="extras-label">Value =</span> -->
+<!--             <input class="medium-width" id="extras__${num}__value" name="extras__${num}__value" type="text" /> -->
+<!--           </label> -->
+<!--         </div> -->
+<!--       </div> -->
+<!--     </py:for> -->
+<!--   </py:with> -->
+<!-- </fieldset> -->
+
+<fieldset id='delete' class="tab-pane fade" py:if="c.is_sysadmin or c.auth_for_change_state">
   <dl>
     <dt>Delete</dt>
     <dd>
-      This dataset is&nbsp;&nbsp;
+      <p>Do you really want to change the state of this dataset? &nbsp;&nbsp;<button class="dataset-delete btn">Yes!</button></p>
       <span>
-      This dataset is&nbsp;&nbsp;
+      This dataset is&nbsp;&nbsp; 
       <select id="state" class="dataset-delete" name="state" style="display:inline;">
         <option py:attrs="{'selected': 'selected' if data.get('state') == 'active' else None}" value="active">active</option>
         <option py:attrs="{'selected': 'selected' if data.get('state') == 'deleted' else None}" value="deleted">deleted</option>
@@ -329,29 +387,28 @@
   </dl>
 </fieldset>
 
-<!-- <div id="unsaved-warning"></div> -->
+<fieldset class="tab-pane" id="resources">
+  <div class="instructions basic"><h3>Resources: the files and APIs associated with this dataset</h3></div>
+  <table class="resource-table-edit">
+    <thead>
+      <tr>
+        <th class="field_req resource-url">Resource</th>
+        <th class="resource-delete-link"></th>
+      </tr>
+    </thead>
+    <tbody class="js-resource-editor">
+    </tbody>
+  </table>
 
-<!-- <div class="ckan-logged-in" style="display: none;"> -->
-<!--   <p>Author: ${c.author}</p> -->
-<!-- </div> -->
-<!-- <div class="ckan-logged-out"> -->
-<!--   <label>Author: ${c.author}</label> -->
-<!--   <p i18n:msg="" class="hints"> -->
-<!--     Since you have not signed in this will just be your IP address. -->
-<!--     <a href="${h.url_for(controller='user', action='login', id=None)}" target="_blank">Click here to sign in</a> before saving (opens in new window). -->
-<!--   </p> -->
-<!-- </div> -->
-
-<!-- <div class="form-submit"> -->
-<!--   <input id="save" class="pretty-button primary" name="save" type="submit" value="${_('Save Changes')}" /> -->
-<!--   <py:if test="c.pkg"> -->
-<!--     <input id="cancel" class="pretty-button href-action" name="cancel" type="reset" value="${_('Cancel')}" action="${h.url_for(controller='package', action='read', id=c.pkg.name)}" /> -->
-<!--   </py:if> -->
-<!--   <p i18n:msg="" class="hints"> -->
-<!--   <strong>Important:</strong> By submitting content, you agree to release your contributions under the <a href="http://opendatacommons.org/licenses/odbl/1.0/">Open Database License</a>. Please <strong>refrain</strong> from editing this page if you are <strong>not</strong> happy to do this. -->
-<!--   </p> -->
-<!--   <div class="clear"></div> -->
-<!-- </div> -->
+  <div class="resource-add">
+    <ul class="button-row">
+      <li><h4>Add a resource:</h4></li>
+      <li><button class="pretty-button js-link-file">Link to a file</button></li>
+      <li><button class="pretty-button js-link-api">Link to an API</button></li>
+      <li class="js-upload-file" style="display:none;"><button class="pretty-button js-upload-file">Upload a file</button></li>
+    </ul>
+  </div>
+</fieldset>
 
 <div class="author-box ckan-logged-in" style="display: none;">
   <p>Author: ${c.author}</p>
