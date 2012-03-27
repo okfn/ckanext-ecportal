@@ -16,7 +16,7 @@ from field_values import type_of_dataset, update_frequency,\
     temporal_granularity
 from validators import use_other, extract_other, ecportal_date_to_db,\
     convert_to_extras, duplicate_extras_key, publisher_exists,\
-    keyword_string_convert, rename
+    keyword_string_convert, rename, update_rdf
 
 import logging
 log = logging.getLogger(__name__)
@@ -157,6 +157,7 @@ class ECPortalDatasetForm(SingletonPlugin):
             'history_note': [ignore_missing, unicode, convert_to_extras],
             'scope_note': [ignore_missing, unicode, convert_to_extras],
             'example_note': [ignore_missing, unicode, convert_to_extras],
+            'rdf': [ignore_missing, unicode, update_rdf, convert_to_extras],
             '__after': [duplicate_extras_key, rename('keywords', 'tags')],
         })
         return schema
@@ -183,6 +184,7 @@ class ECPortalDatasetForm(SingletonPlugin):
             'history_note': [convert_from_extras, ignore_missing],
             'scope_note': [convert_from_extras, ignore_missing],
             'example_note': [convert_from_extras, ignore_missing],
+            'rdf': [convert_from_extras, ignore_missing],
             '__after': [duplicate_extras_key, rename('tags', 'keywords')],
         })
 

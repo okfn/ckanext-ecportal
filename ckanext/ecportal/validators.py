@@ -1,6 +1,9 @@
 import re
 from itertools import count
+
 from pylons.i18n import _
+import rdfutil
+
 from ckan.lib.field_types import DateType, DateConvertError
 from ckan.lib.navl.dictization_functions import Invalid, missing, unflatten
 from ckan.logic import get_action, NotFound
@@ -9,7 +12,7 @@ from ckan.logic.validators import tag_name_validator, tag_length_validator
 # parse_timedate function is similar to the one in ckan.lib.field_types.DateType
 # changes:
 # - doesn't accept a time value
-# - different message passed to DateConvertError exception 
+# - different message passed to DateConvertError exception
 class ECPortalDateType(DateType):
     @classmethod
     def parse_timedate(cls, timedate_str, format_type):
@@ -93,7 +96,7 @@ def extract_other(option_list):
             other_key = key[-1] + '-other'
             data[(other_key,)] = value
     return other
-            
+
 def convert_to_extras(key, data, errors, context):
     # get current number of extras
     extra_number = 0
@@ -167,3 +170,17 @@ def rename(old, new):
                 data[tuple(new_field_name)] = data[field_name]
                 data.pop(field_name)
     return rename_field
+
+def update_rdf(key, data, errors, context):
+    """
+    Determines if there is any XML in the rdf field and ensures that  it
+    matches expectations.  This data will be returned on requests for .rdf
+    however we first need to add our fields.
+    """
+    rdf = data.get(key, '')
+    name = data.get((u'name',), "")
+    if (not rdf) or ('package' in context):
+        return
+
+    data[key] = '"%s"' % rdfutil.update_rdf( rdf, name ).replace('"', '\\"')
+    print data[key]

@@ -4,6 +4,11 @@ from ckan import plugins
 from ckan.tests import WsgiAppCase
 from create_test_data import CreateTestData
 
+try:
+    import json
+except:
+    import simplejson as json
+
 
 class TestAPI(WsgiAppCase):
     @classmethod
@@ -15,6 +20,44 @@ class TestAPI(WsgiAppCase):
     def teardown_class(cls):
         model.repo.rebuild_db()
         plugins.unload('ecportal')
+
+    def test_package_rdf_create_ns_update(self):
+        rdf = ('<rdf:RDF '
+               'xmlns:foaf="http://xmlns.com/foaf/0.1/" '
+               'xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" '
+               'xmlns:dct="http://purl.org/dc/terms/" '
+               'xmlns:dcat="http://www.w3.org/ns/dcat#"> '
+               '<dcat:Dataset rdf:about="http://localhost"></dcat:Dataset> '
+               '</rdf:RDF>')
+        dataset_json = json.dumps({
+            'name' : u'rdfpackage',
+            'title': u'RDF Package',
+            'rdf'  : json.dumps(rdf)
+        })
+        response = self.app.post('/api/action/package_create',
+                                 params=dataset_json,
+                                 extra_environ={'Authorization': 'tester'})
+        dataset = json.loads(response.body)['result']
+        assert 'dct=' in dataset['rdf']
+
+    def test_package_rdf_create_ns_new(self):
+        rdf = ('<rdf:RDF '
+               'xmlns:foaf="http://xmlns.com/foaf/0.1/" '
+               'xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" '
+               'xmlns:dcat="http://www.w3.org/ns/dcat#"> '
+               '<dcat:Dataset rdf:about="http://localhost"></dcat:Dataset> '
+               '</rdf:RDF>')
+        dataset_json = json.dumps({
+            'name' : u'rdfpackage',
+            'title': u'RDF Package',
+            'rdf'  : json.dumps(rdf)
+        })
+        response = self.app.post('/api/action/package_create',
+                                 params=dataset_json,
+                                 extra_environ={'Authorization': 'tester'})
+        dataset = json.loads(response.body)['result']
+        assert 'dct=' in dataset['rdf']
+
 
     def test_keywords_create(self):
         tag = u'test-keyword'
