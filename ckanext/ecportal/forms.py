@@ -16,7 +16,7 @@ from field_values import type_of_dataset, update_frequency,\
     temporal_granularity
 from validators import use_other, extract_other, ecportal_date_to_db,\
     convert_to_extras, convert_to_groups, convert_from_groups,\
-    duplicate_extras_key, publisher_exists, keyword_string_convert, rename\
+    duplicate_extras_key, publisher_exists, keyword_string_convert, rename, \
     update_rdf
 
 import logging
