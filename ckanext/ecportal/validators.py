@@ -204,4 +204,3 @@ def update_rdf(key, data, errors, context):
         return
 
     data[key] = '"%s"' % rdfutil.update_rdf( rdf, name ).replace('"', '\\"')
-    print data[key]
