@@ -394,9 +394,9 @@
   <div class="js-resource-edit-barebones">
     <!-- The resource editor deletes these fields and replaces them with a dynamic editor.
          They are required for the form to render correctly when not in resource-edit mode. -->
-    <py:for each="num,res in enumerate(data.get('resources', []))">
+    <py:for each="num, res in enumerate(data.get('resources', []))">
       <py:for each="field in res.keys()">
-      <input type="hidden" name="resources__${res.get('position')}__${field}" value="${res.get(field)}" />
+      <input type="hidden" name="resources__${res.get('position', num)}__${field}" value="${res.get(field)}" />
       </py:for>
     </py:for>
   </div>

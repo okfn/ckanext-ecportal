@@ -107,6 +107,22 @@ def convert_to_extras(key, data, errors, context):
     data[('extras', extra_number, 'key')] = key[0]
     data[('extras', extra_number, 'value')] = data[key]
 
+def convert_to_groups(key, data, errors, context):
+    '''
+    Add data[key] as the first group name in data, and remove
+    any existing groups.
+    '''
+    for data_key in data.keys():
+        if data_key[0] == 'groups':
+            data.pop(data_key)
+    data[('groups', 0, 'name')] = data[key]
+
+def convert_from_groups(key, data, errors, context):
+    '''
+    Set data[key] to the first group name in data (if any exist).
+    '''
+    data[key] = data.get(('groups', 0, 'name'), None)
+
 def duplicate_extras_key(key, data, errors, context):
     '''Test for a custom extra key being a duplicate of an existing (schema) key.'''
     unflattened = unflatten(data)

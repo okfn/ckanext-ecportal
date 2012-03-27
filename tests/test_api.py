@@ -98,3 +98,16 @@ class TestAPI(WsgiAppCase):
             assert tag in updated_tags
         for tag in new_tag_names:
             assert tag in updated_tags
+
+    def test_convert_publisher_to_groups(self):
+        params = json.dumps({'id': u'warandpeace'})
+        response = self.app.post('/api/action/package_show', params=params)
+        dataset = json.loads(response.body)['result']
+        assert dataset['published_by'] == u'david'
+
+        dataset['published_by'] = u'roger'
+        params = json.dumps(dataset)
+        response = self.app.post('/api/action/package_update', params=params,
+                                 extra_environ={'Authorization': 'tester'})
+        updated_dataset = json.loads(response.body)['result']
+        assert updated_dataset['published_by'] == u'roger'
