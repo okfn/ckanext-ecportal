@@ -264,112 +264,113 @@
 </fieldset>
 
 <fieldset class="tab-pane fade" id="keywords">
-  <dl>
-    <dt class="tags-label"><label class="field_opt" for="tags">Keywords</label></dt>
-    <dd class="tags-field">
-      <input class="long autocomplete-tag" id="tag_string" name="tag_string" size="60" type="text"
-               value="${data.get('tag_string') or ', '.join([tag['name'] for tag in data.get('tags', [])])}" />
-    </dd>
-    <dd class="tags-instructions instructions basic" i18n:msg="">Comma-separated terms that may link this dataset to similar ones. For more information on conventions, see <a href="http://wiki.okfn.org/ckan/doc/faq#TagConventions">this wiki page</a>.</dd>
-    <dd class="instructions further">
-      Keywords must be alphanumeric characters or symbols: -_.
-      Keywords must not be uppercase words in phrases connected with hyphen.
-    </dd>
-    <dd class="hints">e.g. pollution rivers water-quality</dd>
-    <dd class="tags-instructions field_error" py:if="errors.get('tag_string', '')">${errors.get('tag_string', '')}</dd>
-  </dl>
+  <div class="control-group">
+    <label class="control-label field_opt" for="keywords">Keywords</label>
+    <div class="controls">
+      <input class="long autocomplete-tag" id="keyword_string" name="keyword_string" size="60" type="text"
+        value="${data.get('keyword_string') or ', '.join([keyword['name'] for keyword in data.get('keywords', [])])}" />
+      <p>Comma-separated terms that may link this dataset to similar ones.  For more information on conventions,
+        see <a href="http://wiki.okfn.org/ckan/doc/faq#TagConventions">this wiki page</a>.</p>
+      <p>Keywords must be alphanumeric characters or symbols: -_.</p>
+      <p>Keywords must not be uppercase words in phrases connected with hyphen.</p>
+      <p>e.g. pollution rivers water-quality</p>
+      <p class="field_error" py:if="errors.get('keyword_string', '')">${errors.get('keyword_string', '')}</p>
+    </div>
+  </div>
 </fieldset>
 
 <fieldset class="tab-pane fade" id="notes-tab">
-  <dl>
-    <dt><label class="field_opt" for="skos_note">SKOS Note</label></dt>
-    <dd><input id="skos_note" name="skos_note" size="40" type="text" value="${data.get('skos_note', '')}" /></dd>
-    <dd class="field_error" py:if="errors.get('skos_note', '')">${errors.get('skos_note', '')}</dd>
+  <div class="control-group">
+    <label class="control-label field_opt" for="skos_note">SKOS Note</label>
+    <div class="controls">
+      <input id="skos_note" name="skos_note" type="text" value="${data.get('skos_note', '')}" />
+      <p class="field_error" py:if="errors.get('skos_note', '')">${errors.get('skos_note', '')}</p>
+    </div>
+  </div>
 
-    <dt><label class="field_opt" for="change_note">Change Note</label></dt>
-    <dd><input id="change_note" name="change_note" size="40" type="text" value="${data.get('change_note', '')}" /></dd>
-    <dd class="field_error" py:if="errors.get('change_note', '')">${errors.get('change_note', '')}</dd>
+  <div class="control-group">
+    <label class="control-label field_opt" for="change_note">Change Note</label>
+    <div class="controls">
+      <input id="change_note" name="change_note" type="text" value="${data.get('change_note', '')}" />
+      <p class="field_error" py:if="errors.get('change_note', '')">${errors.get('change_note', '')}</p>
+    </div>
+  </div>
 
-    <dt><label class="field_opt" for="definition_note">Definition Note</label></dt>
-    <dd><input id="definition_note" name="definition_note" size="40" type="text" value="${data.get('definition_note', '')}" /></dd>
-    <dd class="field_error" py:if="errors.get('definition_note', '')">${errors.get('definition_note', '')}</dd>
+  <div class="control-group">
+    <label class="control-label field_opt" for="definition_note">Definition Note</label>
+    <div class="controls">
+      <input id="definition_note" name="definition_note" type="text" value="${data.get('definition_note', '')}" />
+      <p class="field_error" py:if="errors.get('definition_note', '')">${errors.get('definition_note', '')}</p>
+    </div>
+  </div>
 
-    <dt><label class="field_opt" for="editorial_note">Editorial Note</label></dt>
-    <dd><input id="editorial_note" name="editorial_note" size="40" type="text" value="${data.get('editorial_note', '')}" /></dd>
-    <dd class="field_error" py:if="errors.get('editorial_note', '')">${errors.get('editorial_note', '')}</dd>
+  <div class="control-group">
+    <label class="control-label field_opt" for="editorial_note">Editorial Note</label>
+    <div class="controls">
+      <input id="editorial_note" name="editorial_note" type="text" value="${data.get('editorial_note', '')}" />
+      <p class="field_error" py:if="errors.get('editorial_note', '')">${errors.get('editorial_note', '')}</p>
+    </div>
+  </div>
 
-    <dt><label class="field_opt" for="history_note">History Note</label></dt>
-    <dd><input id="history_note" name="history_note" size="40" type="text" value="${data.get('history_note', '')}" /></dd>
-    <dd class="field_error" py:if="errors.get('history_note', '')">${errors.get('history_note', '')}</dd>
+  <div class="control-group">
+    <label class="control-label field_opt" for="history_note">History Note</label>
+    <div class="controls">
+      <input id="history_note" name="history_note" type="text" value="${data.get('history_note', '')}" />
+      <p class="field_error" py:if="errors.get('history_note', '')">${errors.get('history_note', '')}</p>
+    </div>
+  </div>
 
-    <dt><label class="field_opt" for="scope_note">Scope Note</label></dt>
-    <dd><input id="scope_note" name="scope_note" size="40" type="text" value="${data.get('scope_note', '')}" /></dd>
-    <dd class="field_error" py:if="errors.get('scope_note', '')">${errors.get('scope_note', '')}</dd>
+  <div class="control-group">
+    <label class="control-label field_opt" for="scope_note">Scope Note</label>
+    <div class="controls">
+      <input id="scope_note" name="scope_note" type="text" value="${data.get('scope_note', '')}" />
+      <p class="field_error" py:if="errors.get('scope_note', '')">${errors.get('scope_note', '')}</p>
+    </div>
+  </div>
 
-    <dt><label class="field_opt" for="example_note">Example Note</label></dt>
-    <dd><input id="example_note" name="example_note" size="40" type="text" value="${data.get('example_note', '')}" /></dd>
-    <dd class="field_error" py:if="errors.get('example_note', '')">${errors.get('example_note', '')}</dd>
-  </dl>
+  <div class="control-group">
+    <label class="control-label field_opt" for="example_note">Example Note</label>
+    <div class="controls">
+      <input id="example_note" name="example_note" type="text" value="${data.get('example_note', '')}" />
+      <p class="field_error" py:if="errors.get('example_note', '')">${errors.get('example_note', '')}</p>
+    </div>
+  </div>
 </fieldset>
 
 <fieldset class="tab-pane fade" id="extras">
-  <h3>Extra Fields</h3>
-  <dl py:if="c.additional_extras">
-    <py:for each="num, extra in enumerate(c.additional_extras)">
-    <dt><label for="extras__${num}__value">${extra.get('key')}</label></dt>
-    <dd>
-      <input id="extras__${num}__key" name="extras__${num}__key" type="hidden" value="${extra.get('key')}" />
-      <input id="extras__${num}__value" name="extras__${num}__value" type="text" value="${extra.get('value')}" />
-      <input type="checkbox" name="extras__${num}__deleted" checked="${extra.get('deleted')}"> Delete </input>
-    </dd>
+  <p>This data will also appear under <strong>Additional Information</strong> when viewing the dataset.</p>
+  <br />
+  <py:with vars="extras = c.additional_extras">
+    <py:for each="num, extra in enumerate(extras)">
+      <div class="control-group">
+        <label class="control-label" for="extras__${num}__value">${extra.get('key')}</label>
+        <div class="controls">
+          <input id="extras__${num}__key" name="extras__${num}__key" type="hidden" value="${extra.get('key')}" />
+          <input id="extras__${num}__value" name="extras__${num}__value" type="text" value="${extra.get('value')}" />
+          <label class="checkbox" style="display: inline-block;">
+            <input type="checkbox" name="extras__${num}__deleted" checked="${extra.get('deleted')}" />Delete
+          </label>
+        </div>
+      </div>
     </py:for>
-  </dl>
-
-  <dl>
-    <py:for each="num in range(len(c.additional_extras), len(c.additional_extras) + 4)">
-    <dt><label for="extras__${num}__key">New key</label></dt>
-    <dd>
-      <input class="medium-width" id="extras__${num}__key" name="extras__${num}__key" type="text" />
-      with value
-      <input class="medium-width" id="extras__${num}__value" name="extras__${num}__value" type="text" />
-    </dd>
+    <hr py:if="len(extras)" class="extras-divider" />
+    <py:for each="num in range(len(extras), len(extras) + 4)">
+      <div class="control-group">
+        <label class="control-label" for="extras__${num}__key">Add...</label>
+        <div class="controls">
+          <label>
+            <span class="extras-label">Key =</span>
+            <input class="medium-width" id="extras__${num}__key" name="extras__${num}__key" type="text" />
+          </label>
+          <label>
+            <span class="extras-label">Value =</span>
+            <input class="medium-width" id="extras__${num}__value" name="extras__${num}__value" type="text" />
+          </label>
+        </div>
+      </div>
     </py:for>
-  </dl>
+  </py:with>
 </fieldset>
-
-<!-- <fieldset class="tab-pane fade" id='extras'> -->
-<!--   <p>This data will also appear under <strong>Additional Information</strong> when viewing the dataset.</p> -->
-<!--   <py:with vars="extras = data.get('extras', [])"> -->
-<!--     <py:for each="num, extra in enumerate(extras)"> -->
-<!--       <div class="control-group"> -->
-<!--         <label class="control-label" for="extras__${num}__value">${extra.get('key')}</label> -->
-<!--         <div class="controls"> -->
-<!--           <input id="extras__${num}__key" name="extras__${num}__key" type="hidden" value="${extra.get('key')}" /> -->
-<!--           <input id="extras__${num}__value" name="extras__${num}__value" type="text" value="${extra.get('value')}" /> -->
-<!--           <label class="checkbox" style="display: inline-block;"> -->
-<!--             <input type="checkbox" name="extras__${num}__deleted" checked="${extra.get('deleted')}" />Delete -->
-<!--           </label> -->
-<!--         </div> -->
-<!--       </div> -->
-<!--     </py:for> -->
-<!--     <hr py:if="len(extras)" class="extras-divider" /> -->
-<!--     <py:for each="num in range(len(extras), len(extras) + 4)"> -->
-<!--       <div class="control-group"> -->
-<!--         <label class="control-label" for="extras__${num}__key">Add...</label> -->
-<!--         <div class="controls"> -->
-<!--           <label> -->
-<!--             <span class="extras-label">Key =</span> -->
-<!--             <input class="medium-width" id="extras__${num}__key" name="extras__${num}__key" type="text" /> -->
-<!--           </label> -->
-<!--           <label> -->
-<!--             <span class="extras-label">Value =</span> -->
-<!--             <input class="medium-width" id="extras__${num}__value" name="extras__${num}__value" type="text" /> -->
-<!--           </label> -->
-<!--         </div> -->
-<!--       </div> -->
-<!--     </py:for> -->
-<!--   </py:with> -->
-<!-- </fieldset> -->
 
 <fieldset id='delete' class="tab-pane fade" py:if="c.is_sysadmin or c.auth_for_change_state">
   <dl>
