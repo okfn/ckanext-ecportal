@@ -30,8 +30,8 @@ class TestAPI(WsgiAppCase):
                '<dcat:Dataset rdf:about="http://localhost"></dcat:Dataset> '
                '</rdf:RDF>')
         dataset_json = json.dumps({
-            'name' : u'rdfpackage',
-            'title': u'RDF Package',
+            'name' : u'rdfpackage2',
+            'title': u'RDF Package2',
             'rdf'  : json.dumps(rdf)
         })
         response = self.app.post('/api/action/package_create',
@@ -48,8 +48,8 @@ class TestAPI(WsgiAppCase):
                '<dcat:Dataset rdf:about="http://localhost"></dcat:Dataset> '
                '</rdf:RDF>')
         dataset_json = json.dumps({
-            'name' : u'rdfpackage',
-            'title': u'RDF Package',
+            'name' : u'rdfpackage1',
+            'title': u'RDF Package1',
             'rdf'  : json.dumps(rdf)
         })
         response = self.app.post('/api/action/package_create',
