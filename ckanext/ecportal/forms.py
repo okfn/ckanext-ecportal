@@ -15,8 +15,8 @@ from ckan.plugins import implements, SingletonPlugin, IDatasetForm
 from field_values import type_of_dataset, update_frequency,\
     temporal_granularity
 from validators import use_other, extract_other, ecportal_date_to_db,\
-    convert_to_extras, duplicate_extras_key, publisher_exists,\
-    keyword_string_convert, rename
+    convert_to_extras, convert_to_groups, convert_from_groups,\
+    duplicate_extras_key, publisher_exists, keyword_string_convert, rename
 
 import logging
 log = logging.getLogger(__name__)
@@ -141,7 +141,7 @@ class ECPortalDatasetForm(SingletonPlugin):
         schema.update({
             'keyword_string': [ignore_missing, keyword_string_convert],
             'type_of_dataset': [ignore_missing, unicode, convert_to_extras],
-            'published_by': [ignore_missing, unicode, publisher_exists, convert_to_extras],
+            'published_by': [ignore_missing, unicode, publisher_exists, convert_to_groups],
             'release_date': [ignore_missing, ecportal_date_to_db, convert_to_extras],
             'modified_date': [ignore_missing, ecportal_date_to_db, convert_to_extras],
             'update_frequency': [ignore_missing, use_other, unicode, convert_to_extras],
@@ -168,7 +168,7 @@ class ECPortalDatasetForm(SingletonPlugin):
                 '__extras': [keep_extras, free_tags_only]
             },
             'type_of_dataset': [convert_from_extras, ignore_missing],
-            'published_by': [convert_from_extras, ignore_missing],
+            'published_by': [convert_from_groups, ignore_missing],
             'release_date': [convert_from_extras, ignore_missing],
             'modified_date': [convert_from_extras, ignore_missing],
             'update_frequency': [convert_from_extras, ignore_missing, extract_other(update_frequency)],
