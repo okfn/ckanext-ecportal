@@ -68,8 +68,7 @@ current_locale = h.get_locales_dict().get(request.environ['CKAN_LANG'])
 ?>
               <li class="selected">
                 ${current_locale.display_name or current_locale.english_name} (${current_locale})
-                <!-- FIXME use local image -->
-                <img border="0" alt="" src="http://ec.europa.eu/wel/template-2012/images/arrows-down.gif" />
+                <img border="0" alt="Menu Arrow" src="${h.url_for_static('/images/arrow_down.gif')}" />
               </li>
               <py:for each="locale in h.get_available_locales()">
               <li py:if="str(locale) != str(current_locale)">
@@ -183,8 +182,6 @@ current_locale = h.get_locales_dict().get(request.environ['CKAN_LANG'])
     <footer class="container">
       <div class="row-fluid">
         <div class="span12">
-        <!-- <div class="xoxo span-24"> -->
-          <h3 class="widget-title">About</h3>
           <div>
             &copy; 2012
             <img src="http://assets.okfn.org/images/logo/okf_logo_white_and_green_tiny.png" id="footer-okf-logo" />
@@ -246,8 +243,6 @@ current_locale = h.get_locales_dict().get(request.environ['CKAN_LANG'])
 		$(".chzn-select").chosen();
     });
   </script>
-<!--   <script type="text/javascript" src="http://ecportal.demo.ckan.org/open-data/sites/all/modules/lang_dropdown/msdropdown/jquery.dd.js?m0ev5r"></script> -->
-<!-- <script type="text/javascript" src="http://ecportal.demo.ckan.org/open-data/sites/all/modules/lang_dropdown/lang_dropdown.js?m0ev5r"></script> -->
 
   <py:if test="defined('optional_footer')">
     ${optional_footer()}
