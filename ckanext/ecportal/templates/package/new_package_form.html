@@ -389,25 +389,32 @@
 </fieldset>
 
 <fieldset class="tab-pane" id="resources">
-  <div class="instructions basic"><h3>Resources: the files and APIs associated with this dataset</h3></div>
-  <table class="resource-table-edit">
-    <thead>
-      <tr>
-        <th class="field_req resource-url">Resource</th>
-        <th class="resource-delete-link"></th>
-      </tr>
-    </thead>
-    <tbody class="js-resource-editor">
-    </tbody>
-  </table>
-
-  <div class="resource-add">
-    <ul class="button-row">
-      <li><h4>Add a resource:</h4></li>
-      <li><button class="pretty-button js-link-file">Link to a file</button></li>
-      <li><button class="pretty-button js-link-api">Link to an API</button></li>
-      <li class="js-upload-file" style="display:none;"><button class="pretty-button js-upload-file">Upload a file</button></li>
-    </ul>
+  <legend>Add Resources</legend>
+  <div class="instructions"><p>Resources: the files and APIs associated with this dataset</p></div>
+  <div class="js-resource-edit-barebones">
+    <!-- The resource editor deletes these fields and replaces them with a dynamic editor.
+         They are required for the form to render correctly when not in resource-edit mode. -->
+    <py:for each="num,res in enumerate(data.get('resources', []))">
+      <py:for each="field in res.keys()">
+      <input type="hidden" name="resources__${res.get('position')}__${field}" value="${res.get(field)}" />
+      </py:for>
+    </py:for>
+  </div>
+  <ul class="resource-list resource-list-edit drag-drop-list">
+  </ul>
+  <ul class="resource-list resource-list-add">
+    <li><a href="#" class="js-resource-add">${h.icon('page_white_add')}New resource...</a></li>
+  </ul>
+  <div style="display: none;" class="resource-panel">
+    <button class="btn btn-danger resource-panel-close">x</button>
+    <div class="resource-details resource-add">
+      <ul class="button-row">
+        <li><h4>Add a resource:</h4></li>
+        <li><button class="btn js-link-file">Link to a file</button></li>
+        <li><button class="btn js-link-api">Link to an API</button></li>
+        <li class="js-upload-file ckan-logged-in" style="display: none;"><button class="btn js-upload-file">Upload a file</button></li>
+      </ul>
+    </div>
   </div>
 </fieldset>
 
