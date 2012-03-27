@@ -161,14 +161,19 @@ def rename(old, new):
     Should be used in __after.
     '''
     def rename_field(key, data, errors, context):
-        # import pprint
-        # pprint.pprint(data)
+        index = max([int(k[1]) for k in data.keys() if len(k) == 3 and k[0] == new] + [-1])
+
         for field_name in data.keys():
             if field_name[0] == old:
                 new_field_name = list(field_name)
                 new_field_name[0] = new
+
+                if len(new_field_name) > 1:
+                    new_field_name[1] = int(new_field_name[1]) + index + 1
+
                 data[tuple(new_field_name)] = data[field_name]
                 data.pop(field_name)
+
     return rename_field
 
 def update_rdf(key, data, errors, context):
