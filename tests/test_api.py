@@ -39,9 +39,8 @@ class TestAPI(WsgiAppCase):
         dataset = json.loads(response.body)['result']
 
         old_tags = dataset.pop('keywords')
-        new_tags = old_tags[:]
-        new_tag = u'test-keyword'
-        new_tags.append({'name': new_tag})
+        new_tag_names = [u'test-keyword1', u'test-keyword2']
+        new_tags = old_tags + [{'name': name} for name in new_tag_names]
         dataset['keywords'] = new_tags
 
         params = json.dumps(dataset)
@@ -49,9 +48,10 @@ class TestAPI(WsgiAppCase):
                                  extra_environ={'Authorization': 'tester'})
         updated_dataset = json.loads(response.body)['result']
 
-        old_tag_names = [tag['name'] for tag in old_tags]
-        new_tag_names = [tag['name'] for tag in updated_dataset['keywords']]
+        old_tags = [tag['name'] for tag in old_tags]
+        updated_tags = [tag['name'] for tag in updated_dataset['keywords']]
 
-        for tag in old_tag_names:
-            assert tag in new_tag_names
-        assert new_tag in new_tag_names
+        for tag in old_tags:
+            assert tag in updated_tags
+        for tag in new_tag_names:
+            assert tag in updated_tags
