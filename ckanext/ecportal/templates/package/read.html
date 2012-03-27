@@ -20,15 +20,14 @@
 
   <py:match path="primarysidebar">
 
-    <!-- TODO: look up license title during package read call -->
-    <!-- <li py:if="c.pkg.license_id" id="dataset-license" class="sidebar-section"> -->
-    <!--   <strong>License:</strong> -->
-    <!--     <py:choose test=""> -->
-    <!--       <span py:when="c.pkg_dict.get('license_url')"><a -->
-    <!--           href="${c.pkg_dict.get('license_url')}" rel="dc:rights">${c.pkg_dict.get('license_title')}</a></span> -->
-    <!--       <span py:when="c.pkg.license" property="dc:rights">${c.pkg_dict.get('license_title')}</span> -->
-    <!--     </py:choose> -->
-    <!-- </li> -->
+    <li py:if="c.pkg_dict.get('license_id')" id="dataset-license" class="sidebar-section">
+      <strong>License:</strong>
+        <py:choose test="">
+          <span py:when="c.pkg_dict.get('license_url')"><a
+              href="${c.pkg_dict.get('license_url')}" rel="dc:rights">${c.pkg_dict.get('license_title')}</a></span>
+          <span py:when="c.pkg_dict.get('license_id')" property="dc:rights">${c.pkg_dict.get('license_title')}</span>
+        </py:choose>
+    </li>
 
     <li py:if="[tag for tag in c.pkg_dict.get('tags', []) if not tag.get('vocabulary_id')]" class="sidebar-section">
       <h3>Keywords</h3>
@@ -57,16 +56,6 @@
         </py:for>
       </ul>
     </li>
-
-    <!-- <py:if test="not(c.pkg.isopen() and c.pkg.resources)"> -->
-    <!--   <h3 i18n:msg="">This dataset is Not Open</h3>  -->
-    <!--   <p>Either because it is not openly licensed or is missing -->
-    <!--   downloadable resources.</p> -->
-    <!--   <p class="widget_action"> -->
-    <!--     <a href="http://isitopendata.org/enquiry/start/?ckan_dataset=${c.pkg.name}">Start an enquiry on IsItOpenData &raquo;</a> -->
-    <!--   </p> -->
-    <!-- </py:if> -->
-    <!-- </li> -->
 
   </py:match>
 
