@@ -130,15 +130,36 @@ current_locale = h.get_locales_dict().get(request.environ['CKAN_LANG'])
       </header>
     </div>
 
-    <py:with vars="messages = list(h._flash.pop_messages())">
-    <div class="flash-messages container">
-      <div class="alert ${m.category}" py:for="m in messages">
-        ${h.literal(m)}
-      </div>
-    </div>
-    </py:with>
-
     <div id="main" class="container" role="main">
+
+      <div class="row odp-menu">
+        <div class="span12 odp-menu-container">
+          <div class="region region-menu">
+            <div id="block-menu-menu-ec-open-data-main-menu" class="block block-menu">
+
+              <div class="odp-menu-content">
+                <ul class="odp-menu">
+                  <li class="first leaf"><a href="/open-data/" title="">Home</a></li>
+                  <li class="leaf"><a href="/open-data/data" title="" class="active">Data</a></li>
+                  <li class="leaf"><a href="/open-data/apps" title="">Applications</a></li>
+                  <li class="leaf"><a href="/open-data/linked-data" title="">Linked Data</a></li>
+                  <li class="leaf"><a href="/open-data/forums" title="">Forums</a></li>
+                  <li class="last leaf"><a href="/open-data/blogs" title="">Blogs</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <py:with vars="messages = list(h._flash.pop_messages())">
+      <div class="flash-messages container">
+        <div class="alert ${m.category}" py:for="m in messages">
+          ${h.literal(m)}
+        </div>
+      </div>
+      </py:with>
+
       <h1 py:if="defined('page_heading')" class="page_heading">${page_heading()}</h1>
       <div class="row-fluid">
         <div class="span12">
