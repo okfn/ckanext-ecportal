@@ -60,7 +60,8 @@ class ECPortalDatasetForm(SingletonPlugin):
         c.is_sysadmin = Authorizer().is_sysadmin(c.user)
 
         groups = get_action('group_list')(context, {'all_fields': True})
-        c.publishers = [(g['title'], g['name']) for g in groups if g.get('type') == u'publisher']
+        group_type = pylons.config.get('ckan.default.group_type', 'publisher')
+        c.publishers = [(g['title'], g['name']) for g in groups if g.get('type') == group_type]
 
         # get geo tag translations (full names)
         # eg: 'UK' translates to 'United Kingdom' in English
