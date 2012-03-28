@@ -3,6 +3,7 @@ from ckan import model
 from ckan import plugins
 from ckan.tests import WsgiAppCase
 from create_test_data import CreateTestData
+import ckan.lib.helpers as h
 
 try:
     import json
@@ -38,7 +39,14 @@ class TestAPI(WsgiAppCase):
                                  params=dataset_json,
                                  extra_environ={'Authorization': 'tester'})
         dataset = json.loads(response.body)['result']
-        assert 'dct=' in dataset['rdf']
+        assert 'owl=' in dataset['rdf']
+
+        # Fetch RDF page
+        response = self.app.get(h.url_for(
+            controller='package', action='read', id='rdfpackage2'
+        ) + ".rdf")
+        assert '/dataset/rdfpackage2' in response.body, response.body
+
 
     def test_package_rdf_create_ns_new(self):
         rdf = ('<rdf:RDF '
@@ -56,7 +64,13 @@ class TestAPI(WsgiAppCase):
                                  params=dataset_json,
                                  extra_environ={'Authorization': 'tester'})
         dataset = json.loads(response.body)['result']
-        assert 'dct=' in dataset['rdf']
+        assert 'owl=' in dataset['rdf'], dataset['rdf']
+
+        # Fetch RDF page
+        response = self.app.get(h.url_for(
+            controller='package', action='read', id='rdfpackage1'
+        ) + ".rdf")
+        assert '/dataset/rdfpackage1' in response.body, response.body
 
 
     def test_keywords_create(self):
