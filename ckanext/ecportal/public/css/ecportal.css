@@ -3,6 +3,11 @@
     width: 984px;
 }
 
+#main {
+    border: 1px solid #369;
+    padding: 9px;
+}
+
 .page_heading {
     margin-top: 0;
 }
@@ -14,13 +19,18 @@ body.no-sidebar .content-outer {
 /****************************************************************************/
 /* Header
 /****************************************************************************/
+header.container {
+    width: 1002px;
+}
+
 .header.outer {
     line-height: 1.4;
     border: 1px solid #369;
     box-shadow: none;
     margin-bottom: 10px;
-    width: 984px;
-	margin: 0 auto 50px;
+    width: 1002px;
+	margin: 0 auto 0;
+    background-color: #ffffff;
 }
 
 header {
@@ -165,7 +175,7 @@ div#banner-image-title {
 #header-row2 {
 	position: absolute;
 	top: 100px;
-    width: 744px;
+    width: 762px;
     padding: 5px 0px 15px 240px;
     background-color: #0065a2;
 	font-size: 21px;
@@ -181,7 +191,7 @@ div#banner-image-title {
 #path {
     position: absolute;
     top: 145px;
-    width: 984px;
+    width: 1002px;
     background-color: #074a8b;
     color: #ffffff;
     font-size: 10px;
@@ -221,12 +231,15 @@ div#banner-image-title {
 /* Footer                                                                   */
 /****************************************************************************/
 
+footer.container {
+    width: 1004px;
+}
+
 .footer.outer {
-    width: 984px;
     margin: 0 auto;
     background-color: #ffffff;
     background-image: none;
-    border-top: 1px solid #074a8b;
+    border: 0;
 }
 
 footer h3 {
