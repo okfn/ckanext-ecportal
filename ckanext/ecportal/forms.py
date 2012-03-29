@@ -61,7 +61,7 @@ class ECPortalDatasetForm(SingletonPlugin):
 
         groups = get_action('group_list')(context, {'all_fields': True})
         group_type = pylons.config.get('ckan.default.group_type', 'publisher')
-        c.publishers = [(g['title'], g['name']) for g in groups if g.get('type') == group_type]
+        c.publishers = [(g['title'], g['id']) for g in groups if g.get('type') == group_type]
 
         # get geo tag translations (full names)
         # eg: 'UK' translates to 'United Kingdom' in English
@@ -162,6 +162,10 @@ class ECPortalDatasetForm(SingletonPlugin):
             'rdf': [ignore_missing, unicode, update_rdf, convert_to_extras],
             '__after': [duplicate_extras_key, rename('keywords', 'tags')],
         })
+
+        schema['groups'].update({
+            'capacity': [ ignore_missing, unicode ]
+        })
         return schema
 
     def db_to_form_schema(data, package_type=None):
@@ -194,7 +198,8 @@ class ECPortalDatasetForm(SingletonPlugin):
 
         schema['groups'].update({
             'name': [not_empty, unicode],
-            'title': [ignore_missing]
+            'title': [ignore_missing],
+            'capacity': [ ignore_missing, unicode ]
         })
 
         # Remove isodate validator

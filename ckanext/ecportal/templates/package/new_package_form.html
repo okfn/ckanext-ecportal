@@ -1,8 +1,8 @@
-<form 
+<form
   py:with="tab_mode=(c.action=='edit')"
-  class="${'tab-content' if tab_mode else ''} ${'has-errors' if errors else ''} form-horizontal" 
-  id="dataset-edit" 
-  method="post" 
+  class="${'tab-content' if tab_mode else ''} ${'has-errors' if errors else ''} form-horizontal"
+  id="dataset-edit"
+  method="post"
   xmlns:i18n="http://genshi.edgewall.org/i18n"
   xmlns:py="http://genshi.edgewall.org/"
   xmlns:xi="http://www.w3.org/2001/XInclude" >
@@ -97,15 +97,29 @@
     </div>
   </div>
 
+<?python
+organization = data.get('groups', {})
+if organization:
+    organization = organization[0]
+?>
+
   <div class="control-group publisher-field">
     <label class="control-label" for="published_by">Published By</label>
     <div class="controls">
-      <select id="published_by" name="published_by">
+      <select id="published_by" name="groups__0__id">
         <py:for each="publisher_desc, publisher_id in c.publishers">
           <option value="${publisher_id}" py:attrs="{'selected': 'selected' if data.get('published_by', '') == publisher_id else None}" >${publisher_desc}</option>
         </py:for>
       </select>
       <p>The publisher of the dataset.</p>
+        <label for='cap_public'>
+          <input id='cap_public' type='radio' name='groups__0__capacity' value='public' py:attrs="{'checked':'checked'} if organization.get('capacity','') in ['public', ''] else {}"/>
+          Public</label>
+
+          <label for='cap_private'>
+          <input id='cap_private' type='radio' name='groups__0__capacity' value='private' py:attrs="{'checked':'checked'} if organization.get('capacity','') == 'private' else {}"/>
+          Private</label>
+
     </div>
   </div>
 </fieldset>
@@ -124,19 +138,19 @@
       <p>The type of dataset.</p>
       <br />
       <p>Primary legal materials include documents of primary authority issued by governmental bodies,
-      such as court opinions, statutes, and regulations. They also include the supporting documents 
-      and other media issued and maintained by those bodies, such as dockets, hearings, forms, 
+      such as court opinions, statutes, and regulations. They also include the supporting documents
+      and other media issued and maintained by those bodies, such as dockets, hearings, forms,
       oral arguments, and legislative histories. These materials can be found in every branch,
-      at every level, national, tribal, state and local, and should be available to anyone with the will 
+      at every level, national, tribal, state and local, and should be available to anyone with the will
       and the heart to obtain them.</p>
       <br />
-      <p>Government operational records are typically administrative records (rather than legal records) 
-      that are useful for the public to identify conflicts of interest and to perform oversight. 
+      <p>Government operational records are typically administrative records (rather than legal records)
+      that are useful for the public to identify conflicts of interest and to perform oversight.
       Contracts/grants, personal financial disclosures, etc. These documents have little utility aside from oversight.</p>
       <br />
-      <p>The last category "civic capital" are government records that have utility that have nothing to do 
+      <p>The last category "civic capital" are government records that have utility that have nothing to do
       with government per se.  Environmental and weather data, health and safety data, corporate compliance records.
-      These records can save lives, make markets more efficient, etc. These records are closest to 
+      These records can save lives, make markets more efficient, etc. These records are closest to
       Government as a Platform.</p>
       <p class="field_error" py:if="errors.get('type_of_dataset', '')">${errors.get('type_of_dataset', '')}</p>
     </div>
@@ -183,7 +197,7 @@
         </py:for>
       </select>
       <label class="inline" for="update_frequency-other">Other:
-        <input class="medium-width" id="update_frequency-other" name="update_frequency-other" 
+        <input class="medium-width" id="update_frequency-other" name="update_frequency-other"
           type="text" value="${data.get('update_frequency-other', '')}"/>
       </label>
       <p>The frequency with which dataset is published.</p>
@@ -236,7 +250,7 @@
         multiple="multiple" style="width: 30em;">
         <py:for each="tag_name, tag_translation in c.geographical_coverage">
           <py:choose test="">
-            <option py:when="tag_name in data.get('geographical_coverage', [])" 
+            <option py:when="tag_name in data.get('geographical_coverage', [])"
               selected="selected" value="${tag_name}">${tag_translation}</option>
             <option py:otherwise="" value="${tag_name}">${tag_translation}</option>
           </py:choose>
@@ -372,7 +386,7 @@
     <dd>
       <p>Do you really want to change the state of this dataset? &nbsp;&nbsp;<button class="dataset-delete btn">Yes!</button></p>
       <span>
-      This dataset is&nbsp;&nbsp; 
+      This dataset is&nbsp;&nbsp;
       <select id="state" class="dataset-delete" name="state" style="display:inline;">
         <option py:attrs="{'selected': 'selected' if data.get('state') == 'active' else None}" value="active">active</option>
         <option py:attrs="{'selected': 'selected' if data.get('state') == 'deleted' else None}" value="deleted">deleted</option>
