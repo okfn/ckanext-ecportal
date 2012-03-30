@@ -119,7 +119,7 @@
       </span>
 
       <div class="search_meta">
-        <py:if test="package.resources">
+        <py:if test="package.get('resources')">
           <ul class="dataset_formats">
             <py:for each="resource in package.resources">
               <py:if test="resource.get('format')">
