@@ -12,7 +12,7 @@
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 
-  <title>${page_title()} - ${g.site_title}</title>
+  <title>${page_title()} | ${g.site_title}</title>
   <meta name="description" content="" />
   <meta name="author" content="" />
 
@@ -133,7 +133,7 @@ current_locale = h.get_locales_dict().get(request.environ['CKAN_LANG'])
     <div id="main" class="container" role="main">
 
       <div class="row odp-menu">
-        <div class="span12 odp-menu-container">
+        <div class="odp-menu-container">
           <div class="region region-menu">
             <div id="block-menu-menu-ec-open-data-main-menu" class="block block-menu">
 

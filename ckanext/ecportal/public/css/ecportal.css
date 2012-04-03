@@ -1,11 +1,11 @@
 .container {
     margin: 0 auto;
-    width: 984px;
+    width: 954px;
 }
 
 #main {
     border: 1px solid #369;
-    padding: 9px;
+    padding: 0 24px 10px 24px;
 }
 
 .page_heading {
@@ -13,7 +13,7 @@
 }
 
 body.no-sidebar .content-outer {
-    width: 986px;
+    width: 954px;
 }
 
 /****************************************************************************/
