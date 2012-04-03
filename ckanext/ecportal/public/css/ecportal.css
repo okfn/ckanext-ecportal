@@ -62,7 +62,7 @@ header #site-name a {
 
 header #services {
 	position:absolute;
-    width:984px;
+    width:978px;
     padding-top: 4px;
     z-index: 10;
     font-size: 10px;
@@ -131,7 +131,6 @@ header .menu a {
     text-shadow: none;
     font-size: 10px;
 	color:#396ea2;
-    padding-right: 5px;
 }
 
 header .menu a:hover {
@@ -142,7 +141,7 @@ header .menu.account {
     position: absolute;
     top: 30px;
     text-align: right;
-    width: 984px;
+    width: 978px;
     z-index: 5;
 }
 
@@ -150,7 +149,7 @@ header #mainmenu {
     position: absolute;
     top: 60px;
     text-align: right;
-    width: 984px;
+    width: 978px;
     z-index: 5;
 }
 
@@ -200,7 +199,7 @@ div#banner-image-title {
 
 #path ul{
 	position:relative;
-    margin-left: 10px;
+    margin-left: 24px;
 }
 	
 #path li {
