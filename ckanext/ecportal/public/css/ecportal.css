@@ -1,13 +1,11 @@
 .container {
     margin: 0 auto;
-    width: 954px;
+    width: 952px;
 }
 
 #main {
-    border: 1px solid #369;
+    border: 2px solid #369;
     padding: 0 24px 10px 24px;
-    background-color: #f4f4f4;
-    /* color: #8b8b8b; */
 }
 
 .page_heading {
@@ -15,25 +13,24 @@
 }
 
 body.no-sidebar .content-outer {
-    width: 954px;
+    width: 952px;
 }
 
 a, a:visited {
-    /* color: #8b8b8b; */
-    color: #88af3c;
+    color: #074b8c;
     text-decoration: none;
 }
 a:hover {
-    /* color: #8b8b8b; */
-    color: #88af3c;
+    color: #074b8c;
 }
 
 .dropdown-menu a {
-    color: #88af3c;
+    color: #074b8c;
 }
 
 .activity-stream .activity .verb {
-    background-color: transparent;
+    margin: 0;
+    padding: 0;
 }
 
 /****************************************************************************/
@@ -354,7 +351,13 @@ footer li {
 /* Home page
 /****************************************************************************/
 body.index.home .front-page .action-box {
-    background-color: #f4f4f4;
+    background-color: #ffffff;
+}
+body.index.home .front-page .action-box-inner {
+    margin: 0;
+}
+body.index.home .front-page .action-box h1 {
+    padding: 0;
 }
 
 /****************************************************************************/
@@ -385,45 +388,21 @@ body.index.home .front-page .action-box {
 /****************************************************************************/
 /* View Dataset Page
 /****************************************************************************/
-.resource-list li {
-    background: transparent;
-}
-
-.resource-list li:hover {
-    background-color: #ffffff;
-}
-
 .resource-list li a {
-    color: #88af3c;
+    color: #074b8c;
 }
 
 .resource-list li a:hover {
-    color: #88af3c;
+    color: #074b8c;
 }
 
 /****************************************************************************/
 /* Edit Dataset Page
 /****************************************************************************/
 
-form#dataset-edit {
-    background-color: #ffffff;
-}
-
-.form-actions {
-    background-color: #ffffff;
-}
-
 #dataset-edit p {
     margin:0 ;
     line-height: 16px;
-}
-
-.resource-panel {
-    background: none repeat scroll 0 0 #ffffff;
-}
-
-.resource-list li.active {
-    background-color: #ffffff;
 }
 
 #dataset-edit input,
