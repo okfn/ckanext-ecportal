@@ -6,6 +6,8 @@
 #main {
     border: 1px solid #369;
     padding: 0 24px 10px 24px;
+    background-color: #f4f4f4;
+    /* color: #8b8b8b; */
 }
 
 .page_heading {
@@ -14,6 +16,24 @@
 
 body.no-sidebar .content-outer {
     width: 954px;
+}
+
+a, a:visited {
+    /* color: #8b8b8b; */
+    color: #88af3c;
+    text-decoration: none;
+}
+a:hover {
+    /* color: #8b8b8b; */
+    color: #88af3c;
+}
+
+.dropdown-menu a {
+    color: #88af3c;
+}
+
+.activity-stream .activity .verb {
+    background-color: transparent;
 }
 
 /****************************************************************************/
@@ -331,9 +351,20 @@ footer li {
 }
 
 /****************************************************************************/
+/* Home page
+/****************************************************************************/
+body.index.home .front-page .action-box {
+    background-color: #f4f4f4;
+}
+
+/****************************************************************************/
 /* Add Dataset Page
 /****************************************************************************/
 
+.dataset-create-form form {
+    border: 1px solid #DDDDDD;
+    padding: 10px;
+}
 .dataset-create-form fieldset {
     display: none;
 }
@@ -352,12 +383,47 @@ footer li {
 }
 
 /****************************************************************************/
+/* View Dataset Page
+/****************************************************************************/
+.resource-list li {
+    background: transparent;
+}
+
+.resource-list li:hover {
+    background-color: #ffffff;
+}
+
+.resource-list li a {
+    color: #88af3c;
+}
+
+.resource-list li a:hover {
+    color: #88af3c;
+}
+
+/****************************************************************************/
 /* Edit Dataset Page
 /****************************************************************************/
+
+form#dataset-edit {
+    background-color: #ffffff;
+}
+
+.form-actions {
+    background-color: #ffffff;
+}
 
 #dataset-edit p {
     margin:0 ;
     line-height: 16px;
+}
+
+.resource-panel {
+    background: none repeat scroll 0 0 #ffffff;
+}
+
+.resource-list li.active {
+    background-color: #ffffff;
 }
 
 #dataset-edit input,
@@ -378,13 +444,16 @@ body.package.edit input[type="checkbox"] {
     border: 1px solid #fbc2c4;
 }
 
-.markdown-editor textarea.markdown-input {
-width: 400px;
-height: 70px;
-margin-bottom: 5px;
-padding: 5px;
-display: block;
-}
+/* TODO: this needs to be a different width on the dataset edit and
+ *       resource edit pages 
+ */ 
+/* .markdown-editor textarea.markdown-input { */
+/* width: 400px; */
+/* height: 70px; */
+/* margin-bottom: 5px; */
+/* padding: 5px; */
+/* display: block; */
+/* } */
 
 /****************************************************************************/
 /* Search Page
