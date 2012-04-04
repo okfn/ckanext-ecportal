@@ -81,10 +81,10 @@ current_locale = h.get_locales_dict().get(request.environ['CKAN_LANG'])
           </div>
           <!-- / Language Selector -->
 
-          <!-- TODO: this will have to change depending on language -->
           <div id="banner-flag">
             <a id="logo" rel="home" title="Home" href="http://ecportal.demo.ckan.org">
-              <img src="${h.url_for_static('/images/logo/logo_en.gif')}" alt="${g.site_title}" title="${g.site_title}" id="logo" />
+              <img src="${h.url_for_static('/images/logo/logo_%s.gif' % current_locale)}"
+                   alt="${g.site_title}" title="${g.site_title}" id="logo" />
             </a>
           </div>
 
