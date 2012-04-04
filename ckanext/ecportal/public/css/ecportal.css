@@ -5,11 +5,16 @@
 
 #main {
     border: 2px solid #369;
-    padding: 0 24px 10px 24px;
+    border-top-width: 1px;
+    padding: 0 15px 10px 15px;
 }
 
 .page_heading {
     margin-top: 0;
+}
+
+body {
+    font-family: Verdana, Arial, Helvetica, "DejaVu Sans", sans-serif;
 }
 
 body.no-sidebar .content-outer {
@@ -37,15 +42,16 @@ a:hover {
 /* Header
 /****************************************************************************/
 header.container {
-    width: 1002px;
+    width: 984px;
 }
 
 .header.outer {
     line-height: 1.4;
     border: 1px solid #369;
+    border-top-width: 0;
     box-shadow: none;
     margin-bottom: 10px;
-    width: 1002px;
+    width: 984px;
 	margin: 0 auto 0;
     background-color: #ffffff;
 }
@@ -79,17 +85,17 @@ header #site-name a {
 
 header #services {
 	position:absolute;
-    width:978px;
-    padding-top: 4px;
+    font-size: 10.8px;
+    width:982px;
+    padding: 1px;
     z-index: 10;
-    font-size: 10px;
 }
 
 header #services-menu {
     position: absolute;
-    right: 225px;
+    right: 140px;
     text-align: right;
-    padding-top: 2px;
+    padding-top: 1px;
 }
 
 header #services-menu ul li {
@@ -101,7 +107,7 @@ header #services-menu ul li a,
 header #services-menu ul li a:visited {
 	color:#396ea2;
 	text-decoration:none;
-	padding:0 0 3px 5px;
+	padding: 0;
 	border:0;
 	font-weight:normal;
 	display:inline-block;
@@ -116,10 +122,10 @@ header #services-menu ul li a:active {
 ul.language-dd-selector {
 	border:1px solid #9AB;
 	background-color:#FFF;
-	width:216px;
+	width:130px;
 	list-style-type: none;
 	padding-left:0px;
-	margin-right:1px;
+	margin: 0;
 	float:right;
 }
 ul.language-dd-selector li img{
@@ -158,7 +164,7 @@ header .menu.account {
     position: absolute;
     top: 30px;
     text-align: right;
-    width: 978px;
+    width: 982px;
     z-index: 5;
 }
 
@@ -166,7 +172,7 @@ header #mainmenu {
     position: absolute;
     top: 60px;
     text-align: right;
-    width: 978px;
+    width: 982px;
     z-index: 5;
 }
 
@@ -191,7 +197,7 @@ div#banner-image-title {
 #header-row2 {
 	position: absolute;
 	top: 100px;
-    width: 762px;
+    width: 744px;
     padding: 5px 0px 15px 240px;
     background-color: #0065a2;
 	font-size: 21px;
@@ -207,16 +213,16 @@ div#banner-image-title {
 #path {
     position: absolute;
     top: 145px;
-    width: 1002px;
+    width: 984px;
     background-color: #074a8b;
     color: #ffffff;
-    font-size: 10px;
+    font-size: 10.8px;
     height: 17px;
 }
 
 #path ul{
 	position:relative;
-    margin-left: 24px;
+    margin-left: 10px;
 }
 	
 #path li {
@@ -316,7 +322,7 @@ div.odp-menu-container {
 /****************************************************************************/
 
 footer.container {
-    width: 1004px;
+    width: 984px;
 }
 
 .footer.outer {
