@@ -49,6 +49,7 @@
   ">
   <div id="wrap">
     <div class="header outer">
+      <a id="top" />
       <header class="container">
 
         <div id="header-row1">
@@ -193,7 +194,17 @@ current_locale = h.get_locales_dict().get(request.environ['CKAN_LANG'])
           </div>
         </div>
       </div>
-    </div>
+
+      <div id="content-last-updated" class="row-fluid">
+        <?python
+        from datetime import date
+        current_date = date.today().strftime('%d/%m/%Y')
+        ?>
+        Last update: ${current_date} |
+        <a href="#top">Top</a>
+      </div>
+
+    </div> <!-- /main -->
 
   </div>
 
