@@ -92,7 +92,7 @@ current_locale = h.get_locales_dict().get(request.environ['CKAN_LANG'])
           <div class="menu account">
             <span class="ckan-logged-in" style="display: none;">
               <a href="${h.url_for(controller='user',action='me')}">${h.gravatar((c.userobj.email_hash if c and c.userobj else ''),size=16)} ${c.user}</a>
-              <a href="${h.url_for('/user/logout')}">Logout</a>
+              <a href="${h.url_for('/user/_logout')}">Logout</a>
             </span>
             <span class="ckan-logged-out">
               <a href="${h.url_for(controller='user',action='login')}">Login</a>
@@ -259,6 +259,7 @@ current_locale = h.get_locales_dict().get(request.environ['CKAN_LANG'])
     CKAN.plugins.push('storage');
     </py:if>
     CKAN.SITE_URL = '${h.url('/')}';
+    CKAN.LANG = '${h.lang()}';
     // later use will add offsets with leading '/' so ensure no trailing slash
     CKAN.SITE_URL = CKAN.SITE_URL.replace(/\/$/, '');
     $(document).ready(function() {
