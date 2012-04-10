@@ -358,6 +358,12 @@ footer li {
 #sidebar ul {
     margin-left: 0;
 }
+#sidebar div.facet-box {
+    margin-bottom: 2em;
+}
+#sidebar h2 {
+    line-height: 18px;
+}
 
 /****************************************************************************/
 /* Home page
