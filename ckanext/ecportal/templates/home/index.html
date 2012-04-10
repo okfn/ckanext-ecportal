@@ -5,14 +5,13 @@
   
   <py:def function="body_class">no-sidebar</py:def>
 
-  <py:def function="page_title">Welcome</py:def>
+  <py:def function="page_title">Data</py:def>
 
   <div py:match="//div[@id='content']" class="front-page">
     <div class="row-fluid">
-      <div class="span6 action-box">
+      <div class="span12 action-box">
         <div class="action-box-inner find">
           <h1>Find data</h1>
-
           <form action="${h.url_for(controller='package', action='search')}" method="GET"> 
             <input name="q" value="" class="search-field" placeholder="${_('Find datasets')}" /> 
           </form> 
@@ -21,31 +20,29 @@
           that you can browse, learn about and download. 
         </div>
       </div>
-      <div class="span6 action-box last">
-        <div class="action-box-inner share">
-        <h1>Share data</h1>
-
-        Add your own datasets to share them with others and
-        to find other people interested in your data.
-        
-        <py:choose test="h.am_authorized(c, actions.PACKAGE_CREATE)">
-          <a py:when="" href="${h.url_for(controller='package', action='new')}" class="create-button">Create a dataset &raquo;</a>
-          <py:otherwise>
-            <a href="${h.url_for(controller='user', action='login')}" class="create-button">Sign up &raquo;</a>
-          </py:otherwise>
-        </py:choose>
+    </div>
+    <div class="row-fluid">
+      <div class="span12 action-box">
+        <div class="action-box-inner">
+          <h1>Top Publishers</h1>
+          <py:for each="i, group_dict in enumerate(c.groups[:6])">
+            <div py:if="group_dict['packages']" class="group">
+              <a href="${h.url_for(controller='group', action='read', id=group_dict['name'])}">
+                ${group_dict['title']} (${group_dict['packages']} datasets)
+              </a>
+              <p py:if="len(group_dict['description'])">${h.markdown_extract(group_dict['description'])}</p>
+            </div>
+          </py:for>
         </div>
       </div>
     </div>
     <div class="row-fluid">
-    <!-- <div class="span4 action-box" style="margin-top:1em;"> -->
-    <!-- </div> -->
-      <div class="span12 action-box last" style="margin-top:1em;">
+      <div class="span12 action-box">
         <div class="action-box-inner">
-            <h1>Recently Changed Datasets</h1>
-                <div class="activity-stream">
-                ${c.recently_changed_packages_activity_stream}
-                </div>
+          <h1>Recent Updates</h1>
+          <div class="activity-stream">
+          ${c.recently_changed_packages_activity_stream}
+          </div>
         </div>
       </div>
     </div>

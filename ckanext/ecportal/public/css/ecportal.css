@@ -1,34 +1,57 @@
 .container {
     margin: 0 auto;
-    width: 984px;
+    width: 952px;
 }
 
 #main {
-    border: 1px solid #369;
-    padding: 9px;
+    border: 2px solid #369;
+    border-top-width: 1px;
+    padding: 0 15px 10px 15px;
 }
 
 .page_heading {
     margin-top: 0;
 }
 
+body {
+    font-family: Verdana, Arial, Helvetica, "DejaVu Sans", sans-serif;
+}
+
 body.no-sidebar .content-outer {
-    width: 986px;
+    width: 952px;
+}
+
+a, a:visited {
+    color: #074b8c;
+    text-decoration: none;
+}
+a:hover {
+    color: #074b8c;
+}
+
+.dropdown-menu a {
+    color: #074b8c;
+}
+
+.activity-stream .activity .verb {
+    margin: 0;
+    padding: 0;
 }
 
 /****************************************************************************/
 /* Header
 /****************************************************************************/
 header.container {
-    width: 1002px;
+    width: 984px;
 }
 
 .header.outer {
     line-height: 1.4;
     border: 1px solid #369;
+    border-top-width: 0;
     box-shadow: none;
     margin-bottom: 10px;
-    width: 1002px;
+    width: 984px;
 	margin: 0 auto 0;
     background-color: #ffffff;
 }
@@ -62,17 +85,17 @@ header #site-name a {
 
 header #services {
 	position:absolute;
-    width:984px;
-    padding-top: 4px;
+    font-size: 10.8px;
+    width:982px;
+    padding: 1px;
     z-index: 10;
-    font-size: 10px;
 }
 
 header #services-menu {
     position: absolute;
-    right: 225px;
+    right: 140px;
     text-align: right;
-    padding-top: 2px;
+    padding-top: 1px;
 }
 
 header #services-menu ul li {
@@ -84,7 +107,7 @@ header #services-menu ul li a,
 header #services-menu ul li a:visited {
 	color:#396ea2;
 	text-decoration:none;
-	padding:0 0 3px 5px;
+	padding: 0;
 	border:0;
 	font-weight:normal;
 	display:inline-block;
@@ -99,10 +122,10 @@ header #services-menu ul li a:active {
 ul.language-dd-selector {
 	border:1px solid #9AB;
 	background-color:#FFF;
-	width:216px;
+	width:130px;
 	list-style-type: none;
 	padding-left:0px;
-	margin-right:1px;
+	margin: 0;
 	float:right;
 }
 ul.language-dd-selector li img{
@@ -131,7 +154,6 @@ header .menu a {
     text-shadow: none;
     font-size: 10px;
 	color:#396ea2;
-    padding-right: 5px;
 }
 
 header .menu a:hover {
@@ -142,7 +164,7 @@ header .menu.account {
     position: absolute;
     top: 30px;
     text-align: right;
-    width: 984px;
+    width: 982px;
     z-index: 5;
 }
 
@@ -150,7 +172,7 @@ header #mainmenu {
     position: absolute;
     top: 60px;
     text-align: right;
-    width: 984px;
+    width: 982px;
     z-index: 5;
 }
 
@@ -175,7 +197,7 @@ div#banner-image-title {
 #header-row2 {
 	position: absolute;
 	top: 100px;
-    width: 762px;
+    width: 744px;
     padding: 5px 0px 15px 240px;
     background-color: #0065a2;
 	font-size: 21px;
@@ -191,10 +213,10 @@ div#banner-image-title {
 #path {
     position: absolute;
     top: 145px;
-    width: 1002px;
+    width: 984px;
     background-color: #074a8b;
     color: #ffffff;
-    font-size: 10px;
+    font-size: 10.8px;
     height: 17px;
 }
 
@@ -300,7 +322,7 @@ div.odp-menu-container {
 /****************************************************************************/
 
 footer.container {
-    width: 1004px;
+    width: 984px;
 }
 
 .footer.outer {
@@ -323,6 +345,12 @@ footer li {
     display: inline;
 }
 
+#content-last-updated {
+    color: #074b8c;
+    margin-top: 2em;
+    padding-left: 360px;
+}
+
 /****************************************************************************/
 /* Sidebar
 /****************************************************************************/
@@ -332,9 +360,34 @@ footer li {
 }
 
 /****************************************************************************/
+/* Home page
+/****************************************************************************/
+body.index.home .front-page .action-box {
+    background-color: #ffffff;
+    margin-bottom: 3em;
+}
+body.index.home .front-page .action-box-inner {
+    margin: 0;
+    min-height: 0;
+}
+body.index.home .front-page .action-box h1 {
+    padding: 0;
+}
+body.index.home .front-page .group {
+    min-height: 4em;
+}
+body.index.home .front-page .group p {
+    min-height: 0;
+}
+
+/****************************************************************************/
 /* Add Dataset Page
 /****************************************************************************/
 
+.dataset-create-form form {
+    border: 1px solid #DDDDDD;
+    padding: 10px;
+}
 .dataset-create-form fieldset {
     display: none;
 }
@@ -350,6 +403,17 @@ footer li {
 .dataset-create-form dd.description-field,
 .dataset-create-form dd.description-instructions {
     display: block;
+}
+
+/****************************************************************************/
+/* View Dataset Page
+/****************************************************************************/
+.resource-list li a {
+    color: #074b8c;
+}
+
+.resource-list li a:hover {
+    color: #074b8c;
 }
 
 /****************************************************************************/
@@ -379,13 +443,16 @@ body.package.edit input[type="checkbox"] {
     border: 1px solid #fbc2c4;
 }
 
-.markdown-editor textarea.markdown-input {
-width: 400px;
-height: 70px;
-margin-bottom: 5px;
-padding: 5px;
-display: block;
-}
+/* TODO: this needs to be a different width on the dataset edit and
+ *       resource edit pages 
+ */ 
+/* .markdown-editor textarea.markdown-input { */
+/* width: 400px; */
+/* height: 70px; */
+/* margin-bottom: 5px; */
+/* padding: 5px; */
+/* display: block; */
+/* } */
 
 /****************************************************************************/
 /* Search Page

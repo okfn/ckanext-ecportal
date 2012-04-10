@@ -449,7 +449,7 @@ class ECPortalCommand(CkanCommand):
 
                 child_dict = {
                     'name': unicode(groups[child]['dict']['name']),
-                    'capacity': u'member'
+                    'capacity': u'public'
                 }
                 if 'groups' in parent:
                     parent['groups'].append(child_dict)

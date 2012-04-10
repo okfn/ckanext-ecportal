@@ -11,16 +11,6 @@
 
   <py:match path="primarysidebar">
     
-    <li class="widget-container boxed widget_text" py:if="h.check_access('package_create')">
-        <h3>Add a dataset</h3>
-        <p>
-            Do you know of a dataset that should be added to ${g.site_title}?
-            <br/>
-            
-            <a href="${h.url_for(controller='package', action='new', id=None)}">Register it now</a>.
-        </p>
-    </li>
- 
     ${facet_sidebar('tags')}
     ${facet_sidebar('res_format')}
     ${facet_sidebar('groups', label=h.group_name_to_title)}
