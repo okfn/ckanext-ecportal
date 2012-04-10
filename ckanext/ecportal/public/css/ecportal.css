@@ -364,12 +364,20 @@ footer li {
 /****************************************************************************/
 body.index.home .front-page .action-box {
     background-color: #ffffff;
+    margin-bottom: 3em;
 }
 body.index.home .front-page .action-box-inner {
     margin: 0;
+    min-height: 0;
 }
 body.index.home .front-page .action-box h1 {
     padding: 0;
+}
+body.index.home .front-page .group {
+    min-height: 4em;
+}
+body.index.home .front-page .group p {
+    min-height: 0;
 }
 
 /****************************************************************************/
