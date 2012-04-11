@@ -83,29 +83,10 @@ current_locale = h.get_locales_dict().get(request.environ['CKAN_LANG'])
           <!-- / Language Selector -->
 
           <div id="banner-flag">
-            <a id="logo" rel="home" title="Home" href="/open-data/">
+            <a id="logo" rel="home" title="Home" href="/open-data/${current_locale}/">
               <img src="${h.url_for_static('/images/logo/logo_%s.gif' % current_locale)}"
                    alt="${g.site_title}" title="${g.site_title}" id="logo" />
             </a>
-          </div>
-
-          <div class="menu account">
-            <span class="ckan-logged-in" style="display: none;">
-              <a href="${h.url_for(controller='user',action='me')}">${h.gravatar((c.userobj.email_hash if c and c.userobj else ''),size=16)} ${c.user}</a>
-              <a href="${h.url_for('/user/_logout')}">Logout</a>
-            </span>
-            <span class="ckan-logged-out">
-              <a href="${h.url_for(controller='user',action='login')}">Login</a>
-              <a href="${h.url_for(controller='user',action='register')}">Register</a>
-            </span>
-          </div>
-
-          <div class="menu">
-            <div id="mainmenu">
-              <span py:if="h.check_access('package_create')">${h.nav_link(c, _('Add a dataset'), controller='package', action='new')}</span>
-              ${h.nav_link(c, _('Search'), controller='package', action='search', highlight_actions = 'new index')}
-              ${h.nav_link(c, _('Groups'), controller='group', action='index')}
-            </div>
           </div>
 
           <div id="site-name">
@@ -137,7 +118,6 @@ current_locale = h.get_locales_dict().get(request.environ['CKAN_LANG'])
         <div class="odp-menu-container">
           <div class="region region-menu">
             <div id="block-menu-menu-ec-open-data-main-menu" class="block block-menu">
-
               <div class="odp-menu-content">
                 <ul class="odp-menu">
                   <li class="first leaf"><a href="/open-data/${current_locale}/" title="">Home</a></li>
@@ -150,6 +130,26 @@ current_locale = h.get_locales_dict().get(request.environ['CKAN_LANG'])
               </div>
             </div>
           </div>
+        </div>
+      </div>
+
+      <div id="ckan-menu" class="row">
+        <div class="menu account">
+          <span class="ckan-logged-in" style="display: none;">
+            <a href="${h.url_for(controller='user',action='me')}">${h.gravatar((c.userobj.email_hash if c and c.userobj else ''),size=16)} ${c.user}</a> |
+            <a href="${h.url_for('/user/_logout')}">Logout</a>
+          </span>
+          <span class="ckan-logged-out">
+            <a href="${h.url_for(controller='user',action='login')}">Login</a> |
+            <a href="${h.url_for(controller='user',action='register')}">Register</a>
+          </span>
+        </div>
+        <div id="mainmenu" class="menu">
+          <span py:if="h.check_access('package_create')">
+            ${h.nav_link(c, _('Add a dataset'), controller='package', action='new')} |
+          </span>
+          ${h.nav_link(c, _('Search'), controller='package', action='search', highlight_actions = 'new index')} |
+          ${h.nav_link(c, _('Groups'), controller='group', action='index')}
         </div>
       </div>
 

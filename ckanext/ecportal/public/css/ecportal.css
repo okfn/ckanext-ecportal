@@ -149,33 +149,6 @@ ul.language-dd-selector li:hover{
 	color:#036;
 }
 
-header .menu a {
-    text-decoration: none;
-    text-shadow: none;
-    font-size: 10px;
-	color:#396ea2;
-}
-
-header .menu a:hover {
-    text-decoration: underline;
-}
-
-header .menu.account {
-    position: absolute;
-    top: 30px;
-    text-align: right;
-    width: 982px;
-    z-index: 5;
-}
-
-header #mainmenu {
-    position: absolute;
-    top: 60px;
-    text-align: right;
-    width: 982px;
-    z-index: 5;
-}
-
 header #banner-flag {
 	position:absolute;
 	left:40px;
@@ -318,9 +291,33 @@ div.odp-menu-container {
 }
 
 /****************************************************************************/
+/* CKAN Menu
+/****************************************************************************/
+#ckan-menu {
+    margin-bottom: 2em;
+}
+
+.menu a {
+    text-decoration: none;
+    text-shadow: none;
+	color:#396ea2;
+}
+
+.menu a:hover {
+    text-decoration: underline;
+}
+
+.menu.account {
+    float: right;
+}
+
+#mainmenu {
+    padding-left: 20px;
+}
+
+/****************************************************************************/
 /* Footer                                                                   */
 /****************************************************************************/
-
 footer.container {
     width: 984px;
 }
