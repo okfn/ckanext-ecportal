@@ -107,19 +107,23 @@ if organization:
     <label class="control-label" for="published_by">Published By</label>
     <div class="controls">
       <select id="published_by" name="groups__0__id">
-        <py:for each="publisher_desc, publisher_id in c.publishers">
-          <option value="${publisher_id}" py:attrs="{'selected': 'selected' if data.get('published_by', '') == publisher_id else None}" >${publisher_desc}</option>
-        </py:for>
+        <py:with vars="published_by = organization['id'] if organization else data.get('published_by', '')">
+          <py:for each="publisher_desc, publisher_id in c.publishers">
+            <option value="${publisher_id}" py:attrs="{'selected': 'selected' if published_by == publisher_id else None}" >${publisher_desc}</option>
+          </py:for>
+        </py:with>
       </select>
       <p>The publisher of the dataset.</p>
-        <label for='cap_public'>
-          <input id='cap_public' type='radio' name='groups__0__capacity' value='public' py:attrs="{'checked':'checked'} if organization.get('capacity','') in ['public', ''] else {}"/>
-          Public</label>
-
-          <label for='cap_private'>
-          <input id='cap_private' type='radio' name='groups__0__capacity' value='private' py:attrs="{'checked':'checked'} if organization.get('capacity','') == 'private' else {}"/>
-          Private</label>
-
+        <div class="subcontrols">
+          <div>
+            <input id='cap_public' type='radio' name='groups__0__capacity' value='public' py:attrs="{'checked':'checked'} if organization.get('capacity','') in ['public', ''] else {}"/>
+            <label for='cap_public'>Public</label>
+          </div>
+          <div>
+            <input id='cap_private' type='radio' name='groups__0__capacity' value='private' py:attrs="{'checked':'checked'} if organization.get('capacity','') == 'private' else {}"/>
+            <label for='cap_private'>Private</label>
+          </div>
+        </div>
     </div>
   </div>
 </fieldset>

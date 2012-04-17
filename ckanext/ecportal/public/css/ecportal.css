@@ -446,6 +446,14 @@ body.package.edit input[type="checkbox"] {
     border: 1px solid #fbc2c4;
 }
 
+.subcontrols {
+    margin-top: 1em;
+}
+.subcontrols label {
+    display: inline;
+    margin-bottom: 0;
+}
+
 /* TODO: this needs to be a different width on the dataset edit and
  *       resource edit pages 
  */ 
