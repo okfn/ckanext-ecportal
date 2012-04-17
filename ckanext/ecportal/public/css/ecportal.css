@@ -370,7 +370,7 @@ body.index.home .front-page .action-box {
     margin-bottom: 3em;
 }
 body.index.home .front-page .action-box-inner {
-    margin: 0;
+    margin: 0 0 3em 0;
     min-height: 0;
 }
 body.index.home .front-page .action-box h1 {
