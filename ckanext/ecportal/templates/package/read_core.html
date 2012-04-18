@@ -14,9 +14,9 @@
     </div>
 
       <!-- Description -->
-      <div class="notes" py:if="str(c.pkg_notes_formatted).strip()">
+      <div class="notes" py:if="c.pkg_dict.get('description', '').strip()">
         <div id="notes-extract">
-          ${c.pkg_notes_formatted}
+          ${h.format_description(c.pkg_dict['description'])}
         </div>
         <div id="notes-remainder"></div>
         <div id="notes-toggle" style="display: none;">

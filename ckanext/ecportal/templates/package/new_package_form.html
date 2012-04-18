@@ -70,14 +70,15 @@
     <div class="controls">
       <input id="alternative_title" name="alternative_title" type="text"
         value="${data.get('alternative_title', '')}" />
-      <p class="field_error" py:if="errors.get('alternative_title', '')">${errors.get('alternative_title', '')}</p>
+      <p class="field_error" py:if="errors.get('alternative_title', '')">Error: ${errors.get('alternative_title', '')}</p>
     </div>
   </div>
 
   <div class="control-group description-field">
-    <label class="control-label" for="notes">Description</label>
+    <label class="control-label" for="description">Description</label>
     <div class="controls">
-      ${markdown_editor('notes', data.get('notes'), 'notes', _('The main description of the dataset ...'))}
+      ${markdown_editor('description', data.get('description'), 'description', _('The main description of the dataset ...'))}
+      <p class="field_error" py:if="errors.get('description')">Error: ${errors.get('description')}</p>
       <p>The main description of the dataset. It is often displayed with the package title.</p>
       <p>In particular, it should start with a short sentence that describes the data set succinctly,
         because the first few words alone may be used in some views of the data sets.</p>
@@ -136,7 +137,7 @@ if organization:
     </div>
   </div>
 
-  <div py:attrs="{'class': 'control-group error' if errors.get('status') else 'control-group'}">
+  <div class="control-group">
     <label class="control-label" for="status">Status</label>
     <div class="controls">
       <input id="status" name="status" type="text"

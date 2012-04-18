@@ -11,12 +11,13 @@ from ckan.logic.validators import package_id_not_changed,\
     name_validator, package_name_validator
 from ckan.logic.schema import package_form_schema, default_tags_schema
 from ckan.logic.converters import convert_to_tags, convert_from_tags, free_tags_only
-from ckan.plugins import implements, SingletonPlugin, IDatasetForm
+import ckan.plugins as plugins
 import field_values
 from validators import use_other, extract_other, ecportal_date_to_db,\
     convert_to_extras, convert_to_groups, convert_from_groups,\
     duplicate_extras_key, publisher_exists, keyword_string_convert, rename, \
     update_rdf
+import helpers
 
 import logging
 log = logging.getLogger(__name__)
@@ -24,8 +25,9 @@ log = logging.getLogger(__name__)
 GEO_VOCAB_NAME = u'geographical_coverage'
 
 
-class ECPortalDatasetForm(SingletonPlugin):
-    implements(IDatasetForm, inherit=True)
+class ECPortalDatasetForm(plugins.SingletonPlugin):
+    plugins.implements(plugins.IDatasetForm, inherit=True)
+    plugins.implements(plugins.ITemplateHelpers)
 
     def package_form(self):
         return 'package/new_package_form.html'
@@ -158,7 +160,8 @@ class ECPortalDatasetForm(SingletonPlugin):
         schema.update({
             'keyword_string': [ignore_missing, keyword_string_convert],
             'alternative_title': [ignore_missing, unicode, convert_to_extras],
-            'status': [unicode, not_empty, convert_to_extras],
+            'description': [not_empty, unicode],
+            'status': [not_empty, unicode, convert_to_extras],
             'identifier': [ignore_missing, unicode, convert_to_extras],
             'interoperability_level': [ignore_missing, unicode, convert_to_extras],
             'type_of_dataset': [ignore_missing, unicode, convert_to_extras],
@@ -180,7 +183,9 @@ class ECPortalDatasetForm(SingletonPlugin):
             'scope_note': [ignore_missing, unicode, convert_to_extras],
             'example_note': [ignore_missing, unicode, convert_to_extras],
             'rdf': [ignore_missing, unicode, update_rdf, convert_to_extras],
-            '__after': [duplicate_extras_key, rename('keywords', 'tags')],
+            '__after': [duplicate_extras_key,
+                        rename('keywords', 'tags'),
+                        rename('description', 'notes')],
         })
 
         schema['groups'].update({
@@ -219,7 +224,9 @@ class ECPortalDatasetForm(SingletonPlugin):
             'rdf': [convert_from_extras, ignore_missing],
             'license_url': [ignore_missing],
             'license_title': [ignore_missing],
-            '__after': [duplicate_extras_key, rename('tags', 'keywords')],
+            '__after': [duplicate_extras_key,
+                        rename('tags', 'keywords'),
+                        rename('notes', 'description')]
         })
 
         schema['groups'].update({
@@ -239,3 +246,6 @@ class ECPortalDatasetForm(SingletonPlugin):
 
     def check_data_dict(self, data_dict):
         return
+
+    def get_helpers(self):
+        return {'format_description': helpers.format_description}
