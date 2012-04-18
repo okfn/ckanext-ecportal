@@ -156,6 +156,7 @@ class ECPortalDatasetForm(SingletonPlugin):
     def form_to_db_schema(self, package_type=None):
         schema = package_form_schema()
         schema.update({
+            'alternative_title': [ignore_missing, unicode, convert_to_extras],
             'keyword_string': [ignore_missing, keyword_string_convert],
             'type_of_dataset': [ignore_missing, unicode, convert_to_extras],
             'published_by': [ignore_missing, unicode, publisher_exists, convert_to_groups],
@@ -189,6 +190,7 @@ class ECPortalDatasetForm(SingletonPlugin):
             'tags': {
                 '__extras': [keep_extras, free_tags_only]
             },
+            'alternative_title': [convert_from_extras, ignore_missing],
             'type_of_dataset': [convert_from_extras, ignore_missing],
             'published_by': [convert_from_groups, ignore_missing],
             'release_date': [convert_from_extras, ignore_missing],

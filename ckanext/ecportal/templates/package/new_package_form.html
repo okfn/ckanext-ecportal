@@ -65,6 +65,15 @@
     </div>
   </div>
 
+  <div class="control-group title-field">
+    <label class="control-label" for="alternative_title">Alternative Title</label>
+    <div class="controls">
+      <input id="alternative_title" name="alternative_title" type="text"
+        value="${data.get('alternative_title', '')}" />
+      <p class="field_error" py:if="errors.get('alternative_title', '')">${errors.get('alternative_title', '')}</p>
+    </div>
+  </div>
+
   <div class="control-group description-field">
     <label class="control-label" for="notes">Description</label>
     <div class="controls">
@@ -164,7 +173,6 @@ if organization:
     <label class="control-label" for="release_date">Release Date</label>
     <div class="controls">
       <input id="release_date"
-        class="js-title"
         name="release_date" type="text"
         value="${data.get('release_date', '')}"
         placeholder="${_('YYYY-MM-DD, YYYY-MM or YYYY')}"
@@ -179,7 +187,6 @@ if organization:
     <label class="control-label" for="modified_date">Modified Date</label>
     <div class="controls">
       <input id="modified_date"
-        class="js-title"
         name="modified_date" type="text"
         value="${data.get('modified_date', '')}"
         placeholder="${_('YYYY-MM-DD, YYYY-MM or YYYY')}"
@@ -218,7 +225,7 @@ if organization:
       />
       -
       <input id="temporal_coverage_to" name="temporal_coverage_to"
-        class="js-title" type="text" value="${data.get('temporal_coverage_to', '')}"
+        type="text" value="${data.get('temporal_coverage_to', '')}"
         placeholder="${_('YYYY-MM-DD, YYYY-MM or YYYY')}"
       />
       <p>The start and end of the temporal series used in this dataset.</p>
