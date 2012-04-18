@@ -306,6 +306,14 @@ if organization:
       <p>e.g. 1.2.0</p>
     </div>
   </div>
+
+  <div class="control-group">
+    <label class="control-label field_opt" for="version_description">Version Description</label>
+    <div class="controls">
+      <input id="version_description" maxlength="100" name="version_description" type="text" value="${data.get('version_description', '')}" />
+      <p>Description of changes between this version and the previous version of the dataset.</p>
+    </div>
+  </div>
 </fieldset>
 
 <fieldset class="tab-pane fade" id="keywords">
