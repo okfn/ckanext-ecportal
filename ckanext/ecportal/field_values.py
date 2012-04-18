@@ -14,7 +14,7 @@ type_of_dataset = [
     ('civic capital', 'Civic Capital')
 ]
 
-update_frequency = [
+accrual_periodicity = [
     ('', ''),
     ('never', 'never'),
     ('discontinued', 'discontinued'),

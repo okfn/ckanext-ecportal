@@ -55,7 +55,7 @@ class ECPortalDatasetForm(SingletonPlugin):
         c.licences = model.Package.get_license_options()
         c.interoperability_levels = field_values.interoperability_levels
         c.type_of_dataset = field_values.type_of_dataset
-        c.update_frequency = field_values.update_frequency
+        c.accrual_periodicity = field_values.accrual_periodicity
         c.temporal_granularity = field_values.temporal_granularity
         c.is_sysadmin = Authorizer().is_sysadmin(c.user)
 
@@ -164,8 +164,8 @@ class ECPortalDatasetForm(SingletonPlugin):
             'published_by': [ignore_missing, unicode, publisher_exists, convert_to_groups],
             'release_date': [ignore_missing, ecportal_date_to_db, convert_to_extras],
             'modified_date': [ignore_missing, ecportal_date_to_db, convert_to_extras],
-            'update_frequency': [ignore_missing, use_other, unicode, convert_to_extras],
-            'update_frequency-other': [ignore_missing, unicode],
+            'accrual_periodicity': [ignore_missing, use_other, unicode, convert_to_extras],
+            'accrual_periodicity-other': [ignore_missing, unicode],
             'temporal_coverage_from': [ignore_missing, ecportal_date_to_db, convert_to_extras],
             'temporal_coverage_to': [ignore_missing, ecportal_date_to_db, convert_to_extras],
             'temporal_granularity': [ignore_missing, unicode, convert_to_extras],
@@ -199,8 +199,8 @@ class ECPortalDatasetForm(SingletonPlugin):
             'published_by': [convert_from_groups, ignore_missing],
             'release_date': [convert_from_extras, ignore_missing],
             'modified_date': [convert_from_extras, ignore_missing],
-            'update_frequency': [convert_from_extras, ignore_missing,
-                                 extract_other(field_values.update_frequency)],
+            'accrual_periodicity': [convert_from_extras, ignore_missing,
+                                    extract_other(field_values.accrual_periodicity)],
             'temporal_coverage_from': [convert_from_extras, ignore_missing],
             'temporal_coverage_to': [convert_from_extras, ignore_missing],
             'temporal_granularity': [convert_from_extras, ignore_missing],
