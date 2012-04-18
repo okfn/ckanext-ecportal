@@ -12,8 +12,7 @@ from ckan.logic.validators import package_id_not_changed,\
 from ckan.logic.schema import package_form_schema, default_tags_schema
 from ckan.logic.converters import convert_to_tags, convert_from_tags, free_tags_only
 from ckan.plugins import implements, SingletonPlugin, IDatasetForm
-from field_values import type_of_dataset, update_frequency,\
-    temporal_granularity
+import field_values
 from validators import use_other, extract_other, ecportal_date_to_db,\
     convert_to_extras, convert_to_groups, convert_from_groups,\
     duplicate_extras_key, publisher_exists, keyword_string_convert, rename, \
@@ -54,9 +53,10 @@ class ECPortalDatasetForm(SingletonPlugin):
 
     def setup_template_variables(self, context, data_dict=None, package_type=None):
         c.licences = model.Package.get_license_options()
-        c.type_of_dataset = type_of_dataset
-        c.update_frequency = update_frequency
-        c.temporal_granularity = temporal_granularity
+        c.interoperability_levels = field_values.interoperability_levels
+        c.type_of_dataset = field_values.type_of_dataset
+        c.update_frequency = field_values.update_frequency
+        c.temporal_granularity = field_values.temporal_granularity
         c.is_sysadmin = Authorizer().is_sysadmin(c.user)
 
         ckan_lang = pylons.request.environ['CKAN_LANG']
@@ -159,6 +159,7 @@ class ECPortalDatasetForm(SingletonPlugin):
             'keyword_string': [ignore_missing, keyword_string_convert],
             'alternative_title': [ignore_missing, unicode, convert_to_extras],
             'identifier': [ignore_missing, unicode, convert_to_extras],
+            'interoperability_level': [ignore_missing, unicode, convert_to_extras],
             'type_of_dataset': [ignore_missing, unicode, convert_to_extras],
             'published_by': [ignore_missing, unicode, publisher_exists, convert_to_groups],
             'release_date': [ignore_missing, ecportal_date_to_db, convert_to_extras],
@@ -193,11 +194,13 @@ class ECPortalDatasetForm(SingletonPlugin):
             },
             'alternative_title': [convert_from_extras, ignore_missing],
             'identifier': [convert_from_extras, ignore_missing],
+            'interoperability_level': [convert_from_extras, ignore_missing],
             'type_of_dataset': [convert_from_extras, ignore_missing],
             'published_by': [convert_from_groups, ignore_missing],
             'release_date': [convert_from_extras, ignore_missing],
             'modified_date': [convert_from_extras, ignore_missing],
-            'update_frequency': [convert_from_extras, ignore_missing, extract_other(update_frequency)],
+            'update_frequency': [convert_from_extras, ignore_missing,
+                                 extract_other(field_values.update_frequency)],
             'temporal_coverage_from': [convert_from_extras, ignore_missing],
             'temporal_coverage_to': [convert_from_extras, ignore_missing],
             'temporal_granularity': [convert_from_extras, ignore_missing],

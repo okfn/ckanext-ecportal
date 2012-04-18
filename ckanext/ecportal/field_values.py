@@ -1,3 +1,12 @@
+interoperability_levels = [
+    ('', ''),
+    ('http://purl.org/adms/interoperabilitylevel/Political', 'Political'),
+    ('http://purl.org/adms/interoperabilitylevel/Legal', 'Legal'),
+    ('http://purl.org/adms/interoperabilitylevel/Organisational', 'Organisational'),
+    ('http://purl.org/adms/interoperabilitylevel/Semantic', 'Semantic'),
+    ('http://purl.org/adms/interoperabilitylevel/Technical', 'Technical')
+]
+
 type_of_dataset = [
     ('', ''),
     ('primary legal materials', 'Primary Legal Materials'),

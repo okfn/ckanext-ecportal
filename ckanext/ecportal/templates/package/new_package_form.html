@@ -143,9 +143,24 @@ if organization:
     <div class="controls">
       <input id="identifier" name="identifier" type="text"
         value="${data.get('identifier', '')}" />
-        <p>Literal identifiers</p> 
+        <p>Literal identifiers.</p>
         <p>e.g. CELEX number, etc.</p>
       <p class="field_error" py:if="errors.get('identifier', '')">${errors.get('identifier', '')}</p>
+    </div>
+  </div>
+
+  <div class="control-group">
+    <label class="control-label" for="interoperability_level">Interoperability Level</label>
+    <div class="controls">
+      <select id="interoperability_level" name="interoperability_level">
+        <py:for each="interop_id, interop_name in c.interoperability_levels">
+          <option value="${interop_id}" py:attrs="{'selected': 'selected' if data.get('interoperability_level') == interop_id else None}">
+            ${interop_name}
+          </option>
+        </py:for>
+      </select>
+      <p>Interoperability level for which the dataset is relevant.</p>
+      <p class="field_error" py:if="errors.get('interoperability_level', '')">${errors.get('interoperability_level', '')}</p>
     </div>
   </div>
 
