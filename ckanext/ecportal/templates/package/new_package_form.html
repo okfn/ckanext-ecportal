@@ -41,10 +41,10 @@
         value="${data.get('title', '')}"
         placeholder="${_('A short descriptive title for the dataset')}"
       />
+      <p class="field_error" py:if="errors.get('title', '')">Error: ${errors.get('title', '')}</p>
       <p>A short descriptive title for the data set.</p>
       <p>It should not be a description though - save that for the Description field.</p>
       <p>Do not give a trailing full stop. Do not use allcaps.</p>
-      <p class="field_error" py:if="errors.get('title', '')">${errors.get('title', '')}</p>
     </div>
   </div>
 
@@ -55,13 +55,13 @@
         <span class="add-on">${h.url(controller='package', action='search')+'/'}</span>
         <input maxlength="100" name="name" type="text" class="js-url-input" value="${data.get('name', '')}" />
       </div>
+      <p class="field_error" py:if="errors.get('name', '')">Error: ${errors.get('name', '')}</p>
       <p class="js-url-is-valid">&nbsp;</p>
       <p class="url-is-long">Warning: URL is very long. Consider changing it to something shorter.</p>
       <p>A unique identifier for the package.</p>
       <p>It should be broadly humanly readable, in the spirit of Semantic Web URIs.</p>
       <p>Only use an acronym if it is widely recognised. Renaming is possible but discouraged.</p>
       <p>2+ characters, lowercase, using only 'a-z0-9' and '-_' include date (yyyy-mm-dd) if a static dataset.</p>
-      <p class="field_error" py:if="errors.get('name', '')">${errors.get('name', '')}</p>
     </div>
   </div>
 
@@ -88,9 +88,9 @@
     <label class="control-label" for="url">URL</label>
     <div class="controls">
       <input id="url" name="url" type="text" value="${data.get('url', '')}"/>
+      <p class="field_error" py:if="errors.get('url', '')">Error: ${errors.get('url', '')}</p>
       <p>The URL for the web page describing the data (not the data itself).</p>
       <p>e.g. http://www.example.com/growth-figures.html</p>
-      <p class="field_error" py:if="errors.get('url', '')">${errors.get('url', '')}</p>
     </div>
   </div>
 
@@ -133,6 +133,16 @@ if organization:
             <label for='cap_private'>Private</label>
           </div>
         </div>
+    </div>
+  </div>
+
+  <div py:attrs="{'class': 'control-group error' if errors.get('status') else 'control-group'}">
+    <label class="control-label" for="status">Status</label>
+    <div class="controls">
+      <input id="status" name="status" type="text"
+        value="${data.get('status', '')}" />
+      <p class="field_error" py:if="errors.get('status', '')">Error: ${errors.get('status', '')}</p>
+      <p>e.g. published, withdrawn, draft</p>
     </div>
   </div>
 </fieldset>

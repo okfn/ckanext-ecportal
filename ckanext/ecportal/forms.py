@@ -158,6 +158,7 @@ class ECPortalDatasetForm(SingletonPlugin):
         schema.update({
             'keyword_string': [ignore_missing, keyword_string_convert],
             'alternative_title': [ignore_missing, unicode, convert_to_extras],
+            'status': [unicode, not_empty, convert_to_extras],
             'identifier': [ignore_missing, unicode, convert_to_extras],
             'interoperability_level': [ignore_missing, unicode, convert_to_extras],
             'type_of_dataset': [ignore_missing, unicode, convert_to_extras],
@@ -194,6 +195,7 @@ class ECPortalDatasetForm(SingletonPlugin):
                 '__extras': [keep_extras, free_tags_only]
             },
             'alternative_title': [convert_from_extras, ignore_missing],
+            'status': [convert_from_extras, ignore_missing],
             'identifier': [convert_from_extras, ignore_missing],
             'interoperability_level': [convert_from_extras, ignore_missing],
             'type_of_dataset': [convert_from_extras, ignore_missing],
