@@ -138,6 +138,17 @@ if organization:
 </fieldset>
 
 <fieldset class="tab-pane fade" id="further-information">
+  <div class="control-group title-field">
+    <label class="control-label" for="identifier">Identifier</label>
+    <div class="controls">
+      <input id="identifier" name="identifier" type="text"
+        value="${data.get('identifier', '')}" />
+        <p>Literal identifiers</p> 
+        <p>e.g. CELEX number, etc.</p>
+      <p class="field_error" py:if="errors.get('identifier', '')">${errors.get('identifier', '')}</p>
+    </div>
+  </div>
+
   <div class="control-group">
     <label class="control-label" for="type_of_dataset">Type of Dataset</label>
     <div class="controls">
