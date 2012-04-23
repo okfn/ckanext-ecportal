@@ -23,6 +23,31 @@ import logging
 log = logging.getLogger(__name__)
 
 GEO_VOCAB_NAME = u'geographical_coverage'
+DATASET_TYPE_VOCAB_NAME = u'dataset_type'
+
+
+def _translate(terms, lang, fallback_lang):
+    translations = get_action('term_translation_show')(
+        {'model': model},
+        {'terms': terms, 'lang_codes': [lang]}
+    )
+
+    term_translations = {}
+    for translation in translations:
+        term_translations[translation['term']] = translation['term_translation']
+
+    for term in terms:
+        if not term in term_translations:
+            translation = get_action('term_translation_show')(
+                {'model': model},
+                {'terms': [term], 'lang_codes': [fallback_lang]}
+            )
+            if translation:
+                term_translations[term] = translation[0]['term_translation']
+            else:
+                term_translations[term] = term
+
+    return term_translations
 
 
 class ECPortalDatasetForm(plugins.SingletonPlugin):
@@ -54,6 +79,9 @@ class ECPortalDatasetForm(plugins.SingletonPlugin):
         return ['dataset']
 
     def setup_template_variables(self, context, data_dict=None, package_type=None):
+        ckan_lang = pylons.request.environ['CKAN_LANG']
+        ckan_lang_fallback = pylons.config.get('ckan.locale_default', 'en')
+
         c.licences = model.Package.get_license_options()
         c.interoperability_levels = field_values.interoperability_levels
         c.type_of_dataset = field_values.type_of_dataset
@@ -61,51 +89,19 @@ class ECPortalDatasetForm(plugins.SingletonPlugin):
         c.temporal_granularity = field_values.temporal_granularity
         c.is_sysadmin = Authorizer().is_sysadmin(c.user)
 
-        ckan_lang = pylons.request.environ['CKAN_LANG']
-        ckan_lang_fallback = pylons.config.get('ckan.locale_default', 'en')
-
         # get publisher IDs and name translations
         group_type = pylons.config.get('ckan.default.group_type', 'organization')
         groups = get_action('group_list')(context, {'all_fields': True})
         groups = [g for g in groups if g.get('type') == group_type]
-        publishers = []
-
-        for group in groups:
-            translation = get_action('term_translation_show')(
-                {'model': model},
-                {'terms': group['title'], 'lang_code': ckan_lang}
-            )
-            if not translation:
-                translation = get_action('term_translation_show')(
-                    {'model': model},
-                    {'terms': group['title'], 'lang_code': ckan_lang_fallback}
-                )
-            group_translation = translation[0]['term_translation'] if translation else group['title']
-            publishers.append((group['id'], group_translation))
-        c.publishers = publishers
+        group_translations = _translate([g['title'] for g in groups], ckan_lang, ckan_lang_fallback)
+        c.publishers = [(g['id'], group_translations[g['title']]) for g in groups]
 
         # get geo tag translations (full names)
         # eg: 'UK' translates to 'United Kingdom' in English
         try:
             geo_tags = get_action('tag_list')(context, {'vocabulary_id': GEO_VOCAB_NAME})
-
-            geographical_coverage = []
-            for geo_tag in geo_tags:
-                translation = get_action('term_translation_show')(
-                    {'model': model},
-                    {'terms': geo_tag, 'lang_code': ckan_lang}
-                )
-                if not translation:
-                    translation = get_action('term_translation_show')(
-                        {'model': model},
-                        {'terms': geo_tag, 'lang_code': ckan_lang_fallback}
-                    )
-
-                tag_translation = translation[0]['term_translation'] if translation else geo_tag
-                geographical_coverage.append((geo_tag, tag_translation))
-
-            c.geographical_coverage = geographical_coverage
-
+            tag_translations = _translate(geo_tags, ckan_lang, ckan_lang_fallback)
+            c.geographical_coverage = [(t, tag_translations[t]) for t in geo_tags]
         except NotFound:
             c.geographical_coverage = []
 
