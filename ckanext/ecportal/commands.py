@@ -8,7 +8,6 @@ import ckan
 import ckan.model as model
 from ckan.logic import get_action, NotFound, ValidationError
 from ckan.lib.cli import CkanCommand
-import base64
 import forms
 import requests
 
@@ -307,58 +306,11 @@ class ECPortalCommand(CkanCommand):
         namespace = tree.getroot().tag[1:].split('}')[0]
         self._import_data_node(tree.getroot()[0], [], namespace)
 
-    def _import_dataset_json(self, path):
-        '''
-        Import JSON datasets from the proof-of-concept site.
-        '''
-        with open(path, 'r') as f:
-            dataset = json.loads(f.read())
-            extras = dataset.get('extras')
-
-            if extras:
-                # change licenseLink to license_link
-                if extras.get('licenseLink'):
-                    license_link = extras['licenseLink']
-                    del extras['licenseLink']
-                    extras['license_link'] = license_link
-                    extras['license_link'] = urllib.unquote(extras['license_link'])
-                # change responsable_department to responsible_department
-                if extras.get('responsable_department'):
-                    department = extras['responsable_department']
-                    del extras['responsable_department']
-                    extras['responsible_department'] = department
-                # remove encoding of support extra
-                if extras.get('support'):
-                    extras['support'] = urllib.unquote(extras['support'])
-                # convert to list of dicts
-                dataset[u'extras'] = [{'key': k, 'value': json.dumps(extras[k])}
-                                      for k in extras.keys() if extras[k]]
-
-            # remove encoding of url and resource.url fields
-            if dataset.get('url'):
-                dataset['url'] = urllib.unquote(dataset['url'])
-            for resource in dataset.get('resources', []):
-                if resource.get('url'):
-                    resource['url'] = urllib.unquote(resource['url'])
-
-            # rename tags
-            if dataset.get('tags'):
-                dataset[u'keywords'] = dataset['tags']
-                dataset.pop('tags')
-
-            log.info('Adding dataset: %s' % dataset['name'])
-            user = get_action('get_site_user')({'model': model, 'ignore_auth': True}, {})
-            context = {'model': model, 'session': model.Session, 'user': user['name']}
-            get_action('package_create')(context, dataset)
-
     def export_datasets(self, output_folder, fetch_url):
         '''
         Export datasets as RDF to an output folder.
         '''
-        import pylons.config as config
         import urlparse
-        import urllib2
-
 
         user = get_action('get_site_user')({'model': model, 'ignore_auth': True}, {})
         context = {'model': model, 'session': model.Session, 'user': user['name']}
