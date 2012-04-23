@@ -343,64 +343,6 @@ if organization:
   </div>
 </fieldset>
 
-<fieldset class="tab-pane fade" id="notes-tab">
-  <div class="control-group">
-    <label class="control-label field_opt" for="skos_note">SKOS Note</label>
-    <div class="controls">
-      <input id="skos_note" name="skos_note" type="text" value="${data.get('skos_note', '')}" />
-      <p class="field_error" py:if="errors.get('skos_note', '')">${errors.get('skos_note', '')}</p>
-    </div>
-  </div>
-
-  <div class="control-group">
-    <label class="control-label field_opt" for="change_note">Change Note</label>
-    <div class="controls">
-      <input id="change_note" name="change_note" type="text" value="${data.get('change_note', '')}" />
-      <p class="field_error" py:if="errors.get('change_note', '')">${errors.get('change_note', '')}</p>
-    </div>
-  </div>
-
-  <div class="control-group">
-    <label class="control-label field_opt" for="definition_note">Definition Note</label>
-    <div class="controls">
-      <input id="definition_note" name="definition_note" type="text" value="${data.get('definition_note', '')}" />
-      <p class="field_error" py:if="errors.get('definition_note', '')">${errors.get('definition_note', '')}</p>
-    </div>
-  </div>
-
-  <div class="control-group">
-    <label class="control-label field_opt" for="editorial_note">Editorial Note</label>
-    <div class="controls">
-      <input id="editorial_note" name="editorial_note" type="text" value="${data.get('editorial_note', '')}" />
-      <p class="field_error" py:if="errors.get('editorial_note', '')">${errors.get('editorial_note', '')}</p>
-    </div>
-  </div>
-
-  <div class="control-group">
-    <label class="control-label field_opt" for="history_note">History Note</label>
-    <div class="controls">
-      <input id="history_note" name="history_note" type="text" value="${data.get('history_note', '')}" />
-      <p class="field_error" py:if="errors.get('history_note', '')">${errors.get('history_note', '')}</p>
-    </div>
-  </div>
-
-  <div class="control-group">
-    <label class="control-label field_opt" for="scope_note">Scope Note</label>
-    <div class="controls">
-      <input id="scope_note" name="scope_note" type="text" value="${data.get('scope_note', '')}" />
-      <p class="field_error" py:if="errors.get('scope_note', '')">${errors.get('scope_note', '')}</p>
-    </div>
-  </div>
-
-  <div class="control-group">
-    <label class="control-label field_opt" for="example_note">Example Note</label>
-    <div class="controls">
-      <input id="example_note" name="example_note" type="text" value="${data.get('example_note', '')}" />
-      <p class="field_error" py:if="errors.get('example_note', '')">${errors.get('example_note', '')}</p>
-    </div>
-  </div>
-</fieldset>
-
 <fieldset class="tab-pane fade" id="extras">
   <p>This data will also appear under <strong>Additional Information</strong> when viewing the dataset.</p>
   <br />
