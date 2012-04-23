@@ -84,10 +84,18 @@ class ECPortalDatasetForm(plugins.SingletonPlugin):
 
         c.licences = model.Package.get_license_options()
         c.interoperability_levels = field_values.interoperability_levels
-        c.type_of_dataset = field_values.type_of_dataset
         c.accrual_periodicity = field_values.accrual_periodicity
         c.temporal_granularity = field_values.temporal_granularity
         c.is_sysadmin = Authorizer().is_sysadmin(c.user)
+
+        # dataset types
+        try:
+            dataset_types = get_action('tag_list')(
+                context, {'vocabulary_id': DATASET_TYPE_VOCAB_NAME}
+            )
+            c.type_of_dataset = [(t, field_values.type_of_dataset[t]) for t in dataset_types]
+        except NotFound:
+            c.type_of_dataset = []
 
         # get publisher IDs and name translations
         group_type = pylons.config.get('ckan.default.group_type', 'organization')
@@ -160,7 +168,7 @@ class ECPortalDatasetForm(plugins.SingletonPlugin):
             'status': [not_empty, unicode, convert_to_extras],
             'identifier': [ignore_missing, unicode, convert_to_extras],
             'interoperability_level': [ignore_missing, unicode, convert_to_extras],
-            'type_of_dataset': [ignore_missing, unicode, convert_to_extras],
+            'type_of_dataset': [ignore_missing, convert_to_tags(DATASET_TYPE_VOCAB_NAME)],
             'published_by': [ignore_missing, unicode, publisher_exists, convert_to_groups],
             'release_date': [ignore_missing, ecportal_date_to_db, convert_to_extras],
             'modified_date': [ignore_missing, ecportal_date_to_db, convert_to_extras],
@@ -192,7 +200,8 @@ class ECPortalDatasetForm(plugins.SingletonPlugin):
             'status': [convert_from_extras, ignore_missing],
             'identifier': [convert_from_extras, ignore_missing],
             'interoperability_level': [convert_from_extras, ignore_missing],
-            'type_of_dataset': [convert_from_extras, ignore_missing],
+            'type_of_dataset': [convert_from_tags(DATASET_TYPE_VOCAB_NAME),
+                                ignore_missing],
             'published_by': [convert_from_groups, ignore_missing],
             'release_date': [convert_from_extras, ignore_missing],
             'modified_date': [convert_from_extras, ignore_missing],

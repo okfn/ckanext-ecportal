@@ -178,31 +178,18 @@ if organization:
   <div class="control-group">
     <label class="control-label" for="type_of_dataset">Type of Dataset</label>
     <div class="controls">
-      <select id="type_of_dataset" name="type_of_dataset">
-        <py:for each="name, desc in c.type_of_dataset">
-          <option value="${name}" py:attrs="{'selected': 'selected' if data.get('type_of_dataset', '') == name else None}" >
-            ${desc}
-          </option>
+      <select id="type_of_dataset" class="chzn-select" name="type_of_dataset"
+        multiple="multiple" style="width: 30em;">
+        <py:for each="type_id, type_name in c.type_of_dataset">
+          <py:choose test="">
+            <option py:when="type_id in data.get('type_of_dataset', [])"
+              selected="selected" value="${type_id}">${type_name}</option>
+            <option py:otherwise="" value="${type_id}">${type_name}</option>
+          </py:choose>
         </py:for>
       </select>
-      <p>The type of dataset.</p>
-      <br />
-      <p>Primary legal materials include documents of primary authority issued by governmental bodies,
-      such as court opinions, statutes, and regulations. They also include the supporting documents
-      and other media issued and maintained by those bodies, such as dockets, hearings, forms,
-      oral arguments, and legislative histories. These materials can be found in every branch,
-      at every level, national, tribal, state and local, and should be available to anyone with the will
-      and the heart to obtain them.</p>
-      <br />
-      <p>Government operational records are typically administrative records (rather than legal records)
-      that are useful for the public to identify conflicts of interest and to perform oversight.
-      Contracts/grants, personal financial disclosures, etc. These documents have little utility aside from oversight.</p>
-      <br />
-      <p>The last category "civic capital" are government records that have utility that have nothing to do
-      with government per se.  Environmental and weather data, health and safety data, corporate compliance records.
-      These records can save lives, make markets more efficient, etc. These records are closest to
-      Government as a Platform.</p>
       <p class="field_error" py:if="errors.get('type_of_dataset', '')">${errors.get('type_of_dataset', '')}</p>
+      <p>The type of dataset.</p>
     </div>
   </div>
 
@@ -281,7 +268,7 @@ if organization:
       <select id="temporal_granularity" name="temporal_granularity">
         <py:for each="temporal_name, temporal_desc in c.temporal_granularity">
           <option value="${temporal_name}" py:attrs="{'selected': 'selected' if data.get('temporal_granularity', '') == temporal_name else None}" >
-            ${temporal_name}
+            ${temporal_desc}
           </option>
         </py:for>
       </select>
