@@ -73,12 +73,12 @@ class ECPortalDatasetForm(plugins.SingletonPlugin):
         for group in groups:
             translation = get_action('term_translation_show')(
                 {'model': model},
-                {'term': group['title'], 'lang_code': ckan_lang}
+                {'terms': group['title'], 'lang_code': ckan_lang}
             )
             if not translation:
                 translation = get_action('term_translation_show')(
                     {'model': model},
-                    {'term': group['title'], 'lang_code': ckan_lang_fallback}
+                    {'terms': group['title'], 'lang_code': ckan_lang_fallback}
                 )
             group_translation = translation[0]['term_translation'] if translation else group['title']
             publishers.append((group['id'], group_translation))
@@ -93,12 +93,12 @@ class ECPortalDatasetForm(plugins.SingletonPlugin):
             for geo_tag in geo_tags:
                 translation = get_action('term_translation_show')(
                     {'model': model},
-                    {'term': geo_tag, 'lang_code': ckan_lang}
+                    {'terms': geo_tag, 'lang_code': ckan_lang}
                 )
                 if not translation:
                     translation = get_action('term_translation_show')(
                         {'model': model},
-                        {'term': geo_tag, 'lang_code': ckan_lang_fallback}
+                        {'terms': geo_tag, 'lang_code': ckan_lang_fallback}
                     )
 
                 tag_translation = translation[0]['term_translation'] if translation else geo_tag
