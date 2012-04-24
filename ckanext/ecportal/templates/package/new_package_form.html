@@ -291,8 +291,26 @@ if organization:
           </py:choose>
         </py:for>
       </select>
-      <p>The geographical coverage of this dataset.</p>
       <p class="field_error" py:if="errors.get('geographical_coverage', '')">${errors.get('geographical_coverage', '')}</p>
+      <p>The geographical coverage of this dataset.</p>
+    </div>
+  </div>
+
+  <div class="control-group">
+    <label class="control-label" for="language">Language</label>
+    <div class="controls">
+      <select id="language" class="chzn-select" name="language"
+        multiple="multiple" style="width: 30em;">
+        <py:for each="tag in c.languages">
+          <py:choose test="">
+            <option py:when="tag in data.get('language', [])"
+              selected="selected" value="${tag}">${tag}</option>
+            <option py:otherwise="" value="${tag}">${tag}</option>
+          </py:choose>
+        </py:for>
+      </select>
+      <p class="field_error" py:if="errors.get('language', '')">${errors.get('language', '')}</p>
+      <p>The language coverage of this dataset.</p>
     </div>
   </div>
 

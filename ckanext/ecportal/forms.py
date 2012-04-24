@@ -24,6 +24,7 @@ log = logging.getLogger(__name__)
 
 GEO_VOCAB_NAME = u'geographical_coverage'
 DATASET_TYPE_VOCAB_NAME = u'dataset_type'
+LANGUAGE_VOCAB_NAME = u'language'
 
 
 def _translate(terms, lang, fallback_lang):
@@ -113,6 +114,12 @@ class ECPortalDatasetForm(plugins.SingletonPlugin):
         except NotFound:
             c.geographical_coverage = []
 
+        # get language tags
+        try:
+            c.languages = get_action('tag_list')(context, {'vocabulary_id': LANGUAGE_VOCAB_NAME})
+        except NotFound:
+            c.languages = []
+
         # find extras that are not part of our schema
         c.additional_extras = []
         schema_keys = self.form_to_db_schema().keys()
@@ -178,6 +185,7 @@ class ECPortalDatasetForm(plugins.SingletonPlugin):
             'temporal_coverage_to': [ignore_missing, ecportal_date_to_db, convert_to_extras],
             'temporal_granularity': [ignore_missing, unicode, convert_to_extras],
             'geographical_coverage': [ignore_missing, convert_to_tags(GEO_VOCAB_NAME)],
+            'language': [ignore_missing, convert_to_tags(LANGUAGE_VOCAB_NAME)],
             'version_description': [ignore_missing, unicode, convert_to_extras],
             'rdf': [ignore_missing, unicode, update_rdf, convert_to_extras],
             '__after': [duplicate_extras_key,
@@ -211,6 +219,7 @@ class ECPortalDatasetForm(plugins.SingletonPlugin):
             'temporal_coverage_to': [convert_from_extras, ignore_missing],
             'temporal_granularity': [convert_from_extras, ignore_missing],
             'geographical_coverage': [convert_from_tags(GEO_VOCAB_NAME), ignore_missing],
+            'language': [convert_from_tags(LANGUAGE_VOCAB_NAME), ignore_missing],
             'version_description': [convert_from_extras, ignore_missing],
             'rdf': [convert_from_extras, ignore_missing],
             'license_url': [ignore_missing],

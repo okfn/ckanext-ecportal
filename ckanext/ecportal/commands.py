@@ -9,6 +9,7 @@ import ckan.model as model
 import ckan.logic as logic
 import ckan.lib.cli as cli
 import ckan.lib.navl.validators as validators
+import ckan.lib.i18n as i18n
 import requests
 import forms
 import field_values
@@ -29,9 +30,11 @@ class ECPortalCommand(cli.CkanCommand):
         paster ecportal import-publishers <translations> <structure> -c <config>
         paster ecportal create-geo-vocab <ntu translations> <ntu types> -c <config>
         paster ecportal create-dataset-type-vocab -c <config>
+        paster ecportal create-language-vocab -c <config>
         paster ecportal export-datasets <folder> -c <config>
         paster ecportal delete-geo-vocab -c <config>
         paster ecportal delete-dataset-type-vocab -c <config>
+        paster ecportal delete-language-vocab -c <config>
 
     Where:
         <data> = path to XML file (format of the Eurostat bulk import metadata file)
@@ -139,6 +142,12 @@ class ECPortalCommand(cli.CkanCommand):
 
         elif cmd == 'delete-dataset-type-vocab':
             self.delete_dataset_type_vocab()
+
+        elif cmd == 'create-language-vocab':
+            self.create_language_vocab()
+
+        elif cmd == 'delete-language-vocab':
+            self.delete_language_vocab()
 
         else:
             log.error('Command "%s" not recognized' % (cmd,))
@@ -514,24 +523,35 @@ class ECPortalCommand(cli.CkanCommand):
         }
         return language_codes[lang]
 
-    def create_geo_vocab(self, ntu_translations, ntu_types):
-        context = {'model': model, 'session': model.Session,
-                   'user': self.user_name}
+    def _create_vocab(self, context, vocab_name):
         try:
-            log.info('Creating vocabulary "%s"' % forms.GEO_VOCAB_NAME)
+            log.info('Creating vocabulary "%s"' % vocab_name)
             vocab = logic.get_action('vocabulary_create')(
-                context, {'name': forms.GEO_VOCAB_NAME}
+                context, {'name': vocab_name}
             )
         except logic.ValidationError, ve:
             # ignore errors about the vocab already existing
             # if it's a different error, reraise
             if not 'name is already in use' in str(ve.error_dict):
                 raise ve
-            log.info('Vocabulary "%s" already exists' % forms.GEO_VOCAB_NAME)
+            log.info('Vocabulary "%s" already exists' % vocab_name)
             vocab = logic.get_action('vocabulary_show')(
-                context, {'id': forms.GEO_VOCAB_NAME}
+                context, {'id': vocab_name}
             )
+        return vocab
 
+    def _delete_vocab(self, vocab_name):
+        log.info('Deleting vocabulary "%s"' % vocab_name)
+        context = {'model': model, 'session': model.Session, 'user': self.user_name}
+        vocab = logic.get_action('vocabulary_show')(context, {'id': vocab_name})
+        for tag in vocab.get('tags'):
+            logic.get_action('tag_delete')(context, {'id': tag['id']})
+        logic.get_action('vocabulary_delete')(context, {'id': vocab['id']})
+
+    def create_geo_vocab(self, ntu_translations, ntu_types):
+        context = {'model': model, 'session': model.Session,
+                   'user': self.user_name}
+        vocab = self._create_vocab(context, forms.GEO_VOCAB_NAME)
         countries = self._get_countries(ntu_translations)
         term_translations = []
 
@@ -587,32 +607,12 @@ class ECPortalCommand(cli.CkanCommand):
         )
 
     def delete_geo_vocab(self):
-        log.info('Deleting vocabulary "%s"' % forms.GEO_VOCAB_NAME)
-
-        context = {'model': model, 'session': model.Session, 'user': self.user_name}
-        vocab = logic.get_action('vocabulary_show')(context, {'id': forms.GEO_VOCAB_NAME})
-        for tag in vocab.get('tags'):
-            logic.get_action('tag_delete')(context, {'id': tag['id']})
-        logic.get_action('vocabulary_delete')(context, {'id': vocab['id']})
+        self._delete_vocab(forms.GEO_VOCAB_NAME)
 
     def create_dataset_type_vocab(self):
         context = {'model': model, 'session': model.Session,
                    'user': self.user_name}
-        try:
-            log.info('Creating vocabulary "%s"' % forms.DATASET_TYPE_VOCAB_NAME)
-            vocab = logic.get_action('vocabulary_create')(
-                context, {'name': forms.DATASET_TYPE_VOCAB_NAME}
-            )
-        except logic.ValidationError, ve:
-            # ignore errors about the vocab already existing
-            # if it's a different error, reraise
-            if not 'name is already in use' in str(ve.error_dict):
-                raise ve
-            log.info('Vocabulary "%s" already exists' %
-                     forms.DATASET_TYPE_VOCAB_NAME)
-            vocab = logic.get_action('vocabulary_show')(
-                context, {'id': forms.DATASET_TYPE_VOCAB_NAME}
-            )
+        vocab = self._create_vocab(context, forms.DATASET_TYPE_VOCAB_NAME)
 
         # create custom tag schema so can create tags containing characters
         # ':' and '/' (dataset type tags are URLs)
@@ -636,13 +636,27 @@ class ECPortalCommand(cli.CkanCommand):
                          (dataset_type, forms.DATASET_TYPE_VOCAB_NAME))
 
     def delete_dataset_type_vocab(self):
-        log.info('Deleting vocabulary "%s"' % forms.DATASET_TYPE_VOCAB_NAME)
+        self._delete_vocab(forms.DATASET_TYPE_VOCAB_NAME)
 
+    def create_language_vocab(self):
         context = {'model': model, 'session': model.Session,
                    'user': self.user_name}
-        vocab = logic.get_action('vocabulary_show')(
-            context, {'id': forms.DATASET_TYPE_VOCAB_NAME}
-        )
-        for tag in vocab.get('tags'):
-            logic.get_action('tag_delete')(context, {'id': tag['id']})
-        logic.get_action('vocabulary_delete')(context, {'id': vocab['id']})
+        vocab = self._create_vocab(context, forms.LANGUAGE_VOCAB_NAME)
+
+        locales = i18n.get_locales_dict()
+        for locale in locales.keys():
+            try:
+                log.info('Adding tag "%s" to vocab "%s"' %
+                         (locale, forms.LANGUAGE_VOCAB_NAME))
+                tag_data = {'name': locale, 'vocabulary_id': vocab['id']}
+                logic.get_action('tag_create')(context, tag_data)
+            except logic.ValidationError, ve:
+                # ignore errors about the tag already belong to the vocab
+                # if it's a different error, reraise
+                if not 'already belongs to vocabulary' in str(ve.error_dict):
+                    raise ve
+                log.info('Tag "%s" already belongs to vocab "%s"' %
+                         (locale, forms.LANGUAGE_VOCAB_NAME))
+
+    def delete_language_vocab(self):
+        self._delete_vocab(forms.LANGUAGE_VOCAB_NAME)
