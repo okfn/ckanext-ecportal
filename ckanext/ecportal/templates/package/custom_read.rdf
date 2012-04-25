@@ -1,26 +1,73 @@
 <?xml version="1.0" encoding="utf-8"?>
 <rdf:RDF
-  xmlns:py="http://genshi.edgewall.org/"
-  xmlns:foaf="http://xmlns.com/foaf/0.1/"
-  xmlns:owl="http://www.w3.org/2002/07/owl#"
-  xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
-  xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
-  xmlns:dcat="http://www.w3.org/ns/dcat#"
-  xmlns:dct="http://purl.org/dc/terms/"
-  xmlns:skos="http://www.w3.org/2004/02/skos/core"
->
-<dcat:Dataset rdf:about="${ g.site_url + h.url_for(controller='package',action='read',id=c.pkg_dict['name'])}">
+    xmlns:py="http://genshi.edgewall.org/"
+    xmlns:ecodp="http://ec.europa.eu/open-data/ontologies/ec-odp#"
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:foaf="http://xmlns.com/foaf/0.1/"
+    xmlns:dct="http://purl.org/dc/terms/"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+    xmlns:skos="http://www.w3.org/2004/02/skos/core#"
+    xmlns:dcat="http://www.w3.org/ns/dcat#"
+    xmlns:dc="http://purl.org/dc/elements/1.1/"
+    xmlns="http://ec.europa.eu/open-data/ontologies/ec-odp-example#"
+    xmlns:owl="http://www.w3.org/2002/07/owl#"
+    xmlns:skos-xl="http://www.w3.org/2008/05/skos-xl#"
+    xmlns:dcam="http://purl.org/dc/dcam/"
+    xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#">
+<dcat:Dataset rdf:about="http://data.lod2.eu/scoreboard">
+    <dct:title xml:lang="en">${c.pkg_dict['title']}</dct:title>
+    <dct:description xml:lang="en">${c.pkg_dict.get('notes', '')}</dct:description>
+
+<py:if test="c.pkg_dict.get('tags','')">
+    <py:for each="tag_dict in c.pkg_dict['tags']">
+    <dcat:keyword xml:lang="en">${ tag_dict["name"] }</dcat:keyword>
+    </py:for>
+</py:if>
+
+
+    <dcat:record rdf:parseType="Resource">
+        <dct:description xml:lang="en">Catalog record for Digital Agenda Scoreboard in publicdata.eu</dct:description>
+        <dcat:accessURL rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">${ g.site_url + h.url_for(controller='package',action='read',id=c.pkg_dict['name'])}</dcat:accessURL>
+        <dct:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">YYYY-MM-DD</dct:modified>
+        <dct:issued rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">YYYY-MM-DD</dct:issued>
+    </dcat:record>
+
+    <dct:license py:if="c.pkg_dict.get('license_url', None)">
+      <skos:Concept rdf:about="${c.pkg_dict['license_url']}"/>
+    </dct:license>
+
+    <ecodp:accrualPeriodicity py:if="c.pkg_dict.get('update_frequency','')" xml:lang="en">${c.pkg_dict['update_frequency']}</ecodp:accrualPeriodicity>
+
+    <dct:temporal py:if="c.pkg_dict.get('temporal_coverage_from', '') or c.pkg_dict.get('temporal_coverage_to', '') or c.temporal_granularity">
+      <dct:PeriodOfTime rdf:about="http://ec.europa.eu/open-data/ontologies/ec-odp-example#PeriodExample">
+        <ecodp:periodEnd test="c.pkg_dict.get('temporal_coverage_to', '')" rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">${c.pkg_dict.get('temporal_coverage_to', '')}</ecodp:periodEnd>
+        <ecodp:periodStart test="c.pkg_dict.get('temporal_coverage_from', '')" rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">${c.pkg_dict.get('temporal_coverage_from', '')}</ecodp:periodStart>
+      </dct:PeriodOfTime>
+    </dct:temporal>
+
+<py:if test="c.pkg_dict.get('geographical_coverage','')">
+    <py:for each="tag,trans in c.pkg_dict['geographical_coverage']">
+    <dct:spatial>
+      <skos:Concept rdf:about="http://publications.europa.eu/resource/authority/ntu/${tag}"/>
+    </dct:spatial>
+    </py:for>
+</py:if>
+
+
+
+
+
   <foaf:homepage rdf:resource="${ g.site_url + h.url_for(controller='package',action='read',id=c.pkg_dict['name'])}"/>
   <rdfs:label>${c.pkg_dict['name']}</rdfs:label>
   <owl:sameAs rdf:resource="urn:uuid:${c.pkg.id}"/>
-  <dct:title>${c.pkg_dict['title']}</dct:title>
-  <dct:identifier>${c.pkg_dict['name']}</dct:identifier>
-  <dct:dataDictionary>${ g.site_url + h.url_for(controller='package',action='read',id=c.pkg_dict['name'])}</dct:dataDictionary>
-  <dct:description>${c.pkg_dict.get('notes', '')}</dct:description>
-  <dct:issued>${c.pkg_dict.get('release_date','')}</dct:issued>
-  <dct:modified>${c.pkg_dict.get('modified_date','')}</dct:modified>
-  <dct:license py:if="c.pkg_dict.get('license_url', None)" rdf:resource="${c.pkg_dict['license_url']}"/>
-  <dct:publisher py:if="c.pkg_dict.get('published_by','')">${c.pkg_dict['published_by']}</dct:publisher>
+
+  <dc:identifier>${c.pkg_dict['name']}</dc:identifier>
+  <dc:dataDictionary>${ g.site_url + h.url_for(controller='package',action='read',id=c.pkg_dict['name'])}</dc:dataDictionary>
+  <dc:description></dc:description>
+  <dc:issued>${c.pkg_dict.get('release_date','')}</dc:issued>
+  <dc:modified>${c.pkg_dict.get('modified_date','')}</dc:modified>
+  <dc:license py:if="c.pkg_dict.get('license_url', None)" rdf:resource="${c.pkg_dict['license_url']}"/>
+  <dc:publisher py:if="c.pkg_dict.get('published_by','')">${c.pkg_dict['published_by']}</dc:publisher>
 <py:if test="c.pkg_dict.get('resources', '')">
 <py:for each="rsc_dict in c.pkg_dict['resources']">
 <py:choose test="rsc_dict.get('resource_type', '') in ['api','file.upload', '']">
@@ -34,32 +81,19 @@
     </dcat:distribution>
 </py:when>
 <py:when test="0">
-    <dct:references>${ rsc_dict['url'] }</dct:references>
+    <dc:references>${ rsc_dict['url'] }</dc:references>
 </py:when>
  </py:choose>
 </py:for>
 </py:if>
-<py:if test="c.pkg_dict.get('tags','')">
-<py:for each="tag_dict in c.pkg_dict['tags']">
-    <dcat:keyword>${ tag_dict["name"] }</dcat:keyword>
-</py:for>
-</py:if>
 
-  <dct:temporal py:if="c.pkg_dict.get('temporal_coverage_from', '') or c.pkg_dict.get('temporal_coverage_to', '') or c.temporal_granularity"><py:if test="c.pkg_dict.get('temporal_coverage_from', '')">start=${c.pkg_dict.get('temporal_coverage_from', '')};</py:if><py:if test="c.pkg_dict.get('temporal_coverage_to', '')">end=${c.pkg_dict.get('temporal_coverage_to', '')};</py:if></dct:temporal>
   <dcat:granularity py:if="c.pkg_dict.get('temporal_granularity','')">${c.pkg_dict['temporal_granularity']}</dcat:granularity>
-<py:if test="c.pkg_dict.get('geographical_coverage','')">
-    <py:for each="tag,trans in c.pkg_dict['geographical_coverage']">
-        <dct:spatial>${tag}, ${trans}</dct:spatial>
-        <!-- <dcat:granularity>country</dcat:granularity> -->
-    </py:for>
-</py:if>
-  <dct:accrualPeriodicity py:if="c.pkg_dict.get('update_frequency','')">${c.pkg_dict['update_frequency']}</dct:accrualPeriodicity>
-  <dct:creator  py:if="c.pkg_dict.get('groups','')">
+  <dc:creator  py:if="c.pkg_dict.get('groups','')">
     <rdf:Description>
       <foaf:name>${c.pkg_dict['groups'][0]['title']}</foaf:name>
       <foaf:mbox rdf:resource="mailto:"/> <!-- TODO -->
     </rdf:Description>
-  </dct:creator>
+  </dc:creator>
   <skos:note py:if="c.pkg_dict.get('skos_note','')">${c.pkg_dict['skos_note']}</skos:note>
   <skos:changeNote py:if="c.pkg_dict.get('change_note','')">${c.pkg_dict['change_note']}</skos:changeNote>
   <skos:editorialNote py:if="c.pkg_dict.get('editorial_note','')">${c.pkg_dict['editorial_note']}</skos:editorialNote>
@@ -67,5 +101,6 @@
   <skos:scopeNote py:if="c.pkg_dict.get('scope_note','')">${c.pkg_dict['scope_note']}</skos:scopeNote>
   <skos:example py:if="c.pkg_dict.get('example_note','')">${c.pkg_dict['example_note']}</skos:example>
   <skos:definition py:if="c.pkg_dict.get('definition_note','')">${c.pkg_dict['definition_note']}</skos:definition>
+
   </dcat:Dataset>
 </rdf:RDF>
