@@ -1,4 +1,3 @@
-import json
 from ckan import model
 from ckan import plugins
 from ckan.tests import WsgiAppCase
@@ -7,7 +6,7 @@ import ckan.lib.helpers as h
 
 try:
     import json
-except:
+except ImportError:
     import simplejson as json
 
 
