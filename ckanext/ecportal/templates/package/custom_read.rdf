@@ -24,17 +24,20 @@
     </py:for>
 </py:if>
 
-
     <dcat:record rdf:parseType="Resource">
         <dct:description xml:lang="en">Catalog record for Digital Agenda Scoreboard in publicdata.eu</dct:description>
         <dcat:accessURL rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">${ g.site_url + h.url_for(controller='package',action='read',id=c.pkg_dict['name'])}</dcat:accessURL>
-        <dct:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">YYYY-MM-DD</dct:modified>
-        <dct:issued rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">YYYY-MM-DD</dct:issued>
+        <dct:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">${c.pkg_dict.get('modified_date','')}</dct:modified>
+        <dct:issued rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">${c.pkg_dict.get('release_date','')}</dct:issued>
     </dcat:record>
 
     <dct:license py:if="c.pkg_dict.get('license_url', None)">
       <skos:Concept rdf:about="${c.pkg_dict['license_url']}"/>
     </dct:license>
+
+    <dct:issued py:if="c.pkg_dict.get('release_date')" rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">${c.pkg_dict.get('release_date','')}</dct:issued>
+    <dct:modified py:if="c.pkg_dict.get('modified_date','')"  rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">${c.pkg_dict.get('modified_date','')}</dct:modified>
+
 
     <ecodp:accrualPeriodicity py:if="c.pkg_dict.get('update_frequency','')" xml:lang="en">${c.pkg_dict['update_frequency']}</ecodp:accrualPeriodicity>
 
@@ -53,20 +56,21 @@
     </py:for>
 </py:if>
 
+<!--
+    <ecodp:contactPoint rdf:parseType="Resource">
+        <foaf:phone rdf:resource="tel:+352111111111"/>
+        <foaf:mbox rdf:resource="mailto:INFSO-TRUST-SECURITY@ec.europa.eu"/>
+        <foaf:workplaceHomepage rdf:resource="http://ec.europa.eu/dgs/information_society/index_en.htm"/>
+        <ecodp:contactAddress xml:lang="en">rue Robert Stumper, L-2557, Luxembourg</ecodp:contactAddress>
+        <foaf:name xml:lang="en">INFSO</foaf:name>
+    </ecodp:contactPoint>
 
+-->
 
-
-
-  <foaf:homepage rdf:resource="${ g.site_url + h.url_for(controller='package',action='read',id=c.pkg_dict['name'])}"/>
-  <rdfs:label>${c.pkg_dict['name']}</rdfs:label>
-  <owl:sameAs rdf:resource="urn:uuid:${c.pkg.id}"/>
 
   <dc:identifier>${c.pkg_dict['name']}</dc:identifier>
   <dc:dataDictionary>${ g.site_url + h.url_for(controller='package',action='read',id=c.pkg_dict['name'])}</dc:dataDictionary>
   <dc:description></dc:description>
-  <dc:issued>${c.pkg_dict.get('release_date','')}</dc:issued>
-  <dc:modified>${c.pkg_dict.get('modified_date','')}</dc:modified>
-  <dc:license py:if="c.pkg_dict.get('license_url', None)" rdf:resource="${c.pkg_dict['license_url']}"/>
   <dc:publisher py:if="c.pkg_dict.get('published_by','')">${c.pkg_dict['published_by']}</dc:publisher>
 <py:if test="c.pkg_dict.get('resources', '')">
 <py:for each="rsc_dict in c.pkg_dict['resources']">
