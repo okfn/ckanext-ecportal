@@ -31,9 +31,11 @@ class TestAPI(WsgiAppCase):
                '<dcat:Dataset rdf:about="http://localhost"></dcat:Dataset> '
                '</rdf:RDF>')
         dataset_json = json.dumps({
-            'name' : u'rdfpackage2',
+            'name': u'rdfpackage2',
             'title': u'RDF Package2',
-            'rdf'  : json.dumps(rdf)
+            'description': u'RDF package 2 description',
+            'status': json.dumps(u'published'),
+            'rdf': json.dumps(rdf)
         })
         response = self.app.post('/api/action/package_create',
                                  params=dataset_json,
@@ -47,7 +49,6 @@ class TestAPI(WsgiAppCase):
         ) + ".rdf")
         assert '/dataset/rdfpackage2' in response.body, response.body
 
-
     def test_package_rdf_create_ns_new(self):
         rdf = ('<rdf:RDF '
                'xmlns:foaf="http://xmlns.com/foaf/0.1/" '
@@ -56,9 +57,11 @@ class TestAPI(WsgiAppCase):
                '<dcat:Dataset rdf:about="http://localhost"></dcat:Dataset> '
                '</rdf:RDF>')
         dataset_json = json.dumps({
-            'name' : u'rdfpackage1',
+            'name': u'rdfpackage1',
             'title': u'RDF Package1',
-            'rdf'  : json.dumps(rdf)
+            'description': u'RDF package 2 description',
+            'status': json.dumps(u'published'),
+            'rdf': json.dumps(rdf)
         })
         response = self.app.post('/api/action/package_create',
                                  params=dataset_json,
@@ -72,13 +75,13 @@ class TestAPI(WsgiAppCase):
         ) + ".rdf")
         assert '/dataset/rdfpackage1' in response.body, response.body
 
-
     def test_keywords_create(self):
         tag = u'test-keyword'
         dataset_json = json.dumps({
             'name': u'test_keywords_dataset',
             'title': u'Test Keywords Dataset',
             'description': u'test description',
+            'status': json.dumps(u'published'),
             'keywords': [{u'name': tag}]
         })
         response = self.app.post('/api/action/package_create',
@@ -99,6 +102,8 @@ class TestAPI(WsgiAppCase):
         new_tag_names = [u'test-keyword1', u'test-keyword2']
         new_tags = old_tags + [{'name': name} for name in new_tag_names]
         dataset['keywords'] = new_tags
+        dataset['description'] = u'test description'
+        dataset['status'] = json.dumps(u'published')
 
         params = json.dumps(dataset)
         response = self.app.post('/api/action/package_update', params=params,
@@ -119,6 +124,8 @@ class TestAPI(WsgiAppCase):
         dataset = json.loads(response.body)['result']
         assert dataset['published_by'] == u'david'
 
+        dataset['description'] = u'test description'
+        dataset['status'] = json.dumps(u'published')
         dataset['published_by'] = u'roger'
         params = json.dumps(dataset)
         response = self.app.post('/api/action/package_update', params=params,
