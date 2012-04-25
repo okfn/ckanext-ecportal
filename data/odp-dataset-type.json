@@ -1,0 +1,74 @@
+{
+  "head": {
+    "vars": [ "term" , "label" , "language" ]
+  } ,
+  "results": {
+    "bindings": [
+      {
+        "term": { "type": "uri" , "value": "http://ec.europa.eu/open-data/kos/dataset-type/CodeList" } ,
+        "label": { "type": "literal" , "value": "Code List" } ,
+        "language": { "type": "literal" , "value": "en" }
+      } ,
+      {
+        "term": { "type": "uri" , "value": "http://ec.europa.eu/open-data/kos/dataset-type/CoreComponent" } ,
+        "label": { "type": "literal" , "value": "Core Component" } ,
+        "language": { "type": "literal" , "value": "en" }
+      } ,
+      {
+        "term": { "type": "uri" , "value": "http://ec.europa.eu/open-data/kos/dataset-type/DomainModel" } ,
+        "label": { "type": "literal" , "value": "Domain Model" } ,
+        "language": { "type": "literal" , "value": "en" }
+      } ,
+      {
+        "term": { "type": "uri" , "value": "http://ec.europa.eu/open-data/kos/dataset-type/InformationExchangePackageDescription" } ,
+        "label": { "type": "literal" , "value": "Information Exchange Package Description" } ,
+        "language": { "type": "literal" , "value": "en" }
+      } ,
+      {
+        "term": { "type": "uri" , "value": "http://ec.europa.eu/open-data/kos/dataset-type/Mapping" } ,
+        "label": { "type": "literal" , "value": "Mapping" } ,
+        "language": { "type": "literal" , "value": "en" }
+      } ,
+      {
+        "term": { "type": "uri" , "value": "http://ec.europa.eu/open-data/kos/dataset-type/NameAuthorityList" } ,
+        "label": { "type": "literal" , "value": "Name Authority List" } ,
+        "language": { "type": "literal" , "value": "en" }
+      } ,
+      {
+        "term": { "type": "uri" , "value": "http://ec.europa.eu/open-data/kos/dataset-type/Ontology" } ,
+        "label": { "type": "literal" , "value": "Ontology" } ,
+        "language": { "type": "literal" , "value": "en" }
+      } ,
+      {
+        "term": { "type": "uri" , "value": "http://ec.europa.eu/open-data/kos/dataset-type/Schema" } ,
+        "label": { "type": "literal" , "value": "Schema" } ,
+        "language": { "type": "literal" , "value": "en" }
+      } ,
+      {
+        "term": { "type": "uri" , "value": "http://ec.europa.eu/open-data/kos/dataset-type/ServiceDescription" } ,
+        "label": { "type": "literal" , "value": "Service Description" } ,
+        "language": { "type": "literal" , "value": "en" }
+      } ,
+      {
+        "term": { "type": "uri" , "value": "http://ec.europa.eu/open-data/kos/dataset-type/Statistical" } ,
+        "label": { "type": "literal" , "value": "Statistical" } ,
+        "language": { "type": "literal" , "value": "en" }
+      } ,
+      {
+        "term": { "type": "uri" , "value": "http://ec.europa.eu/open-data/kos/dataset-type/SyntaxEncodingScheme" } ,
+        "label": { "type": "literal" , "value": "Syntax Encoding Scheme" } ,
+        "language": { "type": "literal" , "value": "en" }
+      } ,
+      {
+        "term": { "type": "uri" , "value": "http://ec.europa.eu/open-data/kos/dataset-type/Taxonomy" } ,
+        "label": { "type": "literal" , "value": "Taxonomy" } ,
+        "language": { "type": "literal" , "value": "en" }
+      } ,
+      {
+        "term": { "type": "uri" , "value": "http://ec.europa.eu/open-data/kos/dataset-type/Thesaurus" } ,
+        "label": { "type": "literal" , "value": "Thesaurus" } ,
+        "language": { "type": "literal" , "value": "en" }
+      }
+    ]
+  }
+}

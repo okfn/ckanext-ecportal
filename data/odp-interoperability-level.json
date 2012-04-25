@@ -1,0 +1,34 @@
+{
+  "head": {
+    "vars": [ "term" , "label" , "language" ]
+  } ,
+  "results": {
+    "bindings": [
+      {
+        "term": { "type": "uri" , "value": "http://ec.europa.eu/open-data/kos/interoperability-level/Legal" } ,
+        "label": { "type": "literal" , "value": "Legal" } ,
+        "language": { "type": "literal" , "value": "en" }
+      } ,
+      {
+        "term": { "type": "uri" , "value": "http://ec.europa.eu/open-data/kos/interoperability-level/Organisational" } ,
+        "label": { "type": "literal" , "value": "Organisational" } ,
+        "language": { "type": "literal" , "value": "en" }
+      } ,
+      {
+        "term": { "type": "uri" , "value": "http://ec.europa.eu/open-data/kos/interoperability-level/Political" } ,
+        "label": { "type": "literal" , "value": "Political" } ,
+        "language": { "type": "literal" , "value": "en" }
+      } ,
+      {
+        "term": { "type": "uri" , "value": "http://ec.europa.eu/open-data/kos/interoperability-level/Semantic" } ,
+        "label": { "type": "literal" , "value": "Semantic" } ,
+        "language": { "type": "literal" , "value": "en" }
+      } ,
+      {
+        "term": { "type": "uri" , "value": "http://ec.europa.eu/open-data/kos/interoperability-level/Technical" } ,
+        "label": { "type": "literal" , "value": "Technical Description" } ,
+        "language": { "type": "literal" , "value": "en" }
+      }
+    ]
+  }
+}

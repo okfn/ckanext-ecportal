@@ -1,0 +1,24 @@
+{
+  "head": {
+    "vars": [ "term" , "label" , "language" ]
+  } ,
+  "results": {
+    "bindings": [
+      {
+        "term": { "type": "uri" , "value": "http://ec.europa.eu/open-data/kos/documentation-type/MainDocumentation" } ,
+        "label": { "type": "literal" , "value": "Main Documentation" } ,
+        "language": { "type": "literal" , "value": "en" }
+      } ,
+      {
+        "term": { "type": "uri" , "value": "http://ec.europa.eu/open-data/kos/documentation-type/RelatedDocumentation" } ,
+        "label": { "type": "literal" , "value": "Related Documentation" } ,
+        "language": { "type": "literal" , "value": "en" }
+      } ,
+      {
+        "term": { "type": "uri" , "value": "http://ec.europa.eu/open-data/kos/documentation-type/RelatedWebPage" } ,
+        "label": { "type": "literal" , "value": "Related Web Page" } ,
+        "language": { "type": "literal" , "value": "en" }
+      }
+    ]
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "head": {
+    "vars": [ "term" , "label" , "language" ]
+  } ,
+  "results": {
+    "bindings": [
+      {
+        "term": { "type": "uri" , "value": "http://ec.europa.eu/open-data/kos/licence/EuroStat" } ,
+        "label": { "type": "literal" , "value": "EuroStat data licence" } ,
+        "language": { "type": "literal" , "value": "en" }
+      } ,
+      {
+        "term": { "type": "uri" , "value": "http://ec.europa.eu/open-data/kos/licence/EuropeanCommission" } ,
+        "label": { "type": "literal" , "value": "European Commission Open Licence" } ,
+        "language": { "type": "literal" , "value": "en" }
+      }
+    ]
+  }
+}
