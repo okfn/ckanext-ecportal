@@ -38,7 +38,7 @@
       <py:if test="h.check_access('package_update',{'id':c.pkg.id})">
         <li class="divider">|</li>
         <li class="${'active' if c.action=='edit' else ''}">
-          ${h.subnav_link(c, h.icon('package_edit') + _('Settings'), controller='package', action='edit', id=c.pkg.name)}
+          ${h.subnav_link(c, h.icon('package_edit') + _('Edit'), controller='package', action='edit', id=c.pkg.name)}
         </li>
       </py:if>
       <li class="${'active' if c.action=='authz' else ''}" py:if="h.check_access('package_edit_permissions',{'id':c.pkg.id})">

@@ -59,25 +59,40 @@ class ECPortalDatasetForm(SingletonPlugin):
         c.temporal_granularity = temporal_granularity
         c.is_sysadmin = Authorizer().is_sysadmin(c.user)
 
+        ckan_lang = pylons.request.environ['CKAN_LANG']
+        ckan_lang_fallback = pylons.config.get('ckan.locale_default', 'en')
+
+        # get publisher IDs and name translations
+        group_type = pylons.config.get('ckan.default.group_type', 'organization')
         groups = get_action('group_list')(context, {'all_fields': True})
-        group_type = pylons.config.get('ckan.default.group_type', 'publisher')
-        c.publishers = [(g['title'], g['id']) for g in groups if g.get('type') == group_type]
+        groups = [g for g in groups if g.get('type') == group_type]
+        publishers = []
+
+        for group in groups:
+            translation = get_action('term_translation_show')(
+                {'model': model},
+                {'term': group['title'], 'lang_code': ckan_lang}
+            )
+            if not translation:
+                translation = get_action('term_translation_show')(
+                    {'model': model},
+                    {'term': group['title'], 'lang_code': ckan_lang_fallback}
+                )
+            group_translation = translation[0]['term_translation'] if translation else group['title']
+            publishers.append((group['id'], group_translation))
+        c.publishers = publishers
 
         # get geo tag translations (full names)
         # eg: 'UK' translates to 'United Kingdom' in English
         try:
-            ckan_lang = pylons.request.environ['CKAN_LANG']
-            ckan_lang_fallback = pylons.config.get('ckan.locale_default', 'en')
             geo_tags = get_action('tag_list')(context, {'vocabulary_id': GEO_VOCAB_NAME})
 
             geographical_coverage = []
             for geo_tag in geo_tags:
-                # try to get translation in current language
                 translation = get_action('term_translation_show')(
                     {'model': model},
                     {'term': geo_tag, 'lang_code': ckan_lang}
                 )
-                # try to use fallback language if no translation found
                 if not translation:
                     translation = get_action('term_translation_show')(
                         {'model': model},
@@ -164,7 +179,7 @@ class ECPortalDatasetForm(SingletonPlugin):
         })
 
         schema['groups'].update({
-            'capacity': [ ignore_missing, unicode ]
+            'capacity': [ignore_missing, unicode]
         })
         return schema
 
@@ -199,7 +214,7 @@ class ECPortalDatasetForm(SingletonPlugin):
         schema['groups'].update({
             'name': [not_empty, unicode],
             'title': [ignore_missing],
-            'capacity': [ ignore_missing, unicode ]
+            'capacity': [ignore_missing, unicode]
         })
 
         # Remove isodate validator

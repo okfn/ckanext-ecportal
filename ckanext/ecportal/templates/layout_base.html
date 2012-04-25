@@ -66,6 +66,12 @@
 <?python
 current_url = request.environ['CKAN_CURRENT_URL'].encode('utf-8')
 current_locale = h.get_locales_dict().get(request.environ['CKAN_LANG'])
+
+# TODO: this should not be necessary when the drupal links are fixed
+if current_locale == 'en':
+    root_url = '/open-data/'
+else:
+    root_url = '/open-data/%s/' % current_locale
 ?>
               <li class="selected">
                 ${current_locale.display_name or current_locale.english_name} (${current_locale})
@@ -83,14 +89,14 @@ current_locale = h.get_locales_dict().get(request.environ['CKAN_LANG'])
           <!-- / Language Selector -->
 
           <div id="banner-flag">
-            <a id="logo" rel="home" title="Home" href="/open-data/${current_locale}/">
+            <a id="logo" rel="home" title="Home" href="${root_url}">
               <img src="${h.url_for_static('/images/logo/logo_%s.gif' % current_locale)}"
                    alt="${g.site_title}" title="${g.site_title}" id="logo" />
             </a>
           </div>
 
           <div id="site-name">
-            <a href="/open-data/">${g.site_title}</a>
+            <a href="${root_url}">${g.site_title}</a>
           </div>
 
         </div>
@@ -103,7 +109,7 @@ current_locale = h.get_locales_dict().get(request.environ['CKAN_LANG'])
           <ul>
             <li><a href="http://ec.europa.eu">European Commission</a></li>
             <li class="separator">&gt;</li>
-            <li><a href="/open-data/${current_locale}/">Open Data Portal</a></li>
+            <li><a href="${root_url}">Open Data Portal</a></li>
             <li class="separator">&gt;</li>
             <li><a href="${h.url('home')}">Data</a></li>
           </ul>
@@ -120,12 +126,12 @@ current_locale = h.get_locales_dict().get(request.environ['CKAN_LANG'])
             <div id="block-menu-menu-ec-open-data-main-menu" class="block block-menu">
               <div class="odp-menu-content">
                 <ul class="odp-menu">
-                  <li class="first leaf"><a href="/open-data/${current_locale}/" title="">Home</a></li>
-                  <li class="leaf"><a href="/open-data/${current_locale}/data" title="" class="active">Data</a></li>
-                  <li class="leaf"><a href="/open-data/${current_locale}/apps" title="">Applications</a></li>
-                  <li class="leaf"><a href="/open-data/${current_locale}/linked-data/" title="">Linked Data</a></li>
-                  <li class="leaf"><a href="/open-data/${current_locale}/forums/" title="">Forums</a></li>
-                  <li class="last leaf"><a href="/open-data/${current_locale}/blogs" title="">Blogs</a></li>
+                  <li class="first leaf"><a href="${root_url}" title="">Home</a></li>
+                  <li class="leaf"><a href="${root_url}data" title="" class="active">Data</a></li>
+                  <li class="leaf"><a href="${root_url}apps" title="">Applications</a></li>
+                  <li class="leaf"><a href="${root_url}linked-data" title="">Linked Data</a></li>
+                  <li class="leaf"><a href="${root_url}forums" title="">Forums</a></li>
+                  <li class="last leaf"><a href="${root_url}blogs" title="">Blogs</a></li>
                 </ul>
               </div>
             </div>
@@ -149,7 +155,7 @@ current_locale = h.get_locales_dict().get(request.environ['CKAN_LANG'])
             ${h.nav_link(c, _('Add a dataset'), controller='package', action='new')} |
           </span>
           ${h.nav_link(c, _('Search'), controller='package', action='search', highlight_actions = 'new index')} |
-          ${h.nav_link(c, _('Groups'), controller='group', action='index')}
+          ${h.nav_link(c, _('Publishers'), controller='group', action='index')}
         </div>
       </div>
 

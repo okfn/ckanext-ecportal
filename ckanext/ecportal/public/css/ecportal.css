@@ -370,7 +370,7 @@ body.index.home .front-page .action-box {
     margin-bottom: 3em;
 }
 body.index.home .front-page .action-box-inner {
-    margin: 0;
+    margin: 0 0 3em 0;
     min-height: 0;
 }
 body.index.home .front-page .action-box h1 {
@@ -446,6 +446,14 @@ body.package.edit input[type="checkbox"] {
     border: 1px solid #fbc2c4;
 }
 
+.subcontrols {
+    margin-top: 1em;
+}
+.subcontrols label {
+    display: inline;
+    margin-bottom: 0;
+}
+
 /* TODO: this needs to be a different width on the dataset edit and
  *       resource edit pages 
  */ 
@@ -456,6 +464,15 @@ body.package.edit input[type="checkbox"] {
 /* padding: 5px; */
 /* display: block; */
 /* } */
+
+/****************************************************************************/
+/* Resource Edit Page
+/****************************************************************************/
+
+/* TODO: Update this URL (or find a way to specify it dynamically) */
+.drag-drop-list li.drag-bars {
+    background-image: url("http://thedatahub.org/images/dragbars.png");
+}
 
 /****************************************************************************/
 /* Search Page
