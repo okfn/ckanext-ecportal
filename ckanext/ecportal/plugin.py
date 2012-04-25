@@ -38,6 +38,9 @@ class ECPortalPlugin(SingletonPlugin):
         configure_template_directory(config, 'templates')
         configure_public_directory(config, 'public')
 
+        # ECPortal should use group auth
+        config['ckan.auth.profile'] = 'publisher'
+
     # def filter(self, stream):
     #     from pylons import request
     #     routes = request.environ.get('pylons.routes_dict')
