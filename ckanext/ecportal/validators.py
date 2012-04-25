@@ -7,6 +7,10 @@ import ckan.lib.navl.dictization_functions as df
 import ckan.logic.validators as val
 import rdfutil
 
+try:
+    import json
+except ImportError:
+    import simplejson as json
 
 # parse_timedate function is similar to the one in ckan.lib.field_types.DateType
 # changes:
@@ -102,7 +106,10 @@ def convert_to_extras(key, data, errors, context):
             extra_number = max(extra_number, k[1] + 1)
     # add a new extra
     data[('extras', extra_number, 'key')] = key[0]
-    data[('extras', extra_number, 'value')] = data[key]
+    if not context.get('extras_as_string'):
+        data[('extras', extra_number, 'value')] = json.dumps(data[key])
+    else:
+        data[('extras', extra_number, 'value')] = data[key]
 
 def convert_from_extras(key, data, errors, context):
     for k in data.keys():
