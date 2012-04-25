@@ -42,4 +42,11 @@ def update_rdf( source_rdf, name ):
         sameAs.set("{http://www.w3.org/1999/02/22-rdf-syntax-ns}resource", local_url)
         root.append( sameAs )
 
-    return lxml.etree.tostring( root )
+    origin_url = ""
+    # Pull out URL from
+    # <dcat:record rdf:parseType="Resource">
+    # <dct:description xml:lang="en">Catalog record for Digital Agenda Scoreboard in publicdata.eu</dct:description>
+    # <dcat:accessURL rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">http://publicdata.eu/dataset/digital-agenda-scoreboard</dcat:accessURL>
+
+
+    return origin_url, lxml.etree.tostring( root )
