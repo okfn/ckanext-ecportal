@@ -2,20 +2,19 @@ import json
 import pylons
 from ckan.lib.base import c, model
 from ckan.authz import Authorizer
-from ckan.lib.navl.validators import ignore, ignore_missing, keep_extras,\
-    empty, not_empty
-from ckan.logic import get_action, check_access
-from ckan.logic import NotFound, NotAuthorized
+import ckan.logic as logic
 from ckan.logic.converters import convert_from_extras
 from ckan.logic.validators import package_id_not_changed,\
     name_validator, package_name_validator
+from ckan.lib.navl.validators import ignore, ignore_missing, keep_extras,\
+    empty, not_empty
 from ckan.logic.schema import package_form_schema, default_tags_schema
 from ckan.logic.converters import convert_to_tags, convert_from_tags, free_tags_only
 import ckan.plugins as plugins
 import field_values
 from validators import use_other, extract_other, ecportal_date_to_db,\
     convert_to_extras, convert_to_groups, convert_from_groups,\
-    duplicate_extras_key, publisher_exists, keyword_string_convert, rename, \
+    duplicate_extras_key, publisher_exists, keyword_string_convert, rename,\
     update_rdf
 import helpers
 
@@ -28,7 +27,7 @@ LANGUAGE_VOCAB_NAME = u'language'
 
 
 def _translate(terms, lang, fallback_lang):
-    translations = get_action('term_translation_show')(
+    translations = logic.get_action('term_translation_show')(
         {'model': model},
         {'terms': terms, 'lang_codes': [lang]}
     )
@@ -39,7 +38,7 @@ def _translate(terms, lang, fallback_lang):
 
     for term in terms:
         if not term in term_translations:
-            translation = get_action('term_translation_show')(
+            translation = logic.get_action('term_translation_show')(
                 {'model': model},
                 {'terms': [term], 'lang_codes': [fallback_lang]}
             )
@@ -92,16 +91,16 @@ class ECPortalDatasetForm(plugins.SingletonPlugin):
 
         # dataset types
         try:
-            dataset_types = get_action('tag_list')(
+            dataset_types = logic.get_action('tag_list')(
                 context, {'vocabulary_id': DATASET_TYPE_VOCAB_NAME}
             )
             c.type_of_dataset = [(t, field_values.type_of_dataset[t]) for t in dataset_types]
-        except NotFound:
+        except logic.NotFound:
             c.type_of_dataset = []
 
         # get publisher IDs and name translations
         group_type = pylons.config.get('ckan.default.group_type', 'organization')
-        groups = get_action('group_list')(context, {'all_fields': True})
+        groups = logic.get_action('group_list')(context, {'all_fields': True})
         groups = [g for g in groups if g.get('type') == group_type]
         group_translations = _translate([g['title'] for g in groups], ckan_lang, ckan_lang_fallback)
         c.publishers = [(g['id'], group_translations[g['title']]) for g in groups]
@@ -109,16 +108,16 @@ class ECPortalDatasetForm(plugins.SingletonPlugin):
         # get geo tag translations (full names)
         # eg: 'UK' translates to 'United Kingdom' in English
         try:
-            geo_tags = get_action('tag_list')(context, {'vocabulary_id': GEO_VOCAB_NAME})
+            geo_tags = logic.get_action('tag_list')(context, {'vocabulary_id': GEO_VOCAB_NAME})
             tag_translations = _translate(geo_tags, ckan_lang, ckan_lang_fallback)
             c.geographical_coverage = [(t, tag_translations[t]) for t in geo_tags]
-        except NotFound:
+        except logic.NotFound:
             c.geographical_coverage = []
 
         # get language tags
         try:
-            c.languages = get_action('tag_list')(context, {'vocabulary_id': LANGUAGE_VOCAB_NAME})
-        except NotFound:
+            c.languages = logic.get_action('tag_list')(context, {'vocabulary_id': LANGUAGE_VOCAB_NAME})
+        except logic.NotFound:
             c.languages = []
 
         # find extras that are not part of our schema
@@ -137,9 +136,9 @@ class ECPortalDatasetForm(plugins.SingletonPlugin):
             try:
                 if not context_pkg:
                     context['package'] = pkg
-                check_access('package_change_state', context)
+                logic.check_access('package_change_state', context)
                 c.auth_for_change_state = True
-            except NotAuthorized:
+            except logic.NotAuthorized:
                 c.auth_for_change_state = False
 
     def form_to_db_schema_options(self, options):

@@ -1,19 +1,18 @@
 import re
-from itertools import count
-
+import itertools
 from pylons.i18n import _
+import ckan.logic as logic
+import ckan.lib.field_types as field_types
+import ckan.lib.navl.dictization_functions as df
+import ckan.logic.validators as val
 import rdfutil
 
-from ckan.lib.field_types import DateType, DateConvertError
-from ckan.lib.navl.dictization_functions import Invalid, missing, unflatten
-from ckan.logic import get_action, NotFound
-from ckan.logic.validators import tag_name_validator, tag_length_validator
 
 # parse_timedate function is similar to the one in ckan.lib.field_types.DateType
 # changes:
 # - doesn't accept a time value
 # - different message passed to DateConvertError exception
-class ECPortalDateType(DateType):
+class ECPortalDateType(field_types.DateType):
     @classmethod
     def parse_timedate(cls, timedate_str, format_type):
         '''
@@ -47,8 +46,6 @@ class ECPortalDateType(DateType):
                     finished_regexps.append(date_re)
                     readable_formats.append(date_readable)
                     date_fields.remove(how_specific)
-                full_date_re = finished_regexps[0]
-                full_date_readable = readable_formats[0]
                 cls.matchers[format_type_] = [re.compile('^%s$' % regexp) for regexp in finished_regexps]
                 cls.readable_formats[format_type_] = readable_formats
         for index, matcher in enumerate(cls.matchers[format_type]):
@@ -60,21 +57,21 @@ class ECPortalDateType(DateType):
                 return timedate_dict
         else:
             acceptable_formats = ', '.join(["'%s'" % format_ for format_ in cls.readable_formats[format_type]])
-            raise DateConvertError("Unknown date format: '%s'. Acceptable formats: %s" % (timedate_str, acceptable_formats))
+            raise field_types.DateConvertError("Unknown date format: '%s'. Acceptable formats: %s" % (timedate_str, acceptable_formats))
 
 def ecportal_date_to_db(value, context):
     if not value:
         return
     try:
         timedate_dict = ECPortalDateType.parse_timedate(value, 'db')
-    except DateConvertError, e:
+    except field_types.DateConvertError, e:
         # Cannot parse
-        raise Invalid(str(e))
+        raise df.Invalid(str(e))
     try:
         value = ECPortalDateType.format(timedate_dict, 'db')
-    except DateConvertError, e:
+    except field_types.DateConvertError, e:
         # Values out of range
-        raise Invalid(str(e))
+        raise df.Invalid(str(e))
     return value
 
 def use_other(key, data, errors, context):
@@ -88,7 +85,7 @@ def extract_other(option_list):
         value = data[key]
         if value in dict(option_list).keys():
             return
-        elif value is missing:
+        elif value is df.missing:
             data[key] = ''
             return
         else:
@@ -125,7 +122,7 @@ def convert_from_groups(key, data, errors, context):
 
 def duplicate_extras_key(key, data, errors, context):
     '''Test for a custom extra key being a duplicate of an existing (schema) key.'''
-    unflattened = unflatten(data)
+    unflattened = df.unflatten(data)
     extras = unflattened.get('extras', [])
     extras_keys = []
     for extra in extras:
@@ -146,9 +143,9 @@ def publisher_exists(publisher_name, context):
 
     '''
     try:
-        get_action('group_show')(context, {'id': publisher_name})
-    except NotFound:
-        raise Invalid('%s: %s' % (_('Publisher not found'), publisher_name))
+        logic.get_action('group_show')(context, {'id': publisher_name})
+    except logic.NotFound:
+        raise df.Invalid('%s: %s' % (_('Publisher not found'), publisher_name))
     return publisher_name
 
 def keyword_string_convert(key, data, errors, context):
@@ -164,12 +161,12 @@ def keyword_string_convert(key, data, errors, context):
 
     current_index = max([int(k[1]) for k in data.keys() if len(k) == 3 and k[0] == 'keywords'] + [-1])
 
-    for num, tag in zip(count(current_index + 1), tags):
+    for num, tag in zip(itertools.count(current_index + 1), tags):
         data[('keywords', num, 'name')] = tag
 
     for tag in tags:
-        tag_length_validator(tag, context)
-        tag_name_validator(tag, context)
+        val.tag_length_validator(tag, context)
+        val.tag_name_validator(tag, context)
 
 def rename(old, new):
     '''
@@ -203,4 +200,4 @@ def update_rdf(key, data, errors, context):
     if (not rdf) or ('package' in context):
         return
 
-    data[key] = '"%s"' % rdfutil.update_rdf( rdf, name ).replace('"', '\\"')
+    data[key] = '"%s"' % rdfutil.update_rdf(rdf, name).replace('"', '\\"')
