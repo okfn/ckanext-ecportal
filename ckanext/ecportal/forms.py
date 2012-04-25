@@ -83,6 +83,7 @@ class ECPortalDatasetForm(plugins.SingletonPlugin):
         ckan_lang = pylons.request.environ['CKAN_LANG']
         ckan_lang_fallback = pylons.config.get('ckan.locale_default', 'en')
 
+        c.status = field_values.status
         c.licences = model.Package.get_license_options()
         c.interoperability_levels = field_values.interoperability_levels
         c.accrual_periodicity = field_values.accrual_periodicity

@@ -33,7 +33,7 @@ class TestAPI(WsgiAppCase):
             'name': u'rdfpackage2',
             'title': u'RDF Package2',
             'description': u'RDF package 2 description',
-            'status': json.dumps(u'published'),
+            'status': json.dumps(u'http://purl.org/adms/status/Completed'),
             'rdf': json.dumps(rdf)
         })
         response = self.app.post('/api/action/package_create',
@@ -59,7 +59,7 @@ class TestAPI(WsgiAppCase):
             'name': u'rdfpackage1',
             'title': u'RDF Package1',
             'description': u'RDF package 2 description',
-            'status': json.dumps(u'published'),
+            'status': json.dumps(u'http://purl.org/adms/status/Completed'),
             'rdf': json.dumps(rdf)
         })
         response = self.app.post('/api/action/package_create',
@@ -80,7 +80,7 @@ class TestAPI(WsgiAppCase):
             'name': u'test_keywords_dataset',
             'title': u'Test Keywords Dataset',
             'description': u'test description',
-            'status': json.dumps(u'published'),
+            'status': json.dumps(u'http://purl.org/adms/status/Completed'),
             'keywords': [{u'name': tag}]
         })
         response = self.app.post('/api/action/package_create',
@@ -102,7 +102,7 @@ class TestAPI(WsgiAppCase):
         new_tags = old_tags + [{'name': name} for name in new_tag_names]
         dataset['keywords'] = new_tags
         dataset['description'] = u'test description'
-        dataset['status'] = json.dumps(u'published')
+        dataset['status'] = json.dumps(u'http://purl.org/adms/status/Completed')
 
         params = json.dumps(dataset)
         response = self.app.post('/api/action/package_update', params=params,
@@ -124,7 +124,7 @@ class TestAPI(WsgiAppCase):
         assert dataset['published_by'] == u'david'
 
         dataset['description'] = u'test description'
-        dataset['status'] = json.dumps(u'published')
+        dataset['status'] = json.dumps(u'http://purl.org/adms/status/Completed')
         dataset['published_by'] = u'roger'
         params = json.dumps(dataset)
         response = self.app.post('/api/action/package_update', params=params,

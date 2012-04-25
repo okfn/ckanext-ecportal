@@ -140,10 +140,14 @@ if organization:
   <div class="control-group">
     <label class="control-label" for="status">Status</label>
     <div class="controls">
-      <input id="status" name="status" type="text"
-        value="${data.get('status', '')}" />
+      <select id="status" name="status">
+        <py:for each="id, name in c.status">
+          <option value="${id}" py:attrs="{'selected': 'selected' if data.get('status', '') == id else None}" >
+            ${name}
+          </option>
+        </py:for>
+      </select>
       <p class="field_error" py:if="errors.get('status', '')">Error: ${errors.get('status', '')}</p>
-      <p>e.g. published, withdrawn, draft</p>
     </div>
   </div>
 </fieldset>

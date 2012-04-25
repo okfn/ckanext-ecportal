@@ -1,3 +1,10 @@
+status = [
+    (u'http://purl.org/adms/status/Completed', u'Completed'),
+    (u'http://purl.org/adms/status/Deprecated', u'Deprecated'),
+    (u'http://purl.org/adms/status/UnderDevelopment', u'Under Development'),
+    (u'http://purl.org/adms/status/Withdrawn', u'Withdrawn'),
+]
+
 type_of_dataset = {
     u'http://purl.org/adms/assettype/CoreComponent': u'Core Component',
     u'http://purl.org/adms/assettype/Ontology': u'Ontology',
