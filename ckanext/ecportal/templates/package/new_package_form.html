@@ -65,15 +65,6 @@
     </div>
   </div>
 
-  <div class="control-group title-field">
-    <label class="control-label" for="alternative_title">Alternative Title</label>
-    <div class="controls">
-      <input id="alternative_title" name="alternative_title" type="text"
-        value="${data.get('alternative_title', '')}" />
-      <p class="field_error" py:if="errors.get('alternative_title', '')">Error: ${errors.get('alternative_title', '')}</p>
-    </div>
-  </div>
-
   <div class="control-group description-field">
     <label class="control-label" for="description">Description</label>
     <div class="controls">
@@ -150,16 +141,35 @@ if organization:
       <p class="field_error" py:if="errors.get('status', '')">Error: ${errors.get('status', '')}</p>
     </div>
   </div>
+
+  <div class="control-group title-field">
+    <label class="control-label" for="contact_name">Contact Name</label>
+    <div class="controls">
+      <input id="contact_name" name="contact_name" type="text"
+        value="${data.get('contact_name', '')}" />
+      <p class="field_error" py:if="errors.get('contact_name', '')">${errors.get('contact_name', '')}</p>
+      <p>The name of the contact point.</p>
+    </div>
+  </div>
 </fieldset>
 
 <fieldset class="tab-pane fade" id="further-information">
+  <div class="control-group title-field">
+    <label class="control-label" for="alternative_title">Alternative Title</label>
+    <div class="controls">
+      <input id="alternative_title" name="alternative_title" type="text"
+        value="${data.get('alternative_title', '')}" />
+      <p class="field_error" py:if="errors.get('alternative_title', '')">Error: ${errors.get('alternative_title', '')}</p>
+    </div>
+  </div>
+
   <div class="control-group title-field">
     <label class="control-label" for="identifier">Identifier</label>
     <div class="controls">
       <input id="identifier" name="identifier" type="text"
         value="${data.get('identifier', '')}" />
-        <p>Literal identifiers.</p>
-        <p>e.g. CELEX number, etc.</p>
+      <p>Literal identifiers.</p>
+      <p>e.g. CELEX number, etc.</p>
       <p class="field_error" py:if="errors.get('identifier', '')">${errors.get('identifier', '')}</p>
     </div>
   </div>
@@ -348,6 +358,48 @@ if organization:
       <p>Keywords must not be uppercase words in phrases connected with hyphen.</p>
       <p>e.g. pollution rivers water-quality</p>
       <p class="field_error" py:if="errors.get('keyword_string', '')">${errors.get('keyword_string', '')}</p>
+    </div>
+  </div>
+</fieldset>
+
+<fieldset class="tab-pane fade" id="contact-information">
+  <div class="control-group title-field">
+    <label class="control-label" for="contact_email">Contact E-mail</label>
+    <div class="controls">
+      <input id="contact_email" name="contact_email" type="text"
+        value="${data.get('contact_email', '')}" />
+      <p class="field_error" py:if="errors.get('contact_email', '')">${errors.get('contact_email', '')}</p>
+      <p>The e-mail address of the contact point.</p>
+    </div>
+  </div>
+
+  <div class="control-group title-field">
+    <label class="control-label" for="contact_address">Contact Address</label>
+    <div class="controls">
+      <input id="contact_address" name="contact_address" type="text"
+        value="${data.get('contact_address', '')}" />
+      <p class="field_error" py:if="errors.get('contact_address', '')">${errors.get('contact_address', '')}</p>
+      <p>The full address of the contact point.</p>
+    </div>
+  </div>
+
+  <div class="control-group title-field">
+    <label class="control-label" for="contact_telephone">Contact Telephone</label>
+    <div class="controls">
+      <input id="contact_telephone" name="contact_telephone" type="text"
+        value="${data.get('contact_telephone', '')}" />
+      <p class="field_error" py:if="errors.get('contact_telephone', '')">${errors.get('contact_telephone', '')}</p>
+      <p>The telephone number of the contact point.</p>
+    </div>
+  </div>
+
+  <div class="control-group title-field">
+    <label class="control-label" for="contact_webpage">Contact Web Page</label>
+    <div class="controls">
+      <input id="contact_webpage" name="contact_webpage" type="text"
+        value="${data.get('contact_webpage', '')}" />
+      <p class="field_error" py:if="errors.get('contact_webpage', '')">${errors.get('contact_webpage', '')}</p>
+      <p>The web page of the contact point.</p>
     </div>
   </div>
 </fieldset>

@@ -34,6 +34,7 @@ class TestAPI(WsgiAppCase):
             'title': u'RDF Package2',
             'description': u'RDF package 2 description',
             'status': json.dumps(u'http://purl.org/adms/status/Completed'),
+            'contact_name': json.dumps(u'Eurostat'),
             'rdf': json.dumps(rdf)
         })
         response = self.app.post('/api/action/package_create',
@@ -60,6 +61,7 @@ class TestAPI(WsgiAppCase):
             'title': u'RDF Package1',
             'description': u'RDF package 2 description',
             'status': json.dumps(u'http://purl.org/adms/status/Completed'),
+            'contact_name': json.dumps(u'Eurostat'),
             'rdf': json.dumps(rdf)
         })
         response = self.app.post('/api/action/package_create',
@@ -81,6 +83,7 @@ class TestAPI(WsgiAppCase):
             'title': u'Test Keywords Dataset',
             'description': u'test description',
             'status': json.dumps(u'http://purl.org/adms/status/Completed'),
+            'contact_name': json.dumps(u'Eurostat'),
             'keywords': [{u'name': tag}]
         })
         response = self.app.post('/api/action/package_create',
@@ -103,6 +106,7 @@ class TestAPI(WsgiAppCase):
         dataset['keywords'] = new_tags
         dataset['description'] = u'test description'
         dataset['status'] = json.dumps(u'http://purl.org/adms/status/Completed')
+        dataset['contact_name'] = json.dumps(u'Eurostat')
 
         params = json.dumps(dataset)
         response = self.app.post('/api/action/package_update', params=params,
@@ -125,6 +129,7 @@ class TestAPI(WsgiAppCase):
 
         dataset['description'] = u'test description'
         dataset['status'] = json.dumps(u'http://purl.org/adms/status/Completed')
+        dataset['contact_name'] = json.dumps(u'Eurostat')
         dataset['published_by'] = u'roger'
         params = json.dumps(dataset)
         response = self.app.post('/api/action/package_update', params=params,
