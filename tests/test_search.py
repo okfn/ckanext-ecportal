@@ -16,9 +16,7 @@ class TestSearch(TestController):
     def setup_class(cls):
         model.Session.remove()
         setup_test_search_index()
-        CreateTestData.create_ecportal_search_test_data(
-            extra_core_fields=['description', 'status']
-        )
+        CreateTestData.create_ecportal_search_test_data()
 
     @classmethod
     def teardown_class(cls):
