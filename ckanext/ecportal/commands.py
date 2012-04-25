@@ -6,11 +6,13 @@ import urllib
 import lxml.etree
 import ckan
 import ckan.model as model
-from ckan.logic import get_action, NotFound, ValidationError
-from ckan.lib.cli import CkanCommand
-import base64
-import forms
+import ckan.logic as logic
+import ckan.lib.cli as cli
+import ckan.lib.navl.validators as validators
+import ckan.lib.i18n as i18n
 import requests
+import forms
+import field_values
 
 import logging
 log = logging.getLogger()
@@ -20,15 +22,19 @@ class InvalidDateFormat(Exception):
     pass
 
 
-class ECPortalCommand(CkanCommand):
+class ECPortalCommand(cli.CkanCommand):
     '''
     Commands:
 
         paster ecportal import-data <data> <user> -c <config>
         paster ecportal import-publishers <translations> <structure> -c <config>
         paster ecportal create-geo-vocab <ntu translations> <ntu types> -c <config>
+        paster ecportal create-dataset-type-vocab -c <config>
+        paster ecportal create-language-vocab -c <config>
         paster ecportal export-datasets <folder> -c <config>
         paster ecportal delete-geo-vocab -c <config>
+        paster ecportal delete-dataset-type-vocab -c <config>
+        paster ecportal delete-language-vocab -c <config>
 
     Where:
         <data> = path to XML file (format of the Eurostat bulk import metadata file)
@@ -67,7 +73,7 @@ class ECPortalCommand(CkanCommand):
         cmd = self.args[0]
         self._load_config()
 
-        user = get_action('get_site_user')(
+        user = logic.get_action('get_site_user')(
             {'model': model, 'ignore_auth': True}, {}
         )
         self.user_name = user['name']
@@ -130,6 +136,18 @@ class ECPortalCommand(CkanCommand):
 
         elif cmd == 'delete-geo-vocab':
             self.delete_geo_vocab()
+
+        elif cmd == 'create-dataset-type-vocab':
+            self.create_dataset_type_vocab()
+
+        elif cmd == 'delete-dataset-type-vocab':
+            self.delete_dataset_type_vocab()
+
+        elif cmd == 'create-language-vocab':
+            self.create_language_vocab()
+
+        elif cmd == 'delete-language-vocab':
+            self.delete_language_vocab()
 
         else:
             log.error('Command "%s" not recognized' % (cmd,))
@@ -240,8 +258,8 @@ class ECPortalCommand(CkanCommand):
         context = {'model': model, 'session': model.Session,
                     'user': self.user_name, 'extras_as_string': True}
         try:
-            get_action('package_create')(context, dataset)
-        except ValidationError, ve:
+            logic.get_action('package_create')(context, dataset)
+        except logic.ValidationError, ve:
             log.error('Could not add dataset %s: %s' %
                       (dataset['name'], str(ve.error_dict)))
 
@@ -259,7 +277,7 @@ class ECPortalCommand(CkanCommand):
                 })
 
         if translations:
-            get_action('term_translation_update_many')(
+            logic.get_action('term_translation_update_many')(
                 context, {'data': translations}
             )
 
@@ -286,7 +304,7 @@ class ECPortalCommand(CkanCommand):
                 if translations:
                     context = {'model': model, 'session': model.Session,
                                 'user': self.user_name, 'extras_as_string': True}
-                    get_action('term_translation_update_many')(
+                    logic.get_action('term_translation_update_many')(
                         context, {'data': translations}
                     )
 
@@ -307,64 +325,17 @@ class ECPortalCommand(CkanCommand):
         namespace = tree.getroot().tag[1:].split('}')[0]
         self._import_data_node(tree.getroot()[0], [], namespace)
 
-    def _import_dataset_json(self, path):
-        '''
-        Import JSON datasets from the proof-of-concept site.
-        '''
-        with open(path, 'r') as f:
-            dataset = json.loads(f.read())
-            extras = dataset.get('extras')
-
-            if extras:
-                # change licenseLink to license_link
-                if extras.get('licenseLink'):
-                    license_link = extras['licenseLink']
-                    del extras['licenseLink']
-                    extras['license_link'] = license_link
-                    extras['license_link'] = urllib.unquote(extras['license_link'])
-                # change responsable_department to responsible_department
-                if extras.get('responsable_department'):
-                    department = extras['responsable_department']
-                    del extras['responsable_department']
-                    extras['responsible_department'] = department
-                # remove encoding of support extra
-                if extras.get('support'):
-                    extras['support'] = urllib.unquote(extras['support'])
-                # convert to list of dicts
-                dataset[u'extras'] = [{'key': k, 'value': json.dumps(extras[k])}
-                                      for k in extras.keys() if extras[k]]
-
-            # remove encoding of url and resource.url fields
-            if dataset.get('url'):
-                dataset['url'] = urllib.unquote(dataset['url'])
-            for resource in dataset.get('resources', []):
-                if resource.get('url'):
-                    resource['url'] = urllib.unquote(resource['url'])
-
-            # rename tags
-            if dataset.get('tags'):
-                dataset[u'keywords'] = dataset['tags']
-                dataset.pop('tags')
-
-            log.info('Adding dataset: %s' % dataset['name'])
-            user = get_action('get_site_user')({'model': model, 'ignore_auth': True}, {})
-            context = {'model': model, 'session': model.Session, 'user': user['name']}
-            get_action('package_create')(context, dataset)
-
     def export_datasets(self, output_folder, fetch_url):
         '''
         Export datasets as RDF to an output folder.
         '''
-        import pylons.config as config
         import urlparse
-        import urllib2
 
-
-        user = get_action('get_site_user')({'model': model, 'ignore_auth': True}, {})
+        user = logic.get_action('get_site_user')({'model': model, 'ignore_auth': True}, {})
         context = {'model': model, 'session': model.Session, 'user': user['name']}
-        dataset_names = get_action('package_list')(context, {})
+        dataset_names = logic.get_action('package_list')(context, {})
         for dataset_name in dataset_names:
-            dataset_dict = get_action('package_show')(context, {'id':dataset_name })
+            dataset_dict = logic.get_action('package_show')(context, {'id':dataset_name })
             if not dataset_dict['state'] == 'active':
                 continue
 
@@ -413,13 +384,13 @@ class ECPortalCommand(CkanCommand):
 
         # create CKAN groups
         log.info('Creating CKAN group objects')
-        user = get_action('get_site_user')({'model': model, 'ignore_auth': True}, {})
+        user = logic.get_action('get_site_user')({'model': model, 'ignore_auth': True}, {})
         context = {'model': model, 'session': model.Session, 'user': user['name']}
 
         for group in groups:
             try:
-                g = get_action('group_show')(context, {'id': group})
-            except NotFound:
+                g = logic.get_action('group_show')(context, {'id': group})
+            except logic.NotFound:
                 # use the english title if we have one
                 group_title = groups[group]['titles'].get('eng')
                 if not group_title:
@@ -430,7 +401,7 @@ class ECPortalCommand(CkanCommand):
                     'title': unicode(group_title),
                     'type': u'publisher'
                 }
-                g = get_action('group_create')(context, group_data)
+                g = logic.get_action('group_create')(context, group_data)
             groups[group]['dict'] = g
 
         # updating group heirarchy
@@ -456,7 +427,7 @@ class ECPortalCommand(CkanCommand):
                 else:
                     parent['groups'] = [child_dict]
 
-            get_action('group_update')(context, parent)
+            logic.get_action('group_update')(context, parent)
 
         # update French translation
         log.info('Updating French translations')
@@ -473,7 +444,7 @@ class ECPortalCommand(CkanCommand):
                 'term_translation': unicode(translation),
                 'lang_code': u'fr'
             })
-        get_action('term_translation_update_many')(
+        logic.get_action('term_translation_update_many')(
             context, {'data': term_translations}
         )
 
@@ -552,24 +523,35 @@ class ECPortalCommand(CkanCommand):
         }
         return language_codes[lang]
 
-    def create_geo_vocab(self, ntu_translations, ntu_types):
-        context = {'model': model, 'session': model.Session,
-                   'user': self.user_name}
+    def _create_vocab(self, context, vocab_name):
         try:
-            log.info('Creating vocabulary "%s"' % forms.GEO_VOCAB_NAME)
-            vocab = get_action('vocabulary_create')(
-                context, {'name': forms.GEO_VOCAB_NAME}
+            log.info('Creating vocabulary "%s"' % vocab_name)
+            vocab = logic.get_action('vocabulary_create')(
+                context, {'name': vocab_name}
             )
-        except ValidationError, ve:
+        except logic.ValidationError, ve:
             # ignore errors about the vocab already existing
             # if it's a different error, reraise
             if not 'name is already in use' in str(ve.error_dict):
                 raise ve
-            log.info('Vocabulary "%s" already exists' % forms.GEO_VOCAB_NAME)
-            vocab = get_action('vocabulary_show')(
-                context, {'id': forms.GEO_VOCAB_NAME}
+            log.info('Vocabulary "%s" already exists' % vocab_name)
+            vocab = logic.get_action('vocabulary_show')(
+                context, {'id': vocab_name}
             )
+        return vocab
 
+    def _delete_vocab(self, vocab_name):
+        log.info('Deleting vocabulary "%s"' % vocab_name)
+        context = {'model': model, 'session': model.Session, 'user': self.user_name}
+        vocab = logic.get_action('vocabulary_show')(context, {'id': vocab_name})
+        for tag in vocab.get('tags'):
+            logic.get_action('tag_delete')(context, {'id': tag['id']})
+        logic.get_action('vocabulary_delete')(context, {'id': vocab['id']})
+
+    def create_geo_vocab(self, ntu_translations, ntu_types):
+        context = {'model': model, 'session': model.Session,
+                   'user': self.user_name}
+        vocab = self._create_vocab(context, forms.GEO_VOCAB_NAME)
         countries = self._get_countries(ntu_translations)
         term_translations = []
 
@@ -579,8 +561,8 @@ class ECPortalCommand(CkanCommand):
                 log.info('Adding tag "%s" to vocab "%s"' %
                          (country_code, forms.GEO_VOCAB_NAME))
                 tag_data = {'name': country_code, 'vocabulary_id': vocab['id']}
-                get_action('tag_create')(context, tag_data)
-            except ValidationError, ve:
+                logic.get_action('tag_create')(context, tag_data)
+            except logic.ValidationError, ve:
                 # ignore errors about the tag already belong to the vocab
                 # if it's a different error, reraise
                 if not 'already belongs to vocabulary' in str(ve.error_dict):
@@ -620,15 +602,61 @@ class ECPortalCommand(CkanCommand):
 
         # save translations
         log.info('Adding translations')
-        get_action('term_translation_update_many')(
+        logic.get_action('term_translation_update_many')(
             context, {'data': term_translations}
         )
 
     def delete_geo_vocab(self):
-        log.info('Deleting vocabulary "%s"' % forms.GEO_VOCAB_NAME)
+        self._delete_vocab(forms.GEO_VOCAB_NAME)
 
-        context = {'model': model, 'session': model.Session, 'user': self.user_name}
-        vocab = get_action('vocabulary_show')(context, {'id': forms.GEO_VOCAB_NAME})
-        for tag in vocab.get('tags'):
-            get_action('tag_delete')(context, {'id': tag['id']})
-        get_action('vocabulary_delete')(context, {'id': vocab['id']})
+    def create_dataset_type_vocab(self):
+        context = {'model': model, 'session': model.Session,
+                   'user': self.user_name}
+        vocab = self._create_vocab(context, forms.DATASET_TYPE_VOCAB_NAME)
+
+        # create custom tag schema so can create tags containing characters
+        # ':' and '/' (dataset type tags are URLs)
+        tag_schema = logic.schema.default_create_tag_schema()
+        tag_schema.update({'name': [validators.not_missing, validators.not_empty,
+                                    logic.validators.tag_length_validator]})
+        context['schema'] = tag_schema
+
+        for dataset_type in field_values.type_of_dataset.keys():
+            try:
+                log.info('Adding tag "%s" to vocab "%s"' %
+                         (dataset_type, forms.DATASET_TYPE_VOCAB_NAME))
+                tag_data = {'name': dataset_type, 'vocabulary_id': vocab['id']}
+                logic.get_action('tag_create')(context, tag_data)
+            except logic.ValidationError, ve:
+                # ignore errors about the tag already belong to the vocab
+                # if it's a different error, reraise
+                if not 'already belongs to vocabulary' in str(ve.error_dict):
+                    raise ve
+                log.info('Tag "%s" already belongs to vocab "%s"' %
+                         (dataset_type, forms.DATASET_TYPE_VOCAB_NAME))
+
+    def delete_dataset_type_vocab(self):
+        self._delete_vocab(forms.DATASET_TYPE_VOCAB_NAME)
+
+    def create_language_vocab(self):
+        context = {'model': model, 'session': model.Session,
+                   'user': self.user_name}
+        vocab = self._create_vocab(context, forms.LANGUAGE_VOCAB_NAME)
+
+        locales = i18n.get_locales_dict()
+        for locale in locales.keys():
+            try:
+                log.info('Adding tag "%s" to vocab "%s"' %
+                         (locale, forms.LANGUAGE_VOCAB_NAME))
+                tag_data = {'name': locale, 'vocabulary_id': vocab['id']}
+                logic.get_action('tag_create')(context, tag_data)
+            except logic.ValidationError, ve:
+                # ignore errors about the tag already belong to the vocab
+                # if it's a different error, reraise
+                if not 'already belongs to vocabulary' in str(ve.error_dict):
+                    raise ve
+                log.info('Tag "%s" already belongs to vocab "%s"' %
+                         (locale, forms.LANGUAGE_VOCAB_NAME))
+
+    def delete_language_vocab(self):
+        self._delete_vocab(forms.LANGUAGE_VOCAB_NAME)

@@ -454,6 +454,11 @@ body.package.edit input[type="checkbox"] {
     margin-bottom: 0;
 }
 
+#dataset-edit .control-group p.field_error {
+    color: #b94a48;
+    margin-bottom: 0.5em;
+}
+
 /* TODO: this needs to be a different width on the dataset edit and
  *       resource edit pages 
  */ 

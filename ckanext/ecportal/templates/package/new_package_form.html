@@ -41,10 +41,10 @@
         value="${data.get('title', '')}"
         placeholder="${_('A short descriptive title for the dataset')}"
       />
+      <p class="field_error" py:if="errors.get('title', '')">Error: ${errors.get('title', '')}</p>
       <p>A short descriptive title for the data set.</p>
       <p>It should not be a description though - save that for the Description field.</p>
       <p>Do not give a trailing full stop. Do not use allcaps.</p>
-      <p class="field_error" py:if="errors.get('title', '')">${errors.get('title', '')}</p>
     </div>
   </div>
 
@@ -55,20 +55,21 @@
         <span class="add-on">${h.url(controller='package', action='search')+'/'}</span>
         <input maxlength="100" name="name" type="text" class="js-url-input" value="${data.get('name', '')}" />
       </div>
+      <p class="field_error" py:if="errors.get('name', '')">Error: ${errors.get('name', '')}</p>
       <p class="js-url-is-valid">&nbsp;</p>
       <p class="url-is-long">Warning: URL is very long. Consider changing it to something shorter.</p>
       <p>A unique identifier for the package.</p>
       <p>It should be broadly humanly readable, in the spirit of Semantic Web URIs.</p>
       <p>Only use an acronym if it is widely recognised. Renaming is possible but discouraged.</p>
       <p>2+ characters, lowercase, using only 'a-z0-9' and '-_' include date (yyyy-mm-dd) if a static dataset.</p>
-      <p class="field_error" py:if="errors.get('name', '')">${errors.get('name', '')}</p>
     </div>
   </div>
 
   <div class="control-group description-field">
-    <label class="control-label" for="notes">Description</label>
+    <label class="control-label" for="description">Description</label>
     <div class="controls">
-      ${markdown_editor('notes', data.get('notes'), 'notes', _('The main description of the dataset ...'))}
+      ${markdown_editor('description', data.get('description'), 'description', _('The main description of the dataset ...'))}
+      <p class="field_error" py:if="errors.get('description')">Error: ${errors.get('description')}</p>
       <p>The main description of the dataset. It is often displayed with the package title.</p>
       <p>In particular, it should start with a short sentence that describes the data set succinctly,
         because the first few words alone may be used in some views of the data sets.</p>
@@ -79,9 +80,9 @@
     <label class="control-label" for="url">URL</label>
     <div class="controls">
       <input id="url" name="url" type="text" value="${data.get('url', '')}"/>
+      <p class="field_error" py:if="errors.get('url', '')">Error: ${errors.get('url', '')}</p>
       <p>The URL for the web page describing the data (not the data itself).</p>
       <p>e.g. http://www.example.com/growth-figures.html</p>
-      <p class="field_error" py:if="errors.get('url', '')">${errors.get('url', '')}</p>
     </div>
   </div>
 
@@ -126,37 +127,83 @@ if organization:
         </div>
     </div>
   </div>
-</fieldset>
 
-<fieldset class="tab-pane fade" id="further-information">
   <div class="control-group">
-    <label class="control-label" for="type_of_dataset">Type of Dataset</label>
+    <label class="control-label" for="status">Status</label>
     <div class="controls">
-      <select id="type_of_dataset" name="type_of_dataset">
-        <py:for each="name, desc in c.type_of_dataset">
-          <option value="${name}" py:attrs="{'selected': 'selected' if data.get('type_of_dataset', '') == name else None}" >
-            ${desc}
+      <select id="status" name="status">
+        <py:for each="id, name in c.status">
+          <option value="${id}" py:attrs="{'selected': 'selected' if data.get('status', '') == id else None}" >
+            ${name}
           </option>
         </py:for>
       </select>
-      <p>The type of dataset.</p>
-      <br />
-      <p>Primary legal materials include documents of primary authority issued by governmental bodies,
-      such as court opinions, statutes, and regulations. They also include the supporting documents
-      and other media issued and maintained by those bodies, such as dockets, hearings, forms,
-      oral arguments, and legislative histories. These materials can be found in every branch,
-      at every level, national, tribal, state and local, and should be available to anyone with the will
-      and the heart to obtain them.</p>
-      <br />
-      <p>Government operational records are typically administrative records (rather than legal records)
-      that are useful for the public to identify conflicts of interest and to perform oversight.
-      Contracts/grants, personal financial disclosures, etc. These documents have little utility aside from oversight.</p>
-      <br />
-      <p>The last category "civic capital" are government records that have utility that have nothing to do
-      with government per se.  Environmental and weather data, health and safety data, corporate compliance records.
-      These records can save lives, make markets more efficient, etc. These records are closest to
-      Government as a Platform.</p>
+      <p class="field_error" py:if="errors.get('status', '')">Error: ${errors.get('status', '')}</p>
+    </div>
+  </div>
+
+  <div class="control-group title-field">
+    <label class="control-label" for="contact_name">Contact Name</label>
+    <div class="controls">
+      <input id="contact_name" name="contact_name" type="text"
+        value="${data.get('contact_name', '')}" />
+      <p class="field_error" py:if="errors.get('contact_name', '')">${errors.get('contact_name', '')}</p>
+      <p>The name of the contact point.</p>
+    </div>
+  </div>
+</fieldset>
+
+<fieldset class="tab-pane fade" id="further-information">
+  <div class="control-group title-field">
+    <label class="control-label" for="alternative_title">Alternative Title</label>
+    <div class="controls">
+      <input id="alternative_title" name="alternative_title" type="text"
+        value="${data.get('alternative_title', '')}" />
+      <p class="field_error" py:if="errors.get('alternative_title', '')">Error: ${errors.get('alternative_title', '')}</p>
+    </div>
+  </div>
+
+  <div class="control-group title-field">
+    <label class="control-label" for="identifier">Identifier</label>
+    <div class="controls">
+      <input id="identifier" name="identifier" type="text"
+        value="${data.get('identifier', '')}" />
+      <p>Literal identifiers.</p>
+      <p>e.g. CELEX number, etc.</p>
+      <p class="field_error" py:if="errors.get('identifier', '')">${errors.get('identifier', '')}</p>
+    </div>
+  </div>
+
+  <div class="control-group">
+    <label class="control-label" for="interoperability_level">Interoperability Level</label>
+    <div class="controls">
+      <select id="interoperability_level" name="interoperability_level">
+        <py:for each="interop_id, interop_name in c.interoperability_levels">
+          <option value="${interop_id}" py:attrs="{'selected': 'selected' if data.get('interoperability_level') == interop_id else None}">
+            ${interop_name}
+          </option>
+        </py:for>
+      </select>
+      <p>Interoperability level for which the dataset is relevant.</p>
+      <p class="field_error" py:if="errors.get('interoperability_level', '')">${errors.get('interoperability_level', '')}</p>
+    </div>
+  </div>
+
+  <div class="control-group">
+    <label class="control-label" for="type_of_dataset">Type of Dataset</label>
+    <div class="controls">
+      <select id="type_of_dataset" class="chzn-select" name="type_of_dataset"
+        multiple="multiple" style="width: 30em;">
+        <py:for each="type_id, type_name in c.type_of_dataset">
+          <py:choose test="">
+            <option py:when="type_id in data.get('type_of_dataset', [])"
+              selected="selected" value="${type_id}">${type_name}</option>
+            <option py:otherwise="" value="${type_id}">${type_name}</option>
+          </py:choose>
+        </py:for>
+      </select>
       <p class="field_error" py:if="errors.get('type_of_dataset', '')">${errors.get('type_of_dataset', '')}</p>
+      <p>The type of dataset.</p>
     </div>
   </div>
 
@@ -164,7 +211,6 @@ if organization:
     <label class="control-label" for="release_date">Release Date</label>
     <div class="controls">
       <input id="release_date"
-        class="js-title"
         name="release_date" type="text"
         value="${data.get('release_date', '')}"
         placeholder="${_('YYYY-MM-DD, YYYY-MM or YYYY')}"
@@ -179,7 +225,6 @@ if organization:
     <label class="control-label" for="modified_date">Modified Date</label>
     <div class="controls">
       <input id="modified_date"
-        class="js-title"
         name="modified_date" type="text"
         value="${data.get('modified_date', '')}"
         placeholder="${_('YYYY-MM-DD, YYYY-MM or YYYY')}"
@@ -191,21 +236,21 @@ if organization:
   </div>
 
   <div class="control-group">
-    <label class="control-label" for="update_frequency">Update Frequency</label>
+    <label class="control-label" for="accrual_periodicity">Accrual Periodicity</label>
     <div class="controls">
-      <select id="update_frequency" name="update_frequency">
-        <py:for each="freq_name, freq_desc in c.update_frequency">
-          <option value="${freq_name}" py:attrs="{'selected': 'selected' if data.get('update_frequency', '') == freq_name else None}" >
+      <select id="accrual_periodicity" name="accrual_periodicity">
+        <py:for each="freq_name, freq_desc in c.accrual_periodicity">
+          <option value="${freq_name}" py:attrs="{'selected': 'selected' if data.get('accrual_periodicity', '') == freq_name else None}" >
             ${freq_desc}
           </option>
         </py:for>
       </select>
-      <label class="inline" for="update_frequency-other">Other:
-        <input class="medium-width" id="update_frequency-other" name="update_frequency-other"
-          type="text" value="${data.get('update_frequency-other', '')}"/>
+      <label class="inline" for="accrual_periodicity-other">Other:
+        <input class="medium-width" id="accrual_periodicity-other" name="accrual_periodicity-other"
+          type="text" value="${data.get('accrual_periodicity-other', '')}"/>
       </label>
       <p>The frequency with which dataset is published.</p>
-      <p class="field_error" py:if="errors.get('update_frequency', '')">${errors.get('update_frequency', '')}</p>
+      <p class="field_error" py:if="errors.get('accrual_periodicity', '')">${errors.get('accrual_periodicity', '')}</p>
     </div>
   </div>
 
@@ -218,7 +263,7 @@ if organization:
       />
       -
       <input id="temporal_coverage_to" name="temporal_coverage_to"
-        class="js-title" type="text" value="${data.get('temporal_coverage_to', '')}"
+        type="text" value="${data.get('temporal_coverage_to', '')}"
         placeholder="${_('YYYY-MM-DD, YYYY-MM or YYYY')}"
       />
       <p>The start and end of the temporal series used in this dataset.</p>
@@ -237,7 +282,7 @@ if organization:
       <select id="temporal_granularity" name="temporal_granularity">
         <py:for each="temporal_name, temporal_desc in c.temporal_granularity">
           <option value="${temporal_name}" py:attrs="{'selected': 'selected' if data.get('temporal_granularity', '') == temporal_name else None}" >
-            ${temporal_name}
+            ${temporal_desc}
           </option>
         </py:for>
       </select>
@@ -260,8 +305,26 @@ if organization:
           </py:choose>
         </py:for>
       </select>
-      <p>The geographical coverage of this dataset.</p>
       <p class="field_error" py:if="errors.get('geographical_coverage', '')">${errors.get('geographical_coverage', '')}</p>
+      <p>The geographical coverage of this dataset.</p>
+    </div>
+  </div>
+
+  <div class="control-group">
+    <label class="control-label" for="language">Language</label>
+    <div class="controls">
+      <select id="language" class="chzn-select" name="language"
+        multiple="multiple" style="width: 30em;">
+        <py:for each="tag in c.languages">
+          <py:choose test="">
+            <option py:when="tag in data.get('language', [])"
+              selected="selected" value="${tag}">${tag}</option>
+            <option py:otherwise="" value="${tag}">${tag}</option>
+          </py:choose>
+        </py:for>
+      </select>
+      <p class="field_error" py:if="errors.get('language', '')">${errors.get('language', '')}</p>
+      <p>The language coverage of this dataset.</p>
     </div>
   </div>
 
@@ -271,6 +334,14 @@ if organization:
       <input id="version" maxlength="100" name="version" type="text" value="${data.get('version', '')}" />
       <p>A number representing the version (if applicable)</p>
       <p>e.g. 1.2.0</p>
+    </div>
+  </div>
+
+  <div class="control-group">
+    <label class="control-label field_opt" for="version_description">Version Description</label>
+    <div class="controls">
+      <input id="version_description" maxlength="100" name="version_description" type="text" value="${data.get('version_description', '')}" />
+      <p>Description of changes between this version and the previous version of the dataset.</p>
     </div>
   </div>
 </fieldset>
@@ -291,60 +362,44 @@ if organization:
   </div>
 </fieldset>
 
-<fieldset class="tab-pane fade" id="notes-tab">
-  <div class="control-group">
-    <label class="control-label field_opt" for="skos_note">SKOS Note</label>
+<fieldset class="tab-pane fade" id="contact-information">
+  <div class="control-group title-field">
+    <label class="control-label" for="contact_email">Contact E-mail</label>
     <div class="controls">
-      <input id="skos_note" name="skos_note" type="text" value="${data.get('skos_note', '')}" />
-      <p class="field_error" py:if="errors.get('skos_note', '')">${errors.get('skos_note', '')}</p>
+      <input id="contact_email" name="contact_email" type="text"
+        value="${data.get('contact_email', '')}" />
+      <p class="field_error" py:if="errors.get('contact_email', '')">${errors.get('contact_email', '')}</p>
+      <p>The e-mail address of the contact point.</p>
     </div>
   </div>
 
-  <div class="control-group">
-    <label class="control-label field_opt" for="change_note">Change Note</label>
+  <div class="control-group title-field">
+    <label class="control-label" for="contact_address">Contact Address</label>
     <div class="controls">
-      <input id="change_note" name="change_note" type="text" value="${data.get('change_note', '')}" />
-      <p class="field_error" py:if="errors.get('change_note', '')">${errors.get('change_note', '')}</p>
+      <input id="contact_address" name="contact_address" type="text"
+        value="${data.get('contact_address', '')}" />
+      <p class="field_error" py:if="errors.get('contact_address', '')">${errors.get('contact_address', '')}</p>
+      <p>The full address of the contact point.</p>
     </div>
   </div>
 
-  <div class="control-group">
-    <label class="control-label field_opt" for="definition_note">Definition Note</label>
+  <div class="control-group title-field">
+    <label class="control-label" for="contact_telephone">Contact Telephone</label>
     <div class="controls">
-      <input id="definition_note" name="definition_note" type="text" value="${data.get('definition_note', '')}" />
-      <p class="field_error" py:if="errors.get('definition_note', '')">${errors.get('definition_note', '')}</p>
+      <input id="contact_telephone" name="contact_telephone" type="text"
+        value="${data.get('contact_telephone', '')}" />
+      <p class="field_error" py:if="errors.get('contact_telephone', '')">${errors.get('contact_telephone', '')}</p>
+      <p>The telephone number of the contact point.</p>
     </div>
   </div>
 
-  <div class="control-group">
-    <label class="control-label field_opt" for="editorial_note">Editorial Note</label>
+  <div class="control-group title-field">
+    <label class="control-label" for="contact_webpage">Contact Web Page</label>
     <div class="controls">
-      <input id="editorial_note" name="editorial_note" type="text" value="${data.get('editorial_note', '')}" />
-      <p class="field_error" py:if="errors.get('editorial_note', '')">${errors.get('editorial_note', '')}</p>
-    </div>
-  </div>
-
-  <div class="control-group">
-    <label class="control-label field_opt" for="history_note">History Note</label>
-    <div class="controls">
-      <input id="history_note" name="history_note" type="text" value="${data.get('history_note', '')}" />
-      <p class="field_error" py:if="errors.get('history_note', '')">${errors.get('history_note', '')}</p>
-    </div>
-  </div>
-
-  <div class="control-group">
-    <label class="control-label field_opt" for="scope_note">Scope Note</label>
-    <div class="controls">
-      <input id="scope_note" name="scope_note" type="text" value="${data.get('scope_note', '')}" />
-      <p class="field_error" py:if="errors.get('scope_note', '')">${errors.get('scope_note', '')}</p>
-    </div>
-  </div>
-
-  <div class="control-group">
-    <label class="control-label field_opt" for="example_note">Example Note</label>
-    <div class="controls">
-      <input id="example_note" name="example_note" type="text" value="${data.get('example_note', '')}" />
-      <p class="field_error" py:if="errors.get('example_note', '')">${errors.get('example_note', '')}</p>
+      <input id="contact_webpage" name="contact_webpage" type="text"
+        value="${data.get('contact_webpage', '')}" />
+      <p class="field_error" py:if="errors.get('contact_webpage', '')">${errors.get('contact_webpage', '')}</p>
+      <p>The web page of the contact point.</p>
     </div>
   </div>
 </fieldset>
