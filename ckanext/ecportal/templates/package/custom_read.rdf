@@ -14,7 +14,7 @@
     xmlns:skos-xl="http://www.w3.org/2008/05/skos-xl#"
     xmlns:dcam="http://purl.org/dc/dcam/"
     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#">
-<dcat:Dataset rdf:about="http://data.lod2.eu/scoreboard">
+<dcat:Dataset rdf:about="${ g.site_url + h.url_for(controller='package',action='read',id=c.pkg_dict['name'])}">
     <dct:title xml:lang="en">${c.pkg_dict['title']}</dct:title>
     <dct:description xml:lang="en">${c.pkg_dict.get('notes', '')}</dct:description>
 
@@ -56,17 +56,13 @@
     </py:for>
 </py:if>
 
-<!--
     <ecodp:contactPoint rdf:parseType="Resource">
-        <foaf:phone rdf:resource="tel:+352111111111"/>
-        <foaf:mbox rdf:resource="mailto:INFSO-TRUST-SECURITY@ec.europa.eu"/>
-        <foaf:workplaceHomepage rdf:resource="http://ec.europa.eu/dgs/information_society/index_en.htm"/>
-        <ecodp:contactAddress xml:lang="en">rue Robert Stumper, L-2557, Luxembourg</ecodp:contactAddress>
-        <foaf:name xml:lang="en">INFSO</foaf:name>
+        <foaf:phone py:if="c.pkg_dict.get('contact_telephone')" rdf:resource="${c.pkg_dict.get('contact_telephone')}"/>
+        <foaf:mbox py:if="c.pkg_dict.get('contact_email')" rdf:resource="${c.pkg_dict.get('contact_email')}"/>
+        <foaf:workplaceHomepage py:if="c.pkg_dict.get('contact_webpage')" rdf:resource="${c.pkg_dict.get('contact_webpage')}"/>
+        <ecodp:contactAddress py:if="c.pkg_dict.get('contact_address')"  xml:lang="en">${c.pkg_dict.get('contact_address')}</ecodp:contactAddress>
+        <foaf:name py:if="c.pkg_dict.get('contact_name')" xml:lang="en">${c.pkg_dict.get('contact_name')}</foaf:name>
     </ecodp:contactPoint>
-
--->
-
 
   <dc:identifier>${c.pkg_dict['name']}</dc:identifier>
   <dc:dataDictionary>${ g.site_url + h.url_for(controller='package',action='read',id=c.pkg_dict['name'])}</dc:dataDictionary>

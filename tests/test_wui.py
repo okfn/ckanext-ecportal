@@ -125,6 +125,6 @@ class TestWUI(WsgiAppCase):
     def test_geo_tags_translated(self):
         response = self.app.get(h.url_for(
             controller='package', action='edit', id=self.dset.id
-        ))
-        assert '<option value="ie">Ireland</option>' in response.body
-        assert '<option value="uk">United Kingdom</option>' in response.body
+        ), extra_environ={'Authorization': str(TestWUI.sysadmin_user.apikey)})
+        assert '<option value="ie">Ireland</option>' in response.body, response.body
+        assert '<option value="uk">United Kingdom</option>' in response.body, response.body

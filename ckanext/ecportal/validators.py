@@ -219,4 +219,5 @@ def update_rdf(key, data, errors, context):
     if (not rdf) or ('package' in context):
         return
 
-    data[key] = '"%s"' % rdfutil.update_rdf(rdf, name).replace('"', '\\"')
+    origin_url, xml = rdfutil.update_rdf(rdf, name)
+    data[key] = '"%s"' % xml.replace('"', '\\"')

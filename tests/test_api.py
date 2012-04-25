@@ -13,7 +13,25 @@ except ImportError:
 class TestAPI(WsgiAppCase):
     @classmethod
     def setup_class(cls):
-        CreateTestData.create()
+        CreateTestData.create("publisher")
+
+        model.repo.new_revision()
+
+        usr = model.User(name="ectest", apikey="ectest", password=u'ectest')
+        model.Session.add( usr )
+        model.Session.commit()
+
+        g = model.Group.get('david')
+        g.type = 'organization'
+        model.Session.add( g )
+
+        p = model.Package.get('warandpeace')
+        mu = model.Member(table_id=usr.id, table_name='user', group=g)
+        mp = model.Member(table_id=p.id, table_name='package', group=g)
+        model.Session.add( mu )
+        model.Session.add( mp )
+        model.Session.commit()
+
         plugins.load('ecportal')
 
     @classmethod
@@ -39,7 +57,7 @@ class TestAPI(WsgiAppCase):
         })
         response = self.app.post('/api/action/package_create',
                                  params=dataset_json,
-                                 extra_environ={'Authorization': 'tester'})
+                                 extra_environ={'Authorization': 'ectest'})
         dataset = json.loads(response.body)['result']
         assert 'owl=' in dataset['rdf']
 
@@ -66,7 +84,7 @@ class TestAPI(WsgiAppCase):
         })
         response = self.app.post('/api/action/package_create',
                                  params=dataset_json,
-                                 extra_environ={'Authorization': 'tester'})
+                                 extra_environ={'Authorization': 'ectest'})
         dataset = json.loads(response.body)['result']
         assert 'owl=' in dataset['rdf'], dataset['rdf']
 
@@ -88,7 +106,7 @@ class TestAPI(WsgiAppCase):
         })
         response = self.app.post('/api/action/package_create',
                                  params=dataset_json,
-                                 extra_environ={'Authorization': 'tester'})
+                                 extra_environ={'Authorization': 'ectest'})
         dataset = json.loads(response.body)['result']
 
         tags = [t['name'] for t in dataset['keywords']]
@@ -99,7 +117,6 @@ class TestAPI(WsgiAppCase):
         params = json.dumps({'id': u'warandpeace'})
         response = self.app.post('/api/action/package_show', params=params)
         dataset = json.loads(response.body)['result']
-
         old_tags = dataset.pop('keywords')
         new_tag_names = [u'test-keyword1', u'test-keyword2']
         new_tags = old_tags + [{'name': name} for name in new_tag_names]
@@ -110,7 +127,7 @@ class TestAPI(WsgiAppCase):
 
         params = json.dumps(dataset)
         response = self.app.post('/api/action/package_update', params=params,
-                                 extra_environ={'Authorization': 'tester'})
+                                 extra_environ={'Authorization': 'ectest'})
         updated_dataset = json.loads(response.body)['result']
 
         old_tags = [tag['name'] for tag in old_tags]
@@ -133,6 +150,6 @@ class TestAPI(WsgiAppCase):
         dataset['published_by'] = u'roger'
         params = json.dumps(dataset)
         response = self.app.post('/api/action/package_update', params=params,
-                                 extra_environ={'Authorization': 'tester'})
+                                 extra_environ={'Authorization': 'ectest'})
         updated_dataset = json.loads(response.body)['result']
-        assert updated_dataset['published_by'] == u'roger'
+        assert updated_dataset['published_by'] == u'david', updated_dataset
