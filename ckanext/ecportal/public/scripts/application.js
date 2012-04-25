@@ -434,19 +434,13 @@ CKAN.View.Resource = Backbone.View.extend({
         num: this.options.position,
         resource_icon: '/images/icons/page_white.png',
         resourceTypeOptions: [
-          ['file', CKAN.Strings.dataFile],
-          ['api', CKAN.Strings.api],
-          ['visualization', CKAN.Strings.visualization],
-          ['image', CKAN.Strings.image],
-          ['metadata', CKAN.Strings.metadata],
           ['documentation_main', CKAN.Strings.documentationMain],
           ['documentation_related', CKAN.Strings.documentationRelated],
           ['documentation_webpage', CKAN.Strings.documentationWebpage],
           ['distribution_feed', CKAN.Strings.distributionFeed],
           ['distribution_web_service', CKAN.Strings.distributionWebService],
           ['distribution_download', CKAN.Strings.distributionDownload],
-          ['code', CKAN.Strings.code],
-          ['example', CKAN.Strings.example]
+          ['visualization', CKAN.Strings.visualization]
         ]
     };
     // Generate DOM elements
