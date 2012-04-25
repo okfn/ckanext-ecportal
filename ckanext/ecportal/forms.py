@@ -91,12 +91,12 @@ class ECPortalDatasetForm(SingletonPlugin):
             for geo_tag in geo_tags:
                 translation = get_action('term_translation_show')(
                     {'model': model},
-                    {'term': geo_tag, 'lang_code': ckan_lang}
+                    {'terms': geo_tag, 'lang_code': ckan_lang}
                 )
                 if not translation:
                     translation = get_action('term_translation_show')(
                         {'model': model},
-                        {'term': geo_tag, 'lang_code': ckan_lang_fallback}
+                        {'terms': geo_tag, 'lang_code': ckan_lang_fallback}
                     )
 
                 tag_translation = translation[0]['term_translation'] if translation else geo_tag
