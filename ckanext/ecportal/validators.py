@@ -104,6 +104,18 @@ def convert_to_extras(key, data, errors, context):
     data[('extras', extra_number, 'key')] = key[0]
     data[('extras', extra_number, 'value')] = data[key]
 
+def convert_from_extras(key, data, errors, context):
+    for k in data.keys():
+        if (k[0] == 'extras' and
+            k[-1] == 'key' and
+            data[k] == key[-1]):
+            # add to top level
+            data[key] = data[('extras', k[1], 'value')]
+            # remove from extras
+            for to_remove in data.keys():
+                if to_remove[0] == 'extras' and to_remove[1] == k[1]:
+                    del data[to_remove]
+
 def convert_to_groups(key, data, errors, context):
     '''
     Add data[key] as the first group name in data, and remove

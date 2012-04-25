@@ -65,9 +65,99 @@
           <td class="dataset-details" property="foaf:homepage">${c.pkg_url_link}</td>
         </tr>
 
+        <tr py:if="c.pkg_dict.get('alternative_title')">
+          <td class="dataset-label">Alternative Title</td>
+          <td class="dataset-details">${c.pkg_dict['alternative_title']}</td>
+        </tr>
+
+        <tr py:if="c.pkg_dict.get('status')">
+          <td class="dataset-label">Status</td>
+          <td class="dataset-details">${c.pkg_dict['status']}</td>
+        </tr>
+
+        <tr py:if="c.pkg_dict.get('identifier')">
+          <td class="dataset-label">Identifier</td>
+          <td class="dataset-details">${c.pkg_dict['identifier']}</td>
+        </tr>
+
+        <tr py:if="c.pkg_dict.get('interoperability_level')">
+          <td class="dataset-label">Interoperability Level</td>
+          <td class="dataset-details">${c.pkg_dict['interoperability_level']}</td>
+        </tr>
+
+        <tr py:if="c.pkg_dict.get('type_of_dataset')">
+          <td class="dataset-label">Type of Dataset</td>
+          <td class="dataset-details">${c.pkg_dict['type_of_dataset']}</td>
+        </tr>
+
+        <tr py:if="c.pkg_dict.get('release_date')">
+          <td class="dataset-label">Release Date</td>
+          <td class="dataset-details">${c.pkg_dict['release_date']}</td>
+        </tr>
+
+        <tr py:if="c.pkg_dict.get('modified_date')">
+          <td class="dataset-label">Modified Date</td>
+          <td class="dataset-details">${c.pkg_dict['modified_date']}</td>
+        </tr>
+
+        <tr py:if="c.pkg_dict.get('accrual_periodicity')">
+          <td class="dataset-label">Accrual Periodicity</td>
+          <td class="dataset-details">${c.pkg_dict['accrual_periodicity']}</td>
+        </tr>
+
+        <tr py:if="c.pkg_dict.get('temporal_coverage_from')">
+          <td class="dataset-label">Temporal Coverage From</td>
+          <td class="dataset-details">${c.pkg_dict['temporal_coverage_from']}</td>
+        </tr>
+
+        <tr py:if="c.pkg_dict.get('temporal_coverage_to')">
+          <td class="dataset-label">Temporal Coverage To</td>
+          <td class="dataset-details">${c.pkg_dict['temporal_coverage_to']}</td>
+        </tr>
+
+        <tr py:if="c.pkg_dict.get('geographical_coverage')">
+          <td class="dataset-label">Geographical Coverage</td>
+          <td class="dataset-details">${c.pkg_dict['geographical_coverage']}</td>
+        </tr>
+
+        <tr py:if="c.pkg_dict.get('language')">
+          <td class="dataset-label">Language</td>
+          <td class="dataset-details">${", ".join(c.pkg_dict['language'])}</td>
+        </tr>
+
+        <tr py:if="c.pkg_dict.get('contact_name')">
+          <td class="dataset-label">Contact Name</td>
+          <td class="dataset-details">${c.pkg_dict['contact_name']}</td>
+        </tr>
+
+        <tr py:if="c.pkg_dict.get('contact_email')">
+          <td class="dataset-label">Contact E-mail</td>
+          <td class="dataset-details">${c.pkg_dict['contact_email']}</td>
+        </tr>
+
+        <tr py:if="c.pkg_dict.get('contact_address')">
+          <td class="dataset-label">Contact Address</td>
+          <td class="dataset-details">${c.pkg_dict['contact_address']}</td>
+        </tr>
+
+        <tr py:if="c.pkg_dict.get('contact_telephone')">
+          <td class="dataset-label">Contact Telephone</td>
+          <td class="dataset-details">${c.pkg_dict['contact_telephone']}</td>
+        </tr>
+
+        <tr py:if="c.pkg_dict.get('contact_webpage')">
+          <td class="dataset-label">Contact Web Page</td>
+          <td class="dataset-details">${c.pkg_dict['contact_webpage']}</td>
+        </tr>
+
         <tr py:if="c.pkg.version">
           <td class="dataset-label">Version</td>
           <td class="dataset-details">${c.pkg.version}</td>
+        </tr>
+
+        <tr py:if="c.pkg_dict.get('version_description')">
+          <td class="dataset-label">Version Description</td>
+          <td class="dataset-details">${c.pkg_dict['version_description']}</td>
         </tr>
 
         <tr py:if="c.eu_country">

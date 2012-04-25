@@ -3,7 +3,6 @@ import pylons
 from ckan.lib.base import c, model
 from ckan.authz import Authorizer
 import ckan.logic as logic
-from ckan.logic.converters import convert_from_extras
 from ckan.logic.validators import package_id_not_changed,\
     name_validator, package_name_validator
 from ckan.lib.navl.validators import ignore, ignore_missing, keep_extras,\
@@ -13,7 +12,7 @@ from ckan.logic.converters import convert_to_tags, convert_from_tags, free_tags_
 import ckan.plugins as plugins
 import field_values
 from validators import use_other, extract_other, ecportal_date_to_db,\
-    convert_to_extras, convert_to_groups, convert_from_groups,\
+    convert_to_extras, convert_from_extras, convert_to_groups, convert_from_groups,\
     duplicate_extras_key, publisher_exists, keyword_string_convert, rename,\
     update_rdf
 import helpers
