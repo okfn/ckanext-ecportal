@@ -97,23 +97,10 @@ class ECPortalCommand(cli.CkanCommand):
                 return
             self.export_datasets( self.args[1], self.args[2] )
         elif cmd == 'import-publishers':
-            if not len(self.args) == 3:
+            if not len(self.args) == 1:
                 print ECPortalCommand.__doc__
                 return
-
-            translations_path = self.args[1]
-            structure_path = self.args[2]
-
-            if os.path.isfile(translations_path) and \
-               os.path.isfile(structure_path):
-                with open(translations_path, 'r') as t:
-                    with open(structure_path, 'r') as s:
-                        self.import_publishers(json.loads(t.read()),
-                                               json.loads(s.read()))
-            else:
-                log.error('Could not open files %s and %s' %
-                    (translations_path, structure_path)
-                )
+            self.import_publishers()
 
         elif cmd == 'create-geo-vocab':
             if not len(self.args) == 3:
@@ -355,98 +342,60 @@ class ECPortalCommand(cli.CkanCommand):
                 sys.stderr.write( str(ioe) + "\n" )
 
 
-    def import_publishers(self, translations, structure):
+    def import_publishers(self):
         '''
         Create publisher groups based on translations and structure JSON objects.
         '''
         # get group names and title translations
         log.info('Reading group structure and names/translations')
         groups = {}
-        for group in translations['results']['bindings']:
-            name_uri = group['s']['value']
-            group_name = name_uri.split('/')[-1].lower()
-            lang_uri = group['lang']['value']
-            lang_name = lang_uri.split('/')[-1].lower()
-            if not group_name in groups:
-                groups[group_name] = {}
-                groups[group_name]['titles'] = {}
-            groups[group_name]['titles'][lang_name] = group['f']['value']
 
-        # get list of child groups for each group
-        for group in groups:
-            groups[group]['children'] = []
+        file_name = os.path.dirname(os.path.abspath(__file__)) + '/../../data/po-corporate-bodies.json'
+        with open(file_name) as json_file:
+            full_json = json.loads(json_file.read())
 
-            for relationship in structure['results']['bindings']:
-                parent = relationship['ch']['value'].split('/')[-1].lower()
-                if parent == group:
-                    child = relationship['s']['value'].split('/')[-1].lower()
-                    groups[group]['children'].append(child)
+        ### get out english 
 
-        # create CKAN groups
+        groups_title_lookup = {}
+        translations = []
+
         log.info('Creating CKAN group objects')
         user = logic.get_action('get_site_user')({'model': model, 'ignore_auth': True}, {})
-        context = {'model': model, 'session': model.Session, 'user': user['name']}
 
-        for group in groups:
-            try:
-                g = logic.get_action('group_show')(context, {'id': group})
-            except logic.NotFound:
-                # use the english title if we have one
-                group_title = groups[group]['titles'].get('eng')
-                if not group_title:
-                    group_title = groups[group]['titles'].values()[0]
-
-                group_data = {
-                    'name': unicode(group),
-                    'title': unicode(group_title),
-                    'type': u'publisher'
+        for item in full_json['results']['bindings']:
+            if item["language"]["value"] == "en":
+                context = {'model': model, 'session': model.Session, 'user': user['name']}
+                short_term = item["term"]["value"].split('/')[-1].lower()
+                label = item["label"]["value"]
+                if not label:
+                    label = short_term
+                groups_title_lookup[short_term] = label
+                group = {
+                    'name': short_term,
+                    'title': item["label"]["value"],
+                    'type': u'organization'
                 }
-                g = logic.get_action('group_create')(context, group_data)
-            groups[group]['dict'] = g
+                logic.get_action('group_create')(context, group)
 
-        # updating group heirarchy
-        log.info('Updating group hierarchy')
-        for group in groups:
-            if not groups[group]['children']:
+        for item in full_json['results']['bindings']:
+            if item["language"]["value"] == "en":
                 continue
-
-            parent = groups[group]['dict']
-            for child in groups[group]['children']:
-
-                # check that child is not already in the group
-                child_names = [g['name'] for g in parent.get('groups', [])]
-                if child in child_names:
-                    continue
-
-                child_dict = {
-                    'name': unicode(groups[child]['dict']['name']),
-                    'capacity': u'public'
-                }
-                if 'groups' in parent:
-                    parent['groups'].append(child_dict)
-                else:
-                    parent['groups'] = [child_dict]
-
-            logic.get_action('group_update')(context, parent)
-
-        # update French translation
-        log.info('Updating French translations')
-        term_translations = []
-        for group in groups:
-            if not 'eng' in groups[group]['titles'] or\
-               not 'fra' in groups[group]['titles']:
+            short_term = item["term"]["value"].split('/')[-1].lower()
+            translation = item["label"]["value"]
+            if not translation:
                 continue
+            translations.append({"term": groups_title_lookup[short_term],
+                                "term_translation": translation,
+                                "lang_code": item["language"]["value"]
+                                })
 
-            term = groups[group]['titles']['eng']
-            translation = groups[group]['titles']['fra']
-            term_translations.append({
-                'term': unicode(term),
-                'term_translation': unicode(translation),
-                'lang_code': u'fr'
-            })
-        logic.get_action('term_translation_update_many')(
-            context, {'data': term_translations}
-        )
+        try:
+            logic.get_action('term_translation_update_many')(
+                context, {'data': translations}
+            )
+        except Exception, e:
+            print e.error
+            raise
 
     def _get_countries(self, translations):
         '''
