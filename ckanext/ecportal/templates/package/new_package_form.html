@@ -315,11 +315,11 @@ if organization:
     <div class="controls">
       <select id="language" class="chzn-select" name="language"
         multiple="multiple" style="width: 30em;">
-        <py:for each="tag in c.languages">
+        <py:for each="tag_name, tag_translation in c.languages">
           <py:choose test="">
-            <option py:when="tag in data.get('language', [])"
-              selected="selected" value="${tag}">${tag}</option>
-            <option py:otherwise="" value="${tag}">${tag}</option>
+            <option py:when="tag_name in data.get('language', [])"
+              selected="selected" value="${tag_name}">${tag_translation}</option>
+            <option py:otherwise="" value="${tag_name}">${tag_translation}</option>
           </py:choose>
         </py:for>
       </select>

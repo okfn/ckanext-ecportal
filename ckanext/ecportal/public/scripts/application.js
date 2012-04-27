@@ -434,13 +434,13 @@ CKAN.View.Resource = Backbone.View.extend({
         num: this.options.position,
         resource_icon: '/images/icons/page_white.png',
         resourceTypeOptions: [
-          ['documentation_main', CKAN.Strings.documentationMain],
-          ['documentation_related', CKAN.Strings.documentationRelated],
-          ['documentation_webpage', CKAN.Strings.documentationWebpage],
-          ['distribution_feed', CKAN.Strings.distributionFeed],
-          ['distribution_web_service', CKAN.Strings.distributionWebService],
-          ['distribution_download', CKAN.Strings.distributionDownload],
-          ['visualization', CKAN.Strings.visualization]
+          ['http://ec.europa.eu/open-data/kos/documentation-type/MainDocumentation', CKAN.Strings.documentationMain],
+          ['http://ec.europa.eu/open-data/kos/documentation-type/RelatedDocumentation', CKAN.Strings.documentationRelated],
+          ['http://ec.europa.eu/open-data/kos/documentation-type/RelatedWebPage', CKAN.Strings.documentationWebpage],
+          ['Feed', CKAN.Strings.distributionFeed],
+          ['WebService', CKAN.Strings.distributionWebService],
+          ['Download', CKAN.Strings.distributionDownload],
+          ['Visualization', CKAN.Strings.visualization]
         ]
     };
     // Generate DOM elements

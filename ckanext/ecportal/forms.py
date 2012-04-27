@@ -93,7 +93,8 @@ class ECPortalDatasetForm(plugins.SingletonPlugin):
             dataset_types = logic.get_action('tag_list')(
                 context, {'vocabulary_id': DATASET_TYPE_VOCAB_NAME}
             )
-            c.type_of_dataset = [(t, field_values.type_of_dataset[t]) for t in dataset_types]
+            tag_translations = _translate(dataset_types, ckan_lang, ckan_lang_fallback)
+            c.type_of_dataset = [(t, tag_translations[t]) for t in dataset_types]
         except logic.NotFound:
             c.type_of_dataset = []
 
@@ -115,7 +116,10 @@ class ECPortalDatasetForm(plugins.SingletonPlugin):
 
         # get language tags
         try:
-            c.languages = logic.get_action('tag_list')(context, {'vocabulary_id': LANGUAGE_VOCAB_NAME})
+            languages = logic.get_action('tag_list')(context, {'vocabulary_id': LANGUAGE_VOCAB_NAME})
+            
+            tag_translations = _translate(languages, ckan_lang, ckan_lang_fallback)
+            c.languages = [(t, tag_translations[t]) for t in languages]
         except logic.NotFound:
             c.languages = []
 
@@ -182,7 +186,7 @@ class ECPortalDatasetForm(plugins.SingletonPlugin):
             'accrual_periodicity-other': [ignore_missing, unicode],
             'temporal_coverage_from': [ignore_missing, ecportal_date_to_db, convert_to_extras],
             'temporal_coverage_to': [ignore_missing, ecportal_date_to_db, convert_to_extras],
-            'temporal_granularity': [ignore_missing, unicode, convert_to_extras],
+            #'temporal_granularity': [ignore_missing, unicode, convert_to_extras],
             'geographical_coverage': [ignore_missing, convert_to_tags(GEO_VOCAB_NAME)],
             'language': [ignore_missing, convert_to_tags(LANGUAGE_VOCAB_NAME)],
             'version_description': [ignore_missing, unicode, convert_to_extras],
@@ -221,7 +225,7 @@ class ECPortalDatasetForm(plugins.SingletonPlugin):
                                     extract_other(field_values.accrual_periodicity)],
             'temporal_coverage_from': [convert_from_extras, ignore_missing],
             'temporal_coverage_to': [convert_from_extras, ignore_missing],
-            'temporal_granularity': [convert_from_extras, ignore_missing],
+            #'temporal_granularity': [convert_from_extras, ignore_missing],
             'geographical_coverage': [convert_from_tags(GEO_VOCAB_NAME), ignore_missing],
             'language': [convert_from_tags(LANGUAGE_VOCAB_NAME), ignore_missing],
             'version_description': [convert_from_extras, ignore_missing],
