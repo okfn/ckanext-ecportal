@@ -49,13 +49,6 @@ class Select(paste.fixture.Field):
             self.options = [(option, False) for (option, checked) in self.options]
             return
 
-        for v in value:
-            if not v in [option for (option, checked) in self.options]:
-                raise ValueError("Option %r not found (from %s)"
-                    % (value, ', '.join(
-                    [repr(o) for o, checked in self.options]))
-                )
-
         new_options = [(option, True) for (option, checked) in self.options if option in value]
         new_options += [(option, False) for (option, checked) in self.options if not option in value]
         self.options = new_options
@@ -78,12 +71,12 @@ class TestWUI(WsgiAppCase):
         cls.old_select = paste.fixture.Field.classes['select']
         paste.fixture.Field.classes['select'] = Select
 
-        extra_environ = {'Authorization': str(cls.sysadmin_user.apikey)}
+        cls.extra_environ = {'Authorization': str(cls.sysadmin_user.apikey)}
 
         # create a test vocab
         params = json.dumps({'name': GEO_VOCAB_NAME})
         response = cls.app.post('/api/action/vocabulary_create', params=params,
-                                extra_environ=extra_environ)
+                                extra_environ=cls.extra_environ)
         assert json.loads(response.body)['success']
         cls.geo_vocab_id = json.loads(response.body)['result']['id']
 
@@ -93,7 +86,7 @@ class TestWUI(WsgiAppCase):
                                  'vocabulary_id': cls.geo_vocab_id})
             response = cls.app.post('/api/action/tag_create',
                                     params=params,
-                                    extra_environ=extra_environ)
+                                    extra_environ=cls.extra_environ)
             assert json.loads(response.body)['success']
             # add tag translations
             params = json.dumps({
@@ -103,7 +96,7 @@ class TestWUI(WsgiAppCase):
             })
             response = cls.app.post('/api/action/term_translation_update',
                                     params=params,
-                                    extra_environ=extra_environ)
+                                    extra_environ=cls.extra_environ)
             assert json.loads(response.body)['success']
 
     @classmethod
@@ -117,14 +110,47 @@ class TestWUI(WsgiAppCase):
         dataset = json.loads(response.body)['result']
         dataset['geographical_coverage'] = []
         params = json.dumps(dataset)
-        extra_environ = {'Authorization': str(self.sysadmin_user.apikey)}
         response = self.app.post('/api/action/package_update', params=params,
-                                 extra_environ=extra_environ)
+                                 extra_environ=self.extra_environ)
         assert json.loads(response.body)['success']
 
     def test_geo_tags_translated(self):
-        response = self.app.get(h.url_for(
-            controller='package', action='edit', id=self.dset.id
-        ), extra_environ={'Authorization': str(TestWUI.sysadmin_user.apikey)})
+        response = self.app.get(
+            h.url_for(controller='package', action='edit', id=self.dset.id),
+            extra_environ=self.extra_environ
+        )
         assert '<option value="ie">Ireland</option>' in response.body, response.body
         assert '<option value="uk">United Kingdom</option>' in response.body, response.body
+
+    def test_dataset_create(self):
+        dataset = {
+            'name': u'test-create',
+            'description': u'test description',
+            'status': u'http://purl.org/adms/status/Withdrawn',
+            'contact_name': u'dataset-contact'
+        }
+
+        response = self.app.get(
+            h.url_for(controller='package', action='new'),
+            extra_environ=self.extra_environ
+        )
+        fv = response.forms['dataset-edit']
+        fv = Form(fv.response, fv.text)
+        for k in dataset.keys():
+            fv[k] = dataset[k]
+        response = fv.submit('save', extra_environ=self.extra_environ)
+        response = response.follow(extra_environ=self.extra_environ)
+
+        response = self.app.get(
+            h.url_for(controller='package', action='edit', id=dataset['name']),
+            extra_environ=self.extra_environ
+        )
+        fv = response.forms['dataset-edit']
+        fv = Form(fv.response, fv.text)
+        for k in dataset.keys():
+            # TODO: select values returned as a list, should return a single
+            # value if it is a standard select object (not multi-select)
+            if not isinstance(fv[k].value, list):
+                assert fv[k].value == dataset[k], (fv[k].value, dataset[k])
+            else:
+                assert fv[k].value[0] == dataset[k], (fv[k].value[0], dataset[k])
