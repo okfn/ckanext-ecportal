@@ -2,18 +2,14 @@ import os
 import sys
 import re
 import json
-from collections import defaultdict
 import urllib
 import lxml.etree
 import ckan
 import ckan.model as model
 import ckan.logic as logic
 import ckan.lib.cli as cli
-import ckan.lib.navl.validators as validators
-import ckan.lib.i18n as i18n
 import requests
 import forms
-import field_values
 
 
 import logging
@@ -90,11 +86,13 @@ class ECPortalCommand(cli.CkanCommand):
                 self.import_data(urllib.urlopen(data))
             else:
                 self.import_data(data)
+
         elif cmd == 'export-datasets':
             if not len(self.args) == 3:
                 print ECPortalCommand.__doc__
                 return
-            self.export_datasets( self.args[1], self.args[2] )
+            self.export_datasets(self.args[1], self.args[2])
+
         elif cmd == 'import-publishers':
             if not len(self.args) == 1:
                 print ECPortalCommand.__doc__
@@ -106,7 +104,6 @@ class ECPortalCommand(cli.CkanCommand):
                 print ECPortalCommand.__doc__
                 return
             self.create_geo_vocab()
-
 
         elif cmd == 'delete-geo-vocab':
             self.delete_geo_vocab()
@@ -311,25 +308,24 @@ class ECPortalCommand(cli.CkanCommand):
         context = {'model': model, 'session': model.Session, 'user': user['name']}
         dataset_names = logic.get_action('package_list')(context, {})
         for dataset_name in dataset_names:
-            dataset_dict = logic.get_action('package_show')(context, {'id':dataset_name })
+            dataset_dict = logic.get_action('package_show')(context, {'id': dataset_name})
             if not dataset_dict['state'] == 'active':
                 continue
 
-            url = ckan.lib.helpers.url_for( controller='package',
-                                                  action='read',
-                                                  id=dataset_dict['name'])
+            url = ckan.lib.helpers.url_for(controller='package',
+                                           action='read',
+                                           id=dataset_dict['name'])
 
             url = urlparse.urljoin(fetch_url, url[1:]) + '.rdf'
 
             try:
-                filename = os.path.join( output_folder, dataset_dict['name'] ) + ".rdf"
+                filename = os.path.join(output_folder, dataset_dict['name']) + ".rdf"
                 print filename
                 r = requests.get(url, auth=('ec', 'ecportal'))
                 with open(filename, 'wb') as f:
                     f.write(r.content)
             except IOError, ioe:
-                sys.stderr.write( str(ioe) + "\n" )
-
+                sys.stderr.write(str(ioe) + "\n")
 
     def import_publishers(self):
         '''
@@ -337,7 +333,6 @@ class ECPortalCommand(cli.CkanCommand):
         '''
         # get group names and title translations
         log.info('Reading group structure and names/translations')
-        groups = {}
 
         file_name = os.path.dirname(os.path.abspath(__file__)) + '/../../data/po-corporate-bodies.json'
         with open(file_name) as json_file:
@@ -382,7 +377,6 @@ class ECPortalCommand(cli.CkanCommand):
             context, {'data': translations}
         )
 
-
     def _create_vocab(self, context, vocab_name):
         try:
             log.info('Creating vocabulary "%s"' % vocab_name)
@@ -409,7 +403,6 @@ class ECPortalCommand(cli.CkanCommand):
         logic.get_action('vocabulary_delete')(context, {'id': vocab['id']})
 
     def create_vocab_from_file(self, vocab_name, file_name):
-
         context = {'model': model, 'session': model.Session,
                    'user': self.user_name}
         vocab = self._create_vocab(context, vocab_name)
@@ -493,4 +486,3 @@ class ECPortalCommand(cli.CkanCommand):
         print 'dataset type complete'
         self.create_language_vocab()
         print 'language complete'
-
