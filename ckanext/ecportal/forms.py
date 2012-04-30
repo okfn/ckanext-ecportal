@@ -150,6 +150,7 @@ class ECPortalDatasetForm(plugins.SingletonPlugin):
 
         if options.get('api'):
             schema.update({
+                'accrual_periodicity': [ignore_missing, unicode, convert_to_extras],
                 'keywords': default_tags_schema(),
                 'groups': {
                     'id': [ignore_missing, unicode],
@@ -157,6 +158,7 @@ class ECPortalDatasetForm(plugins.SingletonPlugin):
                     '__extras': [ignore],
                 }
             })
+            del schema['accrual_periodicity-other']
 
             if options.get('type') == 'create':
                 schema.update({'id': [empty]})

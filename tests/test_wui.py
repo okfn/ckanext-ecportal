@@ -49,8 +49,12 @@ class Select(paste.fixture.Field):
             self.options = [(option, False) for (option, checked) in self.options]
             return
 
-        new_options = [(option, True) for (option, checked) in self.options if option in value]
-        new_options += [(option, False) for (option, checked) in self.options if not option in value]
+        new_options = []
+        for option, checked in self.options:
+            if option and option in value:
+                new_options.append((option, True))
+            else:
+                new_options.append((option, False))
         self.options = new_options
 
     def value__get(self):
@@ -130,6 +134,7 @@ class TestWUI(WsgiAppCase):
             'contact_name': u'dataset-contact'
         }
 
+        # create the dataset
         response = self.app.get(
             h.url_for(controller='package', action='new'),
             extra_environ=self.extra_environ
@@ -139,7 +144,69 @@ class TestWUI(WsgiAppCase):
         for k in dataset.keys():
             fv[k] = dataset[k]
         response = fv.submit('save', extra_environ=self.extra_environ)
+
+        # check values
         response = response.follow(extra_environ=self.extra_environ)
+        for k in dataset.keys():
+            assert dataset[k] in response
+
+    def test_dataset_edit(self):
+        # TODO: add vocab fields and published_by (groups)
+        dataset = {
+            'name': u'test-edit',
+            'title': u'Test Title',
+            'description': u'test description',
+            'status': u'http://purl.org/adms/status/Completed',
+            'contact_name': u'dataset-contact',
+            'alternative_title': u'test alt title',
+            'identifier': u'test-id',
+            'release_date': u'2012-01-01',
+            'modified_date': u'2012-01-01',
+            'accrual_periodicity': u'quarterly',
+            'temporal_coverage_from': u'2012-01',
+            'temporal_coverage_to': u'2012-02',
+            'temporal_granularity': u'month',
+            'version': u'1.0',
+            'version_description': u'test version description',
+            'contact_email': u'test@contact.com',
+            'contact_address': u'123 contact st',
+            'contact_telephone': u'0123456789',
+            'contact_webpage': u'http://test.contact.com'
+        }
+        response = self.app.post('/api/action/package_create',
+                                 params=json.dumps(dataset),
+                                 extra_environ=self.extra_environ)
+        assert json.loads(response.body)['success']
+
+        dataset.update({
+            'title': u'Test Title 2',
+            'description': u'test description 2',
+            'status': u'http://purl.org/adms/status/Withdrawn',
+            'contact_name': u'dataset-contact-2',
+            'alternative_title': u'test alt title 2',
+            'identifier': u'test-id-2',
+            'release_date': u'2012-01-02',
+            'modified_date': u'2012-01-02',
+            'accrual_periodicity': u'never',
+            'temporal_coverage_from': u'2012-02',
+            'temporal_coverage_to': u'2012-03',
+            'temporal_granularity': u'day',
+            'version': u'2.0',
+            'version_description': u'test version description 2',
+            'contact_email': u'test2@contact.com',
+            'contact_address': u'123 contact st 2',
+            'contact_telephone': u'0123',
+            'contact_webpage': u'http://test2.contact.com'
+        })
+        response = self.app.get(
+            h.url_for(controller='package', action='edit', id=dataset['name']),
+            extra_environ=self.extra_environ
+        )
+        fv = response.forms['dataset-edit']
+        fv = Form(fv.response, fv.text)
+        for k in dataset.keys():
+            fv[k] = dataset[k]
+        response = fv.submit('save', extra_environ=self.extra_environ)
 
         response = self.app.get(
             h.url_for(controller='package', action='edit', id=dataset['name']),
