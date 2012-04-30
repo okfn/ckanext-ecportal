@@ -18,18 +18,18 @@ class TestAPI(WsgiAppCase):
         model.repo.new_revision()
 
         usr = model.User(name="ectest", apikey="ectest", password=u'ectest')
-        model.Session.add( usr )
+        model.Session.add(usr)
         model.Session.commit()
 
         g = model.Group.get('david')
         g.type = 'organization'
-        model.Session.add( g )
+        model.Session.add(g)
 
         p = model.Package.get('warandpeace')
         mu = model.Member(table_id=usr.id, table_name='user', group=g)
         mp = model.Member(table_id=p.id, table_name='package', group=g)
-        model.Session.add( mu )
-        model.Session.add( mp )
+        model.Session.add(mu)
+        model.Session.add(mp)
         model.Session.commit()
 
         plugins.load('ecportal')
@@ -51,6 +51,7 @@ class TestAPI(WsgiAppCase):
             'name': u'rdfpackage2',
             'title': u'RDF Package2',
             'description': u'RDF package 2 description',
+            'published_by': u'david',
             'status': u'http://purl.org/adms/status/Completed',
             'contact_name': u'Eurostat',
             'rdf': json.dumps(rdf)
@@ -78,6 +79,7 @@ class TestAPI(WsgiAppCase):
             'name': u'rdfpackage1',
             'title': u'RDF Package1',
             'description': u'RDF package 2 description',
+            'published_by': u'david',
             'status': u'http://purl.org/adms/status/Completed',
             'contact_name': u'Eurostat',
             'rdf': json.dumps(rdf)
@@ -100,6 +102,7 @@ class TestAPI(WsgiAppCase):
             'name': u'test_keywords_dataset',
             'title': u'Test Keywords Dataset',
             'description': u'test description',
+            'published_by': u'david',
             'status': u'http://purl.org/adms/status/Completed',
             'contact_name': json.dumps(u'Eurostat'),
             'keywords': [{u'name': tag}]

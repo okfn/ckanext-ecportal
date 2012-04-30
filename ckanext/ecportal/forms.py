@@ -6,8 +6,7 @@ import ckan.logic as logic
 from ckan.logic.validators import package_id_not_changed,\
     name_validator, package_name_validator
 from ckan.lib.navl.validators import ignore, ignore_missing, keep_extras,\
-    empty, not_empty
-from ckan.logic.schema import package_form_schema, default_tags_schema
+    empty, not_empty, default
 from ckan.logic.converters import convert_to_tags, convert_from_tags, free_tags_only
 import ckan.plugins as plugins
 import field_values
@@ -103,7 +102,7 @@ class ECPortalDatasetForm(plugins.SingletonPlugin):
         groups = logic.get_action('group_list')(context, {'all_fields': True})
         groups = [g for g in groups if g.get('type') == group_type]
         group_translations = _translate([g['title'] for g in groups], ckan_lang, ckan_lang_fallback)
-        c.publishers = [(g['id'], group_translations[g['title']]) for g in groups]
+        c.publishers = [(g['name'], group_translations[g['title']]) for g in groups]
 
         # get geo tag translations (full names)
         # eg: 'UK' translates to 'United Kingdom' in English
@@ -151,7 +150,7 @@ class ECPortalDatasetForm(plugins.SingletonPlugin):
         if options.get('api'):
             schema.update({
                 'accrual_periodicity': [ignore_missing, unicode, convert_to_extras],
-                'keywords': default_tags_schema(),
+                'keywords': logic.schema.default_tags_schema(),
                 'groups': {
                     'id': [ignore_missing, unicode],
                     'name': [ignore_missing, unicode],
@@ -172,7 +171,7 @@ class ECPortalDatasetForm(plugins.SingletonPlugin):
         return schema
 
     def form_to_db_schema(self, package_type=None):
-        schema = package_form_schema()
+        schema = logic.schema.package_form_schema()
         schema.update({
             'keyword_string': [ignore_missing, keyword_string_convert],
             'alternative_title': [ignore_missing, unicode, convert_to_extras],
@@ -181,7 +180,10 @@ class ECPortalDatasetForm(plugins.SingletonPlugin):
             'identifier': [ignore_missing, unicode, convert_to_extras],
             'interoperability_level': [ignore_missing, unicode, convert_to_extras],
             'type_of_dataset': [ignore_missing, convert_to_tags(DATASET_TYPE_VOCAB_NAME)],
-            'published_by': [ignore_missing, unicode, publisher_exists, convert_to_groups],
+            'published_by': [not_empty, unicode, publisher_exists,
+                             convert_to_groups('name')],
+            'capacity': [ignore_missing, unicode, default(u'private'),
+                         convert_to_groups('capacity')],
             'release_date': [ignore_missing, ecportal_date_to_db, convert_to_extras],
             'modified_date': [ignore_missing, ecportal_date_to_db, convert_to_extras],
             'accrual_periodicity': [ignore_missing, use_other, unicode, convert_to_extras],
@@ -209,7 +211,7 @@ class ECPortalDatasetForm(plugins.SingletonPlugin):
         return schema
 
     def db_to_form_schema(data, package_type=None):
-        schema = package_form_schema()
+        schema = logic.schema.package_form_schema()
         schema.update({
             'tags': {
                 '__extras': [keep_extras, free_tags_only]
@@ -220,7 +222,8 @@ class ECPortalDatasetForm(plugins.SingletonPlugin):
             'interoperability_level': [convert_from_extras, ignore_missing],
             'type_of_dataset': [convert_from_tags(DATASET_TYPE_VOCAB_NAME),
                                 ignore_missing],
-            'published_by': [convert_from_groups, ignore_missing],
+            'published_by': [convert_from_groups('name')],
+            'capacity': [convert_from_groups('capacity')],
             'release_date': [convert_from_extras, ignore_missing],
             'modified_date': [convert_from_extras, ignore_missing],
             'accrual_periodicity': [convert_from_extras, ignore_missing,

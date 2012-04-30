@@ -66,10 +66,16 @@ class Select(paste.fixture.Field):
 class TestWUI(WsgiAppCase):
     @classmethod
     def setup_class(cls):
-        CreateTestData.create()
+        CreateTestData.create('publisher')
         cls.sysadmin_user = model.User.get('testsysadmin')
         cls.dset = model.Package.get('warandpeace')
         cls.geo_tags = [(u'uk', u'United Kingdom'), (u'ie', u'Ireland')]
+
+        model.repo.new_revision()
+        g = model.Group.get('david')
+        g.type = 'organization'
+        model.Session.add(g)
+        model.Session.commit()
 
         # use our custom select class for this test suite
         cls.old_select = paste.fixture.Field.classes['select']
@@ -130,6 +136,7 @@ class TestWUI(WsgiAppCase):
         dataset = {
             'name': u'test-create',
             'description': u'test description',
+            'published_by': u'david',
             'status': u'http://purl.org/adms/status/Withdrawn',
             'contact_name': u'dataset-contact'
         }
@@ -151,11 +158,12 @@ class TestWUI(WsgiAppCase):
             assert dataset[k] in response
 
     def test_dataset_edit(self):
-        # TODO: add vocab fields and published_by (groups)
+        # TODO: add vocab fields
         dataset = {
             'name': u'test-edit',
             'title': u'Test Title',
             'description': u'test description',
+            'published_by': u'david',
             'status': u'http://purl.org/adms/status/Completed',
             'contact_name': u'dataset-contact',
             'alternative_title': u'test alt title',
