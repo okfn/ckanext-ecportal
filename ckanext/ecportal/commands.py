@@ -32,12 +32,14 @@ class ECPortalCommand(cli.CkanCommand):
         paster ecportal create-dataset-type-vocab -c <config>
         paster ecportal create-language-vocab -c <config>
         paster ecportal create-status-vocab -c <config>
+        paster ecportal create-interop-vocab -c <config>
         paster ecportal create-all-vocabs -c <config>
 
         paster ecportal delete-geo-vocab -c <config>
         paster ecportal delete-dataset-type-vocab -c <config>
         paster ecportal delete-language-vocab -c <config>
         paster ecportal delete-status-vocab -c <config>
+        paster ecportal delete-interop-vocab -c <config>
         paster ecportal delete-all-vocabs -c <config>
 
     Where:
@@ -130,6 +132,12 @@ class ECPortalCommand(cli.CkanCommand):
 
         elif cmd == 'delete-status-vocab':
             self.delete_status_vocab()
+
+        elif cmd == 'create-interop-vocab':
+            self.create_interop_vocab()
+
+        elif cmd == 'delete-interop-vocab':
+            self.delete_interop_vocab()
 
         elif cmd == 'create-all-vocabs':
             self.create_all_vocabs()
@@ -499,12 +507,20 @@ class ECPortalCommand(cli.CkanCommand):
     def delete_status_vocab(self):
         self._delete_vocab(forms.STATUS_VOCAB_NAME)
 
+    def create_interop_vocab(self):
+        file_name = os.path.dirname(os.path.abspath(__file__)) + '/../../data/odp-interoperability-level.json'
+        self.create_vocab_from_file(forms.INTEROP_VOCAB_NAME, file_name)
+
+    def delete_interop_vocab(self):
+        self._delete_vocab(forms.INTEROP_VOCAB_NAME)
+
     def create_all_vocabs(self):
         self.import_publishers()
         self.create_geo_vocab()
         self.create_dataset_type_vocab()
         self.create_language_vocab()
         self.create_status_vocab()
+        self.create_interop_vocab()
 
     def delete_all_vocabs(self):
         log.warn('Not deleting publisher info (not yet implemented)')
@@ -512,3 +528,4 @@ class ECPortalCommand(cli.CkanCommand):
         self.delete_dataset_type_vocab()
         self.delete_language_vocab()
         self.delete_status_vocab()
+        self.delete_interop_vocab()

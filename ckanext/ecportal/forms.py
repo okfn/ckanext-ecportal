@@ -23,6 +23,7 @@ GEO_VOCAB_NAME = u'geographical_coverage'
 DATASET_TYPE_VOCAB_NAME = u'dataset_type'
 LANGUAGE_VOCAB_NAME = u'language'
 STATUS_VOCAB_NAME = u'status'
+INTEROP_VOCAB_NAME = u'interoperability_level'
 
 
 def _translate(terms, lang, fallback_lang):
@@ -82,7 +83,6 @@ class ECPortalDatasetForm(plugins.SingletonPlugin):
         ckan_lang_fallback = pylons.config.get('ckan.locale_default', 'en')
 
         c.licences = model.Package.get_license_options()
-        c.interoperability_levels = field_values.interoperability_levels
         c.accrual_periodicity = field_values.accrual_periodicity
         c.temporal_granularity = field_values.temporal_granularity
         c.is_sysadmin = Authorizer().is_sysadmin(c.user)
@@ -93,6 +93,13 @@ class ECPortalDatasetForm(plugins.SingletonPlugin):
             c.status = [(t, tag_translations[t]) for t in status]
         except logic.NotFound:
             c.status = []
+
+        try:
+            interop = logic.get_action('tag_list')(context, {'vocabulary_id': INTEROP_VOCAB_NAME})
+            tag_translations = _translate(interop, ckan_lang, ckan_lang_fallback)
+            c.interoperability_levels = [(u'', u'')] + [(t, tag_translations[t]) for t in interop]
+        except logic.NotFound:
+            c.interoperability_levels = []
 
         try:
             dataset_types = logic.get_action('tag_list')(
@@ -180,7 +187,8 @@ class ECPortalDatasetForm(plugins.SingletonPlugin):
             'description': [not_empty, unicode],
             'status': [not_empty, unicode, convert_to_tags(STATUS_VOCAB_NAME)],
             'identifier': [ignore_missing, unicode, convert_to_extras],
-            'interoperability_level': [ignore_missing, unicode, convert_to_extras],
+            'interoperability_level': [ignore_missing, unicode,
+                                       convert_to_tags(INTEROP_VOCAB_NAME)],
             'type_of_dataset': [ignore_missing, convert_to_tags(DATASET_TYPE_VOCAB_NAME)],
             'published_by': [not_empty, unicode, publisher_exists,
                              convert_to_groups('name')],
@@ -221,7 +229,8 @@ class ECPortalDatasetForm(plugins.SingletonPlugin):
             'alternative_title': [convert_from_extras, ignore_missing],
             'status': [convert_from_tags(STATUS_VOCAB_NAME), ignore_missing],
             'identifier': [convert_from_extras, ignore_missing],
-            'interoperability_level': [convert_from_extras, ignore_missing],
+            'interoperability_level': [convert_from_tags(INTEROP_VOCAB_NAME),
+                                       ignore_missing],
             'type_of_dataset': [convert_from_tags(DATASET_TYPE_VOCAB_NAME),
                                 ignore_missing],
             'published_by': [convert_from_groups('name')],
