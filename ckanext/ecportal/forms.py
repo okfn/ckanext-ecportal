@@ -22,6 +22,7 @@ log = logging.getLogger(__name__)
 GEO_VOCAB_NAME = u'geographical_coverage'
 DATASET_TYPE_VOCAB_NAME = u'dataset_type'
 LANGUAGE_VOCAB_NAME = u'language'
+STATUS_VOCAB_NAME = u'status'
 
 
 def _translate(terms, lang, fallback_lang):
@@ -80,12 +81,19 @@ class ECPortalDatasetForm(plugins.SingletonPlugin):
         ckan_lang = pylons.request.environ['CKAN_LANG']
         ckan_lang_fallback = pylons.config.get('ckan.locale_default', 'en')
 
-        c.status = field_values.status
         c.licences = model.Package.get_license_options()
         c.interoperability_levels = field_values.interoperability_levels
         c.accrual_periodicity = field_values.accrual_periodicity
         c.temporal_granularity = field_values.temporal_granularity
         c.is_sysadmin = Authorizer().is_sysadmin(c.user)
+
+        # get status tags
+        try:
+            status = logic.get_action('tag_list')(context, {'vocabulary_id': STATUS_VOCAB_NAME})
+            tag_translations = _translate(status, ckan_lang, ckan_lang_fallback)
+            c.status = [(t, tag_translations[t]) for t in status]
+        except logic.NotFound:
+            c.status = []
 
         # dataset types
         try:
@@ -116,7 +124,6 @@ class ECPortalDatasetForm(plugins.SingletonPlugin):
         # get language tags
         try:
             languages = logic.get_action('tag_list')(context, {'vocabulary_id': LANGUAGE_VOCAB_NAME})
-            
             tag_translations = _translate(languages, ckan_lang, ckan_lang_fallback)
             c.languages = [(t, tag_translations[t]) for t in languages]
         except logic.NotFound:
