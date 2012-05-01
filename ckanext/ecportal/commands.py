@@ -29,11 +29,12 @@ class ECPortalCommand(cli.CkanCommand):
         paster ecportal create-geo-vocab -c <config>
         paster ecportal create-dataset-type-vocab -c <config>
         paster ecportal create-language-vocab -c <config>
+        paster ecportal create-all-vocabs -c <config>
         paster ecportal export-datasets <folder> -c <config>
         paster ecportal delete-geo-vocab -c <config>
         paster ecportal delete-dataset-type-vocab -c <config>
         paster ecportal delete-language-vocab -c <config>
-        paster ecportal all-vocab -c <config>
+        paster ecportal delete-all-vocabs -c <config>
 
     Where:
         <data> = path to XML file (format of the Eurostat bulk import metadata file)
@@ -120,8 +121,12 @@ class ECPortalCommand(cli.CkanCommand):
         elif cmd == 'delete-language-vocab':
             self.delete_language_vocab()
 
-        elif cmd == 'all-vocab':
-            self.all_vocab()
+        elif cmd == 'create-all-vocabs':
+            self.create_all_vocabs()
+
+        elif cmd == 'delete-all-vocabs':
+            self.delete_all_vocabs()
+
         else:
             log.error('Command "%s" not recognized' % (cmd,))
 
@@ -458,31 +463,37 @@ class ECPortalCommand(cli.CkanCommand):
 
     def create_geo_vocab(self):
         file_name = os.path.dirname(os.path.abspath(__file__)) + '/../../data/po-countries.json'
-        self.create_vocab_from_file(forms.GEO_VOCAB_NAME, file_name) 
+        self.create_vocab_from_file(forms.GEO_VOCAB_NAME, file_name)
 
     def delete_geo_vocab(self):
         self._delete_vocab(forms.GEO_VOCAB_NAME)
 
     def create_dataset_type_vocab(self):
         file_name = os.path.dirname(os.path.abspath(__file__)) + '/../../data/odp-dataset-type.json'
-        self.create_vocab_from_file(forms.DATASET_TYPE_VOCAB_NAME, file_name) 
+        self.create_vocab_from_file(forms.DATASET_TYPE_VOCAB_NAME, file_name)
 
     def delete_dataset_type_vocab(self):
         self._delete_vocab(forms.DATASET_TYPE_VOCAB_NAME)
 
     def create_language_vocab(self):
         file_name = os.path.dirname(os.path.abspath(__file__)) + '/../../data/po-languages.json'
-        self.create_vocab_from_file(forms.LANGUAGE_VOCAB_NAME, file_name) 
+        self.create_vocab_from_file(forms.LANGUAGE_VOCAB_NAME, file_name)
 
     def delete_language_vocab(self):
         self._delete_vocab(forms.LANGUAGE_VOCAB_NAME)
 
-    def all_vocab(self):
+    def create_all_vocabs(self):
         self.import_publishers()
-        print 'publisher complete'
+        log.info('publisher creation complete')
         self.create_geo_vocab()
-        print 'geo complete'
+        log.info('geo vocab creation complete')
         self.create_dataset_type_vocab()
-        print 'dataset type complete'
+        log.info('dataset type vocab creation complete')
         self.create_language_vocab()
-        print 'language complete'
+        log.info('language vocab creation complete')
+
+    def delete_all_vocabs(self):
+        log.warn('Not deleting publisher info (not yet implemented)')
+        self.delete_geo_vocab()
+        self.delete_dataset_type_vocab()
+        self.delete_language_vocab()
