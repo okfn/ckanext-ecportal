@@ -205,6 +205,7 @@ class ECPortalDatasetForm(plugins.SingletonPlugin):
         schema['groups'].update({
             'capacity': [ignore_missing, unicode]
         })
+
         return schema
 
     def db_to_form_schema(data, package_type=None):
@@ -251,8 +252,8 @@ class ECPortalDatasetForm(plugins.SingletonPlugin):
             'capacity': [ignore_missing, unicode]
         })
 
-        # Remove isodate validator
         schema['resources'].update({
+            'position': [not_empty],
             'last_modified': [ignore_missing],
             'cache_last_updated': [ignore_missing],
             'webstore_last_updated': [ignore_missing]
