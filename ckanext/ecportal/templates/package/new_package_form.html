@@ -124,9 +124,9 @@
     <label class="control-label" for="status">Status</label>
     <div class="controls">
       <select id="status" name="status">
-        <py:for each="id, name in c.status">
-          <option value="${id}" py:attrs="{'selected': 'selected' if data.get('status', '') == id else None}" >
-            ${name}
+        <py:for each="tag, translation in c.status">
+          <option value="${tag}" py:attrs="{'selected': 'selected' if tag in data.get('status', []) else None}" >
+            ${translation}
           </option>
         </py:for>
       </select>
@@ -171,7 +171,7 @@
     <div class="controls">
       <select id="interoperability_level" name="interoperability_level">
         <py:for each="tag, translation in c.interoperability_levels">
-          <option value="${tag}" py:attrs="{'selected': 'selected' if tag in data.get('interoperability_level') else None}">
+          <option value="${tag}" py:attrs="{'selected': 'selected' if tag in data.get('interoperability_level', []) else None}">
             ${translation}
           </option>
         </py:for>
@@ -263,7 +263,7 @@
     <div class="controls">
       <select id="temporal_granularity" name="temporal_granularity">
         <py:for each="tag, translation in c.temporal_granularity">
-          <option value="${tag}" py:attrs="{'selected': 'selected' if tag in data.get('temporal_granularity') else None}">
+          <option value="${tag}" py:attrs="{'selected': 'selected' if tag in data.get('temporal_granularity', []) else None}">
             ${translation}
           </option>
         </py:for>

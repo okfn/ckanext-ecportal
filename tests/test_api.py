@@ -1,8 +1,9 @@
-from ckan import model
-from ckan import plugins
-from ckan.tests import WsgiAppCase
-from create_test_data import CreateTestData
+import ckan.model as model
+import ckan.plugins as plugins
+import ckan.tests as tests
 import ckan.lib.helpers as h
+import ckan.logic as logic
+from create_test_data import CreateTestData
 
 try:
     import json
@@ -10,7 +11,26 @@ except ImportError:
     import simplejson as json
 
 
-class TestAPI(WsgiAppCase):
+def create_vocab(vocab_name, user_name):
+    context = {'model': model, 'session': model.Session,
+               'user': user_name}
+    vocab = logic.get_action('vocabulary_create')(
+        context, {'name': vocab_name}
+    )
+    return vocab
+
+
+def add_tag_to_vocab(tag_name, vocab_id, user_name):
+    tag_schema = logic.schema.default_create_tag_schema()
+    tag_schema['name'] = [unicode]
+    context = {'model': model, 'session': model.Session,
+               'user': user_name, 'schema': tag_schema}
+    tag = {'name': tag_name,
+           'vocabulary_id': vocab_id}
+    logic.get_action('tag_create')(context, tag)
+
+
+class TestAPI(tests.WsgiAppCase):
     @classmethod
     def setup_class(cls):
         CreateTestData.create("publisher")
@@ -31,6 +51,12 @@ class TestAPI(WsgiAppCase):
         model.Session.add(mu)
         model.Session.add(mp)
         model.Session.commit()
+
+        cls.sysadmin_user = model.User.get('testsysadmin')
+
+        status = create_vocab(u'status', cls.sysadmin_user.name)
+        add_tag_to_vocab(u'http://purl.org/adms/status/Completed',
+                         status['id'], cls.sysadmin_user.name)
 
         plugins.load('ecportal')
 

@@ -1,10 +1,14 @@
-import json
 import paste.fixture
-from ckan import model
-from ckan.lib.create_test_data import CreateTestData
+import ckan.model as model
+import ckan.lib as lib
 import ckan.lib.helpers as h
-from ckan.tests import WsgiAppCase
-from ckanext.ecportal.forms import GEO_VOCAB_NAME
+import ckan.tests as tests
+import test_api
+
+try:
+    import json
+except ImportError:
+    import simplejson as json
 
 
 # paste.fixture.Field.Select does not handle multiple selects currently,
@@ -63,10 +67,10 @@ class Select(paste.fixture.Field):
     value = property(value__get, value__set)
 
 
-class TestWUI(WsgiAppCase):
+class TestWUI(tests.WsgiAppCase):
     @classmethod
     def setup_class(cls):
-        CreateTestData.create('publisher')
+        lib.create_test_data.CreateTestData.create('publisher')
         cls.sysadmin_user = model.User.get('testsysadmin')
         cls.dset = model.Package.get('warandpeace')
         cls.geo_tags = [(u'uk', u'United Kingdom'), (u'ie', u'Ireland')]
@@ -83,22 +87,21 @@ class TestWUI(WsgiAppCase):
 
         cls.extra_environ = {'Authorization': str(cls.sysadmin_user.apikey)}
 
-        # create a test vocab
-        params = json.dumps({'name': GEO_VOCAB_NAME})
-        response = cls.app.post('/api/action/vocabulary_create', params=params,
-                                extra_environ=cls.extra_environ)
-        assert json.loads(response.body)['success']
-        cls.geo_vocab_id = json.loads(response.body)['result']['id']
+        # create status vocab
+        status = test_api.create_vocab(u'status', cls.sysadmin_user.name)
+        test_api.add_tag_to_vocab(u'http://purl.org/adms/status/Completed',
+                                  status['id'], cls.sysadmin_user.name)
+        test_api.add_tag_to_vocab(u'http://purl.org/adms/status/Withdrawn',
+                                  status['id'], cls.sysadmin_user.name)
+
+        # create geographical coverage vocab
+        geo = test_api.create_vocab(u'geographical_coverage',
+                                    cls.sysadmin_user.name)
+        cls.geo_vocab_id = geo['id']
 
         for tag in cls.geo_tags:
-            # add tags to the vocab
-            params = json.dumps({'name': tag[0],
-                                 'vocabulary_id': cls.geo_vocab_id})
-            response = cls.app.post('/api/action/tag_create',
-                                    params=params,
-                                    extra_environ=cls.extra_environ)
-            assert json.loads(response.body)['success']
-            # add tag translations
+            test_api.add_tag_to_vocab(tag[0], cls.geo_vocab_id,
+                                      cls.sysadmin_user.name)
             params = json.dumps({
                 'term': tag[0],
                 'term_translation': tag[1],
@@ -108,6 +111,14 @@ class TestWUI(WsgiAppCase):
                                     params=params,
                                     extra_environ=cls.extra_environ)
             assert json.loads(response.body)['success']
+
+        # create temporal granularity
+        temporal = test_api.create_vocab(u'temporal_granularity',
+                                         cls.sysadmin_user.name)
+        test_api.add_tag_to_vocab(u'day', temporal['id'],
+                                  cls.sysadmin_user.name)
+        test_api.add_tag_to_vocab(u'month', temporal['id'],
+                                  cls.sysadmin_user.name)
 
     @classmethod
     def teardown_class(cls):
@@ -129,15 +140,15 @@ class TestWUI(WsgiAppCase):
             h.url_for(controller='package', action='edit', id=self.dset.id),
             extra_environ=self.extra_environ
         )
-        assert '<option value="ie">Ireland</option>' in response.body, response.body
-        assert '<option value="uk">United Kingdom</option>' in response.body, response.body
+        assert '<option value="ie">Ireland</option>' in response.body
+        assert '<option value="uk">United Kingdom</option>' in response.body
 
     def test_dataset_create(self):
         dataset = {
             'name': u'test-create',
             'description': u'test description',
             'published_by': u'david',
-            'status': u'http://purl.org/adms/status/Withdrawn',
+            'status': u'http://purl.org/adms/status/Completed',
             'contact_name': u'dataset-contact'
         }
 
@@ -158,7 +169,7 @@ class TestWUI(WsgiAppCase):
             assert dataset[k] in response
 
     def test_dataset_edit(self):
-        # TODO: add vocab fields
+        # TODO: add remaining vocab fields
         dataset = {
             'name': u'test-edit',
             'title': u'Test Title',
