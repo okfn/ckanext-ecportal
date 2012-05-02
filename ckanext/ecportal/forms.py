@@ -50,6 +50,15 @@ def _translate(terms, lang, fallback_lang):
     return term_translations
 
 
+def _tags_and_translations(context, vocab, lang, lang_fallback):
+    try:
+        tags = logic.get_action('tag_list')(context, {'vocabulary_id': vocab})
+        tag_translations = _translate(tags, lang, lang_fallback)
+        return [(t, tag_translations[t]) for t in tags]
+    except logic.NotFound:
+        return []
+
+
 class ECPortalDatasetForm(plugins.SingletonPlugin):
     plugins.implements(plugins.IDatasetForm, inherit=True)
     plugins.implements(plugins.ITemplateHelpers)
@@ -87,28 +96,21 @@ class ECPortalDatasetForm(plugins.SingletonPlugin):
         c.temporal_granularity = field_values.temporal_granularity
         c.is_sysadmin = Authorizer().is_sysadmin(c.user)
 
-        try:
-            status = logic.get_action('tag_list')(context, {'vocabulary_id': STATUS_VOCAB_NAME})
-            tag_translations = _translate(status, ckan_lang, ckan_lang_fallback)
-            c.status = [(t, tag_translations[t]) for t in status]
-        except logic.NotFound:
-            c.status = []
-
-        try:
-            interop = logic.get_action('tag_list')(context, {'vocabulary_id': INTEROP_VOCAB_NAME})
-            tag_translations = _translate(interop, ckan_lang, ckan_lang_fallback)
-            c.interoperability_levels = [(u'', u'')] + [(t, tag_translations[t]) for t in interop]
-        except logic.NotFound:
-            c.interoperability_levels = []
-
-        try:
-            dataset_types = logic.get_action('tag_list')(
-                context, {'vocabulary_id': DATASET_TYPE_VOCAB_NAME}
-            )
-            tag_translations = _translate(dataset_types, ckan_lang, ckan_lang_fallback)
-            c.type_of_dataset = [(t, tag_translations[t]) for t in dataset_types]
-        except logic.NotFound:
-            c.type_of_dataset = []
+        c.status = _tags_and_translations(
+            context, STATUS_VOCAB_NAME, ckan_lang, ckan_lang_fallback
+        )
+        c.interoperability_levels = _tags_and_translations(
+            context, INTEROP_VOCAB_NAME, ckan_lang, ckan_lang_fallback
+        )
+        c.type_of_dataset = _tags_and_translations(
+            context, DATASET_TYPE_VOCAB_NAME, ckan_lang, ckan_lang_fallback
+        )
+        c.geographical_coverage = _tags_and_translations(
+            context, GEO_VOCAB_NAME, ckan_lang, ckan_lang_fallback
+        )
+        c.languages = _tags_and_translations(
+            context, LANGUAGE_VOCAB_NAME, ckan_lang, ckan_lang_fallback
+        )
 
         # publisher IDs and name translations
         group_type = pylons.config.get('ckan.default.group_type', 'organization')
@@ -116,20 +118,6 @@ class ECPortalDatasetForm(plugins.SingletonPlugin):
         groups = [g for g in groups if g.get('type') == group_type]
         group_translations = _translate([g['title'] for g in groups], ckan_lang, ckan_lang_fallback)
         c.publishers = [(g['name'], group_translations[g['title']]) for g in groups]
-
-        try:
-            geo_tags = logic.get_action('tag_list')(context, {'vocabulary_id': GEO_VOCAB_NAME})
-            tag_translations = _translate(geo_tags, ckan_lang, ckan_lang_fallback)
-            c.geographical_coverage = [(t, tag_translations[t]) for t in geo_tags]
-        except logic.NotFound:
-            c.geographical_coverage = []
-
-        try:
-            languages = logic.get_action('tag_list')(context, {'vocabulary_id': LANGUAGE_VOCAB_NAME})
-            tag_translations = _translate(languages, ckan_lang, ckan_lang_fallback)
-            c.languages = [(t, tag_translations[t]) for t in languages]
-        except logic.NotFound:
-            c.languages = []
 
         # find extras that are not part of our schema
         c.additional_extras = []
