@@ -33,6 +33,7 @@ class ECPortalCommand(cli.CkanCommand):
         paster ecportal create-language-vocab -c <config>
         paster ecportal create-status-vocab -c <config>
         paster ecportal create-interop-vocab -c <config>
+        paster ecportal create-temporal-vocab -c <config>
         paster ecportal create-all-vocabs -c <config>
 
         paster ecportal delete-geo-vocab -c <config>
@@ -40,6 +41,7 @@ class ECPortalCommand(cli.CkanCommand):
         paster ecportal delete-language-vocab -c <config>
         paster ecportal delete-status-vocab -c <config>
         paster ecportal delete-interop-vocab -c <config>
+        paster ecportal delete-temporal-vocab -c <config>
         paster ecportal delete-all-vocabs -c <config>
 
     Where:
@@ -138,6 +140,12 @@ class ECPortalCommand(cli.CkanCommand):
 
         elif cmd == 'delete-interop-vocab':
             self.delete_interop_vocab()
+
+        elif cmd == 'create-temporal-vocab':
+            self.create_temporal_vocab()
+
+        elif cmd == 'delete-temporal-vocab':
+            self.delete_temporal_vocab()
 
         elif cmd == 'create-all-vocabs':
             self.create_all_vocabs()
@@ -514,6 +522,13 @@ class ECPortalCommand(cli.CkanCommand):
     def delete_interop_vocab(self):
         self._delete_vocab(forms.INTEROP_VOCAB_NAME)
 
+    def create_temporal_vocab(self):
+        file_name = os.path.dirname(os.path.abspath(__file__)) + '/../../data/odp-temporal-granularity.json'
+        self.create_vocab_from_file(forms.TEMPORAL_VOCAB_NAME, file_name)
+
+    def delete_temporal_vocab(self):
+        self._delete_vocab(forms.TEMPORAL_VOCAB_NAME)
+
     def create_all_vocabs(self):
         self.import_publishers()
         self.create_geo_vocab()
@@ -521,6 +536,7 @@ class ECPortalCommand(cli.CkanCommand):
         self.create_language_vocab()
         self.create_status_vocab()
         self.create_interop_vocab()
+        self.create_temporal_vocab()
 
     def delete_all_vocabs(self):
         log.warn('Not deleting publisher info (not yet implemented)')
@@ -529,3 +545,4 @@ class ECPortalCommand(cli.CkanCommand):
         self.delete_language_vocab()
         self.delete_status_vocab()
         self.delete_interop_vocab()
+        self.delete_temporal_vocab()

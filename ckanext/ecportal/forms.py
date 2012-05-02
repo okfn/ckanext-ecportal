@@ -24,6 +24,7 @@ DATASET_TYPE_VOCAB_NAME = u'dataset_type'
 LANGUAGE_VOCAB_NAME = u'language'
 STATUS_VOCAB_NAME = u'status'
 INTEROP_VOCAB_NAME = u'interoperability_level'
+TEMPORAL_VOCAB_NAME = u'temporal_granularity'
 
 
 def _translate(terms, lang, fallback_lang):
@@ -92,9 +93,8 @@ class ECPortalDatasetForm(plugins.SingletonPlugin):
         ckan_lang_fallback = pylons.config.get('ckan.locale_default', 'en')
 
         c.licences = model.Package.get_license_options()
-        c.accrual_periodicity = field_values.accrual_periodicity
-        c.temporal_granularity = field_values.temporal_granularity
         c.is_sysadmin = Authorizer().is_sysadmin(c.user)
+        c.accrual_periodicity = field_values.accrual_periodicity
 
         c.status = _tags_and_translations(
             context, STATUS_VOCAB_NAME, ckan_lang, ckan_lang_fallback
@@ -110,6 +110,9 @@ class ECPortalDatasetForm(plugins.SingletonPlugin):
         )
         c.languages = _tags_and_translations(
             context, LANGUAGE_VOCAB_NAME, ckan_lang, ckan_lang_fallback
+        )
+        c.temporal_granularity = [(u'', u'')] + _tags_and_translations(
+            context, TEMPORAL_VOCAB_NAME, ckan_lang, ckan_lang_fallback
         )
 
         # publisher IDs and name translations
@@ -177,18 +180,23 @@ class ECPortalDatasetForm(plugins.SingletonPlugin):
             'identifier': [ignore_missing, unicode, convert_to_extras],
             'interoperability_level': [ignore_missing, unicode,
                                        convert_to_tags(INTEROP_VOCAB_NAME)],
-            'type_of_dataset': [ignore_missing, convert_to_tags(DATASET_TYPE_VOCAB_NAME)],
+            'type_of_dataset': [ignore_missing, unicode,
+                                convert_to_tags(DATASET_TYPE_VOCAB_NAME)],
             'published_by': [not_empty, unicode, publisher_exists,
                              convert_to_groups('name')],
             'capacity': [ignore_missing, unicode, default(u'private'),
                          convert_to_groups('capacity')],
             'release_date': [ignore_missing, ecportal_date_to_db, convert_to_extras],
             'modified_date': [ignore_missing, ecportal_date_to_db, convert_to_extras],
-            'accrual_periodicity': [ignore_missing, use_other, unicode, convert_to_extras],
+            'accrual_periodicity': [ignore_missing, use_other,
+                                    unicode, convert_to_extras],
             'accrual_periodicity-other': [ignore_missing, unicode],
-            'temporal_coverage_from': [ignore_missing, ecportal_date_to_db, convert_to_extras],
-            'temporal_coverage_to': [ignore_missing, ecportal_date_to_db, convert_to_extras],
-            'temporal_granularity': [ignore_missing, unicode, convert_to_extras],
+            'temporal_coverage_from': [ignore_missing, ecportal_date_to_db,
+                                       convert_to_extras],
+            'temporal_coverage_to': [ignore_missing, ecportal_date_to_db,
+                                     convert_to_extras],
+            'temporal_granularity': [ignore_missing, unicode,
+                                     convert_to_tags(TEMPORAL_VOCAB_NAME)],
             'geographical_coverage': [ignore_missing, convert_to_tags(GEO_VOCAB_NAME)],
             'language': [ignore_missing, convert_to_tags(LANGUAGE_VOCAB_NAME)],
             'version_description': [ignore_missing, unicode, convert_to_extras],
@@ -229,7 +237,8 @@ class ECPortalDatasetForm(plugins.SingletonPlugin):
                                     extract_other(field_values.accrual_periodicity)],
             'temporal_coverage_from': [convert_from_extras, ignore_missing],
             'temporal_coverage_to': [convert_from_extras, ignore_missing],
-            'temporal_granularity': [convert_from_extras, ignore_missing],
+            'temporal_granularity': [convert_from_tags(TEMPORAL_VOCAB_NAME),
+                                     ignore_missing],
             'geographical_coverage': [convert_from_tags(GEO_VOCAB_NAME), ignore_missing],
             'language': [convert_from_tags(LANGUAGE_VOCAB_NAME), ignore_missing],
             'version_description': [convert_from_extras, ignore_missing],
