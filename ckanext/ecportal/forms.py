@@ -9,7 +9,6 @@ from ckan.lib.navl.validators import ignore, ignore_missing, keep_extras,\
     empty, not_empty, default
 from ckan.logic.converters import convert_to_tags, convert_from_tags, free_tags_only
 import ckan.plugins as plugins
-import field_values
 from validators import use_other, extract_other, ecportal_date_to_db,\
     convert_to_extras, convert_from_extras, convert_to_groups, convert_from_groups,\
     duplicate_extras_key, publisher_exists, keyword_string_convert, rename,\
@@ -94,7 +93,6 @@ class ECPortalDatasetForm(plugins.SingletonPlugin):
 
         c.licences = model.Package.get_license_options()
         c.is_sysadmin = Authorizer().is_sysadmin(c.user)
-        c.accrual_periodicity = field_values.accrual_periodicity
 
         c.status = _tags_and_translations(
             context, STATUS_VOCAB_NAME, ckan_lang, ckan_lang_fallback
@@ -149,7 +147,6 @@ class ECPortalDatasetForm(plugins.SingletonPlugin):
 
         if options.get('api'):
             schema.update({
-                'accrual_periodicity': [ignore_missing, unicode, convert_to_extras],
                 'keywords': logic.schema.default_tags_schema(),
                 'groups': {
                     'id': [ignore_missing, unicode],
@@ -157,7 +154,6 @@ class ECPortalDatasetForm(plugins.SingletonPlugin):
                     '__extras': [ignore],
                 }
             })
-            del schema['accrual_periodicity-other']
 
             if options.get('type') == 'create':
                 schema.update({'id': [empty]})
@@ -188,9 +184,7 @@ class ECPortalDatasetForm(plugins.SingletonPlugin):
                          convert_to_groups('capacity')],
             'release_date': [ignore_missing, ecportal_date_to_db, convert_to_extras],
             'modified_date': [ignore_missing, ecportal_date_to_db, convert_to_extras],
-            'accrual_periodicity': [ignore_missing, use_other,
-                                    unicode, convert_to_extras],
-            'accrual_periodicity-other': [ignore_missing, unicode],
+            'accrual_periodicity': [ignore_missing, unicode, convert_to_extras],
             'temporal_coverage_from': [ignore_missing, ecportal_date_to_db,
                                        convert_to_extras],
             'temporal_coverage_to': [ignore_missing, ecportal_date_to_db,
@@ -233,8 +227,7 @@ class ECPortalDatasetForm(plugins.SingletonPlugin):
             'capacity': [convert_from_groups('capacity')],
             'release_date': [convert_from_extras, ignore_missing],
             'modified_date': [convert_from_extras, ignore_missing],
-            'accrual_periodicity': [convert_from_extras, ignore_missing,
-                                    extract_other(field_values.accrual_periodicity)],
+            'accrual_periodicity': [convert_from_extras, ignore_missing],
             'temporal_coverage_from': [convert_from_extras, ignore_missing],
             'temporal_coverage_to': [convert_from_extras, ignore_missing],
             'temporal_granularity': [convert_from_tags(TEMPORAL_VOCAB_NAME),

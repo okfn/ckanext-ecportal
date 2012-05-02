@@ -230,19 +230,9 @@
   <div class="control-group">
     <label class="control-label" for="accrual_periodicity">Accrual Periodicity</label>
     <div class="controls">
-      <select id="accrual_periodicity" name="accrual_periodicity">
-        <py:for each="freq_name, freq_desc in c.accrual_periodicity">
-          <option value="${freq_name}" py:attrs="{'selected': 'selected' if data.get('accrual_periodicity', '') == freq_name else None}" >
-            ${freq_desc}
-          </option>
-        </py:for>
-      </select>
-      <label class="inline" for="accrual_periodicity-other">Other:
-        <input class="medium-width" id="accrual_periodicity-other" name="accrual_periodicity-other"
-          type="text" value="${data.get('accrual_periodicity-other', '')}"/>
-      </label>
-      <p>The frequency with which dataset is published.</p>
+      <input id="accrual_periodicity" maxlength="100" name="accrual_periodicity" type="text" value="${data.get('accrual_periodicity', '')}" />
       <p class="field_error" py:if="errors.get('accrual_periodicity', '')">${errors.get('accrual_periodicity', '')}</p>
+      <p>The frequency with which dataset is published.</p>
     </div>
   </div>
 
