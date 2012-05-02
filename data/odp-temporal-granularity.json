@@ -1,0 +1,24 @@
+{
+  "head": {
+    "vars": ["term" , "label" , "language"]
+  },
+  "results": {
+    "bindings": [
+      {
+        "term": {"type": "uri" , "value": "year"},
+        "label": {"type": "literal" , "value": "Year"},
+        "language": {"type": "literal" , "value": "en" }
+      },
+      {
+        "term": {"type": "uri" , "value": "month"},
+        "label": {"type": "literal" , "value": "Month"},
+        "language": {"type": "literal" , "value": "en" }
+      },
+      {
+        "term": {"type": "uri" , "value": "day"},
+        "label": {"type": "literal" , "value": "Day"},
+        "language": {"type": "literal" , "value": "en" }
+      }
+    ]
+  }
+}
