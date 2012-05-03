@@ -8,11 +8,9 @@ import ckan
 import ckan.model as model
 import ckan.logic as logic
 import ckan.lib.cli as cli
-import ckan.lib.navl.validators as validators
-import ckan.lib.i18n as i18n
 import requests
 import forms
-import field_values
+
 
 import logging
 log = logging.getLogger()
@@ -27,23 +25,29 @@ class ECPortalCommand(cli.CkanCommand):
     Commands:
 
         paster ecportal import-data <data> <user> -c <config>
-        paster ecportal import-publishers <translations> <structure> -c <config>
-        paster ecportal create-geo-vocab <ntu translations> <ntu types> -c <config>
+        paster ecportal import-publishers -c <config>
+        paster ecportal export-datasets <folder> -c <config>
+
+        paster ecportal create-geo-vocab -c <config>
         paster ecportal create-dataset-type-vocab -c <config>
         paster ecportal create-language-vocab -c <config>
-        paster ecportal export-datasets <folder> -c <config>
+        paster ecportal create-status-vocab -c <config>
+        paster ecportal create-interop-vocab -c <config>
+        paster ecportal create-temporal-vocab -c <config>
+        paster ecportal create-all-vocabs -c <config>
+
         paster ecportal delete-geo-vocab -c <config>
         paster ecportal delete-dataset-type-vocab -c <config>
         paster ecportal delete-language-vocab -c <config>
+        paster ecportal delete-status-vocab -c <config>
+        paster ecportal delete-interop-vocab -c <config>
+        paster ecportal delete-temporal-vocab -c <config>
+        paster ecportal delete-all-vocabs -c <config>
 
     Where:
         <data> = path to XML file (format of the Eurostat bulk import metadata file)
         <user> = perform actions as this CKAN user (name)
         <folder> = Output folder for dataset export
-        <translations> = path to translations.json
-        <structure> = path to structure.json
-        <ntu translations> = path to ntu_translations.json
-        <ntu types> = path to ntu_types.json
         <config> = path to your ckan config file
 
     The commands should be run from the ckanext-ecportal directory.
@@ -91,48 +95,24 @@ class ECPortalCommand(cli.CkanCommand):
                 self.import_data(urllib.urlopen(data))
             else:
                 self.import_data(data)
+
         elif cmd == 'export-datasets':
             if not len(self.args) == 3:
                 print ECPortalCommand.__doc__
                 return
-            self.export_datasets( self.args[1], self.args[2] )
+            self.export_datasets(self.args[1], self.args[2])
+
         elif cmd == 'import-publishers':
-            if not len(self.args) == 3:
+            if not len(self.args) == 1:
                 print ECPortalCommand.__doc__
                 return
-
-            translations_path = self.args[1]
-            structure_path = self.args[2]
-
-            if os.path.isfile(translations_path) and \
-               os.path.isfile(structure_path):
-                with open(translations_path, 'r') as t:
-                    with open(structure_path, 'r') as s:
-                        self.import_publishers(json.loads(t.read()),
-                                               json.loads(s.read()))
-            else:
-                log.error('Could not open files %s and %s' %
-                    (translations_path, structure_path)
-                )
+            self.import_publishers()
 
         elif cmd == 'create-geo-vocab':
-            if not len(self.args) == 3:
+            if not len(self.args) == 1:
                 print ECPortalCommand.__doc__
                 return
-
-            translations_path = self.args[1]
-            types_path = self.args[2]
-
-            if os.path.isfile(translations_path) and \
-               os.path.isfile(types_path):
-                with open(translations_path, 'r') as tr:
-                    with open(types_path, 'r') as ty:
-                        self.create_geo_vocab(json.loads(tr.read()),
-                                              json.loads(ty.read()))
-            else:
-                log.error('Could not open files %s and %s' %
-                    (translations_path, types_path)
-                )
+            self.create_geo_vocab()
 
         elif cmd == 'delete-geo-vocab':
             self.delete_geo_vocab()
@@ -148,6 +128,30 @@ class ECPortalCommand(cli.CkanCommand):
 
         elif cmd == 'delete-language-vocab':
             self.delete_language_vocab()
+
+        elif cmd == 'create-status-vocab':
+            self.create_status_vocab()
+
+        elif cmd == 'delete-status-vocab':
+            self.delete_status_vocab()
+
+        elif cmd == 'create-interop-vocab':
+            self.create_interop_vocab()
+
+        elif cmd == 'delete-interop-vocab':
+            self.delete_interop_vocab()
+
+        elif cmd == 'create-temporal-vocab':
+            self.create_temporal_vocab()
+
+        elif cmd == 'delete-temporal-vocab':
+            self.delete_temporal_vocab()
+
+        elif cmd == 'create-all-vocabs':
+            self.create_all_vocabs()
+
+        elif cmd == 'delete-all-vocabs':
+            self.delete_all_vocabs()
 
         else:
             log.error('Command "%s" not recognized' % (cmd,))
@@ -335,193 +339,74 @@ class ECPortalCommand(cli.CkanCommand):
         context = {'model': model, 'session': model.Session, 'user': user['name']}
         dataset_names = logic.get_action('package_list')(context, {})
         for dataset_name in dataset_names:
-            dataset_dict = logic.get_action('package_show')(context, {'id':dataset_name })
+            dataset_dict = logic.get_action('package_show')(context, {'id': dataset_name})
             if not dataset_dict['state'] == 'active':
                 continue
 
-            url = ckan.lib.helpers.url_for( controller='package',
-                                                  action='read',
-                                                  id=dataset_dict['name'])
+            url = ckan.lib.helpers.url_for(controller='package',
+                                           action='read',
+                                           id=dataset_dict['name'])
 
             url = urlparse.urljoin(fetch_url, url[1:]) + '.rdf'
 
             try:
-                filename = os.path.join( output_folder, dataset_dict['name'] ) + ".rdf"
+                filename = os.path.join(output_folder, dataset_dict['name']) + ".rdf"
                 print filename
                 r = requests.get(url, auth=('ec', 'ecportal'))
                 with open(filename, 'wb') as f:
                     f.write(r.content)
             except IOError, ioe:
-                sys.stderr.write( str(ioe) + "\n" )
+                sys.stderr.write(str(ioe) + "\n")
 
-
-    def import_publishers(self, translations, structure):
+    def import_publishers(self):
         '''
         Create publisher groups based on translations and structure JSON objects.
         '''
         # get group names and title translations
         log.info('Reading group structure and names/translations')
-        groups = {}
-        for group in translations['results']['bindings']:
-            name_uri = group['s']['value']
-            group_name = name_uri.split('/')[-1].lower()
-            lang_uri = group['lang']['value']
-            lang_name = lang_uri.split('/')[-1].lower()
-            if not group_name in groups:
-                groups[group_name] = {}
-                groups[group_name]['titles'] = {}
-            groups[group_name]['titles'][lang_name] = group['f']['value']
 
-        # get list of child groups for each group
-        for group in groups:
-            groups[group]['children'] = []
+        file_name = os.path.dirname(os.path.abspath(__file__)) + '/../../data/po-corporate-bodies.json'
+        with open(file_name) as json_file:
+            full_json = json.loads(json_file.read())
 
-            for relationship in structure['results']['bindings']:
-                parent = relationship['ch']['value'].split('/')[-1].lower()
-                if parent == group:
-                    child = relationship['s']['value'].split('/')[-1].lower()
-                    groups[group]['children'].append(child)
+        ### get out english 
 
-        # create CKAN groups
+        groups_title_lookup = {}
+        translations = []
+
         log.info('Creating CKAN group objects')
         user = logic.get_action('get_site_user')({'model': model, 'ignore_auth': True}, {})
-        context = {'model': model, 'session': model.Session, 'user': user['name']}
 
-        for group in groups:
-            try:
-                g = logic.get_action('group_show')(context, {'id': group})
-            except logic.NotFound:
-                # use the english title if we have one
-                group_title = groups[group]['titles'].get('eng')
-                if not group_title:
-                    group_title = groups[group]['titles'].values()[0]
-
-                group_data = {
-                    'name': unicode(group),
-                    'title': unicode(group_title),
-                    'type': u'publisher'
+        for item in full_json['results']['bindings']:
+            if item["language"]["value"] == "en":
+                context = {'model': model, 'session': model.Session, 'user': user['name']}
+                short_term = item["term"]["value"].split('/')[-1].lower()
+                label = item["label"]["value"]
+                if not label:
+                    label = short_term
+                groups_title_lookup[short_term] = label
+                group = {
+                    'name': short_term,
+                    'title': item["label"]["value"],
+                    'type': u'organization'
                 }
-                g = logic.get_action('group_create')(context, group_data)
-            groups[group]['dict'] = g
+                logic.get_action('group_create')(context, group)
 
-        # updating group heirarchy
-        log.info('Updating group hierarchy')
-        for group in groups:
-            if not groups[group]['children']:
+        for item in full_json['results']['bindings']:
+            if item["language"]["value"] == "en":
                 continue
-
-            parent = groups[group]['dict']
-            for child in groups[group]['children']:
-
-                # check that child is not already in the group
-                child_names = [g['name'] for g in parent.get('groups', [])]
-                if child in child_names:
-                    continue
-
-                child_dict = {
-                    'name': unicode(groups[child]['dict']['name']),
-                    'capacity': u'public'
-                }
-                if 'groups' in parent:
-                    parent['groups'].append(child_dict)
-                else:
-                    parent['groups'] = [child_dict]
-
-            logic.get_action('group_update')(context, parent)
-
-        # update French translation
-        log.info('Updating French translations')
-        term_translations = []
-        for group in groups:
-            if not 'eng' in groups[group]['titles'] or\
-               not 'fra' in groups[group]['titles']:
+            short_term = item["term"]["value"].split('/')[-1].lower()
+            translation = item["label"]["value"]
+            if not translation:
                 continue
+            translations.append({"term": groups_title_lookup[short_term],
+                                "term_translation": translation,
+                                "lang_code": item["language"]["value"]
+                                })
 
-            term = groups[group]['titles']['eng']
-            translation = groups[group]['titles']['fra']
-            term_translations.append({
-                'term': unicode(term),
-                'term_translation': unicode(translation),
-                'lang_code': u'fr'
-            })
         logic.get_action('term_translation_update_many')(
-            context, {'data': term_translations}
+            context, {'data': translations}
         )
-
-    def _get_countries(self, translations):
-        '''
-        Return a list of the JSON dicts in the translations dict that refer
-        to countries.
-        '''
-        bindings = translations['results']['bindings']
-        type1 = 'http://publications.europa.eu/resource/authority/ntu/type/1'
-        return [b for b in bindings if b['t']['value'] == type1]
-
-    def _get_country_codes(self, countries):
-        codes = set([u'EU27'])
-        for c in countries:
-            codes.add(c['s']['value'].split('/')[-1].upper())
-        return list(codes)
-
-    def _get_name_translations(self, country_code, countries):
-        '''
-        Return all translations of the full name of country_code.
-        '''
-        name_translations = {}
-        for c in countries:
-            if c['s']['value'].split('/')[-1].upper() == country_code:
-                lang = c['lang']['value'].split('/')[-1].lower()
-                name_translations[lang] = c['f']['value']
-        return name_translations
-
-    def _lang_code_convert(self, lang):
-        '''
-        Convert 3 letter language codes (ISO 639-2) from URIs in ntu_translations.json
-        to 2 letter language codes (ISO 639-1).
-        '''
-        language_codes = {
-            'eng': u'en',
-            'fra': u'fr',
-            'deu': u'de',
-            'spa': u'es',
-            'ita': u'it',
-            'roh': u'rm',
-            'dan': u'da',
-            'ron': u'ro',
-            'por': u'pt',
-            'gle': u'ga',
-            'pol': u'pl',
-            'nld': u'nl',
-            'cat': u'ca',
-            'mkd': u'mk',
-            'ell': u'el',
-            'hrv': u'hr',
-            'swe': u'sv',
-            'ukr': u'uk',
-            'lit': u'lt',
-            'fin': u'fi',
-            'tur': u'tr',
-            'eus': u'eu',
-            'hun': u'hu',
-            'isl': u'is',
-            'sqi': u'sq',
-            'est': u'et',
-            'ces': u'cs',
-            'fao': u'fo',
-            'bul': u'bg',
-            'rus': u'ru',
-            'lav': u'lv',
-            'nor': u'no',
-            'bel': u'be',
-            'slv': u'sl',
-            'bos': u'bs',
-            'glg': u'gl',
-            'srp': u'sr',
-            'mlt': u'mt',
-            'slk': u'sk',
-            'ltz': u'lb',
-        }
-        return language_codes[lang]
 
     def _create_vocab(self, context, vocab_name):
         try:
@@ -548,115 +433,116 @@ class ECPortalCommand(cli.CkanCommand):
             logic.get_action('tag_delete')(context, {'id': tag['id']})
         logic.get_action('vocabulary_delete')(context, {'id': vocab['id']})
 
-    def create_geo_vocab(self, ntu_translations, ntu_types):
+    def create_vocab_from_file(self, vocab_name, file_name):
         context = {'model': model, 'session': model.Session,
                    'user': self.user_name}
-        vocab = self._create_vocab(context, forms.GEO_VOCAB_NAME)
-        countries = self._get_countries(ntu_translations)
-        term_translations = []
+        vocab = self._create_vocab(context, vocab_name)
 
-        for country_code in self._get_country_codes(countries):
-            # add tag
-            try:
-                log.info('Adding tag "%s" to vocab "%s"' %
-                         (country_code, forms.GEO_VOCAB_NAME))
-                tag_data = {'name': country_code, 'vocabulary_id': vocab['id']}
-                logic.get_action('tag_create')(context, tag_data)
-            except logic.ValidationError, ve:
-                # ignore errors about the tag already belong to the vocab
-                # if it's a different error, reraise
-                if not 'already belongs to vocabulary' in str(ve.error_dict):
-                    raise ve
-                log.info('Tag "%s" already belongs to vocab "%s"' %
-                         (country_code, forms.GEO_VOCAB_NAME))
+        with open(file_name) as json_file:
+            full_json = json.loads(json_file.read())
 
-            # no translations for 'EU27'
-            if country_code == 'EU27':
+        translations = []
+        tag_schema = ckan.logic.schema.default_create_tag_schema()
+        tag_schema['name'] = [unicode]
+
+        user = logic.get_action('get_site_user')({'model': model, 'ignore_auth': True}, {})
+
+        for item in full_json['results']['bindings']:
+            if item["language"]["value"] == "en":
+                context = {'model': model, 'session': model.Session, 'user': user['name'],
+                           'schema': tag_schema}
+
+                if item["label"]["value"] == "Multilingual Code" and vocab_name == forms.LANGUAGE_VOCAB_NAME:
+                    continue
+
+                term = item["term"]["value"]
+                tag = {
+                    'name': term,
+                    'vocabulary_id': vocab['id']
+                }
+                try:
+                    logic.get_action('tag_create')(context, tag)
+                except logic.ValidationError, ve:
+                    # ignore errors about the tag already belong to the vocab
+                    # if it's a different error, reraise
+                    if not 'already belongs to vocabulary' in str(ve.error_dict):
+                        raise ve
+                    log.info('Tag "%s" already belongs to vocab "%s"' %
+                             (term, vocab_name))
+
+        for item in full_json['results']['bindings']:
+            term = item["term"]["value"]
+            translation = item["label"]["value"]
+            if translation == "Multilingual Code" and vocab_name == forms.LANGUAGE_VOCAB_NAME:
+                continue
+            if not translation:
                 continue
 
-            # get all translations of the country name
-            name_translations = self._get_name_translations(country_code, countries)
-            for name in name_translations:
-                try:
-                    term_translations.append({
-                        'term': country_code,
-                        'term_translation': name_translations[name],
-                        'lang_code': self._lang_code_convert(name)
-                    })
-                except KeyError:
-                    log.info('No language code found for lang "%s"' % name)
+            translations.append({"term": term,
+                                "term_translation": translation,
+                                "lang_code": item["language"]["value"]
+                                })
 
-        # add additional translations from ntu_types dict
-        type_translations = self._get_countries(ntu_types)
-        # en_tt is just 'Country' for now, but this is here in case we want
-        # to import additional types and translations later
-        en_tt = [tt['label']['value'] for tt in type_translations
-                 if tt['label']['xml:lang'] == 'en'][0]
-        for tt in type_translations:
-            if not tt['label']['xml:lang'] == 'en':
-                term_translations.append({
-                    'term': unicode(en_tt),
-                    'term_translation': unicode(tt['label']['value']),
-                    'lang_code': unicode(tt['label']['xml:lang'])
-                })
-
-        # save translations
-        log.info('Adding translations')
         logic.get_action('term_translation_update_many')(
-            context, {'data': term_translations}
+            context, {'data': translations}
         )
+
+    def create_geo_vocab(self):
+        file_name = os.path.dirname(os.path.abspath(__file__)) + '/../../data/po-countries.json'
+        self.create_vocab_from_file(forms.GEO_VOCAB_NAME, file_name)
 
     def delete_geo_vocab(self):
         self._delete_vocab(forms.GEO_VOCAB_NAME)
 
     def create_dataset_type_vocab(self):
-        context = {'model': model, 'session': model.Session,
-                   'user': self.user_name}
-        vocab = self._create_vocab(context, forms.DATASET_TYPE_VOCAB_NAME)
-
-        # create custom tag schema so can create tags containing characters
-        # ':' and '/' (dataset type tags are URLs)
-        tag_schema = logic.schema.default_create_tag_schema()
-        tag_schema.update({'name': [validators.not_missing, validators.not_empty,
-                                    logic.validators.tag_length_validator]})
-        context['schema'] = tag_schema
-
-        for dataset_type in field_values.type_of_dataset.keys():
-            try:
-                log.info('Adding tag "%s" to vocab "%s"' %
-                         (dataset_type, forms.DATASET_TYPE_VOCAB_NAME))
-                tag_data = {'name': dataset_type, 'vocabulary_id': vocab['id']}
-                logic.get_action('tag_create')(context, tag_data)
-            except logic.ValidationError, ve:
-                # ignore errors about the tag already belong to the vocab
-                # if it's a different error, reraise
-                if not 'already belongs to vocabulary' in str(ve.error_dict):
-                    raise ve
-                log.info('Tag "%s" already belongs to vocab "%s"' %
-                         (dataset_type, forms.DATASET_TYPE_VOCAB_NAME))
+        file_name = os.path.dirname(os.path.abspath(__file__)) + '/../../data/odp-dataset-type.json'
+        self.create_vocab_from_file(forms.DATASET_TYPE_VOCAB_NAME, file_name)
 
     def delete_dataset_type_vocab(self):
         self._delete_vocab(forms.DATASET_TYPE_VOCAB_NAME)
 
     def create_language_vocab(self):
-        context = {'model': model, 'session': model.Session,
-                   'user': self.user_name}
-        vocab = self._create_vocab(context, forms.LANGUAGE_VOCAB_NAME)
-
-        locales = i18n.get_locales_dict()
-        for locale in locales.keys():
-            try:
-                log.info('Adding tag "%s" to vocab "%s"' %
-                         (locale, forms.LANGUAGE_VOCAB_NAME))
-                tag_data = {'name': locale, 'vocabulary_id': vocab['id']}
-                logic.get_action('tag_create')(context, tag_data)
-            except logic.ValidationError, ve:
-                # ignore errors about the tag already belong to the vocab
-                # if it's a different error, reraise
-                if not 'already belongs to vocabulary' in str(ve.error_dict):
-                    raise ve
-                log.info('Tag "%s" already belongs to vocab "%s"' %
-                         (locale, forms.LANGUAGE_VOCAB_NAME))
+        file_name = os.path.dirname(os.path.abspath(__file__)) + '/../../data/po-languages.json'
+        self.create_vocab_from_file(forms.LANGUAGE_VOCAB_NAME, file_name)
 
     def delete_language_vocab(self):
         self._delete_vocab(forms.LANGUAGE_VOCAB_NAME)
+
+    def create_status_vocab(self):
+        file_name = os.path.dirname(os.path.abspath(__file__)) + '/../../data/odp-dataset-status.json'
+        self.create_vocab_from_file(forms.STATUS_VOCAB_NAME, file_name)
+
+    def delete_status_vocab(self):
+        self._delete_vocab(forms.STATUS_VOCAB_NAME)
+
+    def create_interop_vocab(self):
+        file_name = os.path.dirname(os.path.abspath(__file__)) + '/../../data/odp-interoperability-level.json'
+        self.create_vocab_from_file(forms.INTEROP_VOCAB_NAME, file_name)
+
+    def delete_interop_vocab(self):
+        self._delete_vocab(forms.INTEROP_VOCAB_NAME)
+
+    def create_temporal_vocab(self):
+        file_name = os.path.dirname(os.path.abspath(__file__)) + '/../../data/odp-temporal-granularity.json'
+        self.create_vocab_from_file(forms.TEMPORAL_VOCAB_NAME, file_name)
+
+    def delete_temporal_vocab(self):
+        self._delete_vocab(forms.TEMPORAL_VOCAB_NAME)
+
+    def create_all_vocabs(self):
+        self.import_publishers()
+        self.create_geo_vocab()
+        self.create_dataset_type_vocab()
+        self.create_language_vocab()
+        self.create_status_vocab()
+        self.create_interop_vocab()
+        self.create_temporal_vocab()
+
+    def delete_all_vocabs(self):
+        log.warn('Not deleting publisher info (not yet implemented)')
+        self.delete_geo_vocab()
+        self.delete_dataset_type_vocab()
+        self.delete_language_vocab()
+        self.delete_status_vocab()
+        self.delete_interop_vocab()
+        self.delete_temporal_vocab()

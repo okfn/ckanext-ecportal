@@ -1,8 +1,9 @@
-from ckan import model
-from ckan import plugins
-from ckan.tests import WsgiAppCase
-from create_test_data import CreateTestData
+import ckan.model as model
+import ckan.plugins as plugins
+import ckan.tests as tests
 import ckan.lib.helpers as h
+import ckan.logic as logic
+from create_test_data import CreateTestData
 
 try:
     import json
@@ -10,7 +11,26 @@ except ImportError:
     import simplejson as json
 
 
-class TestAPI(WsgiAppCase):
+def create_vocab(vocab_name, user_name):
+    context = {'model': model, 'session': model.Session,
+               'user': user_name}
+    vocab = logic.get_action('vocabulary_create')(
+        context, {'name': vocab_name}
+    )
+    return vocab
+
+
+def add_tag_to_vocab(tag_name, vocab_id, user_name):
+    tag_schema = logic.schema.default_create_tag_schema()
+    tag_schema['name'] = [unicode]
+    context = {'model': model, 'session': model.Session,
+               'user': user_name, 'schema': tag_schema}
+    tag = {'name': tag_name,
+           'vocabulary_id': vocab_id}
+    logic.get_action('tag_create')(context, tag)
+
+
+class TestAPI(tests.WsgiAppCase):
     @classmethod
     def setup_class(cls):
         CreateTestData.create("publisher")
@@ -18,19 +38,25 @@ class TestAPI(WsgiAppCase):
         model.repo.new_revision()
 
         usr = model.User(name="ectest", apikey="ectest", password=u'ectest')
-        model.Session.add( usr )
+        model.Session.add(usr)
         model.Session.commit()
 
         g = model.Group.get('david')
         g.type = 'organization'
-        model.Session.add( g )
+        model.Session.add(g)
 
         p = model.Package.get('warandpeace')
         mu = model.Member(table_id=usr.id, table_name='user', group=g)
         mp = model.Member(table_id=p.id, table_name='package', group=g)
-        model.Session.add( mu )
-        model.Session.add( mp )
+        model.Session.add(mu)
+        model.Session.add(mp)
         model.Session.commit()
+
+        cls.sysadmin_user = model.User.get('testsysadmin')
+
+        status = create_vocab(u'status', cls.sysadmin_user.name)
+        add_tag_to_vocab(u'http://purl.org/adms/status/Completed',
+                         status['id'], cls.sysadmin_user.name)
 
         plugins.load('ecportal')
 
@@ -51,6 +77,7 @@ class TestAPI(WsgiAppCase):
             'name': u'rdfpackage2',
             'title': u'RDF Package2',
             'description': u'RDF package 2 description',
+            'published_by': u'david',
             'status': u'http://purl.org/adms/status/Completed',
             'contact_name': u'Eurostat',
             'rdf': json.dumps(rdf)
@@ -78,6 +105,7 @@ class TestAPI(WsgiAppCase):
             'name': u'rdfpackage1',
             'title': u'RDF Package1',
             'description': u'RDF package 2 description',
+            'published_by': u'david',
             'status': u'http://purl.org/adms/status/Completed',
             'contact_name': u'Eurostat',
             'rdf': json.dumps(rdf)
@@ -100,6 +128,7 @@ class TestAPI(WsgiAppCase):
             'name': u'test_keywords_dataset',
             'title': u'Test Keywords Dataset',
             'description': u'test description',
+            'published_by': u'david',
             'status': u'http://purl.org/adms/status/Completed',
             'contact_name': json.dumps(u'Eurostat'),
             'keywords': [{u'name': tag}]

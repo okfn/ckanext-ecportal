@@ -87,7 +87,7 @@
 
         <tr py:if="c.pkg_dict.get('type_of_dataset')">
           <td class="dataset-label">Type of Dataset</td>
-          <td class="dataset-details">${c.pkg_dict['type_of_dataset']}</td>
+          <td class="dataset-details">${", ".join(c.pkg_dict['type_of_dataset'])}</td>
         </tr>
 
         <tr py:if="c.pkg_dict.get('release_date')">
@@ -115,9 +115,14 @@
           <td class="dataset-details">${c.pkg_dict['temporal_coverage_to']}</td>
         </tr>
 
+        <tr py:if="c.pkg_dict.get('temporal_granularity')">
+          <td class="dataset-label">Temporal Granularity</td>
+          <td class="dataset-details">${c.pkg_dict['temporal_granularity']}</td>
+        </tr>
+
         <tr py:if="c.pkg_dict.get('geographical_coverage')">
           <td class="dataset-label">Geographical Coverage</td>
-          <td class="dataset-details">${c.pkg_dict['geographical_coverage']}</td>
+          <td class="dataset-details">${", ".join(c.pkg_dict['geographical_coverage'])}</td>
         </tr>
 
         <tr py:if="c.pkg_dict.get('language')">

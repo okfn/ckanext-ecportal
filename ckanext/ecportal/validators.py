@@ -123,21 +123,21 @@ def convert_from_extras(key, data, errors, context):
                 if to_remove[0] == 'extras' and to_remove[1] == k[1]:
                     del data[to_remove]
 
-def convert_to_groups(key, data, errors, context):
+def convert_to_groups(field):
     '''
-    Add data[key] as the first group name in data, and remove
-    any existing groups.
+    Add data[key] as the first group name in data.
     '''
-    for data_key in data.keys():
-        if data_key[0] == 'groups':
-            data.pop(data_key)
-    data[('groups', 0, 'name')] = data[key]
+    def convert(key, data, errors, context):
+        data[('groups', 0, field)] = data[key]
+    return convert
 
-def convert_from_groups(key, data, errors, context):
+def convert_from_groups(field):
     '''
     Set data[key] to the first group name in data (if any exist).
     '''
-    data[key] = data.get(('groups', 0, 'name'), None)
+    def convert(key, data, errors, context):
+        data[key] = data.get(('groups', 0, field), None)
+    return convert
 
 def duplicate_extras_key(key, data, errors, context):
     '''Test for a custom extra key being a duplicate of an existing (schema) key.'''
