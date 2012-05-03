@@ -59,7 +59,7 @@ class TestAPI(WsgiAppCase):
                                  params=dataset_json,
                                  extra_environ={'Authorization': 'ectest'})
         dataset = json.loads(response.body)['result']
-        assert 'owl=' in dataset['rdf']
+        assert 'dcat=' in dataset['rdf']
 
         # Fetch RDF page
         response = self.app.get(h.url_for(
@@ -86,7 +86,7 @@ class TestAPI(WsgiAppCase):
                                  params=dataset_json,
                                  extra_environ={'Authorization': 'ectest'})
         dataset = json.loads(response.body)['result']
-        assert 'owl=' in dataset['rdf'], dataset['rdf']
+        assert 'dcat=' in dataset['rdf']
 
         # Fetch RDF page
         response = self.app.get(h.url_for(

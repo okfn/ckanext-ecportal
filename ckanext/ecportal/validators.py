@@ -212,7 +212,7 @@ def update_rdf(key, data, errors, context):
     """
     Determines if there is any XML in the rdf field and ensures that  it
     matches expectations.  This data will be returned on requests for .rdf
-    however we first need to add our fields.
+    As this data is saved we first need to add our fields.
     """
     rdf = data.get(key, '')
     name = data.get((u'name',), "")
@@ -221,3 +221,9 @@ def update_rdf(key, data, errors, context):
 
     origin_url, xml = rdfutil.update_rdf(rdf, name)
     data[key] = '"%s"' % xml.replace('"', '\\"')
+
+    if origin_url:
+        # Store in data
+        pass
+
+
