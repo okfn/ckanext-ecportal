@@ -115,8 +115,11 @@ class ECPortalDatasetForm(plugins.SingletonPlugin):
 
         # publisher IDs and name translations
         group_type = pylons.config.get('ckan.default.group_type', 'organization')
-        groups = logic.get_action('group_list')(context, {'all_fields': True})
-        groups = [g for g in groups if g.get('type') == group_type]
+        if c.userobj:
+            groups = c.userobj.get_groups()
+        else:
+            groups = []
+
         group_translations = _translate([g['title'] for g in groups], ckan_lang, ckan_lang_fallback)
         c.publishers = [(g['name'], group_translations[g['title']]) for g in groups]
 
