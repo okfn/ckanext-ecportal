@@ -256,6 +256,7 @@ class ECPortalDatasetForm(plugins.SingletonPlugin):
         })
 
         schema['resources'].update({
+            'created': [ignore_missing],
             'position': [not_empty],
             'last_modified': [ignore_missing],
             'cache_last_updated': [ignore_missing],
