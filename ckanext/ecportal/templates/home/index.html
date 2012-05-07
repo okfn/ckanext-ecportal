@@ -35,9 +35,7 @@
       <div class="span6 action-box">
         <div class="action-box-inner">
           <h1>Recent Updates</h1>
-          <div class="activity-stream">
-          ${c.recently_changed_packages_activity_stream}
-          </div>
+          ${h.snippet('snippets/recent_updates_package_list.html', packages=h.recent_updates(10))}
         </div>
       </div>
     </div>

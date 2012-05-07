@@ -33,11 +33,6 @@ a:hover {
     color: #074b8c;
 }
 
-.activity-stream .activity .verb {
-    margin: 0;
-    padding: 0;
-}
-
 /****************************************************************************/
 /* Header
 /****************************************************************************/
@@ -381,6 +376,9 @@ body.index.home .front-page .group {
 }
 body.index.home .front-page .group p {
     min-height: 0;
+}
+body.home ul.datasets li {
+    border-bottom: 0;
 }
 
 /****************************************************************************/
