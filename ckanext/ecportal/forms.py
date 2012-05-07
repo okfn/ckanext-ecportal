@@ -126,8 +126,8 @@ class ECPortalDatasetForm(plugins.SingletonPlugin):
         # find extras that are not part of our schema
         c.additional_extras = []
         schema_keys = self.form_to_db_schema().keys()
-        if c.pkg_json:
-            extras = json.loads(c.pkg_json).get('extras', [])
+        if c.pkg_dict:
+            extras = c.pkg_dict.get('extras', [])
             for extra in extras:
                 if not extra['key'] in schema_keys:
                     c.additional_extras.append(extra)
