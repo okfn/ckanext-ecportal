@@ -1,15 +1,14 @@
-import json
 import pylons
 from ckan.lib.base import c, model
 from ckan.authz import Authorizer
 import ckan.logic as logic
 from ckan.logic.validators import package_id_not_changed,\
-    name_validator, package_name_validator
+    package_name_validator
 from ckan.lib.navl.validators import ignore, ignore_missing, keep_extras,\
     empty, not_empty, default
 from ckan.logic.converters import convert_to_tags, convert_from_tags, free_tags_only
 import ckan.plugins as plugins
-from validators import ecportal_date_to_db,\
+from validators import ecportal_name_validator, ecportal_date_to_db,\
     convert_to_extras, convert_from_extras, convert_to_groups, convert_from_groups,\
     duplicate_extras_key, publisher_exists, keyword_string_convert, rename,\
     update_rdf
@@ -163,7 +162,8 @@ class ECPortalDatasetForm(plugins.SingletonPlugin):
             else:
                 schema.update({
                     'id': [ignore_missing, package_id_not_changed],
-                    'name': [ignore_missing, name_validator, package_name_validator, unicode],
+                    'name': [ignore_missing, ecportal_name_validator,
+                             package_name_validator, unicode],
                     'title': [ignore_missing, unicode]
                 })
 
@@ -172,6 +172,8 @@ class ECPortalDatasetForm(plugins.SingletonPlugin):
     def form_to_db_schema(self, package_type=None):
         schema = logic.schema.package_form_schema()
         schema.update({
+            'name': [not_empty, unicode, ecportal_name_validator,
+                     package_name_validator],
             'keyword_string': [ignore_missing, keyword_string_convert],
             'alternative_title': [ignore_missing, unicode, convert_to_extras],
             'description': [not_empty, unicode],

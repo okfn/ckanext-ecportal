@@ -5,12 +5,15 @@ import ckan.logic as logic
 import ckan.lib.field_types as field_types
 import ckan.lib.navl.dictization_functions as df
 import ckan.logic.validators as val
+import ckan.model as model
 import rdfutil
 
 try:
     import json
 except ImportError:
     import simplejson as json
+
+name_match = re.compile('[a-zA-Z0-9_\-]*$')
 
 # parse_timedate function is similar to the one in ckan.lib.field_types.DateType
 # changes:
@@ -226,4 +229,15 @@ def update_rdf(key, data, errors, context):
         # Store in data
         pass
 
-
+def ecportal_name_validator(val, context):
+    if val in ['new', 'edit', 'search']:
+        raise df.Invalid(_('That name cannot be used'))
+    if len(val) < 2:
+        raise df.Invalid(_('Name must be at least %s characters long') % 2)
+    if len(val) > model.PACKAGE_NAME_MAX_LENGTH:
+        raise df.Invalid(_('Name must be a maximum of %i characters long') % \
+                           model.PACKAGE_NAME_MAX_LENGTH)
+    if not name_match.match(val):
+        raise df.Invalid(_('Url must be alphanumeric '
+                           '(ascii) characters and these symbols: -_'))
+    return val
