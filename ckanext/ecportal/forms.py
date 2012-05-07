@@ -9,7 +9,7 @@ from ckan.lib.navl.validators import ignore, ignore_missing, keep_extras,\
     empty, not_empty, default
 from ckan.logic.converters import convert_to_tags, convert_from_tags, free_tags_only
 import ckan.plugins as plugins
-from validators import use_other, extract_other, ecportal_date_to_db,\
+from validators import ecportal_date_to_db,\
     convert_to_extras, convert_from_extras, convert_to_groups, convert_from_groups,\
     duplicate_extras_key, publisher_exists, keyword_string_convert, rename,\
     update_rdf
@@ -114,14 +114,14 @@ class ECPortalDatasetForm(plugins.SingletonPlugin):
         )
 
         # publisher IDs and name translations
-        group_type = pylons.config.get('ckan.default.group_type', 'organization')
         if c.userobj:
             groups = c.userobj.get_groups()
         else:
             groups = []
 
-        group_translations = _translate([g['title'] for g in groups], ckan_lang, ckan_lang_fallback)
-        c.publishers = [(g['name'], group_translations[g['title']]) for g in groups]
+        group_translations = _translate([g.title for g in groups],
+                                        ckan_lang, ckan_lang_fallback)
+        c.publishers = [(g.name, group_translations[g.title]) for g in groups]
 
         # find extras that are not part of our schema
         c.additional_extras = []
