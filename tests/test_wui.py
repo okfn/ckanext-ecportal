@@ -151,8 +151,7 @@ class TestWUI(tests.WsgiAppCase):
             'name': u'test-create',
             'description': u'test description',
             'published_by': u'david',
-            'status': u'http://purl.org/adms/status/Completed',
-            'contact_name': u'dataset-contact'
+            'status': u'http://purl.org/adms/status/Completed'
         }
 
         # create the dataset

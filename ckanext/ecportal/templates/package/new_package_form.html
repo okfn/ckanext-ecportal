@@ -133,16 +133,6 @@
       <p class="field_error" py:if="errors.get('status', '')">Error: ${errors.get('status', '')}</p>
     </div>
   </div>
-
-  <div class="control-group title-field">
-    <label class="control-label" for="contact_name">Contact Name</label>
-    <div class="controls">
-      <input id="contact_name" name="contact_name" type="text"
-        value="${data.get('contact_name', '')}" />
-      <p class="field_error" py:if="errors.get('contact_name', '')">${errors.get('contact_name', '')}</p>
-      <p>The name of the contact point.</p>
-    </div>
-  </div>
 </fieldset>
 
 <fieldset class="tab-pane fade" id="further-information">
@@ -345,6 +335,16 @@
 </fieldset>
 
 <fieldset class="tab-pane fade" id="contact-information">
+  <div class="control-group title-field">
+    <label class="control-label" for="contact_name">Contact Name</label>
+    <div class="controls">
+      <input id="contact_name" name="contact_name" type="text"
+        value="${data.get('contact_name', '')}" />
+      <p class="field_error" py:if="errors.get('contact_name', '')">${errors.get('contact_name', '')}</p>
+      <p>The name of the contact point.</p>
+    </div>
+  </div>
+
   <div class="control-group title-field">
     <label class="control-label" for="contact_email">Contact E-mail</label>
     <div class="controls">
