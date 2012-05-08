@@ -9,6 +9,10 @@ try:
 except:
     import simplejson as json
 
+import logging
+log = logging.getLogger(__name__)
+
+
 
 
 def update_rdf( source_rdf, name ):
@@ -17,11 +21,12 @@ def update_rdf( source_rdf, name ):
     triples we want, and if not adds them.  The adding of the triples will
     depend on the namespaces already present.
     """
-    rdf = source_rdf[1:-1].replace('\\"', '"') # cleanup json junk
+    rdf = source_rdf.replace('\\"', '"').strip() # cleanup json junk
     try:
         root = lxml.etree.fromstring( rdf )
-    except lxml.etree.XMLSyntaxError:
-        return ""
+    except lxml.etree.XMLSyntaxError, xmlerr:
+        log.error( xmlerr)
+        return "", ""
 
     local_namespaces = {
         "http://purl.org/dc/terms/#" : "dct",

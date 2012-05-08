@@ -80,7 +80,7 @@ class TestAPI(tests.WsgiAppCase):
             'published_by': u'david',
             'status': u'http://purl.org/adms/status/Completed',
             'contact_name': u'Eurostat',
-            'rdf': json.dumps(rdf)
+            'rdf': rdf
         })
         response = self.app.post('/api/action/package_create',
                                  params=dataset_json,
@@ -108,7 +108,7 @@ class TestAPI(tests.WsgiAppCase):
             'published_by': u'david',
             'status': u'http://purl.org/adms/status/Completed',
             'contact_name': u'Eurostat',
-            'rdf': json.dumps(rdf)
+            'rdf': rdf
         })
         response = self.app.post('/api/action/package_create',
                                  params=dataset_json,
