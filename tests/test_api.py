@@ -79,7 +79,7 @@ class TestAPI(tests.WsgiAppCase):
             'description': u'RDF package 2 description',
             'published_by': u'david',
             'status': u'http://purl.org/adms/status/Completed',
-            'rdf': json.dumps(rdf)
+            'rdf': rdf
         })
         response = self.app.post('/api/action/package_create',
                                  params=dataset_json,
@@ -106,7 +106,7 @@ class TestAPI(tests.WsgiAppCase):
             'description': u'RDF package 2 description',
             'published_by': u'david',
             'status': u'http://purl.org/adms/status/Completed',
-            'rdf': json.dumps(rdf)
+            'rdf': rdf
         })
         response = self.app.post('/api/action/package_create',
                                  params=dataset_json,

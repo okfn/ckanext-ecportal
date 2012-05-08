@@ -223,11 +223,10 @@ def update_rdf(key, data, errors, context):
         return
 
     origin_url, xml = rdfutil.update_rdf(rdf, name)
-    data[key] = '"%s"' % xml.replace('"', '\\"')
+    data[key] = xml
 
     if origin_url:
-        # Store in data
-        pass
+        data[('url',)] = origin_url
 
 def ecportal_name_validator(val, context):
     if val in ['new', 'edit', 'search']:
