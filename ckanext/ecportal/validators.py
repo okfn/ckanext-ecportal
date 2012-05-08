@@ -223,7 +223,6 @@ def update_rdf(key, data, errors, context):
     data[key] = '"%s"' % xml.replace('"', '\\"')
 
     if origin_url:
-        # Store in data
-        pass
+        data[('url',)] = origin_url
 
 
