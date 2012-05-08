@@ -486,9 +486,9 @@ CKAN.View.Resource = Backbone.View.extend({
           ['http://ec.europa.eu/open-data/kos/documentation-type/MainDocumentation', CKAN.Strings.documentationMain],
           ['http://ec.europa.eu/open-data/kos/documentation-type/RelatedDocumentation', CKAN.Strings.documentationRelated],
           ['http://ec.europa.eu/open-data/kos/documentation-type/RelatedWebPage', CKAN.Strings.documentationWebpage],
-          ['Feed', CKAN.Strings.distributionFeed],
-          ['WebService', CKAN.Strings.distributionWebService],
-          ['Download', CKAN.Strings.distributionDownload],
+          ['http://www.w3.org/TR/vocab-dcat#Feed', CKAN.Strings.distributionFeed],
+          ['http://www.w3.org/TR/vocab-dcat#WebService', CKAN.Strings.distributionWebService],
+          ['http://www.w3.org/TR/vocab-dcat#Download', CKAN.Strings.distributionDownload],
           ['Visualization', CKAN.Strings.visualization]
         ]
     };
