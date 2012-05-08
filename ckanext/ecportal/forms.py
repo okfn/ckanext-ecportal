@@ -197,7 +197,7 @@ class ECPortalDatasetForm(plugins.SingletonPlugin):
             'language': [ignore_missing, convert_to_tags(LANGUAGE_VOCAB_NAME)],
             'version_description': [ignore_missing, unicode, convert_to_extras],
             'rdf': [ignore_missing, unicode, update_rdf, convert_to_extras],
-            'contact_name': [not_empty, unicode, convert_to_extras],
+            'contact_name': [ignore_missing, unicode, convert_to_extras],
             'contact_email': [ignore_missing, unicode, convert_to_extras],
             'contact_address': [ignore_missing, unicode, convert_to_extras],
             'contact_telephone': [ignore_missing, unicode, convert_to_extras],

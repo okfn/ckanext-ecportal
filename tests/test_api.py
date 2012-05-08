@@ -79,7 +79,6 @@ class TestAPI(tests.WsgiAppCase):
             'description': u'RDF package 2 description',
             'published_by': u'david',
             'status': u'http://purl.org/adms/status/Completed',
-            'contact_name': u'Eurostat',
             'rdf': json.dumps(rdf)
         })
         response = self.app.post('/api/action/package_create',
@@ -107,7 +106,6 @@ class TestAPI(tests.WsgiAppCase):
             'description': u'RDF package 2 description',
             'published_by': u'david',
             'status': u'http://purl.org/adms/status/Completed',
-            'contact_name': u'Eurostat',
             'rdf': json.dumps(rdf)
         })
         response = self.app.post('/api/action/package_create',
@@ -130,7 +128,6 @@ class TestAPI(tests.WsgiAppCase):
             'description': u'test description',
             'published_by': u'david',
             'status': u'http://purl.org/adms/status/Completed',
-            'contact_name': json.dumps(u'Eurostat'),
             'keywords': [{u'name': tag}]
         })
         response = self.app.post('/api/action/package_create',
@@ -152,7 +149,6 @@ class TestAPI(tests.WsgiAppCase):
         dataset['keywords'] = new_tags
         dataset['description'] = u'test description'
         dataset['status'] = u'http://purl.org/adms/status/Completed'
-        dataset['contact_name'] = u'Eurostat'
 
         params = json.dumps(dataset)
         response = self.app.post('/api/action/package_update', params=params,
@@ -175,7 +171,6 @@ class TestAPI(tests.WsgiAppCase):
 
         dataset['description'] = u'test description'
         dataset['status'] = u'http://purl.org/adms/status/Completed'
-        dataset['contact_name'] = u'Eurostat'
         dataset['published_by'] = u'roger'
         params = json.dumps(dataset)
         response = self.app.post('/api/action/package_update', params=params,
@@ -190,7 +185,6 @@ class TestAPI(tests.WsgiAppCase):
             'description': u'test description',
             'published_by': u'david',
             'status': u'http://purl.org/adms/status/Completed',
-            'contact_name': u'Eurostat'
         })
         self.app.post('/api/action/package_create',
                       params=dataset_json,
