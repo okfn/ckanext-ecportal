@@ -19,7 +19,7 @@
     <dct:title xml:lang="en">${c.pkg_dict['title']}</dct:title>
     <dct:description xml:lang="en">${c.pkg_dict.get('notes', '')}</dct:description>
 
-    <dct:alternative xml:lang="en" py:if="${c.pkg_dict.get('alternative_title')}">${c.pkg_dict['alternative_title']}</dct:alternative>
+    <dct:alternative xml:lang="en" py:if="c.pkg_dict.get('alternative_title')">${c.pkg_dict['alternative_title']}</dct:alternative>
 
 
 <py:if test="c.pkg_dict.get('tags','')">
@@ -69,19 +69,19 @@
         <foaf:name py:if="c.pkg_dict.get('contact_name')" xml:lang="en">${c.pkg_dict.get('contact_name')}</foaf:name>
     </ecodp:contactPoint>
 
-  <dct:identifier py:if="c.pkg_dict('identifier')">${c.pkg_dict['identifier']}</dct:identifier>
+  <dct:identifier py:if="c.pkg_dict.get('identifier')">${c.pkg_dict['identifier']}</dct:identifier>
 
-    <ecodp:interoperabilityLevel py:if="c.pkg_dict('interoperability_level')">
+    <ecodp:interoperabilityLevel py:if="c.pkg_dict.get('interoperability_level')">
       <skos:Concept rdf:about="${c.pkg_dict['interoperability_level']}"/>
     </ecodp:interoperabilityLevel>
 
-    <py:for each="t in c.pkg_dict('type_of_dataset', [])">
+    <py:for each="t in c.pkg_dict.get('type_of_dataset', [])">
       <ecodp:datasetType>
         <skos:Concept rdf:about="${t}"/>
       </ecodp:datasetType>
     </py:for>
 
-    <py:for each="l in c.pkg_dict('language', [])">
+    <py:for each="l in c.pkg_dict.get('language', [])">
         <dct:language>
             <skos:Concept rdf:about="${l}"/>
         </dct:language>
@@ -100,7 +100,7 @@
     </dct:publisher>
 
 
-<py:for each="rsc_dict in c.pkg_dict['resources']">
+<py:for each="rsc_dict in c.pkg_dict.get('resources', [])">
     <py:choose test="rsc_dict.get('resource_type', '') in ['Feed','WebService', 'Download']">
         <py:when test="1">
           <dcat:distribution rdf:parseType="Resource">

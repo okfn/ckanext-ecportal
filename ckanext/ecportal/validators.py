@@ -223,7 +223,7 @@ def update_rdf(key, data, errors, context):
         return
 
     origin_url, xml = rdfutil.update_rdf(rdf, name)
-    data[key] = '"%s"' % xml.replace('"', '\\"')
+    data[key] = xml
 
     if origin_url:
         data[('url',)] = origin_url
