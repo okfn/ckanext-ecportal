@@ -1,15 +1,14 @@
-import json
 import pylons
 from ckan.lib.base import c, model
 from ckan.authz import Authorizer
 import ckan.logic as logic
 from ckan.logic.validators import package_id_not_changed,\
-    name_validator, package_name_validator
+    package_name_validator
 from ckan.lib.navl.validators import ignore, ignore_missing, keep_extras,\
     empty, not_empty, default
 from ckan.logic.converters import convert_to_tags, convert_from_tags, free_tags_only
 import ckan.plugins as plugins
-from validators import use_other, extract_other, ecportal_date_to_db,\
+from validators import ecportal_name_validator, ecportal_date_to_db,\
     convert_to_extras, convert_from_extras, convert_to_groups, convert_from_groups,\
     duplicate_extras_key, publisher_exists, keyword_string_convert, rename,\
     update_rdf
@@ -114,20 +113,20 @@ class ECPortalDatasetForm(plugins.SingletonPlugin):
         )
 
         # publisher IDs and name translations
-        group_type = pylons.config.get('ckan.default.group_type', 'organization')
         if c.userobj:
             groups = c.userobj.get_groups()
         else:
             groups = []
 
-        group_translations = _translate([g['title'] for g in groups], ckan_lang, ckan_lang_fallback)
-        c.publishers = [(g['name'], group_translations[g['title']]) for g in groups]
+        group_translations = _translate([g.title for g in groups],
+                                        ckan_lang, ckan_lang_fallback)
+        c.publishers = [(g.name, group_translations[g.title]) for g in groups]
 
         # find extras that are not part of our schema
         c.additional_extras = []
         schema_keys = self.form_to_db_schema().keys()
-        if c.pkg_json:
-            extras = json.loads(c.pkg_json).get('extras', [])
+        if c.pkg_dict:
+            extras = c.pkg_dict.get('extras', [])
             for extra in extras:
                 if not extra['key'] in schema_keys:
                     c.additional_extras.append(extra)
@@ -163,7 +162,8 @@ class ECPortalDatasetForm(plugins.SingletonPlugin):
             else:
                 schema.update({
                     'id': [ignore_missing, package_id_not_changed],
-                    'name': [ignore_missing, name_validator, package_name_validator, unicode],
+                    'name': [ignore_missing, ecportal_name_validator,
+                             package_name_validator, unicode],
                     'title': [ignore_missing, unicode]
                 })
 
@@ -172,6 +172,8 @@ class ECPortalDatasetForm(plugins.SingletonPlugin):
     def form_to_db_schema(self, package_type=None):
         schema = logic.schema.package_form_schema()
         schema.update({
+            'name': [not_empty, unicode, ecportal_name_validator,
+                     package_name_validator],
             'keyword_string': [ignore_missing, keyword_string_convert],
             'alternative_title': [ignore_missing, unicode, convert_to_extras],
             'description': [not_empty, unicode],
@@ -256,6 +258,7 @@ class ECPortalDatasetForm(plugins.SingletonPlugin):
         })
 
         schema['resources'].update({
+            'created': [ignore_missing],
             'position': [not_empty],
             'last_modified': [ignore_missing],
             'cache_last_updated': [ignore_missing],
@@ -268,4 +271,5 @@ class ECPortalDatasetForm(plugins.SingletonPlugin):
         return
 
     def get_helpers(self):
-        return {'format_description': helpers.format_description}
+        return {'format_description': helpers.format_description,
+                'recent_updates': helpers.recent_updates}

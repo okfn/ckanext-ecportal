@@ -182,3 +182,16 @@ class TestAPI(tests.WsgiAppCase):
                                  extra_environ={'Authorization': 'ectest'})
         updated_dataset = json.loads(response.body)['result']
         assert updated_dataset['published_by'] == u'david', updated_dataset
+
+    def test_uppercase_names_allowed(self):
+        dataset_json = json.dumps({
+            'name': u'TEST-UPPERCASE-NAMES',
+            'title': u'Test',
+            'description': u'test description',
+            'published_by': u'david',
+            'status': u'http://purl.org/adms/status/Completed',
+            'contact_name': u'Eurostat'
+        })
+        self.app.post('/api/action/package_create',
+                      params=dataset_json,
+                      extra_environ={'Authorization': 'ectest'})

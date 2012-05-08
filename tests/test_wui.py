@@ -79,6 +79,9 @@ class TestWUI(tests.WsgiAppCase):
         g = model.Group.get('david')
         g.type = 'organization'
         model.Session.add(g)
+        mu = model.Member(table_id=cls.sysadmin_user.id,
+                          table_name='user', group=g)
+        model.Session.add(mu)
         model.Session.commit()
 
         # use our custom select class for this test suite
