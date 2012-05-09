@@ -81,26 +81,6 @@ def ecportal_date_to_db(value, context):
         raise df.Invalid(str(e))
     return value
 
-def use_other(key, data, errors, context):
-    other_key = key[-1] + '-other'
-    other_value = data.get((other_key,), '').strip()
-    if other_value:
-        data[key] = other_value
-
-def extract_other(option_list):
-    def other(key, data, errors, context):
-        value = data[key]
-        if value in dict(option_list).keys():
-            return
-        elif value is df.missing:
-            data[key] = ''
-            return
-        else:
-            data[key] = 'other'
-            other_key = key[-1] + '-other'
-            data[(other_key,)] = value
-    return other
-
 def convert_to_extras(key, data, errors, context):
     # get current number of extras
     extra_number = 0
@@ -143,7 +123,9 @@ def convert_from_groups(field):
     return convert
 
 def duplicate_extras_key(key, data, errors, context):
-    '''Test for a custom extra key being a duplicate of an existing (schema) key.'''
+    '''
+    Test for a custom extra key being a duplicate of an existing (schema) key.
+    '''
     unflattened = df.unflatten(data)
     extras = unflattened.get('extras', [])
     extras_keys = []
@@ -171,9 +153,11 @@ def publisher_exists(publisher_name, context):
     return publisher_name
 
 def keyword_string_convert(key, data, errors, context):
-    '''Takes a list of tags that is a comma-separated string (in data[key])
+    '''
+    Takes a list of tags that is a comma-separated string (in data[key])
     and parses tag names. These are added to the data dict, enumerated. They
-    are also validated.'''
+    are also validated.
+    '''
     if isinstance(data[key], basestring):
         tags = [tag.strip() \
                 for tag in data[key].split(',') \
@@ -212,11 +196,11 @@ def rename(old, new):
     return rename_field
 
 def update_rdf(key, data, errors, context):
-    """
+    '''
     Determines if there is any XML in the rdf field and ensures that  it
     matches expectations.  This data will be returned on requests for .rdf
     As this data is saved we first need to add our fields.
-    """
+    '''
     rdf = data.get(key, '')
     name = data.get((u'name',), "")
     if (not rdf) or ('package' in context):
@@ -229,6 +213,10 @@ def update_rdf(key, data, errors, context):
         data[('url',)] = origin_url
 
 def ecportal_name_validator(val, context):
+    '''
+    Names must be alphanumeric characters or the symbols '-' and '_'.
+    Unlike CKAN core, names in the EC Portal can contain capital letters.
+    '''
     if val in ['new', 'edit', 'search']:
         raise df.Invalid(_('That name cannot be used'))
     if len(val) < 2:
@@ -240,3 +228,13 @@ def ecportal_name_validator(val, context):
         raise df.Invalid(_('Url must be alphanumeric '
                            '(ascii) characters and these symbols: -_'))
     return val
+
+def requires_field(field_name):
+    '''
+    If data[key] exists, check that the top-level field field_name is also
+    present (and not empty).
+    '''
+    def check(key, data, errors, context):
+        if data[key] and not data[(field_name,)]:
+            raise df.Invalid(_('Additional field required: %s' % field_name))
+    return check

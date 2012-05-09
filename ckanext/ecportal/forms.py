@@ -11,7 +11,7 @@ import ckan.plugins as plugins
 from validators import ecportal_name_validator, ecportal_date_to_db,\
     convert_to_extras, convert_from_extras, convert_to_groups, convert_from_groups,\
     duplicate_extras_key, publisher_exists, keyword_string_convert, rename,\
-    update_rdf
+    update_rdf, requires_field
 import helpers
 
 import logging
@@ -198,10 +198,14 @@ class ECPortalDatasetForm(plugins.SingletonPlugin):
             'version_description': [ignore_missing, unicode, convert_to_extras],
             'rdf': [ignore_missing, unicode, update_rdf, convert_to_extras],
             'contact_name': [ignore_missing, unicode, convert_to_extras],
-            'contact_email': [ignore_missing, unicode, convert_to_extras],
-            'contact_address': [ignore_missing, unicode, convert_to_extras],
-            'contact_telephone': [ignore_missing, unicode, convert_to_extras],
-            'contact_webpage': [ignore_missing, unicode, convert_to_extras],
+            'contact_email': [ignore_missing, requires_field('contact_name'),
+                              unicode, convert_to_extras],
+            'contact_address': [ignore_missing, requires_field('contact_name'),
+                                unicode, convert_to_extras],
+            'contact_telephone': [ignore_missing, requires_field('contact_name'),
+                                  unicode, convert_to_extras],
+            'contact_webpage': [ignore_missing, requires_field('contact_name'),
+                                unicode, convert_to_extras],
             '__after': [duplicate_extras_key,
                         rename('keywords', 'tags'),
                         rename('description', 'notes')],

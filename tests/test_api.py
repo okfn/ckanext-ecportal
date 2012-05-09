@@ -189,3 +189,17 @@ class TestAPI(tests.WsgiAppCase):
         self.app.post('/api/action/package_create',
                       params=dataset_json,
                       extra_environ={'Authorization': 'ectest'})
+
+    def test_contact_name_required(self):
+        dataset_json = json.dumps({
+            'name': u'TEST-UPPERCASE-NAMES',
+            'title': u'Test',
+            'description': u'test description',
+            'published_by': u'david',
+            'status': u'http://purl.org/adms/status/Completed',
+            'contact_email': u'contact@email.com',
+        })
+        self.app.post('/api/action/package_create',
+                      params=dataset_json,
+                      extra_environ={'Authorization': 'ectest'},
+                      status=409)
