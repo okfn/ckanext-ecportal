@@ -10,11 +10,9 @@
   <py:def function="page_heading">Search - ${g.site_title}</py:def>
 
   <py:match path="primarysidebar">
-    
-    <li>${facet_sidebar('tags')}</li>
-    <li>${facet_sidebar('res_format')}</li>
-    <li>${facet_sidebar('groups', label=h.group_name_to_title)}</li>
-
+    ${facet_div('tags', 'Tags')}
+    ${facet_div('res_format', 'Resource Formats')}
+    ${facet_div('groups', 'Groups')}
   </py:match>
 
   <div py:match="content">
@@ -35,7 +33,13 @@
       ${c.page.pager(q=c.q)}
 
   </div>
+
+  <py:def function="optional_feed">
+  <link rel="alternate" type="application/atom+xml" title="${g.site_title} - Datasets found with custom search: '${c.search_url_params}'"
+    href="${h.url(controller='feed', action='custom')}?${c.search_url_params}" />
+  <link rel="alternate" type="application/atom+xml" title="${g.site_title} - Recent Revision History"
+    href="${h.url_for(controller='revision', action='list', format='atom', days=1)}" />
+  </py:def>
+
   <xi:include href="layout.html" />
 </html>
-
-
