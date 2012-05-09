@@ -63,7 +63,7 @@ header {
 header #site-name {
     color: #0065a2;
     position: absolute;
-    top: 65px;
+    top: 72px;
 	font-family: Verdana, Arial, Helvetica, "DejaVu Sans", sans-serif;
     font-size: 24px;
     line-height: 1.2;
@@ -428,7 +428,8 @@ body.home ul.datasets li {
 
 #dataset-edit input,
 #dataset-edit .markdown-editor,
-#dataset-edit select {
+#dataset-edit select,
+#dataset-edit .add-on {
     margin-bottom: 0.5em;
 }
 
@@ -457,17 +458,6 @@ body.package.edit input[type="checkbox"] {
     margin-bottom: 0.5em;
 }
 
-/* TODO: this needs to be a different width on the dataset edit and
- *       resource edit pages 
- */ 
-/* .markdown-editor textarea.markdown-input { */
-/* width: 400px; */
-/* height: 70px; */
-/* margin-bottom: 5px; */
-/* padding: 5px; */
-/* display: block; */
-/* } */
-
 /****************************************************************************/
 /* Resource Edit Page
 /****************************************************************************/
@@ -475,15 +465,4 @@ body.package.edit input[type="checkbox"] {
 /* TODO: Update this URL (or find a way to specify it dynamically) */
 .drag-drop-list li.drag-bars {
     background-image: url("http://thedatahub.org/images/dragbars.png");
-}
-
-/****************************************************************************/
-/* Search Page
-/****************************************************************************/
-input.search {
-    font-size: 1em;
-    padding: 0.5em 0 0.5em 0;
-}
-.dataset-search input.button {
-    margin-right: 0 !important;
 }

@@ -229,6 +229,7 @@ class ECPortalDatasetForm(plugins.SingletonPlugin):
     def db_to_form_schema(data, package_type=None):
         schema = logic.schema.package_form_schema()
         schema.update({
+            'id': [ignore_missing, unicode],
             'tags': {
                 '__extras': [keep_extras, free_tags_only]
             },
