@@ -12,6 +12,7 @@ from validators import ecportal_name_validator, ecportal_date_to_db,\
     convert_to_extras, convert_from_extras, convert_to_groups, convert_from_groups,\
     duplicate_extras_key, publisher_exists, keyword_string_convert, rename,\
     update_rdf
+import ckan.lib.dictization as dictization
 import helpers
 
 import logging
@@ -113,15 +114,27 @@ class ECPortalDatasetForm(plugins.SingletonPlugin):
         )
 
         # publisher IDs and name translations
-        if c.userobj:
-            groups = c.userobj.get_groups()
+
+        if c.is_sysadmin:
+            group_type = pylons.config.get('ckan.default.group_type', 'organization')
+            groups = logic.get_action('group_list')(context, {'all_fields': True})
+            groups = [group for group in groups if group.get('type') == group_type]
+        elif c.userobj:
+            groups = [dictization.table_dictize(obj, context) for obj in c.userobj.get_groups()]
         else:
             groups = []
 
-        group_translations = _translate([g.title for g in groups],
+        group_translations = _translate([group.get('title') for group in groups],
                                         ckan_lang, ckan_lang_fallback)
-        c.publishers = [(g.name, group_translations[g.title]) for g in groups]
+        c.publishers = []
 
+        for group in groups:
+            name = group['name']
+            value = group_translations[group.get('title')] or group.get('name')
+            c.publishers.append((name, value))
+
+        c.publishers.sort(key=lambda group: group[1])
+        
         # find extras that are not part of our schema
         c.additional_extras = []
         schema_keys = self.form_to_db_schema().keys()
