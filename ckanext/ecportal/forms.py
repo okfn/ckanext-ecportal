@@ -4,6 +4,7 @@ from ckan.authz import Authorizer
 import ckan.logic as logic
 import ckan.lib.dictization as dictization
 import ckan.plugins as plugins
+import ckanext.organizations.forms as org_forms
 from ckan.logic.validators import package_id_not_changed,\
     package_name_validator
 from ckan.lib.navl.validators import ignore, ignore_missing, keep_extras,\
@@ -291,3 +292,11 @@ class ECPortalDatasetForm(plugins.SingletonPlugin):
     def get_helpers(self):
         return {'format_description': helpers.format_description,
                 'recent_updates': helpers.recent_updates}
+
+
+class ECPortalPublisherForm(org_forms.OrganizationForm):
+    def index_template(self):
+        return 'publisher/index.html'
+
+    def read_template(self):
+        return 'publisher/read.html'

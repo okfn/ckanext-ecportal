@@ -23,6 +23,7 @@ setup(
         [ckan.plugins]
         ecportal = ckanext.ecportal.plugin:ECPortalPlugin
         ecportal_form = ckanext.ecportal.forms:ECPortalDatasetForm
+        ecportal_publisher_form = ckanext.ecportal.forms:ECPortalPublisherForm
 
         [paste.paster_command]
         ecportal=ckanext.ecportal.commands:ECPortalCommand
