@@ -30,7 +30,7 @@ def update_rdf( source_rdf, name ):
 
     local_namespaces = {
         "http://purl.org/dc/terms/#" : "dct",
-        "http://www.w3.org/1999/02/22-rdf-syntax-ns" : "rdf",
+        "http://www.w3.org/1999/02/22-rdf-syntax-ns#" : "rdf",
         "http://www.w3.org/ns/dcat#" : "dcat"
     }
     local_ns = dict( (v,k) for k,v in local_namespaces.iteritems() )
@@ -41,9 +41,9 @@ def update_rdf( source_rdf, name ):
     modified_text = datetime.datetime.now().date().isoformat()
     origin_url    = ""
 
-    node = root.xpath('//Dataset', namespaces=local_namespaces)
+    node = root.xpath('//dcat:Dataset', namespaces=local_ns)
     if len(node) == 1:
-        original_url = node[0].get("http://www.w3.org/1999/02/22-rdf-syntax-ns}about",
+        original_url = node[0].get("http://www.w3.org/1999/02/22-rdf-syntax-ns#}about",
                                    default="")
 
     # Pull out URL from
