@@ -96,7 +96,7 @@ else:
           </div>
 
           <div id="site-name">
-            <a href="${root_url}">${g.site_title}</a>
+            <a href="${root_url}">${g.site_title.upper()}</a>
           </div>
 
         </div>
@@ -126,12 +126,11 @@ else:
             <div id="block-menu-menu-ec-open-data-main-menu" class="block block-menu">
               <div class="odp-menu-content">
                 <ul class="odp-menu">
-                  <li class="first leaf"><a href="${root_url}" title="">Home</a></li>
-                  <li class="leaf"><a href="${root_url}data" title="" class="active">Data</a></li>
-                  <li class="leaf"><a href="${root_url}apps" title="">Applications</a></li>
-                  <li class="leaf"><a href="${root_url}linked-data" title="">Linked Data</a></li>
-                  <li class="leaf"><a href="${root_url}forums" title="">Forums</a></li>
-                  <li class="last leaf"><a href="${root_url}blogs" title="">Blogs</a></li>
+                  <li class="first leaf"><a href="${root_url}" title="">${_('Home')}</a></li>
+                  <li class="leaf"><a href="${root_url}data" title="" class="active">${_('Data')}</a></li>
+                  <li class="leaf"><a href="${root_url}apps" title="">${_('Applications')}</a></li>
+                  <li class="leaf"><a href="${root_url}linked-data" title="">${_('Linked Data')}</a></li>
+                  <li class="last leaf"><a href="${root_url}social" title="">${_('Social Media')}</a></li>
                 </ul>
               </div>
             </div>
@@ -288,7 +287,9 @@ else:
                  // Tracking
 				 var url = location.pathname;
 				 // remove any site root from url
-				 url = url.substring(CKAN.SITE_URL.length, url.length - 1);
+				 url = url.substring(CKAN.SITE_URL.length, url.length);
+				 // trim any trailing /
+				 url = url.replace(/\/*$/, '');
 				 $.ajax({url : CKAN.SITE_URL_NO_LOCALE + '/_tracking',
 						 type : 'POST',
 						 data : {url:url, type:'page'},

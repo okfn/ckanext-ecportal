@@ -10,7 +10,7 @@
 
     <div class="row-fluid">
       <div class="span6 action-box">
-        <div class="action-box-inner find">
+        <div class="action-box-inner find clearfix">
           <h1>Find data</h1>
           <form action="${h.url_for(controller='package', action='search')}" method="GET"> 
             <input name="q" value="" class="search-field" placeholder="${_('Find datasets')}" /> 
@@ -19,7 +19,7 @@
           <a href="${h.url_for(controller='package', action='search')}">${c.package_count} datasets</a>
           that you can browse, learn about and download. 
         </div>
-        <div class="action-box-inner">
+        <div class="action-box-inner clearfix">
           <h1>Top Publishers</h1>
           <py:for each="i, group_dict in enumerate(c.groups[:6])">
             <div py:if="group_dict['packages']" class="group">
@@ -33,7 +33,7 @@
       </div>
 
       <div class="span6 action-box">
-        <div class="action-box-inner">
+        <div class="action-box-inner clearfix">
           <h1>Recent Updates</h1>
           ${h.snippet('snippets/recent_updates_package_list.html', packages=h.recent_updates(10))}
         </div>
