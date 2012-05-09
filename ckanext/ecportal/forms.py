@@ -295,8 +295,14 @@ class ECPortalDatasetForm(plugins.SingletonPlugin):
 
 
 class ECPortalPublisherForm(org_forms.OrganizationForm):
+    def is_fallback(self):
+        return True
+
     def index_template(self):
         return 'publisher/index.html'
 
     def read_template(self):
         return 'publisher/read.html'
+
+    def group_form(self):
+        return 'publisher/edit.html'
