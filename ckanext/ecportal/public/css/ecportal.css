@@ -428,7 +428,8 @@ body.home ul.datasets li {
 
 #dataset-edit input,
 #dataset-edit .markdown-editor,
-#dataset-edit select {
+#dataset-edit select,
+#dataset-edit .add-on {
     margin-bottom: 0.5em;
 }
 
