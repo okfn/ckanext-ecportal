@@ -13,8 +13,6 @@ import logging
 log = logging.getLogger(__name__)
 
 
-
-
 def update_rdf( source_rdf, name ):
     """
     Checks that the source_rdf is valid and whether it contains the local
@@ -31,7 +29,8 @@ def update_rdf( source_rdf, name ):
     local_namespaces = {
         "http://purl.org/dc/terms/#" : "dct",
         "http://www.w3.org/1999/02/22-rdf-syntax-ns#" : "rdf",
-        "http://www.w3.org/ns/dcat#" : "dcat"
+        "http://www.w3.org/ns/dcat#" : "dcat",
+        "http://ec.europa.eu/open-data/ontologies/ec-odp#" : "ecodp"
     }
     local_ns = dict( (v,k) for k,v in local_namespaces.iteritems() )
     for k,v in root.nsmap.iteritems():
@@ -41,13 +40,23 @@ def update_rdf( source_rdf, name ):
     modified_text = datetime.datetime.now().date().isoformat()
     origin_url    = ""
 
+    new_root = None
     node = root.xpath('//dcat:Dataset', namespaces=local_ns)
     if len(node) == 1:
-        original_url = node[0].get("http://www.w3.org/1999/02/22-rdf-syntax-ns#}about",
+        new_root = node[0]
+        origin_url = new_root.get("http://www.w3.org/1999/02/22-rdf-syntax-ns#}about",
                                    default="")
+    else:
+        node = root.xpath('/rdf:RDF/rdf:Description', namespaces=local_ns)
+        for n in node:
+            # Find the one with a rdf:type rdf:resource="http://www.w3.org/ns/dcat#Dataset"
+            test = n.xpath("rdf:type[@rdf:resource='http://www.w3.org/ns/dcat#Dataset']", namespaces=local_ns)
+            if len(test) > 0:
+                new_root = n
+                origin_url = new_root.get("{http://www.w3.org/1999/02/22-rdf-syntax-ns#}about")
+                break
 
-    # Pull out URL from
-    # <dcat:Dataset rdf:about="{0}">
+
 
     # We can add elements like this knowing it will look up the uri in the
     # root nsmap before this element's map.
@@ -57,32 +66,42 @@ def update_rdf( source_rdf, name ):
     # Outer dcat:record
     record = lxml.etree.Element("{http://www.w3.org/ns/dcat#}record",
                                  nsmap=local_ns)
-    record.set("{http://www.w3.org/1999/02/22-rdf-syntax-ns}parseType",
+    record.set("{http://www.w3.org/1999/02/22-rdf-syntax-ns#}parseType",
                 "Resource")
 
+    desc = lxml.etree.Element("{http://www.w3.org/1999/02/22-rdf-syntax-ns#}Description",
+                                 nsmap=local_ns)
+    desc.set("{http://www.w3.org/1999/02/22-rdf-syntax-ns#}about", origin_url)
+
+    innerdesc = lxml.etree.Element("{http://www.w3.org/1999/02/22-rdf-syntax-ns#}Description",
+                                 nsmap=local_ns)
+    innerdesc.set("{http://www.w3.org/1999/02/22-rdf-syntax-ns#}about", local_url)
+
     # dcat:accessUrl inside the record
-    accessUrl = lxml.etree.Element("{http://www.w3.org/ns/dcat#}accessUrl",
+    accessUrl = lxml.etree.Element("{http://ec.europa.eu/open-data/ontologies/ec-odp#}accessUrl",
                                     nsmap=local_ns)
-    accessUrl.set("{http://www.w3.org/1999/02/22-rdf-syntax-ns}datatype",
+    accessUrl.set("{http://www.w3.org/1999/02/22-rdf-syntax-ns#}datatype",
                   "http://www.w3.org/2001/XMLSchema#anyURI")
     accessUrl.text = local_url
 
 
     modified = lxml.etree.Element("{http://purl.org/dc/terms/#}modified",
                                     nsmap=local_ns)
-    modified.set("{http://www.w3.org/1999/02/22-rdf-syntax-ns}datatype",
+    modified.set("{http://www.w3.org/1999/02/22-rdf-syntax-ns#}datatype",
                   "http://www.w3.org/2001/XMLSchema#dateTime")
     modified.text = modified_text
 
     issued = lxml.etree.Element("{http://purl.org/dc/terms/#}issued",
                                     nsmap=local_ns)
-    issued.set("{http://www.w3.org/1999/02/22-rdf-syntax-ns}datatype",
+    issued.set("{http://www.w3.org/1999/02/22-rdf-syntax-ns#}datatype",
                   "http://www.w3.org/2001/XMLSchema#dateTime")
     issued.text = modified_text
 
-    record.append(accessUrl)
-    record.append(modified)
-    record.append(issued)
-    root.append( record )
+    innerdesc.append(accessUrl)
+    innerdesc.append(modified)
+    innerdesc.append(issued)
+    record.append(innerdesc)
+    desc.append(record)
+    root.append( desc )
 
     return origin_url, lxml.etree.tostring( root )
