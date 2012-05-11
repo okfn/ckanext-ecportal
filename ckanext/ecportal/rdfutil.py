@@ -66,8 +66,6 @@ def update_rdf( source_rdf, name ):
     # Outer dcat:record
     record = lxml.etree.Element("{http://www.w3.org/ns/dcat#}record",
                                  nsmap=local_ns)
-    record.set("{http://www.w3.org/1999/02/22-rdf-syntax-ns#}parseType",
-                "Resource")
 
     desc = lxml.etree.Element("{http://www.w3.org/1999/02/22-rdf-syntax-ns#}Description",
                                  nsmap=local_ns)
