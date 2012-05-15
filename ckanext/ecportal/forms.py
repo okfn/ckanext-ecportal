@@ -13,7 +13,7 @@ from ckan.logic.converters import convert_to_tags, convert_from_tags, free_tags_
 from validators import ecportal_name_validator, ecportal_date_to_db,\
     convert_to_extras, convert_from_extras, convert_to_groups, convert_from_groups,\
     duplicate_extras_key, publisher_exists, keyword_string_convert, rename,\
-    update_rdf, requires_field
+    update_rdf, requires_field, convert_resource_type
 import helpers
 
 import logging
@@ -227,6 +227,10 @@ class ECPortalDatasetForm(plugins.SingletonPlugin):
 
         schema['groups'].update({
             'capacity': [ignore_missing, unicode]
+        })
+
+        schema['resources'].update({
+            'type': [ignore_missing, unicode, convert_resource_type]
         })
 
         return schema

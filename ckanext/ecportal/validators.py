@@ -122,6 +122,15 @@ def convert_from_groups(field):
         data[key] = data.get(('groups', 0, field), None)
     return convert
 
+def convert_resource_type(key, data, errors, context):
+    '''
+       convert type to resource_type
+    '''
+    new_key = key[:-1] + ('resource_type',)
+    data[new_key] = data[key]
+    data.pop(key)
+
+
 def duplicate_extras_key(key, data, errors, context):
     '''
     Test for a custom extra key being a duplicate of an existing (schema) key.
