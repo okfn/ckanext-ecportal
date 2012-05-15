@@ -4,25 +4,52 @@
     "domain_data": true, 
     "domain_software": false, 
     "family": "", 
-    "id": "ec-ol", 
+    "id": "http://ec.europa.eu/open-data/kos/licence/EuropeanCommission", 
     "is_okd_compliant": true, 
     "is_osi_compliant": false, 
     "maintainer": "", 
     "status": "active", 
     "title": "European Commission Open License", 
-    "url": "http://www.opendefinition.org/licenses/ec-ol"
+    "url": "http://ec.europa.eu/open-data/kos/licence/EuropeanCommission"
   }, 
   {
     "domain_content": false, 
     "domain_data": true, 
     "domain_software": false, 
     "family": "", 
-    "id": "ec-eurostat", 
+    "id": "http://ec.europa.eu/open-data/kos/licence/EuroStat", 
     "is_okd_compliant": true, 
     "is_osi_compliant": false, 
     "maintainer": "", 
     "status": "active", 
     "title": "Eurostat Copyright/License Policy", 
-    "url": "http://epp.eurostat.ec.europa.eu/portal/page/portal/about_eurostat/policies/copyright_licence_policy"
-  }
+    "url": "http://ec.europa.eu/open-data/kos/licence/EuroStat"
+  },
+  {
+
+    "domain_content": true,
+    "domain_data": false,
+    "domain_software": false,
+    "family": "",
+    "id": "http://www.opendefinition.org/licenses/cc-by",
+    "is_okd_compliant": true,
+    "is_osi_compliant": false,
+    "maintainer": "",
+    "status": "active",
+    "title": "Creative Commons Attribution",
+    "url": "http://www.opendefinition.org/licenses/cc-by"
+  },
+  {
+    "domain_content": true,
+    "domain_data": false,
+    "domain_software": false,
+    "family": "",
+    "id": "http://www.opendefinition.org/licenses/cc-by-sa",
+    "is_okd_compliant": true,
+    "is_osi_compliant": false,
+    "maintainer": "",
+    "status": "active",
+    "title": "Creative Commons Attribution Share-Alike",
+    "url": "http://www.opendefinition.org/licenses/cc-by-sa"
+   }
 ]
