@@ -1,3 +1,4 @@
+import operator
 import pylons
 from ckan.lib.base import c, model
 from ckan.authz import Authorizer
@@ -107,8 +108,12 @@ class ECPortalDatasetForm(plugins.SingletonPlugin):
         c.geographical_coverage = _tags_and_translations(
             context, GEO_VOCAB_NAME, ckan_lang, ckan_lang_fallback
         )
-        c.languages = _tags_and_translations(
-            context, LANGUAGE_VOCAB_NAME, ckan_lang, ckan_lang_fallback
+        c.languages = sorted(
+            _tags_and_translations(context,
+                                   LANGUAGE_VOCAB_NAME,
+                                   ckan_lang,
+                                   ckan_lang_fallback),
+            key=operator.itemgetter(1)
         )
         c.temporal_granularity = [(u'', u'')] + _tags_and_translations(
             context, TEMPORAL_VOCAB_NAME, ckan_lang, ckan_lang_fallback
