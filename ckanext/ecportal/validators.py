@@ -247,3 +247,28 @@ def requires_field(field_name):
         if data[key] and not data[(field_name,)]:
             raise df.Invalid(_('Additional field required: %s' % field_name))
     return check
+
+def member_of_vocab(vocab):
+    ''' Returns a validator that checks values are members of the given vocab.
+
+    Unlike the `convert_to_tag` function found in `ckan.logic.converters`,
+    this does not convert the values into tags.  It's only purpose is
+    validation, not conversion.
+    '''
+    def validator(key, data, errors, context):
+        tags = data.get(key)
+        if not tags:
+            return
+        if isinstance(tags, basestring):
+            tags = [tags]
+
+        v = model.Vocabulary.get(vocab)
+        if not v:
+            raise df.Invalid(_('Tag vocabulary "%s" does not exist') % vocab)
+        context['vocabulary'] = v
+
+        for tag in tags:
+            val.tag_in_vocabulary_validator(tag, context)
+        return tags
+    return validator
+
