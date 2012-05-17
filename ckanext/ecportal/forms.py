@@ -13,7 +13,7 @@ from ckan.logic.converters import convert_to_tags, convert_from_tags, free_tags_
 from validators import ecportal_name_validator, ecportal_date_to_db,\
     convert_to_extras, convert_from_extras, convert_to_groups, convert_from_groups,\
     duplicate_extras_key, publisher_exists, keyword_string_convert, rename,\
-    update_rdf, requires_field, convert_resource_type
+    update_rdf, requires_field, convert_resource_type, member_of_vocab
 import helpers
 
 import logging
@@ -209,7 +209,7 @@ class ECPortalDatasetForm(plugins.SingletonPlugin):
             'temporal_granularity': [ignore_missing, convert_to_tags(TEMPORAL_VOCAB_NAME)],
             'geographical_coverage': [ignore_missing, convert_to_tags(GEO_VOCAB_NAME)],
             'language': [ignore_missing, convert_to_tags(LANGUAGE_VOCAB_NAME)],
-            'metadata_language': [ignore_missing, convert_to_extras],
+            'metadata_language': [ignore_missing, member_of_vocab(LANGUAGE_VOCAB_NAME), convert_to_extras],
             'version_description': [ignore_missing, unicode, convert_to_extras],
             'rdf': [ignore_missing, unicode, update_rdf, convert_to_extras],
             'contact_name': [ignore_missing, unicode, convert_to_extras],
