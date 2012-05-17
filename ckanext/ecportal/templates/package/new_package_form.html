@@ -301,6 +301,24 @@
   </div>
 
   <div class="control-group">
+    <label class="control-label" for="metadata_language">Metadata Language</label>
+    <div class="controls">
+      <select id="metadata_language" class="chzn-select" name="metadata_language"
+        style="width: 30em;">
+        <py:for each="tag_name, tag_translation in c.languages">
+          <py:choose test="">
+            <option py:when="tag_name == data.get('metadata_language', 'http://publications.europa.eu/resource/authority/language/ENG')"
+              selected="selected" value="${tag_name}">${tag_translation}</option>
+            <option py:otherwise="" value="${tag_name}">${tag_translation}</option>
+          </py:choose>
+        </py:for>
+      </select>
+      <p class="field_error" py:if="errors.get('metadata_language', '')">${errors.get('metadata_language', '')}</p>
+      <p>The language the metadata is in.</p>
+    </div>
+  </div>
+
+  <div class="control-group">
     <label class="control-label field_opt" for="version">Version</label>
     <div class="controls">
       <input id="version" maxlength="100" name="version" type="text" value="${data.get('version', '')}" />
