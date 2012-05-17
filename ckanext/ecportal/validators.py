@@ -1,5 +1,6 @@
-import re
 import itertools
+import re
+import types
 from pylons.i18n import _
 import ckan.logic as logic
 import ckan.lib.field_types as field_types
@@ -296,3 +297,11 @@ def map_licenses(val, context):
         return 'http://www.opendefinition.org/licenses/cc-by-sa'
     return val
 
+def reduce_list(val, context):
+    ''' Converts a list to the value at the head of the list.
+
+    If the value isn't a list, then it is left alone.
+    '''
+    if isinstance(val, types.ListType) and len(val) > 0:
+        return val[0]
+    return val
