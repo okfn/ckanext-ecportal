@@ -272,3 +272,27 @@ def member_of_vocab(vocab):
         return tags
     return validator
 
+_cc_by_re    = re.compile(r'http://creativecommons.org/licenses/by/2.5/[^/]+/?',
+                          re.IGNORECASE)
+_cc_by_sa_re = re.compile(r'http://creativecommons.org/licenses/by-sa/3.0/[^/]+/?',
+                          re.IGNORECASE)
+def map_licenses(val, context):
+    ''' Maps fixed set of license_ids to others.
+
+    Specifically, it maps licenses with a country code, as specified in the
+    Creative Commons RDF Specification, to cc-by and cc-by-sa licenses.
+
+    http://creativecommons.org/licenses/by/2.5/{countrycode}/
+    maps to
+    http://www.opendefinition.org/licenses/cc-by
+
+    http://creativecommons.org/licenses/by-sa/3.0/{countrycode}/
+    maps to
+    http://www.opendefinition.org/licenses/cc-by-sa
+    '''
+    if re.match(_cc_by_re, val):
+        return 'http://www.opendefinition.org/licenses/cc-by'
+    if re.match(_cc_by_sa_re, val):
+        return 'http://www.opendefinition.org/licenses/cc-by-sa'
+    return val
+
