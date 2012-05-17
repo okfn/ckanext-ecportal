@@ -14,7 +14,8 @@ from ckan.logic.converters import convert_to_tags, convert_from_tags, free_tags_
 from validators import ecportal_name_validator, ecportal_date_to_db,\
     convert_to_extras, convert_from_extras, convert_to_groups, convert_from_groups,\
     duplicate_extras_key, publisher_exists, keyword_string_convert, rename,\
-    update_rdf, requires_field, convert_resource_type, member_of_vocab
+    update_rdf, requires_field, convert_resource_type, member_of_vocab,\
+    map_licenses, reduce_list
 import helpers
 
 import logging
@@ -193,6 +194,7 @@ class ECPortalDatasetForm(plugins.SingletonPlugin):
         schema.update({
             'name': [not_empty, unicode, ecportal_name_validator,
                      package_name_validator],
+            'license_id': [ignore_missing, reduce_list, map_licenses, unicode],
             'keyword_string': [ignore_missing, keyword_string_convert],
             'alternative_title': [ignore_missing, unicode, convert_to_extras],
             'description': [not_empty, unicode],
