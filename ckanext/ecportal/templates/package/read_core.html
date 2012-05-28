@@ -10,7 +10,7 @@
     <div id="dataset-overview">
 
     <div py:if="c.pkg_dict.get('state') == 'deleted'" class="dataset-deleted-message">
-      This dataset is "deleted".
+      This dataset has been marked as deleted.
     </div>
 
       <!-- Description -->
@@ -168,14 +168,6 @@
         <tr py:if="c.eu_country">
           <td class="dataset-label">Country</td>
           <td class="dataset-details">${h.code_to_country(c.eu_country)}</td>
-        </tr>
-
-        <tr py:if="c.harvest_catalogue_name">
-          <td class="dataset-label">Harvest Source</td>
-          <td class="dataset-details" i18n:msg="harvest_catalogue_name">
-            <a href="${c.harvest_dataset_url}">Dataset page</a> on 
-            <a href="${c.harvest_catalogue_url}">${c.harvest_catalogue_name}</a>
-          </td>
         </tr>
 
         <tr py:for="i, (key, value) in enumerate(c.pkg_extras)"
