@@ -27,7 +27,8 @@ class ECPortalDatasetController(p.SingletonPlugin):
         return search_params
 
     def after_search(self, search_results, search_params):
-        context = {'model': model, 'user': p.toolkit.c.user}
+        context = {'model': model,
+                   'user': p.toolkit.c.user or p.toolkit.c.author}
 
         # get search results with package_show so that they go through
         # schema validators/converters
