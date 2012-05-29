@@ -57,9 +57,9 @@
           <div class="textwidget" id="services">
             <div id="services-menu">
               <ul>
-                <li><a href="http://ec.europa.eu/geninfo/legal_notices_en.htm" title="">Legal notice</a> |</li>
-                <li><a href="/open-data/contact" title="">Contact</a> |</li>
-                <li><a href="http://ec.europa.eu/geninfo/query/search_en.html" title="">Search</a></li>
+                <li><a href="http://ec.europa.eu/geninfo/legal_notices_en.htm" title="">${_('Legal notice')}</a> |</li>
+                <li><a href="/open-data/contact" title="">${_('Contact')}</a> |</li>
+                <li><a href="http://ec.europa.eu/geninfo/query/search_en.html" title="">${_('Search')}</a></li>
               </ul>
             </div>
             <ul class="language-dd-selector">
@@ -107,11 +107,11 @@ else:
 
         <div id="path">
           <ul>
-            <li><a href="http://ec.europa.eu">European Commission</a></li>
+            <li><a href="http://ec.europa.eu">${_('European Commission')}</a></li>
             <li class="separator">&gt;</li>
-            <li><a href="${root_url}">Open Data Portal</a></li>
+            <li><a href="${root_url}">${_('Open Data Portal')}</a></li>
             <li class="separator">&gt;</li>
-            <li><a href="${h.url('home')}">Data</a></li>
+            <li><a href="${h.url('home')}">${_('Data')}</a></li>
           </ul>
         </div>
 
