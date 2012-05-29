@@ -305,7 +305,8 @@ class ECPortalDatasetForm(plugins.SingletonPlugin):
 
     def get_helpers(self):
         return {'format_description': helpers.format_description,
-                'recent_updates': helpers.recent_updates}
+                'recent_updates': helpers.recent_updates,
+                'top_publishers': helpers.top_publishers}
 
 
 class ECPortalPublisherForm(org_forms.OrganizationForm):

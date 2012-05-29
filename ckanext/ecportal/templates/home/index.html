@@ -21,7 +21,7 @@
         </div>
         <div class="action-box-inner clearfix">
           <h1>Top Publishers</h1>
-          <py:for each="i, group_dict in enumerate(c.groups[:6])">
+          <py:for each="i, group_dict in enumerate(h.top_publishers(c.groups))">
             <div py:if="group_dict['packages']" class="group">
               <a href="${h.url_for(controller='group', action='read', id=group_dict['name'])}">
                 ${group_dict['title']} (${group_dict['packages']} datasets)
