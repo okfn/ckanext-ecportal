@@ -1,5 +1,11 @@
+import json
 import ckan.model as model
 import ckan.plugins as p
+import ckan.lib.navl.dictization_functions
+import forms
+
+_validate = ckan.lib.navl.dictization_functions.validate
+_f = forms.ECPortalDatasetForm()
 
 
 class ECPortalDatasetController(p.SingletonPlugin):
@@ -27,20 +33,6 @@ class ECPortalDatasetController(p.SingletonPlugin):
         return search_params
 
     def after_search(self, search_results, search_params):
-        context = {'model': model,
-                   'user': p.toolkit.c.user or p.toolkit.c.author}
-
-        # get search results with package_show so that they go through
-        # schema validators/converters
-        validated_results = []
-
-        for result in search_results['results']:
-            data = {'id': result['id']}
-            pkg = p.toolkit.get_action('package_show')(context, data)
-            validated_results.append(pkg)
-
-        search_results['results'] = validated_results
-
         # remove vocab tags from facets
         free_tags = {}
 
@@ -61,6 +53,16 @@ class ECPortalDatasetController(p.SingletonPlugin):
         return search_results
 
     def before_index(self, pkg_dict):
+        context = {'model': model,
+                   'session': model.Session,
+                   'user': u''}
+        schema = _f.db_to_form_schema({})
+
+        validated_pkg, errors = _validate(json.loads(pkg_dict['data_dict']),
+                                          schema,
+                                          context=context)
+        pkg_dict['data_dict'] = json.dumps(validated_pkg)
+
         return pkg_dict
 
     def before_view(self, pkg_dict):
