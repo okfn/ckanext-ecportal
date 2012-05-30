@@ -1,4 +1,8 @@
-import json
+try:
+    import json
+except ImportError:
+    import simplejson as json
+
 import ckan.model as model
 import ckan.plugins as p
 import ckan.lib.navl.dictization_functions
@@ -6,6 +10,26 @@ import forms
 
 _validate = ckan.lib.navl.dictization_functions.validate
 _f = forms.ECPortalDatasetForm()
+
+
+def _vocabularies(tag_name):
+    '''
+    Return a list containing the names of each vocabulary that
+    contains the tag tag_name.
+
+    Returns an empty list if tag_name does not belong to any vocabulary.
+
+    If no such tag exists, throws a ckan.plugins.toolkit.ObjectNotFound
+    exception.
+    '''
+    query = model.Session.query(model.tag.Tag)\
+        .filter(model.tag.Tag.name == tag_name)
+
+    if not query.count():
+        raise p.toolkit.ObjectNotFound
+
+    vocab_ids = [t.vocabulary_id for t in query if t.vocabulary_id]
+    return [model.vocabulary.Vocabulary.get(id).name for id in vocab_ids]
 
 
 class ECPortalDatasetController(p.SingletonPlugin):
@@ -33,26 +57,10 @@ class ECPortalDatasetController(p.SingletonPlugin):
         return search_params
 
     def after_search(self, search_results, search_params):
-        # remove vocab tags from facets
-        free_tags = {}
-
-        for tag, count in search_results['facets'].get('tags', {}).iteritems():
-            # as we don't specify a vocab here, only tags with no vocab
-            # will be found
-            if model.Tag.get(tag):
-                free_tags[tag] = count
-
-        if free_tags:
-            search_results['facets']['tags'] = free_tags
-
-        if search_results['search_facets'].get('tags'):
-            items = search_results['search_facets']['tags']['items']
-            items = filter(lambda x: x.get('name') in free_tags.keys(), items)
-            search_results['search_facets']['tags']['items'] = items
-
         return search_results
 
     def before_index(self, pkg_dict):
+        # save a validated version of the package dict in the search index
         context = {'model': model,
                    'session': model.Session,
                    'user': u''}
@@ -62,6 +70,24 @@ class ECPortalDatasetController(p.SingletonPlugin):
                                           schema,
                                           context=context)
         pkg_dict['data_dict'] = json.dumps(validated_pkg)
+
+        # remove vocab tags from 'tags' list and add them as vocab_<tag name>
+        # so that they can be used in facets
+        free_tags = []
+
+        for tag in pkg_dict.get('tags'):
+            vocabs = _vocabularies(tag)
+            if vocabs:
+                for vocab in vocabs:
+                    key = u'vocab_%s' % vocab
+                    if key in pkg_dict:
+                        pkg_dict[key].append(tag)
+                    else:
+                        pkg_dict[key] = [tag]
+            else:
+                free_tags.append(tag)
+
+        pkg_dict['tags'] = free_tags
 
         return pkg_dict
 
