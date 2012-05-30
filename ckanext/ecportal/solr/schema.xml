@@ -372,6 +372,7 @@
     <field name="ratings_average" type="float" indexed="true" stored="false" />
     <field name="tags" type="string" indexed="true" stored="true" multiValued="true"/>
     <field name="groups" type="string" indexed="true" stored="true" multiValued="true"/>
+
     <field name="capacity" type="string" indexed="true" stored="true" multiValued="false"/>
 
     <field name="res_description" type="textgen" indexed="true" stored="true" multiValued="true"/>
@@ -400,6 +401,10 @@
     <field name="metadata_modified" type="date" indexed="true" stored="true" multiValued="false"/>
 
     <field name="indexed_ts" type="date" indexed="true" stored="true" default="NOW" multiValued="false"/>
+
+    <!-- Copy the title field into titleString, and treat as a string
+         (rather than text type).  This allows us to sort on the titleString -->
+    <field name="title_string" type="string" indexed="true" stored="false" />
 
     <!-- Multilingual -->
     <field name="text_en" type="text_en" indexed="true" stored="true"/>
