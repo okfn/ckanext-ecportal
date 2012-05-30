@@ -437,6 +437,7 @@
     <field name="data_dict" type="string" indexed="false" stored="true" />
 
     <dynamicField name="extras_*" type="text" indexed="true" stored="true" multiValued="false"/>
+    <dynamicField name="vocab_*" type="string" indexed="true" stored="true" multiValued="true"/>
     <dynamicField name="*" type="string" indexed="true"  stored="false"/>
 </fields>
 
