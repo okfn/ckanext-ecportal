@@ -57,7 +57,8 @@ def _tags_and_translations(context, vocab, lang, lang_fallback):
     try:
         tags = logic.get_action('tag_list')(context, {'vocabulary_id': vocab})
         tag_translations = _translate(tags, lang, lang_fallback)
-        return [(t, tag_translations[t]) for t in tags]
+        return sorted([(t, tag_translations[t]) for t in tags],
+                      key=operator.itemgetter(1))
     except logic.NotFound:
         return []
 
@@ -94,7 +95,8 @@ class ECPortalDatasetForm(plugins.SingletonPlugin):
         ckan_lang = pylons.request.environ['CKAN_LANG']
         ckan_lang_fallback = pylons.config.get('ckan.locale_default', 'en')
 
-        c.licences = model.Package.get_license_options()
+        c.licences = sorted(model.Package.get_license_options(),
+                            key=operator.itemgetter(1))
         c.is_sysadmin = Authorizer().is_sysadmin(c.user)
 
         c.status = _tags_and_translations(
@@ -109,12 +111,8 @@ class ECPortalDatasetForm(plugins.SingletonPlugin):
         c.geographical_coverage = _tags_and_translations(
             context, GEO_VOCAB_NAME, ckan_lang, ckan_lang_fallback
         )
-        c.languages = sorted(
-            _tags_and_translations(context,
-                                   LANGUAGE_VOCAB_NAME,
-                                   ckan_lang,
-                                   ckan_lang_fallback),
-            key=operator.itemgetter(1)
+        c.languages = _tags_and_translations(
+            context, LANGUAGE_VOCAB_NAME, ckan_lang, ckan_lang_fallback
         )
         c.temporal_granularity = [(u'', u'')] + _tags_and_translations(
             context, TEMPORAL_VOCAB_NAME, ckan_lang, ckan_lang_fallback
