@@ -119,7 +119,6 @@ class ECPortalDatasetForm(plugins.SingletonPlugin):
         )
 
         # publisher IDs and name translations
-
         if c.is_sysadmin:
             group_type = pylons.config.get('ckan.default.group_type', 'organization')
             groups = logic.get_action('group_list')(context, {'all_fields': True})
@@ -139,7 +138,7 @@ class ECPortalDatasetForm(plugins.SingletonPlugin):
             c.publishers.append((name, value))
 
         c.publishers.sort(key=lambda group: group[1])
-        
+
         # find extras that are not part of our schema
         c.additional_extras = []
         schema_keys = self.form_to_db_schema().keys()
@@ -319,3 +318,6 @@ class ECPortalPublisherForm(org_forms.OrganizationForm):
 
     def group_form(self):
         return 'publisher/edit.html'
+
+    def new_template(self):
+        return 'publisher/new.html'
