@@ -133,23 +133,10 @@ CKAN.Utils = CKAN.Utils || {};
 jQuery.fn.truncate = function (max, suffix) {
   return this.each(function () {
     var element = jQuery(this),
-        isTruncated = element.hasClass('truncated'),
-        cached, length, text, expand;
-
-    if (isTruncated) {
-      element.html(element.data('truncate:' + (max === 'expand' ? 'original' : 'truncated')));
-      return;
-    }
-
-    cached  = element.text();
-    length  = max || element.data('truncate') || 30;
-    text    = cached.slice(0, length);
-    expand  = jQuery('<a href="#" />').text(suffix || '»');
-
-    // Bail early if there is nothing to truncate.
-    if (cached.length < length) {
-      return;
-    }
+        cached  = element.text(),
+        length  = max || element.data('truncate') || 30,
+        text    = cached.slice(0, length),
+        expand  = jQuery('<a href="#" />').text(suffix || '»');
 
     // Try to truncate to nearest full word.
     while ((/\S/).test(text[text.length - 1])) {
@@ -157,15 +144,12 @@ jQuery.fn.truncate = function (max, suffix) {
     }
 
     element.html(jQuery.trim(text));
+
     expand.appendTo(element.append(' '));
     expand.click(function (event) {
       event.preventDefault();
-      element.html(cached);
+      element.text(cached);
     });
-
-    element.addClass('truncated');
-    element.data('truncate:original',  cached);
-    element.data('truncate:truncated', element.html());
   });
 };
 
@@ -1156,30 +1140,13 @@ CKAN.Utils = function($, my) {
 
 
   my.relatedSetup = function(form) {
-    $('[rel=popover]').popover();
-
     function addAlert(msg) {
       $('<div class="alert alert-error" />').html(msg).hide().prependTo(form).fadeIn();
     }
 
-    function relatedRequest(action, method, data) {
-      return $.ajax({
-        type: method,
-        dataType: 'json',
-        contentType: 'application/json',
-        url: CKAN.SITE_URL + '/api/3/action/related_' + action,
-        data: data ? JSON.stringify(data) : undefined,
-        error: function(err, txt, w) {
-          // This needs to be far more informative.
-          addAlert('<strong>Error:</strong> Unable to ' + action + ' related item');
-        }
-      });
-    }
-
     // Center thumbnails vertically.
-    var relatedItems = $('.related-items');
-    relatedItems.find('li').each(function () {
-      var item = $(this), description = item.find('.description');
+    $('.related-items').each(function () {
+      var item = $(this);
 
       function vertiallyAlign() {
         var img = $(this),
@@ -1193,47 +1160,7 @@ CKAN.Utils = function($, my) {
       }
 
       item.find('img').load(vertiallyAlign);
-      description.data('height', description.height()).truncate();
-    });
-
-    relatedItems.on('mouseenter mouseleave', '.description.truncated', function (event) {
-      var isEnter = event.type === 'mouseenter'
-          description = $(this)
-          timer = description.data('hover-intent');
-
-      function update() {
-        var parent = description.parents('li:first'),
-            difference = description.data('height') - description.height();
-
-        description.truncate(isEnter ? 'expand' : 'collapse');
-        parent.toggleClass('expanded-description', isEnter);
-
-        // Adjust the bottom margin of the item relative to it's current value
-        // to allow the description to expand without breaking the grid.
-        parent.css('margin-bottom', isEnter ? '-=' + difference + 'px' : '');
-        description.removeData('hover-intent');
-      }
-
-      if (!isEnter && timer) {
-        // User has moused out in the time set so cancel the action.
-        description.removeData('hover-intent');
-        return clearTimeout(timer);
-      } else if (!isEnter && !timer) {
-        update();
-      } else {
-        // Delay the hover action slightly to wait to see if the user mouses
-        // out again. This prevents unwanted actions.
-        description.data('hover-intent', setTimeout(update, 200));
-      }
-    });
-
-    // Add a handler for the delete buttons.
-    relatedItems.on('click', '[data-action=delete]', function (event) {
-      var id = $(this).data('relatedId');
-      relatedRequest('delete', 'POST', {id: id}).done(function () {
-        $('#related-item-' + id).remove();
-      });
-      event.preventDefault();
+      item.find('.description').truncate();
     });
 
     $(form).submit(function (event) {
@@ -1258,10 +1185,18 @@ CKAN.Utils = function($, my) {
         return;
       }
 
-      relatedRequest('create', this.method, data).done(function () {
-        // TODO: Insert item dynamically.
-        window.location.reload();
-      });
+      $.ajax({
+        type: this.method,
+        url: CKAN.SITE_URL + '/api/3/action/related_create',
+        data: JSON.stringify(data),
+        success: function (data) {
+          window.location.reload();
+        },
+        error: function(err, txt, w) {
+          // This needs to be far more informative.
+          addAlert('<strong>Error:</strong> Unable to add related item');
+        }
+      }); 
     });
   };
 
