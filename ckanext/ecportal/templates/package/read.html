@@ -29,11 +29,6 @@
         </py:choose>
     </li>
 
-    <li py:if="[tag for tag in c.pkg_dict.get('tags', []) if not tag.get('vocabulary_id')]" class="sidebar-section">
-      <h3>Keywords</h3>
-      ${tag_list(c.pkg_dict.get('tags', ''))}
-    </li>
-
     <li py:if="c.pkg_dict.get('groups')" class="sidebar-section">
       <h3>Publisher</h3>
       <ul class="groups">
@@ -41,6 +36,11 @@
         <a href="${h.url_for(controller='group', action='read', id=group['name'])}">${group.get('title') or group.get('name')}</a>
         </li>
       </ul>
+    </li>
+
+    <li py:if="[tag for tag in c.pkg_dict.get('keywords', []) if not tag.get('vocabulary_id')]" class="sidebar-section">
+      <h3>Keywords</h3>
+      ${tag_list(c.pkg_dict.get('keywords', ''))}
     </li>
 
     <li py:if="c.package_relationships" class="sidebar-section">
