@@ -1577,8 +1577,22 @@ CKAN.DataPreview = function ($, my) {
         my.showPlainTextData(data);
       });
     }
-    else if (resourceData.formatNormalized in {'html':'', 'htm':''}
-        ||  resourceData.url.substring(0,23)=='http://docs.google.com/') {
+    // TODO: this format is ignored due to the problem that resources that
+    // are incorrectly specified as text/html result in // automatic downloads
+    // when attempting to preview.
+    // Can be restored if metadata is fixed.
+    //
+    // else if (resourceData.formatNormalized in {'html':'', 'htm':''}
+    //     ||  resourceData.url.substring(0,23)=='http://docs.google.com/') {
+    //   // we displays a fullscreen dialog with the url in an iframe.
+    //   my.$dialog.empty();
+    //   var el = $('<iframe></iframe>');
+    //   el.attr('src', resourceData.url);
+    //   el.attr('width', '100%');
+    //   el.attr('height', '100%');
+    //   my.$dialog.append(el);
+    // }
+    else if (resourceData.url.substring(0,23)=='http://docs.google.com/') {
       // we displays a fullscreen dialog with the url in an iframe.
       my.$dialog.empty();
       var el = $('<iframe></iframe>');
