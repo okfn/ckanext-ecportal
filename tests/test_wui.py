@@ -1,14 +1,10 @@
+import json
 import paste.fixture
 import ckan.model as model
 import ckan.lib as lib
 import ckan.lib.helpers as h
 import ckan.tests as tests
 import test_api
-
-try:
-    import json
-except ImportError:
-    import simplejson as json
 
 
 # paste.fixture.Field.Select does not handle multiple selects currently,

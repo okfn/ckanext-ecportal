@@ -3,9 +3,9 @@ import pylons
 from ckan.lib.base import c, model
 from ckan.authz import Authorizer
 import ckan.logic as logic
+import ckan.logic.schema
 import ckan.lib.dictization as dictization
-import ckan.plugins as plugins
-import ckanext.organizations.forms as org_forms
+import ckan.plugins as p
 from ckan.logic.validators import package_id_not_changed,\
     package_name_validator
 from ckan.lib.navl.validators import ignore, ignore_missing, keep_extras,\
@@ -63,9 +63,9 @@ def _tags_and_translations(context, vocab, lang, lang_fallback):
         return []
 
 
-class ECPortalDatasetForm(plugins.SingletonPlugin):
-    plugins.implements(plugins.IDatasetForm, inherit=True)
-    plugins.implements(plugins.ITemplateHelpers)
+class ECPortalDatasetForm(p.SingletonPlugin):
+    p.implements(p.IDatasetForm, inherit=True)
+    p.implements(p.ITemplateHelpers)
 
     def package_form(self):
         return 'package/new_package_form.html'
@@ -144,9 +144,9 @@ class ECPortalDatasetForm(plugins.SingletonPlugin):
         if new_group_id:
             try:
                 data = {'id': new_group_id}
-                new_group = plugins.toolkit.get_action('group_show')(context, data)
+                new_group = p.toolkit.get_action('group_show')(context, data)
                 c.new_group = new_group['name']
-            except plugins.toolkit.ObjectNotFound:
+            except p.toolkit.ObjectNotFound:
                 c.new_group = None
 
         # find extras that are not part of our schema
@@ -316,9 +316,29 @@ class ECPortalDatasetForm(plugins.SingletonPlugin):
                 'top_publishers': helpers.top_publishers}
 
 
-class ECPortalPublisherForm(org_forms.OrganizationForm):
+class ECPortalPublisherForm(p.SingletonPlugin):
+    p.implements(p.IGroupForm, inherit=True)
+    p.implements(p.IRoutes)
+
+    def before_map(self, map):
+        controller = 'ckanext.organizations.controllers:OrganizationController'
+        map.connect('/publisher/users/{id}', controller=controller, action='users')
+        map.connect('/publisher/apply/{id}', controller=controller, action='apply')
+        map.connect('/publisher/apply', controller=controller, action='apply')
+        map.connect('/publisher/edit/{id}', controller='group', action='edit')
+        map.connect('/publisher/history/{id}', controller='group', action='history')
+        map.connect('/publisher/new', controller='group', action='new')
+        map.connect('/publisher/{id}', controller='group', action='read')
+        map.connect('/publisher',  controller='group', action='index')
+        map.redirect('/publishers', '/publisher')
+        map.redirect('/organization/{url:.*}', '/publisher/{url}')
+        return map
+
+    def after_map(self, map):
+        return map
+
     def group_types(self):
-        return ['publisher', 'organization']
+        return ['organization']
 
     def is_fallback(self):
         return True
@@ -329,8 +349,45 @@ class ECPortalPublisherForm(org_forms.OrganizationForm):
     def read_template(self):
         return 'publisher/read.html'
 
+    def new_template(self):
+        return 'publisher/new.html'
+
     def group_form(self):
         return 'publisher/edit.html'
 
-    def new_template(self):
-        return 'publisher/new.html'
+    def history_template(self):
+        return 'publisher/history.html'
+
+    def package_form(self):
+        return 'publisher/package_form.html'
+
+    def form_to_db_schema(self):
+        return ckan.logic.schema.group_form_schema()
+
+    def db_to_form_schema(self):
+        return ckan.logic.schema.group_form_schema()
+
+    def check_data_dict(self, data_dict):
+        pass
+
+    def setup_template_variables(self, context, data_dict):
+        c.user_groups = c.userobj.get_groups('organization')
+        local_ctx = {'model': model, 'session': model.Session,
+                     'user': c.user or c.author}
+
+        try:
+            logic.check_access('group_create', local_ctx)
+            c.is_superuser_or_groupadmin = True
+        except logic.NotAuthorized:
+            c.is_superuser_or_groupadmin = False
+
+        if 'group' in context:
+            group = context['group']
+
+            # Only show possible groups where the current user is a member
+            c.possible_parents = c.userobj.get_groups('organization', 'admin')
+            c.parent = None
+            grps = group.get_groups('organization')
+            if grps:
+                c.parent = grps[0]
+            c.users = group.members_of_type(model.User)
