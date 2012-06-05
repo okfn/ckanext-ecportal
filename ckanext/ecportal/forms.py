@@ -139,6 +139,16 @@ class ECPortalDatasetForm(plugins.SingletonPlugin):
 
         c.publishers.sort(key=lambda group: group[1])
 
+        # get new group name if group ID in query string
+        new_group_id = pylons.request.params.get('groups__0__id')
+        if new_group_id:
+            try:
+                data = {'id': new_group_id}
+                new_group = plugins.toolkit.get_action('group_show')(context, data)
+                c.new_group = new_group['name']
+            except plugins.toolkit.ObjectNotFound:
+                c.new_group = None
+
         # find extras that are not part of our schema
         c.additional_extras = []
         schema_keys = self.form_to_db_schema().keys()
@@ -307,6 +317,9 @@ class ECPortalDatasetForm(plugins.SingletonPlugin):
 
 
 class ECPortalPublisherForm(org_forms.OrganizationForm):
+    def group_types(self):
+        return ['publisher', 'organization']
+
     def is_fallback(self):
         return True
 
