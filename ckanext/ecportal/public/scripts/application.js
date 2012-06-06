@@ -1546,7 +1546,7 @@ CKAN.DataPreview = function ($, my) {
     }
 
     if (resourceData.webstore_url) {
-      resourceData.elasticsearch_url = '/api/data/' + resourceData.id;
+      resourceData.elasticsearch_url = '/open-data/data/api/data/' + resourceData.id;
       var dataset = new recline.Model.Dataset(resourceData, 'elasticsearch');
       initializeDataExplorer(dataset);
     }
