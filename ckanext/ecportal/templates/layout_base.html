@@ -45,8 +45,7 @@
 
 <body class="${request.environ.get('pylons.routes_dict', {}).get('action')}
              ${request.environ.get('pylons.routes_dict', {}).get('controller').split(':')[-1]}
-             ${defined('body_class') and body_class()}
-  ">
+             ${defined('body_class') and body_class()}">
   <div id="wrap">
     <div class="header outer">
       <a id="top" />
@@ -127,7 +126,7 @@ else:
               <div class="odp-menu-content">
                 <ul class="odp-menu">
                   <li class="first leaf"><a href="${root_url}" title="">${_('Home')}</a></li>
-                  <li class="leaf"><a href="${root_url}data" title="" class="active">${_('Data')}</a></li>
+                  <li class="leaf"><a href="${h.url('home')}" title="" class="active">${_('Data')}</a></li>
                   <li class="leaf"><a href="${root_url}apps" title="">${_('Applications')}</a></li>
                   <li class="leaf"><a href="${root_url}linked-data" title="">${_('Linked Data')}</a></li>
                   <li class="last leaf"><a href="${root_url}social" title="">${_('Social Media')}</a></li>
