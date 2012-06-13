@@ -1048,7 +1048,7 @@ msgstr "Die Länge des Tags \"%s\" ist länger als die maximale Länge %i"
 #: ckan/logic/validators.py:273
 #, python-format
 msgid "Tag \"%s\" must be alphanumeric characters or symbols: -_."
-msgstr "Ein Tag \"%s\ muss aus alphanumerischen (ASCII)-Zeichen oder folgenden Symbolen bestehen: -_."
+msgstr "Ein Tag \"%s\" muss aus alphanumerischen (ASCII)-Zeichen oder folgenden Symbolen bestehen: -_."
 
 #: ckan/logic/validators.py:281
 #, python-format
