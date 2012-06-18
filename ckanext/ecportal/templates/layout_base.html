@@ -64,7 +64,8 @@
             <ul class="language-dd-selector">
 <?python
 current_url = request.environ['CKAN_CURRENT_URL'].encode('utf-8')
-current_locale = h.get_locales_dict().get(request.environ['CKAN_LANG'])
+current_locale = h.get_locales_dict().get(request.environ['CKAN_LANG']) or\
+  h.get_locales_dict().get(config.get('ckan.locale_default', 'en'))
 
 # TODO: this should not be necessary when the drupal links are fixed
 if current_locale == 'en':
