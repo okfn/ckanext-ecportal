@@ -1,11 +1,29 @@
-import pylons.i18n as i18n
+import datetime
+import pylons.config as config
 import genshi
 import ckan
 import ckan.model as model
 import ckan.plugins as p
 import ckan.lib.search as search
+import ckan.lib.i18n as i18n
 
 NUM_TOP_PUBLISHERS = 6
+
+
+def current_url():
+    return p.toolkit.request.environ['CKAN_CURRENT_URL'].encode('utf-8')
+
+
+def current_locale():
+    return i18n.get_locales_dict().get(p.toolkit.request.environ['CKAN_LANG'])\
+        or i18n.get_locales_dict().get(config.get('ckan.locale_default', 'en'))
+
+
+def root_url():
+    if current_locale() == 'en':
+        return '/open-data/'
+    else:
+        return '/open-data/%s/' % current_locale()
 
 
 def format_description(description):
@@ -17,7 +35,7 @@ def format_description(description):
         return genshi.HTML(formatted)
     except Exception:
         error_msg = "<span class='inline-warning'>%s</span>" % \
-            i18n._("Cannot render package description")
+            p.toolkit._("Cannot render package description")
         return genshi.HTML(error_msg)
 
 
@@ -61,3 +79,7 @@ def top_publishers(groups):
             publisher['packages'] = 0
 
     return publishers
+
+
+def current_date():
+    return datetime.date.today().strftime('%d/%m/%Y')

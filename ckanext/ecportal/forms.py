@@ -311,9 +311,13 @@ class ECPortalDatasetForm(p.SingletonPlugin):
         return
 
     def get_helpers(self):
-        return {'format_description': helpers.format_description,
+        return {'current_url': helpers.current_url,
+                'current_locale': helpers.current_locale,
+                'root_url': helpers.root_url,
+                'format_description': helpers.format_description,
                 'recent_updates': helpers.recent_updates,
-                'top_publishers': helpers.top_publishers}
+                'top_publishers': helpers.top_publishers,
+                'current_date': helpers.current_date}
 
 
 class ECPortalPublisherForm(p.SingletonPlugin):
