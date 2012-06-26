@@ -5,6 +5,36 @@
   "results": {
     "bindings": [
       {
+        "term": { "type": "uri" , "value": "http://publications.europa.eu/resource/authority/country/EU27" } ,
+        "label": { "type": "literal" , "value": "EU27" } ,
+        "language": { "type": "literal" , "value": "de" }
+      } ,
+      {
+        "term": { "type": "uri" , "value": "http://publications.europa.eu/resource/authority/country/EU27" } ,
+        "label": { "type": "literal" , "value": "EU27" } ,
+        "language": { "type": "literal" , "value": "en" }
+      } ,
+      {
+        "term": { "type": "uri" , "value": "http://publications.europa.eu/resource/authority/country/EU27" } ,
+        "label": { "type": "literal" , "value": "EU27" } ,
+        "language": { "type": "literal" , "value": "fr" }
+      } ,
+      {
+        "term": { "type": "uri" , "value": "http://publications.europa.eu/resource/authority/country/EU27" } ,
+        "label": { "type": "literal" , "value": "EU27" } ,
+        "language": { "type": "literal" , "value": "es" }
+      } ,
+      {
+        "term": { "type": "uri" , "value": "http://publications.europa.eu/resource/authority/country/EU27" } ,
+        "label": { "type": "literal" , "value": "EU27" } ,
+        "language": { "type": "literal" , "value": "it" }
+      } ,
+      {
+        "term": { "type": "uri" , "value": "http://publications.europa.eu/resource/authority/country/EU27" } ,
+        "label": { "type": "literal" , "value": "EU27" } ,
+        "language": { "type": "literal" , "value": "pl" }
+      } ,
+      {
         "term": { "type": "uri" , "value": "http://publications.europa.eu/resource/authority/country/1A0" } ,
         "label": { "type": "literal" , "value": "Kosovo" } ,
         "language": { "type": "literal" , "value": "de" }
