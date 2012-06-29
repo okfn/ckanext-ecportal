@@ -63,7 +63,7 @@
             </div>
             <ul class="language-dd-selector">
               <li class="selected">
-                ${h.current_locale().display_name or h.current_locale().english_name} (${h.current_locale()})
+              <span>${h.current_locale().display_name or h.current_locale().english_name} (${h.current_locale()}) </span>
                 <img border="0" alt="Menu Arrow" src="${h.url_for_static('/images/arrow_down.gif')}" />
               </li>
               <py:for each="locale in h.get_available_locales()">

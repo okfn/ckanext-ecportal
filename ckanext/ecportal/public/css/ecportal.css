@@ -117,17 +117,23 @@ header #services-menu ul li a:active {
 ul.language-dd-selector {
 	border:1px solid #9AB;
 	background-color:#FFF;
-	width:130px;
 	list-style-type: none;
 	padding-left:0px;
 	margin: 0;
 	float:right;
+    line-height: 0.7
 }
 ul.language-dd-selector li img{
-	float:right;
+	float:left;
+    display:inline-block
+}
+ul.language-dd-selector li span{
+	float:left;
+	width:107px;
+	display:inline-block
 }
 ul.language-dd-selector li a{
-	display:block;
+	display:inline;
 }
 ul.language-dd-selector li a:hover{
 	color:#036;
@@ -137,7 +143,7 @@ ul.language-dd-selector li{
 	display:none;
 }
 ul.language-dd-selector li.selected{
-	display:block;
+	display:inline-block;
 }
 ul.language-dd-selector li:hover{
 	background-color:#DEF;
@@ -253,6 +259,7 @@ div.odp-menu-container {
 	padding: 15px 20px;
 	margin-left: -7px;
 	border-right: 1px solid #0065A2;
+    line-height:1.5;
 }
 
 .odp-menu ul li.first a{
