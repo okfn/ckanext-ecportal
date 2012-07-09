@@ -63,9 +63,9 @@ header {
 header #site-name {
     color: #0065a2;
     position: absolute;
-    top: 72px;
+    top: 69px;
 	font-family: Verdana, Arial, Helvetica, "DejaVu Sans", sans-serif;
-    font-size: 24px;
+    font-size: 28px;
     line-height: 1.2;
     padding-left: 240px;
     padding-top: 0px;
