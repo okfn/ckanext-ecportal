@@ -14,10 +14,10 @@
     xmlns:skos-xl="http://www.w3.org/2008/05/skos-xl#"
     xmlns:dcam="http://purl.org/dc/dcam/"
     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#">
-<dcat:Dataset rdf:about="${ g.site_url + h.url_for(controller='package',action='read',id=c.pkg_dict['name'])}">
+<dcat:Dataset rdf:about="http://ec.europa.eu/open-data/en/data/dataset/${c.pkg_dict['name'])}">
 
     <dct:title xml:lang="en">${c.pkg_dict['title']}</dct:title>
-    <dct:description xml:lang="en">${c.pkg_dict.get('notes', '')}</dct:description>
+    <dct:description xml:lang="en">${c.pkg_dict.get('description', '')}</dct:description>
 
     <dct:alternative xml:lang="en" py:if="c.pkg_dict.get('alternative_title')">${c.pkg_dict['alternative_title']}</dct:alternative>
 
@@ -48,8 +48,8 @@
 
     <dct:temporal py:if="c.pkg_dict.get('temporal_coverage_from', '') or c.pkg_dict.get('temporal_coverage_to', '') or c.temporal_granularity">
       <dct:PeriodOfTime rdf:about="http://ec.europa.eu/open-data/ontologies/ec-odp-example#PeriodExample">
-        <ecodp:periodEnd test="c.pkg_dict.get('temporal_coverage_to', '')" rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">${c.pkg_dict.get('temporal_coverage_to', '')}</ecodp:periodEnd>
-        <ecodp:periodStart test="c.pkg_dict.get('temporal_coverage_from', '')" rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">${c.pkg_dict.get('temporal_coverage_from', '')}</ecodp:periodStart>
+        <ecodp:periodEnd py:if="c.pkg_dict.get('temporal_coverage_to', '')" rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">${c.pkg_dict.get('temporal_coverage_to', '')}</ecodp:periodEnd>
+        <ecodp:periodStart py:if="c.pkg_dict.get('temporal_coverage_from', '')" rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">${c.pkg_dict.get('temporal_coverage_from', '')}</ecodp:periodStart>
       </dct:PeriodOfTime>
     </dct:temporal>
 
@@ -72,18 +72,18 @@
   <dct:identifier py:if="c.pkg_dict.get('identifier')">${c.pkg_dict['identifier']}</dct:identifier>
 
     <ecodp:interoperabilityLevel py:if="c.pkg_dict.get('interoperability_level')">
-      <skos:Concept rdf:about="${c.pkg_dict['interoperability_level']}"/>
+      <skos:Concept rdf:about="http://ec.europa.eu/open-data/kos/interoperability-level/${c.pkg_dict['interoperability_level']}"/>
     </ecodp:interoperabilityLevel>
 
     <py:for each="t in c.pkg_dict.get('type_of_dataset', [])">
       <ecodp:datasetType>
-        <skos:Concept rdf:about="${t}"/>
+        <skos:Concept rdf:about="http://ec.europa.eu/open-data/kos/dataset-type/${t}"/>
       </ecodp:datasetType>
     </py:for>
 
     <py:for each="l in c.pkg_dict.get('language', [])">
         <dct:language>
-            <skos:Concept rdf:about="${l}"/>
+            <skos:Concept rdf:about="http://publications.europa.eu/resource/authority/language/${l}"/>
         </dct:language>
     </py:for>
     <dct:hasVersion rdf:parseType="Resource" py:if="c.pkg_dict.get('version_description')">
@@ -92,7 +92,7 @@
     </dct:hasVersion>
 
     <ecodp:datasetStatus py:if="c.pkg_dict.get('status')">
-      <skos:Concept rdf:about="${c.pkg_dict.get('status')}"/>
+      <skos:Concept rdf:about="http://ec.europa.eu/open-data/kos/dataset-status/${c.pkg_dict.get('status')}"/>
     </ecodp:datasetStatus>
 
    <dct:publisher py:if="c.pkg_dict.get('published_by')">
