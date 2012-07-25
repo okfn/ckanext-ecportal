@@ -28,7 +28,7 @@
     </py:for>
 </py:if>
 
-    <dcat:record rdf:parseType="Resource">
+    <dcat:record>
         <dcat:accessURL rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">${ g.site_url + h.url_for(controller='package',action='read',id=c.pkg_dict['name'])}</dcat:accessURL>
         <dct:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">${c.pkg_dict.get('modified_date','')}</dct:modified>
         <dct:issued rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">${c.pkg_dict.get('release_date','')}</dct:issued>
