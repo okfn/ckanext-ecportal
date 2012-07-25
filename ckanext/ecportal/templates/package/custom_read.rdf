@@ -14,7 +14,8 @@
     xmlns:skos-xl="http://www.w3.org/2008/05/skos-xl#"
     xmlns:dcam="http://purl.org/dc/dcam/"
     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#">
-<dcat:Dataset rdf:about="http://ec.europa.eu/open-data/en/data/dataset/${c.pkg_dict['name'])}">
+
+<dcat:Dataset rdf:about="http://ec.europa.eu/open-data/en/data/dataset/${c.pkg_dict['name']}">
 
     <dct:title xml:lang="en">${c.pkg_dict['title']}</dct:title>
     <dct:description xml:lang="en">${c.pkg_dict.get('description', '')}</dct:description>
@@ -72,18 +73,18 @@
   <dct:identifier py:if="c.pkg_dict.get('identifier')">${c.pkg_dict['identifier']}</dct:identifier>
 
     <ecodp:interoperabilityLevel py:if="c.pkg_dict.get('interoperability_level')">
-      <skos:Concept rdf:about="http://ec.europa.eu/open-data/kos/interoperability-level/${c.pkg_dict['interoperability_level']}"/>
+      <skos:Concept rdf:about="${c.pkg_dict['interoperability_level']}"/>
     </ecodp:interoperabilityLevel>
 
     <py:for each="t in c.pkg_dict.get('type_of_dataset', [])">
       <ecodp:datasetType>
-        <skos:Concept rdf:about="http://ec.europa.eu/open-data/kos/dataset-type/${t}"/>
+        <skos:Concept rdf:about="${t}"/>
       </ecodp:datasetType>
     </py:for>
 
     <py:for each="l in c.pkg_dict.get('language', [])">
         <dct:language>
-            <skos:Concept rdf:about="http://publications.europa.eu/resource/authority/language/${l}"/>
+            <skos:Concept rdf:about="${l}"/>
         </dct:language>
     </py:for>
     <dct:hasVersion rdf:parseType="Resource" py:if="c.pkg_dict.get('version_description')">
@@ -92,7 +93,7 @@
     </dct:hasVersion>
 
     <ecodp:datasetStatus py:if="c.pkg_dict.get('status')">
-      <skos:Concept rdf:about="http://ec.europa.eu/open-data/kos/dataset-status/${c.pkg_dict.get('status')}"/>
+      <skos:Concept rdf:about="${c.pkg_dict.get('status')}"/>
     </ecodp:datasetStatus>
 
    <dct:publisher py:if="c.pkg_dict.get('published_by')">
