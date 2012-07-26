@@ -15,7 +15,7 @@
     xmlns:dcam="http://purl.org/dc/dcam/"
     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#">
 
-<dcat:Dataset rdf:about="http://ec.europa.eu/open-data/en/data/dataset/${c.pkg_dict['name']}">
+<dcat:Dataset rdf:about="http://ec.europa.eu/open-data/data/dataset/${c.pkg_dict['name']}">
 
     <dct:title xml:lang="en">${c.pkg_dict['title']}</dct:title>
     <dct:description xml:lang="en">${c.pkg_dict.get('description', '')}</dct:description>
@@ -48,7 +48,7 @@
 
 
     <dct:temporal py:if="c.pkg_dict.get('temporal_coverage_from', '') or c.pkg_dict.get('temporal_coverage_to', '') or c.temporal_granularity">
-      <dct:PeriodOfTime rdf:about="http://ec.europa.eu/open-data/ontologies/ec-odp-example#PeriodExample">
+      <dct:PeriodOfTime>
         <ecodp:periodEnd py:if="c.pkg_dict.get('temporal_coverage_to', '')" rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">${c.pkg_dict.get('temporal_coverage_to', '')}</ecodp:periodEnd>
         <ecodp:periodStart py:if="c.pkg_dict.get('temporal_coverage_from', '')" rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">${c.pkg_dict.get('temporal_coverage_from', '')}</ecodp:periodStart>
       </dct:PeriodOfTime>
