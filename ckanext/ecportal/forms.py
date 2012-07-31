@@ -205,6 +205,7 @@ class ECPortalDatasetForm(p.SingletonPlugin):
             'keyword_string': [ignore_missing, keyword_string_convert],
             'alternative_title': [ignore_missing, unicode, convert_to_extras],
             'description': [not_empty, unicode],
+            'url': [not_empty, unicode],
             'status': [not_empty, convert_to_tags(STATUS_VOCAB_NAME)],
             'identifier': [ignore_missing, unicode, convert_to_extras],
             'interoperability_level': [ignore_missing, convert_to_tags(INTEROP_VOCAB_NAME)],

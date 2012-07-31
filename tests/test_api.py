@@ -72,6 +72,7 @@ class TestAPI(tests.WsgiAppCase):
             'name': u'rdfpackage2',
             'title': u'RDF Package2',
             'description': u'RDF package 2 description',
+            'url': u'http://datahub.io',
             'published_by': u'david',
             'status': u'http://purl.org/adms/status/Completed',
             'rdf': rdf
@@ -99,6 +100,7 @@ class TestAPI(tests.WsgiAppCase):
             'name': u'rdfpackage1',
             'title': u'RDF Package1',
             'description': u'RDF package 2 description',
+            'url': u'http://datahub.io',
             'published_by': u'david',
             'status': u'http://purl.org/adms/status/Completed',
             'rdf': rdf
@@ -121,6 +123,7 @@ class TestAPI(tests.WsgiAppCase):
             'name': u'test_keywords_dataset',
             'title': u'Test Keywords Dataset',
             'description': u'test description',
+            'url': u'http://datahub.io',
             'published_by': u'david',
             'status': u'http://purl.org/adms/status/Completed',
             'keywords': [{u'name': tag}]
@@ -143,6 +146,7 @@ class TestAPI(tests.WsgiAppCase):
         new_tags = old_tags + [{'name': name} for name in new_tag_names]
         dataset['keywords'] = new_tags
         dataset['description'] = u'test description'
+        dataset['url'] = u'http://datahub.io'
         dataset['status'] = u'http://purl.org/adms/status/Completed'
 
         params = json.dumps(dataset)
@@ -165,6 +169,7 @@ class TestAPI(tests.WsgiAppCase):
         assert dataset['published_by'] == u'david'
 
         dataset['description'] = u'test description'
+        dataset['url'] = u'http://datahub.io'
         dataset['status'] = u'http://purl.org/adms/status/Completed'
         dataset['published_by'] = u'roger'
         params = json.dumps(dataset)
@@ -178,6 +183,7 @@ class TestAPI(tests.WsgiAppCase):
             'name': u'TEST-UPPERCASE-NAMES',
             'title': u'Test',
             'description': u'test description',
+            'url': u'http://datahub.io',
             'published_by': u'david',
             'status': u'http://purl.org/adms/status/Completed',
         })
@@ -190,6 +196,7 @@ class TestAPI(tests.WsgiAppCase):
             'name': u'TEST-UPPERCASE-NAMES',
             'title': u'Test',
             'description': u'test description',
+            'url': u'http://datahub.io',
             'published_by': u'david',
             'status': u'http://purl.org/adms/status/Completed',
             'contact_email': u'contact@email.com',

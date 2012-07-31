@@ -130,6 +130,7 @@ class TestSearch(tests.TestController):
         dataset = json.loads(response.body)['result']
 
         dataset['description'] = u'test description'
+        dataset['url'] = u'http://datahub.io'
         dataset['status'] = [u'http://purl.org/adms/status/Completed']
         dataset['geographical_coverage'] = [u'uk']
 

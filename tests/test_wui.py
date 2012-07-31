@@ -146,6 +146,7 @@ class TestWUI(tests.WsgiAppCase):
         dataset = {
             'name': u'test-create',
             'description': u'test description',
+            'url': u'http://datahub.io',
             'published_by': u'david',
             'status': u'http://purl.org/adms/status/Completed'
         }
@@ -172,6 +173,7 @@ class TestWUI(tests.WsgiAppCase):
             'name': u'test-edit',
             'title': u'Test Title',
             'description': u'test description',
+            'url': u'http://datahub.io',
             'published_by': u'david',
             'status': u'http://purl.org/adms/status/Completed',
             'contact_name': u'dataset-contact',
@@ -198,6 +200,7 @@ class TestWUI(tests.WsgiAppCase):
         dataset.update({
             'title': u'Test Title 2',
             'description': u'test description 2',
+            'url': u'http://thedatahub.org',
             'status': u'http://purl.org/adms/status/Withdrawn',
             'contact_name': u'dataset-contact-2',
             'alternative_title': u'test alt title 2',
