@@ -15,7 +15,7 @@
     xmlns:dcam="http://purl.org/dc/dcam/"
     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#">
 
-<dcat:Dataset rdf:about="http://ec.europa.eu/open-data/data/dataset/${c.pkg_dict['name']}">
+<dcat:Dataset rdf:about="${c.pkg_dict.get('url','')}">
 
     <dct:title xml:lang="en">${c.pkg_dict['title']}</dct:title>
     <dct:description xml:lang="en">${c.pkg_dict.get('description', '')}</dct:description>
