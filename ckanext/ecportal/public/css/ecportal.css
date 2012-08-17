@@ -51,6 +51,10 @@ header.container {
     background-color: #ffffff;
 }
 
+.dataset-create-form .homepage-field, .dataset-create-form .tags-field {
+    display: block !important;
+}
+
 header {
     padding: 0;
 	height: 162px;

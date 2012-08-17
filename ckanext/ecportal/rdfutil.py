@@ -24,6 +24,9 @@ def update_rdf( source_rdf, name ):
         root = lxml.etree.fromstring( rdf )
     except lxml.etree.XMLSyntaxError, xmlerr:
         log.error( xmlerr)
+        print rdf
+
+        raise
         return "", ""
 
     local_namespaces = {
