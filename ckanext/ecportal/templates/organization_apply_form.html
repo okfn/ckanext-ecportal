@@ -1,4 +1,3 @@
-
 <form id="publisher-edit" action="" method="post"
     py:attrs="{'class':'has-errors'} if errors else {}"
     xmlns:i18n="http://genshi.edgewall.org/i18n"
@@ -18,10 +17,10 @@
 <fieldset id="application">
   <dl>
 	<dt>
-		<label class="field_opt" for="name">Organization</label>
+		<label class="field_opt" for="name">Publisher</label>
 	</dt>
 	<dd>
-		<select id="parent" name="parent" class="chzn-select" data-placeholder="Please choose an organization">
+		<select id="parent" name="parent" class="chzn-select" data-placeholder="Please choose a publisher">
 			<option value=""></option>
     		<py:for each="pg in c.possible_parents">
 				<option py:attrs="{'selected': 'selected' if c.group and pg.id == c.group.id else None}" value="${pg.id}">${pg.title}</option>
@@ -29,16 +28,14 @@
 		</select>
 	</dd>
 
-
     <dt><label class="field_opt" for="name">Reason</label></dt>
     <dd>
 		<textarea rows="10" cols="60" class="" id="reason" name="reason">${data.get('reason', '')}</textarea>
 		<br/>
-		<span class="hints">Please explain to the owner your reasons for wishing to become an editor of this organization</span>
+		<span class="hints">Please explain to the owner your reasons for wishing to become an editor of this publisher.</span>
 	</dd>
   </dl>
 </fieldset>
-
 
 <div class="form-submit">
   <input id="save" class="pretty-button primary" name="save" type="submit" value="${_('Send request')}" />
