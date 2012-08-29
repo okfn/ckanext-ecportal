@@ -188,8 +188,12 @@
           </tr>
         </thead>
         <tbody>
+
+          <td class="dataset-label" property="rdfs:label">url</td>
+          <td class="dataset-details" property="rdf:value"><a href="${c.resource['url']}">${c.resource['url']}</a></td>
+
           <py:for each="i, key in enumerate(sorted(c.resource.keys()))">
-            <tr py:if="not key=='description'">
+            <tr py:if="not key in ('description', 'url')">
               <td class="dataset-label" property="rdfs:label">${_(key)}</td>
               <td class="dataset-details" property="rdf:value">${c.resource[key]}</td>
             </tr>

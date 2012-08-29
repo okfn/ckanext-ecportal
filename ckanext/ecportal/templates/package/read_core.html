@@ -152,7 +152,7 @@
 
         <tr py:if="c.pkg_dict.get('contact_webpage')">
           <td class="dataset-label">Contact Web Page</td>
-          <td class="dataset-details">${c.pkg_dict['contact_webpage']}</td>
+          <td class="dataset-details"><a href="${c.pkg_dict['contact_webpage']}">${c.pkg_dict['contact_webpage']}</a></td>
         </tr>
 
         <tr py:if="c.pkg.version">
