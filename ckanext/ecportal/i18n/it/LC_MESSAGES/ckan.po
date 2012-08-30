@@ -958,7 +958,7 @@ msgstr "Valore mancante"
 #: ckan/lib/navl/validators.py:54
 #, python-format
 msgid "The input field %(name)s was not expected."
-msgstr "Il campo di inserimento %(nome) non era previsto."
+msgstr "Il campo di inserimento %(name)s non era previsto."
 
 #: ckan/lib/navl/validators.py:93
 msgid "Please enter an integer value"
@@ -2564,7 +2564,7 @@ msgstr "Stato:"
 #: ../ckanext-ecportal/ckanext/ecportal/templates/publisher/read.html:69
 #, python-format
 msgid "[1:You searched for \"%(query)s\". ]%(number_of_results)s datasets found."
-msgstr "[1:Avete cercato \"%(query)s\". ]%(numero_di_risultati)s insiemi di dati trovati."
+msgstr "[1:Avete cercato \"%(query)s\". ]%(number_of_results)s insiemi di dati trovati."
 
 #: ckan/templates/home/about.html:14
 msgid "What was the [1:average price] of a house in the UK in 1935? When will India's projected population [2:overtake] that of China? Where can you see [3:publicly-funded art] in Seattle? Data to answer many, many questions like these is out there on the Internet somewhere - but it is not always easy to find."
@@ -2573,7 +2573,7 @@ msgstr "Qual era il [1:prezzo medio] di un'abitazione nel Regno Unito nel 1935? 
 #: ckan/templates/home/about.html:16
 #, python-format
 msgid "%(site_title)s is a community-run catalogue of useful sets of data on the Internet. You can collect links here to data from around the web for yourself and others to use, or search for data that others have collected. Depending on the type of data (and its conditions of use), %(site_title)s may also be able to store a copy of the data or host it in a database, and provide some basic visualisation tools."
-msgstr "%(titolo_sito) è un catalogo di set di dati utili  gestito dalla comunità su Internet. Da qui potete raccogliere link ai dati di tutto il Web, che tutti possono utilizzare: sia voi che gli altri, oppure cercare raccolti da altri. In base al tipo di dati (e alle condizioni d'uso), %(titolo_sito)s potrebbe essere anche in grado di memorizzare una copia dei dati o di ospitarla in un database, fornendo alcuni strumenti di visualizzazione."
+msgstr "%(site_title)s è un catalogo di set di dati utili  gestito dalla comunità su Internet. Da qui potete raccogliere link ai dati di tutto il Web, che tutti possono utilizzare: sia voi che gli altri, oppure cercare raccolti da altri. In base al tipo di dati (e alle condizioni d'uso), %(site_title)s potrebbe essere anche in grado di memorizzare una copia dei dati o di ospitarla in un database, fornendo alcuni strumenti di visualizzazione."
 
 #: ckan/templates/home/about.html:23
 msgid "How it works"
@@ -2594,7 +2594,7 @@ msgstr "Open data e la Open Knowledge Foundation"
 #: ckan/templates/home/about.html:32
 #, python-format
 msgid "Most of the data indexed at %(site_title)s is openly licensed, meaning anyone is free to use or re-use it however they like. Perhaps someone will take that nice dataset of a city's public art that you found, and add it to a tourist map - or even make a neat app for your phone that'll help you find artworks when you visit the city. Open data means more enterprise, collaborative science and transparent government. You can read more about open data in the [1:Open Data Handbook]."
-msgstr "La maggior parte dei dati indicizzati su %(titolo_sito) sono in licenza open: ciò significa che chiunque è libero di utilizzarli o riutilizzarli come desidera. Forse qualcuno prenderà quel set di dati che avete raccolto sull'arte pubblica di una città e lo aggiungerà a una mappa turistica - o addirittura creerà un'applicazione curata per il vostro telefono che vi aiuterà a cercare le opere d'arte quando visitate una città. Open data vuol dire più impresa, scienza collaborativa e governo trasparentere. Per saperne di più sugli open data, conservate la [1:Guida Open Data]."
+msgstr "La maggior parte dei dati indicizzati su %(site_title) sono in licenza open: ciò significa che chiunque è libero di utilizzarli o riutilizzarli come desidera. Forse qualcuno prenderà quel set di dati che avete raccolto sull'arte pubblica di una città e lo aggiungerà a una mappa turistica - o addirittura creerà un'applicazione curata per il vostro telefono che vi aiuterà a cercare le opere d'arte quando visitate una città. Open data vuol dire più impresa, scienza collaborativa e governo trasparentere. Per saperne di più sugli open data, conservate la [1:Guida Open Data]."
 
 #: ckan/templates/home/about.html:34
 msgid "The [1:Open Knowledge Foundation] is a non-profit organisation [2:promoting] open knowledge: writing and improving CKAN is one of the ways we do that. If you want to get involved with its design or code, join the discussion or development [3:mailing lists], or take a look at the [4:OKFN] site to find out about our other projects."
@@ -2960,7 +2960,7 @@ msgstr "- Set di dati"
 
 #: ckan/templates/package/read.html:24
 #: ../ckanext-ecportal/ckanext/ecportal/templates/package/read.html:24
-msgid "License:"
+msgid "Licence:"
 msgstr "Licenza:"
 
 #: ckan/templates/package/read.html:32
@@ -3070,7 +3070,7 @@ msgid ""
 "            [2:%(harvest_catalogue_name)s]"
 msgstr ""
 "[1:Pagina del set di dati] su \n"
-"            [2:%(nome_catalogo_raccolta)]"
+"            [2:%(harvest_catalogue_name)s]"
 
 #: ckan/templates/package/related_list.html:14
 #: ../ckanext-ecportal/ckanext/ecportal/templates/home/index.html:6
@@ -3469,7 +3469,7 @@ msgstr "Registra account"
 #: ckan/templates/user/list.html:15
 #, python-format
 msgid "[1:%(item_count)s] users found."
-msgstr "[1:%(conteggio_elemento)s] utente trovato."
+msgstr "[1:%(item_count)s] utente trovato."
 
 #: ckan/templates/user/list.html:24
 msgid "Sort by name"

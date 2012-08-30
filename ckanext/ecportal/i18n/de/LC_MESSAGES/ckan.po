@@ -150,7 +150,7 @@ msgstr "Lesen von Entity dieses Typs nicht möglich: %s"
 #: ckan/controllers/api.py:319
 #, python-format
 msgid "Cannot create new entity of this type: %s %s"
-msgstr "Erstellen einer neuen Entity dieses Typs nicht möglich: %s"
+msgstr "Erstellen einer neuen Entity dieses Typs nicht möglich: %s %s"
 
 #: ckan/controllers/api.py:345
 msgid "Unable to add package to search index"
@@ -168,7 +168,7 @@ msgstr "Aktualisierung des Suchindexes nicht möglich"
 #: ckan/controllers/api.py:415
 #, python-format
 msgid "Cannot delete entity of this type: %s %s"
-msgstr "Löschen von Entity dieses Typs nicht möglich: %s"
+msgstr "Löschen von Entity dieses Typs nicht möglich: %s %s"
 
 #: ckan/controllers/api.py:438
 msgid "No revision specified"
@@ -2960,8 +2960,8 @@ msgstr "- Datensätze"
 
 #: ckan/templates/package/read.html:24
 #: ../ckanext-ecportal/ckanext/ecportal/templates/package/read.html:24
-msgid "License:"
-msgstr "Lizenz"
+msgid "Licence:"
+msgstr "Lizenz:"
 
 #: ckan/templates/package/read.html:32
 #: ckan/templates/package/resource_read.html:143

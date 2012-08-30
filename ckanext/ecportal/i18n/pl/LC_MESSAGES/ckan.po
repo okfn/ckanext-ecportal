@@ -222,7 +222,7 @@ msgstr "Brak uprawnień do stworzenia grupy"
 #: ckan/controllers/group.py:381
 #, python-format
 msgid "User %r not authorized to edit %r"
-msgstr "Użytkownik %s nie posiada uprawnień pozwalających na edycję %r"
+msgstr "Użytkownik %r nie posiada uprawnień pozwalających na edycję %r"
 
 #: ckan/controllers/authorization_group.py:151
 #: ckan/controllers/group.py:110
@@ -1240,7 +1240,7 @@ msgstr "Użytkownik %s nie posiada uprawnień pozwalających na tworzenie grup a
 #: ckan/logic/auth/create.py:82
 #, python-format
 msgid "User %s not authorized to create users"
-msgstr "Użytkownik %r nie posiada uprawnień pozwalających na tworzenie kont użytkowników"
+msgstr "Użytkownik %s nie posiada uprawnień pozwalających na tworzenie kont użytkowników"
 
 #: ckan/logic/auth/create.py:111
 msgid "Group was not found."
@@ -1259,7 +1259,7 @@ msgstr "Do stworzenia grupy wymagany jest ważny klucz API"
 #: ckan/logic/auth/delete.py:14
 #, python-format
 msgid "User %s not authorized to delete package %s"
-msgstr "Użytkownik %r nie posiada uprawnień pozwalających na usunięcie pakietu %s"
+msgstr "Użytkownik %s nie posiada uprawnień pozwalających na usunięcie pakietu %s"
 
 #: ckan/logic/auth/delete.py:23
 #: ckan/logic/auth/delete.py:40
@@ -1277,7 +1277,7 @@ msgstr "Użytkownik %s nie posiada uprawnień pozwalających na usunięcie powi�
 #: ckan/logic/auth/publisher/delete.py:73
 #, python-format
 msgid "User %s not authorized to delete group %s"
-msgstr "Użytkownik %r nie posiada uprawnień pozwalających na usunięcie grupy %s"
+msgstr "Użytkownik %s nie posiada uprawnień pozwalających na usunięcie grupy %s"
 
 #: ckan/logic/auth/delete.py:83
 #: ckan/logic/auth/publisher/delete.py:89
@@ -2961,7 +2961,7 @@ msgstr "– Zbiory danych"
 
 #: ckan/templates/package/read.html:24
 #: ../ckanext-ecportal/ckanext/ecportal/templates/package/read.html:24
-msgid "License:"
+msgid "Licence:"
 msgstr "Licencja:"
 
 #: ckan/templates/package/read.html:32

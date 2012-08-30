@@ -2960,7 +2960,7 @@ msgstr "- Ensembles de données"
 
 #: ckan/templates/package/read.html:24
 #: ../ckanext-ecportal/ckanext/ecportal/templates/package/read.html:24
-msgid "License:"
+msgid "Licence:"
 msgstr "Licence :"
 
 #: ckan/templates/package/read.html:32

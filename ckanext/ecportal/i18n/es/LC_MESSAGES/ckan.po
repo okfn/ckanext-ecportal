@@ -2961,7 +2961,7 @@ msgstr "- Conjuntos de datos"
 
 #: ckan/templates/package/read.html:24
 #: ../ckanext-ecportal/ckanext/ecportal/templates/package/read.html:24
-msgid "License:"
+msgid "Licence:"
 msgstr "Licencia:"
 
 #: ckan/templates/package/read.html:32
