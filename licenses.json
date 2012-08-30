@@ -9,8 +9,8 @@
     "is_osi_compliant": false, 
     "maintainer": "", 
     "status": "active", 
-    "title": "European Commission Open License", 
-    "url": "http://ec.europa.eu/open-data/kos/licence/EuropeanCommission"
+    "title": "Europa Legal Notice", 
+    "url": "http://ec.europa.eu/geninfo/legal_notices_en.htm"
   }, 
   {
     "domain_content": false, 
@@ -23,7 +23,7 @@
     "maintainer": "", 
     "status": "active", 
     "title": "Eurostat Copyright/License Policy", 
-    "url": "http://ec.europa.eu/open-data/kos/licence/EuroStat"
+    "url": "http://epp.eurostat.ec.europa.eu/portal/page/portal/about_eurostat/policies/copyright_licence_policy"
   },
   {
 
