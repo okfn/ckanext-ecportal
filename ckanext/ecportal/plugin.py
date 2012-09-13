@@ -1,5 +1,6 @@
 import ckan.plugins as p
 import ckan.logic.action.update as update
+import ckan.logic.action.get as get
 import ckan.logic as logic
 import logging
 import ckan.lib.navl.dictization_functions
@@ -114,6 +115,13 @@ def group_show(context, data_dict):
 
     return group_dict
 
+def group_list(context, data_dict):
+    return sorted(
+        get.group_list(context, data_dict),
+        key=lambda x:x['display_name']
+    )
+
+
 class ECPortalPlugin(p.SingletonPlugin):
     p.implements(p.IConfigurable)
     p.implements(p.IConfigurer)
@@ -122,7 +130,8 @@ class ECPortalPlugin(p.SingletonPlugin):
 
     def get_actions(self):
 
-        return {'group_update': group_update,
+        return {'group_list': group_list,
+                'group_update': group_update,
                 'group_show': group_show}
 
     def configure(self, config):
