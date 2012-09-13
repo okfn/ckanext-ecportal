@@ -22,14 +22,10 @@ def _vocabularies(tag_name):
     If no such tag exists, throws a ckan.plugins.toolkit.ObjectNotFound
     exception.
     '''
-    query = model.Session.query(model.tag.Tag)\
-        .filter(model.tag.Tag.name == tag_name)
+    query = model.Session.query(model.tag.Tag.name, model.vocabulary.Vocabulary.name)\
+        .filter(model.tag.Tag.name == tag_name).filter(model.tag.Tag.vocabulary_id == model.vocabulary.Vocabulary.id)
 
-    if not query.count():
-        raise p.toolkit.ObjectNotFound
-
-    vocab_ids = [t.vocabulary_id for t in query if t.vocabulary_id]
-    return [model.vocabulary.Vocabulary.get(id).name for id in vocab_ids]
+    return [t[1] for t in query]
 
 
 class ECPortalDatasetController(p.SingletonPlugin):
