@@ -128,6 +128,15 @@ class ECPortalPlugin(p.SingletonPlugin):
     def configure(self, config):
         self.site_url = config.get('ckan.site_url')
 
+        ## Do not automatically notify for now for performance reasons
+        def no_notify(entity, operation=None):
+            return
+
+        for plugin in p.PluginImplementations(p.IDomainObjectModification):
+            if plugin.name in ('QAPlugin', 'WebstorerPlugin'):
+                plugin.notify = no_notify
+        
+
     def update_config(self, config):
         p.toolkit.add_template_directory(config, 'templates')
         p.toolkit.add_public_directory(config, 'public')

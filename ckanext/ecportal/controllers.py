@@ -67,6 +67,10 @@ class ECPortalDatasetController(p.SingletonPlugin):
                                           context=context)
         pkg_dict['data_dict'] = json.dumps(validated_pkg)
 
+        pkg_dict.pop('rdf', None)
+        pkg_dict.pop('extras_rdf', None)
+
+
         # remove vocab tags from 'tags' list and add them as vocab_<tag name>
         # so that they can be used in facets
         free_tags = []
