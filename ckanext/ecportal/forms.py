@@ -98,7 +98,7 @@ class ECPortalDatasetForm(p.SingletonPlugin):
         c.licences = sorted(model.Package.get_license_options(),
                             key=operator.itemgetter(1))
         default_licence = ("Europa Legal Notice", "http://ec.europa.eu/open-data/kos/licence/EuropeanCommission")
-        c.licences.remove(default_licence)
+        c.licences = filter(lambda l: l != default_licence, c.licences)
         c.licences.insert(0, default_licence)	
 
         c.is_sysadmin = Authorizer().is_sysadmin(c.user)
