@@ -7,8 +7,9 @@ import ckan.lib.navl.dictization_functions
 import ckan.plugins as plugins
 import ckan.lib.plugins as lib_plugins
 import ckan.lib.dictization as d
-
 import ckan.lib.dictization.model_dictize as model_dictize
+
+import ckanext.ecportal.auth as ecportal_auth
 
 log = logging.getLogger('ckan.logic')
 
@@ -127,6 +128,7 @@ class ECPortalPlugin(p.SingletonPlugin):
     p.implements(p.IConfigurer)
     p.implements(p.IRoutes)
     p.implements(p.IActions)
+    p.implements(p.IAuthFunctions)
 
     def get_actions(self):
 
@@ -159,3 +161,13 @@ class ECPortalPlugin(p.SingletonPlugin):
 
     def after_map(self, map):
         return map
+
+    ##
+    ## IAuthFunctions implementation
+    ##
+
+    def get_auth_functions(self):
+        return {
+            'package_update': ecportal_auth.package_update,
+            'show_package_edit_button': ecportal_auth.show_package_edit_button
+        }
