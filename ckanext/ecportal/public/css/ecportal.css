@@ -480,3 +480,61 @@ body.package.edit input[type="checkbox"] {
 .drag-drop-list li.drag-bars {
     background-image: url("http://thedatahub.org/images/dragbars.png");
 }
+
+/****************************************************************************/
+/* Internet Explorer Fixes
+/****************************************************************************/
+.ie7 .btn,
+.ie8 .btn {
+    border: 1px solid #CCC;
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#F6F6F6', endColorstr='#EEEEEE');
+}
+.ie7 .btn:hover,
+.ie8 .btn:hover {
+    border-color: #999;
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#EEEEEE', endColorstr='#DDDDDD');
+}
+
+.ie7 .btn-primary,
+.ie8 .btn-primary {
+    border: 1px solid #2544B6;
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#3150C6', endColorstr='#2544B6');
+}
+.ie7 .btn-primary:hover,
+.ie8 .btn-primary:hover {
+    border-color: #19369E;
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#2544B6', endColorstr='#19369E');
+}
+
+.ie7 .btn-danger,
+.ie8 .btn-danger {
+    border: 1px solid #D44944;
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#D44944', endColorstr='#B93530');
+}
+.ie7 .btn-danger:hover,
+.ie8 .btn-danger:hover {
+    border-color: #A4231F;
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#B93530', endColorstr='#A4231F');
+}
+
+.ie8 .filter-list .filter-entry {
+    white-space: nowrap;
+    padding-right: 15px;
+}
+
+/* nav fixes */
+.ie8 #minornavigation .nav li a {
+    white-space: nowrap;
+    padding-right: 25px;
+}
+.ie8 .account.menu,
+.ie8 ul.language-dd-selector li.selected {
+    white-space: nowrap;
+}
+.ie8 ul.language-dd-selector li img {
+    display: inherit;
+    float: none;
+    position: relative;
+    left: -20px;
+}
+
