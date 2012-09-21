@@ -1487,6 +1487,10 @@ CKAN.DataPreview = function ($, my) {
         }
       });
 
+      dataExplorer.model.bind('query:done', function() {
+        $('.resource-preview').fadeIn(1500);
+      });
+
       // -----------------------------
       // Setup the Embed modal dialog.
       // -----------------------------

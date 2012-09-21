@@ -480,3 +480,10 @@ body.package.edit input[type="checkbox"] {
 .drag-drop-list li.drag-bars {
     background-image: url("http://thedatahub.org/images/dragbars.png");
 }
+
+/****************************************************************************/
+/* Resource View Page
+/****************************************************************************/
+.resource-preview {
+    display: none;
+}
