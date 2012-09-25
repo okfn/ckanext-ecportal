@@ -27,6 +27,7 @@ class ECPortalCommand(cli.CkanCommand):
 
         paster ecportal import-data <data> <user> -c <config>
         paster ecportal import-publishers -c <config>
+        paster ecportal update-publishers -c <config>
         paster ecportal export-datasets <folder> -c <config>
 
         paster ecportal create-geo-vocab -c <config>
@@ -108,6 +109,9 @@ class ECPortalCommand(cli.CkanCommand):
                 print ECPortalCommand.__doc__
                 return
             self.import_publishers()
+
+        elif cmd == 'update-publishers':
+            self.update_publishers()
 
         elif cmd == 'create-geo-vocab':
             if not len(self.args) == 1:
@@ -381,7 +385,6 @@ class ECPortalCommand(cli.CkanCommand):
         ### get out english 
 
         groups_title_lookup = {}
-        translations = []
 
         log.info('Creating CKAN group objects')
         user = logic.get_action('get_site_user')({'model': model, 'ignore_auth': True}, {})
@@ -396,13 +399,89 @@ class ECPortalCommand(cli.CkanCommand):
                     'type': u'organization'
                 }
                 logic.get_action('group_create')(context, group)
-
+                log.info("Added new publisher: %s [%s]", publisher.title, publisher.name)
                 groups_title_lookup[publisher.name] = publisher.title or publisher.name
 
+        context = {'model': model, 'session': model.Session, 'user': user['name']}
+        self._update_translations(publishers, groups_title_lookup, context)
+
+    _Publisher = collections.namedtuple('Publisher', 'name title lang_code')
+    
+    def _parse_publishers_from(self, data):
+        
+        for item in data['results']['bindings']:
+            yield self._Publisher(
+                    name = item["term"]["value"].split('/')[-1].lower(),
+                    title = item["label"]["value"],
+                    lang_code = item["language"]["value"])
+
+    def update_publishers(self):
+        '''
+        Update existing publisher groups.
+
+         - new publishers are added
+         - existing publishers are updated
+         - deleted publishers are left untouched
+        '''
+
+        user = logic.get_action('get_site_user')({'model': model, 'ignore_auth': True}, {})
+        context = {'model': model, 'session': model.Session, 'user': user['name']}
+
+        group_list_context = context.copy()
+        group_list_context['with_datasets'] = True
+        existing_groups = logic.get_action('group_list')(
+                group_list_context,
+                {'groups': '', 'all_fields': True})
+
+        existing_groups = dict((g['name'], g) for g in existing_groups)
+
+        publishers = self._read_publishers_from_file()
+
+        new_publishers = [ p for p in publishers if p.name not in existing_groups ]
+        existing_publishers = [ p for p in publishers if p.name in existing_groups ]
+
+        deleted_publishers = [ group_name for group_name in existing_groups.keys() \
+                                 if group_name not in set(p.name for p in publishers) ]
+
+        self._add_publishers(new_publishers)
+
+        # Update existing publishers
+        groups_title_lookup = {}
+        for publisher in existing_publishers:
+            context = {'model': model, 'session': model.Session, 'user': user['name']}
+            if publisher.lang_code != "en":
+                continue
+            existing_group = existing_groups[publisher.name]
+            if existing_group["title"] != publisher.title:
+                # Update the Group
+                log.info("Publisher required update: %s, [%s].  (Was: %s)",
+                         publisher.title,
+                         publisher.name,
+                         existing_group['title'])
+                group = existing_group.copy()
+                group.update(title=publisher.title)
+                logic.get_action('group_update')(context, group)
+            # Track the group titles
+            groups_title_lookup[publisher.name] = publisher.title or publisher.name
+
+        # Update translations.
+        context = {'model': model, 'session': model.Session, 'user': user['name']}
+        self._update_translations(existing_publishers, groups_title_lookup, context)
+
+        # Just log which publishers should be deleted.
+        for group_name in deleted_publishers:
+            log.warn("Not deleting old publisher: %s", group_name)
+
+    def _update_translations(self, publishers, groups_title_lookup, context):
+        translations = []
         for publisher in publishers:
             if publisher.lang_code == "en":
                 continue
             if not publisher.title:
+                continue
+
+            if publisher.name not in groups_title_lookup:
+                log.warn("No english version of %s [%s].  Skipping", publisher.title, publisher.name)
                 continue
 
             translations.append({
@@ -414,16 +493,6 @@ class ECPortalCommand(cli.CkanCommand):
         logic.get_action('term_translation_update_many')(
             context, {'data': translations}
         )
-
-    _Publisher = collections.namedtuple('Publisher', 'name title lang_code')
-    
-    def _parse_publishers_from(self, data):
-        
-        for item in data['results']['bindings']:
-            yield self._Publisher(
-                    name = item["term"]["value"].split('/')[-1].lower(),
-                    title = item["label"]["value"],
-                    lang_code = item["language"]["value"])
 
     def _create_vocab(self, context, vocab_name):
         try:
