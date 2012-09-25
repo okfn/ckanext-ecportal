@@ -1,3 +1,4 @@
+import collections
 import os
 import sys
 import re
@@ -365,9 +366,17 @@ class ECPortalCommand(cli.CkanCommand):
         # get group names and title translations
         log.info('Reading group structure and names/translations')
 
+        publishers = self._read_publishers_from_file()
+        self._add_publishers(publishers)
+
+    def _read_publishers_from_file(self):
         file_name = os.path.dirname(os.path.abspath(__file__)) + '/../../data/po-corporate-bodies.json'
         with open(file_name) as json_file:
             full_json = json.loads(json_file.read())
+
+        return list(self._parse_publishers_from(full_json))
+
+    def _add_publishers(self, publishers):
 
         ### get out english 
 
@@ -377,36 +386,44 @@ class ECPortalCommand(cli.CkanCommand):
         log.info('Creating CKAN group objects')
         user = logic.get_action('get_site_user')({'model': model, 'ignore_auth': True}, {})
 
-        for item in full_json['results']['bindings']:
-            if item["language"]["value"] == "en":
-                context = {'model': model, 'session': model.Session, 'user': user['name']}
-                short_term = item["term"]["value"].split('/')[-1].lower()
-                label = item["label"]["value"]
-                if not label:
-                    label = short_term
-                groups_title_lookup[short_term] = label
+        for publisher in publishers:
+            context = {'model': model, 'session': model.Session, 'user': user['name']}
+
+            if publisher.lang_code == "en":
                 group = {
-                    'name': short_term,
-                    'title': item["label"]["value"],
+                    'name': publisher.name,
+                    'title': publisher.title,
                     'type': u'organization'
                 }
                 logic.get_action('group_create')(context, group)
 
-        for item in full_json['results']['bindings']:
-            if item["language"]["value"] == "en":
+                groups_title_lookup[publisher.name] = publisher.title or publisher.name
+
+        for publisher in publishers:
+            if publisher.lang_code == "en":
                 continue
-            short_term = item["term"]["value"].split('/')[-1].lower()
-            translation = item["label"]["value"]
-            if not translation:
+            if not publisher.title:
                 continue
-            translations.append({"term": groups_title_lookup[short_term],
-                                "term_translation": translation,
-                                "lang_code": item["language"]["value"]
-                                })
+
+            translations.append({
+                "term": groups_title_lookup[publisher.name],
+                "term_translation": publisher.title,
+                "lang_code": publisher.lang_code
+            })
 
         logic.get_action('term_translation_update_many')(
             context, {'data': translations}
         )
+
+    _Publisher = collections.namedtuple('Publisher', 'name title lang_code')
+    
+    def _parse_publishers_from(self, data):
+        
+        for item in data['results']['bindings']:
+            yield self._Publisher(
+                    name = item["term"]["value"].split('/')[-1].lower(),
+                    title = item["label"]["value"],
+                    lang_code = item["language"]["value"])
 
     def _create_vocab(self, context, vocab_name):
         try:
