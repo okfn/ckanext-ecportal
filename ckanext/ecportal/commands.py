@@ -470,7 +470,14 @@ class ECPortalCommand(cli.CkanCommand):
 
         # Just log which publishers should be deleted.
         for group_name in deleted_publishers:
-            log.warn("Not deleting old publisher: %s", group_name)
+            group = existing_groups[group_name]
+            if group['packages'] == 0:
+                log.info("Deleting old group %s as it has no datasets.", group['name'])
+                context = {'model': model, 'session': model.Session, 'user': user['name']}
+                logic.get_action('group_delete')(context, {'id': group['id']})
+
+            else:
+                log.warn("Not deleting old publisher: %s because it has datasets associated with it.", group_name)
 
     def _update_translations(self, publishers, groups_title_lookup, context):
         translations = []

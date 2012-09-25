@@ -88,11 +88,10 @@ def group_show(context, data_dict):
     '''Shows group details'''
     model = context['model']
     id = data_dict['id']
-
     group = model.Group.get(id)
     context['group'] = group
 
-    if group is None:
+    if group is None or group.state == u'deleted':
         raise NotFound
 
     check_access('group_show',context, data_dict)
