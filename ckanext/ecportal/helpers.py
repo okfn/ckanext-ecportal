@@ -62,9 +62,9 @@ def top_publishers(groups):
     Updates the 'packages' field in each group dict (up to a maximum
     of NUM_TOP_PUBLISHERS) to show the number of public datasets in the group.
     '''
-    publishers = groups[:NUM_TOP_PUBLISHERS]
+    publishers = sorted(groups, key=lambda g: g['packages'], reverse=True)
 
-    return publishers
+    return publishers[:NUM_TOP_PUBLISHERS]
 
 
 def current_date():
