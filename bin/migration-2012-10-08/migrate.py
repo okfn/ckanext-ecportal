@@ -2,6 +2,8 @@
 
 Usage:
     migrate.py from <source> to <target> [options] <dataset-ids>...
+    migrate.py create bundle from <source> [options] <dataset-ids>...
+    migrate.py upload bundle to <target> [options] <dataset-ids>...
 
 Options:
     -h --help                     Show this screen
@@ -18,6 +20,8 @@ import logging
 import os
 import re
 import requests
+import shelve
+import shutil
 import sys
 import tempfile
 import urlparse
@@ -30,6 +34,18 @@ log.addHandler(handler)
 
 def main(args):
 
+
+    if args['create']:
+        create_bundle_command(args)
+    elif args['upload']:
+        upload_bundle_command(args)
+    elif args['from']:
+        migrate_command(args)
+    else:
+        raise Exception('Unknown command')
+
+
+def migrate_command(args):
     source_url = args['<source>']
     target_url = args['<target>']
     source_api_key = args['--source-api-key']
@@ -59,10 +75,52 @@ def main(args):
                         dry_run=dry_run,
                         overwrite=overwrite)
 
-def migrate_dataset(dataset, source, target, dry_run=True, overwrite=False):
-    '''Migrate a dataset'''
-    log.info('Attempting to migrate %s', dataset)
+def create_bundle_command(args):
+    source_url = args['<source>']
+    source_api_key = args['--source-api-key']
+    dataset_ids = args['<dataset-ids>']
+    
+    if not valid_ckan_url(source_url):
+        import sys
+        sys.exit(1)
 
+    ckan_source = ckanclient.CkanClient(base_location=source_url,
+                                        api_key=source_api_key)
+
+    bundle = shelve.open('ckan-bundle.bin')
+    for dataset in dataset_ids:
+        add_dataset_to_bundle(dataset,
+                              source=ckan_source,
+                              bundle=bundle)
+    bundle.close()
+
+def upload_bundle_command(args):
+    target_url = args['<target>']
+    target_api_key = args['--target-api-key']
+    dry_run = args['--dry-run']
+    dataset_ids = args['<dataset-ids>']
+    overwrite = args['--overwrite']
+    
+    if not valid_ckan_url(target_url):
+        import sys
+        sys.exit(1)
+
+    ckan_target = ckanclient.CkanClient(base_location=target_url,
+                                        api_key=target_api_key)
+
+    # shelve modifies the original file in place, so copy it.
+    shutil.copyfile('ckan-bundle.bin', 'ckan-bundle-for-upload.bin')
+    bundle = shelve.open('ckan-bundle-for-upload.bin')
+    for dataset in dataset_ids:
+        upload_dataset_from_bundle(dataset,
+                                   target=ckan_target,
+                                   bundle=bundle,
+                                   dry_run=dry_run,
+                                   overwrite=overwrite)
+    bundle.close()
+
+def add_dataset_to_bundle(dataset, source, bundle):
+    '''Create a bundle of data and resource files from the source machine.'''
     log.info('Retriveing dataset from %s', source.base_location)
 
     if not dataset_exists(dataset, source):
@@ -79,7 +137,17 @@ def migrate_dataset(dataset, source, target, dry_run=True, overwrite=False):
                source_dataset[key] = value.strip('"')
 
     log.info('Successfully retrieved %s from source' % dataset)
+    download_resources(source_dataset, source) # modifies the source_dataset in place
+    bundle[dataset] = source_dataset
 
+def upload_dataset_from_bundle(dataset, target, bundle, dry_run=True, overwrite=False):
+    '''Upload the given dataset, found in the given bundle, to the target'''
+    if dataset not in bundle:
+        log.critical('Could not find dataset %s in the bundle', dataset)
+        return None
+
+    source_dataset = bundle[dataset]
+    
     if not check_groups_exist_on_target(source_dataset['groups'],
                                         target):
         log.error('Cannot migrate dataset %s because reuired group(s) do not exist on the target',
@@ -100,7 +168,7 @@ def migrate_dataset(dataset, source, target, dry_run=True, overwrite=False):
                 for g in source_dataset['groups']:
                     g['id'] = g['name']
 
-                upload_resources(source_dataset, source, target, dry_run)
+                upload_resources(source_dataset, target, dry_run)
 
                 if dry_run:
                     log.info('Skipping package update (dry-run)')
@@ -109,7 +177,7 @@ def migrate_dataset(dataset, source, target, dry_run=True, overwrite=False):
                     log.info('Successfully updated %s', dataset)
         else:   # dataset does not exist on the target
             source_dataset.pop('id')
-            upload_resources(source_dataset, source, target, dry_run)
+            upload_resources(source_dataset, target, dry_run)
             if dry_run:
                 log.info('Skipping package create (dry-run)')
             else:
@@ -125,11 +193,19 @@ def migrate_dataset(dataset, source, target, dry_run=True, overwrite=False):
         log.critical('Conflit error attempting to migrate dataset %s', dataset)
         log.critical('This is most likely caused by invalid data')
         return
- 
-def upload_resources(dataset, source, target, dry_run):
-    '''Upload any file-upload resources.
 
-    And edit the dataset's resource attributes to reflect any changes'''
+
+def migrate_dataset(dataset, source, target, dry_run=True, overwrite=False):
+    '''Migrate a dataset'''
+    log.info('Attempting to migrate %s', dataset)
+
+    bundle = {}
+    add_dataset_to_bundle(dataset, source, bundle)
+    upload_dataset_from_bundle(dataset, target, bundle, dry_run=dry_run, overwrite=overwrite)
+
+
+def download_resources(dataset, source):
+    '''Download any uploaded-files'''
     if 'resources' not in dataset:
         return
     for resource in dataset['resources']:
@@ -143,7 +219,35 @@ def upload_resources(dataset, source, target, dry_run):
             log.error('Unable to download data for %s',
                       resource['url'])
             continue
-        
+ 
+        # read entire file into the bundle
+        resource['__data__'] = open(data_filename, 'r').read()
+
+
+def upload_resources(dataset, target, dry_run):
+    '''Upload any file-upload resources.
+
+    And edit the dataset's resource attributes to reflect any changes'''
+    if 'resources' not in dataset:
+        return
+    for resource in dataset['resources']:
+
+        if resource['url'].startswith('http'):
+            continue    # Skip those that look links
+
+        if '__data__' not in resource:
+            log.error('Could not find data for resource %s', resource['url'])
+            continue
+
+        # write the data to a file in order that ckanclient can upload it
+        data_fh, data_filename = tempfile.mkstemp()
+        data_fh = os.fdopen(data_fh, 'w')
+        data_fh.write(resource['__data__'])
+        data_fh.flush()
+        data_fh.close()
+
+        del resource['__data__']
+
         if dry_run:
             log.info('Skipping resource upload (dry-run)')
         else:
