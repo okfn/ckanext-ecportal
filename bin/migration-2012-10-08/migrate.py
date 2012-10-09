@@ -14,13 +14,14 @@ Options:
 
 """
 
+import base64
 import ckanclient
 import docopt
+import json
 import logging
 import os
 import re
 import requests
-import shelve
 import shutil
 import sys
 import tempfile
@@ -87,12 +88,14 @@ def create_bundle_command(args):
     ckan_source = ckanclient.CkanClient(base_location=source_url,
                                         api_key=source_api_key)
 
-    bundle = shelve.open('ckan-bundle.bin')
+    bundle = {}
     for dataset in dataset_ids:
         add_dataset_to_bundle(dataset,
                               source=ckan_source,
                               bundle=bundle)
-    bundle.close()
+    bundle_file = open('ckan-bundle.json', 'w')
+    json.dump(bundle, bundle_file)
+    bundle_file.close()
 
 def upload_bundle_command(args):
     target_url = args['<target>']
@@ -108,16 +111,13 @@ def upload_bundle_command(args):
     ckan_target = ckanclient.CkanClient(base_location=target_url,
                                         api_key=target_api_key)
 
-    # shelve modifies the original file in place, so copy it.
-    shutil.copyfile('ckan-bundle.bin', 'ckan-bundle-for-upload.bin')
-    bundle = shelve.open('ckan-bundle-for-upload.bin')
+    bundle = json.load(open('ckan-bundle.json'))
     for dataset in dataset_ids:
         upload_dataset_from_bundle(dataset,
                                    target=ckan_target,
                                    bundle=bundle,
                                    dry_run=dry_run,
                                    overwrite=overwrite)
-    bundle.close()
 
 def add_dataset_to_bundle(dataset, source, bundle):
     '''Create a bundle of data and resource files from the source machine.'''
@@ -221,7 +221,7 @@ def download_resources(dataset, source):
             continue
  
         # read entire file into the bundle
-        resource['__data__'] = open(data_filename, 'r').read()
+        resource['__data__'] = base64.encodestring(open(data_filename, 'r').read())
 
 
 def upload_resources(dataset, target, dry_run):
@@ -239,10 +239,12 @@ def upload_resources(dataset, target, dry_run):
             log.error('Could not find data for resource %s', resource['url'])
             continue
 
+        data = base64.decodestring(resource['__data__'])
+
         # write the data to a file in order that ckanclient can upload it
         data_fh, data_filename = tempfile.mkstemp()
         data_fh = os.fdopen(data_fh, 'w')
-        data_fh.write(resource['__data__'])
+        data_fh.write(data)
         data_fh.flush()
         data_fh.close()
 
