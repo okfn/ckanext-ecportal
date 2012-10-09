@@ -222,6 +222,7 @@ def download_resources(dataset, source):
  
         # read entire file into the bundle
         resource['__data__'] = base64.encodestring(open(data_filename, 'r').read())
+        resource['__data_filename__'] = resource['url'].split('/')[-1]
 
 
 def upload_resources(dataset, target, dry_run):
@@ -240,21 +241,23 @@ def upload_resources(dataset, target, dry_run):
             continue
 
         data = base64.decodestring(resource['__data__'])
+        data_filename = resource['__data_filename__']
 
         # write the data to a file in order that ckanclient can upload it
-        data_fh, data_filename = tempfile.mkstemp()
-        data_fh = os.fdopen(data_fh, 'w')
+        tmp_dir = tempfile.mkdtemp()
+        data_fh = open(os.path.join(tmp_dir, data_filename), 'w')
         data_fh.write(data)
         data_fh.flush()
         data_fh.close()
 
         del resource['__data__']
+        del resource['__data_filename__']
 
         if dry_run:
             log.info('Skipping resource upload (dry-run)')
         else:
             log.info('Uploading %s to target', resource['url'])
-            new_resource_url = upload_datafile(data_filename, target)
+            new_resource_url = upload_datafile(os.path.join(tmp_dir, data_filename), target)
             if new_resource_url:
                 resource['url'] = new_resource_url
             else:
@@ -297,6 +300,9 @@ def upload_datafile(filename, target):
         if suffix:
             target.base_location = target.base_location[:-2]
 
+        if isinstance(filename, unicode):
+            filename = filename.encode('utf-8')
+
         new_url, errs = target.upload_file(filename)
         if not errs:
             return new_url
@@ -304,7 +310,7 @@ def upload_datafile(filename, target):
             log.error('Errors uploading to target machine: %s', errs)
             return None
     except Exception, e:
-        log.error('Unhandled exception whilst uploading to target machine', str(e))
+        log.error('Unhandled exception whilst uploading to target machine: %s', str(e))
         return None
     finally:
         if suffix:
