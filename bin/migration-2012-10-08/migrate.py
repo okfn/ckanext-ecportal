@@ -259,6 +259,8 @@ def upload_resources(dataset, target, dry_run):
             log.info('Uploading %s to target', resource['url'])
             new_resource_url = upload_datafile(os.path.join(tmp_dir, data_filename), target)
             if new_resource_url:
+                if new_resource_url.startswith('http://'):
+                    new_resource_url = new_resource_url[7:]
                 resource['url'] = new_resource_url
             else:
                 continue
