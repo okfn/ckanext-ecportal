@@ -136,6 +136,10 @@ def add_dataset_to_bundle(dataset, source, bundle):
            value[0] == value[-1] == '"':
                source_dataset[key] = value.strip('"')
 
+    # strip ids from groups
+    for group in source_dataset.get('groups', []):
+        del group['id']
+
     log.info('Successfully retrieved %s from source' % dataset)
     download_resources(source_dataset, source) # modifies the source_dataset in place
     bundle[dataset] = source_dataset
@@ -162,13 +166,9 @@ def upload_dataset_from_bundle(dataset, target, bundle, dry_run=True, overwrite=
                 return
             else:
 
-                # ids refer to the ids on the source instance.  Turn them
-                # into their 'name' values.
-                source_dataset['id'] = source_dataset['name']
-                for g in source_dataset['groups']:
-                    g['id'] = g['name']
-
                 upload_resources(source_dataset, target, dry_run)
+
+                source_dataset['id'] = source_dataset['name']
 
                 if dry_run:
                     log.info('Skipping package update (dry-run)')
