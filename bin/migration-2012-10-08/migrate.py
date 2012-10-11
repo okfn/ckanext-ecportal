@@ -151,6 +151,10 @@ def upload_dataset_from_bundle(dataset, target, bundle, dry_run=True, overwrite=
         return None
 
     source_dataset = bundle[dataset]
+
+    # Make some modifications to get around validation checks.
+    if not source_dataset.get('url', ''):
+        source_dataset['url'] = ' '
     
     if not check_groups_exist_on_target(source_dataset['groups'],
                                         target):
