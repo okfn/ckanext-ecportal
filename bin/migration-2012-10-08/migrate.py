@@ -265,6 +265,8 @@ def upload_resources(dataset, target, dry_run):
             if new_resource_url:
                 if new_resource_url.startswith('http://'):
                     new_resource_url = new_resource_url[7:]
+                elif new_resource_url.startswith('https://'):
+                    new_resource_url = new_resource_url[8:]
                 if not new_resource_url.startswith('/open-data/data'):
                     new_resource_url = '/open-data/data' + new_resource_url
                 resource['url'] = new_resource_url
