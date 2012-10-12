@@ -1,4 +1,4 @@
--e git+https://github.com/okfn/ckanclient.git@6262a5599453e76bd41f9776ea319244d1b64af8#egg=ckanclient-dev
+-e git+https://github.com/okfn/ckanclient.git@a6eb1665a4ec72a81e2be39b87d8b2edd1c80603#egg=ckanclient-dev
 docopt==0.5.0
 requests==0.14.1
 wsgiref==0.1.2
