@@ -4,6 +4,7 @@ Customised authorization for the ecportal extension.
 
 from ckan.lib.base import _
 import ckan.logic.auth as ckan_auth
+import ckan.logic.auth.publisher as publisher_auth
 
 def package_update(context, data_dict):
     """
@@ -15,7 +16,7 @@ def package_update(context, data_dict):
 
     RDF-imported packages are identified by having an 'rdf' field.
     """
-    authorised_by_core = ckan_auth.update.package_update(context, data_dict)
+    authorised_by_core = publisher_auth.update.package_update(context, data_dict)
     if authorised_by_core['success'] is False:
         return authorised_by_core
     elif 'api_version' in context:
@@ -44,4 +45,4 @@ def show_package_edit_button(context, data_dict):
     edit button to be displayed, but de-activated: giving the user feedback
     on how to update the dataset (ie - re-running the import).
     """
-    return ckan_auth.update.package_update(context, data_dict)
+    return publisher_auth.update.package_update(context, data_dict)
