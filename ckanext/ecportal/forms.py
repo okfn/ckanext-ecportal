@@ -15,7 +15,7 @@ from validators import ecportal_name_validator, ecportal_date_to_db,\
     convert_to_extras, convert_from_extras, convert_to_groups, convert_from_groups,\
     duplicate_extras_key, publisher_exists, keyword_string_convert, rename,\
     update_rdf, requires_field, convert_resource_type, member_of_vocab,\
-    map_licenses, reduce_list
+    map_licenses, reduce_list, group_name_unchanged
 import helpers
 
 import logging
@@ -371,7 +371,14 @@ class ECPortalPublisherForm(p.SingletonPlugin):
         return 'publisher/package_form.html'
 
     def form_to_db_schema(self):
-        return ckan.logic.schema.group_form_schema()
+        '''Custom group schema for EC portal.
+
+        Does not allow an existing group's name to be changed.
+        '''
+        schema = ckan.logic.schema.group_form_schema()
+        schema['name'].append(group_name_unchanged)
+
+        return schema
 
     def db_to_form_schema(self):
         return ckan.logic.schema.group_form_schema()

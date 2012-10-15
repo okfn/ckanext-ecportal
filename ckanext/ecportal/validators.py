@@ -150,6 +150,21 @@ def duplicate_extras_key(key, data, errors, context):
         for extra_key in extras_keys:
             errors[(extra_key,)] = [_('Duplicate key for "%s" given') % extra_key]
 
+def group_name_unchanged(key, data, errors, context):
+    '''Ensures that a group's name cannot be changed once set.'''
+    model = context['model']
+    group = context.get('group')
+    new_group_name = data[key]
+
+    if not group:
+        group_id = data.get(key[:-1] + ('id',))
+        if group_id and group_id is not df.missing:
+            group = model.Group.get(group_id)
+
+    if group and group.name != new_group_name:
+        errors[key].append(_('Group name cannot be changed'))
+
+
 def publisher_exists(publisher_name, context):
     '''
     Raises Invalid if the given publisher_name does not exist in the model given

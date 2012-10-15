@@ -9,6 +9,8 @@
 
 <xi:include href="../_util.html" />
 
+<input name="id" type="hidden" value="${data.get('id', '')}" />
+
 <div class="error-explanation" py:if="error_summary">
 <h2>Errors in form</h2>
 <p>The form contains invalid entries:</p>
@@ -29,7 +31,8 @@
     <div class="controls">
       <div class="input-prepend">
         <span class="add-on">${h.url(controller='group', action='index')+'/'}</span>
-        <input maxlength="100" name="name" type="text" class="js-url-input" value="${data.get('name', '')}" />
+        <input maxlength="100" name="name" type="text" class="js-url-input" value="${data.get('name', '')}" readonly="readonly" py:if="data.get('id', '')"/>
+        <input maxlength="100" name="name" type="text" class="js-url-input" value="${data.get('name', '')}" py:if="not data.get('id', '')"/>
       </div>
       <p class="js-url-is-valid">&nbsp;</p>
       <p class="url-is-long">Warning: URL is very long. Consider changing it to something shorter.</p>
