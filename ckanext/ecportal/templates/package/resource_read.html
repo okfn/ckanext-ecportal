@@ -141,7 +141,7 @@
           </py:choose>
           <py:if test="c.pkg.isopen()">
               <a href="http://opendefinition.org/okd/" title="This dataset satisfies the Open Definition.">
-                <img class="open-data" src="http://assets.okfn.org/images/ok_buttons/od_80x15_blue.png" alt="[Open Data]" />
+                <img class="open-data" src="${h.url_for_static('/images/ok_buttons/od_80x15_blue.png')}" alt="[Open Data]" />
               </a>
           </py:if>
           <py:if test="not c.pkg.isopen()">
