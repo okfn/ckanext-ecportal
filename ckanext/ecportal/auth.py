@@ -3,8 +3,26 @@ Customised authorization for the ecportal extension.
 """
 
 from ckan.lib.base import _
+import ckan.authz as authz
 import ckan.logic.auth as ckan_auth
 import ckan.logic.auth.publisher as publisher_auth
+
+def group_create(context, data_dict=None):
+    """
+    Only sysadmins can create Groups.
+
+    All the Groups are created through the API using a paster command.  So
+    there's no need for non-sysadmin users to be able to create new Groups.
+    """
+    user  = context['user']
+
+    if not user:
+        return {'success': False, 'msg': _('User is not authorized to create groups') }
+
+    if user and authz.Authorizer.is_sysadmin(user):
+        return {'success': True}
+    else:
+        return {'success': False, 'msg': _('User is not authorized to create groups') }
 
 def package_update(context, data_dict):
     """

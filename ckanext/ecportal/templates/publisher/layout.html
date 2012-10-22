@@ -33,12 +33,6 @@
         <li class="${'active' if c.action=='index' else ''}">
           ${h.subnav_named_route(h.icon('group') + _('List Publishers'), '%s_index' % h.default_group_type(), action='index')}
         </li>
-        <li style="display:none;" class="ckan-logged-in ${'active' if c.action=='new' else ''}">
-          ${ h.subnav_named_route(h.icon('group_add') + _('Add a Publisher'), '%s_new' % h.default_group_type(), action='new')}
-        </li>
-        <li class="ckan-logged-out ${'active' if c.action=='new' else ''}">
-          ${h.subnav_link(h.icon('group_add') + _('Login to Add a Publisher'), controller='group', action='new')}
-        </li>
       </py:otherwise>
     </ul>
   </py:match>
