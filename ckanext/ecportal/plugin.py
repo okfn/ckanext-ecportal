@@ -170,4 +170,5 @@ class ECPortalPlugin(p.SingletonPlugin):
             'package_update': ecportal_auth.package_update,
             'show_package_edit_button': ecportal_auth.show_package_edit_button,
             'group_create': ecportal_auth.group_create,
+            'user_create': ecportal_auth.user_create,
         }

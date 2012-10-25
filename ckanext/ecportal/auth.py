@@ -64,3 +64,18 @@ def show_package_edit_button(context, data_dict):
     on how to update the dataset (ie - re-running the import).
     """
     return publisher_auth.update.package_update(context, data_dict)
+
+def user_create(context, data_dict=None):
+    """
+    Only allow sysadmins to create new Users
+    """
+    user  = context['user']
+
+    if authz.Authorizer().is_sysadmin(unicode(user)):
+        return { 'success': True }
+
+    return {
+        'success': False,
+        'msg': _('User not authorized to create new Users')
+        }
+
