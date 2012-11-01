@@ -75,10 +75,14 @@ CKAN.Templates.resourceDetails = ' \
           &nbsp;&nbsp;<img class="js-resource-icon inline-icon resource-icon" src="${resource_icon}" /> </label>\
       <div class="controls"> \
         <select id="resources__${num}__format" name="resources__${num}__format" class="long js-resource-edit-format" placeholder="'+CKAN.Strings.resourceFormatPlaceholder+'"> \
+          {{if _.contains(_.map(formatTypeOptions, function(l){return l[0];}))}} \
+          {{else}} \
+            <option value="${resource.format}" selected="selected">${resource.format}</option> \
+          {{/if}} \
           {{each formatTypeOptions}} \
             <option value="${$value[0]}" {{if $value[0]==resource.format}}selected="selected"{{/if}}>${$value[1]}</option> \
           {{/each}} \
-	      </select> \
+        </select> \
       </div> \
     </div> \
     <div class="control-group"> \
