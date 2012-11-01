@@ -492,6 +492,12 @@ CKAN.View.Resource = Backbone.View.extend({
           ['http://www.w3.org/TR/vocab-dcat#WebService', CKAN.Strings.distributionWebService],
           ['http://www.w3.org/TR/vocab-dcat#Download', CKAN.Strings.distributionDownload],
           ['Visualization', CKAN.Strings.visualization]
+        ],
+        formatTypeOptions: [
+          ['csv', 'csv'],
+          ['xls', 'xls'],
+          ['pdf', 'pdf'],
+          ['text', 'text'],
         ]
     };
     // Generate DOM elements
@@ -504,7 +510,7 @@ CKAN.View.Resource = Backbone.View.extend({
     CKAN.Utils.bindInputChanges(this.nameBox,this.updateName);
     CKAN.Utils.bindInputChanges(this.descriptionBox,this.updateName);
     // Hook to changes in format
-    this.formatBox = this.table.find('input.js-resource-edit-format');
+    this.formatBox = this.table.find('.js-resource-edit-format');
     CKAN.Utils.bindInputChanges(this.formatBox,this.updateIcon);
     // Hook to open panel link
     this.li.find('.resource-open-my-panel').click(this.openMyPanel);

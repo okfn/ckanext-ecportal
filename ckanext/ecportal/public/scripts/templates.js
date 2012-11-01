@@ -74,7 +74,11 @@ CKAN.Templates.resourceDetails = ' \
       <label for="" class="control-label" property="rdfs:label">'+CKAN.Strings.format + '\
           &nbsp;&nbsp;<img class="js-resource-icon inline-icon resource-icon" src="${resource_icon}" /> </label>\
       <div class="controls"> \
-        <input name="resources__${num}__format" type="text" value="${resource.format}" class="long js-resource-edit-format autocomplete-format" placeholder="'+CKAN.Strings.resourceFormatPlaceholder+'" /> \
+        <select id="resources__${num}__format" name="resources__${num}__format" class="long js-resource-edit-format" placeholder="'+CKAN.Strings.resourceFormatPlaceholder+'"> \
+          {{each formatTypeOptions}} \
+            <option value="${$value[0]}" {{if $value[0]==resource.format}}selected="selected"{{/if}}>${$value[1]}</option> \
+          {{/each}} \
+	      </select> \
       </div> \
     </div> \
     <div class="control-group"> \
