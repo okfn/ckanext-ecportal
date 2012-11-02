@@ -18,6 +18,12 @@
 </div>
   <fieldset>
     <div class="control-group">
+      <label for="name" class="control-label">Username</label>
+      <div class="controls">
+        <input readonly="readonly" type="text" name="name" value="${data.get('name','')}" />
+      </div>
+    </div>
+    <div class="control-group">
       <label for="fullname" class="control-label">Full name</label>
       <div class="controls">
         <input type="text" name="fullname" value="${data.get('fullname','')}" />
@@ -54,15 +60,6 @@
       <label for="password2" class="control-label">Password (repeat)</label>
       <div class="controls">
         <input type="password" name="password2" value="" />
-      </div>
-    </div>
-  </fieldset>
-  <fieldset>
-    <legend>Change your username</legend>
-    <div class="control-group">
-      <label for="name" class="control-label">Username</label>
-      <div class="controls">
-        <input type="text" name="name" value="${data.get('name','')}" />
       </div>
     </div>
   </fieldset>
