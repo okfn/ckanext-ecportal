@@ -494,10 +494,26 @@ CKAN.View.Resource = Backbone.View.extend({
           ['Visualization', CKAN.Strings.visualization]
         ],
         formatTypeOptions: [
+          ['adp', 'adp'],
+          ['atom', 'atom'],
           ['csv', 'csv'],
-          ['xls', 'xls'],
+          ['dbf', 'dbf'],
+          ['doc', 'doc'],
+          ['html', 'html'],
+          ['ods', 'ods'],
+          ['owl+xml', 'owl+xml'],
           ['pdf', 'pdf'],
-          ['text', 'text'],
+          ['png', 'png'],
+          ['rdf+xml', 'rdf+xml'],
+          ['rss', 'rss'],
+          ['sparql-query', 'sparql-query'],
+          ['sparql-results+xml', 'sparql-results+xml'],
+          ['n3', 'n3'],
+          ['tiff', 'tiff'],
+          ['tsv', 'tsv'],
+          ['txt', 'txt'],
+          ['xls', 'xls'],
+          ['xml', 'xml'],
         ]
     };
     // Generate DOM elements
