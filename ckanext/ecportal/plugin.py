@@ -8,6 +8,7 @@ import ckan.plugins as plugins
 import ckan.lib.plugins as lib_plugins
 import ckan.lib.dictization as d
 import ckan.lib.dictization.model_dictize as model_dictize
+import ckan.config.routing as routing
 
 import ckanext.ecportal.auth as ecportal_auth
 
@@ -211,6 +212,25 @@ class ECPortalPlugin(p.SingletonPlugin):
         config['ckan.auth.profile'] = 'publisher'
 
     def before_map(self, map):
+
+        user_controller = 'ckanext.ecportal.controllers:ECPortalUserController'
+
+        with routing.SubMapper(map, controller=user_controller) as m:
+            m.connect('/user/edit', action='edit')
+            # Note: openid users have slashes in their ids, so need the wildcard
+            # in the route.
+            m.connect('/user/edit/{id:.*}', action='edit')
+            m.connect('/user/reset/{id:.*}', action='perform_reset')
+            m.connect('/user/login', action='login')
+            m.connect('/user/_logout', action='logout')
+            m.connect('/user/logged_in', action='logged_in')
+            m.connect('/user/logged_out', action='logged_out')
+            m.connect('/user/logged_out_redirect', action='logged_out_page')
+            m.connect('/user/reset', action='request_reset')
+            m.connect('/user/me', action='me')
+            m.connect('/user/set_lang/{lang}', action='set_lang')
+            m.connect('/user/{id:.*}', action='read')
+            m.connect('/user', action='index')
         map.redirect('/user/register', '/not_found')
         return map
 
