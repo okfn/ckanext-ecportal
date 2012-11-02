@@ -121,6 +121,60 @@ def group_list(context, data_dict):
         key=lambda x:x['display_name']
     )
 
+def purge_revision_history(context, data_dict):
+    '''
+    Purge a given publisher's unused revision history.
+    '''
+
+    check_access('purge_revision_history', context, data_dict)
+
+    model = context['model']
+    engine = model.meta.engine
+    group_identifier = logic.get_or_bust(data_dict, 'group')
+    group = model.Group.get(group_identifier)
+
+    if not group:
+        raise NotFound
+
+    RESOURCE_IDS_SQL = '''
+        SELECT resource.id FROM resource
+        JOIN resource_group ON resource.resource_group_id = resource_group.id
+        JOIN member ON member.table_id = resource_group.package_id
+        JOIN "group" ON "group".id = member.group_id
+        WHERE "group".name      = %s
+          AND "group".type      = 'organization'
+          AND member.table_name = 'package'
+          AND resource.state    = 'deleted'
+    '''
+
+    DELETE_REVISIONS_SQL = '''
+        DELETE FROM resource_revision
+            WHERE id IN ({sql})
+    '''.format(sql=RESOURCE_IDS_SQL)
+
+    # Not necessary to use a sub-select, but it allows re-use of sql statement
+    # and this isn't performance critical code.
+    DELETE_RESOURCES_SQL = '''
+        DELETE FROM resource WHERE id IN ({sql})
+    '''.format(sql=RESOURCE_IDS_SQL)
+
+    try:
+        number_revisions_deleted = engine.execute(
+                DELETE_REVISIONS_SQL,
+                group.name
+            ).rowcount
+
+        number_resources_deleted = engine.execute(
+                DELETE_RESOURCES_SQL,
+                group.name
+            ).rowcount
+        return {
+            'number_revisions_deleted': number_revisions_deleted,
+            'number_resources_deleted': number_resources_deleted
+        }
+
+    except Exception, e:
+        raise logic.ActionError('Error executing sql: %s' % e)
 
 class ECPortalPlugin(p.SingletonPlugin):
     p.implements(p.IConfigurable)
@@ -133,7 +187,9 @@ class ECPortalPlugin(p.SingletonPlugin):
 
         return {'group_list': group_list,
                 'group_update': group_update,
-                'group_show': group_show}
+                'group_show': group_show,
+                'purge_revision_history': purge_revision_history,
+               }
 
     def configure(self, config):
         self.site_url = config.get('ckan.site_url')
@@ -171,4 +227,5 @@ class ECPortalPlugin(p.SingletonPlugin):
             'show_package_edit_button': ecportal_auth.show_package_edit_button,
             'group_create': ecportal_auth.group_create,
             'user_create': ecportal_auth.user_create,
+            'purge_revision_history': ecportal_auth.purge_revision_history,
         }

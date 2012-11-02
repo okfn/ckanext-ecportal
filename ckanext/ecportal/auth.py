@@ -50,6 +50,18 @@ def package_update(context, data_dict):
         else:
             return authorised_by_core
 
+def purge_revision_history(context, data_dict):
+    '''
+    Only sysadmins can purge a publisher's revision history.
+    '''
+    user  = context['user']
+
+    if user and authz.Authorizer.is_sysadmin(user):
+        return {'success': True}
+    else:
+        return {'success': False,
+                'msg': _('User is not authorized to to purge revision history') }
+
 def show_package_edit_button(context, data_dict):
     """
     Custom ecportal auth function.
