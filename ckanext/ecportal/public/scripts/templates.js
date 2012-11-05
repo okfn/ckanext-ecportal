@@ -125,18 +125,6 @@ CKAN.Templates.resourceDetails = ' \
       </div> \
     </div> \
     <div class="control-group"> \
-      <label for="" class="control-label" property="rdfs:label">'+CKAN.Strings.mimetype+'</label> \
-      <div class="controls"> \
-        <input name="resources__${num}__mimetype" type="text" value="${resource.mimetype}" /> \
-      </div> \
-    </div> \
-    <div class="control-group"> \
-      <label for="" class="control-label" property="rdfs:label">'+CKAN.Strings.mimetypeInner+'</label> \
-      <div class="controls"> \
-        <input name="resources__${num}__mimetype_inner" type="text" value="${resource.mimetype_inner}" /> \
-      </div> \
-    </div> \
-    <div class="control-group"> \
       <label for="" class="control-label" property="rdfs:label">'+CKAN.Strings.id+'</label> \
       <div class="controls"> \
         <input type="text" disabled="disabled" value="${resource.id}" class="disabled" /> \
@@ -164,6 +152,8 @@ CKAN.Templates.resourceDetails = ' \
         <div class="dynamic-extras"> \
         </div> \
       </div> \
+    <input name="resources__${num}__mimetype" type="hidden" value="${resource.mimetype}" /> \
+    <input name="resources__${num}__mimetype_inner" type="hidden" value="${resource.mimetype_inner}" /> \
     <button class="btn btn-danger resource-edit-delete js-resource-edit-delete">'+CKAN.Strings.deleteResource+'</button>\
   </div> \
 ';
