@@ -1,11 +1,10 @@
-========================
-EC ODP API Documentation
-========================
+==========
+CKAN's API
+==========
 
-This document outlines the API offered up by CKAN.  For the most part, the API
-is the standard CKAN action API, but it has been customised for the ECODP
-project.  Both the standard API and its customisations are outlined in this
-document.
+This document outlines CKAN's action API.  For the most part, the API is the
+standard CKAN action API, but it has been customised for the ECODP project.
+Where there are differences, the customised behaviour is documented here.
 
 .. _action-api:
 
