@@ -22,6 +22,60 @@ NotFound = logic.NotFound
 ##Wrapper around group update, *always* adds on packages.
 
 def group_update(context, data_dict):
+    '''Update a group.
+
+    You must be authorized to edit the group.
+
+    Note: unlike ``group_create()``, the list of packages belonging to the
+          group is ignored.  This is a deviation from the standard CKAN API
+          specific to ECODP.
+
+    :param id: the name or id of the group to update
+    :type id: string
+
+    :param name: the name of the group, a string between 2 and 100 characters
+        long, containing only lowercase alphanumeric characters, ``-`` and
+        ``_``
+    :type name: string
+    :param title: the title of the group (optional)
+    :type title: string
+    :param description: the description of the group (optional)
+    :type description: string
+    :param image_url: the URL to an image to be displayed on the group's page
+        (optional)
+    :type image_url: string
+    :param type: the type of the group (optional), ``IGroupForm`` plugins
+        associate themselves with different group types and provide custom
+        group handling behaviour for these types
+    :type type: string
+    :param state: the current state of the group, e.g. ``'active'`` or
+        ``'deleted'``, only active groups show up in search results and
+        other lists of groups, this parameter will be ignored if you are not
+        authorized to change the state of the group (optional, default:
+        ``'active'``)
+    :type state: string
+    :param approval_status: (optional)
+    :type approval_status: string
+    :param extras: the group's extras (optional), extras are arbitrary
+        (key: value) metadata items that can be added to groups, each extra
+        dictionary should have keys ``'key'`` (a string), ``'value'`` (a
+        string), and optionally ``'deleted'``
+    :type extras: list of dataset extra dictionaries
+    :param groups: the groups that belong to the group, a list of dictionaries
+        each with key ``'name'`` (string, the id or name of the group) and
+        optionally ``'capacity'`` (string, the capacity in which the group is
+        a member of the group)
+    :type groups: list of dictionaries
+    :param users: the users that belong to the group, a list of dictionaries
+        each with key ``'name'`` (string, the id or name of the user) and
+        optionally ``'capacity'`` (string, the capacity in which the user is
+        a member of the group)
+    :type users: list of dictionaries
+
+    :returns: the updated group
+    :rtype: dictionary
+
+    '''
 
     model = context['model']
     user = context['user']
@@ -86,7 +140,14 @@ def group_dictize(group, context):
 #####################################################################
 
 def group_show(context, data_dict):
-    '''Shows group details'''
+    '''Return the details of a group.
+
+    :param id: the id or name of the group
+    :type id: string
+
+    :rtype: dictionary
+
+    '''
     model = context['model']
     id = data_dict['id']
     group = model.Group.get(id)
@@ -117,6 +178,25 @@ def group_show(context, data_dict):
     return group_dict
 
 def group_list(context, data_dict):
+    '''Return a list of the names of the site's groups.
+
+    :param order_by: the field to sort the list by, must be ``'name'`` or
+      ``'packages'`` (optional, default: ``'name'``) Deprecated use sort.
+    :type order_by: string
+    :param sort: sorting of the search results.  Optional.  Default:
+        "name asc" string of field name and sort-order. The allowed fields are
+        'name' and 'packages'
+    :type sort: string
+    :param groups: a list of names of the groups to return, if given only
+        groups whose names are in this list will be returned (optional)
+    :type groups: list of strings
+    :param all_fields: return full group dictionaries instead of  just names
+        (optional, default: ``False``)
+    :type all_fields: boolean
+
+    :rtype: list of strings
+
+    '''
     return sorted(
         get.group_list(context, data_dict),
         key=lambda x:x['display_name']
@@ -125,6 +205,12 @@ def group_list(context, data_dict):
 def purge_revision_history(context, data_dict):
     '''
     Purge a given publisher's unused revision history.
+
+    :param group: the name or id of the publisher
+    :type group: string
+
+    :returns: number of resources and revisions purged.
+    :rtype: dictionary
     '''
 
     check_access('purge_revision_history', context, data_dict)
