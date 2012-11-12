@@ -4,12 +4,12 @@ except ImportError:
     import simplejson as json
 
 import ckan.controllers.user
-import ckan.lib.navl.validators as navl_validators
-import ckan.logic.validators as ckan_validators
 import ckan.model as model
 import ckan.plugins as p
 import ckan.lib.navl.dictization_functions
 import forms
+
+import ckanext.ecportal.schema as schema
 
 _validate = ckan.lib.navl.dictization_functions.validate
 _f = forms.ECPortalDatasetForm()
@@ -37,13 +37,10 @@ class ECPortalUserController(ckan.controllers.user.UserController):
     '''
 
     def _edit_form_to_db_schema(self):
-        schema = super(ECPortalUserController, self)._edit_form_to_db_schema()
-        schema['name'] = [navl_validators.not_empty,
-                          ckan_validators.user_name_validator,
-                          unicode]
-        schema['email'] = [unicode]
-        return schema
+        return schema.user_edit_form_schema()
 
+    def _new_form_to_db_schema(self):
+        return schema.user_new_form_schema()
 
 class ECPortalDatasetController(p.SingletonPlugin):
     p.implements(p.IPackageController)

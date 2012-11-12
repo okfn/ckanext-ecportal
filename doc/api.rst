@@ -62,16 +62,16 @@ are other actions exposed throught Action API, which are documented in the
 `Action API -- the remaining exposed actions`_ section.
 
 .. automodule:: ckanext.ecportal.plugin
-   :members: group_list, group_update, purge_revision_history
+   :members: group_list, group_update, purge_revision_history, user_create, user_update
 
 .. automodule:: ckan.logic.action.get
    :members: site_read, package_list, current_package_list_with_resources, member_list, group_list_authz, licence_list, tag_list, user_list, package_show, resource_show, group_show, group_package_show, tag_show, user_show, package_search, resource_search, tag_search, term_translation_show, status_show, vocabulary_list, vocabulary_show
 
 .. automodule:: ckan.logic.action.create
-   :members: package_create, resource_create, member_create, group_create, user_create, vocabulary_create, tag_create
+   :members: package_create, resource_create, member_create, group_create, vocabulary_create, tag_create
 
 .. automodule:: ckan.logic.action.update
-   :members: resource_update, package_update, user_update, term_translation_update, term_translation_update_many, vocabulary_update
+   :members: resource_update, package_update, term_translation_update, term_translation_update_many, vocabulary_update
 
 .. automodule:: ckan.logic.action.delete
    :members: package_delete, member_delete, group_delete, vocabulary_delete, tag_delete

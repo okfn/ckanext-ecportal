@@ -1,6 +1,7 @@
 import ckan.plugins as p
-import ckan.logic.action.update as update
+import ckan.logic.action.create as create
 import ckan.logic.action.get as get
+import ckan.logic.action.update as update
 import ckan.logic as logic
 import logging
 import ckan.lib.navl.dictization_functions
@@ -11,6 +12,7 @@ import ckan.lib.dictization.model_dictize as model_dictize
 import ckan.config.routing as routing
 
 import ckanext.ecportal.auth as ecportal_auth
+import ckanext.ecportal.schema as schema
 
 log = logging.getLogger('ckan.logic')
 
@@ -263,6 +265,69 @@ def purge_revision_history(context, data_dict):
     except Exception, e:
         raise logic.ActionError('Error executing sql: %s' % e)
 
+def user_create(context, data_dict):
+    '''Create a new user.
+
+    You must be authorized to create users.
+    
+    Wrapper around core user_create action ensures that the ECODP custom user
+    schema are used.
+    
+    :param name: the name of the new user, a string between 2 and 100
+        characters in length, containing only alphanumeric characters, ``-``
+        and ``_``
+    :type name: string
+    :param email: the email address for the new user (optional)
+    :type email: string
+    :param password: the password of the new user, a string of at least 4
+        characters
+    :type password: string
+    :param id: the id of the new user (optional)
+    :type id: string
+    :param fullname: the full name of the new user (optional)
+    :type fullname: string
+    :param about: a description of the new user (optional)
+    :type about: string
+    :param openid: (optional)
+    :type openid: string
+
+    :returns: the newly created user
+    :rtype: dictionary
+
+    '''
+
+    if 'schema' not in context:
+        new_context = context.copy()  # Don't modify caller's context
+        new_context['schema'] = schema.default_user_schema()
+    else:
+        new_context = context
+
+    return create.user_create(new_context, data_dict)
+
+def user_update(context, data_dict):
+    '''Update a user account.
+
+    Normal users can only update their own user accounts. Sysadmins can update
+    any user account.
+
+    For further parameters see ``user_create()``.
+
+    :param id: the name or id of the user to update
+    :type id: string
+
+    :returns: the updated user account
+    :rtype: dictionary
+
+    '''
+    if 'schema' not in context:
+        new_context = context.copy()  # Don't modify caller's context
+        new_context['schema'] = schema.default_update_user_schema()
+    else:
+        new_context = context
+
+    return update.user_update(new_context, data_dict)
+
+
 class ECPortalPlugin(p.SingletonPlugin):
     p.implements(p.IConfigurable)
     p.implements(p.IConfigurer)
@@ -276,6 +341,8 @@ class ECPortalPlugin(p.SingletonPlugin):
                 'group_update': group_update,
                 'group_show': group_show,
                 'purge_revision_history': purge_revision_history,
+                'user_create': user_create,
+                'user_update': user_update,
                }
 
     def configure(self, config):
