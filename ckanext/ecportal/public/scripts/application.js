@@ -1118,7 +1118,7 @@ CKAN.Utils = function($, my) {
     elements.autocomplete({
       minLength: 2,
       source: function(request, callback) {
-        var url = '/api/2/util/user/autocomplete?q=' + request.term;
+        var url = CKAN.SITE_URL + '/api/2/util/user/autocomplete?q=' + request.term;
         $.getJSON(url, function(data) {
           $.each(data, function(idx, userobj) {
             var label = userobj.name;
@@ -1590,7 +1590,7 @@ CKAN.DataPreview = function ($, my) {
     }
 
     if (resourceData.webstore_url) {
-      resourceData.elasticsearch_url = '/open-data/data/api/data/' + resourceData.id;
+      resourceData.elasticsearch_url = CKAN.SITE_URL_NO_LOCALE + '/api/data/' + resourceData.id;
       var dataset = new recline.Model.Dataset(resourceData, 'elasticsearch');
       initializeDataExplorer(dataset);
     }
