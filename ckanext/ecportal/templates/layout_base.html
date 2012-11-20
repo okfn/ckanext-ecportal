@@ -190,12 +190,29 @@
       </div>
 
       <div id="content-last-updated" class="row">
-	&copy; 2012 European Commission. Last update: ${h.current_date()} | <a href="#top">Top</a>
+        Last update: ${h.current_date()} | <a href="#top">Top</a>
       </div>
 
     </div> <!-- /main -->
 
   </div>
+
+  <div class="footer outer">
+    <footer class="container">
+      <div class="row-fluid">
+        <div class="span12">
+          <div>
+            &copy; 2012 European Commission
+          </div>
+          Licensed under the <a href="http://opendatacommons.org/licenses/odbl/1.0/">Open Database License</a>
+          <a href="http://opendefinition.org/"><img alt="This Content and Data is Open" src="${h.url_for_static('/images/ok_buttons/od_80x15_blue.png')}" style="border: none ; margin-bottom: 2px;"/></a>
+
+          <br/>
+          Powered by <a href="http://ckan.org">CKAN</a> v${c.__version__}.<br/>
+        </div>
+      </div>
+    </footer>
+  </div> <!-- eo #container -->
 
   <script src="${h.url_for_static('/scripts/vendor/jquery/1.7.1/jquery-1.7.1.min.js')}"></script>
   <script type="text/javascript" src="${h.url_for_static('/scripts/vendor/json2.js')}"></script>
