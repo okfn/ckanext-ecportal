@@ -28,6 +28,7 @@ class ECPortalCommand(cli.CkanCommand):
         paster ecportal import-data <data> <user> -c <config>
         paster ecportal import-publishers -c <config>
         paster ecportal update-publishers -c <config>
+        paster ecportal migrate-publisher <source> <target> -c <config>
         paster ecportal export-datasets <folder> -c <config>
 
         paster ecportal create-geo-vocab -c <config>
@@ -112,6 +113,12 @@ class ECPortalCommand(cli.CkanCommand):
 
         elif cmd == 'update-publishers':
             self.update_publishers()
+
+        elif cmd == 'migrate-publisher':
+            if len(self.args) != 3:
+                print ECPortalCommand.__doc__
+                return
+            self.migrate_publisher(self.args[1], self.args[2])
 
         elif cmd == 'create-geo-vocab':
             if not len(self.args) == 1:
@@ -414,6 +421,155 @@ class ECPortalCommand(cli.CkanCommand):
                     name = item["term"]["value"].split('/')[-1].lower(),
                     title = item["label"]["value"],
                     lang_code = item["language"]["value"])
+
+    def migrate_publisher(self, source_publisher_name, target_publisher_name):
+        '''
+        Migrate datasets and users from one publisher to another.
+        '''
+
+        user = logic.get_action('get_site_user')({'model': model, 'ignore_auth': True}, {})
+        context = {'model': model,
+                   'session': model.Session,
+                   'ecodp_with_package_list': True,
+                   'ecodp_update_packages': True,
+                   'user': user['name']}
+
+        source_publisher = logic.get_action('group_show')(
+                context,
+                {'id': source_publisher_name})
+
+        target_publisher = logic.get_action('group_show')(
+                context,
+                {'id': target_publisher_name})
+
+        # Migrate users
+        source_users = self._extract_members(source_publisher['users'])
+        target_users = self._extract_members(target_publisher['users'])
+
+        source_publisher['users'] = []
+        target_publisher['users'] = self._migrate_user_lists(source_users,
+                                                             target_users)
+
+        # Migrate datasets
+        source_datasets = self._extract_members(source_publisher['packages'])
+        target_datasets = self._extract_members(target_publisher['packages'])
+
+        source_publisher['packages'] = []
+        target_publisher['packages'] = self._migrate_dataset_lists(source_datasets,
+                                                                   target_datasets)
+
+        # Perform the updates
+        # TODO: make this one atomic action. (defer_commit)
+        logic.get_action('group_update')(context, source_publisher)
+        logic.get_action('group_update')(context, target_publisher)
+
+    def _extract_members(self, members):
+        '''Strips redundant information from members of a group'''
+        return [ { 'name': member['name'],
+                   'capacity': member['capacity'] } \
+                           for member in members ]
+                    
+
+    def _migrate_dataset_lists(self, source_datasets, target_datasets):
+        '''Migrate datasets from source into target.
+
+        Returns a new list leaving original lists untouched.
+
+        The merging retains the strictest capacity.  That is, if the same
+        dataset is 'private' in either list, it will remain private in the
+        result.
+        '''
+
+        VALID_CAPACITIES = ['private', 'public']
+        def user_capacity_merger(c1, c2):
+
+            assert c1 in VALID_CAPACITIES
+            assert c2 in VALID_CAPACITIES
+            if c1 == c2:
+                return c1
+            else:
+                return 'private'  ## Assume just two valid capicities
+
+        return self._merge_members(source_datasets,
+                                   target_datasets,
+                                   user_capacity_merger)
+
+    def _migrate_user_lists(self, source_users, target_users):
+        '''Migrate users from source into target.
+
+        Returns a new list leaving original lists untouched.
+
+        The merging is quite simple, and retains user's permissions for both
+        lists.
+
+            - The target list will not lose any users.
+            - Source users will be added to the target with the highest
+              capacity of membership that the user has in either list.  Ie - If
+              a user is an admin in the source list, they will become an admin
+              in the target list.  Or if a user is an admin in the target list,
+              they will retain that capacity, regardless of capacity in the
+              source list.
+         '''
+
+        VALID_CAPACITIES = ['admin', 'editor']
+        def user_capacity_merger(c1, c2):
+
+            assert c1 in VALID_CAPACITIES
+            assert c2 in VALID_CAPACITIES
+            if c1 == c2:
+                return c1
+            else:
+                return 'admin'  ## Assume just two valid capicities
+
+        return self._merge_members(source_users,
+                                   target_users,
+                                   user_capacity_merger)
+ 
+    def _merge_members(self, source_members, target_members, capacity_merger):
+        '''Migrates members from source into target.
+
+        Returns a new list, leaving original lists (and member dicts)
+        untouched.
+
+        If the member is found in both lists, then the member's new capacity
+        is handled by the ``capacity_merger`` function.
+
+        :param source_members: List of member dicts
+        :param target_members: List of member dicts
+        :param capacity_merger: Function
+                (source_capacity, target_capacity) -> merged_capacity
+        '''
+
+        source_member_names = set( member['name'] for member in source_members)
+        target_member_names = set( member['name'] for member in target_members)
+
+        target_capacities = dict((member['name'], member['capacity']) \
+                                    for member in target_members)
+
+        result = [ member.copy() for member in target_members \
+                               if member['name'] not in source_member_names ]
+
+        result += [ member.copy() for member in source_members \
+                                if member['name'] not in target_member_names ]
+
+        for member in source_members:
+            name = member['name']
+            if name not in target_member_names:
+                continue
+
+            member = member.copy()
+            source_capacity = member['capacity']
+            target_capacity = target_capacities[name]
+            member['capacity'] = capacity_merger(source_capacity, target_capacity)
+
+            if source_capacity != target_capacity:
+                log.warn('Mismatched member capacities: %s will be migrated as %s' % (
+                            name, member['capacity']))
+
+            result.append(member)
+        
+        return result
+
 
     def update_publishers(self):
         '''

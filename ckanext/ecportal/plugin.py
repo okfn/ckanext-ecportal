@@ -89,16 +89,20 @@ def group_update(context, data_dict):
     if group is None:
         raise NotFound('Group was not found.')
 
-    members = session.query(model.Member.table_id).filter_by(
-        table_name='package',
-        group_id=group.id,
-        state='active'
-    ).all()
-    packages = []
+    # If the context requires it, then update the packages, as would normally
+    # happen with the group_update action.
+    if not context.get('ecodp_update_packages', False):
 
-    for member in members:
-        packages.append({'name': member[0]})
-    data_dict['packages'] = packages
+        members = session.query(model.Member.table_id).filter_by(
+            table_name='package',
+            group_id=group.id,
+            state='active'
+        ).all()
+        packages = []
+
+        for member in members:
+            packages.append({'name': member[0]})
+        data_dict['packages'] = packages
 
     return update.group_update(context, data_dict)
 
@@ -116,6 +120,11 @@ def group_dictize(group, context):
         group._extras, context)
 
     context['with_capacity'] = True
+
+    if context.get('ecodp_with_package_list', False):
+        result_dict['packages'] = d.obj_list_dictize(
+            model_dictize._get_members(context, group, 'packages'),
+            context)
 
     result_dict['tags'] = model_dictize.tag_list_dictize(
         model_dictize._get_members(context, group, 'tags'),
