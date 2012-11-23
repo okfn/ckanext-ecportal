@@ -118,6 +118,14 @@ header #services-menu ul li a:active {
 	text-decoration:underline;
 }
 
+header .beta {
+	color: red;
+	font-size: 0.4em;
+	vertical-align: 2px;
+	font-weight: bold;
+	padding-left: 10px;
+}
+
 ul.language-dd-selector {
 	border:1px solid #9AB;
 	background-color:#FFF;
