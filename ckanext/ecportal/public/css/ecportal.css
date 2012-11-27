@@ -480,6 +480,11 @@ body.package.edit input[type="checkbox"] {
     margin-bottom: 0.5em;
 }
 
+form .field_required {
+    color: #b94a48;
+    font-weight: bold;
+}
+
 /****************************************************************************/
 /* Resource Edit Page
 /****************************************************************************/
