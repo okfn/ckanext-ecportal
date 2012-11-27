@@ -489,7 +489,6 @@ form .field_required {
 /* Resource Edit Page
 /****************************************************************************/
 
-/* TODO: Update this URL (or find a way to specify it dynamically) */
 .drag-drop-list li.drag-bars {
     background-image: url("../images/dragbars.png");
 }
