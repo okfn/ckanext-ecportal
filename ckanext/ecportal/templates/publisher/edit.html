@@ -31,7 +31,7 @@
     <div class="controls">
       <div class="input-prepend">
         <span class="add-on">${h.url(controller='group', action='index')+'/'}</span>
-        <input maxlength="100" name="name" type="text" class="js-url-input" value="${data.get('name', '')}" readonly="readonly" py:if="data.get('id', '')"/>
+        <input maxlength="100" name="name" type="text" value="${data.get('name', '')}" readonly="readonly" py:if="data.get('id', '')"/>
         <input maxlength="100" name="name" type="text" class="js-url-input" value="${data.get('name', '')}" py:if="not data.get('id', '')"/>
       </div>
       <p class="js-url-is-valid">&nbsp;</p>
