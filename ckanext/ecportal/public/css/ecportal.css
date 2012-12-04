@@ -539,6 +539,14 @@ form .field_required {
     padding-right: 15px;
 }
 
+.ie7 table.diff {
+    table-layout: fixed;
+}
+
+.ie7 table.diff col.values {
+    width: 80%;
+}
+
 /* nav fixes */
 .ie8 #minornavigation .nav li a {
     white-space: nowrap;

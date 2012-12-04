@@ -27,7 +27,10 @@
     </p>
 
     <py:if test="c.diff">
-      <table class="table table-bordered table-striped">
+      <table class="diff table table-bordered table-striped">
+        <colgroup>
+          <col class="fields"/><col class="values"/>
+        </colgroup>  
         <tr>
           <th>Field</th><th>Difference</th>
         </tr>
