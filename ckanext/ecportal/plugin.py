@@ -1,9 +1,11 @@
+import logging
+import operator
+
 import ckan.plugins as p
 import ckan.logic.action.create as create
 import ckan.logic.action.get as get
 import ckan.logic.action.update as update
 import ckan.logic as logic
-import logging
 import ckan.lib.navl.dictization_functions
 import ckan.plugins as plugins
 import ckan.lib.plugins as lib_plugins
@@ -208,10 +210,25 @@ def group_list(context, data_dict):
     :rtype: list of strings
 
     '''
-    return sorted(
-        get.group_list(context, data_dict),
-        key=lambda x:x['display_name']
-    )
+
+    groups = get.group_list(context, data_dict)
+
+    if context.get('for_view', False):
+        # In the context of the web interface, and if the request comes from an
+        # anonymous user, then only present publishers with published datasets.
+
+        model = context['model']
+        userobj = model.User.get(context['user'])
+        
+        if not userobj:     ## anonymous user
+            # Depending upon the context, group['packages'] may be either a
+            # count of the packages, or the actual list of packages.
+            if groups and isinstance(groups[0]['packages'], int):
+                groups = [ g for g in groups if g['packages'] > 0 ]
+            else:
+                groups = [ g for g in groups if len(g['packages']) > 0 ]
+
+    return sorted(groups, key=operator.itemgetter('display_name'))
 
 def purge_revision_history(context, data_dict):
     '''
