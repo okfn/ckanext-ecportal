@@ -1,4 +1,5 @@
 import datetime
+import operator
 import pylons.config as config
 import genshi
 import ckan
@@ -62,7 +63,8 @@ def top_publishers(groups):
     Updates the 'packages' field in each group dict (up to a maximum
     of NUM_TOP_PUBLISHERS) to show the number of public datasets in the group.
     '''
-    publishers = sorted(groups, key=lambda g: g['packages'], reverse=True)
+    publishers = [ g for g in groups if g['packages'] > 0 ]
+    publishers.sort(key=operator.itemgetter('packages'), reverse=True)
 
     return publishers[:NUM_TOP_PUBLISHERS]
 
