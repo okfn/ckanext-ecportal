@@ -230,6 +230,15 @@ def group_list(context, data_dict):
 
     return sorted(groups, key=operator.itemgetter('display_name'))
 
+def package_show(context, data_dict):
+    '''Override package_show to sort the resources by name'''
+    result = get.package_show(context, data_dict)
+
+    if 'resources' in result:
+        result['resources'].sort(key=operator.itemgetter('name'))
+
+    return result
+
 def purge_revision_history(context, data_dict):
     '''
     Purge a given publisher's unused revision history.
@@ -369,6 +378,7 @@ class ECPortalPlugin(p.SingletonPlugin):
                 'purge_revision_history': purge_revision_history,
                 'user_create': user_create,
                 'user_update': user_update,
+                'package_show': package_show,
                }
 
     def configure(self, config):
