@@ -371,7 +371,6 @@ class ECPortalPlugin(p.SingletonPlugin):
     p.implements(p.IAuthFunctions)
 
     def get_actions(self):
-
         return {'group_list': group_list,
                 'group_update': group_update,
                 'group_show': group_show,
@@ -391,7 +390,6 @@ class ECPortalPlugin(p.SingletonPlugin):
         for plugin in p.PluginImplementations(p.IDomainObjectModification):
             if plugin.name in ('QAPlugin', 'WebstorerPlugin'):
                 plugin.notify = no_notify
-        
 
     def update_config(self, config):
         p.toolkit.add_template_directory(config, 'templates')
@@ -401,7 +399,6 @@ class ECPortalPlugin(p.SingletonPlugin):
         config['ckan.auth.profile'] = 'publisher'
 
     def before_map(self, map):
-
         user_controller = 'ckanext.ecportal.controllers:ECPortalUserController'
 
         with routing.SubMapper(map, controller=user_controller) as m:
@@ -419,7 +416,7 @@ class ECPortalPlugin(p.SingletonPlugin):
             m.connect('/user/me', action='me')
             m.connect('/user/set_lang/{lang}', action='set_lang')
             m.connect('/user/{id:.*}', action='read')
-            m.connect('/user', action='index')
+        map.redirect('/user', '/not_found')
         map.redirect('/user/register', '/not_found')
         return map
 
