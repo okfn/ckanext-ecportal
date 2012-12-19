@@ -412,11 +412,13 @@ class ECPortalPlugin(p.SingletonPlugin):
             m.connect('/user/logged_in', action='logged_in')
             m.connect('/user/logged_out', action='logged_out')
             m.connect('/user/logged_out_redirect', action='logged_out_page')
-            m.connect('/user/reset', action='request_reset')
             m.connect('/user/me', action='me')
             m.connect('/user/set_lang/{lang}', action='set_lang')
             m.connect('/user/{id:.*}', action='read')
+
+        # disable user list, password reset and user registration pages
         map.redirect('/user', '/not_found')
+        map.redirect('/user/reset', '/not_found')
         map.redirect('/user/register', '/not_found')
         return map
 
