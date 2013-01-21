@@ -22,18 +22,17 @@
 
     <dct:alternative xml:lang="en" py:if="c.pkg_dict.get('alternative_title')">${c.pkg_dict['alternative_title']}</dct:alternative>
 
-
 <py:if test="c.pkg_dict.get('tags','')">
     <py:for each="tag_dict in c.pkg_dict['tags']">
-    <dcat:keyword xml:lang="en">${ tag_dict["name"] }</dcat:keyword>
+    <dcat:keyword xml:lang="en">${tag_dict["name"]}</dcat:keyword>
     </py:for>
 </py:if>
 
     <dcat:record>
-        <rdf:Description rdf:about="${ g.site_url + h.url_for(controller='package',action='read',id=c.pkg_dict['name'])}">
-            <dcat:accessURL rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">${ g.site_url + h.url_for(controller='package',action='read',id=c.pkg_dict['name'])}</dcat:accessURL>
-            <dct:modified rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">${c.pkg_dict.get('modified_date','')}</dct:modified>
-            <dct:issued rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">${c.pkg_dict.get('release_date','')}</dct:issued>
+        <rdf:Description rdf:about="${ g.site_url + h.url_for(controller='package', action='read', id=c.pkg_dict['name'])}">
+            <dcat:accessURL rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">${g.site_url + h.url_for(controller='package', action='read', id=c.pkg_dict['name'])}</dcat:accessURL>
+            <dct:modified>${c.pkg_dict.get('modified_date', '')}</dct:modified>
+            <dct:issued>${c.pkg_dict.get('release_date', '')}</dct:issued>
         </rdf:Description>
     </dcat:record>
 
@@ -41,23 +40,21 @@
       <skos:Concept rdf:about="${c.pkg_dict['license_url']}"/>
     </dct:license>
 
-    <dct:issued py:if="c.pkg_dict.get('release_date')" rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">${c.pkg_dict.get('release_date','')}</dct:issued>
-    <dct:modified py:if="c.pkg_dict.get('modified_date','')"  rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">${c.pkg_dict.get('modified_date','')}</dct:modified>
+    <dct:issued py:if="c.pkg_dict.get('release_date')">${c.pkg_dict.get('release_date', '')}</dct:issued>
+    <dct:modified py:if="c.pkg_dict.get('modified_date', '')">${c.pkg_dict.get('modified_date', '')}</dct:modified>
 
-
-    <ecodp:accrualPeriodicity py:if="c.pkg_dict.get('accrual_periodicity','') == 'other' and c.pkg_dict.get('accrual_periodicity-other','')" xml:lang="en">${c.pkg_dict['accrual_periodicity-other']}</ecodp:accrualPeriodicity>
-    <ecodp:accrualPeriodicity py:if="c.pkg_dict.get('accrual_periodicity','') and c.pkg_dict.get('accrual_periodicity','') != 'other'" xml:lang="en">${c.pkg_dict['accrual_periodicity']}</ecodp:accrualPeriodicity>
-
+    <ecodp:accrualPeriodicity py:if="c.pkg_dict.get('accrual_periodicity', '') == 'other' and c.pkg_dict.get('accrual_periodicity-other', '')" xml:lang="en">${c.pkg_dict['accrual_periodicity-other']}</ecodp:accrualPeriodicity>
+    <ecodp:accrualPeriodicity py:if="c.pkg_dict.get('accrual_periodicity', '') and c.pkg_dict.get('accrual_periodicity', '') != 'other'" xml:lang="en">${c.pkg_dict['accrual_periodicity']}</ecodp:accrualPeriodicity>
 
     <dct:temporal py:if="c.pkg_dict.get('temporal_coverage_from', '') or c.pkg_dict.get('temporal_coverage_to', '') or c.temporal_granularity">
       <dct:PeriodOfTime>
-        <ecodp:periodEnd py:if="c.pkg_dict.get('temporal_coverage_to', '')" rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">${c.pkg_dict.get('temporal_coverage_to', '')}</ecodp:periodEnd>
-        <ecodp:periodStart py:if="c.pkg_dict.get('temporal_coverage_from', '')" rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">${c.pkg_dict.get('temporal_coverage_from', '')}</ecodp:periodStart>
+        <ecodp:periodEnd py:if="c.pkg_dict.get('temporal_coverage_to', '')">${c.pkg_dict.get('temporal_coverage_to', '')}</ecodp:periodEnd>
+        <ecodp:periodStart py:if="c.pkg_dict.get('temporal_coverage_from', '')">${c.pkg_dict.get('temporal_coverage_from', '')}</ecodp:periodStart>
       </dct:PeriodOfTime>
     </dct:temporal>
 
-<py:if test="c.pkg_dict.get('geographical_coverage','')">
-    <py:for each="tag,trans in c.pkg_dict['geographical_coverage']">
+<py:if test="c.pkg_dict.get('geographical_coverage', '')">
+    <py:for each="tag, trans in c.pkg_dict['geographical_coverage']">
     <dct:spatial>
       <skos:Concept rdf:about="http://publications.europa.eu/resource/authority/ntu/${tag}"/>
     </dct:spatial>
@@ -102,17 +99,16 @@
       <skos:Concept rdf:about="http://publications.europa.eu/resource/authority/corporate-body/${c.pkg_dict.get('published_by')}"/>
     </dct:publisher>
 
-
 <py:for each="rsc_dict in c.pkg_dict.get('resources', [])">
     <py:choose test="rsc_dict.get('resource_type', '#').split('#')[-1] in ['Feed','WebService', 'Download']">
         <py:when test="1">
           <dcat:distribution rdf:parseType="Resource">
-                <dcat:accessURL py:if="rsc_dict.get('url','')"  rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">${rsc_dict.get('url','')}</dcat:accessURL>
-                <rdf:type py:if="rsc_dict.get('resource_type','')"  rdf:resource="${rsc_dict.get('resource_type','')}"/>
-                <ecodp:distributionFormat py:if="rsc_dict.get('format','')">${rsc_dict.get('format','')}</ecodp:distributionFormat>
-                <dct:description xml:lang="en" py:if="rsc_dict.get('description','')">${rsc_dict.get('description','')}</dct:description>
-                <dct:modified py:if="rsc_dict.get('created','')" rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">${rsc_dict.get('created','')}</dct:modified>
-                <dct:issued py:if="rsc_dict.get('last_modified','')"  rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">${rsc_dict.get('last_modified','')}</dct:issued>
+                <dcat:accessURL py:if="rsc_dict.get('url', '')"  rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">${rsc_dict.get('url', '')}</dcat:accessURL>
+                <rdf:type py:if="rsc_dict.get('resource_type', '')"  rdf:resource="${rsc_dict.get('resource_type', '')}"/>
+                <ecodp:distributionFormat py:if="rsc_dict.get('format', '')">${rsc_dict.get('format', '')}</ecodp:distributionFormat>
+                <dct:description xml:lang="en" py:if="rsc_dict.get('description', '')">${rsc_dict.get('description', '')}</dct:description>
+                <dct:modified py:if="rsc_dict.get('created', '')">${rsc_dict.get('created', '')}</dct:modified>
+                <dct:issued py:if="rsc_dict.get('last_modified', '')">${rsc_dict.get('last_modified', '')}</dct:issued>
             </dcat:distribution>
         </py:when>
         <py:when test="0">
@@ -120,8 +116,8 @@
                     <ecodp:documentationType>
                     <skos:Concept rdf:about="${rsc_dict.get('resource_type', '')}"/>
                     </ecodp:documentationType>
-                    <dcat:accessURL rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">${ rsc_dict.get('url','') }</dcat:accessURL>
-                    <dct:title xml:lang="en">${ rsc_dict.get('description','') }</dct:title>
+                    <dcat:accessURL rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">${rsc_dict.get('url', '')}</dcat:accessURL>
+                    <dct:title xml:lang="en">${rsc_dict.get('description', '')}</dct:title>
                 </ecodp:isDocumentedBy>
         </py:when>
     </py:choose>
