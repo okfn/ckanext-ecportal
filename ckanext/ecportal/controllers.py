@@ -25,22 +25,24 @@ def _vocabularies(tag_name):
     If no such tag exists, throws a ckan.plugins.toolkit.ObjectNotFound
     exception.
     '''
-    query = model.Session.query(model.tag.Tag.name, model.vocabulary.Vocabulary.name)\
-        .filter(model.tag.Tag.name == tag_name).filter(model.tag.Tag.vocabulary_id == model.vocabulary.Vocabulary.id)
-
+    query = model.Session.query(model.tag.Tag.name,
+                                model.vocabulary.Vocabulary.name)\
+        .filter(model.tag.Tag.name == tag_name)\
+        .filter(model.tag.Tag.vocabulary_id == model.vocabulary.Vocabulary.id)
     return [t[1] for t in query]
+
 
 class ECPortalUserController(ckan.controllers.user.UserController):
     '''
     EC Portal User controller is customised to allow customisation of the
     user schema
     '''
-
     def _edit_form_to_db_schema(self):
         return schema.user_edit_form_schema()
 
     def _new_form_to_db_schema(self):
         return schema.user_new_form_schema()
+
 
 class ECPortalDatasetController(p.SingletonPlugin):
     p.implements(p.IPackageController)
@@ -83,7 +85,6 @@ class ECPortalDatasetController(p.SingletonPlugin):
 
         pkg_dict.pop('rdf', None)
         pkg_dict.pop('extras_rdf', None)
-
 
         # remove vocab tags from 'tags' list and add them as vocab_<tag name>
         # so that they can be used in facets

@@ -23,7 +23,8 @@ validate = ckan.lib.navl.dictization_functions.validate
 check_access = logic.check_access
 NotFound = logic.NotFound
 
-##Wrapper around group update, *always* adds on packages.
+
+# Wrapper around group update, *always* adds on packages.
 
 def group_update(context, data_dict):
     '''Update a group.
@@ -78,9 +79,7 @@ def group_update(context, data_dict):
 
     :returns: the updated group
     :rtype: dictionary
-
     '''
-
     model = context['model']
     user = context['user']
     session = context['session']
@@ -107,6 +106,7 @@ def group_update(context, data_dict):
         data_dict['packages'] = packages
 
     return update.group_update(context, data_dict)
+
 
 ###########################################################################
 ##Copy of group_dictize form core only change removing pacakge_list dictize
@@ -148,6 +148,7 @@ def group_dictize(group, context):
 
     return result_dict
 
+
 #####################################################################
 ##Copy of core group show only change is using group_dictize above.
 #####################################################################
@@ -159,7 +160,6 @@ def group_show(context, data_dict):
     :type id: string
 
     :rtype: dictionary
-
     '''
     model = context['model']
     id = data_dict['id']
@@ -169,7 +169,7 @@ def group_show(context, data_dict):
     if group is None or group.state == u'deleted':
         raise NotFound
 
-    check_access('group_show',context, data_dict)
+    check_access('group_show', context, data_dict)
 
     group_dict = group_dictize(group, context)
 
@@ -179,9 +179,10 @@ def group_show(context, data_dict):
     group_plugin = lib_plugins.lookup_group_plugin(group_dict['type'])
     try:
         schema = group_plugin.db_to_form_schema_options({
-            'type':'show',
+            'type': 'show',
             'api': 'api_version' in context,
-            'context': context })
+            'context': context
+        })
     except AttributeError:
         schema = group_plugin.db_to_form_schema()
 
@@ -189,6 +190,7 @@ def group_show(context, data_dict):
         package_dict, errors = validate(group_dict, schema, context=context)
 
     return group_dict
+
 
 def group_list(context, data_dict):
     '''Return a list of the names of the site's groups.
@@ -208,9 +210,7 @@ def group_list(context, data_dict):
     :type all_fields: boolean
 
     :rtype: list of strings
-
     '''
-
     groups = get.group_list(context, data_dict)
 
     if context.get('for_view', False):
@@ -219,25 +219,25 @@ def group_list(context, data_dict):
 
         model = context['model']
         userobj = model.User.get(context['user'])
-        
-        if not userobj:     ## anonymous user
+
+        if not userobj:  # anonymous user
             # Depending upon the context, group['packages'] may be either a
             # count of the packages, or the actual list of packages.
             if groups and isinstance(groups[0]['packages'], int):
-                groups = [ g for g in groups if g['packages'] > 0 ]
+                groups = [g for g in groups if g['packages'] > 0]
             else:
-                groups = [ g for g in groups if len(g['packages']) > 0 ]
+                groups = [g for g in groups if len(g['packages']) > 0]
 
     return sorted(groups, key=operator.itemgetter('display_name'))
+
 
 def package_show(context, data_dict):
     '''Override package_show to sort the resources by name'''
     result = get.package_show(context, data_dict)
-
     if 'resources' in result:
         result['resources'].sort(key=operator.itemgetter('name'))
-
     return result
+
 
 def purge_revision_history(context, data_dict):
     '''
@@ -249,7 +249,6 @@ def purge_revision_history(context, data_dict):
     :returns: number of resources and revisions purged.
     :rtype: dictionary
     '''
-
     check_access('purge_revision_history', context, data_dict)
 
     model = context['model']
@@ -284,14 +283,14 @@ def purge_revision_history(context, data_dict):
 
     try:
         number_revisions_deleted = engine.execute(
-                DELETE_REVISIONS_SQL,
-                group.name
-            ).rowcount
+            DELETE_REVISIONS_SQL,
+            group.name
+        ).rowcount
 
         number_resources_deleted = engine.execute(
-                DELETE_RESOURCES_SQL,
-                group.name
-            ).rowcount
+            DELETE_RESOURCES_SQL,
+            group.name
+        ).rowcount
         return {
             'number_revisions_deleted': number_revisions_deleted,
             'number_resources_deleted': number_resources_deleted
@@ -300,14 +299,15 @@ def purge_revision_history(context, data_dict):
     except Exception, e:
         raise logic.ActionError('Error executing sql: %s' % e)
 
+
 def user_create(context, data_dict):
     '''Create a new user.
 
     You must be authorized to create users.
-    
+
     Wrapper around core user_create action ensures that the ECODP custom user
     schema are used.
-    
+
     :param name: the name of the new user, a string between 2 and 100
         characters in length, containing only alphanumeric characters, ``-``
         and ``_``
@@ -328,16 +328,14 @@ def user_create(context, data_dict):
 
     :returns: the newly created user
     :rtype: dictionary
-
     '''
-
     if 'schema' not in context:
         new_context = context.copy()  # Don't modify caller's context
         new_context['schema'] = schema.default_user_schema()
     else:
         new_context = context
-
     return create.user_create(new_context, data_dict)
+
 
 def user_update(context, data_dict):
     '''Update a user account.
@@ -359,7 +357,6 @@ def user_update(context, data_dict):
         new_context['schema'] = schema.default_update_user_schema()
     else:
         new_context = context
-
     return update.user_update(new_context, data_dict)
 
 
@@ -371,14 +368,15 @@ class ECPortalPlugin(p.SingletonPlugin):
     p.implements(p.IAuthFunctions)
 
     def get_actions(self):
-        return {'group_list': group_list,
-                'group_update': group_update,
-                'group_show': group_show,
-                'purge_revision_history': purge_revision_history,
-                'user_create': user_create,
-                'user_update': user_update,
-                'package_show': package_show,
-               }
+        return {
+            'group_list': group_list,
+            'group_update': group_update,
+            'group_show': group_show,
+            'purge_revision_history': purge_revision_history,
+            'user_create': user_create,
+            'user_update': user_update,
+            'package_show': package_show
+        }
 
     def configure(self, config):
         self.site_url = config.get('ckan.site_url')
@@ -403,8 +401,8 @@ class ECPortalPlugin(p.SingletonPlugin):
 
         with routing.SubMapper(map, controller=user_controller) as m:
             m.connect('/user/edit', action='edit')
-            # Note: openid users have slashes in their ids, so need the wildcard
-            # in the route.
+            # Note: openid users have slashes in their ids, so need the
+            # wildcard in the route.
             m.connect('/user/edit/{id:.*}', action='edit')
             m.connect('/user/reset/{id:.*}', action='perform_reset')
             m.connect('/user/login', action='login')

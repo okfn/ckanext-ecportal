@@ -16,7 +16,10 @@ except ImportError:
 
 name_match = re.compile('[a-zA-Z0-9_\-]*$')
 
-# parse_timedate function is similar to the one in ckan.lib.field_types.DateType
+
+# parse_timedate function is similar to the one in
+# ckan.lib.field_types.DateType
+#
 # changes:
 # - doesn't accept a time value
 # - different message passed to DateConvertError exception
@@ -34,38 +37,57 @@ class ECPortalDateType(field_types.DateType):
             # acceptable ways of expressing the time and date
             cls.matchers = {}
             cls.readable_formats = {}
+
             for format_type_ in cls.format_types:
                 finished_regexps = []
-                readable_formats = [] # analogous to the regexps, but human readable
+                readable_formats = []
                 year_re = '(?P<%s>\d{2,4})'
                 month_re = '(?P<%s>\w+)'
                 two_digit_decimal_re = '(?P<%s>\d{1,2})'
-                date_field_re = {'year':year_re % 'year',
-                                 'month':month_re % 'month',
-                                 'day':two_digit_decimal_re % 'day'}
+                date_field_re = {'year': year_re % 'year',
+                                 'month': month_re % 'month',
+                                 'day': two_digit_decimal_re % 'day'}
                 date_fields = list(cls.date_fields_order[format_type_])
+
                 for how_specific in ('day', 'month', 'year'):
                     date_sep_re = '[%s]' % cls.parsing_separators['date']
-                    date_sep_readable = cls.default_separators[format_type_]['date']
-                    date_field_regexps = [date_field_re[field] for field in date_fields]
-                    date_field_readable = [cls.datetime_fields[field][cls.datetime_fields_indexes['format_code']] for field in date_fields]
+                    date_sep_readable = \
+                        cls.default_separators[format_type_]['date']
+                    date_field_regexps = \
+                        [date_field_re[field] for field in date_fields]
+                    date_field_readable = \
+                        [cls.datetime_fields[field]
+                         [cls.datetime_fields_indexes['format_code']]
+                         for field in date_fields]
                     date_re = date_sep_re.join(date_field_regexps)
                     date_readable = date_sep_readable.join(date_field_readable)
                     finished_regexps.append(date_re)
                     readable_formats.append(date_readable)
                     date_fields.remove(how_specific)
-                cls.matchers[format_type_] = [re.compile('^%s$' % regexp) for regexp in finished_regexps]
+
+                cls.matchers[format_type_] = [re.compile('^%s$' % regexp)
+                                              for regexp in finished_regexps]
                 cls.readable_formats[format_type_] = readable_formats
+
         for index, matcher in enumerate(cls.matchers[format_type]):
             match = matcher.match(timedate_str)
             if match:
                 timedate_dict = match.groupdict()
                 timedate_dict = cls.int_timedate(timedate_dict)
-                timedate_dict['readable_format'] = cls.readable_formats[format_type][index]
+                timedate_dict['readable_format'] = \
+                    cls.readable_formats[format_type][index]
                 return timedate_dict
         else:
-            acceptable_formats = ', '.join(["'%s'" % format_ for format_ in cls.readable_formats[format_type]])
-            raise field_types.DateConvertError("Unknown date format: '%s'. Acceptable formats: %s" % (timedate_str, acceptable_formats))
+            acceptable_formats = ', '.join(
+                ["'%s'" % format_
+                 for format_ in cls.readable_formats[format_type]]
+            )
+            raise field_types.DateConvertError(
+                "Unknown date format: '%s'. Acceptable formats: %s" % (
+                    timedate_str, acceptable_formats
+                )
+            )
+
 
 def ecportal_date_to_db(value, context):
     if not value:
@@ -82,6 +104,30 @@ def ecportal_date_to_db(value, context):
         raise df.Invalid(str(e))
     return value
 
+
+def valid_xsd_datetime(key, data, errors, context):
+    '''
+    If viewing RDF, this validator will update output of date fields so that
+    they meet the XSD:dateTime spec.
+
+    See: books.xmlschemata.org/relaxng/ch19-77049.html
+
+    Output must be: YYYY-MM-DDThh-mm-ss
+
+    This data is not all available as a day is the lowest level of
+    granularity that will be deemed valid by CKAN. Days and months may also
+    be omitted.
+
+    As time is not availble, hh-mm-ss will be set to 00:00:00.
+    Missing months and days will be set to 01.
+    '''
+    timedate_dict = ECPortalDateType.parse_timedate(data[key], 'db')
+    year = str(timedate_dict.get('year'))
+    month = str(timedate_dict.get('month', 1)).zfill(2)
+    day = str(timedate_dict.get('day', 1)).zfill(2)
+    data[key] = '{0}-{1}-{2}T{3}'.format(year, month, day, '00:00:00')
+
+
 def convert_to_extras(key, data, errors, context):
     # get current number of extras
     extra_number = 0
@@ -95,17 +141,17 @@ def convert_to_extras(key, data, errors, context):
     else:
         data[('extras', extra_number, 'value')] = data[key]
 
+
 def convert_from_extras(key, data, errors, context):
     for k in data.keys():
-        if (k[0] == 'extras' and
-            k[-1] == 'key' and
-            data[k] == key[-1]):
+        if k[0] == 'extras' and k[-1] == 'key' and data[k] == key[-1]:
             # add to top level
             data[key] = data[('extras', k[1], 'value')]
             # remove from extras
             for to_remove in data.keys():
                 if to_remove[0] == 'extras' and to_remove[1] == k[1]:
                     del data[to_remove]
+
 
 def convert_to_groups(field):
     '''
@@ -115,6 +161,7 @@ def convert_to_groups(field):
         data[('groups', 0, field)] = data[key]
     return convert
 
+
 def convert_from_groups(field):
     '''
     Set data[key] to the first group name in data (if any exist).
@@ -122,6 +169,7 @@ def convert_from_groups(field):
     def convert(key, data, errors, context):
         data[key] = data.get(('groups', 0, field), None)
     return convert
+
 
 def convert_resource_type(key, data, errors, context):
     '''
@@ -148,7 +196,9 @@ def duplicate_extras_key(key, data, errors, context):
 
     if extras_keys:
         for extra_key in extras_keys:
-            errors[(extra_key,)] = [_('Duplicate key for "%s" given') % extra_key]
+            errors[(extra_key,)] = [_('Duplicate key for "%s" given')
+                                    % extra_key]
+
 
 def group_name_unchanged(key, data, errors, context):
     '''Ensures that a group's name cannot be changed once set.'''
@@ -167,15 +217,15 @@ def group_name_unchanged(key, data, errors, context):
 
 def publisher_exists(publisher_name, context):
     '''
-    Raises Invalid if the given publisher_name does not exist in the model given
-    in the context, otherwise returns the given publisher_name.
-
+    Raises Invalid if the given publisher_name does not exist in the model
+    given in the context, otherwise returns the given publisher_name.
     '''
     try:
         logic.get_action('group_show')(context, {'id': publisher_name})
     except logic.NotFound:
         raise df.Invalid('%s: %s' % (_('Publisher not found'), publisher_name))
     return publisher_name
+
 
 def keyword_string_convert(key, data, errors, context):
     '''
@@ -184,13 +234,14 @@ def keyword_string_convert(key, data, errors, context):
     are also validated.
     '''
     if isinstance(data[key], basestring):
-        tags = [tag.strip() \
-                for tag in data[key].split(',') \
+        tags = [tag.strip()
+                for tag in data[key].split(',')
                 if tag.strip()]
     else:
         tags = data[key]
 
-    current_index = max([int(k[1]) for k in data.keys() if len(k) == 3 and k[0] == 'keywords'] + [-1])
+    current_index = max([int(k[1]) for k in data.keys()
+                         if len(k) == 3 and k[0] == 'keywords'] + [-1])
 
     for num, tag in zip(itertools.count(current_index + 1), tags):
         data[('keywords', num, 'name')] = tag
@@ -199,13 +250,15 @@ def keyword_string_convert(key, data, errors, context):
         val.tag_length_validator(tag, context)
         val.tag_name_validator(tag, context)
 
+
 def rename(old, new):
     '''
     Rename a schema field from old to new.
     Should be used in __after.
     '''
     def rename_field(key, data, errors, context):
-        index = max([int(k[1]) for k in data.keys() if len(k) == 3 and k[0] == new] + [-1])
+        index = max([int(k[1]) for k in data.keys()
+                     if len(k) == 3 and k[0] == new] + [-1])
 
         for field_name in data.keys():
             if field_name[0] == old:
@@ -220,14 +273,15 @@ def rename(old, new):
 
     return rename_field
 
+
 def update_rdf(key, data, errors, context):
     '''
-    Determines if there is any XML in the rdf field and ensures that  it
-    matches expectations.  This data will be returned on requests for .rdf
+    Determines if there is any XML in the rdf field and ensures that it
+    matches expectations. This data will be returned on requests for .rdf
     As this data is saved we first need to add our fields.
     '''
     rdf = data.get(key, '')
-    name = data.get((u'name',), "")
+    name = data.get((u'name',), '')
     if (not rdf) or ('package' in context):
         return
 
@@ -236,6 +290,7 @@ def update_rdf(key, data, errors, context):
 
     if origin_url:
         data[('url',)] = origin_url
+
 
 def ecportal_name_validator(val, context):
     '''
@@ -247,12 +302,13 @@ def ecportal_name_validator(val, context):
     if len(val) < 2:
         raise df.Invalid(_('Name must be at least %s characters long') % 2)
     if len(val) > model.PACKAGE_NAME_MAX_LENGTH:
-        raise df.Invalid(_('Name must be a maximum of %i characters long') % \
-                           model.PACKAGE_NAME_MAX_LENGTH)
+        raise df.Invalid(_('Name must be a maximum of %i characters long') %
+                         model.PACKAGE_NAME_MAX_LENGTH)
     if not name_match.match(val):
         raise df.Invalid(_('Url must be alphanumeric '
                            '(ascii) characters and these symbols: -_'))
     return val
+
 
 def requires_field(field_name):
     '''
@@ -263,6 +319,7 @@ def requires_field(field_name):
         if data[key] and not data[(field_name,)]:
             raise df.Invalid(_('Additional field required: %s' % field_name))
     return check
+
 
 def member_of_vocab(vocab):
     ''' Returns a validator that checks values are members of the given vocab.
@@ -288,10 +345,13 @@ def member_of_vocab(vocab):
         return tags
     return validator
 
-_cc_by_re    = re.compile(r'http://creativecommons.org/licenses/by/2.5/[^/]+/?',
-                          re.IGNORECASE)
+
+_cc_by_re = re.compile(r'http://creativecommons.org/licenses/by/2.5/[^/]+/?',
+                       re.IGNORECASE)
 _cc_by_sa_re = re.compile(r'http://creativecommons.org/licenses/by-sa/3.0/[^/]+/?',
                           re.IGNORECASE)
+
+
 def map_licenses(val, context):
     ''' Maps fixed set of license_ids to others.
 
@@ -311,6 +371,7 @@ def map_licenses(val, context):
     if re.match(_cc_by_sa_re, val):
         return 'http://www.opendefinition.org/licenses/cc-by-sa'
     return val
+
 
 def reduce_list(val, context):
     ''' Converts a list to the value at the head of the list.

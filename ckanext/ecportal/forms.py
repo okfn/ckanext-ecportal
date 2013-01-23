@@ -6,16 +6,34 @@ import ckan.logic as logic
 import ckan.logic.schema
 import ckan.lib.dictization as dictization
 import ckan.plugins as p
-from ckan.logic.validators import package_id_not_changed,\
-    package_name_validator
-from ckan.lib.navl.validators import ignore, ignore_missing, keep_extras,\
-    empty, not_empty, default
-from ckan.logic.converters import convert_to_tags, convert_from_tags, free_tags_only
-from validators import ecportal_name_validator, ecportal_date_to_db,\
-    convert_to_extras, convert_from_extras, convert_to_groups, convert_from_groups,\
-    duplicate_extras_key, publisher_exists, keyword_string_convert, rename,\
-    update_rdf, requires_field, convert_resource_type, member_of_vocab,\
-    map_licenses, reduce_list, group_name_unchanged
+from ckan.logic.validators import (package_id_not_changed,
+                                   package_name_validator)
+from ckan.lib.navl.validators import (ignore,
+                                      ignore_missing,
+                                      keep_extras,
+                                      empty,
+                                      not_empty,
+                                      default)
+from ckan.logic.converters import (convert_to_tags,
+                                   convert_from_tags,
+                                   free_tags_only)
+from validators import (ecportal_name_validator,
+                        ecportal_date_to_db,
+                        convert_to_extras,
+                        convert_from_extras,
+                        convert_to_groups,
+                        convert_from_groups,
+                        duplicate_extras_key,
+                        publisher_exists,
+                        keyword_string_convert,
+                        rename,
+                        update_rdf,
+                        requires_field,
+                        convert_resource_type,
+                        member_of_vocab,
+                        map_licenses,
+                        reduce_list,
+                        group_name_unchanged)
 import helpers
 
 import logging
@@ -99,7 +117,7 @@ class ECPortalDatasetForm(p.SingletonPlugin):
                             key=operator.itemgetter(1))
         default_licence = ("Europa Legal Notice", "http://ec.europa.eu/open-data/kos/licence/EuropeanCommission")
         c.licences = filter(lambda l: l != default_licence, c.licences)
-        c.licences.insert(0, default_licence)	
+        c.licences.insert(0, default_licence)
 
         c.is_sysadmin = Authorizer().is_sysadmin(c.user)
 
