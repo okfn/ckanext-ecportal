@@ -234,6 +234,7 @@ def group_list(context, data_dict):
 def package_show(context, data_dict):
     '''Override package_show to sort the resources by name'''
     result = get.package_show(context, data_dict)
+
     def order_key(resource):
         return resource.get('name', resource.get('description', ''))
 
