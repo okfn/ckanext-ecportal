@@ -29,8 +29,8 @@
 </py:if>
 
     <dcat:record>
-        <rdf:Description rdf:about="${ g.site_url + h.url_for(controller='package', action='read', id=c.pkg_dict['name'])}">
-            <dcat:accessURL rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">${g.site_url + h.url_for(controller='package', action='read', id=c.pkg_dict['name'])}</dcat:accessURL>
+        <rdf:Description rdf:about="${c.dataset_url}">
+            <dcat:accessURL rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">${c.dataset_url}</dcat:accessURL>
             <dct:modified>${c.pkg_dict.get('modified_date', '')}</dct:modified>
             <dct:issued>${c.pkg_dict.get('release_date', '')}</dct:issued>
         </rdf:Description>
