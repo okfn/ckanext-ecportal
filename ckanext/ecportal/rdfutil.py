@@ -1,3 +1,4 @@
+import urlparse
 import datetime
 import lxml.etree
 from pylons import g
@@ -65,8 +66,7 @@ def update_rdf(source_rdf, name):
 
     # We can add elements like this knowing it will look up the uri in the
     # root nsmap before this element's map.
-    local_url = g.site_url + h.url_for(controller='package', action='read',
-                                       id=name)
+    local_url = urlparse.urljoin(g.site_url, 'dataset/%s' % name)
 
     # Outer dcat:record
     record = Element('{http://www.w3.org/ns/dcat#}record',
