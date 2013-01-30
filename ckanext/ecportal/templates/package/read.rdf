@@ -1,4 +1,4 @@
 <html xmlns:py="http://genshi.edgewall.org/"
   xmlns:i18n="http://genshi.edgewall.org/i18n"
   xmlns:xi="http://www.w3.org/2001/XInclude"
-  py:strip=""><py:choose test="'rdf' in c.pkg_dict"><py:when test="1">${Markup(c.pkg_dict['rdf'].strip())}</py:when><py:when test="0"><xi:include href="custom_read.rdf" /></py:when></py:choose></html>
+  py:strip=""><py:choose test="c.pkg_dict.get('rdf')"><py:when test="1">${Markup(c.pkg_dict['rdf'].strip())}</py:when><py:when test="0"><xi:include href="custom_read.rdf" /></py:when></py:choose></html>
