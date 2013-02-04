@@ -18,6 +18,10 @@ msgstr ""
 "Generated-By: Babel 0.9.4\n"
 "X-Poedit-SourceCharset: utf-8\n"
 
+# added manually for EC ODP release 07.50
+msgid "DATA PORTAL"
+msgstr "PORTAL DANYCH"
+
 #: ckan/new_authz.py:19
 #, python-format
 msgid "Authorization function not found: %s"
@@ -1925,7 +1929,7 @@ msgstr "Dodaj zbiór danych"
 #: ../ckanext-ecportal/ckanext/ecportal/templates/layout_base.html:156
 #: ../ckanext-ecportal/ckanext/ecportal/templates/package/search_form.html:10
 msgid "Search"
-msgstr "Wyszukaj"
+msgstr "Wyszukiwanie"
 
 #: ckan/templates/layout_base.html:79
 #: ckan/templates/layout_base.html:137
@@ -3840,7 +3844,7 @@ msgstr "Inne – proszę określić"
 #: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:53
 #: ../ckanext-ecportal/ckanext/ecportal/templates/layout_base.html:60
 msgid "Legal notice"
-msgstr "Informacje prawne"
+msgstr "Informacja prawna"
 
 #: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:54
 #: ../ckanext-ecportal/ckanext/ecportal/templates/layout_base.html:61

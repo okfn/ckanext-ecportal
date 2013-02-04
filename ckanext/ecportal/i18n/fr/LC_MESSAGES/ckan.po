@@ -17,6 +17,10 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 0.9.4\n"
 
+# added manually for EC ODP release 07.50
+msgid "DATA PORTAL"
+msgstr "PORTAIL DE DONNÉES"
+
 #: ckan/new_authz.py:19
 #, python-format
 msgid "Authorization function not found: %s"
@@ -1924,7 +1928,7 @@ msgstr "Ajouter un ensemble de données"
 #: ../ckanext-ecportal/ckanext/ecportal/templates/layout_base.html:156
 #: ../ckanext-ecportal/ckanext/ecportal/templates/package/search_form.html:10
 msgid "Search"
-msgstr "Rechercher"
+msgstr "Recherche"
 
 #: ckan/templates/layout_base.html:79
 #: ckan/templates/layout_base.html:137
@@ -3839,7 +3843,7 @@ msgstr "Autre - Veuillez préciser"
 #: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:53
 #: ../ckanext-ecportal/ckanext/ecportal/templates/layout_base.html:60
 msgid "Legal notice"
-msgstr "Mentions légales"
+msgstr "Avis juridique"
 
 #: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:54
 #: ../ckanext-ecportal/ckanext/ecportal/templates/layout_base.html:61
