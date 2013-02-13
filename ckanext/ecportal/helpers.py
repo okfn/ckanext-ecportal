@@ -22,9 +22,9 @@ def current_locale():
 
 def root_url():
     if current_locale() == 'en':
-        return '/open-data/'
+        return '/'
     else:
-        return '/open-data/%s/' % current_locale()
+        return '/%s/' % current_locale()
 
 
 def format_description(description):
