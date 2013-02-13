@@ -5,4 +5,3 @@ JS = '''
 CSS = '''
 <link rel="stylesheet" href="%(site_url)s/css/ecportal.css" />
 '''
-

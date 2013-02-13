@@ -2,10 +2,9 @@ import ckan.lib.navl.validators as navl_validators
 import ckan.logic.schema as core_schema
 import ckan.logic.validators as core_validators
 
+
 def default_user_schema():
     schema = core_schema.default_user_schema()
-    
-    ## ECODP custom mofications
 
     # username can be uppercase
     schema['name'] = [navl_validators.not_empty,
@@ -17,6 +16,7 @@ def default_user_schema():
                        unicode]
 
     return schema
+
 
 def user_new_form_schema():
     schema = default_user_schema()
@@ -30,6 +30,7 @@ def user_new_form_schema():
 
     return schema
 
+
 def user_edit_form_schema():
     schema = default_user_schema()
 
@@ -41,9 +42,10 @@ def user_edit_form_schema():
                            core_validators.user_password_validator,
                            core_validators.user_passwords_match]
 
-    schema['password2'] = [navl_validators.ignore_missing,unicode]
+    schema['password2'] = [navl_validators.ignore_missing, unicode]
 
     return schema
+
 
 def default_update_user_schema():
     schema = default_user_schema()

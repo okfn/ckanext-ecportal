@@ -7,6 +7,7 @@ import ckan.authz as authz
 import ckan.logic.auth as ckan_auth
 import ckan.logic.auth.publisher as publisher_auth
 
+
 def group_create(context, data_dict=None):
     """
     Only sysadmins can create Groups.
@@ -14,15 +15,18 @@ def group_create(context, data_dict=None):
     All the Groups are created through the API using a paster command.  So
     there's no need for non-sysadmin users to be able to create new Groups.
     """
-    user  = context['user']
+    user = context['user']
 
     if not user:
-        return {'success': False, 'msg': _('User is not authorized to create groups') }
+        return {'success': False,
+                'msg': _('User is not authorized to create groups')}
 
     if user and authz.Authorizer.is_sysadmin(user):
         return {'success': True}
     else:
-        return {'success': False, 'msg': _('User is not authorized to create groups') }
+        return {'success': False,
+                'msg': _('User is not authorized to create groups')}
+
 
 def package_update(context, data_dict):
     """
@@ -50,17 +54,21 @@ def package_update(context, data_dict):
         else:
             return authorised_by_core
 
+
 def purge_revision_history(context, data_dict):
     '''
     Only sysadmins can purge a publisher's revision history.
     '''
-    user  = context['user']
+    user = context['user']
 
     if user and authz.Authorizer.is_sysadmin(user):
         return {'success': True}
     else:
-        return {'success': False,
-                'msg': _('User is not authorized to to purge revision history') }
+        return {
+            'success': False,
+            'msg': _('User is not authorized to to purge revision history')
+        }
+
 
 def show_package_edit_button(context, data_dict):
     """
@@ -77,17 +85,15 @@ def show_package_edit_button(context, data_dict):
     """
     return publisher_auth.update.package_update(context, data_dict)
 
+
 def user_create(context, data_dict=None):
     """
     Only allow sysadmins to create new Users
     """
-    user  = context['user']
+    user = context['user']
 
     if authz.Authorizer().is_sysadmin(unicode(user)):
-        return { 'success': True }
+        return {'success': True}
 
-    return {
-        'success': False,
-        'msg': _('User not authorized to create new Users')
-        }
-
+    return {'success': False,
+            'msg': _('User not authorized to create new Users')}
