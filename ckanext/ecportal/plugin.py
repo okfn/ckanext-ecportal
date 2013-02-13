@@ -422,6 +422,9 @@ class ECPortalPlugin(p.SingletonPlugin):
         map.redirect('/user', '/not_found')
         map.redirect('/user/reset', '/not_found')
         map.redirect('/user/register', '/not_found')
+        # disable dataset history page
+        map.redirect('/dataset/history/{url:.*}', '/not_found')
+        map.redirect('/dataset/history_ajax/{url:.*}', '/not_found')
         return map
 
     def after_map(self, map):
