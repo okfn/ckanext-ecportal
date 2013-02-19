@@ -756,6 +756,7 @@ input#txtSearchData:focus,
 }
 /* Moves the breadcrumb text to the left a little */
 .breadcrumb-custom {
+  padding-top: 2px;
   padding-left: 5px;
 }
 /* Font reset for boostrap */
