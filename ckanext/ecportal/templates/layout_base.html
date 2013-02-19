@@ -60,8 +60,22 @@
         <li class="leaf"><a href="/contact">${_('Contact')}</a></li>
         <li class="last leaf"><a href="http://ec.europa.eu/geninfo/query/search_en.html">${_('Search')}</a></li>
       </ul>
+      <div id="language-selector">
+        <a href="#" class="root">
+          <span>${h.current_locale().display_name or h.current_locale().english_name} (${h.current_locale()})</span>
+          <img border="0" alt="Menu Arrow" src="${h.url_for_static('/images/arrow_down.gif')}" />
+        </a>
+        <ul class="unstyled">
+          <py:for each="locale in h.get_available_locales()">
+            <li py:if="str(locale) != str(h.current_locale())">
+              <a href="${h.url(h.current_url(), locale=str(locale))}">
+                ${locale.display_name or locale.english_name} (${locale})
+              </a>
+            </li>
+          </py:for>
+        </ul>
+      </div>
     </div>
-
     <div class="logo">
       <a id="logo" rel="Home" title="Home" href="${h.root_url()}">
         <img src="${h.url_for_static('/images/logo/logo_{0}.gif').format('en')}" alt="${g.site_title}" title="${g.site_title}" />
@@ -204,8 +218,8 @@
 
 <py:if test="h.asbool(config.get('ckan.tracking_enabled', 'false'))">
 <script type="text/javascript">
- $(function (){
-         // Tracking
+$(function (){
+ // Tracking
  var url = location.pathname;
  // remove any site root from url
  url = url.substring(CKAN.SITE_URL.length, url.length);

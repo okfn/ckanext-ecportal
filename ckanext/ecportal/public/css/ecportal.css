@@ -933,3 +933,46 @@ input.search {
 .subsection {
   margin-bottom: 20px;
 }
+
+/* Language dropdown */
+#header-menu {
+  padding-top: 1px;
+}
+#header-menu .menu {
+  float: left;
+}
+#language-selector {
+  position: relative;
+  float: left;
+  margin-left: 5px;
+  margin-top: 1px;
+}
+#language-selector a:hover {
+  text-decoration: none;
+}
+#language-selector a.root {
+  display: block;
+  padding: 0 4px;
+  background-color: #FFF;
+  border: 1px solid #9AB;
+  border-radius: 2px;
+}
+#language-selector ul {
+  display: none;
+  position: absolute;
+  right: 0;
+  z-index: 1;
+  background-color: #FFF;
+  border: 1px solid #9AB;
+  width: 140px;
+  margin-top: -1px;
+  border-radius: 0 0 2px 2px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+#language-selector ul li a {
+  display: block;
+  padding: 1px 4px;
+}
+#language-selector ul li a:hover {
+  background-color: #DDD;
+}
