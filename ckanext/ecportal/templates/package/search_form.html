@@ -7,7 +7,7 @@
 
 <form id="dataset-search" class="dataset-search clearfix" method="GET">
   <input type="search" class="search" name="q" value="${c.q}" autocomplete="off" results="0" placeholder="${_('Search...')}" />
-  <input type="submit" value="${_('Search')}" class="btn btn-large button" />
+  <input type="submit" value="${_('Search')}" class="btn" />
   <span py:if="c.fields">
   <py:for each="(k, v) in c.fields"> 
     <input type="hidden" name="${k}" value="${v}" />  

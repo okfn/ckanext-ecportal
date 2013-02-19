@@ -31,7 +31,7 @@
         <py:if test="h.check_access('package_update',{'id':c.pkg.id})"> &nbsp;
           ${h.subnav_link(c, _('(edit)'), controller='package', action='editresources', id=c.pkg.name)}
         </py:if></h3>
-        <ul class="resource-list">
+        <ul class="resource-list unstyled">
           <py:for each="res in c.pkg_dict.get('resources', [])">
           <li>
             <a href="${h.url_for(controller='package', action='resource_read', id=c.pkg_dict['name'], resource_id=res['id'])}">

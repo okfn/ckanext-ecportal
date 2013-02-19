@@ -6,37 +6,49 @@
   <py:def function="body_class">no-sidebar</py:def>
   <py:def function="page_title">Data</py:def>
 
-  <div py:match="//div[@id='content']" class="front-page">
+  <div py:match="//div[@id='wrapper']" class="front-page">
 
-    <div class="row-fluid">
-      <div class="span6 action-box">
-        <div class="action-box-inner find clearfix">
-          <h1>Find data</h1>
-          <form action="${h.url_for(controller='package', action='search')}" method="GET"> 
-            <input name="q" value="" class="search-field" placeholder="${_('Find datasets')}" /> 
-          </form> 
-          ${g.site_title} contains 
-          <a href="${h.url_for(controller='package', action='search')}">${c.package_count} datasets</a>
-          that you can browse, learn about and download. 
-        </div>
-        <div class="action-box-inner clearfix">
-          <h1>Top Publishers</h1>
+    <div class="row bootstrap-row">
+      <div class="span6">
+        <div class="region-content">
+          <h2>
+            ${_('Top Publishers')}
+            <a href="${h.url_for(controller='group', action='index')}">
+              <i class="publisher"></i>
+              ${_('view all publishers')} &raquo;
+            </a>
+          </h2>
           <py:for each="i, group_dict in enumerate(h.top_publishers(c.groups))">
-            <div py:if="group_dict['packages']" class="group">
-              <a href="${h.url_for(controller='group', action='read', id=group_dict['name'])}">
-                ${group_dict['title']} (${group_dict['packages']} datasets)
-              </a>
-              <p py:if="len(group_dict['description'])">${h.markdown_extract(group_dict['description'])}</p>
-            </div>
+            <a py:if="group_dict['packages']" href="${h.url_for(controller='group', action='read', id=group_dict['name'])}" class="item_link">
+              <i class="publisher"></i>
+              <p>${group_dict['title']}</p>
+              (${group_dict['packages']} datasets)
+            </a>
           </py:for>
         </div>
       </div>
-
-      <div class="span6 action-box">
-        <div class="action-box-inner clearfix">
-          <h1>Recent Updates</h1>
+      <div class="span6">
+        <div class="region-content">
+          <h2>
+            ${_('Recent Updates')}
+            <a href="${h.url_for(controller='group', action='index')}">
+              <i class="resource"></i>
+              ${_('view all updates')} &raquo;
+            </a>
+          </h2>
           ${h.snippet('snippets/recent_updates_package_list.html', packages=h.recent_updates(10))}
         </div>
+        <!--
+        <div class="region-content">
+          <h2>
+            ${_('Tags')}
+            <a href="${h.url_for(controller='package', action='tags')}">
+              <i class="tag"></i>
+              ${_('view all tags')} &raquo;
+            </a>
+          </h2>
+        </div>
+        -->
       </div>
     </div>
 

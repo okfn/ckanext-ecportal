@@ -34,7 +34,7 @@
   <link rel="stylesheet" href="${h.url_for_static('/scripts/vendor/jqueryui/1.8.14/css/jquery-ui.custom.css')}" type="text/css" media="screen, print" />
   <link rel="stylesheet" href="${h.url_for_static('/css/bootstrap.min.css')}" type="text/css" media="screen, projection" />
   <link rel="stylesheet" href="${h.url_for_static('/css/chosen.css')}" type="text/css" />
-  <link rel="stylesheet" href="${h.url_for_static('/css/style.css?v=2')}" />
+  <!-- <link rel="stylesheet" href="${h.url_for_static('/css/style.css?v=2')}" /> -->
   ${jsConditionalForIe(9, '&lt;script type="text/javascript" src="' + h.url_for_static('/scripts/vendor/html5shiv/html5.js') + '"&gt;&lt;/script&gt;')}
   <link rel="stylesheet" href="${h.url_for_static('/css/ecportal.css')}" />
 
@@ -48,244 +48,191 @@
 <body class="${request.environ.get('pylons.routes_dict', {}).get('action')}
              ${request.environ.get('pylons.routes_dict', {}).get('controller').split(':')[-1]}
              ${defined('body_class') and body_class()}">
-  <div id="wrap">
-    <div class="header outer">
-      <a id="top" />
-      <header class="container">
 
-        <div id="header-row1">
-          <!-- Language Selector -->
-          <div class="textwidget" id="services">
-            <div id="services-menu">
-              <ul>
-                <li><a href="http://ec.europa.eu/geninfo/legal_notices_en.htm" title="">${_('Legal notice')}</a> |</li>
-                <li><a href="/contact" title="">${_('Contact')}</a> |</li>
-                <li><a href="http://ec.europa.eu/geninfo/query/search_en.html" title="">${_('Search')}</a></li>
-              </ul>
-            </div>
-            <ul class="language-dd-selector">
-              <li class="selected">
-              <span>${h.current_locale().display_name or h.current_locale().english_name} (${h.current_locale()}) </span>
-                <img border="0" alt="Menu Arrow" src="${h.url_for_static('/images/arrow_down.gif')}" />
-              </li>
-              <py:for each="locale in h.get_available_locales()">
-              <li py:if="str(locale) != str(h.current_locale())">
-                <a href="${h.url(h.current_url(), locale=str(locale))}">
-                  ${locale.display_name or locale.english_name} (${locale})
-                </a>
-              </li>
-              </py:for>
-            </ul>
-          </div>
-          <!-- / Language Selector -->
+<div class="container">
 
-          <div id="banner-flag">
-            <a id="logo" rel="home" title="Home" href="${h.root_url()}">
-              <img src="${h.url_for_static('/images/logo/logo_%s.gif' % h.current_locale())}"
-                   alt="${g.site_title}" title="${g.site_title}" id="logo" />
-            </a>
-          </div>
+  <a name="top" />
 
-          <div id="site-name">
-            <a href="${h.root_url()}">${_(g.site_title.upper())}<span class="beta">(${_('BETA')})</span></a>
-          </div>
-
-        </div>
-
-        <div id="header-row2">
-          <span id="site-description">${_(g.site_description)}</span>
-        </div>
-
-        <div id="path">
-          <ul>
-            <li><a href="http://ec.europa.eu">${_('European Commission')}</a></li>
-            <li class="separator">&gt;</li>
-            <li><a href="${h.root_url()}">${_('Open Data Portal')}</a></li>
-            <li class="separator">&gt;</li>
-            <li><a href="${h.url('home')}">${_('Data')}</a></li>
-          </ul>
-        </div>
-
-      </header>
+  <div class="header">
+    <div id="header-menu" class="region region-header-menu">
+      <ul class="menu">
+        <li class="first leaf"><a href="http://ec.europa.eu/geninfo/legal_notices_en.htm">${_('Legal notice')}</a></li>
+        <li class="leaf"><a href="/contact">${_('Contact')}</a></li>
+        <li class="last leaf"><a href="http://ec.europa.eu/geninfo/query/search_en.html">${_('Search')}</a></li>
+      </ul>
     </div>
 
-    <div id="main" class="container" role="main">
-
-      <div class="row odp-menu">
-        <div class="odp-menu-container">
-          <div class="region region-menu">
-            <div id="block-menu-menu-ec-open-data-main-menu" class="block block-menu">
-              <div class="odp-menu-content">
-                <ul class="odp-menu">
-                  <li class="first leaf"><a href="${h.root_url()}">${_('Home')}</a></li>
-                  <li class="leaf"><a href="${h.url('home')}" class="active">${_('Data')}</a></li>
-                  <li class="leaf"><a href="${h.root_url()}apps">${_('Applications')}</a></li>
-                  <li class="leaf"><a href="${h.root_url()}linked-data">${_('Linked Data')}</a></li>
-                </ul>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div id="ckan-menu" class="row">
-        <div class="menu account">
-          <span class="ckan-logged-in" style="display: none;">
-            <a href="${h.url_for(controller='user',action='me')}">${h.gravatar((c.userobj.email_hash if c and c.userobj else ''),size=16)} ${c.user}</a> |
-            <a href="${h.url_for('/user/_logout')}">Logout</a>
-          </span>
-          <span class="ckan-logged-out">
-            <a href="${h.url_for(controller='user',action='login')}">Login</a>
-          </span>
-        </div>
-        <div id="mainmenu" class="menu">
-          <span py:if="h.check_access('package_create')">
-            ${h.nav_link(c, _('Add a dataset'), controller='package', action='new')} |
-          </span>
-          ${h.nav_link(c, _('Search'), controller='package', action='search', highlight_actions = 'new index')} |
-          ${h.nav_link(c, _('Publishers'), controller='group', action='index')}
-        </div>
-      </div>
-
-      <py:with vars="messages = list(h._flash.pop_messages())">
-      <div class="flash-messages container">
-        <div class="alert ${m.category}" py:for="m in messages">
-          ${h.literal(m)}
-        </div>
-      </div>
-      </py:with>
-
-      <h1 py:if="defined('page_heading')" class="page_heading">${page_heading()}</h1>
-      <div class="row-fluid">
-        <div class="span12">
-          <div id="minornavigation">
-              <minornavigation></minornavigation>
-          </div>
-        </div>
-      </div>
-
-      <div class="row">
-        <div class="span9 content-outer">
-          <div id="content">
-            <py:if test="defined('content')">
-              ${content()}
-            </py:if>
-            <content>
-              <p>Master content template placeholder &hellip; please replace me.</p>
-            </content>
-          </div> <!-- /content -->
-        </div>
-        <div class="span3 sidebar-outer">
-          <div id="sidebar">
-            <ul class="widget-list">
-              <py:if test="defined('primary_sidebar_extras')">
-                ${primary_sidebar_extras()}
-              </py:if>
-              <primarysidebar>
-                <!-- Primary Side Bar Goes Here -->
-              </primarysidebar>
-            </ul>
-          </div>
-        </div>
-      </div>
-
-      <div id="content-last-updated" class="row">
-            Last update: ${h.current_date()} | <a href="#top">Top</a>
-      </div>
-
-    </div> <!-- /main -->
-
+    <div class="logo">
+      <a id="logo" rel="Home" title="Home" href="${h.root_url()}">
+        <img src="${h.url_for_static('/images/logo/logo_{0}.gif').format('en')}" alt="${g.site_title}" title="${g.site_title}" />
+      </a>
+    </div>
   </div>
 
-  <div class="footer outer">
-    <footer class="container">
-      <div class="row-fluid">
-        <div class="span12">
-          Powered by <a href="http://ckan.org">CKAN</a>.
+  <div class="breadcrumb-custom">
+    <a href="http://ec.europa.eu">${_('European Commission')}</a><span class="seperator">&gt;</span><a href="${h.root_url()}" class="active">${_('Open Data Portal')}</a><span class="seperator">&gt;</span><span class="last">${_('Home')}</span>
+  </div>
+
+  <div class="menu">
+    <div class="region region-menu">
+      <ul class="menu">
+        <li class="first leaf"><a href="${h.root_url()}">${_('Home')}</a></li>
+        <li class="leaf"><a href="${h.url('home')}" class="active">${_('Data')}</a></li>
+        <li class="leaf"><a href="${h.root_url()}apps">${_('Applications')}</a></li>
+        <li class="leaf"><a href="${h.root_url()}linked-data">${_('Linked Data')}</a></li>
+        <li class="last leaf"><a href="${h.root_url()}about">${_('About')}</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="content-custom">
+    <div class="region region-tabdesc">
+      <form id="ckan-form" action="${h.url_for(controller='package', action='search')}" method="GET">
+        <div class="form-item form-type-textfield form-item-query">
+          <label for="edit-query">
+            <span class="form-required" title="This field is required.">*</span>
+          </label>
+          <input type="text" id="edit-query" name="q" value="" size="60" placeholder="${_('Find datasets...')}" class="form-text required" />
+        </div>
+        <input type="submit" id="dataset-search" name="op" value="" class="form-submit" />
+        <p py:if="c.package_count">${g.site_title} contains 
+          <a href="${h.url_for(controller='package', action='search')}">${c.package_count} datasets</a>
+          that you can browse, learn about and download.</p>
+      </form>
+    </div>
+  </div>
+
+  <py:with vars="messages = list(h._flash.pop_messages())">
+    <div class="flash-messages">
+      <div class="alert ${m.category}" py:for="m in messages">
+        ${h.literal(m)}
+      </div>
+    </div>
+  </py:with>
+
+  <h1 py:if="defined('page_heading')" class="page_heading">${page_heading()}</h1>
+
+  <div class="row-fluid">
+    <div class="span12">
+      <div id="minornavigation">
+        <minornavigation></minornavigation>
+      </div>
+    </div>
+  </div>
+
+  <div id="wrapper">
+    <div class="row bootstrap-row">
+      <div class="span8">
+        <div id="content">
+          <py:if test="defined('content')">
+            ${content()}
+          </py:if>
+          <content>
+            <p>Master content template placeholder &hellip; please replace me.</p>
+          </content>
         </div>
       </div>
-    </footer>
-  </div> <!-- eo #container -->
+      <div class="span4">
+        <div id="sidebar">
+          <ul class="widget-list unstyled">
+            <py:if test="defined('primary_sidebar_extras')">
+              ${primary_sidebar_extras()}
+            </py:if>
+            <primarysidebar>
+              <!-- Primary Side Bar Goes Here -->
+            </primarysidebar>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
 
-  <script src="${h.url_for_static('/scripts/vendor/jquery/1.7.1/jquery-1.7.1.min.js')}"></script>
-  <script type="text/javascript" src="${h.url_for_static('/scripts/vendor/json2.js')}"></script>
-  <script type="text/javascript" src="${h.url_for_static('/scripts/vendor/jquery.tmpl/beta1/jquery.tmpl.js')}"></script>
-  <script type="text/javascript" src="${h.url_for_static('/scripts/vendor/jquery.cookie/jquery.cookie.min.js')}"></script>
-  <script type="text/javascript" src="${h.url_for_static('/scripts/vendor/jquery.chosen/0.9.7/chosen.js')}"></script>
-  <script type="text/javascript" src="${h.url_for_static('/scripts/vendor/jquery.placeholder/jquery.placeholder.js')}"></script>
-  <script type="text/javascript" src="${h.url_for_static('/scripts/vendor/jqueryui/1.8.14/jquery-ui.min.js')}"></script>
-  <script type="text/javascript" src="${h.url_for_static('/scripts/vendor/bootstrap/2.0.3/bootstrap.min.js')}"></script>
+  <div id="content-last-updated" class="footer">
+    Last update: ${h.current_date()} | <a href="#top">Top</a>
+  </div>
 
-  <!-- for application.js -->
-  <script type="text/javascript" src="${h.url_for_static('/scripts/vendor/underscore/1.1.6/underscore.js')}"></script>
-  <script type="text/javascript" src="${h.url_for_static('/scripts/vendor/backbone/0.5.1/backbone.js')}"></script>
-  <script type="text/javascript" src="${h.url_for_static('/scripts/vendor/jquery.fileupload/20110801/jquery.iframe-transport.js')}"></script>
-  <script type="text/javascript" src="${h.url_for_static('/scripts/vendor/jquery.fileupload/20110801/jquery.fileupload.js')}"></script>
+</div>
 
-  <!-- Translated js strings live inside an html template. -->
-  <xi:include href="js_strings.html" />
-  <!-- finally our application js that sets everything up-->
-  <script type="text/javascript" src="${h.url_for_static('/scripts/application.js?lang=${c.locale}')}"></script>
-  <script type="text/javascript" src="${h.url_for_static('/scripts/templates.js')}"></script>
+<script src="${h.url_for_static('/scripts/vendor/jquery/1.7.1/jquery-1.7.1.min.js')}"></script>
+<script type="text/javascript" src="${h.url_for_static('/scripts/vendor/json2.js')}"></script>
+<script type="text/javascript" src="${h.url_for_static('/scripts/vendor/jquery.tmpl/beta1/jquery.tmpl.js')}"></script>
+<script type="text/javascript" src="${h.url_for_static('/scripts/vendor/jquery.cookie/jquery.cookie.min.js')}"></script>
+<script type="text/javascript" src="${h.url_for_static('/scripts/vendor/jquery.chosen/0.9.7/chosen.js')}"></script>
+<script type="text/javascript" src="${h.url_for_static('/scripts/vendor/jquery.placeholder/jquery.placeholder.js')}"></script>
+<script type="text/javascript" src="${h.url_for_static('/scripts/vendor/jqueryui/1.8.14/jquery-ui.min.js')}"></script>
+<script type="text/javascript" src="${h.url_for_static('/scripts/vendor/bootstrap/2.0.3/bootstrap.min.js')}"></script>
 
-  <script type="text/javascript" src="${h.url_for_static('/scripts/ecportal.js')}"></script>
+<!-- for application.js -->
+<script type="text/javascript" src="${h.url_for_static('/scripts/vendor/underscore/1.1.6/underscore.js')}"></script>
+<script type="text/javascript" src="${h.url_for_static('/scripts/vendor/backbone/0.5.1/backbone.js')}"></script>
+<script type="text/javascript" src="${h.url_for_static('/scripts/vendor/jquery.fileupload/20110801/jquery.iframe-transport.js')}"></script>
+<script type="text/javascript" src="${h.url_for_static('/scripts/vendor/jquery.fileupload/20110801/jquery.fileupload.js')}"></script>
 
-  <script type="text/javascript">
-    CKAN.plugins = [
-      // Declare js array from Python string
-      ${['\'%s\', '%s  for s in config.get('ckan.plugins','').split(' ')]}
-    ];
-    <py:if test="config.get('ckan.storage.bucket', '')">
-    CKAN.plugins.push('storage');
-    </py:if>
-    CKAN.SITE_URL = '${h.url('/')}';
-    CKAN.SITE_URL_NO_LOCALE = '${h.url('/', locale='default')}';
-    CKAN.LANG = '${h.lang()}';
-    // later use will add offsets with leading '/' so ensure no trailing slash
-    CKAN.SITE_URL = CKAN.SITE_URL.replace(/\/$/, '');
-    CKAN.SITE_URL_NO_LOCALE = CKAN.SITE_URL_NO_LOCALE.replace(/\/$/, '');
-    $(document).ready(function() {
-        var ckan_user = '${c.user}';
-        if (ckan_user) {
-            $(".ckan-logged-out").hide();
-            $(".ckan-logged-in").show();
-        }
-        $('input[placeholder], textarea[placeholder]').placeholder();
+<!-- Translated js strings live inside an html template. -->
+<xi:include href="js_strings.html" />
+<!-- finally our application js that sets everything up-->
+<script type="text/javascript" src="${h.url_for_static('/scripts/application.js?lang=${c.locale}')}"></script>
+<script type="text/javascript" src="${h.url_for_static('/scripts/templates.js')}"></script>
 
-		$(".chzn-select").chosen();
-    });
-  </script>
+<script type="text/javascript" src="${h.url_for_static('/scripts/ecportal.js')}"></script>
 
-  <py:if test="h.asbool(config.get('ckan.tracking_enabled', 'false'))">
-  <script type="text/javascript">
-         $(function (){
-                 // Tracking
-				 var url = location.pathname;
-				 // remove any site root from url
-				 url = url.substring(CKAN.SITE_URL.length, url.length);
-				 // trim any trailing /
-				 url = url.replace(/\/*$/, '');
-				 $.ajax({url : CKAN.SITE_URL_NO_LOCALE + '/_tracking',
-						 type : 'POST',
-						 data : {url:url, type:'page'},
-						 timeout : 300 });
-                 $('a.resource-url-analytics').click(function (e){
-                         var url = $(e.target).closest('a').attr('href');
-						 $.ajax({url : CKAN.SITE_URL_NO_LOCALE + '/_tracking',
-							     data : {url:url, type:'resource'},
-								 type : 'POST',
-								 complete : function () {location.href = url;},
-								 timeout : 30});
-                         e.preventDefault();
-                         });
+<script type="text/javascript">
+  CKAN.plugins = [
+    // Declare js array from Python string
+    ${['\'%s\', '%s  for s in config.get('ckan.plugins','').split(' ')]}
+  ];
+  <py:if test="config.get('ckan.storage.bucket', '')">
+  CKAN.plugins.push('storage');
+  </py:if>
+  CKAN.SITE_URL = '${h.url('/')}';
+  CKAN.SITE_URL_NO_LOCALE = '${h.url('/', locale='default')}';
+  CKAN.LANG = '${h.lang()}';
+  // later use will add offsets with leading '/' so ensure no trailing slash
+  CKAN.SITE_URL = CKAN.SITE_URL.replace(/\/$/, '');
+  CKAN.SITE_URL_NO_LOCALE = CKAN.SITE_URL_NO_LOCALE.replace(/\/$/, '');
+  $(document).ready(function() {
+      var ckan_user = '${c.user}';
+      if (ckan_user) {
+          $(".ckan-logged-out").hide();
+          $(".ckan-logged-in").show();
+      }
+      $('input[placeholder], textarea[placeholder]').placeholder();
+
+  $(".chzn-select").chosen();
+  });
+</script>
+
+<py:if test="h.asbool(config.get('ckan.tracking_enabled', 'false'))">
+<script type="text/javascript">
+ $(function (){
+         // Tracking
+ var url = location.pathname;
+ // remove any site root from url
+ url = url.substring(CKAN.SITE_URL.length, url.length);
+ // trim any trailing /
+ url = url.replace(/\/*$/, '');
+ $.ajax({url : CKAN.SITE_URL_NO_LOCALE + '/_tracking',
+     type : 'POST',
+     data : {url:url, type:'page'},
+     timeout : 300 });
+         $('a.resource-url-analytics').click(function (e){
+                 var url = $(e.target).closest('a').attr('href');
+     $.ajax({url : CKAN.SITE_URL_NO_LOCALE + '/_tracking',
+           data : {url:url, type:'resource'},
+         type : 'POST',
+         complete : function () {location.href = url;},
+         timeout : 30});
+                 e.preventDefault();
                  });
-  </script>
-  </py:if>
+         });
+</script>
+</py:if>
 
-  <py:if test="defined('optional_footer')">
-    ${optional_footer()}
-  </py:if>
+<py:if test="defined('optional_footer')">
+  ${optional_footer()}
+</py:if>
 
 ${h.literal(getattr(g, 'template_footer_end', ''))}
+
 </body>
 </html>
