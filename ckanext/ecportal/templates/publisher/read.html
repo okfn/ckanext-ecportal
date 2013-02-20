@@ -9,7 +9,7 @@
   <py:def function="page_heading">
     <div class="pull-right">
       <small>(${c.page.item_count} datasets)</small>
-      <a href=""><i class="rss"></i></a>
+      <a href="${h.url_for(controller='revision', action='list', format='atom', days=1)}"><i class="rss"></i></a>
     </div>
     ${c.group_dict.display_name}
   </py:def>

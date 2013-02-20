@@ -29,11 +29,6 @@
         </li>
 
       </py:when>
-      <py:otherwise>
-        <li class="${'active' if c.action=='index' else ''}">
-          ${h.subnav_named_route(h.icon('group') + _('List Publishers'), '%s_index' % h.default_group_type(), action='index')}
-        </li>
-      </py:otherwise>
     </ul>
   </py:match>
 

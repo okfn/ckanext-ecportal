@@ -1316,3 +1316,8 @@ input.search {
 #minornavigation .inline-icon {
   display: none;
 }
+
+.item_link .additional {
+  color: #999 !important;
+  font-weight: normal;
+}

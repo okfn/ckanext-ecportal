@@ -8,7 +8,15 @@
   <py:def function="body_class">no-sidebar</py:def>
 
   <div py:match="content">
-    ${group_list_from_dict(c.page.items)}
+    <!-- ${group_list_from_dict(c.page.items)} -->
+
+    <a py:for="group in c.page.items" href="${h.url_for(controller='group', action='read', id=group.name)}" class="item_link">
+      <i class="publisher"></i>
+      <p>${group.title or group.name}</p>
+      <p class="additional">${group.description}</p>
+      <p class="additional">(${group.packages} datasets)</p>
+    </a>
+
     ${c.page.pager()}
   </div>
 
