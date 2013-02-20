@@ -84,7 +84,7 @@
   </div>
 
   <div class="breadcrumb-custom">
-    <a href="http://ec.europa.eu">${_('European Commission')}</a><span class="seperator">&gt;</span><a href="${h.root_url()}" class="active">${_('Open Data Portal')}</a><span class="seperator">&gt;</span><span class="last">${_('Home')}</span>
+    <a href="http://ec.europa.eu">${_('European Commission')}</a><span class="seperator">&gt;</span><a href="${h.root_url()}" class="active">${_('Open Data Portal')}</a><span class="seperator">&gt;</span><a href="${h.url('home')}">${_('Data')}</a><span py:if="defined('breadcrumbs_extra')">${breadcrumbs_extra()}</span>
   </div>
 
   <div class="menu">
@@ -99,22 +99,7 @@
     </div>
   </div>
 
-  <div class="content-custom">
-    <div class="region region-tabdesc">
-      <form id="ckan-form" action="${h.url_for(controller='package', action='search')}" method="GET">
-        <div class="form-item form-type-textfield form-item-query">
-          <label for="edit-query">
-            <span class="form-required" title="This field is required.">*</span>
-          </label>
-          <input type="text" id="edit-query" name="q" value="" size="60" placeholder="${_('Find datasets...')}" class="form-text required" />
-        </div>
-        <input type="submit" id="dataset-search" name="op" value="" class="form-submit" />
-        <p py:if="c.package_count">${g.site_title} contains 
-          <a href="${h.url_for(controller='package', action='search')}">${c.package_count} datasets</a>
-          that you can browse, learn about and download.</p>
-      </form>
-    </div>
-  </div>
+  <div id="search-header"></div>
 
   <py:with vars="messages = list(h._flash.pop_messages())">
     <div class="flash-messages">
@@ -124,19 +109,14 @@
     </div>
   </py:with>
 
-  <h1 py:if="defined('page_heading')" class="page_heading">${page_heading()}</h1>
-
-  <div class="row-fluid">
-    <div class="span12">
-      <div id="minornavigation">
-        <minornavigation></minornavigation>
-      </div>
-    </div>
-  </div>
-
   <div id="wrapper">
     <div class="row bootstrap-row">
       <div class="span8">
+        <div id="page-search"></div>
+        <h1 py:if="defined('page_heading')" class="page_heading">${page_heading()}</h1>
+        <div id="minornavigation">
+          <minornavigation></minornavigation>
+        </div>
         <div id="content">
           <py:if test="defined('content')">
             ${content()}
@@ -162,7 +142,11 @@
   </div>
 
   <div id="content-last-updated" class="footer">
-    Last update: ${h.current_date()} | <a href="#top">Top</a>
+    Last update: ${h.current_date()} |
+    <a href="#">${_('About this site')}</a> |
+    <a href="http://ec.europa.eu/geninfo/legal_notices_en.htm">${_('Legal notice')}</a> |
+    <a href="/contact">${_('Contact')}</a> |
+    <a href="#top">Top</a>
   </div>
 
 </div>

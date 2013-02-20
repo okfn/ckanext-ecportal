@@ -6,11 +6,32 @@
   <xi:include href="../facets.html" />
 
   <py:def function="page_title">${c.group_dict.display_name}</py:def>
-  <py:def function="page_heading">${c.group_dict.display_name}</py:def>
+  <py:def function="page_heading">
+    <div class="pull-right">
+      <small>(${c.page.item_count} datasets)</small>
+      <a href=""><i class="rss"></i></a>
+    </div>
+    ${c.group_dict.display_name}
+  </py:def>
   <py:if test="c.group.image_url">
     <py:def function="page_logo">${c.group.image_url}</py:def>
   </py:if>
 
+  <py:def function="breadcrumbs_extra">
+    <span class="seperator">&gt;</span>
+    <a href="${h.url_for(controller='group', action='index')}">Publisher</a>
+    <span class="seperator">&gt;</span>
+    <a href="${h.url_for(controller='group', action='read', id=c.group_dict.name)}">${c.group_dict.display_name}</a>
+  </py:def>
+
+  <py:def function="search_value"><py:if test="c.q">${c.q}</py:if></py:def>
+
+  <div py:match="//div[@id='page-search']" class="page-search">
+    <form>
+      <input type="text" name="q" value="${search_value()}" placeholder="${_('Search publisher...')}" />
+      <input type="submit" />
+    </form>
+  </div>
 
   <?python
     from pylons import config
@@ -50,22 +71,11 @@
 
   <py:match path="content">
     <h3 py:if="c.group['state'] != 'active'">State: ${c.group['state']}</h3>
-    <div class="notes" py:if="str(c.description_formatted).strip()">
-      <div id="notes-extract">
-        ${c.description_formatted}
-      </div>
-      <div id="notes-remainder"></div>
-      <div id="notes-toggle" style="display: none;">
-        <button class="more btn"><img src="${h.url_for_static('/images/chevron-down.png')}"/></button>
-        <button class="less btn" style="display: none;"><img src="${h.url_for_static('/images/chevron-up.png')}"/></button>
-      </div>
+    <div py:if="str(c.description_formatted).strip()">
+      ${c.description_formatted}
     </div>
     <div class="group-dataset-list">
-      <h3>Datasets</h3>
-      <xi:include href="../package/search_form.html" />
       ${field_list()}
-
-      <p i18n:msg="query, number_of_results"><span py:if="c.q">You searched for "${c.q}". </span>${c.page.item_count} datasets found.</p>
       ${c.page.pager()}
       ${package_list_from_dict(c.page.items)}
       ${c.page.pager()}

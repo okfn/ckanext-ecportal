@@ -6,8 +6,24 @@
   <py:def function="body_class">no-sidebar</py:def>
   <py:def function="page_title">Data</py:def>
 
-  <div py:match="//div[@id='wrapper']" class="front-page">
+  <div py:match="//div[@id='search-header']" class="front-page">
+    <div class="region region-tabdesc">
+      <form id="ckan-form" action="${h.url_for(controller='package', action='search')}" method="GET">
+        <div class="form-item form-type-textfield form-item-query">
+          <label for="edit-query">
+            <span class="form-required" title="This field is required.">*</span>
+          </label>
+          <input type="text" id="edit-query" name="q" value="" size="60" placeholder="${_('Find datasets...')}" class="form-text required" />
+        </div>
+        <input type="submit" id="dataset-search" name="op" value="" class="form-submit" />
+        <p py:if="c.package_count">${g.site_title} contains 
+          <a href="${h.url_for(controller='package', action='search')}">${c.package_count} datasets</a>
+          that you can browse, learn about and download.</p>
+      </form>
+    </div>
+  </div>
 
+  <div py:match="//div[@id='wrapper']" class="front-page">
     <div class="row bootstrap-row">
       <div class="span6">
         <div class="region-content">

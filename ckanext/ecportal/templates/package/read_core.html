@@ -6,178 +6,181 @@
   <xi:include href="../_util.html" />
 
   <div id="dataset" class="dataset">
-    <!-- Overview Section -->
     <div id="dataset-overview">
 
-    <div py:if="c.pkg_dict.get('state') == 'deleted'" class="dataset-deleted-message">
-      This dataset has been marked as deleted.
-    </div>
+      <div py:if="c.pkg_dict.get('state') == 'deleted'" class="dataset-deleted-message">
+        ${_('This dataset has been marked as deleted.')}
+      </div>
+
+      <div py:if="c.pkg_dict.get('groups')" class="package-box publishers">
+        <h3><i class="publisher"></i> ${_('Publisher')}</h3>
+        <div class="inner">
+          <a py:for="group in sorted(c.pkg_dict.groups, key=lambda g: g['title'] or g['name'])" href="${h.url_for(controller='group', action='read', id=group['name'])}">${group.get('title') or group.get('name')} &raquo;</a>
+        </div>
+      </div>
 
       <!-- Description -->
-      <div class="notes" py:if="c.pkg_dict.get('description', '').strip()">
-        <div id="notes-extract">
+      <div class="package-box" py:if="c.pkg_dict.get('description', '').strip()">
+        <h3><i class="note"></i> ${_('Description')}</h3>
+        <div class="inner faded">
           ${h.format_description(c.pkg_dict['description'])}
-        </div>
-        <div id="notes-remainder"></div>
-        <div id="notes-toggle" style="display: none;">
-          <button class="more btn"><img src="${h.url_for_static('/images/chevron-down.png')}"/></button>
-          <button class="less btn" style="display: none;"><img src="${h.url_for_static('/images/chevron-up.png')}"/></button>
         </div>
       </div>
 
       <!-- Resources -->
-      <div id="dataset-resources" class="resources subsection">
-        <h3>Resources
+      <div id="dataset-resources" class="package-box resources">
+        <h3>
+          <i class="resource"></i> ${_('Resources')}
         <py:if test="h.check_access('package_update',{'id':c.pkg.id})"> &nbsp;
           ${h.subnav_link(c, _('(edit)'), controller='package', action='editresources', id=c.pkg.name)}
         </py:if></h3>
-        <ul class="resource-list unstyled">
-          <py:for each="res in c.pkg_dict.get('resources', [])">
-          <li>
-            <a href="${h.url_for(controller='package', action='resource_read', id=c.pkg_dict['name'], resource_id=res['id'])}">
-              ${h.resource_icon(res)}
-              ${h.resource_display_name(res)}
-              <span py:if="res.get('format')" class="format-box" property="dc:format">${res.get('format')}</span>
-            </a>
-            </li>
-          </py:for>
-        </ul>
-        <py:if test="not len(c.pkg_dict.get('resources', []))">
-          (none)
-        </py:if>
+        <div class="inner">
+          <ul class="resource-list unstyled">
+            <py:for each="res in c.pkg_dict.get('resources', [])">
+            <li>
+              <a href="${res['url']}" class="download">${_('Download')}</a>
+              <a href="${h.url_for(controller='package', action='resource_read', id=c.pkg_dict['name'], resource_id=res['id'])}">${h.resource_display_name(res)} &raquo;</a>
+              </li>
+            </py:for>
+          </ul>
+          <py:if test="not len(c.pkg_dict.get('resources', []))">
+            (none)
+          </py:if>
+        </div>
       </div>
 
     </div>
 
     <!-- Dataset Information Section -->
-    <h3>Additional Information</h3>
-    <div id="dataset-information">
-    <table class="table table-striped table-bordered table-condensed">
-      <thead>
-        <tr>
-          <th>Field</th>
-          <th>Value</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr py:if="c.pkg.url">
-          <td class="dataset-label">URL</td>
-          <td class="dataset-details" property="foaf:homepage">${c.pkg_url_link}</td>
-        </tr>
+    <div class="package-box">
+      <h3><i class="info"></i> ${_('Additional Information')}</h3>
+      <div id="dataset-information" class="inner">
+        <table class="additional-table">
+          <thead>
+            <tr>
+              <th>Field</th>
+              <th>Value</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr py:if="c.pkg.url">
+              <td class="dataset-label">${_('URL')}</td>
+              <td class="dataset-details" property="foaf:homepage">${c.pkg_url_link}</td>
+            </tr>
 
-        <tr py:if="c.pkg_dict.get('alternative_title')">
-          <td class="dataset-label">Alternative Title</td>
-          <td class="dataset-details">${c.pkg_dict['alternative_title']}</td>
-        </tr>
+            <tr py:if="c.pkg_dict.get('alternative_title')">
+              <td class="dataset-label">${_('Alternative Title')}</td>
+              <td class="dataset-details">${c.pkg_dict['alternative_title']}</td>
+            </tr>
 
-        <tr py:if="c.pkg_dict.get('status')">
-          <td class="dataset-label">Status</td>
-          <td class="dataset-details">${c.pkg_dict['status']}</td>
-        </tr>
+            <tr py:if="c.pkg_dict.get('status')">
+              <td class="dataset-label">${_('Status')}</td>
+              <td class="dataset-details">${c.pkg_dict['status']}</td>
+            </tr>
 
-        <tr py:if="c.pkg_dict.get('identifier')">
-          <td class="dataset-label">Identifier</td>
-          <td class="dataset-details">${c.pkg_dict['identifier']}</td>
-        </tr>
+            <tr py:if="c.pkg_dict.get('identifier')">
+              <td class="dataset-label">${_('Identifier')}</td>
+              <td class="dataset-details">${c.pkg_dict['identifier']}</td>
+            </tr>
 
-        <tr py:if="c.pkg_dict.get('interoperability_level')">
-          <td class="dataset-label">Interoperability Level</td>
-          <td class="dataset-details">${c.pkg_dict['interoperability_level']}</td>
-        </tr>
+            <tr py:if="c.pkg_dict.get('interoperability_level')">
+              <td class="dataset-label">${_('Interoperability Level')}</td>
+              <td class="dataset-details">${c.pkg_dict['interoperability_level']}</td>
+            </tr>
 
-        <tr py:if="c.pkg_dict.get('type_of_dataset')">
-          <td class="dataset-label">Type of Dataset</td>
-          <td class="dataset-details">${", ".join(c.pkg_dict['type_of_dataset'])}</td>
-        </tr>
+            <tr py:if="c.pkg_dict.get('type_of_dataset')">
+              <td class="dataset-label">${_('Type of Dataset')}</td>
+              <td class="dataset-details">${", ".join(c.pkg_dict['type_of_dataset'])}</td>
+            </tr>
 
-        <tr py:if="c.pkg_dict.get('release_date')">
-          <td class="dataset-label">Release Date</td>
-          <td class="dataset-details">${c.pkg_dict['release_date']}</td>
-        </tr>
+            <tr py:if="c.pkg_dict.get('release_date')">
+              <td class="dataset-label">${_('Release Date')}</td>
+              <td class="dataset-details">${c.pkg_dict['release_date']}</td>
+            </tr>
 
-        <tr py:if="c.pkg_dict.get('modified_date')">
-          <td class="dataset-label">Modified Date</td>
-          <td class="dataset-details">${c.pkg_dict['modified_date']}</td>
-        </tr>
+            <tr py:if="c.pkg_dict.get('modified_date')">
+              <td class="dataset-label">${_('Modified Date')}</td>
+              <td class="dataset-details">${c.pkg_dict['modified_date']}</td>
+            </tr>
 
-        <tr py:if="c.pkg_dict.get('accrual_periodicity')">
-          <td class="dataset-label">Accrual Periodicity</td>
-          <td class="dataset-details">${c.pkg_dict['accrual_periodicity']}</td>
-        </tr>
+            <tr py:if="c.pkg_dict.get('accrual_periodicity')">
+              <td class="dataset-label">${_('Accrual Periodicity')}</td>
+              <td class="dataset-details">${c.pkg_dict['accrual_periodicity']}</td>
+            </tr>
 
-        <tr py:if="c.pkg_dict.get('temporal_coverage_from')">
-          <td class="dataset-label">Temporal Coverage From</td>
-          <td class="dataset-details">${c.pkg_dict['temporal_coverage_from']}</td>
-        </tr>
+            <tr py:if="c.pkg_dict.get('temporal_coverage_from')">
+              <td class="dataset-label">${_('Temporal Coverage From')}</td>
+              <td class="dataset-details">${c.pkg_dict['temporal_coverage_from']}</td>
+            </tr>
 
-        <tr py:if="c.pkg_dict.get('temporal_coverage_to')">
-          <td class="dataset-label">Temporal Coverage To</td>
-          <td class="dataset-details">${c.pkg_dict['temporal_coverage_to']}</td>
-        </tr>
+            <tr py:if="c.pkg_dict.get('temporal_coverage_to')">
+              <td class="dataset-label">${_('Temporal Coverage To')}</td>
+              <td class="dataset-details">${c.pkg_dict['temporal_coverage_to']}</td>
+            </tr>
 
-        <tr py:if="c.pkg_dict.get('temporal_granularity')">
-          <td class="dataset-label">Temporal Granularity</td>
-          <td class="dataset-details">${c.pkg_dict['temporal_granularity']}</td>
-        </tr>
+            <tr py:if="c.pkg_dict.get('temporal_granularity')">
+              <td class="dataset-label">${_('Temporal Granularity')}</td>
+              <td class="dataset-details">${c.pkg_dict['temporal_granularity']}</td>
+            </tr>
 
-        <tr py:if="c.pkg_dict.get('geographical_coverage')">
-          <td class="dataset-label">Geographical Coverage</td>
-          <td class="dataset-details">${", ".join(c.pkg_dict['geographical_coverage'])}</td>
-        </tr>
+            <tr py:if="c.pkg_dict.get('geographical_coverage')">
+              <td class="dataset-label">${_('Geographical Coverage')}</td>
+              <td class="dataset-details">${", ".join(c.pkg_dict['geographical_coverage'])}</td>
+            </tr>
 
-        <tr py:if="c.pkg_dict.get('language')">
-          <td class="dataset-label">Language</td>
-          <td class="dataset-details">${", ".join(c.pkg_dict['language'])}</td>
-        </tr>
+            <tr py:if="c.pkg_dict.get('language')">
+              <td class="dataset-label">${_('Language')}</td>
+              <td class="dataset-details">${", ".join(c.pkg_dict['language'])}</td>
+            </tr>
 
-        <tr py:if="c.pkg_dict.get('contact_name')">
-          <td class="dataset-label">Contact Name</td>
-          <td class="dataset-details">${c.pkg_dict['contact_name']}</td>
-        </tr>
+            <tr py:if="c.pkg_dict.get('contact_name')">
+              <td class="dataset-label">${_('Contact Name')}</td>
+              <td class="dataset-details">${c.pkg_dict['contact_name']}</td>
+            </tr>
 
-        <tr py:if="c.pkg_dict.get('contact_email')">
-          <td class="dataset-label">Contact E-mail</td>
-          <td class="dataset-details">${c.pkg_dict['contact_email']}</td>
-        </tr>
+            <tr py:if="c.pkg_dict.get('contact_email')">
+              <td class="dataset-label">${_('Contact E-mail')}</td>
+              <td class="dataset-details">${c.pkg_dict['contact_email']}</td>
+            </tr>
 
-        <tr py:if="c.pkg_dict.get('contact_address')">
-          <td class="dataset-label">Contact Address</td>
-          <td class="dataset-details">${c.pkg_dict['contact_address']}</td>
-        </tr>
+            <tr py:if="c.pkg_dict.get('contact_address')">
+              <td class="dataset-label">${_('Contact Address')}</td>
+              <td class="dataset-details">${c.pkg_dict['contact_address']}</td>
+            </tr>
 
-        <tr py:if="c.pkg_dict.get('contact_telephone')">
-          <td class="dataset-label">Contact Telephone</td>
-          <td class="dataset-details">${c.pkg_dict['contact_telephone']}</td>
-        </tr>
+            <tr py:if="c.pkg_dict.get('contact_telephone')">
+              <td class="dataset-label">${_('Contact Telephone')}</td>
+              <td class="dataset-details">${c.pkg_dict['contact_telephone']}</td>
+            </tr>
 
-        <tr py:if="c.pkg_dict.get('contact_webpage')">
-          <td class="dataset-label">Contact Web Page</td>
-          <td class="dataset-details"><a href="${c.pkg_dict['contact_webpage']}">${c.pkg_dict['contact_webpage']}</a></td>
-        </tr>
+            <tr py:if="c.pkg_dict.get('contact_webpage')">
+              <td class="dataset-label">${_('Contact Web Page')}</td>
+              <td class="dataset-details"><a href="${c.pkg_dict['contact_webpage']}">${c.pkg_dict['contact_webpage']}</a></td>
+            </tr>
 
-        <tr py:if="c.pkg.version">
-          <td class="dataset-label">Version</td>
-          <td class="dataset-details">${c.pkg.version}</td>
-        </tr>
+            <tr py:if="c.pkg.version">
+              <td class="dataset-label">${_('Version')}</td>
+              <td class="dataset-details">${c.pkg.version}</td>
+            </tr>
 
-        <tr py:if="c.pkg_dict.get('version_description')">
-          <td class="dataset-label">Version Description</td>
-          <td class="dataset-details">${c.pkg_dict['version_description']}</td>
-        </tr>
+            <tr py:if="c.pkg_dict.get('version_description')">
+              <td class="dataset-label">${_('Version Description')}</td>
+              <td class="dataset-details">${c.pkg_dict['version_description']}</td>
+            </tr>
 
-        <tr py:if="c.eu_country">
-          <td class="dataset-label">Country</td>
-          <td class="dataset-details">${h.code_to_country(c.eu_country)}</td>
-        </tr>
+            <tr py:if="c.eu_country">
+              <td class="dataset-label">${_('Country')}</td>
+              <td class="dataset-details">${h.code_to_country(c.eu_country)}</td>
+            </tr>
 
-        <tr py:for="i, (key, value) in enumerate(c.pkg_extras)"
-          rel="dc:relation" resource="_:extra${i}">
-          <td class="dataset-label" property="rdfs:label">${_(key)}</td>
-          <td class="dataset-details" property="rdf:value">${value}</td>
-        </tr>
-      </tbody>
-    </table>
-
+            <tr py:for="i, (key, value) in enumerate(c.pkg_extras)"
+              rel="dc:relation" resource="_:extra${i}">
+              <td class="dataset-label" property="rdfs:label">${_(key)}</td>
+              <td class="dataset-details" property="rdf:value">${value}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
 
   </div> <!-- /dataset -->

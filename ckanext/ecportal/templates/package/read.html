@@ -18,7 +18,23 @@
     ${c.pkg_dict['title']}
   </py:def>
 
+  <py:def function="breadcrumbs_extra">
+    <span class="seperator">&gt;</span>
+    <a href="${h.url_for(controller='group', action='index')}">Publisher</a>
+    <span class="seperator">&gt;</span>
+    <span py:for="group in sorted(c.pkg_dict.groups, key=lambda g: g['title'] or g['name'])">
+      <a href="${h.url_for(controller='group', action='read', id=group['name'])}">${group.get('title') or group.get('name')}</a>
+      <span class="seperator">&gt;</span>
+    </span>
+    <a href="${h.url_for(controller='group', action='read', id=c.pkg_dict.name)}">${c.pkg_dict.title or c.pkg_dict.name}</a>
+  </py:def>
+
   <py:match path="primarysidebar">
+
+    <li py:if="[tag for tag in c.pkg_dict.get('keywords', []) if not tag.get('vocabulary_id')]" class="sidebar-section">
+      <h3>Keywords</h3>
+      ${tag_list(c.pkg_dict.get('keywords', ''))}
+    </li>
 
     <li py:if="c.pkg_dict.get('license_id')" id="dataset-license" class="sidebar-section">
       <strong>Licence:</strong>
@@ -27,20 +43,6 @@
               href="${c.pkg_dict.get('license_url')}" rel="dc:rights">${c.pkg_dict.get('license_title')}</a></span>
           <span py:when="c.pkg_dict.get('license_id')" property="dc:rights">${c.pkg_dict.get('license_title')}</span>
         </py:choose>
-    </li>
-
-    <li py:if="c.pkg_dict.get('groups')" class="sidebar-section">
-      <h3>Publisher</h3>
-      <ul class="groups">
-        <li py:for="group in sorted(c.pkg_dict.groups, key=lambda g: g['title'] or g['name'])">
-        <a href="${h.url_for(controller='group', action='read', id=group['name'])}">${group.get('title') or group.get('name')}</a>
-        </li>
-      </ul>
-    </li>
-
-    <li py:if="[tag for tag in c.pkg_dict.get('keywords', []) if not tag.get('vocabulary_id')]" class="sidebar-section">
-      <h3>Keywords</h3>
-      ${tag_list(c.pkg_dict.get('keywords', ''))}
     </li>
 
     <li py:if="c.package_relationships" class="sidebar-section">
