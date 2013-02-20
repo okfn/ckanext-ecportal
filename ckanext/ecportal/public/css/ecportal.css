@@ -1176,9 +1176,12 @@ input.search {
   font-style: italic;
   margin-right: 10px;
 }
+
+/* Table reseters */
 .additional-table thead {
   display: none;
 }
+.quick-info dd,
 .additional-table tr {
   display: block;
   margin-bottom: 5px;
@@ -1186,11 +1189,15 @@ input.search {
 .additional-table td {
   display: block;
 }
+.quick-info dt,
 .additional-table .dataset-label {
   font-style: italic;
+  font-weight: normal;
 }
+.quick-info dd,
 .additional-table .dataset-details {
   color: #777;
+  margin-left: 0;
 }
 
 /* additional icons */

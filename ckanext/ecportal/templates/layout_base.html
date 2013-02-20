@@ -78,7 +78,7 @@
     </div>
     <div class="logo">
       <a id="logo" rel="Home" title="Home" href="${h.root_url()}">
-        <img src="${h.url_for_static('/images/logo/logo_{0}.gif').format('en')}" alt="${g.site_title}" title="${g.site_title}" />
+        <img src="${h.url_for_static('/images/logo/logo_{0}.gif').format(h.current_locale())}" alt="${g.site_title}" title="${g.site_title}" />
       </a>
     </div>
   </div>

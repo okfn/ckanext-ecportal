@@ -106,6 +106,7 @@
           </py:otherwise>
         </py:choose>
       </a>
+      <!--
       <py:if test="config.get('ckan.datastore.enabled', False)">
         <py:if test="c.resource.get('webstore_url')">
           <a class="btn btn-success" data-toggle="modal" href=".modal-data-api-help">Data API</a>
@@ -114,6 +115,7 @@
           <a class="btn disabled" rel="tooltip" title="Data API is unavailable for this resource as DataStore is disabled">Data API</a>
         </py:if>
       </py:if>
+      -->
     </div>
 
   <py:if test="config.get('ckan.datastore.enabled', False)">
