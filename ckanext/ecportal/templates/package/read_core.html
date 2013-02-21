@@ -38,7 +38,7 @@
           <ul class="resource-list unstyled">
             <py:for each="res in c.pkg_dict.get('resources', [])">
             <li>
-              <a href="${res['url']}" class="download">${_('Download')}</a>
+              <a href="${res['url']}" class="button button-primary download">${_('Download')}</a>
               <a href="${h.url_for(controller='package', action='resource_read', id=c.pkg_dict['name'], resource_id=res['id'])}">${h.resource_display_name(res)} &raquo;</a>
               </li>
             </py:for>

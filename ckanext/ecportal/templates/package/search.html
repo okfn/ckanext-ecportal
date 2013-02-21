@@ -21,8 +21,21 @@
     ${facet_div('vocab_geographical_coverage', 'Geographical Coverage')}
   </py:match>
 
+  <py:def function="search_value"><py:if test="c.q">${c.q}</py:if></py:def>
+  <div py:match="//div[@id='page-search']" class="page-search">
+    <form>
+      <input type="text" name="q" value="${search_value()}" placeholder="${_('Search datasets...')}" />
+      <input type="submit" />
+      <span py:if="c.fields">
+        <py:for each="(k, v) in c.fields"> 
+          <input type="hidden" name="${k}" value="${v}" />  
+        </py:for>
+      </span>
+    </form>
+  </div>
+
   <div py:match="content">
-    <xi:include href="search_form.html" />
+
     ${field_list()}   
     
       <py:if test="c.query_error">

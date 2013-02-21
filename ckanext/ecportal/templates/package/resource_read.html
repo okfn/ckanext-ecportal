@@ -85,37 +85,60 @@
     ${h.resource_display_name(c.resource)} - Dataset - Resource
   </py:def>
 
-  <py:def function="page_heading">
-    ${h.dataset_link(c.package)}
-    /
-    ${h.resource_display_name(c.resource)}
-  </py:def>
+  <py:def function="page_heading">${h.dataset_display_name(c.package)}</py:def>
+
+  <py:match path="primarysidebar">
+
+    <li py:if="c.pkg_dict.get('license_id')" id="dataset-license" class="sidebar-section">
+      <strong>Licence:</strong>
+        <py:choose test="">
+          <span py:when="c.pkg.license and c.pkg.license.url"><a
+              href="${c.pkg.license.url}" rel="dc:rights">${c.pkg.license.title.split('::')[-1]}</a></span>
+          <span py:when="c.pkg.license" property="dc:rights">${c.pkg.license.title}</span>
+          <span py:when="c.pkg.license_id" property="dc:rights">${c.pkg.license_id}</span>
+          <span py:when="not(c.pkg.license)">License unknown</span>
+        </py:choose>
+        <py:if test="c.pkg.isopen()">
+            <a href="http://opendefinition.org/okd/" title="This dataset satisfies the Open Definition.">
+              <img class="open-data" src="${h.url_for_static('/images/ok_buttons/od_80x15_blue.png')}" alt="[Open Data]" />
+            </a>
+        </py:if>
+        <py:if test="not c.pkg.isopen()">
+            <span class="closed">
+              ${h.icon('lock')}
+            </span>
+        </py:if>
+    </li>
+
+  </py:match>
+  
 
   <div py:match="content">
-    <div class="resource-actions">
-      <a py:if="c.resource.get('url')" class="btn btn-primary resource-url-analytics resource-type-${c.resource.get('resource_type')}" href="${c.resource.get('url')}">
-        <py:choose test="c.resource.get('resource_type')">
-          <py:when test="'listing'">View</py:when>
-          <py:when test="'service'">View</py:when>
-          <py:when test="'api'">API Endpoint</py:when>
-          <py:otherwise>
-            <div class="download">
-              <img src="${h.icon_url('arrow-down-16')}"/>
-              Download
-            </div>
-          </py:otherwise>
-        </py:choose>
-      </a>
-      <!--
-      <py:if test="config.get('ckan.datastore.enabled', False)">
-        <py:if test="c.resource.get('webstore_url')">
-          <a class="btn btn-success" data-toggle="modal" href=".modal-data-api-help">Data API</a>
+
+    <div class="package-box">
+      <h3 class="alt">
+        <i class="resource"></i>
+        ${h.resource_display_name(c.resource)}
+      </h3>
+
+      <div class="inner faded resource-actions">
+        <a py:if="c.resource.get('url')" class="button button-primary resource-url-analytics resource-type-${c.resource.get('resource_type')}" href="${c.resource.get('url')}">
+          <py:choose test="c.resource.get('resource_type')">
+            <py:when test="'listing'">View</py:when>
+            <py:when test="'service'">View</py:when>
+            <py:when test="'api'">API Endpoint</py:when>
+            <py:otherwise>Download</py:otherwise>
+          </py:choose>
+        </a>
+        <py:if test="config.get('ckan.datastore.enabled', False)">
+          <py:if test="c.resource.get('webstore_url')">
+            <a class="button" data-toggle="modal" href=".modal-data-api-help">Data API</a>
+          </py:if>
+          <py:if test="not c.resource.get('webstore_url')">
+            <a class="button button-disabled" rel="tooltip" title="Data API is unavailable for this resource as DataStore is disabled">Data API</a>
+          </py:if>
         </py:if>
-        <py:if test="not c.resource.get('webstore_url')">
-          <a class="btn disabled" rel="tooltip" title="Data API is unavailable for this resource as DataStore is disabled">Data API</a>
-        </py:if>
-      </py:if>
-      -->
+      </div>
     </div>
 
   <py:if test="config.get('ckan.datastore.enabled', False)">
@@ -124,40 +147,17 @@
 
   ${data_viewer_embed_dialog()}
 
-    <div class="quick-info">
-      <dl>
-        <dt>Last updated</dt>
-        <dd>${h.time_ago_in_words_from_str(c.resource['last_modified'], granularity='day')}</dd>
-        <dt>Format</dt>
-        <dd>
-          ${c.resource['format'] or 'Unknown'}
-        </dd>
-        <dt>Licence</dt>
-        <dd>
-          <py:choose test="">
-            <span py:when="c.pkg.license and c.pkg.license.url"><a
-                href="${c.pkg.license.url}" rel="dc:rights">${c.pkg.license.title.split('::')[-1]}</a></span>
-            <span py:when="c.pkg.license" property="dc:rights">${c.pkg.license.title}</span>
-            <span py:when="c.pkg.license_id" property="dc:rights">${c.pkg.license_id}</span>
-            <span py:when="not(c.pkg.license)">License unknown</span>
-          </py:choose>
-          <py:if test="c.pkg.isopen()">
-              <a href="http://opendefinition.org/okd/" title="This dataset satisfies the Open Definition.">
-                <img class="open-data" src="${h.url_for_static('/images/ok_buttons/od_80x15_blue.png')}" alt="[Open Data]" />
-              </a>
-          </py:if>
-          <py:if test="not c.pkg.isopen()">
-              <span class="closed">
-                ${h.icon('lock')}
-              </span>
-          </py:if>
-        </dd>
-      </dl>
+    <div class="package-box" property="rdfs:label">
+      <h3><i class="note"></i> Description</h3>
+      <div class="inner faded">
+        ${c.resource.get('description') or '(No description)'}
+      </div>
     </div>
 
-    <div class="notes" property="rdfs:label">
-      <div id="notes-extract">
-        ${c.resource.get('description') or '(No description)'}
+    <div class="package-box">
+      <h3><i class="format"></i> Format</h3>
+      <div class="inner faded">
+        ${c.resource['format'] or 'Unknown'}
       </div>
     </div>
 
@@ -179,30 +179,40 @@
       <div id="ckanext-datapreview"></div>
     </div>
 
-    <br/>
-    <div class="resource-information">
-      <h3>Additional Information</h3>
-      <table class="table table-bordered table-striped table-condensed">
-        <thead>
-          <tr>
-            <th>Field</th>
-            <th>Value</th>
-          </tr>
-        </thead>
-        <tbody>
-
-          <td class="dataset-label" property="rdfs:label">url</td>
-          <td class="dataset-details" property="rdf:value"><a href="${c.resource['url']}">${c.resource['url']}</a></td>
-
-          <py:for each="i, key in enumerate(sorted(c.resource.keys()))">
-            <tr py:if="not key in ('description', 'url')">
-              <td class="dataset-label" property="rdfs:label">${_(key)}</td>
-              <td class="dataset-details" property="rdf:value">${c.resource[key]}</td>
+    <div class="package-box resource-information">
+      <h3>
+        <i class="info"></i>
+        Additional Information
+      </h3>
+      <div class="inner">
+        <table class="additional-table">
+          <thead>
+            <tr>
+              <th>Field</th>
+              <th>Value</th>
             </tr>
-          </py:for>
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+
+            <tr>
+              <td class="dataset-label" property="rdfs:label">url</td>
+              <td class="dataset-details" property="rdf:value"><a href="${c.resource['url']}">${c.resource['url']}</a></td>
+            </tr>
+
+            <py:for each="i, key in enumerate(sorted(c.resource.keys()))">
+              <tr py:if="not key in ('description', 'url')">
+                <td class="dataset-label" property="rdfs:label">${_(key)}</td>
+                <td class="dataset-details" property="rdf:value">${c.resource[key]}</td>
+              </tr>
+            </py:for>
+          </tbody>
+        </table>
+      </div>
     </div>
+
+    <div class="package-box"><div class="inner">
+      <a href="${h.url_for(controller='package', action='read', id=c.package['name'])}">&laquo; ${_('Back to dataset')}</a>
+    </div></div>
 
     <span class="insert-comment-thread"></span>
   </div>

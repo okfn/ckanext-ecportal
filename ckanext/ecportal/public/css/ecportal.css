@@ -943,6 +943,134 @@ form .field_required {
     left: -20px;
 }
 
+/* =================== */
+/* = Markdown Editor = */
+/* =================== */
+.markdown-editor {
+  background: #EEE;
+  border-radius: 5px 5px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border: 1px solid #CCC;
+  padding: 0 5px 5px 10px;
+  width: 32em;
+}
+.markdown-editor .button-row {
+  padding-right: 40px;
+  text-align: center;
+}
+.markdown-editor div.markdown-preview {
+  background: white;
+  border: 1px solid #CCC;
+  padding: 5px;
+  margin-bottom: 5px;
+  overflow: auto;
+}
+.markdown-editor textarea.markdown-input {
+  display: block;
+  width: 360px;
+  height: 70px;
+  margin: 0 0 5px 0;
+  padding: 5px;
+}
+
+/* ============= */
+/* = Mini-Tabs = */
+/* ============= */
+ul.button-row {
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+ul.button-row li {
+  display: inline;
+  margin-right: 10px;
+}
+
+
+/* Right-hand-side edit resource panel */
+.resource-panel {
+  background: #f9f9f9;
+  border: 1px solid #888;
+  padding: 10px 20px;
+  position: relative;
+}
+.resource-panel .resource-panel-close {
+  position: absolute;
+  right: -8px;
+  top: -12px;
+  width: 20px;
+  padding: 0;
+  text-align: center;
+}
+.resource-panel input[type="text"] {
+  width: 397px;
+}
+.resource-panel .markdown-editor {
+  width: 390px;
+}
+.resource-panel textarea {
+  height: 90px;
+}
+.resource-panel .control-group {
+  margin-bottom: 3px;
+}
+.resource-panel .hint {
+  font-size: 11px;
+}
+.resource-panel .resource-add {
+  min-height: 140px;
+  margin-bottom: 30px;
+}
+.resource-panel .resource-add input[type="text"] {
+  width: 280px;
+}
+
+/* Resource extra fields */
+/* --------------------- */
+.dynamic-extras .dynamic-extra {
+  margin: 1px 15px;
+}
+.dynamic-extras .remove-resource-extra {
+  padding: 0 7px;
+  font-size: 8px;
+}
+.dynamic-extras input.strikethrough {
+  text-decoration: line-through;
+}
+.dynamic-extras input[type="text"] {
+  width: 164px;
+}
+
+
+button.resource-edit-delete {
+  margin-top: 10px;
+  float: right;
+}
+
+
+
+/* HasErrors */
+.resource-list li.hasErrors {
+  border-color: #c00;
+  border-right: 1px solid #c00;
+}
+.resource-list li.active.hasErrors {
+  border-right: 0;
+}
+.resource-list li.hasErrors a {
+  color: #c00;
+}
+.resource-errors {
+  display: none;
+}
+.resource-errors dl {
+  margin-bottom: 0;
+}
+body.editresources .error-explanation {
+  /* Let JS render the resource errors inline */
+  display: none;
+}
+
 
 /* =======================================================
    Tweaks to the theme */
@@ -1164,6 +1292,15 @@ input.search {
   padding-left: 20px;
   margin-bottom: 10px;
 }
+.package-box h3.alt {
+  color: #505D8C;
+  font-size: 16px;
+}
+.package-box h3.alt .resource {
+  background-image: url("/images/graph.png");
+  background-position: 50% 50%;
+  height: 20px;
+}
 .package-box .inner {
   padding-left: 20px;
 }
@@ -1196,7 +1333,7 @@ input.search {
 }
 .quick-info dd,
 .additional-table .dataset-details {
-  color: #777;
+  color: #999;
   margin-left: 0;
 }
 
@@ -1225,6 +1362,14 @@ input.search {
   background: url("../images/icons.png") -90px 0px no-repeat;
   margin: 0px 0 0 -25px;
 }
+.format {
+  display:block;
+  float:left;
+  width:19px;
+  height:19px;
+  background: url("../images/format.png") 0px 0px no-repeat;
+  margin: 0px 0 0 -25px;
+}
 
 .resource-list li {
   margin-bottom: 5px;
@@ -1237,20 +1382,7 @@ input.search {
 .resource-list a.download {
   float: left;
   font-style: normal;
-  text-transform: uppercase;
-  background-color: #CAD0E2;
-  color: #666;
-  padding: 0 3px;
-  margin-right: 10px;
-  font-size: 11px;
-  border-radius: 2px;
 }
-.resource-list a.download:hover {
-  color: white;
-  background-color: #1B88C2;
-  text-decoration: none;
-}
-
 
 .facet-options {
   margin: 0;
@@ -1320,4 +1452,52 @@ input.search {
 .item_link .additional {
   color: #999 !important;
   font-weight: normal;
+}
+
+.faded {
+  color: #999;
+}
+
+.button {
+  display: inline-block;
+  font-style: normal;
+  text-transform: uppercase;
+  padding: 0 3px;
+  margin-right: 10px;
+  font-size: 11px;
+  border-radius: 2px;
+  background-color: #999;
+  color: white !important;
+  border: 1px solid #999;
+}
+.button:hover {
+  border-color: #000;
+  background-color: #000;
+  text-decoration: none;
+}
+
+.button-primary {
+  background-color: #09C;
+  border-color: #09C;
+}
+
+.button-disabled {
+  cursor: default;
+  color: #999 !important;
+  background-color: #FFF;
+  border-color: #CCC;
+}
+.button-disabled:hover {
+  background-color: #FFF;
+}
+
+ul.menu li a:hover {
+  text-decoration: none;
+}
+
+.dataset-editresources-form .fade {
+  display: none !important;
+}
+.dataset-editresources-form .fade.in {
+  display: block !important;
 }

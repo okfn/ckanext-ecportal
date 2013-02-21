@@ -47,10 +47,10 @@
         <div class="region-content">
           <h2>
             ${_('Recent Updates')}
-            <!-- <a href="${h.url_for(controller='group', action='index')}">
+            <a href="${h.url_for(controller='package', action='search')}">
               <i class="resource"></i>
-              ${_('view all updates')} &raquo;
-            </a> -->
+              ${_('view all datasets')} &raquo;
+            </a>
           </h2>
           ${h.snippet('snippets/recent_updates_package_list.html', packages=h.recent_updates(10))}
         </div>
