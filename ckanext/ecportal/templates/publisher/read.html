@@ -21,7 +21,7 @@
     <span class="seperator">&gt;</span>
     <a href="${h.url_for(controller='group', action='index')}">Publisher</a>
     <span class="seperator">&gt;</span>
-    <a href="${h.url_for(controller='group', action='read', id=c.group_dict.name)}">${c.group_dict.display_name}</a>
+    <a href="${h.url_for(controller='group', action='read', id=c.group_dict.name)}">${h.truncate(c.group_dict.display_name, length=35)}</a>
   </py:def>
 
   <py:def function="search_value"><py:if test="c.q">${c.q}</py:if></py:def>
