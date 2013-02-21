@@ -15,9 +15,16 @@
       });
     </script>
   </py:def>
-  
-  <py:def function="page_title">Login - User</py:def>
-  <py:def function="page_heading">Login to ${g.site_title}</py:def>
+
+  <py:def function="breadcrumbs_extra">
+    <span class="seperator">&gt;</span>
+    <a href="${h.url_for(controller='group', action='index')}">Access to data provider's area</a>
+  </py:def>
+  <py:def function="page_title">Access to data provider's area</py:def>
+  <py:def function="page_heading">Access to data provider's area</py:def>
+
+  <div py:match="minornavigation">
+  </div>
 
   <div py:match="content">
 
@@ -32,8 +39,10 @@
         <input type="password" name="password" value="" />
         <br/>
         <!-- optional 2 year cookie expiry -->
-        <label for="remember">Remember me:</label>
-        <input type="checkbox" name="remember" value="63072000" checked="checked" />
+        <span class="remember">
+          <input type="checkbox" name="remember" value="63072000" checked="checked" />
+          <label for="remember">Remember me</label>
+        </span>
         <br/>
       </fieldset>
       <input name="s" id="s" type="submit" class="btn primary" value="Sign In"/>
