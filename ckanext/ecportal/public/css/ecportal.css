@@ -1501,3 +1501,15 @@ ul.menu li a:hover {
 .dataset-editresources-form .fade.in {
   display: block !important;
 }
+
+.logo {
+  position: relative;
+}
+.logo a {
+  position: absolute;
+  height: 60px;
+  bottom: 3px;
+}
+#logo {
+  left: 84px;
+}

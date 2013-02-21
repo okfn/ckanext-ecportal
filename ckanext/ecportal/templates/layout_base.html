@@ -77,6 +77,9 @@
       </div>
     </div>
     <div class="logo">
+      <a id="logo-root" rel="europa.eu" title="europa.eu" href="http://europa.eu/index_${h.current_locale()}.htm">
+        <img src="${h.url_for_static('/images/logo/logo.gif')}" alt="europa.eu" />
+      </a>
       <a id="logo" rel="Home" title="Home" href="${h.root_url()}">
         <img src="${h.url_for_static('/images/logo/logo_{0}.gif').format(h.current_locale())}" alt="${_(g.site_title)}" title="${_(g.site_title)}" />
       </a>
