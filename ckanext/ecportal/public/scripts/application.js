@@ -513,7 +513,7 @@ CKAN.View.Resource = Backbone.View.extend({
           ['tsv', 'tsv'],
           ['txt', 'txt'],
           ['xls', 'xls'],
-          ['xml', 'xml'],
+          ['xml', 'xml']
         ]
     };
     // Generate DOM elements
@@ -784,17 +784,19 @@ CKAN.View.ResourceAddUpload = Backbone.View.extend({
       done: function(e, data) {
         self.onUploadComplete(self.key);
       }
-    })
+    });
   },
 
   ISODateString: function(d) {
-    function pad(n) {return n<10 ? '0'+n : n};
-    return d.getUTCFullYear()+'-'
-       + pad(d.getUTCMonth()+1)+'-'
-       + pad(d.getUTCDate())+'T'
-       + pad(d.getUTCHours())+':'
-       + pad(d.getUTCMinutes())+':'
-       + pad(d.getUTCSeconds());
+    function pad(n) {
+      return n < 10 ? '0' + n : n;
+    }
+    return d.getUTCFullYear() + '-' +
+      pad(d.getUTCMonth()+1) + '-' +
+      pad(d.getUTCDate()) + 'T' +
+      pad(d.getUTCHours()) + ':' +
+      pad(d.getUTCMinutes()) + ':' +
+      pad(d.getUTCSeconds());
   },
 
   // Create an upload key/label for this file.
@@ -817,7 +819,9 @@ CKAN.View.ResourceAddUpload = Backbone.View.extend({
 
   updateFormData: function(key) {
     var self = this;
-    self.setMessage(CKAN.Strings.checkingUploadPermissions + ' <img src="' + CKAN.SITE_URL_NO_LOCALE + '/images/icons/ajaxload-circle.gif" class="spinner" />');
+    self.setMessage(CKAN.Strings.checkingUploadPermissions +
+                    ' <img src="' + CKAN.SITE_URL_NO_LOCALE +
+                    '/images/icons/ajaxload-circle.gif" class="spinner" />');
     self.el.find('.fileinfo').text(key);
     $.ajax({
       url: CKAN.SITE_URL + '/api/storage/auth/form/' + key,
@@ -857,31 +861,27 @@ CKAN.View.ResourceAddUpload = Backbone.View.extend({
         if (name && name.length > 0 && name[0] === '/') {
           name = name.slice(1);
         }
-        var d = new Date(data._last_modified);
-        var lastmod = self.ISODateString(d);
         var newResource = new CKAN.Model.Resource({});
         newResource.set({
-            url: data._location
-            , name: name
-            , size: data._content_length
-            , last_modified: lastmod
-            , format: data._format
-            , mimetype: data._format
-            , resource_type: 'file.upload'
-            , owner: data['uploaded-by']
-            , hash: data._checksum
-            , cache_url: data._location
-            , cache_url_updated: lastmod
-            , webstore_url: data._location
+          url: data._location,
+          name: name,
+          size: data._content_length,
+          last_modified: data._last_modified,
+          format: data._format,
+          mimetype: data._format,
+          resource_type: 'file.upload',
+          owner: data['uploaded-by'],
+          hash: data._checksum,
+          cache_url: data._location,
+          cache_url_updated: data._last_modified,
+          webstore_url: data._location
+        }, {
+          error: function(model, error) {
+            var msg = 'Filed uploaded OK but error adding resource: ' + error + '.';
+            msg += 'You may need to create a resource directly. Uploaded file at: ' + data._location;
+            self.setMessage(msg, 'error');
           }
-          , {
-            error: function(model, error) {
-              var msg = 'Filed uploaded OK but error adding resource: ' + error + '.';
-              msg += 'You may need to create a resource directly. Uploaded file at: ' + data._location;
-              self.setMessage(msg, 'error');
-            }
-          }
-        );
+        });
         self.collection.add(newResource);
         self.setMessage('File uploaded OK and resource added', 'success');
       }
@@ -889,7 +889,7 @@ CKAN.View.ResourceAddUpload = Backbone.View.extend({
   },
 
   setMessage: function(msg, category) {
-    var category = category || 'alert-info';
+    category = category || 'alert-info';
     this.$messages.removeClass('alert-info alert-success alert-error');
     this.$messages.addClass(category);
     this.$messages.show();
