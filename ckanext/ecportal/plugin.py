@@ -178,16 +178,17 @@ def group_show(context, data_dict):
 
     group_plugin = lib_plugins.lookup_group_plugin(group_dict['type'])
     try:
-        schema = group_plugin.db_to_form_schema_options({
+        group_schema = group_plugin.db_to_form_schema_options({
             'type': 'show',
             'api': 'api_version' in context,
             'context': context
         })
     except AttributeError:
-        schema = group_plugin.db_to_form_schema()
+        group_schema = group_plugin.db_to_form_schema()
 
-    if schema:
-        package_dict, errors = validate(group_dict, schema, context=context)
+    if group_schema:
+        package_dict, errors = validate(group_dict, group_schema,
+                                        context=context)
 
     return group_dict
 
