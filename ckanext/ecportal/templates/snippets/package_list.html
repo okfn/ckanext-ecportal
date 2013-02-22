@@ -11,7 +11,7 @@
       <a href="${h.url_for(controller='package', action='read', id=package.get('name'))}" class="item_link">
         <i class="resource"></i>
         <p>${package.get('title') or package.get('name')}</p>
-        ${h.markdown_extract(package.get('description', u''))}
+        <p class="additional">${h.markdown_extract(package.get('description', u''))}</p>
       </a>
     </li>
   </ul>

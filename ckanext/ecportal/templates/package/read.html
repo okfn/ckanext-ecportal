@@ -26,7 +26,7 @@
       <a href="${h.url_for(controller='group', action='read', id=group['name'])}">${h.truncate(group.get('title') or group.get('name'), length=35)}</a>
       <span class="seperator">&gt;</span>
     </span>
-    <a href="${h.url_for(controller='group', action='read', id=c.pkg_dict.name)}">${h.truncate(c.pkg_dict.title or c.pkg_dict.name, length=35)}</a>
+    <a href="${h.url_for(controller='package', action='read', id=c.pkg_dict.name)}">${h.truncate(c.pkg_dict.title or c.pkg_dict.name, length=35)}</a>
   </py:def>
 
   <py:match path="primarysidebar">

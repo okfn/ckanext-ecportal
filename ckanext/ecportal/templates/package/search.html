@@ -26,7 +26,7 @@
   <div py:match="//div[@id='page-search']" class="page-search">
     <form>
       <input type="text" name="q" value="${search_value()}" placeholder="${_('Search datasets...')}" />
-      <input type="submit" />
+      <input type="submit" value="" />
       <span py:if="c.fields">
         <py:for each="(k, v) in c.fields"> 
           <input type="hidden" name="${k}" value="${v}" />  
