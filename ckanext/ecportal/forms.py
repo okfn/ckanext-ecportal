@@ -340,7 +340,8 @@ class ECPortalDatasetForm(p.SingletonPlugin):
                 'format_description': helpers.format_description,
                 'recent_updates': helpers.recent_updates,
                 'top_publishers': helpers.top_publishers,
-                'current_date': helpers.current_date}
+                'current_date': helpers.current_date,
+                'group_facets_by_field': helpers.group_facets_by_field}
 
 
 class ECPortalPublisherForm(p.SingletonPlugin):

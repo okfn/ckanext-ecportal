@@ -75,3 +75,13 @@ def top_publishers(groups):
 
 def current_date():
     return datetime.date.today().strftime('%d/%m/%Y')
+
+
+def group_facets_by_field(fields):
+    facets = {}
+    for field, value in fields:
+        if field in facets:
+            facets[field].append(value)
+        else:
+            facets[field] = [value]
+    return facets

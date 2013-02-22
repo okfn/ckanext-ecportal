@@ -1252,12 +1252,16 @@ h3 { margin-bottom: 10px; }
   background-color: #EEE;
 }
 .filter-entry {
-  display: inline;
+  display: block;
   margin-right: 10px;
 }
 .filter-entry .value,
-.filter-entry a {
-  background-color: #FFF;
+.filter-entry a, .filter-entry a:visited {
+  color: #666;
+}
+.filter-entry a:hover {
+  color: #b94a48;
+  text-decoration: line-through;
 }
 .filter-entry .value {
   padding: 2px 0 2px 5px;
