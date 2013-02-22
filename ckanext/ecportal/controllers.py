@@ -1,17 +1,13 @@
-try:
-    import json
-except ImportError:
-    import simplejson as json
-
 import ckan.controllers.user
 import ckan.model as model
 import ckan.plugins as p
 import ckan.lib.navl.dictization_functions
+import ckan.lib.helpers
+import ckanext.ecportal.schema as schema
 import forms
 
-import ckanext.ecportal.schema as schema
-
 _validate = ckan.lib.navl.dictization_functions.validate
+json = ckan.lib.helpers.json
 _f = forms.ECPortalDatasetForm()
 
 

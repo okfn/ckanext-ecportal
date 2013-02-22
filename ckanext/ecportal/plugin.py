@@ -17,8 +17,6 @@ import ckanext.ecportal.auth as ecportal_auth
 import ckanext.ecportal.schema as schema
 
 log = logging.getLogger('ckan.logic')
-
-# define some shortcuts
 validate = ckan.lib.navl.dictization_functions.validate
 check_access = logic.check_access
 NotFound = logic.NotFound
