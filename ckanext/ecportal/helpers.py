@@ -21,10 +21,14 @@ def current_locale():
 
 
 def root_url():
-    if current_locale() == 'en':
+    locale = p.toolkit.request.environ.get('CKAN_LANG')
+    default_locale = p.toolkit.request.environ.get('CKAN_LANG_IS_DEFAULT',
+                                                   True)
+
+    if default_locale:
         return '/'
     else:
-        return '/%s/' % current_locale()
+        return '/{0}/'.format(locale)
 
 
 def format_description(description):
