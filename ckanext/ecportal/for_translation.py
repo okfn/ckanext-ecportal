@@ -1,7 +1,7 @@
 from ckan.lib.base import _
 
 
-def terms_for_traslation():
+def terms_for_translation():
     # distribution type
     _('Feed')
     _('Web Service')
@@ -60,10 +60,10 @@ def terms_for_traslation():
     _('Social Media')
     _('Add a dataset')
     _('Publishers')
-    _('The EU Open Data Hub')
+    _('Data Portal')
+    _('Open Data Portal')
     _('The Open Data Hub of the European Union')
     _('European Commission')
-    _('Open Data Portal')
 
     # footer
     _('Last update')
@@ -87,8 +87,12 @@ def terms_for_traslation():
 
     # search
     _('Tags')
+    _('Keywords')
     _('Resource formats')
     _('Groups')
+    _('Publisher')
+    _('Language')
+    _('Geographical Coverage')
 
     # publishers
     _('List Publishers')
