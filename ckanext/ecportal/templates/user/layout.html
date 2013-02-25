@@ -8,16 +8,16 @@
   <py:match path="minornavigation">
     <ul class="nav nav-pills" py:choose="c.is_myself">
       <py:when test="True">
-        <li class="${'active' if c.action=='read' else ''}"><a href="${h.url_for(controller='user', action='me')}">My Profile</a></li>
-        <li class="${'active' if c.action=='edit' else ''}"><a href="${h.url_for(controller='user', action='edit')}">Edit Profile</a></li>
-        <li><a href="${h.url_for('/user/logout')}">Log out</a></li>
+        <li class="${'active' if c.action=='read' else ''}"><a href="${h.url_for(controller='user', action='me')}">${_('My Profile')}</a></li>
+        <li class="${'active' if c.action=='edit' else ''}"><a href="${h.url_for(controller='user', action='edit')}">${_('Edit Profile')}</a></li>
+        <li><a href="${h.url_for('/user/logout')}">${_('Log out')}</a></li>
       </py:when>
       <py:otherwise>
         <py:if test="c.id">
-          <li class="${'active' if c.action=='read' else ''}"><a href="${h.url_for(controller='user', action='read', id=c.user_dict.name)}">View Profile</a></li>
+          <li class="${'active' if c.action=='read' else ''}"><a href="${h.url_for(controller='user', action='read', id=c.user_dict.name)}">${_('View Profile')}</a></li>
         </py:if>
         <py:if test="not c.id">
-          <li class="${'active' if c.action=='login' else ''}"><a href="${h.url_for(controller='user', action='login')}">Login</a></li>
+          <li class="${'active' if c.action=='login' else ''}"><a href="${h.url_for(controller='user', action='login')}">${_('Login')}</a></li>
         </py:if>
       </py:otherwise>
     </ul>

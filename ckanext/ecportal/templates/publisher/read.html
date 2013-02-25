@@ -8,7 +8,7 @@
   <py:def function="page_title">${c.group_dict.display_name}</py:def>
   <py:def function="page_heading">
     <div class="pull-right">
-      <small>(${c.page.item_count} datasets)</small>
+      <small>(${c.page.item_count} ${_('datasets')})</small>
       <a href="${h.url_for(controller='feed', action='group', id=c.group_dict.name)}"><i class="rss"></i></a>
     </div>
     ${c.group_dict.display_name}
@@ -19,7 +19,7 @@
 
   <py:def function="breadcrumbs_extra">
     <span class="seperator">&gt;</span>
-    <a href="${h.url_for(controller='group', action='index')}">Publisher</a>
+    <a href="${h.url_for(controller='group', action='index')}">${_('Publisher')}</a>
     <span class="seperator">&gt;</span>
     <a href="${h.url_for(controller='group', action='read', id=c.group_dict.name)}">${h.truncate(c.group_dict.display_name, length=35)}</a>
   </py:def>
@@ -52,25 +52,25 @@
         class="widget-container widget_text">
       <ul class="property-list">
         <li py:if="group_administrators">
-          <h3>Administrators</h3>
+          <h3>${_('Administrators')}</h3>
           <ul class="no-break">
             <li py:for="admin in group_administrators">${h.linked_user(admin)}</li>
           </ul>
         </li>
         <li py:if="group_editors and in_group">
-          <h3>Members</h3>
+          <h3>${_('Members')}</h3>
           <ul class="no-break">
             <li py:for="editor in group_editors">${h.linked_user(editor)}</li>
           </ul>
         </li>
       </ul>
     </li>
-    ${facet_div('tags', 'Keywords')}
-    ${facet_div('res_format', 'Resource Formats')}
+    ${facet_div('tags', _('Keywords'))}
+    ${facet_div('res_format', _('Resource Formats'))}
   </py:match>
 
   <py:match path="content">
-    <h3 py:if="c.group['state'] != 'active'">State: ${c.group['state']}</h3>
+    <h3 py:if="c.group['state'] != 'active'">${_('State')}: ${c.group['state']}</h3>
     <div py:if="str(c.description_formatted).strip()">
       ${c.description_formatted}
     </div>

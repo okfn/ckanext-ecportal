@@ -22,14 +22,14 @@
       >
 
       <h3 py:if="c.error" class="form-errors">
-        Error: ${c.error}
+        ${_('Error')}: ${c.error}
       </h3>
 
       <input type="hidden" name="group_name" value="${c.group_dict['name']}"/>
 
       <table class="table table-bordered table-striped">
         <tr>
-          <th></th><th>Revision</th><th>Timestamp</th><th>Author</th><th>Log Message</th>
+          <th></th><th>${_('Revision')}</th><th>${_('Timestamp')}</th><th>${_('Author')}</th><th>${_('Log Message')}</th>
         </tr>
         <py:for each="index, revision_dict in enumerate(c.group_revisions)">
           <tr>

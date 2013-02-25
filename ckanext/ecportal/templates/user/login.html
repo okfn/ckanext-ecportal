@@ -18,10 +18,10 @@
 
   <py:def function="breadcrumbs_extra">
     <span class="seperator">&gt;</span>
-    <a href="${h.url_for(controller='group', action='index')}">Access to data provider's area</a>
+    <a href="${h.url_for(controller='group', action='index')}">${_('Access to data provider's area')}</a>
   </py:def>
-  <py:def function="page_title">Access to data provider's area</py:def>
-  <py:def function="page_heading">Access to data provider's area</py:def>
+  <py:def function="page_title">${_('Access to data provider's area')}</py:def>
+  <py:def function="page_heading">${_('Access to data provider's area')}</py:def>
 
   <div py:match="minornavigation">
   </div>
@@ -32,20 +32,20 @@
       <fieldset>
         <!--legend i18n:msg="site_title">Login</legend-->
 
-        <label for="login">Login:</label>
+        <label for="login">${_('Login')}:</label>
         <input type="text" name="login" value="" />
         <br/>
-        <label for="password">Password:</label>
+        <label for="password">${_('Password')}:</label>
         <input type="password" name="password" value="" />
         <br/>
         <!-- optional 2 year cookie expiry -->
         <span class="remember">
           <input type="checkbox" name="remember" value="63072000" checked="checked" />
-          <label for="remember">Remember me</label>
+          <label for="remember">${_('Remember me')}</label>
         </span>
         <br/>
       </fieldset>
-      <input name="s" id="s" type="submit" class="btn primary" value="Sign In"/>
+      <input name="s" id="s" type="submit" class="btn primary" value="${_('Sign In')}"/>
     </form>
     <br/> 
     <!-- Simple OpenID Selector -->

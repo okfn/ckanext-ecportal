@@ -11,7 +11,7 @@
       <a href="${h.url_for(controller='package', action='read', id=package.get('name'))}" class="item_link">
         <i class="resource"></i>
         <p>${package.get('title') or package.get('name')}</p>
-        was updated on ${h.render_datetime(package['metadata_modified'], '%d/%m/%y')}.
+        ${_('was updated on')} ${h.render_datetime(package['metadata_modified'], '%d/%m/%y')}.
       </a>
     </li>
   </ul>

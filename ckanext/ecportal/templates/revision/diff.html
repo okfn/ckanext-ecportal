@@ -2,11 +2,11 @@
   xmlns:xi="http://www.w3.org/2001/XInclude"
   py:strip="">
   
-  <py:def function="page_title">Differences - Revisions</py:def>
+  <py:def function="page_title">${_('Differences - Revisions')}</py:def>
   <py:def function="body_class">${h.literal('no-sidebar')}</py:def>
 
   <div py:match="content">
-    <h2>Revision Differences - 
+    <h2>${_('Revision Differences')} - 
     <span py:choose="c.diff_entity">
         <a py:when="'package'">
             <a href="${h.url_for(controller='package', action='read', id=c.pkg.name)}">${c.pkg.name}</a>
@@ -32,15 +32,15 @@
           <col class="fields"/><col class="values"/>
         </colgroup>  
         <tr>
-          <th>Field</th><th>Difference</th>
+          <th>${_('Field')}</th><th>${_('Difference')}</th>
         </tr>
        <py:for each="field, diff in c.diff">
-          <tr><td>${field}</td><td><pre>${diff}</pre></td></tr>
+          <tr><td>${_(field)}</td><td><pre>${diff}</pre></td></tr>
         </py:for>
       </table>
     </py:if>
     <py:if test="not c.diff">
-      <h3>No differences</h3>
+      <h3>${_('No differences')}</h3>
     </py:if>
   </div>
 
