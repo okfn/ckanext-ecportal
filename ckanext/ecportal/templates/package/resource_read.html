@@ -176,7 +176,7 @@
 
     <div py:if="not c.resource.get('description') and c.package.get('notes')" id="dataset-description">
       <div>
-        <strong i18n:msg="">
+        <strong>
           ${_('From')}: <a href="${h.url_for(controller='package', action='read', id=c.package['name'])}">${ c.package.get('title') or c.package.get('name') }</a>:
         </strong>
       </div>
