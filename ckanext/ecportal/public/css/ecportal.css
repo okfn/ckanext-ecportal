@@ -108,7 +108,7 @@ h2 a:hover .publisher, a.item_link:hover .publisher {
   background: url("../images/icons.png") -34px -17px no-repeat;
 }
 
-.tag {
+.tag-icon {
   display:block;
   float:left;
   width:19px;
