@@ -60,112 +60,78 @@
             <dt>${_('URL')}</dt>
             <dd property="foaf:homepage">${c.pkg_url_link}</dd>
           </dl>
-
-          <dl py:if="c.pkg_dict.get('alternative_title')">
-            <dt>${_('Alternative Title')}</dt>
-            <dd>${c.pkg_dict['alternative_title']}</dd>
-          </dl>
-
-          <dl py:if="c.pkg_dict.get('status')">
-            <dt>${_('Status')}</dt>
-            <dd>${c.pkg_dict['status']}</dd>
-          </dl>
-
-          <dl py:if="c.pkg_dict.get('identifier')">
-            <dt>${_('Identifier')}</dt>
-            <dd>${c.pkg_dict['identifier']}</dd>
-          </dl>
-
-          <dl py:if="c.pkg_dict.get('interoperability_level')">
-            <dt>${_('Interoperability Level')}</dt>
-            <dd>${c.pkg_dict['interoperability_level']}</dd>
-          </dl>
-
-          <dl py:if="c.pkg_dict.get('type_of_dataset')">
-            <dt>${_('Type of Dataset')}</dt>
-            <dd>${", ".join(c.pkg_dict['type_of_dataset'])}</dd>
-          </dl>
-
           <dl py:if="c.pkg_dict.get('release_date')">
             <dt>${_('Release Date')}</dt>
             <dd>${c.pkg_dict['release_date']}</dd>
           </dl>
-
           <dl py:if="c.pkg_dict.get('modified_date')">
             <dt>${_('Modified Date')}</dt>
             <dd>${c.pkg_dict['modified_date']}</dd>
           </dl>
+          <dl py:if="c.pkg_dict.get('status')">
+            <dt>${_('Status')}</dt>
+            <dd>${c.pkg_dict['status']}</dd>
+          </dl>
+          <p class="more-meta"><a href="#more-meta">${_('More Additional Information')}</a></p>
+        </div>
 
+        <div id="#more-meta" class="quick-info" style="display:none;">
           <dl py:if="c.pkg_dict.get('accrual_periodicity')">
             <dt>${_('Accrual Periodicity')}</dt>
             <dd>${c.pkg_dict['accrual_periodicity']}</dd>
           </dl>
-
           <dl py:if="c.pkg_dict.get('temporal_coverage_from')">
             <dt>${_('Temporal Coverage From')}</dt>
             <dd>${c.pkg_dict['temporal_coverage_from']}</dd>
           </dl>
-
           <dl py:if="c.pkg_dict.get('temporal_coverage_to')">
             <dt>${_('Temporal Coverage To')}</dt>
             <dd>${c.pkg_dict['temporal_coverage_to']}</dd>
           </dl>
-
           <dl py:if="c.pkg_dict.get('temporal_granularity')">
             <dt>${_('Temporal Granularity')}</dt>
             <dd>${c.pkg_dict['temporal_granularity']}</dd>
           </dl>
-
           <dl py:if="c.pkg_dict.get('geographical_coverage')">
             <dt>${_('Geographical Coverage')}</dt>
             <dd>${", ".join(c.pkg_dict['geographical_coverage'])}</dd>
           </dl>
-
           <dl py:if="c.pkg_dict.get('language')">
             <dt>${_('Language')}</dt>
             <dd>${", ".join(c.pkg_dict['language'])}</dd>
           </dl>
-
           <dl py:if="c.pkg_dict.get('contact_name')">
             <dt>${_('Contact Name')}</dt>
             <dd>${c.pkg_dict['contact_name']}</dd>
           </dl>
-
           <dl py:if="c.pkg_dict.get('contact_email')">
             <dt>${_('Contact E-mail')}</dt>
             <dd>${c.pkg_dict['contact_email']}</dd>
           </dl>
-
           <dl py:if="c.pkg_dict.get('contact_address')">
             <dt>${_('Contact Address')}</dt>
             <dd>${c.pkg_dict['contact_address']}</dd>
           </dl>
-
           <dl py:if="c.pkg_dict.get('contact_telephone')">
             <dt>${_('Contact Telephone')}</dt>
             <dd>${c.pkg_dict['contact_telephone']}</dd>
           </dl>
-
           <dl py:if="c.pkg_dict.get('contact_webpage')">
             <dt>${_('Contact Web Page')}</dt>
             <dd><a href="${c.pkg_dict['contact_webpage']}">${c.pkg_dict['contact_webpage']}</a></dd>
           </dl>
-
           <dl py:if="c.pkg.version">
             <dt>${_('Version')}</dt>
             <dd>${c.pkg.version}</dd>
           </dl>
-
           <dl py:if="c.pkg_dict.get('version_description')">
             <dt>${_('Version Description')}</dt>
             <dd>${c.pkg_dict['version_description']}</dd>
           </dl>
-
           <dl py:if="c.eu_country">
             <dt>${_('Country')}</dt>
             <dd>${h.code_to_country(c.eu_country)}</dd>
           </dl>
-
           <dl py:for="i, (key, value) in enumerate(c.pkg_extras)"
             rel="dc:relation" resource="_:extra${i}">
             <dt property="rdfs:label">${_(key)}</dt>

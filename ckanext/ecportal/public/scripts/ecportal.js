@@ -20,5 +20,14 @@
 				dropdown_image.attr('src', arrow_url.replace('{0}', 'down'));
 			}
 		}
+
+		if ($('#more-meta dl').length > 0) {
+			$('.more-meta a').bind('click', function() {
+				$(this).hide();
+				$('#more-meta').show();
+			});
+		} else {
+			$('.more-meta').hide();
+		}
 	});
 }(jQuery));
