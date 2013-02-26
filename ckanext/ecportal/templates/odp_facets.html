@@ -24,12 +24,15 @@
       <span py:for="value in values">
         <span class="value" py:choose="">
           <a href="${c.remove_field(field, value)}">
-            <py:when test="c.translated_fields and c.translated_fields.has_key((field,value))">
-            ${c.translated_fields[(field,value)]}
-            </py:when>
-            <py:otherwise>
-            ${value}
-            </py:otherwise>
+            <span>
+              <py:when test="c.translated_fields and c.translated_fields.has_key((field,value))">
+              ${c.translated_fields[(field,value)]}
+              </py:when>
+              <py:otherwise>
+              ${value}
+              </py:otherwise>
+            </span>
+            <strong>-</strong>
           </a>
         </span>
       </span>

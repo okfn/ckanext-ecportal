@@ -92,12 +92,12 @@
     <a href="${h.url_for(controller='group', action='index')}">${_('Publisher')}</a>
     <span class="seperator">&gt;</span>
     <span py:for="group in sorted(c.pkg_dict.groups, key=lambda g: g['title'] or g['name'])">
-      <a href="${h.url_for(controller='group', action='read', id=group['name'])}">${group.get('title') or group.get('name')}</a>
+      <a href="${h.url_for(controller='group', action='read', id=group['name'])}">${h.truncate(group.get('title') or group.get('name'), length=35)}</a>
       <span class="seperator">&gt;</span>
     </span>
-    <a href="${h.url_for(controller='package', action='read', id=c.pkg_dict.name)}">${c.pkg_dict.title or c.pkg_dict.name}</a>
+    <a href="${h.url_for(controller='package', action='read', id=c.pkg_dict.name)}">${h.truncate(c.pkg_dict.title or c.pkg_dict.name, length=35)}</a>
     <span class="seperator">&gt;</span>
-    <a href="">${h.resource_display_name(c.resource)}</a>
+    <a href="">${h.truncate(h.resource_display_name(c.resource), length=35)}</a>
   </py:def>
 
   <py:match path="primarysidebar">
@@ -133,25 +133,6 @@
         <i class="resource"></i>
         ${h.resource_display_name(c.resource)}
       </h3>
-
-      <div class="inner faded resource-actions">
-        <a py:if="c.resource.get('url')" class="button button-primary resource-url-analytics resource-type-${c.resource.get('resource_type')}" href="${c.resource.get('url')}">
-          <py:choose test="c.resource.get('resource_type')">
-            <py:when test="'listing'">${_('View')}</py:when>
-            <py:when test="'service'">${_('View')}</py:when>
-            <py:when test="'api'">${_('API Endpoint')}</py:when>
-            <py:otherwise>${_('Download')}</py:otherwise>
-          </py:choose>
-        </a>
-        <py:if test="config.get('ckan.datastore.enabled', False)">
-          <py:if test="c.resource.get('webstore_url')">
-            <a class="button" data-toggle="modal" href=".modal-data-api-help">${_('Data API')}</a>
-          </py:if>
-          <py:if test="not c.resource.get('webstore_url')">
-            <a class="button button-disabled" rel="tooltip" title="${_('Data API is unavailable for this resource as DataStore is disabled')}">${_('Data API')}</a>
-          </py:if>
-        </py:if>
-      </div>
     </div>
 
   <py:if test="config.get('ckan.datastore.enabled', False)">
@@ -214,7 +195,9 @@
     </div>
 
     <div class="package-box"><div class="inner">
-      <a href="${h.url_for(controller='package', action='read', id=c.package['name'])}">&laquo; ${_('Back to dataset')}</a>
+      <a href="${h.url_for(controller='package', action='read', id=c.package['name'])}">
+        <i class="icon-back"></i> ${_('Back to dataset')}
+      </a>
     </div></div>
 
     <span class="insert-comment-thread"></span>
