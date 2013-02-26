@@ -99,6 +99,12 @@
         <li class="leaf"><a href="${h.root_url()}linked-data">${_('Linked Data')}</a></li>
         <li class="last leaf"><a href="${h.root_url()}about">${_('About')}</a></li>
       </ul>
+      <div class="account">
+        <span class="ckan-logged-in"></span>
+        <span class="ckan-logged-out">
+          <a href="${h.url_for(controller='user',action='login')}"><span>${_('Data provider\'s area')}</span></a>
+        </span>
+      </div>
     </div>
   </div>
 

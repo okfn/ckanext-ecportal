@@ -1553,6 +1553,10 @@ ul.menu li a:hover {
   border-right: 1px solid #bbb;
   background: #eee url("../images/box.png") 100% 100% no-repeat;
 }
+#login .btn span {
+  padding: 5px 0 5px 25px;
+  background: transparent url("../images/lock-button.png") 0 50% no-repeat;
+}
 
 h2 {
   position: relative;
@@ -1565,4 +1569,21 @@ h2 a {
 
 .ie7 .page-search input[type="submit"] {
   margin-top: 3px !important;
+}
+
+.menu {
+  position: relative;
+}
+.account {
+  position: absolute;
+  bottom: 5px;
+  right: 120px;
+}
+.account a {
+  color: #e4ebf0;
+  font-style: italic;
+}
+.account a span {
+  padding-left: 15px;
+  background: transparent url("../images/padlock.png") 0 50% no-repeat;
 }
