@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ckan 1.7.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2013-02-25 18:01+0000\n"
+"POT-Creation-Date: 2013-02-27 19:58+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -67,7 +67,7 @@ msgid "Action not implemented."
 msgstr ""
 
 #: ckan/controllers/api.py:56 ckan/controllers/authorization_group.py:22
-#: ckan/controllers/group.py:83 ckan/controllers/home.py:22
+#: ckan/controllers/group.py:89 ckan/controllers/home.py:22
 #: ckan/controllers/package.py:116 ckan/controllers/related.py:23
 #: ckan/controllers/revision.py:29 ckan/controllers/tag.py:22
 #: ckan/controllers/user.py:30 ckan/controllers/user.py:76
@@ -108,8 +108,8 @@ msgid "Bad request data: %s"
 msgstr ""
 
 #: ckan/controllers/api.py:176 ckan/controllers/api.py:341
-#: ckan/controllers/api.py:389 ckan/controllers/group.py:306
-#: ckan/controllers/group.py:326 ckan/controllers/package.py:592
+#: ckan/controllers/api.py:389 ckan/controllers/group.py:317
+#: ckan/controllers/group.py:337 ckan/controllers/package.py:592
 #: ckan/controllers/package.py:621 ckan/controllers/user.py:162
 #: ckan/controllers/user.py:246 ckan/controllers/user.py:395
 msgid "Integrity Error"
@@ -193,70 +193,70 @@ msgstr ""
 msgid "Not authorized to read %s"
 msgstr ""
 
-#: ckan/controllers/authorization_group.py:62 ckan/controllers/group.py:227
+#: ckan/controllers/authorization_group.py:62 ckan/controllers/group.py:238
 #: ckan/controllers/group_formalchemy.py:36
 msgid "Unauthorized to create a group"
 msgstr ""
 
-#: ckan/controllers/authorization_group.py:107 ckan/controllers/group.py:382
+#: ckan/controllers/authorization_group.py:107 ckan/controllers/group.py:393
 #, python-format
 msgid "User %r not authorized to edit %r"
 msgstr ""
 
-#: ckan/controllers/authorization_group.py:151 ckan/controllers/group.py:110
-#: ckan/controllers/group.py:260 ckan/controllers/group.py:304
-#: ckan/controllers/group.py:324 ckan/controllers/group.py:335
-#: ckan/controllers/group.py:380
+#: ckan/controllers/authorization_group.py:151 ckan/controllers/group.py:115
+#: ckan/controllers/group.py:271 ckan/controllers/group.py:315
+#: ckan/controllers/group.py:335 ckan/controllers/group.py:346
+#: ckan/controllers/group.py:391
 msgid "Group not found"
 msgstr ""
 
-#: ckan/controllers/authorization_group.py:159 ckan/controllers/group.py:347
+#: ckan/controllers/authorization_group.py:159 ckan/controllers/group.py:358
 #: ckan/controllers/package.py:670
 #, python-format
 msgid "User %r not authorized to edit %s authorizations"
 msgstr ""
 
-#: ckan/controllers/datastore.py:32 ckan/controllers/datastore.py:43
-#: ckan/controllers/datastore.py:53 ckan/controllers/package.py:750
+#: ckan/controllers/datastore.py:30 ckan/controllers/datastore.py:41
+#: ckan/controllers/datastore.py:51 ckan/controllers/package.py:750
 #: ckan/controllers/package.py:782
 msgid "Resource not found"
 msgstr ""
 
-#: ckan/controllers/datastore.py:34 ckan/controllers/datastore.py:55
+#: ckan/controllers/datastore.py:32 ckan/controllers/datastore.py:53
 #: ckan/controllers/package.py:752 ckan/controllers/package.py:784
 #, python-format
 msgid "Unauthorized to read resource %s"
 msgstr ""
 
-#: ckan/controllers/group.py:112 ckan/controllers/group.py:262
-#: ckan/controllers/group.py:302 ckan/controllers/group.py:322
+#: ckan/controllers/group.py:117 ckan/controllers/group.py:273
+#: ckan/controllers/group.py:313 ckan/controllers/group.py:333
 #, python-format
 msgid "Unauthorized to read group %s"
 msgstr ""
 
-#: ckan/controllers/group.py:121
+#: ckan/controllers/group.py:129
 msgid "Cannot render description"
 msgstr ""
 
-#: ckan/controllers/group.py:270 ckan/controllers/group_formalchemy.py:93
+#: ckan/controllers/group.py:281 ckan/controllers/group_formalchemy.py:93
 #: ckan/controllers/package.py:484 ckan/controllers/package_formalchemy.py:93
 #, python-format
 msgid "User %r not authorized to edit %s"
 msgstr ""
 
-#: ckan/controllers/group.py:364 ckan/controllers/package.py:357
+#: ckan/controllers/group.py:375 ckan/controllers/package.py:357
 msgid "Select two revisions before doing the comparison."
 msgstr ""
 
-#: ckan/controllers/group.py:389
+#: ckan/controllers/group.py:400
 msgid "CKAN Group Revision History"
 msgstr ""
 
-#: ckan/controllers/group.py:391
+#: ckan/controllers/group.py:402
 msgid "Recent changes to CKAN Group: "
 msgstr ""
 
-#: ckan/controllers/group.py:409 ckan/controllers/package.py:402
+#: ckan/controllers/group.py:420 ckan/controllers/package.py:402
 msgid "Log message: "
 msgstr ""
 
@@ -1144,7 +1144,7 @@ msgstr ""
 #: ../ckanext-ecportal/ckanext/ecportal/templates/group/layout.html:25
 #: ../ckanext-ecportal/ckanext/ecportal/templates/package/layout.html:14
 #: ../ckanext-ecportal/ckanext/ecportal/templates/package/layout.html:21
-#: ../ckanext-ecportal/ckanext/ecportal/templates/publisher/layout.html:24
+#: ../ckanext-ecportal/ckanext/ecportal/templates/publisher/layout.html:22
 msgid "Edit"
 msgstr ""
 
@@ -1153,7 +1153,7 @@ msgstr ""
 #: ckan/templates/snippets/data-viewer-embed-dialog.html:27
 #: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:86
 #: ../ckanext-ecportal/ckanext/ecportal/templates/js_strings.html:16
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/resource_read.html:188
+#: ../ckanext-ecportal/ckanext/ecportal/templates/package/resource_read.html:169
 msgid "Preview"
 msgstr ""
 
@@ -1187,7 +1187,7 @@ msgstr ""
 #: ../ckanext-ecportal/ckanext/ecportal/templates/js_strings.html:16
 #: ../ckanext-ecportal/ckanext/ecportal/templates/package/new_package_form.html:69
 #: ../ckanext-ecportal/ckanext/ecportal/templates/package/read_core.html:24
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/resource_read.html:164
+#: ../ckanext-ecportal/ckanext/ecportal/templates/package/resource_read.html:145
 #: ../ckanext-ecportal/ckanext/ecportal/templates/publisher/edit.html:44
 msgid "Description"
 msgstr ""
@@ -1273,7 +1273,7 @@ msgstr ""
 #: ../ckanext-ecportal/ckanext/ecportal/templates/js_strings.html:16
 #: ../ckanext-ecportal/ckanext/ecportal/templates/organization_layout.html:22
 #: ../ckanext-ecportal/ckanext/ecportal/templates/group/layout.html:22
-#: ../ckanext-ecportal/ckanext/ecportal/templates/publisher/layout.html:21
+#: ../ckanext-ecportal/ckanext/ecportal/templates/publisher/layout.html:19
 msgid "Add Dataset"
 msgstr ""
 
@@ -1398,7 +1398,7 @@ msgstr ""
 
 #: ckan/templates/js_strings.html:16 ckan/templates/package/resource_read.html:129
 #: ../ckanext-ecportal/ckanext/ecportal/templates/js_strings.html:16
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/resource_read.html:171
+#: ../ckanext-ecportal/ckanext/ecportal/templates/package/resource_read.html:152
 msgid "Format"
 msgstr ""
 
@@ -1499,6 +1499,7 @@ msgid "Data File (Uploaded)"
 msgstr ""
 
 #: ckan/templates/layout_base.html:56 ckan/templates/user/logout.html:7
+#: ../ckanext-ecportal/ckanext/ecportal/templates/layout_base.html:104
 msgid "Logout"
 msgstr ""
 
@@ -1526,7 +1527,7 @@ msgstr ""
 #: ckan/templates/tag/index.html:13 ckan/templates/user/list.html:13
 #: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:55
 #: ../ckanext-ecportal/ckanext/ecportal/templates/layout_base.html:61
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/search.html:14
+#: ../ckanext-ecportal/ckanext/ecportal/templates/package/search.html:17
 #: ../ckanext-ecportal/ckanext/ecportal/templates/package/search_form.html:10
 msgid "Search"
 msgstr ""
@@ -1554,7 +1555,7 @@ msgid "Page Logo"
 msgstr ""
 
 #: ckan/templates/layout_base.html:112
-#: ../ckanext-ecportal/ckanext/ecportal/templates/layout_base.html:128
+#: ../ckanext-ecportal/ckanext/ecportal/templates/layout_base.html:136
 msgid "Master content template placeholder … please replace me."
 msgstr ""
 
@@ -1780,7 +1781,6 @@ msgstr ""
 
 #: ckan/templates/admin/layout.html:10
 #: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:56
-#: ../ckanext-ecportal/ckanext/ecportal/templates/layout_base.html:83
 #: ../ckanext-ecportal/ckanext/ecportal/templates/layout_base.html:96
 msgid "Home"
 msgstr ""
@@ -1894,8 +1894,6 @@ msgstr ""
 #: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:82
 #: ../ckanext-ecportal/ckanext/ecportal/templates/organization_layout.html:18
 #: ../ckanext-ecportal/ckanext/ecportal/templates/group/layout.html:18
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/resource_read.html:140
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/resource_read.html:141
 msgid "View"
 msgstr ""
 
@@ -1947,7 +1945,6 @@ msgstr ""
 #: ckan/templates/group/new_group_form.html:101 ckan/templates/group/read.html:45
 #: ckan/templates/revision/read.html:45 ckan/templates/user/read.html:55
 #: ckan/templates/user/read.html:71
-#: ../ckanext-ecportal/ckanext/ecportal/templates/publisher/layout.html:18
 msgid "Datasets"
 msgstr ""
 
@@ -2594,7 +2591,7 @@ msgstr ""
 #: ckan/templates/package/resource_read.html:182
 #: ../ckanext-ecportal/ckanext/ecportal/templates/package/new_package_form.html:406
 #: ../ckanext-ecportal/ckanext/ecportal/templates/package/read_core.html:56
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/resource_read.html:198
+#: ../ckanext-ecportal/ckanext/ecportal/templates/package/resource_read.html:179
 msgid "Additional Information"
 msgstr ""
 
@@ -2811,7 +2808,6 @@ msgstr ""
 
 #: ckan/templates/package/resource_read.html:100
 #: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:83
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/resource_read.html:142
 msgid "API Endpoint"
 msgstr ""
 
@@ -2819,20 +2815,16 @@ msgstr ""
 #: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:8
 #: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:84
 #: ../ckanext-ecportal/ckanext/ecportal/templates/package/read_core.html:41
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/resource_read.html:143
 msgid "Download"
 msgstr ""
 
 #: ckan/templates/package/resource_read.html:111
 #: ckan/templates/package/resource_read.html:114
 #: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:85
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/resource_read.html:148
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/resource_read.html:151
 msgid "Data API"
 msgstr ""
 
 #: ckan/templates/package/resource_read.html:114
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/resource_read.html:151
 msgid "Data API is unavailable for this resource as DataStore is disabled"
 msgstr ""
 
@@ -2842,6 +2834,7 @@ msgstr ""
 
 #: ckan/templates/package/resource_read.html:133
 #: ../ckanext-ecportal/ckanext/ecportal/templates/package/new_package_form.html:90
+#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read.html:40
 msgid "Licence"
 msgstr ""
 
@@ -2855,14 +2848,14 @@ msgid "From the [1:Dataset]:"
 msgstr ""
 
 #: ckan/templates/package/resource_read.html:174
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/resource_read.html:189
+#: ../ckanext-ecportal/ckanext/ecportal/templates/package/resource_read.html:170
 msgid "Cannot embed as resource is private."
 msgstr ""
 
 #: ckan/templates/package/resource_read.html:174
 #: ckan/templates/package/resource_read.html:175
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/resource_read.html:189
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/resource_read.html:190
+#: ../ckanext-ecportal/ckanext/ecportal/templates/package/resource_read.html:170
+#: ../ckanext-ecportal/ckanext/ecportal/templates/package/resource_read.html:171
 msgid "Embed"
 msgstr ""
 
@@ -2872,7 +2865,7 @@ msgstr ""
 
 #: ckan/templates/package/search.html:9 ckan/templates/package/search.html:10
 #: ../ckanext-ecportal/ckanext/ecportal/templates/package/search.html:10
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/search.html:11
+#: ../ckanext-ecportal/ckanext/ecportal/templates/package/search.html:12
 msgid "Search -"
 msgstr ""
 
@@ -2909,20 +2902,20 @@ msgid "dump"
 msgstr ""
 
 #: ckan/templates/package/search.html:50
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/search.html:43
+#: ../ckanext-ecportal/ckanext/ecportal/templates/package/search.html:46
 msgid ""
 "[1:There was an error while searching.] \n"
 "            Please try again."
 msgstr ""
 
 #: ckan/templates/package/search.html:54
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/search.html:47
+#: ../ckanext-ecportal/ckanext/ecportal/templates/package/search.html:50
 #, python-format
 msgid "[1:%(item_count)s] datasets found"
 msgstr ""
 
 #: ckan/templates/package/search.html:57
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/search.html:50
+#: ../ckanext-ecportal/ckanext/ecportal/templates/package/search.html:53
 msgid "Would you like to [1:create a new dataset?]"
 msgstr ""
 
@@ -3501,13 +3494,13 @@ msgstr ""
 
 #: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:53
 #: ../ckanext-ecportal/ckanext/ecportal/templates/layout_base.html:59
-#: ../ckanext-ecportal/ckanext/ecportal/templates/layout_base.html:150
+#: ../ckanext-ecportal/ckanext/ecportal/templates/layout_base.html:158
 msgid "Legal notice"
 msgstr ""
 
 #: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:54
 #: ../ckanext-ecportal/ckanext/ecportal/templates/layout_base.html:60
-#: ../ckanext-ecportal/ckanext/ecportal/templates/layout_base.html:151
+#: ../ckanext-ecportal/ckanext/ecportal/templates/layout_base.html:159
 msgid "Contact"
 msgstr ""
 
@@ -3556,12 +3549,12 @@ msgid "European Commission"
 msgstr ""
 
 #: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:69
-#: ../ckanext-ecportal/ckanext/ecportal/templates/layout_base.html:148
+#: ../ckanext-ecportal/ckanext/ecportal/templates/layout_base.html:156
 msgid "Last update"
 msgstr ""
 
 #: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:70
-#: ../ckanext-ecportal/ckanext/ecportal/templates/layout_base.html:152
+#: ../ckanext-ecportal/ckanext/ecportal/templates/layout_base.html:160
 msgid "Top"
 msgstr ""
 
@@ -3624,7 +3617,7 @@ msgstr ""
 #: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:100
 #: ../ckanext-ecportal/ckanext/ecportal/templates/organization_layout.html:28
 #: ../ckanext-ecportal/ckanext/ecportal/templates/group/layout.html:28
-#: ../ckanext-ecportal/ckanext/ecportal/templates/publisher/layout.html:27
+#: ../ckanext-ecportal/ckanext/ecportal/templates/publisher/layout.html:25
 msgid "Join"
 msgstr ""
 
@@ -3710,7 +3703,11 @@ msgstr ""
 msgid "Europa"
 msgstr ""
 
-#: ../ckanext-ecportal/ckanext/ecportal/templates/layout_base.html:149
+#: ../ckanext-ecportal/ckanext/ecportal/templates/layout_base.html:107
+msgid "Data provider's area"
+msgstr ""
+
+#: ../ckanext-ecportal/ckanext/ecportal/templates/layout_base.html:157
 msgid "About this site"
 msgstr ""
 
@@ -3886,6 +3883,7 @@ msgstr ""
 
 #: ../ckanext-ecportal/ckanext/ecportal/templates/package/new_package_form.html:80
 #: ../ckanext-ecportal/ckanext/ecportal/templates/package/read_core.html:60
+#: ../ckanext-ecportal/ckanext/ecportal/templates/package/resource_read.html:184
 msgid "URL"
 msgstr ""
 
@@ -3911,6 +3909,7 @@ msgstr ""
 
 #: ../ckanext-ecportal/ckanext/ecportal/templates/package/new_package_form.html:124
 #: ../ckanext-ecportal/ckanext/ecportal/templates/package/read_core.html:70
+#: ../ckanext-ecportal/ckanext/ecportal/templates/package/resource_read.html:188
 msgid "Status"
 msgstr ""
 
@@ -3952,6 +3951,7 @@ msgstr ""
 
 #: ../ckanext-ecportal/ckanext/ecportal/templates/package/new_package_form.html:193
 #: ../ckanext-ecportal/ckanext/ecportal/templates/package/read_core.html:90
+#: ../ckanext-ecportal/ckanext/ecportal/templates/package/resource_read.html:196
 msgid "Release Date"
 msgstr ""
 
@@ -3974,6 +3974,7 @@ msgstr ""
 
 #: ../ckanext-ecportal/ckanext/ecportal/templates/package/new_package_form.html:207
 #: ../ckanext-ecportal/ckanext/ecportal/templates/package/read_core.html:95
+#: ../ckanext-ecportal/ckanext/ecportal/templates/package/resource_read.html:200
 msgid "Modified Date"
 msgstr ""
 
@@ -4105,11 +4106,6 @@ msgstr ""
 msgid "This data will also appear under"
 msgstr ""
 
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read.html:40
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/resource_read.html:106
-msgid "Licence:"
-msgstr ""
-
 #: ../ckanext-ecportal/ckanext/ecportal/templates/package/read.html:80
 msgid "RDF/N3"
 msgstr ""
@@ -4130,23 +4126,31 @@ msgstr ""
 msgid "Dataset - Resource"
 msgstr ""
 
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/resource_read.html:166
+#: ../ckanext-ecportal/ckanext/ecportal/templates/package/resource_read.html:106
+msgid "Licence:"
+msgstr ""
+
+#: ../ckanext-ecportal/ckanext/ecportal/templates/package/resource_read.html:147
 msgid "(No description)"
 msgstr ""
 
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/resource_read.html:180
+#: ../ckanext-ecportal/ckanext/ecportal/templates/package/resource_read.html:161
 msgid "From"
 msgstr ""
 
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/resource_read.html:203
-msgid "url"
+#: ../ckanext-ecportal/ckanext/ecportal/templates/package/resource_read.html:192
+msgid "Size"
 msgstr ""
 
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/resource_read.html:217
+#: ../ckanext-ecportal/ckanext/ecportal/templates/package/resource_read.html:203
+msgid "More Additional Information"
+msgstr ""
+
+#: ../ckanext-ecportal/ckanext/ecportal/templates/package/resource_read.html:218
 msgid "Back to dataset"
 msgstr ""
 
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/search.html:28
+#: ../ckanext-ecportal/ckanext/ecportal/templates/package/search.html:31
 msgid "Search datasets..."
 msgstr ""
 
