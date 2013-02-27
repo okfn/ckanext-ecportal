@@ -9,7 +9,7 @@
   <py:def function="page_heading">
     <div class="pull-right">
       <small>(${c.page.item_count} ${_('datasets')})</small>
-      <a href="${h.url_for(controller='feed', action='group', id=c.group_dict.name)}"><i class="rss"></i></a>
+      <a href="${h.url_for(controller='feed', action='group', id=c.group_dict.name)}?${c.search_url_params}"><i class="rss"></i></a>
     </div>
     ${c.group_dict.display_name}
   </py:def>
