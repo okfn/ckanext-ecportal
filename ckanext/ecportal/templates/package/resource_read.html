@@ -179,18 +179,10 @@
         ${_('Additional Information')}
       </h3>
       <div class="inner">
-        <div class="quick-info">
+        <div id="less-meta" class="quick-info">
           <dl>
             <dt property="rdfs:label">${_('URL')}</dt>
             <dd property="rdf:value"><a href="${c.resource['url']}">${c.resource['url']}</a></dd>
-          </dl>
-          <dl py:if="c.resource.get('status')">
-            <dt>${_('Status')}</dt>
-            <dd>${c.pkg_dict['status']}</dd>
-          </dl>
-          <dl py:if="c.resource.get('size')">
-            <dt>${_('Size')}</dt>
-            <dd>${c.pkg_dict['size']}</dd>
           </dl>
           <dl py:if="c.resource.get('release_date')">
             <dt>${_('Release Date')}</dt>
@@ -199,6 +191,18 @@
           <dl py:if="c.resource.get('modified_date')">
             <dt>${_('Modified Date')}</dt>
             <dd>${c.pkg_dict['modified_date']}</dd>
+          </dl>
+          <dl py:if="c.resource.get('name')">
+            <dt>${_('Name')}</dt>
+            <dd>${c.pkg_dict['name']}</dd>
+          </dl>
+          <dl py:if="c.resource.get('size')">
+            <dt>${_('Size')}</dt>
+            <dd>${c.pkg_dict['size']}</dd>
+          </dl>
+          <dl py:if="c.resource.get('status')">
+            <dt>${_('Status')}</dt>
+            <dd>${c.pkg_dict['status']}</dd>
           </dl>
           <p class="more-meta"><a href="#more-meta">${_('More Additional Information')}</a></p>
         </div>
@@ -209,6 +213,7 @@
               <dd property="rdf:value">${c.resource[key]}</dd>
             </dl>
           </py:for>
+          <p class="less-meta"><a href="#less-meta">${_('Less Additional Information')}</a></p>
         </div>
       </div>
     </div>
