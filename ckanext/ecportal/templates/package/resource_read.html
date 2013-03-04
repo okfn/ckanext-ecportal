@@ -111,16 +111,6 @@
           <span py:when="c.pkg.license_id" property="dc:rights">${c.pkg.license_id}</span>
           <span py:when="not(c.pkg.license)">${_('License unknown')}</span>
         </py:choose>
-        <py:if test="c.pkg.isopen()">
-            <a href="http://opendefinition.org/okd/" title="${_('This dataset satisfies the Open Definition.')}">
-              <img class="open-data" src="${h.url_for_static('/images/ok_buttons/od_80x15_blue.png')}" alt="${_('[Open Data]')}" />
-            </a>
-        </py:if>
-        <py:if test="not c.pkg.isopen()">
-            <span class="closed">
-              ${h.icon('lock')}
-            </span>
-        </py:if>
     </li>
 
   </py:match>

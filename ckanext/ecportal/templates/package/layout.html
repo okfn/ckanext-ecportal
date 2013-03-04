@@ -1,3 +1,6 @@
+<?python
+  show_navigation = c.pkg and ( h.check_access('show_package_edit_button',{'id':c.pkg.id}) or h.check_access('package_edit_permissions',{'id':c.pkg.id}) )
+?>
 <html
   xmlns="http://www.w3.org/1999/xhtml"
   xmlns:py="http://genshi.edgewall.org/"
@@ -5,7 +8,7 @@
   py:strip=""
   >
 
-  <py:match path="minornavigation" py:if="c.pkg">
+  <py:match path="minornavigation" py:if="show_navigation">
       <ul class="nav nav-pills">
         <py:if test="h.check_access('show_package_edit_button',{'id':c.pkg.id})">
           <!--! Show an enabled edit button if package_update is available -->
@@ -22,6 +25,13 @@
             </li>
           </py:if>
         </py:if>
+
+        <li py:if="h.check_access('package_update',{'id':c.pkg.id})">
+          ${h.link_to(
+            _('Add / Edit resources'),
+            h.url_for(action='editresources', id=c.pkg.name, controller='package')
+            )}
+        </li>
 
       <li class="${'active' if c.action=='authz' else ''}" py:if="h.check_access('package_edit_permissions',{'id':c.pkg.id})">
         ${h.subnav_link(h.icon('lock') + _('Authorization'), controller='package', action='authz', id=c.pkg.name)}

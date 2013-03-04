@@ -47,9 +47,12 @@ h2 a {
 }
 
 a.item_link, a.item_link:visited {
-  margin: 20px 0px 10px 30px;
+  position: relative;
+  margin: 20px 0px 10px 0;
+  padding-left: 30px;
   display: block;
   color: #999;
+  text-decoration: none;
 }
 
 a.item_link p, a.item_link:visited p{
@@ -60,9 +63,24 @@ a.item_link p, a.item_link:visited p{
   color: #666;
 }
 
-a.item_link:hover, a.item_link:hover p {
+a.item_link:hover, a.item_link:hover p, a.item_link:hover span, a.item_link:hover strong {
   color:#089cce !important;
-  text-decoration:none;
+}
+
+a.item_link strong {
+  font-size:13px;
+  color: #666;
+}
+a.item_link span {
+  color: #999;
+}
+
+a.item_link .resource {
+  position: absolute;
+  left: 0;
+  float: none;
+  margin: 0;
+  display: inline;
 }
 
 h2 a:hover{
@@ -1331,7 +1349,7 @@ input.search {
 
 /* Quick info lists */
 .quick-info dl {
-  margin: 0 0 5px 0;
+  margin: 0 0 15px 0;
 }
 .quick-info dt {
   font-style: italic;
@@ -1595,6 +1613,9 @@ h2 a {
 .menu {
   position: relative;
 }
+.menu .first {
+  margin-left: 5px;
+}
 .account {
   position: absolute;
   bottom: 5px;
@@ -1625,13 +1646,13 @@ body {
   background-color: #FFF;
 }
 
-.ie7 .item_link p {
-  display: inline;
-}
-
 .more-meta,
 .less-meta {
   margin: 10px 0;
   font-size: 11px;
   font-style: italic;
+}
+
+#sidebar {
+  margin-top: 66px;
 }

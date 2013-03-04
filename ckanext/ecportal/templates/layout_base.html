@@ -101,6 +101,7 @@
       </ul>
       <div class="account">
         <span class="ckan-logged-in" style="display:none;">
+          <a href="${h.url_for(controller='package',action='new')}">${_('Add dataset')}</a> |
           <a href="${h.url_for(controller='user',action='logout')}">${_('Logout')}</a>
         </span>
         <span class="ckan-logged-out">
