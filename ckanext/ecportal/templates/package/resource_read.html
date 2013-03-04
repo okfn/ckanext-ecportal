@@ -123,6 +123,9 @@
         <i class="resource"></i>
         ${h.resource_display_name(c.resource)}
       </h3>
+      <div class="inner faded resource-actions">
+        <a py:if="c.resource.get('url')" class="button button-primary resource-url-analytics resource-type-${c.resource.get('resource_type')}" href="${c.resource.get('url')}">${_('Download')}</a>
+      </div>
     </div>
 
   <py:if test="config.get('ckan.datastore.enabled', False)">
