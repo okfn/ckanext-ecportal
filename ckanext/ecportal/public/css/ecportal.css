@@ -75,9 +75,10 @@ a.item_link span {
   color: #999;
 }
 
-a.item_link .resource {
+a.item_link i {
   position: absolute;
-  left: 0;
+  left: 1px;
+  top: 1px;
   float: none;
   margin: 0;
   display: inline;
@@ -1127,7 +1128,7 @@ a:visited{color:#1B88C2;}
   display: none;
   position: absolute;
   right: 0;
-  z-index: 1;
+  z-index: 10000;
   background-color: #FFF;
   border: 1px solid #9AB;
   width: 140px;
@@ -1655,4 +1656,8 @@ body {
 
 #sidebar {
   margin-top: 66px;
+}
+
+.header {
+  z-index: 1000;
 }

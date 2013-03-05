@@ -11,23 +11,29 @@
         editors = c.group.members_of_type(model.User, 'editor')
     else:
         editors = []
+    has_group = bool(c.group)
+    if has_group:
+      can_update = h.check_access('group_update',{'id': c.group.id})
+    else:
+      can_update = False
   ?>
-  <py:match path="minornavigation">
-    <ul class="nav nav-pills" py:choose="bool(c.group)">
-      <py:when test="True" py:with="can_update=h.check_access('group_update',{'id': c.group.id})">
-        <li class="dropdown ${'active' if c.action=='resource_read' else ''}" py:if="can_update  or (c.userobj and c.userobj in editors)">
-          <a href="${h.url_for(controller='package', action='new')}?groups__0__id=${c.group.id}">${h.icon('add') + _('Add Dataset')}</a>
-        </li>
-        <li class="${'active' if c.action=='edit' else ''}" py:if="can_update">
-          ${h.subnav_named_route(c, h.icon('group_edit') + _('Edit'), c.group.type + '_action', action='edit', id=c.group.name )}
-        </li>
-        <li class="${'active' if c.action=='apply' else ''} ckan-logged-in" py:if="c.userobj and not c.userobj.is_in_group(c.group)">
-            <a href="${h.url_for(controller='ckanext.organizations.controllers:OrganizationController', action='apply')}?parent=${c.group.name}">${h.icon('group_edit') + _('Join')}</a>
-        </li>
-
-      </py:when>
-    </ul>
-  </py:match>
+  <py:if test="has_group">
+    <py:match path="minornavigation" py:choose="has_group">
+      <py:if test="can_update">
+        <ul class="nav nav-pills">
+          <li class="dropdown ${'active' if c.action=='resource_read' else ''}" py:if="can_update  or (c.userobj and c.userobj in editors)">
+            <a href="${h.url_for(controller='package', action='new')}?groups__0__id=${c.group.id}">${h.icon('add') + _('Add Dataset')}</a>
+          </li>
+          <li class="${'active' if c.action=='edit' else ''}" py:if="can_update">
+            ${h.subnav_named_route(c, h.icon('group_edit') + _('Edit'), c.group.type + '_action', action='edit', id=c.group.name )}
+          </li>
+          <li class="${'active' if c.action=='apply' else ''} ckan-logged-in" py:if="c.userobj and not c.userobj.is_in_group(c.group)">
+              <a href="${h.url_for(controller='ckanext.organizations.controllers:OrganizationController', action='apply')}?parent=${c.group.name}">${h.icon('group_edit') + _('Join')}</a>
+          </li>
+        </ul>
+      </py:if>
+    </py:match>
+  </py:if>
 
   <xi:include href="../layout.html" />
 </html>

@@ -10,8 +10,8 @@
     <li py:for="package in packages">
       <a href="${h.url_for(controller='package', action='read', id=package.get('name'))}" class="item_link">
         <i class="resource"></i>
-        <p>${package.get('title') or package.get('name')}</p>
-        ${_('was updated on')} ${h.render_datetime(package['metadata_modified'], '%d/%m/%y')}.
+        <strong>${package.get('title') or package.get('name')}</strong><br />
+        <span class="additional">${_('was updated on')} ${h.render_datetime(package['metadata_modified'], '%d/%m/%y')}.</span>
       </a>
     </li>
   </ul>
