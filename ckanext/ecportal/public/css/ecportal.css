@@ -105,7 +105,7 @@ h2 a:hover{
   width:19px;
   height:19px;
   background: url("../images/icons.png") -17px 0px no-repeat;
-  margin: 0px 0 0 -25px;
+  margin: 0px 0 0 -23px;
 }
 
 
@@ -120,7 +120,7 @@ h2 a:hover .resource, a.item_link:hover .resource {
   width:19px;
   height:19px;
   background: url("../images/icons.png") -34px 0px no-repeat;
-  margin: 0px 0 0 -25px;
+  margin: 0px 0 0 -22px;
 }
 
 h2 a:hover .publisher, a.item_link:hover .publisher {
@@ -816,7 +816,7 @@ input#txtSearchData {
   padding-bottom: 0;
   margin-bottom: 0;
 }
-.dataset-create-form fieldset#resources {
+.dataset-create-form fieldset#resource-list {
     display: none;
 }
 .dataset-create-form dt.description-label,
@@ -1208,6 +1208,7 @@ h2 a i {
   margin-left: 4px;
 }
 /* Page heading stuff */
+.pre_page_heading,
 .page_heading {
   color: #505d8c;
   font-size: 21px;
@@ -1215,6 +1216,10 @@ h2 a i {
   margin: 0 0 20px 0;
   padding: 30px 0 5px 0;
   border-bottom: 1px solid #aaa;
+}
+.pre_page_heading {
+  margin: 20px 344px 0 20px;
+  padding: 0;
 }
 .page_heading small {
   font-size: 12px;
@@ -1370,7 +1375,7 @@ input.search {
   width:19px;
   height:19px;
   background: url("../images/icons.png") -70px 0px no-repeat;
-  margin: 0px 0 0 -25px;
+  margin: 0px 0 0 -21px;
 }
 .note {
   display:block;
@@ -1654,10 +1659,10 @@ body {
   font-style: italic;
 }
 
-#sidebar {
-  margin-top: 66px;
-}
-
 .header {
   z-index: 1000;
+}
+
+#sidebar .widget-list .sidebar-section:first-child {
+  margin-top: 0;
 }
