@@ -6,8 +6,8 @@
 
   <xi:include href="facets.html" />
 
-  <!-- same as facet_div from facets.html but the facet title can be translated -->
   <py:def function="facet_div(name, title, limit=10, label_function=lambda item: item.display_name, if_empty=None, count_label=lambda c: ' (%d)'%c)">
+      <!-- same as facet_div from facets.html but the facet title can be translated -->
       <div py:if="if_empty is not None or h.unselected_facet_items(name, limit)" class="facet-box">
           <h2>${_(h.facet_title(title))}</h2>
           <ul class="facet-options">

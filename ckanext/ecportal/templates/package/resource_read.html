@@ -111,16 +111,6 @@
           <span py:when="c.pkg.license_id" property="dc:rights">${c.pkg.license_id}</span>
           <span py:when="not(c.pkg.license)">${_('License unknown')}</span>
         </py:choose>
-        <py:if test="c.pkg.isopen()">
-            <a href="http://opendefinition.org/okd/" title="${_('This dataset satisfies the Open Definition.')}">
-              <img class="open-data" src="${h.url_for_static('/images/ok_buttons/od_80x15_blue.png')}" alt="${_('[Open Data]')}" />
-            </a>
-        </py:if>
-        <py:if test="not c.pkg.isopen()">
-            <span class="closed">
-              ${h.icon('lock')}
-            </span>
-        </py:if>
     </li>
 
   </py:match>
@@ -133,6 +123,9 @@
         <i class="resource"></i>
         ${h.resource_display_name(c.resource)}
       </h3>
+      <div class="inner faded resource-actions">
+        <a py:if="c.resource.get('url')" class="button button-primary resource-url-analytics resource-type-${c.resource.get('resource_type')}" href="${c.resource.get('url')}">${_('Download')}</a>
+      </div>
     </div>
 
   <py:if test="config.get('ckan.datastore.enabled', False)">
@@ -179,18 +172,10 @@
         ${_('Additional Information')}
       </h3>
       <div class="inner">
-        <div class="quick-info">
+        <div id="less-meta" class="quick-info">
           <dl>
             <dt property="rdfs:label">${_('URL')}</dt>
             <dd property="rdf:value"><a href="${c.resource['url']}">${c.resource['url']}</a></dd>
-          </dl>
-          <dl py:if="c.resource.get('status')">
-            <dt>${_('Status')}</dt>
-            <dd>${c.pkg_dict['status']}</dd>
-          </dl>
-          <dl py:if="c.resource.get('size')">
-            <dt>${_('Size')}</dt>
-            <dd>${c.pkg_dict['size']}</dd>
           </dl>
           <dl py:if="c.resource.get('release_date')">
             <dt>${_('Release Date')}</dt>
@@ -199,6 +184,18 @@
           <dl py:if="c.resource.get('modified_date')">
             <dt>${_('Modified Date')}</dt>
             <dd>${c.pkg_dict['modified_date']}</dd>
+          </dl>
+          <dl py:if="c.resource.get('name')">
+            <dt>${_('Name')}</dt>
+            <dd>${c.pkg_dict['name']}</dd>
+          </dl>
+          <dl py:if="c.resource.get('size')">
+            <dt>${_('Size')}</dt>
+            <dd>${c.resource['size']}</dd>
+          </dl>
+          <dl py:if="c.resource.get('status')">
+            <dt>${_('Status')}</dt>
+            <dd>${c.resource['status']}</dd>
           </dl>
           <p class="more-meta"><a href="#more-meta">${_('More Additional Information')}</a></p>
         </div>
@@ -209,6 +206,7 @@
               <dd property="rdf:value">${c.resource[key]}</dd>
             </dl>
           </py:for>
+          <p class="less-meta"><a href="#less-meta">${_('Less Additional Information')}</a></p>
         </div>
       </div>
     </div>

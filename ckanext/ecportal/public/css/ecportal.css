@@ -47,9 +47,12 @@ h2 a {
 }
 
 a.item_link, a.item_link:visited {
-  margin: 20px 0px 10px 30px;
+  position: relative;
+  margin: 20px 0px 10px 0;
+  padding-left: 30px;
   display: block;
   color: #999;
+  text-decoration: none;
 }
 
 a.item_link p, a.item_link:visited p{
@@ -60,9 +63,25 @@ a.item_link p, a.item_link:visited p{
   color: #666;
 }
 
-a.item_link:hover, a.item_link:hover p {
+a.item_link:hover, a.item_link:hover p, a.item_link:hover span, a.item_link:hover strong {
   color:#089cce !important;
-  text-decoration:none;
+}
+
+a.item_link strong {
+  font-size:13px;
+  color: #666;
+}
+a.item_link span {
+  color: #999;
+}
+
+a.item_link i {
+  position: absolute;
+  left: 1px;
+  top: 1px;
+  float: none;
+  margin: 0;
+  display: inline;
 }
 
 h2 a:hover{
@@ -86,7 +105,7 @@ h2 a:hover{
   width:19px;
   height:19px;
   background: url("../images/icons.png") -17px 0px no-repeat;
-  margin: 0px 0 0 -25px;
+  margin: 0px 0 0 -23px;
 }
 
 
@@ -101,7 +120,7 @@ h2 a:hover .resource, a.item_link:hover .resource {
   width:19px;
   height:19px;
   background: url("../images/icons.png") -34px 0px no-repeat;
-  margin: 0px 0 0 -25px;
+  margin: 0px 0 0 -22px;
 }
 
 h2 a:hover .publisher, a.item_link:hover .publisher {
@@ -797,7 +816,7 @@ input#txtSearchData {
   padding-bottom: 0;
   margin-bottom: 0;
 }
-.dataset-create-form fieldset#resources {
+.dataset-create-form fieldset#resource-list {
     display: none;
 }
 .dataset-create-form dt.description-label,
@@ -1109,7 +1128,7 @@ a:visited{color:#1B88C2;}
   display: none;
   position: absolute;
   right: 0;
-  z-index: 1;
+  z-index: 10000;
   background-color: #FFF;
   border: 1px solid #9AB;
   width: 140px;
@@ -1189,6 +1208,7 @@ h2 a i {
   margin-left: 4px;
 }
 /* Page heading stuff */
+.pre_page_heading,
 .page_heading {
   color: #505d8c;
   font-size: 21px;
@@ -1196,6 +1216,10 @@ h2 a i {
   margin: 0 0 20px 0;
   padding: 30px 0 5px 0;
   border-bottom: 1px solid #aaa;
+}
+.pre_page_heading {
+  margin: 20px 344px 0 20px;
+  padding: 0;
 }
 .page_heading small {
   font-size: 12px;
@@ -1331,7 +1355,7 @@ input.search {
 
 /* Quick info lists */
 .quick-info dl {
-  margin: 0 0 5px 0;
+  margin: 0 0 15px 0;
 }
 .quick-info dt {
   font-style: italic;
@@ -1351,7 +1375,7 @@ input.search {
   width:19px;
   height:19px;
   background: url("../images/icons.png") -70px 0px no-repeat;
-  margin: 0px 0 0 -25px;
+  margin: 0px 0 0 -21px;
 }
 .note {
   display:block;
@@ -1595,6 +1619,9 @@ h2 a {
 .menu {
   position: relative;
 }
+.menu .first {
+  margin-left: 5px;
+}
 .account {
   position: absolute;
   bottom: 5px;
@@ -1625,15 +1652,17 @@ body {
   background-color: #FFF;
 }
 
-.ie7 .item_link p {
-  display: inline;
-}
-.ie7 .item_link p::after {
-  content: 'kkkk';
-}
-
-.more-meta {
+.more-meta,
+.less-meta {
   margin: 10px 0;
   font-size: 11px;
   font-style: italic;
+}
+
+.header {
+  z-index: 1000;
+}
+
+#sidebar .widget-list .sidebar-section:first-child {
+  margin-top: 0;
 }

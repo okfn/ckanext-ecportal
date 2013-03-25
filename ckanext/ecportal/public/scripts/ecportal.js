@@ -23,8 +23,14 @@
 
 		if ($('#more-meta dl').length > 0) {
 			$('.more-meta a').bind('click', function() {
-				$(this).hide();
+				$('.more-meta').hide();
+				$('.less-meta').show();
 				$('#more-meta').show();
+			});
+			$('.less-meta a').bind('click', function() {
+				$('.less-meta').hide();
+				$('.more-meta').show();
+				$('#more-meta').hide();
 			});
 		} else {
 			$('.more-meta').hide();
