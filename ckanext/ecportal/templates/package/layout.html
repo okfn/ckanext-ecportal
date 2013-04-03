@@ -26,7 +26,7 @@
           </py:if>
         </py:if>
 
-        <li py:if="h.check_access('package_update',{'id':c.pkg.id})">
+        <li py:if="h.check_access('package_update',{'id':c.pkg.id})" class="${'active' if c.action=='editresources' else ''}">
           ${h.link_to(
             _('Add / Edit resources'),
             h.url_for(action='editresources', id=c.pkg.name, controller='package')

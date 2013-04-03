@@ -755,13 +755,12 @@ input#txtSearchData {
 /* =======================================================
    From old ecportal.css */
 
-/* Hides the sidebar on full-width pages */
-.no-sidebar #wrapper .span4 {
-  display: none;
+body.editresources.no-sidebar .sidebar-outer { display: none; }
+body.editresources.no-sidebar #content { padding-right: 0; border-right: none; }
+body.editresources.no-sidebar .content-outer {
+  width: 940px;
 }
-.no-sidebar #wrapper .span8 {
-  width: 900px;
-}
+
 #path {
     position: absolute;
     top: 145px;
@@ -886,9 +885,30 @@ form .field_required {
 /* Resource Edit Page
 /****************************************************************************/
 
-.drag-drop-list li.drag-bars {
-    background-image: url("../images/dragbars.png");
+.dataset-editresources-form fieldset {
+  display: none;
 }
+.dataset-editresources-form fieldset#resources,
+.dataset-editresources-form fieldset#summary {
+  display: block;
+}
+.resource-add > .nav {
+  margin-bottom: 0;
+  width: 522px;
+}
+.resource-add .tab-pane {
+  padding: 20px;
+  background: #fff;
+  border: 1px solid #DDD;
+  border-top: none;
+  width: 480px;
+}
+.resource-list {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
 
 /****************************************************************************/
 /* Resource View Page
@@ -1536,13 +1556,6 @@ input.search {
 
 ul.menu li a:hover {
   text-decoration: none;
-}
-
-.dataset-editresources-form .fade {
-  display: none !important;
-}
-.dataset-editresources-form .fade.in {
-  display: block !important;
 }
 
 .header {
