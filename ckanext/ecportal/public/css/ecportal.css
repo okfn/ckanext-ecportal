@@ -755,10 +755,10 @@ input#txtSearchData {
 /* =======================================================
    From old ecportal.css */
 
-body.editresources.no-sidebar .sidebar-outer { display: none; }
-body.editresources.no-sidebar #content { padding-right: 0; border-right: none; }
-body.editresources.no-sidebar .content-outer {
-  width: 940px;
+body.no-sidebar .sidebar-outer { display: none; }
+body.no-sidebar #content { padding-right: 0; border-right: none; }
+body.no-sidebar .content-outer {
+  width: 900px;
 }
 
 #path {
