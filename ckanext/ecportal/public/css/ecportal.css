@@ -467,9 +467,8 @@ ul.menu li {
   clear: both;
 }
 
-.footer a{
+.footer a, .footer a:visited {
   color: #646464;
-  /*padding-left: 5px;*/
   font-size: 90%;
   line-height: 1.6;
 }
