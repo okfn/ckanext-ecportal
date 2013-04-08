@@ -39,22 +39,17 @@
   </div>
 
   <div py:match="content">
-
     ${field_list()}   
     
-      <py:if test="c.query_error">
-        <p i18n:msg="item_count"><strong>There was an error while searching.</strong> 
-            Please try again.</p>
-      </py:if>
-      <py:if test="request.params">      
-        <h4 i18n:msg="item_count"><strong>${c.page.item_count}</strong> datasets found</h4>            
-     </py:if>
-      <py:if test="c.page.item_count == 0 and request.params">
-        <p i18n:msg="">Would you like to <a href="${h.url_for(action='new', id=None)}">create a new dataset?</a></p>
-      </py:if>
-      ${package_list_from_dict(c.page.items)}
-      ${c.page.pager(q=c.q)}
-
+    <py:if test="c.query_error">
+    <p i18n:msg="item_count"><strong>There was an error while searching.</strong>
+      Please try again.</p>
+    </py:if>
+    <py:if test="request.params">
+    <h4 i18n:msg="item_count"><strong>${c.page.item_count}</strong> datasets found</h4>
+    </py:if>
+    ${package_list_from_dict(c.page.items)}
+    ${c.page.pager(q=c.q)}
   </div>
 
   <py:def function="optional_feed">
