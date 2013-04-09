@@ -734,7 +734,7 @@ msgid "Size"
 msgstr ""
 
 #: ../ckanext-ecportal/ckanext/ecportal/templates/package/resource_read.html:203
-msgid "More Additional Information"
+msgid "More Information"
 msgstr "Dodatkowe informacje"
 
 #: ../ckanext-ecportal/ckanext/ecportal/templates/package/resource_read.html:218
