@@ -177,37 +177,38 @@
             <dt property="rdfs:label">${_('URL')}</dt>
             <dd property="rdf:value"><a href="${c.resource['url']}">${c.resource['url']}</a></dd>
           </dl>
-          <dl py:if="c.resource.get('release_date')">
+          <dl py:if="c.resource.get('created')">
             <dt>${_('Release Date')}</dt>
-            <dd>${c.pkg_dict['release_date']}</dd>
+            <dd>${h.render_datetime(c.resource['created'], '%Y-%m-%d')}</dd>
           </dl>
-          <dl py:if="c.resource.get('modified_date')">
+          <dl py:choose="c.resource.get('last_modified') or c.resource.get('revision_timestamp')">
             <dt>${_('Modified Date')}</dt>
-            <dd>${c.pkg_dict['modified_date']}</dd>
+            <dd py:when="c.resource.get('last_modified')">${h.render_datetime(c.resource['last_modified'], '%Y-%m-%d')}</dd>
+            <dd py:when="c.resource.get('revision_timestamp')">${h.render_datetime(c.resource['revision_timestamp'], '%Y-%m-%d')}</dd>
           </dl>
-          <dl py:if="c.resource.get('name')">
-            <dt>${_('Name')}</dt>
-            <dd>${c.pkg_dict['name']}</dd>
+          <dl py:if="c.resource.get('resource_type')">
+            <dt>${_('Resource Type')}</dt>
+            <dd>${c.resource['resource_type']}</dd>
           </dl>
-          <dl py:if="c.resource.get('size')">
-            <dt>${_('Size')}</dt>
-            <dd>${c.resource['size']}</dd>
-          </dl>
-          <dl py:if="c.resource.get('status')">
-            <dt>${_('Status')}</dt>
-            <dd>${c.resource['status']}</dd>
-          </dl>
-          <p class="more-meta"><a href="#more-meta">${_('More Information')}</a></p>
+          <!-- <dl py:if="c.resource.get('size')"> -->
+          <!--   <dt>${_('Size')}</dt> -->
+          <!--   <dd>${c.resource['size']}</dd> -->
+          <!-- </dl> -->
+          <!-- <dl py:if="c.resource.get('status')"> -->
+          <!--   <dt>${_('Status')}</dt> -->
+          <!--   <dd>${c.resource['status']}</dd> -->
+          <!-- </dl> -->
+          <!-- <p class="more-meta"><a href="#more-meta">${_('More Information')}</a></p> -->
         </div>
-        <div id="more-meta" class="quick-info" style="display:none;">
-          <py:for each="i, key in enumerate(sorted(c.resource.keys()))">
-            <dl py:if="not key in ('description', 'url', 'status', 'size', 'release_date', 'modified_date')">
-              <dt property="rdfs:label">${_(key)}</dt>
-              <dd property="rdf:value">${c.resource[key]}</dd>
-            </dl>
-          </py:for>
-          <p class="less-meta"><a href="#less-meta">${_('Less Information')}</a></p>
-        </div>
+        <!-- <div id="more-meta" class="quick-info" style="display:none;"> -->
+        <!--   <py:for each="i, key in enumerate(sorted(c.resource.keys()))"> -->
+        <!--     <dl py:if="not key in ('description', 'url', 'status', 'size', 'release_date', 'modified_date')"> -->
+        <!--       <dt property="rdfs:label">${_(key)}</dt> -->
+        <!--       <dd property="rdf:value">${c.resource[key]}</dd> -->
+        <!--     </dl> -->
+        <!--   </py:for> -->
+        <!--   <p class="less-meta"><a href="#less-meta">${_('Less Information')}</a></p> -->
+        <!-- </div> -->
       </div>
     </div>
 
