@@ -1,89 +1,21 @@
-from ckan.lib.base import _
+import ckan.plugin.toolkit as toolkit
+
+_ = toolkit._
 
 
 def terms_for_translation():
-    # distribution type
-    _('Feed')
-    _('Web Service')
-    _('Download')
-
-    # documentation type
-    _('Main Documentation')
-    _('Related Documentation')
-    _('Related Web Page')
-
-    # dataset type
-    _('Code List')
-    _('Core Component')
-    _('Domain Model')
-    _('Information Exchange Package Description')
-    _('Mapping')
-    _('Name Authority List')
-    _('Ontology')
-    _('Schema')
-    _('Service Description')
-    _('Statistical')
-    _('Syntax Encoding Scheme')
-    _('Taxonomy')
-    _('Thesaurus')
-
-    # status
-    _('Completed')
-    _('Deprecated')
-    _('Under Development')
-    _('Withdrawn')
-
-    # accural Periodicy
-    _('Never')
-    _('Discontinued')
-    _('Annual')
-    _('Quarterly')
-    _('Monthly')
-    _('Other - please specify')
-
-    # interoperability level
-    _('Never')
-    _('Discontinued')
-    _('Annual')
-    _('Quarterly')
-    _('Monthly')
-    _('Other - please specify')
-
+    '''
+    Additional terms for translation.
+    Terms from Python files and template files should be extracted
+    automatically using the python setup.py extract_messages command.
+    The terms in this file are ones that would be missed by this
+    process. For example: terms in configuration files, 3rd party
+    libraries, etc.
+    '''
     # header
-    _('Legal notice')
-    _('Contact')
-    _('Search')
-    _('Home')
-    _('Data')
-    _('Applications')
-    _('Linked Data')
-    _('Social Media')
-    _('Add a dataset')
-    _('Publishers')
     _('Data Portal')
     _('Open Data Portal')
-    _('The Open Data Hub of the European Union')
-    _('European Commission')
-
-    # footer
-    _('Last update')
-    _('Top')
-
-    # home
-    _('Find data')
-    _('Top publishers')
-    _('Recent updates')
-
-    # dataset
-    _('Publisher')
-    _('This dataset has been marked as deleted')
-
-    # resource
-    _('View')
-    _('API Endpoint')
-    _('Download')
-    _('Data API')
-    _('Preview')
+    _('European Union Open Data Portal')
 
     # search
     _('Tags')
@@ -94,15 +26,21 @@ def terms_for_translation():
     _('Language')
     _('Geographical Coverage')
 
-    # publishers
-    _('List Publishers')
-    _('Add a Publisher')
-    _('Join')
-    _('Image URL')
-    _('Parent Publisher')
-    _('Please choose a publisher')
-    _('Extras')
-    _('Add')
-    _('Key')
-    _('Value')
-    _('Manage users')
+    # from ckan/templates/_util.html
+    # (ignored as a lot of the strings are not required)
+    _('Number of datasets')
+    _('View dataset resources')
+    _('No downloadable resources.')
+    _('No description for this item')
+
+    # errors
+    _('Not authorized to see this page')
+    _('Unauthorized to read package %s')
+    _('Unauthorized to read resource %s')
+    _('Unauthorized to read group %s')
+    _('Unauthorized to create a package')
+    _('Unauthorized to create a group')
+    _('The resource could not be found.')
+    _('Dataset not found')
+    _('Group not found')
+    _('Tag not found')
