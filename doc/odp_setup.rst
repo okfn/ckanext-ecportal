@@ -304,8 +304,29 @@ Install the Source
         qa
         datastorer
 
-    Finally, restart CKAN (or Apache).
+    Restart CKAN (or Apache).
+
+    To import the list of publishers and create the keyword vocabularies, from the
+    ckanext-ecportal directory run the following command:
+
+    ::
+
+        paster ecportal create-all-vocabs --config=<path to CKAN config file>
 
 
-14. For a guide to deploying CKAN with Apache,
+14. Install additional extensions
+
+    The following extensions should also be installed:
+
+    * ckanext-archiver
+      https://github.com/okfn/ckanext-archiver (branch: release-v1.7.1)
+
+    * ckanext-qa
+      https://github.com/okfn/ckanext-qa (branch: release-v1.7.1)
+
+    * ckanext-datastorer
+      https://github.com/okfn/ckanext-datastorer (branch: master)
+
+
+15. For a guide to deploying CKAN with Apache,
     see: http://docs.ckan.org/en/ckan-1.7.2/deployment.html
