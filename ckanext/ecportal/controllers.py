@@ -1,3 +1,5 @@
+# -*- coding: utf8 -*-
+
 import ckan.controllers.user
 import ckan.model as model
 import ckan.plugins as p
@@ -5,6 +7,138 @@ import ckan.lib.navl.dictization_functions
 import ckan.lib.helpers
 import ckanext.ecportal.schema as schema
 import forms
+import sqlalchemy.exc
+import datetime
+from ckan.lib.base import request, c, BaseController, model, abort, h, g, render, response, _, json
+from ckan.controllers.home import HomeController
+import ckanext.ecportal.searchcloud as searchcloud
+import logging
+log = logging.getLogger(__name__)
+
+class SearchCloudException(Exception):
+    pass
+
+class ECPortalSearchCloudAdminController(BaseController):
+    '''
+    Allow a sysadmin to download the latest list of terms
+    '''
+    # Can't do this check in __before__ as c.user is not yet set up
+    def _sysadmin_or_abort(self):
+        if not c.user:
+            return abort(401, _('Not signed in'))
+        is_admin = self.authorizer.is_sysadmin(c.user)
+        if not is_admin:
+            return abort(
+                401,
+                _('You are not authorized to access search cloud administation')
+            )
+
+    def index(self):
+        self._sysadmin_or_abort()
+        return render('searchcloud/index.html')
+
+    def _parse_json(self, json_data):
+        try:
+            rows = json.loads(json_data)
+        except:
+            raise SearchCloudException(
+                'JSON file could not be parsed. Please ensure file is valid'
+                ' JSON and pay careful attention to trailing commas.'
+            )
+        else:
+            values = []
+            if not isinstance(rows, list):
+                raise SearchCloudException(
+                    'JSON file does not contain a list of terms. Expected the'
+                    ' same format as the download.'
+                )
+            for i, row in enumerate(rows):
+                if not isinstance(row, list):
+                    raise SearchCloudException(
+                        (
+                        'Row %i has a value %r. It is not a list of'
+                        ' [search_string, count]. Expected the same format'
+                        ' as the download.'
+                        )%(i, row,)
+                    )
+                try:
+                    count = int(row[1])
+                except:
+                    raise SearchCloudException(
+                        'Could not parse the count for row %s'%(i,)
+                    )
+                else:
+                    if not row[0].strip():
+                        raise SearchCloudException(
+                            "Row %i doesn't contain a search string"%(i,)
+                        )
+                    values.append([row[0].strip(), count])
+            return values 
+
+    def upload(self):
+        self._sysadmin_or_abort()
+        if request.method == 'GET':
+            return render('searchcloud/upload.html')
+        else:
+            file_field = request.POST['searchcloud']
+            data = file_field.value.decode('utf8')
+            try:
+                rows = self._parse_json(data)
+            except SearchCloudException, e:
+                c.error = str(e)
+                return render('searchcloud/error.html')
+            else:
+                c.json = searchcloud.approved_to_json(rows)
+                c.data = data
+                return render('searchcloud/preview.html')
+
+    def save(self):
+        self._sysadmin_or_abort()
+        data = request.POST['searchcloud']
+        try:
+            rows = self._parse_json(data)
+        except SearchCloudException, e:
+            c.error = str(e)
+            return render('searchcloud/error.html')
+        else:
+            searchcloud.update_approved(model.Session, rows)
+            # Save our changes
+            model.Session.commit()
+            return render('searchcloud/saved.html')
+
+    def download(self):
+        self._sysadmin_or_abort()
+        data = searchcloud.get_latest(model.Session)
+        response.charset = 'utf8'
+        response.content_type = 'application/json'
+        response.headers['Content-Disposition'] = 'attachment; filename="ecodp-searchcloud-latest-%s.json"'%(
+            # We don't know when the script is run, so let's assume just
+            # after midnight and use today's date
+            datetime.datetime.now().strftime( 
+                '%Y-%m-%d',
+            )
+        )
+        return json.dumps(data, indent=4)
+
+
+class ECPortalHomeController(HomeController):
+    '''
+    Overrides the index() method to add the data needed to render the search
+    cloud on the homepage
+    '''
+    def index(self):
+        c.json = None 
+        try:
+            rows = searchcloud.get_approved(model.Session)
+        except sqlalchemy.exc.ProgrammingError:
+            log.error('Could not retrieve search cloud results from database. Do the tables exist? Rolling back the session.')
+            model.Session.rollback()
+        else:
+            if rows:
+                c.json = searchcloud.approved_to_json(rows)
+        return HomeController.index(self)
+
+
 
 _validate = ckan.lib.navl.dictization_functions.validate
 json = ckan.lib.helpers.json

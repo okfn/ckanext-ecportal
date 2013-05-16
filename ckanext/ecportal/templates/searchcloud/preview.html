@@ -1,0 +1,48 @@
+<html xmlns:py="http://genshi.edgewall.org/"
+  xmlns:i18n="http://genshi.edgewall.org/i18n"
+  xmlns:xi="http://www.w3.org/2001/XInclude"
+  py:strip="">
+  
+  <py:def function="page_title">Search Cloud Administration</py:def>
+  <py:def function="page_heading">Preview the Search Cloud</py:def>
+
+  <py:def function="body_class">no-sidebar</py:def>
+
+  <py:def function="optional_head">
+    <link rel="stylesheet" href="${h.url_for_static('/css/vendor/jqcloud/1.0.4/jqcloud.css')}"/>
+  </py:def>
+
+  <py:def function="optional_footer">
+    <script type="text/javascript" src="${h.url_for_static('/scripts/vendor/jqcloud/1.0.4/jqcloud-1.0.4.min.js')}"></script>
+    <script type="text/javascript">
+      /*!
+       * An array of word objects, each representing a word in the cloud
+       */
+      var word_array = ${c.json}
+      $(function() {
+        // When DOM is ready, select the container element and call the jQCloud method, passing the array of words as the first argument.
+        $("#searchcloud").jQCloud(word_array, {removeOverflowing: false, width: 420, height: 300});
+      });
+      // We don't need this for the preview
+      $('#searchcloud').bind('click', function(event) {
+        var search_base_url = "${h.url_for(controller='package', action='search')}";
+        var word = $(event.target);
+        var search_url = search_base_url+'?q='+encodeURIComponent(word.text());
+        window.location.href = search_url;
+      })
+    </script>
+    <!-- You should explicitly specify the dimensions of the container element -->
+  </py:def>
+
+  <div py:match="content">
+    <p>Below is a preview of the search cloud with the search strings you uploaded. Click the <tt>Save</tt> button below to save this search cloud and use it on the homepage or <a href="${h.url_for(controller='ckanext.ecportal.controllers:ECPortalSearchCloudAdminController', action='upload')}">upload new data</a>.</p>
+    <div id="searchcloud" style="width: 420px; height: 300px; border: 1px solid #000;"></div>
+    <br />
+    <form action="${h.url_for(controller='ckanext.ecportal.controllers:ECPortalSearchCloudAdminController', action='save')}" method="post">
+      <input type="hidden" name="searchcloud" value="${c.data}"/>
+      <input type="submit" name="submit" value="Save" />
+    </form>
+  </div>
+  <xi:include href="../layout_base.html" />
+</html>
+

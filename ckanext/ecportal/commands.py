@@ -1,4 +1,7 @@
+# -*- coding: utf8 -*-
+
 import collections
+import datetime
 import os
 import sys
 import re
@@ -11,8 +14,7 @@ import ckan.logic as logic
 import ckan.lib.cli as cli
 import requests
 import forms
-
-
+import ckanext.ecportal.searchcloud as searchcloud
 import logging
 log = logging.getLogger()
 
@@ -46,6 +48,9 @@ class ECPortalCommand(cli.CkanCommand):
         paster ecportal delete-interop-vocab -c <config>
         paster ecportal delete-temporal-vocab -c <config>
         paster ecportal delete-all-vocabs -c <config>
+
+        paster ecportal searchcloud-install-tables -c <config>
+        paster ecportal searchcloud-generate-unapproved-search-list -c <config>
 
     Where:
         <data> = path to XML file (format of the Eurostat bulk import metadata file)
@@ -164,6 +169,12 @@ class ECPortalCommand(cli.CkanCommand):
 
         elif cmd == 'delete-all-vocabs':
             self.delete_all_vocabs()
+
+        elif cmd == 'searchcloud-install-tables':
+            self.searchcloud_install_tables()
+
+        elif cmd == 'searchcloud-generate-unapproved-search-list':
+            self.searchcloud_generate_unapproved_search_list()
 
         else:
             log.error('Command "%s" not recognized' % (cmd,))
@@ -795,3 +806,18 @@ class ECPortalCommand(cli.CkanCommand):
         self.delete_status_vocab()
         self.delete_interop_vocab()
         self.delete_temporal_vocab()
+
+    def searchcloud_generate_unapproved_search_list(self):
+        '''\
+        This command is usually executed via a Cron job once a week to
+        replace the data in the search_popular_latest table
+        '''
+        searchcloud.generate_unapproved_list(model.Session, days=30)
+        model.Session.commit()
+
+    def searchcloud_install_tables(self):
+        def out(text):
+            print text
+        searchcloud.install_tables(model.Session, out)
+        model.Session.commit()
+
