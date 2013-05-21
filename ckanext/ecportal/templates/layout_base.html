@@ -113,7 +113,7 @@
 
   <div id="search-header"></div>
 
-  <py:with vars="messages = list(h._flash.pop_messages())">
+  <py:with vars="messages = list(h.flash.pop_messages())">
     <div class="flash-messages">
       <div class="alert ${m.category}" py:for="m in messages">
         ${h.literal(m)}
