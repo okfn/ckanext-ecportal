@@ -332,11 +332,8 @@ def user_create(context, data_dict):
     :returns: the newly created user
     :rtype: dictionary
     '''
-    if 'schema' not in context:
-        new_context = context.copy()  # Don't modify caller's context
-        new_context['schema'] = schema.default_user_schema()
-    else:
-        new_context = context
+    new_context = context.copy()  # Don't modify caller's context
+    new_context['schema'] = schema.default_user_schema()
     return create.user_create(new_context, data_dict)
 
 
@@ -355,11 +352,8 @@ def user_update(context, data_dict):
     :rtype: dictionary
 
     '''
-    if 'schema' not in context:
-        new_context = context.copy()  # Don't modify caller's context
-        new_context['schema'] = schema.default_update_user_schema()
-    else:
-        new_context = context
+    new_context = context.copy()  # Don't modify caller's context
+    new_context['schema'] = schema.default_update_user_schema()
     return update.user_update(new_context, data_dict)
 
 
@@ -400,30 +394,15 @@ class ECPortalPlugin(p.SingletonPlugin):
         config['ckan.auth.profile'] = 'publisher'
 
     def before_map(self, map):
-        user_controller = 'ckanext.ecportal.controllers:ECPortalUserController'
-
-        with routing.SubMapper(map, controller=user_controller) as m:
-            m.connect('/user/edit', action='edit')
-            # Note: openid users have slashes in their ids, so need the
-            # wildcard in the route.
-            m.connect('/user/edit/{id:.*}', action='edit')
-            m.connect('/user/reset/{id:.*}', action='perform_reset')
-            m.connect('/user/login', action='login')
-            m.connect('/user/_logout', action='logout')
-            m.connect('/user/logged_in', action='logged_in')
-            m.connect('/user/logged_out', action='logged_out')
-            m.connect('/user/logged_out_redirect', action='logged_out_page')
-            m.connect('/user/me', action='me')
-            m.connect('/user/set_lang/{lang}', action='set_lang')
-            m.connect('/user/{id:.*}', action='read')
-
         # disable user list, password reset and user registration pages
         map.redirect('/user', '/not_found')
         map.redirect('/user/reset', '/not_found')
         map.redirect('/user/register', '/not_found')
+
         # disable dataset history page
         map.redirect('/dataset/history/{url:.*}', '/not_found')
         map.redirect('/dataset/history_ajax/{url:.*}', '/not_found')
+
         return map
 
     def after_map(self, map):

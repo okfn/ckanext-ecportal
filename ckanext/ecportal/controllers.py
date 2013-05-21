@@ -1,9 +1,7 @@
-import ckan.controllers.user
 import ckan.model as model
 import ckan.plugins as p
 import ckan.lib.navl.dictization_functions
 import ckan.lib.helpers
-import ckanext.ecportal.schema as schema
 import forms
 
 _validate = ckan.lib.navl.dictization_functions.validate
@@ -26,18 +24,6 @@ def _vocabularies(tag_name):
         .filter(model.tag.Tag.name == tag_name)\
         .filter(model.tag.Tag.vocabulary_id == model.vocabulary.Vocabulary.id)
     return [t[1] for t in query]
-
-
-class ECPortalUserController(ckan.controllers.user.UserController):
-    '''
-    EC Portal User controller is customised to allow customisation of the
-    user schema
-    '''
-    def _edit_form_to_db_schema(self):
-        return schema.user_edit_form_schema()
-
-    def _new_form_to_db_schema(self):
-        return schema.user_new_form_schema()
 
 
 class ECPortalDatasetController(p.SingletonPlugin):
