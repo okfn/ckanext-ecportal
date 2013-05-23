@@ -38,7 +38,7 @@
             <a py:if="group_dict['packages']" href="${h.url_for(controller='group', action='read', id=group_dict['name'])}" class="item_link">
               <i class="publisher"></i>
               <strong>${_(group_dict['title'])}</strong><br />
-              <span class="additional">(${group_dict['packages']} datasets)</span>
+              <span class="additional">(${group_dict['packages']} ${_('datasets')})</span>
             </a>
           </py:for>
         </div>
