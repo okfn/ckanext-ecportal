@@ -26,12 +26,12 @@ class ECPortalSearchCloudAdminController(BaseController):
     # Can't do this check in __before__ as c.user is not yet set up
     def _sysadmin_or_abort(self):
         if not c.user:
-            return abort(401, _('Not signed in'))
+            return abort(401, 'Not signed in')
         is_admin = self.authorizer.is_sysadmin(c.user)
         if not is_admin:
             return abort(
                 401,
-                _('You are not authorized to access search cloud administation')
+                'You are not authorized to access search cloud administation'
             )
 
     def index(self):
