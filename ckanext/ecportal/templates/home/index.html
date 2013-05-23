@@ -54,6 +54,16 @@
       </div>
       <div class="span6">
         <div class="region-content">
+          <div py:if="c.most_viewed_datasets">
+          <h2>
+            ${_('Most viewed datasets')}
+            <a href="${h.url_for(controller='package', action='search')}">
+              <i class="resource"></i>
+              ${_('view all datasets')} &raquo;
+            </a>
+          </h2>
+          ${h.snippet('snippets/most_viewed_datasets.html', packages=c.most_viewed_datasets)}
+          </div>
           <h2>
             ${_('Recently updated datasets')}
             <a href="${h.url_for(controller='package', action='search')}">

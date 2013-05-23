@@ -12,6 +12,7 @@ import datetime
 from ckan.lib.base import request, c, BaseController, model, abort, h, g, render, response, _, json
 from ckan.controllers.home import HomeController
 import ckanext.ecportal.searchcloud as searchcloud
+import ckanext.ecportal.mostviewed as mostviewed
 import logging
 log = logging.getLogger(__name__)
 
@@ -127,6 +128,15 @@ class ECPortalHomeController(HomeController):
     cloud on the homepage
     '''
     def index(self):
+        c.most_viewed_datasets = None
+        try:
+            rows = mostviewed.get_most_viewed(model.Session, 10)
+        except sqlalchemy.exc.ProgrammingError:
+            log.error('Could not retrieve most viewed results from database. Do the tables exist? Rolling back the session.')
+            model.Session.rollback()
+        else:
+            if rows:
+                c.most_viewed_datasets = rows
         c.json = None 
         try:
             rows = searchcloud.get_approved(model.Session)
