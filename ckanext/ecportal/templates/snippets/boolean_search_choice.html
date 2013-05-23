@@ -1,0 +1,27 @@
+<html
+  xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:i18n="http://genshi.edgewall.org/i18n"
+  xmlns:py="http://genshi.edgewall.org/"
+  xmlns:xi="http://www.w3.org/2001/XInclude"
+  py:strip=""
+  >
+<strong>Show results with</strong>:
+<py:choose test="session.get('ext_boolean', 'all')"> 
+  <py:when test="'any'">
+          <input type="radio" name="ext_boolean" value="all" /> all of these words |
+          <input type="radio" name="ext_boolean" value="any" checked="checked" /> any of these words |
+          <input type="radio" name="ext_boolean" value="exact" /> the exact phrase
+  </py:when> 
+  <py:when test="'exact'">
+          <input type="radio" name="ext_boolean" value="all" /> all of these words |
+          <input type="radio" name="ext_boolean" value="any" /> any of these words |
+          <input type="radio" name="ext_boolean" value="exact" checked="checked" /> the exact phrase
+  </py:when> 
+  <py:otherwise>
+          <input type="radio" name="ext_boolean" value="all" checked="checked" /> all of these words |
+          <input type="radio" name="ext_boolean" value="any" /> any of these words |
+          <input type="radio" name="ext_boolean" value="exact" /> the exact phrase
+  </py:otherwise> 
+</py:choose> 
+
+</html>

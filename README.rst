@@ -94,3 +94,25 @@ The datasets displayed on the homepage are based on the data in this summary
 table. The actual query extracts the URL from the table, calculates the dataset
 name and joins on ``package`` to find the top datasets. The query is cached.
 
+Boolean Search Operators
+------------------------
+
+ECPortal presents the user with a choice of radio buttons to allow
+customisation of the search boolean logic. The choices are ``all``, ``exact``
+or ``any``. This required a change in CKAN search behaviour. Previously dataset
+queries used the Solr dismax handler whereas publisher queries did not. Now
+both use the dismax handler which means that the group name has to be added to
+the ``fq`` parameter to filter by publisher, rather than the term being part of
+the main ``q`` parameter as it was before.
+
+To implement exact search, the terms entered are wrapped in quotes. To
+implement all, the ``mm`` parameter is set to ``100%`` to implement any it is
+set to ``0``. 
+
+The default search method is now ``all``.
+
+When a user chooses a search boolean operator during a search, the choice is
+remembered and saved in the session which sets a cookie that expires when the
+user's browser is exited. That means that their search preference will be
+remembered for the session.
+

@@ -16,6 +16,9 @@
           <input type="text" id="edit-query" name="q" value="" size="60" placeholder="${_('Find datasets...')}" class="form-text required" />
         </div>
         <input type="submit" id="dataset-search" name="op" value="" class="form-submit" />
+        <p style="margin-bottom: 10px;">
+          ${h.snippet('snippets/boolean_search_choice.html')}
+        </p>
         <p py:if="c.package_count">${g.site_title} contains 
           <a href="${h.url_for(controller='package', action='search')}">${c.package_count} datasets</a>
           that you can browse, learn about and download.</p>
