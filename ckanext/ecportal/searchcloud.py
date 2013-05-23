@@ -2,6 +2,10 @@
 
 import datetime
 import ckan.lib.base
+import logging
+from paste.deploy.converters import asbool
+
+log = logging.getLogger(__name__)
 
 # Model 
 
@@ -20,6 +24,12 @@ def update_approved(Session, rows):
             """,
             {'search_string': row[0], 'count': row[1]},
         )
+    try:
+        approved_cache = ckan.lib.base.cache.get_cache('approved', type="memory")
+        if update_cache:
+            approved_cache.clear()
+    except Exception, e:
+        log.error('Couldn\'t clear the cache: %r'%(str(e))) 
 
 def get_latest(Session):
     results = Session.execute(
@@ -144,11 +154,25 @@ def generate_unapproved_list(Session, days=30):
     )
 
 def get_approved(Session):
-    results = Session.execute(
-        'SELECT search_string, count FROM search_popular_approved;'
-    )
-    # Return the results in a form that can be JSON-serialised
-    return [list(row) for row in results]
+    def approved():
+        results = Session.execute(
+            'SELECT search_string, count FROM search_popular_approved;'
+        )
+        # Return the results in a form that can be JSON-serialised
+        return [list(row) for row in results]
+
+    if asbool(ckan.lib.base.config.get('beaker.cache.enabled', 'True')):
+        try:
+            return approved_cache.get_value(
+                key='all', # We don't need a key, but get_value requires one
+                createfunc=approved,
+                expiretime=60*5, # We don't need to cache for long
+            )
+        except Exception, e:
+            log.error('Couldn\'t use the cache: %r'%(str(e))) 
+            return approved() 
+    else:
+        return approved()
 
 def track_term(Session, lang, search_string):
     Session.execute(

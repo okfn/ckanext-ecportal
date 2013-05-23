@@ -38,7 +38,6 @@ class TestSearchCloud(tests.TestController):
         ctd.CreateTestData.create_ecportal_search_test_data()
         lib.create_test_data.CreateTestData.create('publisher')
         cls.sysadmin_user = model.User.get('testsysadmin')
-        cls.extra_environ = {'Authorization': str(cls.sysadmin_user.apikey)}
         model.Session.commit()
         # Plugins
         for plugin in ['ecportal', 'ecportal_form', 'ecportal_publisher_form', 'ecportal_controller']:
