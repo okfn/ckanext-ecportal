@@ -22,7 +22,8 @@
     <span class="seperator">&gt;</span>
     <a href="${h.url_for(controller='group', action='index')}">${_('Publisher')}</a>
     <span class="seperator">&gt;</span>
-    <span py:for="group in sorted(c.pkg_dict.groups, key=lambda g: g['title'] or g['name'])">
+
+    <span py:for="group in sorted(c.pkg_dict.get('groups', []), key=lambda g: g['title'] or g['name'])">
       <a href="${h.url_for(controller='group', action='read', id=group['name'])}">${h.truncate(group.get('title') or group.get('name'), length=35)}</a>
       <span class="seperator">&gt;</span>
     </span>
@@ -64,8 +65,11 @@
   <div py:match="content">
     <py:if test="c.pkg_revision_id">
       <div id="revision" class="widget-container">
-        <p py:if="c.pkg_revision_not_latest">This is an old revision of this dataset, as edited <!--!by ${h.linked_user(rev.author)}-->at ${h.render_datetime(c.pkg_revision_timestamp, with_hours=True)}. It may differ significantly from the <a href="${h.url(controller='package', action='read', id=c.pkg.name)}">current revision</a>.</p>
-        <p py:if="not c.pkg_revision_not_latest">This is the current revision of this dataset, as edited <!--!by ${h.linked_user(rev.author)}-->at ${h.render_datetime(c.pkg_revision_timestamp, with_hours=True)}.</p>
+        <p py:if="c.pkg_revision_not_latest">
+        This is an old revision of this dataset, as edited at ${h.render_datetime(c.pkg_revision_timestamp, with_hours=True)}. It may differ significantly from the <a href="${h.url(controller='package', action='read', id=c.pkg.name)}">current revision</a>.
+        </p>
+        <p py:if="not c.pkg_revision_not_latest">
+        This is the current revision of this dataset, as edited at ${h.render_datetime(c.pkg_revision_timestamp, with_hours=True)}.</p>
       </div>
     </py:if>
 

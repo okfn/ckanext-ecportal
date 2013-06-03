@@ -30,6 +30,9 @@
     <form>
       <input type="text" name="q" value="${search_value()}" placeholder="${_('Search publisher...')}" />
       <input type="submit" value="" />
+      <p style="padding-left: 10px; margin-top: 5px;">
+        ${h.snippet('snippets/boolean_search_choice.html')}
+      </p>
     </form>
   </div>
 

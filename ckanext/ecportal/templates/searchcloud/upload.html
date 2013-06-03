@@ -1,0 +1,22 @@
+<html xmlns:py="http://genshi.edgewall.org/"
+  xmlns:i18n="http://genshi.edgewall.org/i18n"
+  xmlns:xi="http://www.w3.org/2001/XInclude"
+  py:strip="">
+  
+  <py:def function="page_title">Search Cloud Administration</py:def>
+  <py:def function="page_heading">Upload JSON File</py:def>
+
+  <py:def function="body_class">no-sidebar</py:def>
+
+  <py:def function="optional_head">
+  </py:def>
+
+  <div py:match="content">
+    <form action="${h.url_for(controller='ckanext.ecportal.controllers:ECPortalSearchCloudAdminController', action='upload')}" method="post" enctype="multipart/form-data">
+      <input type="file" name="searchcloud" />
+      <input type="submit" name="submit" value="Submit" />
+    </form>
+  </div>
+  <xi:include href="../layout_base.html" />
+</html>
+
