@@ -1,9 +1,9 @@
 CKAN EC Portal Extension
 ========================
 
-**Status:** Alpha
+**Status:** Production
 
-**CKAN Version:** 0.1
+**CKAN Version:** release-v1.7.1-ecportal
 
 
 Testing
