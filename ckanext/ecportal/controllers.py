@@ -3,7 +3,6 @@ import sqlalchemy.exc
 from pylons import response
 
 import ckan.lib.base as base
-import ckan.controllers.user
 import ckan.controllers.home
 import ckan.model as model
 import ckan.plugins as p
