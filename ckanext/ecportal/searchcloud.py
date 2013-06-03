@@ -1,53 +1,54 @@
-# -*- coding: utf8 -*-
-
 import datetime
-import ckan.lib.base
 import logging
-from paste.deploy.converters import asbool
+from pylons import config
+import ckan.plugins as p
+import ckan.lib.base as base
 
 log = logging.getLogger(__name__)
+json = base.json
 
-# Model 
 
 def update_approved(Session, rows):
-    Session.execute(
-        """
-        DELETE FROM search_popular_approved;
-        """
-    )
+    Session.execute('DELETE FROM search_popular_approved;')
     for row in rows:
         Session.execute(
-            """
-            INSERT INTO search_popular_approved 
+            '''
+            INSERT INTO search_popular_approved
                    (search_string, count)
             VALUES (:search_string, :count)
-            """,
+            ''',
             {'search_string': row[0], 'count': row[1]},
         )
+
+    # TODO: should we also check for beaker.cache.enabled in config here?
     try:
-        approved_cache = ckan.lib.base.cache.get_cache('approved', type="memory")
-        if update_cache:
+        approved_cache = base.cache.get_cache('approved', type="memory")
+        if approved_cache:
             approved_cache.clear()
     except Exception, e:
-        log.error('Couldn\'t clear the cache: %r'%(str(e))) 
+        log.error('Couldn\'t clear the cache: %r' % (str(e)))
+
 
 def get_latest(Session):
     results = Session.execute(
         '''
-        SELECT 
-            search_string
-          , count
+        SELECT search_string, count
         FROM search_popular_latest
-        ORDER BY 
-            count DESC;
+        ORDER BY count DESC;
         '''
     )
-    # Return the results in a form that can be JSON-serialised
+    # return the results in a form that can be JSON-serialised
     return [list(row) for row in results]
 
+
 def table_exists(Session, table_name):
-    sql_table_exists = "SELECT EXISTS(SELECT * FROM information_schema.tables WHERE table_name=:table_name)"
-    return Session.execute(sql_table_exists, {'table_name': table_name}).fetchone()[0]
+    sql_table_exists = '''
+        SELECT EXISTS(SELECT * FROM information_schema.tables
+                      WHERE table_name=:table_name)
+    '''
+    return Session.execute(sql_table_exists,
+                           {'table_name': table_name}).fetchone()[0]
+
 
 def index_exists(Session, table_name, index_name):
     sql_index_exists = '''
@@ -76,68 +77,77 @@ def index_exists(Session, table_name, index_name):
             ORDER BY
                 t.relname
               , i.relname
-        ) 
+        )
         '''
-    return Session.execute(sql_index_exists, {'table_name': table_name, 'index_name': index_name}).fetchone()[0]
+    return Session.execute(sql_index_exists,
+                           {'table_name': table_name,
+                            'index_name': index_name}).fetchone()[0]
+
 
 def install_tables(Session, out):
     created_count = 0
+
     if not table_exists(Session, 'search_query'):
-        out("Creating the search_query table ...")
-        Session.execute("""
+        out('Creating the search_query table ...')
+        Session.execute('''
             CREATE TABLE search_query (
                 lang VARCHAR(10) NOT NULL
               , search_string VARCHAR NOT NULL
               -- This is only for use during the analysis
               , searched_at TIMESTAMP default NOW()
             );
-        """)
+        ''')
         created_count += 1
-        out("done.")
+        out('done.')
+
     if not table_exists(Session, 'search_popular_latest'):
-        out("Creating the search_popular_latest table ...")
-        Session.execute("""
+        out('Creating the search_popular_latest table ...')
+        Session.execute('''
             CREATE TABLE search_popular_latest (
-                lang VARCHAR(10) -- Can be NULL as we aren't using lang at the moment
+                lang VARCHAR(10) -- Can be NULL
               , search_string VARCHAR NOT NULL
               , count BIGINT
             );
-        """)
+        ''')
         created_count += 1
-        out("done.")
+        out('done.')
+
     if not table_exists(Session, 'search_popular_approved'):
-        out("Creating the search_popular_approved table ...")
-        Session.execute("""
+        out('Creating the search_popular_approved table ...')
+        Session.execute('''
             CREATE TABLE search_popular_approved (
-                lang VARCHAR(10) -- Can be NULL as we aren't using lang at the moment
+                lang VARCHAR(10)
               , search_string VARCHAR NOT NULL
               , count BIGINT NOT NULL
             );
-        """)
+        ''')
         created_count += 1
-        out("done.")
+        out('done.')
+
     if not index_exists(Session, 'search_query', 'search_query_date'):
-        out("Creating the search_query_date index ...")
-        Session.execute("""
+        out('Creating the search_query_date index ...')
+        Session.execute('''
             CREATE INDEX search_query_date ON search_query (searched_at);
-        """)
-        out("done.")
+        ''')
+        out('done.')
     else:
-        out("The index already exists")
+        out('The index already exists')
+
     if created_count == 0:
-        out("The tables already exist")
+        out('The tables already exist')
+
 
 def generate_unapproved_list(Session, days=30):
     Session.execute(
-        """
+        '''
         DELETE FROM search_popular_latest;
-        """
+        '''
     )
     Session.execute(
-        """
+        '''
         INSERT INTO search_popular_latest (lang, search_string, count) (
             SELECT
-                -- At the moment, we only actually want one tag cloud regardless of language
+                -- currently ignoring language
                 NULL
               , search_string
               , count(*)
@@ -149,62 +159,59 @@ def generate_unapproved_list(Session, days=30):
             ORDER BY count(*) DESC
             LIMIT 100
         );
-        """,
+        ''',
         {'since': datetime.datetime.now() - datetime.timedelta(days=30)}
     )
+
 
 def get_approved(Session):
     def approved():
         results = Session.execute(
             'SELECT search_string, count FROM search_popular_approved;'
         )
-        # Return the results in a form that can be JSON-serialised
+        # return the results in a form that can be JSON-serialised
         return [list(row) for row in results]
 
-    if asbool(ckan.lib.base.config.get('beaker.cache.enabled', 'True')):
-        try:
-            return approved_cache.get_value(
-                key='all', # We don't need a key, but get_value requires one
-                createfunc=approved,
-                expiretime=60*5, # We don't need to cache for long
-            )
-        except Exception, e:
-            log.error('Couldn\'t use the cache: %r'%(str(e))) 
-            return approved() 
-    else:
-        return approved()
+    # TODO: fix this - tests fail when cache is used
+    #
+    # if p.toolkit.asbool(config.get('beaker.cache.enabled', 'True')):
+    #     try:
+    #         approved_cache = base.cache.get_cache('approved', type="memory")
+    #         return approved_cache.get_value(
+    #             key='all',  # We don't need a key, but get_value requires one
+    #             createfunc=approved,
+    #             expiretime=60 * 5
+    #         )
+    #     except Exception, e:
+    #         log.error('Couldn\'t use the cache: %r' % (str(e)))
+    #         return approved()
+    # else:
+    #     return approved()
+
+    return approved()
+
 
 def track_term(Session, lang, search_string):
     Session.execute(
         '''
         INSERT INTO search_query (lang, search_string)
         VALUES (:lang, :search_string)
-        ''', 
+        ''',
         {'lang': lang, 'search_string': search_string}
     )
 
-# Helpers 
-
-json = ckan.lib.base.json
 
 def approved_to_json(rows):
+    # Note: We don't use jqcloud's build in link
+    #       functionality as it causes terms to be
+    #       double escaped, instead there is a JS
+    #       click handler on the front-end
     cloud_data = []
     for row in rows:
-        cloud_data.append(
-            {
-                'text': row[0],
-                'weight': row[1],
-                # Note: We don't use jqcloud's build in link
-                #       functionality as it causes terms to be
-                #       double escaped, instead there is a JS
-                #       click handler on the front-end
-                #'link': h.url_for(
-                #    controller='package', 
-                #    action='search'
-                #)+'?q='+urllib.quote_plus(row[1])
-            }
-        )
-    return json.dumps(cloud_data) 
+        cloud_data.append({'text': row[0],
+                           'weight': row[1]})
+    return json.dumps(cloud_data)
+
 
 def unify_terms(search_string, max_length=200):
     if not search_string.strip() or search_string == '*:*':
@@ -223,4 +230,3 @@ def unify_terms(search_string, max_length=200):
                     search_string += term + ' '
             search_string = search_string[:-1]
     return search_string
-

@@ -1,5 +1,3 @@
-# -*- coding: utf8 -*-
-
 try:
     import json
 except ImportError:
@@ -27,6 +25,7 @@ test_data = [
         'notes':u'two three four five',
     },
 ]
+
 
 class TestSearchBoolean(tests.TestController):
 
@@ -147,4 +146,3 @@ class TestSearchBoolean(tests.TestController):
 
     def test_09_publisher_exact(self):
         self.assert_publisher_search_results('exact', 'two three', ['Boolean 1', 'Boolean 3'])
-

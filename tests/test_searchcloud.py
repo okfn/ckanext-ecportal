@@ -1,5 +1,3 @@
-# -*- coding: utf8 -*-
-
 import cgi
 try:
     import json
@@ -11,12 +9,9 @@ import ckan.lib as lib
 import ckan.lib.search as search
 import ckan.tests as tests
 import create_test_data as ctd
-import test_api
 import ckanext.ecportal.searchcloud as searchcloud
 from ckan import plugins
-from pylons import config
-import paste.fixture
-from ckan.config.middleware import make_app
+
 
 def normalize_line_endings(text):
     return text.replace('\r\n', '\n').replace('\r', '\n')
@@ -29,6 +24,7 @@ expected_json = json.dumps(
     ]
 )
 
+
 class TestSearchCloud(tests.TestController):
 
     @classmethod
@@ -40,7 +36,8 @@ class TestSearchCloud(tests.TestController):
         cls.sysadmin_user = model.User.get('testsysadmin')
         model.Session.commit()
         # Plugins
-        for plugin in ['ecportal', 'ecportal_form', 'ecportal_publisher_form', 'ecportal_controller']:
+        for plugin in ['ecportal', 'ecportal_form', 'ecportal_publisher_form',
+                       'ecportal_controller']:
             plugins.load(plugin)
 
     @classmethod
@@ -51,9 +48,12 @@ class TestSearchCloud(tests.TestController):
         plugins.reset()
 
     def test_00_no_tables(self):
-        for table in ['search_query', 'search_popular_latest', 'search_popular_approved']:
-            self.assert_equal(searchcloud.table_exists(model.Session, table), False)
-        self.assert_equal(searchcloud.index_exists(model.Session, 'search_query', 'search_query_date'), False)
+        for table in ['search_query', 'search_popular_latest',
+                      'search_popular_approved']:
+            self.assert_equal(searchcloud.table_exists(
+                model.Session, table), False)
+        self.assert_equal(searchcloud.index_exists(
+            model.Session, 'search_query', 'search_query_date'), False)
 
     def test_01_searchcloud_not_displayed_when_tables_are_missing(self):
         home_url = tests.url_for('home')
@@ -62,20 +62,24 @@ class TestSearchCloud(tests.TestController):
         self.assert_equal("jqcloud" not in res, True)
 
     def test_02a_searches_dont_fail_when_tables_are_missing(self):
-        # Programatically (will raise an Exception if this doesn't work)
+        # Programatically (will raise an Exception if this doesn't work)
         result = search.query_for(model.Package).run({'q': '*:*'})
         self.assert_equal(result.get('count', 0) > 0, True)
 
     def test_02b_searches_dont_fail_when_tables_are_missing(self):
-        # Via HTTP
-        search_url = tests.url_for(controller='package', action='search') +'?q=Test'
+        # Via HTTP
+        search_url = tests.url_for(controller='package', action='search') + \
+            '?q=Test'
         res = self.app.get(search_url)
         self.assert_equal("Test language English" in res, True)
 
     def test_03_install_searchcloud_tables(self):
-        for table in ['search_query', 'search_popular_latest', 'search_popular_approved']:
-            self.assert_equal(searchcloud.table_exists(model.Session, table), False)
+        for table in ['search_query', 'search_popular_latest',
+                      'search_popular_approved']:
+            self.assert_equal(searchcloud.table_exists(
+                model.Session, table), False)
         output = []
+
         def out(text):
             output.append(text)
         first_run = """\
@@ -88,7 +92,8 @@ done.
 Creating the search_query_date index ...
 done."""
         searchcloud.install_tables(model.Session, out)
-        self.assert_equal(output, normalize_line_endings(first_run).split('\n'))
+        self.assert_equal(output,
+                          normalize_line_endings(first_run).split('\n'))
         second_run = """\
 The index already exists
 The tables already exist"""
@@ -120,27 +125,27 @@ The tables already exist"""
         searches = ['Health', 'Health', 'Health', "Water<>&\"{}'", "Water<>&\"{}'", u'Tax\u6c49\u5b57\u6f22\u5b57']
         for term in searches:
             search_url = tests.url_for(controller='package', action='search') +'?q='+urllib.quote(term.encode('utf8'))
-            res = self.app.get(search_url)
+            self.app.get(search_url)
         # Now the query is logged
         result = model.Session.execute('select count(*) from search_query').fetchall()[0][0]
         self.assert_equal(int(result), 6)
 
     def test_06_searchcloud_displays_when_approved_data_present(self):
-        # Put some data into the cloud
+        #Put some data into the cloud
         searchcloud.generate_unapproved_list(model.Session, days=30)
         latest_rows = searchcloud.get_latest(model.Session)
         self.assert_equal(latest_rows, [[u'Health', 3L], [u"Water<>&\"{}'", 2L], [u'Tax\u6c49\u5b57\u6f22\u5b57', 1L]])
         searchcloud.update_approved(model.Session, latest_rows)
         approved_rows = searchcloud.get_approved(model.Session)
         self.assert_equal(latest_rows, approved_rows)
-        # We'll use this test data later, so save it.
+        #We'll use this test data later, so save it.
         model.Session.commit()
         # Test that the JSON text is what we expect.
         self.assert_equal(
             expected_json,
             searchcloud.approved_to_json(approved_rows)
         )
-        # Now we should get a cloud
+        # Now we should get a cloud
         home_url = tests.url_for('home')
         res = self.app.get(home_url)
         self.assert_equal(
@@ -153,7 +158,7 @@ The tables already exist"""
         self.assert_equal('<div id="searchcloud"' in res, True)
 
     def test_07_searches_are_made_uniform_correctly(self):
-        # How should capitalization be taken into account? In the search itself?
+        #How should capitalization be taken into account? In the search itself?
         for search_string, expected in (
             # Simple case
             ['One Two', 'One Two'],
@@ -175,7 +180,7 @@ The tables already exist"""
         # Check the sysadmin exists
         sysadmin = model.User.by_name(u'testsysadmin')
         self.assert_equal(sysadmin is not None, True)
-        # Check that they can access the two versions of the index page
+        # Check that they can access the two versions of the index page
         for url in ['/searchcloud', '/searchcloud/']:
             res = self.app.get(url, status=200, extra_environ={'REMOTE_USER': 'testsysadmin'})
             self.assert_equal('/searchcloud/download' in res, True)
@@ -204,7 +209,7 @@ The tables already exist"""
         latest_rows = searchcloud.get_latest(model.Session)
         self.assert_equal(expected_results, res.body)
         self.assert_equal(json.loads(res.body), latest_rows)
-        # Check you get an upload form
+        # Check you get an upload form
         res = self.app.get('/searchcloud/upload', status=200, extra_environ={'REMOTE_USER': 'testsysadmin'})
         self.assert_equal('type="file"' in res.body, True)
         self.assert_equal('enctype="multipart/form-data"' in res.body, True)
@@ -225,7 +230,7 @@ The tables already exist"""
         )
         self.assert_equal('Search Cloud Successfully Updated' in res.body, True)
         model.Session.commit()
-        # Check the new data is in the approved table
+        # Check the new data is in the approved table
         self.assert_equal(searchcloud.get_approved(model.Session), [[u'Environment', 3L], [u"Water<>&\"{}'", 2L], [u'Tax\u6c49\u5b57\u6f22\u5b57', 1L]])
         # Finally test that the new data is on the homepage
         home_url = tests.url_for('home')
@@ -244,7 +249,7 @@ The tables already exist"""
             params={'searchcloud': expected_json}
         )
         self.assert_equal('Error Accepting JSON File' in res.body, True)
-        # Check it hasn't changed the approved data
+        # Check it hasn't changed the approved data
         self.assert_equal(searchcloud.get_approved(model.Session), [[u'Environment', 3L], [u"Water<>&\"{}'", 2L], [u'Tax\u6c49\u5b57\u6f22\u5b57', 1L]])
         # Post an empty list to empty the table
         res = self.app.post(
@@ -255,12 +260,11 @@ The tables already exist"""
         )
         model.Session.commit()
         self.assert_equal('Search Cloud Successfully Updated' in res.body, True)
-        # The approved data table should be empty
+        # The approved data table should be empty
         self.assert_equal(searchcloud.get_approved(model.Session), [])
 
     def test_10_access_restrictions(self):
         model.Session.add(model.User(name=u'notadmin'))
-        notadmin = model.User.by_name(u'notadmin')
         for url in [
             '/searchcloud',
             '/searchcloud/',
@@ -270,6 +274,5 @@ The tables already exist"""
             '/searchcloud/save',
         ]:
             # Check we get a 401 response from notadmin
-            res = self.app.get(url, status=401, extra_environ={'REMOTE_USER': 'notadmin'})
-            res = self.app.post(url, status=401, extra_environ={'REMOTE_USER': 'notadmin'})
-
+            self.app.get(url, status=401, extra_environ={'REMOTE_USER': 'notadmin'})
+            self.app.post(url, status=401, extra_environ={'REMOTE_USER': 'notadmin'})
