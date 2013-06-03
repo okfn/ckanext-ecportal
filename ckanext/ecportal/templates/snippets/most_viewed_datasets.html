@@ -1,0 +1,19 @@
+<html
+  xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:i18n="http://genshi.edgewall.org/i18n"
+  xmlns:py="http://genshi.edgewall.org/"
+  xmlns:xi="http://www.w3.org/2001/XInclude"
+  py:strip=""
+  >
+
+  <ul class="datasets unstyled">
+    <li py:for="package in packages">
+      <a href="${h.url_for(controller='package', action='read', id=package.name)}" class="item_link">
+        <i class="resource"></i>
+        <strong>${package.title}</strong><br />
+        <span class="additional">(${package.running_total} ${_('views')}</span>)
+      </a>
+    </li>
+  </ul>
+
+</html>
