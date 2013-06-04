@@ -380,8 +380,11 @@ class ECPortalPublisherForm(p.SingletonPlugin):
     def new_template(self):
         return 'publisher/new.html'
 
-    def group_form(self):
+    def edit_template(self):
         return 'publisher/edit.html'
+
+    def group_form(self):
+        return 'publisher/form.html'
 
     def history_template(self):
         return 'publisher/history.html'
