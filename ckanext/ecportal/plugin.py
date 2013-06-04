@@ -8,10 +8,11 @@ import ckan.config.routing as routing
 import ckanext.ecportal.logic as ecportal_logic
 import ckanext.ecportal.auth as ecportal_auth
 import ckanext.ecportal.searchcloud as searchcloud
+import ckanext.ecportal.unicode_sort as unicode_sort
 
 import logging
 log = logging.getLogger(__file__)
-
+UNICODE_SORT = unicode_sort.UNICODE_SORT
 
 class ECPortalPlugin(p.SingletonPlugin):
     p.implements(p.IConfigurable)
@@ -86,11 +87,14 @@ class ECPortalPlugin(p.SingletonPlugin):
         return map
 
     def before_search(self, search_params):
-        '''
-        We don't make any changes to the search_params, just log
-        the search string to the database for later analysis.
-        '''
+
         search_string = search_params.get('q') or ''
+        if not search_string and not search_params.get('sort'):
+            search_params['sort'] = 'title_sort asc'
+
+        #For search cloud we don't make any changes to the search_params, just log
+        #the search string to the database for later analysis.
+
         # do some clean up of the search string so that the analysis
         # will be easier later
         search_string = searchcloud.unify_terms(search_string, max_length=200)
@@ -139,3 +143,14 @@ class ECPortalPlugin(p.SingletonPlugin):
                 search_string
             )
         return search_params
+
+    def before_index(self, pkg_dict):
+        title = pkg_dict.get('title', pkg_dict.get('name'))
+
+        sortable_title = "".join(
+           [unichr(UNICODE_SORT.get(ord(char), ord(char))) 
+           for char in title]
+        ) 
+        pkg_dict['title_sort'] = sortable_title
+        return pkg_dict
+
