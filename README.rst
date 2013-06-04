@@ -3,7 +3,7 @@ CKAN EC Portal Extension
 
 **Status:** Production
 
-**CKAN Version:** release-v1.7.1-ecportal
+**CKAN Version:** release-v1.8.1-ecportal
 
 
 Testing
@@ -107,7 +107,7 @@ the main ``q`` parameter as it was before.
 
 To implement exact search, the terms entered are wrapped in quotes. To
 implement all, the ``mm`` parameter is set to ``100%`` to implement any it is
-set to ``0``. 
+set to ``0``.
 
 The default search method is now ``all``.
 
@@ -115,4 +115,3 @@ When a user chooses a search boolean operator during a search, the choice is
 remembered and saved in the session which sets a cookie that expires when the
 user's browser is exited. That means that their search preference will be
 remembered for the session.
-

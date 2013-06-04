@@ -128,11 +128,7 @@
       </div>
     </div>
 
-  <py:if test="config.get('ckan.datastore.enabled', False)">
-    ${data_api_help(c.datastore_api)}
-  </py:if>
-
-  ${data_viewer_embed_dialog()}
+    ${data_viewer_embed_dialog()}
 
     <div class="package-box" property="rdfs:label">
       <h3><i class="note"></i> ${_('Description')}</h3>

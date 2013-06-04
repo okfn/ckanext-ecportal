@@ -601,7 +601,7 @@ ul li span{
   background: #fff url("../images/descborder.png") bottom center no-repeat;
   margin: 0px auto 10px auto;
   position:relative;
-  padding: 30px 30px 20px 30px;
+  padding: 10px 0px 10px 0px;
 }
 
 input#txtSearchData {
@@ -680,8 +680,9 @@ input#txtSearchData {
   color: #7082b1;
   background: url("../images/videocapture.png") center left no-repeat;
 }
-#ckan-form p{
-  margin: 0px 65px;
+
+#ckan-form {
+  margin: 20px 0 18px;
 }
 
 .grouped-buttons {
@@ -1167,7 +1168,7 @@ a:visited{color:#1B88C2;}
   doctype */
 input#txtSearchData,
 .region-tabdesc input[type="text"] {
-  width: 799px;
+  width: 596px;
   /* removes boostrap inner shadow */
   -webkit-box-shadow: none;
   -moz-box-shadow: none;
@@ -1255,8 +1256,14 @@ h2 a i {
   font-size: 16px;
   line-height: 32px;
 }
+
+.suggest-box a {
+  font-style: italic;
+}
+
 /* Side bar boxes now look good */
 .sidebar-section,
+.suggest-box,
 .facet-box {
   padding: 15px;
   margin: 20px 0;
@@ -1265,6 +1272,7 @@ h2 a i {
   background: #eee url("../images/box.png") 100% 100% no-repeat;
 }
 .sidebar-section h3,
+.suggest-box h2,
 .facet-box h2 {
   margin: 0 0 15px 0;
   padding: 0;
@@ -1498,8 +1506,8 @@ input.search {
 }
 .form-submit:not(#odp-search) {
   height: 33px;
-  top: 40px;
-  right: 88px;
+  top: 35px;
+  left: 588px;
 }
 
 .btn-primary,
