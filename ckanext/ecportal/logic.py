@@ -5,7 +5,6 @@ import ckan.plugins as plugins
 import ckan.lib.dictization as d
 import ckan.lib.navl.dictization_functions
 import ckan.lib.plugins as lib_plugins
-import ckanext.ecportal.unicode_sort as unicode_sort
 
 import ckanext.ecportal.schema as schema
 import ckanext.ecportal.unicode_sort as unicode_sort
