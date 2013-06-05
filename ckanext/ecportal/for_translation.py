@@ -39,9 +39,3 @@ def terms_for_translation():
     _('The resource could not be found.')
     _('Dataset not found')
     _('Tag not found')
-
-    # temporary changes
-    _('URI')
-    _('Release Date')
-    _('Added to open-data.europa.eu')
-    _('Updated on open-data.europa.eu')

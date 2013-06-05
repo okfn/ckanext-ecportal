@@ -57,7 +57,7 @@
       <div id="dataset-information" class="inner">
         <div class="quick-info">
           <dl py:if="c.pkg.url">
-            <dt>${_('URL')}</dt>
+            <dt>${_('URI')}</dt>
             <dd property="foaf:homepage">${c.pkg_url_link}</dd>
           </dl>
 
@@ -94,6 +94,16 @@
           <dl py:if="c.pkg_dict.get('modified_date')">
             <dt>${_('Modified Date')}</dt>
             <dd>${c.pkg_dict['modified_date']}</dd>
+          </dl>
+
+          <dl py:if="c.pkg_dict.get('metadata_created')">
+            <dt>${_('Added to open-data.europa.eu')}</dt>
+            <dd>${h.render_datetime(c.pkg_dict['metadata_created'], '%Y-%m-%d')}</dd>
+          </dl>
+
+          <dl py:if="c.pkg_dict.get('metadata_modified')">
+            <dt>${_('Updated on open-data.europa.eu')}</dt>
+            <dd>${h.render_datetime(c.pkg_dict['metadata_modified'], '%Y-%m-%d')}</dd>
           </dl>
 
           <dl py:if="c.pkg_dict.get('accrual_periodicity')">

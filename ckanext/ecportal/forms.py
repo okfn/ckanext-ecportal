@@ -308,6 +308,7 @@ class ECPortalDatasetForm(p.SingletonPlugin):
             'contact_webpage': [convert_from_extras, ignore_missing],
             'license_url': [ignore_missing],
             'license_title': [ignore_missing],
+            'metadata_created': [ignore_missing],
             'metadata_modified': [ignore_missing],
             '__after': [duplicate_extras_key,
                         rename('tags', 'keywords'),
