@@ -146,11 +146,6 @@ class ECPortalPlugin(p.SingletonPlugin):
 
     def before_index(self, pkg_dict):
         title = pkg_dict.get('title', pkg_dict.get('name'))
-
-        sortable_title = "".join(
-           [unichr(UNICODE_SORT.get(ord(char), ord(char))) 
-           for char in title]
-        ) 
-        pkg_dict['title_sort'] = sortable_title
+        pkg_dict['title_sort'] = title.translate(UNICODE_SORT)
         return pkg_dict
 

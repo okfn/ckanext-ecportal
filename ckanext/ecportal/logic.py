@@ -5,8 +5,12 @@ import ckan.plugins as plugins
 import ckan.lib.dictization as d
 import ckan.lib.navl.dictization_functions
 import ckan.lib.plugins as lib_plugins
+import ckanext.ecportal.unicode_sort as unicode_sort
 
 import ckanext.ecportal.schema as schema
+import ckanext.ecportal.unicode_sort as unicode_sort
+
+UNICODE_SORT = unicode_sort.UNICODE_SORT
 
 _validate = ckan.lib.navl.dictization_functions.validate
 
@@ -173,6 +177,8 @@ def group_show(context, data_dict):
 
     return group_dict
 
+def sort_group(key):
+    return key.get('display_name', '').translate(UNICODE_SORT)
 
 def group_list(context, data_dict):
     '''Return a list of the names of the site's groups.
@@ -210,7 +216,7 @@ def group_list(context, data_dict):
             else:
                 groups = [g for g in groups if len(g['packages']) > 0]
 
-    return sorted(groups, key=operator.itemgetter('display_name'))
+    return sorted(groups, key=sort_group)
 
 
 def package_show(context, data_dict):
