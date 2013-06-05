@@ -305,11 +305,6 @@ msgstr ""
 msgid "Top"
 msgstr ""
 
-#: ../ckanext-ecportal/ckanext/ecportal/templates/home/index.html:6
-#: ../ckanext-ecportal/ckanext/ecportal/templates/publisher/index.html:8
-msgid "no-sidebar"
-msgstr ""
-
 #: ../ckanext-ecportal/ckanext/ecportal/templates/home/index.html:14
 msgid "This field is required."
 msgstr ""

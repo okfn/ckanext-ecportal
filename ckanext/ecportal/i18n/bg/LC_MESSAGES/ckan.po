@@ -1,7 +1,7 @@
-# Translations template for ckan.
+# Bulgarian translations for ckan.
 # Copyright (C) 2013 ORGANIZATION
 # This file is distributed under the same license as the ckan project.
-# 
+#
 # Translators:
 # odptranslator <ecodptranslators@gmail.com>, 2013
 # odptranslatorBG <DGT-WEB-BG@ec.europa.eu>, 2013
@@ -12,13 +12,13 @@ msgstr ""
 "POT-Creation-Date: 2013-05-23 15:38+0000\n"
 "PO-Revision-Date: 2013-06-03 13:48+0000\n"
 "Last-Translator: odptranslatorBG <DGT-WEB-BG@ec.europa.eu>\n"
-"Language-Team: Bulgarian (http://www.transifex.com/projects/p/ckan-eu-odp/language/bg/)\n"
+"Language-Team: Bulgarian (http://www.transifex.com/projects/p/ckan-eu-"
+"odp/language/bg/)\n"
+"Plural-Forms: nplurals=2; plural=(n != 1)\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 0.9.6\n"
-"Language: bg\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: ckan/templates/error_document_template.html:5
 msgid "Error"
@@ -308,11 +308,6 @@ msgstr "За този уебсайт"
 msgid "Top"
 msgstr ""
 
-#: ../ckanext-ecportal/ckanext/ecportal/templates/home/index.html:6
-#: ../ckanext-ecportal/ckanext/ecportal/templates/publisher/index.html:8
-msgid "no-sidebar"
-msgstr "няма странично меню"
-
 #: ../ckanext-ecportal/ckanext/ecportal/templates/home/index.html:14
 msgid "This field is required."
 msgstr "Задължително поле"
@@ -559,7 +554,9 @@ msgstr "Търсене на набори от данни"
 msgid ""
 "[1:There was an error while searching.]\n"
 "      Please try again."
-msgstr "[1:Възникна грешка при търсенето.]⏎\nМоля, опитайте отново."
+msgstr ""
+"[1:Възникна грешка при търсенето.]⏎\n"
+"Моля, опитайте отново."
 
 #: ../ckanext-ecportal/ckanext/ecportal/templates/package/search.html:49
 #, python-format
@@ -635,3 +632,7 @@ msgstr "Ключова дума:"
 #, python-format
 msgid "There are %(count)s datasets with the keyword [1:%(tagname)s]:"
 msgstr "Има %(count)s набори от данни с ключова дума [1:%(tagname)s]:"
+
+#~ msgid "no-sidebar"
+#~ msgstr "няма странично меню"
+

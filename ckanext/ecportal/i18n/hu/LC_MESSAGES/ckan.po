@@ -1,7 +1,7 @@
-# Translations template for ckan.
+# Hungarian translations for ckan.
 # Copyright (C) 2013 ORGANIZATION
 # This file is distributed under the same license as the ckan project.
-# 
+#
 # Translators:
 # odptranslator <ecodptranslators@gmail.com>, 2013
 # odptranslatorHU <DGT-WEB-HU@ec.europa.eu>, 2013
@@ -12,13 +12,13 @@ msgstr ""
 "POT-Creation-Date: 2013-05-23 15:38+0000\n"
 "PO-Revision-Date: 2013-06-04 16:22+0000\n"
 "Last-Translator: odptranslatorHU <DGT-WEB-HU@ec.europa.eu>\n"
-"Language-Team: Hungarian (http://www.transifex.com/projects/p/ckan-eu-odp/language/hu/)\n"
+"Language-Team: Hungarian (http://www.transifex.com/projects/p/ckan-eu-"
+"odp/language/hu/)\n"
+"Plural-Forms: nplurals=2; plural=(n != 1)\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 0.9.6\n"
-"Language: hu\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: ckan/templates/error_document_template.html:5
 msgid "Error"
@@ -225,7 +225,9 @@ msgstr "Adatkészlet ajánlása"
 
 #: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:58
 msgid "Is there a dataset from the EU that you could not find in this portal?"
-msgstr "Tudomása van Önnek olyan EU-vonatkozású adatkészletről, amely nem található a portálon?"
+msgstr ""
+"Tudomása van Önnek olyan EU-vonatkozású adatkészletről, amely nem "
+"található a portálon?"
 
 #: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:59
 msgid "Please request the dataset"
@@ -308,11 +310,6 @@ msgstr "A webhelyről"
 msgid "Top"
 msgstr "Az oldal tetejére"
 
-#: ../ckanext-ecportal/ckanext/ecportal/templates/home/index.html:6
-#: ../ckanext-ecportal/ckanext/ecportal/templates/publisher/index.html:8
-msgid "no-sidebar"
-msgstr ""
-
 #: ../ckanext-ecportal/ckanext/ecportal/templates/home/index.html:14
 msgid "This field is required."
 msgstr " Ennek a mezőnek a kitöltése kötelező"
@@ -334,7 +331,9 @@ msgstr "adatkészletet"
 
 #: ../ckanext-ecportal/ckanext/ecportal/templates/home/index.html:20
 msgid "that you can browse, learn about and download."
-msgstr "A portálon Ön tetszés szerint böngészhet az adatok között, illetve megtekintheti és letöltheti azokat."
+msgstr ""
+"A portálon Ön tetszés szerint böngészhet az adatok között, illetve "
+"megtekintheti és letöltheti azokat."
 
 #: ../ckanext-ecportal/ckanext/ecportal/templates/home/index.html:31
 msgid "Top Publishers"
@@ -366,7 +365,9 @@ msgstr "Kapcsolódó adatkészletek"
 
 #: ../ckanext-ecportal/ckanext/ecportal/templates/package/read.html:67
 msgid "This is an old revision of this dataset, as edited at"
-msgstr "Ez a változat az adatkészlet régebbi, nem módosított változata. Szerkesztésének időpontja:"
+msgstr ""
+"Ez a változat az adatkészlet régebbi, nem módosított változata. "
+"Szerkesztésének időpontja:"
 
 #: ../ckanext-ecportal/ckanext/ecportal/templates/package/read.html:68
 msgid ". It may differ significantly from the"
@@ -378,7 +379,9 @@ msgstr "jelentős eltéréseket tartalmazhat."
 
 #: ../ckanext-ecportal/ckanext/ecportal/templates/package/read.html:70
 msgid "This is the current revision of this dataset, as edited at"
-msgstr "Ez a változat az adatkészlet jelenlegi, módosított változata. Szerkesztésének időpontja:"
+msgstr ""
+"Ez a változat az adatkészlet jelenlegi, módosított változata. "
+"Szerkesztésének időpontja:"
 
 #: ../ckanext-ecportal/ckanext/ecportal/templates/package/read.html:82
 msgid "RDF/XML"
@@ -559,7 +562,9 @@ msgstr "Keresés az adatkészletek között"
 msgid ""
 "[1:There was an error while searching.]\n"
 "      Please try again."
-msgstr "[1:Hiba lépett fel a keresés során.]\n      Kérjük, próbálkozzon újra."
+msgstr ""
+"[1:Hiba lépett fel a keresés során.]\n"
+"      Kérjük, próbálkozzon újra."
 
 #: ../ckanext-ecportal/ckanext/ecportal/templates/package/search.html:49
 #, python-format
@@ -635,3 +640,7 @@ msgstr "Kulcsszó:"
 #, python-format
 msgid "There are %(count)s datasets with the keyword [1:%(tagname)s]:"
 msgstr " %(count)s adatkészlet tartalmazza a(z) [1:%(tagname)s] kulcsszót:"
+
+#~ msgid "no-sidebar"
+#~ msgstr ""
+

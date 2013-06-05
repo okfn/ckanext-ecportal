@@ -1,7 +1,7 @@
-# Translations template for ckan.
+# German translations for ckan.
 # Copyright (C) 2013 ORGANIZATION
 # This file is distributed under the same license as the ckan project.
-# 
+#
 # Translators:
 # darwinp <darwinpeltan@gmail.com>, 2013
 # odptranslator <ecodptranslators@gmail.com>, 2013
@@ -13,13 +13,13 @@ msgstr ""
 "POT-Creation-Date: 2013-05-23 15:38+0000\n"
 "PO-Revision-Date: 2013-06-04 14:04+0000\n"
 "Last-Translator: odptranslator <ecodptranslators@gmail.com>\n"
-"Language-Team: German (http://www.transifex.com/projects/p/ckan-eu-odp/language/de/)\n"
+"Language-Team: German (http://www.transifex.com/projects/p/ckan-eu-"
+"odp/language/de/)\n"
+"Plural-Forms: nplurals=2; plural=(n != 1)\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 0.9.6\n"
-"Language: de\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: ckan/templates/error_document_template.html:5
 msgid "Error"
@@ -308,11 +308,6 @@ msgstr "Über dieses Portal"
 #: ../ckanext-ecportal/ckanext/ecportal/templates/layout_base.html:162
 msgid "Top"
 msgstr "Top"
-
-#: ../ckanext-ecportal/ckanext/ecportal/templates/home/index.html:6
-#: ../ckanext-ecportal/ckanext/ecportal/templates/publisher/index.html:8
-msgid "no-sidebar"
-msgstr "no-sidebar"
 
 #: ../ckanext-ecportal/ckanext/ecportal/templates/home/index.html:14
 msgid "This field is required."
@@ -636,3 +631,7 @@ msgstr "Schlüsselwörter"
 #, python-format
 msgid "There are %(count)s datasets with the keyword [1:%(tagname)s]:"
 msgstr ""
+
+#~ msgid "no-sidebar"
+#~ msgstr "no-sidebar"
+

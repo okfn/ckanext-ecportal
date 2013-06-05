@@ -1,7 +1,7 @@
-# Translations template for ckan.
+# Romanian translations for ckan.
 # Copyright (C) 2013 ORGANIZATION
 # This file is distributed under the same license as the ckan project.
-# 
+#
 # Translators:
 # odptranslator <ecodptranslators@gmail.com>, 2013
 # odptranslatorRO <DGT-WEB-RO@ec.europa.eu>, 2013
@@ -12,13 +12,14 @@ msgstr ""
 "POT-Creation-Date: 2013-05-23 15:38+0000\n"
 "PO-Revision-Date: 2013-06-04 15:46+0000\n"
 "Last-Translator: odptranslator <ecodptranslators@gmail.com>\n"
-"Language-Team: Romanian (http://www.transifex.com/projects/p/ckan-eu-odp/language/ro/)\n"
+"Language-Team: Romanian (http://www.transifex.com/projects/p/ckan-eu-"
+"odp/language/ro/)\n"
+"Plural-Forms: nplurals=3; "
+"plural=(n==1?0:(((n%100>19)||((n%100==0)&&(n!=0)))?2:1))\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 0.9.6\n"
-"Language: ro\n"
-"Plural-Forms: nplurals=3; plural=(n==1?0:(((n%100>19)||((n%100==0)&&(n!=0)))?2:1));\n"
 
 #: ckan/templates/error_document_template.html:5
 msgid "Error"
@@ -308,11 +309,6 @@ msgstr "Despre site"
 msgid "Top"
 msgstr ""
 
-#: ../ckanext-ecportal/ckanext/ecportal/templates/home/index.html:6
-#: ../ckanext-ecportal/ckanext/ecportal/templates/publisher/index.html:8
-msgid "no-sidebar"
-msgstr "nicio bară laterală"
-
 #: ../ckanext-ecportal/ckanext/ecportal/templates/home/index.html:14
 msgid "This field is required."
 msgstr "Câmp obligatoriu."
@@ -334,7 +330,9 @@ msgstr "seturi de date"
 
 #: ../ckanext-ecportal/ckanext/ecportal/templates/home/index.html:20
 msgid "that you can browse, learn about and download."
-msgstr "pe care le puteţi parcurge, despre care puteţi afla informaţii şi pe care le puteţi descărca."
+msgstr ""
+"pe care le puteţi parcurge, despre care puteţi afla informaţii şi pe care"
+" le puteţi descărca."
 
 #: ../ckanext-ecportal/ckanext/ecportal/templates/home/index.html:31
 msgid "Top Publishers"
@@ -366,7 +364,9 @@ msgstr "Seturi de date conexe"
 
 #: ../ckanext-ecportal/ckanext/ecportal/templates/package/read.html:67
 msgid "This is an old revision of this dataset, as edited at"
-msgstr "Aceasta este o versiune veche a acestui set de date, aşa cum a fost editat la"
+msgstr ""
+"Aceasta este o versiune veche a acestui set de date, aşa cum a fost "
+"editat la"
 
 #: ../ckanext-ecportal/ckanext/ecportal/templates/package/read.html:68
 msgid ". It may differ significantly from the"
@@ -378,7 +378,9 @@ msgstr "versiunea actuală"
 
 #: ../ckanext-ecportal/ckanext/ecportal/templates/package/read.html:70
 msgid "This is the current revision of this dataset, as edited at"
-msgstr "Aceasta este versiunea actuală a acestui set de date, aşa cum a fost editat la"
+msgstr ""
+"Aceasta este versiunea actuală a acestui set de date, aşa cum a fost "
+"editat la"
 
 #: ../ckanext-ecportal/ckanext/ecportal/templates/package/read.html:82
 msgid "RDF/XML"
@@ -559,7 +561,9 @@ msgstr "Caută seturi de date..."
 msgid ""
 "[1:There was an error while searching.]\n"
 "      Please try again."
-msgstr "[1:Eroare la căutare.]⏎\nÎncercaţi din nou."
+msgstr ""
+"[1:Eroare la căutare.]⏎\n"
+"Încercaţi din nou."
 
 #: ../ckanext-ecportal/ckanext/ecportal/templates/package/search.html:49
 #, python-format
@@ -635,3 +639,7 @@ msgstr "Cuvânt-cheie:"
 #, python-format
 msgid "There are %(count)s datasets with the keyword [1:%(tagname)s]:"
 msgstr "%(count)s seturi de date cu cuvântul-cheie [1:%(tagname)s]:"
+
+#~ msgid "no-sidebar"
+#~ msgstr "nicio bară laterală"
+
