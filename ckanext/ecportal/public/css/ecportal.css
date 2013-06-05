@@ -1624,16 +1624,16 @@ ul.menu li a:hover {
 }
 
 h2 {
-  position: relative;
-}
-h2 a {
-  position: absolute;
-  bottom: 15px;
-  right: 0;
+  overflow: hidden;
+  clear: both;
 }
 
 .ie7 .page-search input[type="submit"] {
   margin-top: 3px !important;
+}
+
+.ie7 #dataset-search {
+  right: 352px;
 }
 
 .menu {

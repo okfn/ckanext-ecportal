@@ -38,11 +38,11 @@
       <div class="span6">
         <div class="region-content">
           <h2>
-            ${_('Top Publishers')}
             <a href="${h.url_for(controller='group', action='index')}">
               <i class="publisher"></i>
               ${_('view all publishers')} &raquo;
             </a>
+            ${_('Top Publishers')}
           </h2>
           <py:for each="i, group_dict in enumerate(h.top_publishers(c.groups))">
             <a py:if="group_dict['packages']" href="${h.url_for(controller='group', action='read', id=group_dict['name'])}" class="item_link">
@@ -66,20 +66,20 @@
         <div class="region-content">
           <div py:if="c.most_viewed_datasets">
           <h2>
-            ${_('Most viewed datasets')}
             <a href="${h.url_for(controller='package', action='search')}">
               <i class="resource"></i>
               ${_('view all datasets')} &raquo;
             </a>
+            ${_('Most viewed datasets')}
           </h2>
           ${h.snippet('snippets/most_viewed_datasets.html', packages=c.most_viewed_datasets)}
           </div>
           <h2>
-            ${_('Recently updated datasets')}
             <a href="${h.url_for(controller='package', action='search')}">
               <i class="resource"></i>
               ${_('view all datasets')} &raquo;
             </a>
+            ${_('Recently updated datasets')}
           </h2>
           ${h.snippet('snippets/recent_updates_package_list.html', packages=h.recent_updates(10))}
         </div>
