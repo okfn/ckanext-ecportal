@@ -4,106 +4,106 @@
 # 
 # Translators:
 # odptranslator <ecodptranslators@gmail.com>, 2013
-# FIRST AUTHOR <EMAIL@ADDRESS>, 2012
+# odptranslatorEL <DGT-WEB-EL@ec.europa.eu>, 2013
 msgid ""
 msgstr ""
 "Project-Id-Version: CKAN EU ODP \n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2013-05-23 15:38+0000\n"
-"PO-Revision-Date: 2013-06-04 14:41+0000\n"
-"Last-Translator: odptranslator <ecodptranslators@gmail.com>\n"
-"Language-Team: Polish (http://www.transifex.com/projects/p/ckan-eu-odp/language/pl/)\n"
+"PO-Revision-Date: 2013-06-03 11:50+0000\n"
+"Last-Translator: odptranslatorEL <DGT-WEB-EL@ec.europa.eu>\n"
+"Language-Team: Greek (http://www.transifex.com/projects/p/ckan-eu-odp/language/el/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 0.9.6\n"
-"Language: pl\n"
-"Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"Language: el\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: ckan/templates/error_document_template.html:5
 msgid "Error"
-msgstr "Błąd"
+msgstr "Σφάλμα"
 
 #: ckan/templates/package/comments.html:5
 msgid "- Datasets - History"
-msgstr "– Zbiory danych – Historia"
+msgstr "- Σύνολο δεδομένων - Ιστορικό"
 
 #: ckan/templates/package/resource_embedded_dataviewer.html:78
 msgid "- Dataset - Resource"
-msgstr "– Zbiór danych – Źródło"
+msgstr "- Σύνολο δεδομένων - Πόροι"
 
 #: ckan/templates/package/search_form.html:9
 #: ../ckanext-ecportal/ckanext/ecportal/templates/package/search_form.html:9
 msgid "Search..."
-msgstr "Wyszukaj..."
+msgstr "Αναζήτηση..."
 
 #: ckan/templates/package/search_form.html:10 ckan/templates/tag/index.html:13
 #: ../ckanext-ecportal/ckanext/ecportal/templates/layout_base.html:61
 #: ../ckanext-ecportal/ckanext/ecportal/templates/package/search.html:17
 #: ../ckanext-ecportal/ckanext/ecportal/templates/package/search_form.html:10
 msgid "Search"
-msgstr "Wyszukiwanie"
+msgstr "Αναζήτηση"
 
 #: ckan/templates/tag/index.html:6 ckan/templates/tag/index.html:9
 #: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:21
 msgid "Tags"
-msgstr "Tagi"
+msgstr "Ετικέτες"
 
 #: ckan/templates/tag/index.html:20 ckan/templates/tag/index.html:23
 msgid "There are"
-msgstr "Znaleziono"
+msgstr "Υπάρχουν"
 
 #: ckan/templates/tag/index.html:21
 msgid "results for ‘"
-msgstr "wyników dla `"
+msgstr "αποτελέσματα για ‘"
 
 #: ckan/templates/tag/index.html:24
 msgid "results for tags."
-msgstr "wyników dla tagów."
+msgstr "αποτελέσματα για ετικέτες."
 
 #: ckan/templates/tag/index.html:34
 msgid "Clear search"
-msgstr "Anuluj wyszukiwanie"
+msgstr "Απαλοιφή αναζήτησης"
 
 #: ckan/templates/tag/index.html:34
 msgid "and see all tags."
-msgstr "i wyświetl wszystkie tagi."
+msgstr "και εμφάνιση όλων των ετικετών."
 
 #: ckan/templates/tag/read.html:6
 msgid "- Tags"
-msgstr "– Tagi"
+msgstr "- Ετικέτες"
 
 #: ckan/templates/tag/read.html:7
 msgid "Tag:"
-msgstr "Tag:"
+msgstr "Ετικέτα:"
 
 #: ckan/templates/tag/read.html:10
 #, python-format
 msgid "There are %(count)s datasets tagged with [1:%(tagname)s]:"
-msgstr "Znaleziono %(count)s zbiorów danych oznaczonych tagiem [1:%(tagname)s]:"
+msgstr "Υπάρχουν %(count)s σύνολα δεδομένων με την ετικέτα [1:%(tagname)s]:"
 
 #: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:16
 msgid "Data Portal"
-msgstr "Portal otwartych danych"
+msgstr "Πύλη δεδομένων"
 
 #: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:17
 #: ../ckanext-ecportal/ckanext/ecportal/templates/layout_base.html:90
 msgid "Open Data Portal"
-msgstr "Portal otwartych danych"
+msgstr "Πύλη Δημόσιων Δεδομένων "
 
 #: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:18
 msgid "European Union Open Data Portal"
-msgstr "Portal otwartych danych Unii Europejskiej"
+msgstr "Πύλη Δημόσιων Δεδομένων της Ευρωπαϊκής Ένωσης"
 
 #: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:22
 #: ../ckanext-ecportal/ckanext/ecportal/templates/package/read.html:35
 #: ../ckanext-ecportal/ckanext/ecportal/templates/publisher/read.html:68
 msgid "Keywords"
-msgstr "Słowa kluczowe"
+msgstr "Λέξεις-κλειδιά"
 
 #: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:23
 msgid "Resource formats"
-msgstr "Formaty źródeł"
+msgstr "Μορφότυποι πόρων"
 
 #: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:24
 #: ../ckanext-ecportal/ckanext/ecportal/templates/package/read.html:23
@@ -111,59 +111,59 @@ msgstr "Formaty źródeł"
 #: ../ckanext-ecportal/ckanext/ecportal/templates/package/resource_read.html:92
 #: ../ckanext-ecportal/ckanext/ecportal/templates/publisher/read.html:22
 msgid "Publisher"
-msgstr "Wydawca"
+msgstr "Εκδότης"
 
 #: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:25
 #: ../ckanext-ecportal/ckanext/ecportal/templates/package/read_core.html:125
 msgid "Language"
-msgstr "Język"
+msgstr "Γλώσσα"
 
 #: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:26
 #: ../ckanext-ecportal/ckanext/ecportal/templates/package/read_core.html:120
 msgid "Geographical Coverage"
-msgstr "Zasięg geograficzny"
+msgstr "Γεωγραφική κάλυψη"
 
 #: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:30
 msgid "Number of datasets"
-msgstr "Liczba zbiorów danych"
+msgstr "Αριθμός συνόλων δεδομένων"
 
 #: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:31
 msgid "View dataset resources"
-msgstr "Wyświetl źródła zbioru danych"
+msgstr "Εμφάνιση πόρων συνόλου δεδομένων"
 
 #: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:32
 msgid "No downloadable resources."
-msgstr "Brak źródeł, które można pobrać."
+msgstr ""
 
 #: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:33
 msgid "No description for this item"
-msgstr "Brak opisu dla tej pozycji"
+msgstr "Καμία περιγραφή γι αυτό το στοιχείο"
 
 #: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:36
 msgid "Not authorized to see this page"
-msgstr "Brak uprawnień pozwalających na dostęp do tej strony"
+msgstr "Δεν έχετε άδεια να δείτε αυτή τη σελίδα"
 
 #: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:37
 #, python-format
 msgid "Unauthorized to read package %s"
-msgstr "Brak uprawnień dostępu do pakietu %s"
+msgstr "Δεν έχετε άδεια να διαβάσετε το πακέτο %s"
 
 #: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:38
 #, python-format
 msgid "Unauthorized to read resource %s"
-msgstr "Brak uprawnień dostępu do źródła %s"
+msgstr "Δεν έχετε άδεια να διαβάσετε τους πόρους %s"
 
 #: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:39
 msgid "The resource could not be found."
-msgstr ""
+msgstr "Ο πόρος δεν βρέθηκε"
 
 #: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:40
 msgid "Dataset not found"
-msgstr "Nie odnaleziono zbioru danych"
+msgstr "Δεν βρέθηκε σύνολο δεδομένων"
 
 #: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:41
 msgid "Tag not found"
-msgstr "Nie odnaleziono tagu"
+msgstr "Δεν βρέθηκε η ετικέτα"
 
 #: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:44
 msgid "URI"
@@ -173,7 +173,7 @@ msgstr ""
 #: ../ckanext-ecportal/ckanext/ecportal/templates/package/read_core.html:90
 #: ../ckanext-ecportal/ckanext/ecportal/templates/package/resource_read.html:181
 msgid "Release Date"
-msgstr "Data opublikowania"
+msgstr "Ημερομηνία δημοσίευσης"
 
 #: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:46
 msgid "Added to open-data.europa.eu"
@@ -233,405 +233,405 @@ msgstr ""
 
 #: ../ckanext-ecportal/ckanext/ecportal/helpers.py:43
 msgid "Cannot render package description"
-msgstr "Nie można wyświetlić opisu pakietu"
+msgstr ""
 
 #: ../ckanext-ecportal/ckanext/ecportal/templates/layout_base.html:59
 #: ../ckanext-ecportal/ckanext/ecportal/templates/layout_base.html:160
 msgid "Legal notice"
-msgstr "Informacja prawna"
+msgstr "Ανακοίνωση νομικού περιεχομένου"
 
 #: ../ckanext-ecportal/ckanext/ecportal/templates/layout_base.html:60
 #: ../ckanext-ecportal/ckanext/ecportal/templates/layout_base.html:161
 msgid "Contact"
-msgstr "Kontakt"
+msgstr "Επικοινωνία"
 
 #: ../ckanext-ecportal/ckanext/ecportal/templates/layout_base.html:66
 msgid "Menu Arrow"
-msgstr "Strzałka menu"
+msgstr ""
 
 #: ../ckanext-ecportal/ckanext/ecportal/templates/layout_base.html:80
 #: ../ckanext-ecportal/ckanext/ecportal/templates/layout_base.html:81
 msgid "europa.eu"
-msgstr "europa.eu"
+msgstr ""
 
 #: ../ckanext-ecportal/ckanext/ecportal/templates/layout_base.html:90
 msgid "Europa"
-msgstr "Europa"
+msgstr ""
 
 #: ../ckanext-ecportal/ckanext/ecportal/templates/layout_base.html:90
 #: ../ckanext-ecportal/ckanext/ecportal/templates/layout_base.html:97
 #: ../ckanext-ecportal/ckanext/ecportal/templates/home/index.html:7
 msgid "Data"
-msgstr "Dane"
+msgstr "Δεδομένα"
 
 #: ../ckanext-ecportal/ckanext/ecportal/templates/layout_base.html:96
 msgid "Home"
-msgstr "Strona główna"
+msgstr "Αρχή"
 
 #: ../ckanext-ecportal/ckanext/ecportal/templates/layout_base.html:98
 msgid "Applications"
-msgstr "Aplikacje"
+msgstr "Εφαρμογές"
 
 #: ../ckanext-ecportal/ckanext/ecportal/templates/layout_base.html:99
 msgid "Linked Data"
-msgstr "Powiązane dane"
+msgstr "Συνδεδεμένα δεδομένα"
 
 #: ../ckanext-ecportal/ckanext/ecportal/templates/layout_base.html:100
 msgid "About"
-msgstr "Informacje"
+msgstr "Σχετικά"
 
 #: ../ckanext-ecportal/ckanext/ecportal/templates/layout_base.html:104
 msgid "Add dataset"
-msgstr ""
+msgstr "Προσθήκη συνόλου δεδομένων"
 
 #: ../ckanext-ecportal/ckanext/ecportal/templates/layout_base.html:105
 msgid "Logout"
-msgstr "Wyloguj się"
+msgstr "Αποσύνδεση"
 
 #: ../ckanext-ecportal/ckanext/ecportal/templates/layout_base.html:108
 msgid "Data provider's area"
-msgstr "Strefa dostawcy danych"
+msgstr "Τομέας παρόχου δεδομένων"
 
 #: ../ckanext-ecportal/ckanext/ecportal/templates/layout_base.html:138
 msgid "Master content template placeholder … please replace me."
-msgstr "Master content template placeholder … please replace me."
+msgstr ""
 
 #: ../ckanext-ecportal/ckanext/ecportal/templates/layout_base.html:158
 msgid "Last update"
-msgstr "Ostania aktualizacja"
+msgstr "Τελευταία επικαιροποίηση"
 
 #: ../ckanext-ecportal/ckanext/ecportal/templates/layout_base.html:159
 msgid "About this site"
-msgstr "Informacje o stronie"
+msgstr "Λίγα λόγια για τον ιστότοπο"
 
 #: ../ckanext-ecportal/ckanext/ecportal/templates/layout_base.html:162
 msgid "Top"
-msgstr "W górę"
+msgstr "Επάνω"
 
 #: ../ckanext-ecportal/ckanext/ecportal/templates/home/index.html:6
 #: ../ckanext-ecportal/ckanext/ecportal/templates/publisher/index.html:8
 msgid "no-sidebar"
-msgstr "no-sidebar"
+msgstr "δεν υπάρχει πλαϊνό μενού"
 
 #: ../ckanext-ecportal/ckanext/ecportal/templates/home/index.html:14
 msgid "This field is required."
-msgstr "To pole jest wymagane"
+msgstr "Το πεδίο είναι υποχρεωτικό"
 
 #: ../ckanext-ecportal/ckanext/ecportal/templates/home/index.html:16
 msgid "Find datasets..."
-msgstr "Przeszukaj zbiór danych"
+msgstr "Αναζήτηση συνόλων δεδομένων..."
 
 #: ../ckanext-ecportal/ckanext/ecportal/templates/home/index.html:19
 msgid "contains"
-msgstr "zawiera"
+msgstr "περιέχει"
 
 #: ../ckanext-ecportal/ckanext/ecportal/templates/home/index.html:20
 #: ../ckanext-ecportal/ckanext/ecportal/templates/home/index.html:41
 #: ../ckanext-ecportal/ckanext/ecportal/templates/publisher/index.html:16
 #: ../ckanext-ecportal/ckanext/ecportal/templates/publisher/read.html:11
 msgid "datasets"
-msgstr "zbiory danych"
+msgstr "σύνολα δεδομένων"
 
 #: ../ckanext-ecportal/ckanext/ecportal/templates/home/index.html:20
 msgid "that you can browse, learn about and download."
-msgstr "które możesz przeglądać, czytać i pobierać."
+msgstr "που μπορείτε να φυλλομετρήσετε, να συμβουλευθείτε και να κατεβάσετε."
 
 #: ../ckanext-ecportal/ckanext/ecportal/templates/home/index.html:31
 msgid "Top Publishers"
-msgstr "Najważniejsi wydawcy"
+msgstr "Κυριότεροι εκδότες"
 
 #: ../ckanext-ecportal/ckanext/ecportal/templates/home/index.html:34
 msgid "view all publishers"
-msgstr "Zobacz wszystkich wydawców"
+msgstr "εμφάνιση όλων των εκδοτών"
 
 #: ../ckanext-ecportal/ckanext/ecportal/templates/home/index.html:49
 msgid "Recent Updates"
-msgstr "Ostatnie aktualizacje"
+msgstr "Πρόσφατες επικαιροποιήσεις"
 
 #: ../ckanext-ecportal/ckanext/ecportal/templates/home/index.html:52
 msgid "view all datasets"
-msgstr "Zobacz wszystkie zestawy danych"
+msgstr "εμφάνιση όλων των συνόλων δεδομένων"
 
 #: ../ckanext-ecportal/ckanext/ecportal/templates/package/read.html:14
 msgid "- Datasets"
-msgstr "– Zbiory danych"
+msgstr "- Σύνολα δεδομένων"
 
 #: ../ckanext-ecportal/ckanext/ecportal/templates/package/read.html:40
 msgid "Licence"
-msgstr "Licencja"
+msgstr "Άδεια"
 
 #: ../ckanext-ecportal/ckanext/ecportal/templates/package/read.html:49
 msgid "Related Datasets"
-msgstr "Powiązane zbiory danych"
+msgstr "Συναφή σύνολα δεδομένων"
 
 #: ../ckanext-ecportal/ckanext/ecportal/templates/package/read.html:67
 msgid "This is an old revision of this dataset, as edited at"
-msgstr ""
+msgstr "Παλαιά αναθεώρηση αυτού του συνόλου δεδομένων μετά την επεξεργασία του στις "
 
 #: ../ckanext-ecportal/ckanext/ecportal/templates/package/read.html:68
 msgid ". It may differ significantly from the"
-msgstr ". Może ona znacznie różnić się od"
+msgstr ". Ενδεχομένως διαφέρει σημαντικά από την"
 
 #: ../ckanext-ecportal/ckanext/ecportal/templates/package/read.html:68
 msgid "current revision"
-msgstr "aktualnej wersji"
+msgstr "σημερινή αναθεώρηση"
 
 #: ../ckanext-ecportal/ckanext/ecportal/templates/package/read.html:70
 msgid "This is the current revision of this dataset, as edited at"
-msgstr ""
+msgstr "Σημερινή αναθεώρηση αυτού του συνόλου δεδομένων μετά την επεξεργασία του στις "
 
 #: ../ckanext-ecportal/ckanext/ecportal/templates/package/read.html:82
 msgid "RDF/XML"
-msgstr "RDF/XML"
+msgstr ""
 
 #: ../ckanext-ecportal/ckanext/ecportal/templates/package/read.html:83
 msgid "RDF/N3"
-msgstr "RDF/N3"
+msgstr ""
 
 #: ../ckanext-ecportal/ckanext/ecportal/templates/package/read.html:88
 msgid "Dataset History"
-msgstr "Historia zbioru danych"
+msgstr "Ιστορικό συνόλου δεδομένων"
 
 #: ../ckanext-ecportal/ckanext/ecportal/templates/package/read_core.html:12
 msgid "This dataset has been marked as deleted."
-msgstr "Ten zbiór danych został oznaczony jako usunięty."
+msgstr "Αυτό το σύνολο δεδομένων σημειώνεται ως διαγραφέν."
 
 #: ../ckanext-ecportal/ckanext/ecportal/templates/package/read_core.html:24
 #: ../ckanext-ecportal/ckanext/ecportal/templates/package/resource_read.html:138
 msgid "Description"
-msgstr "Opis"
+msgstr "Περιγραφή"
 
 #: ../ckanext-ecportal/ckanext/ecportal/templates/package/read_core.html:33
 msgid "Resources"
-msgstr "Źródła"
+msgstr "Πόροι"
 
 #: ../ckanext-ecportal/ckanext/ecportal/templates/package/read_core.html:35
 msgid "(edit)"
-msgstr "(edytuj)"
+msgstr "(επεξεργασία)"
 
 #: ../ckanext-ecportal/ckanext/ecportal/templates/package/read_core.html:41
 #: ../ckanext-ecportal/ckanext/ecportal/templates/package/resource_read.html:127
 msgid "Download"
-msgstr "Pobierz"
+msgstr "Τηλεφόρτωση"
 
 #: ../ckanext-ecportal/ckanext/ecportal/templates/package/read_core.html:46
 msgid "(none)"
-msgstr "(brak)"
+msgstr "(ουδέν)"
 
 #: ../ckanext-ecportal/ckanext/ecportal/templates/package/read_core.html:56
 #: ../ckanext-ecportal/ckanext/ecportal/templates/package/resource_read.html:172
 msgid "Additional Information"
-msgstr "Dodatkowe informacje"
+msgstr "Συμπληρωματικές πληροφορίες"
 
 #: ../ckanext-ecportal/ckanext/ecportal/templates/package/read_core.html:60
 #: ../ckanext-ecportal/ckanext/ecportal/templates/package/resource_read.html:177
 msgid "URL"
-msgstr "URL"
+msgstr ""
 
 #: ../ckanext-ecportal/ckanext/ecportal/templates/package/read_core.html:65
 msgid "Alternative Title"
-msgstr "Alternatywny tytuł"
+msgstr "Εναλλακτικός τίτλος"
 
 #: ../ckanext-ecportal/ckanext/ecportal/templates/package/read_core.html:70
 msgid "Status"
-msgstr "Status"
+msgstr "Κατάσταση"
 
 #: ../ckanext-ecportal/ckanext/ecportal/templates/package/read_core.html:75
 msgid "Identifier"
-msgstr "Identyfikator"
+msgstr "Αναγνωριστικό"
 
 #: ../ckanext-ecportal/ckanext/ecportal/templates/package/read_core.html:80
 msgid "Interoperability Level"
-msgstr "Poziom możliwości współpracy"
+msgstr "Επίπεδο διαλειτουργικότητας"
 
 #: ../ckanext-ecportal/ckanext/ecportal/templates/package/read_core.html:85
 msgid "Type of Dataset"
-msgstr "Typ zbioru danych"
+msgstr "Τύπος συνόλου δεδομένων"
 
 #: ../ckanext-ecportal/ckanext/ecportal/templates/package/read_core.html:95
 #: ../ckanext-ecportal/ckanext/ecportal/templates/package/resource_read.html:185
 msgid "Modified Date"
-msgstr "Data modyfikacji"
+msgstr "Ημερομηνία τροποποίησης"
 
 #: ../ckanext-ecportal/ckanext/ecportal/templates/package/read_core.html:100
 msgid "Accrual Periodicity"
-msgstr "Częstotliwość przyrostu"
+msgstr "Περιοδικότητα προσαύξησης"
 
 #: ../ckanext-ecportal/ckanext/ecportal/templates/package/read_core.html:105
 msgid "Temporal Coverage From"
-msgstr "Zasięg czasowy od"
+msgstr "Περίοδος κάλυψης από"
 
 #: ../ckanext-ecportal/ckanext/ecportal/templates/package/read_core.html:110
 msgid "Temporal Coverage To"
-msgstr "Zasięg czasowy do"
+msgstr "Περίοδος κάλυψης έως"
 
 #: ../ckanext-ecportal/ckanext/ecportal/templates/package/read_core.html:115
 msgid "Temporal Granularity"
-msgstr "Szczegółowość czasowa"
+msgstr "Χρονική υποδιαίρεση"
 
 #: ../ckanext-ecportal/ckanext/ecportal/templates/package/read_core.html:130
 msgid "Contact Name"
-msgstr "Nazwa kontaktowa"
+msgstr "Πρόσωπο επικοινωνίας"
 
 #: ../ckanext-ecportal/ckanext/ecportal/templates/package/read_core.html:135
 msgid "Contact E-mail"
-msgstr "Adres e-mail kontaktu"
+msgstr "Ηλ. διεύθυνση επικοινωνίας"
 
 #: ../ckanext-ecportal/ckanext/ecportal/templates/package/read_core.html:140
 msgid "Contact Address"
-msgstr "Adres kontaktowy"
+msgstr "Διεύθυνση επικοινωνίας"
 
 #: ../ckanext-ecportal/ckanext/ecportal/templates/package/read_core.html:145
 msgid "Contact Telephone"
-msgstr "Telefon kontaktowy"
+msgstr "Τηλέφωνο επικοινωνίας"
 
 #: ../ckanext-ecportal/ckanext/ecportal/templates/package/read_core.html:150
 msgid "Contact Web Page"
-msgstr "Kontaktowa strona internetowa"
+msgstr "Ιστοσελίδα επικοινωνίας"
 
 #: ../ckanext-ecportal/ckanext/ecportal/templates/package/read_core.html:155
 msgid "Version"
-msgstr "Wersja"
+msgstr "Έκδοση"
 
 #: ../ckanext-ecportal/ckanext/ecportal/templates/package/read_core.html:160
 msgid "Version Description"
-msgstr "Opis wersji"
+msgstr "Περιγραφή έκδοσης"
 
 #: ../ckanext-ecportal/ckanext/ecportal/templates/package/read_core.html:165
 msgid "Country"
-msgstr "Kraj"
+msgstr "Χώρα"
 
 #: ../ckanext-ecportal/ckanext/ecportal/templates/package/resource_read.html:85
 msgid "Dataset - Resource"
-msgstr "– Zbiór danych – Źródło"
+msgstr "Σύνολο δεδομένων - Πόροι"
 
 #: ../ckanext-ecportal/ckanext/ecportal/templates/package/resource_read.html:106
 msgid "Licence:"
-msgstr "Licencja:"
+msgstr "Άδεια:"
 
 #: ../ckanext-ecportal/ckanext/ecportal/templates/package/resource_read.html:112
 msgid "License unknown"
-msgstr "Nieznana licencja"
+msgstr "’Αγνωστη άδεια"
 
 #: ../ckanext-ecportal/ckanext/ecportal/templates/package/resource_read.html:140
 msgid "(No description)"
-msgstr ""
+msgstr "(Καμία περιγραφή)"
 
 #: ../ckanext-ecportal/ckanext/ecportal/templates/package/resource_read.html:145
 msgid "Format"
-msgstr "Format"
+msgstr "Μορφότυπος"
 
 #: ../ckanext-ecportal/ckanext/ecportal/templates/package/resource_read.html:154
 msgid "From"
-msgstr ""
+msgstr "Από"
 
 #: ../ckanext-ecportal/ckanext/ecportal/templates/package/resource_read.html:162
 msgid "Preview"
-msgstr "Podgląd"
+msgstr "Προαπεικόνιση"
 
 #: ../ckanext-ecportal/ckanext/ecportal/templates/package/resource_read.html:163
 msgid "Cannot embed as resource is private."
-msgstr "Nie można osadzić, ponieważ źródło jest prywatne."
+msgstr ""
 
 #: ../ckanext-ecportal/ckanext/ecportal/templates/package/resource_read.html:163
 #: ../ckanext-ecportal/ckanext/ecportal/templates/package/resource_read.html:164
 msgid "Embed"
-msgstr "Osadź"
+msgstr ""
 
 #: ../ckanext-ecportal/ckanext/ecportal/templates/package/resource_read.html:190
 msgid "Resource Type"
-msgstr ""
+msgstr "Τύπος πόρου"
 
 #: ../ckanext-ecportal/ckanext/ecportal/templates/package/resource_read.html:217
 msgid "Back to dataset"
-msgstr "Wróć do zbioru danych"
+msgstr "Επιστροφή στο σύνολο δεδομένων"
 
 #: ../ckanext-ecportal/ckanext/ecportal/templates/package/search.html:10
 #: ../ckanext-ecportal/ckanext/ecportal/templates/package/search.html:12
 msgid "Search -"
-msgstr "Wyszukaj –"
+msgstr "Αναζήτηση -"
 
 #: ../ckanext-ecportal/ckanext/ecportal/templates/package/search.html:31
 msgid "Search datasets..."
-msgstr "Przeszukaj zbiór danych"
+msgstr "Αναζήτηση συνόλων δεδομένων..."
 
 #: ../ckanext-ecportal/ckanext/ecportal/templates/package/search.html:45
 msgid ""
 "[1:There was an error while searching.]\n"
 "      Please try again."
-msgstr ""
+msgstr "[1:Σημειώθηκε σφάλμα κατά την αναζήτηση.]⏎\nΞαναπροσπαθήστε."
 
 #: ../ckanext-ecportal/ckanext/ecportal/templates/package/search.html:49
 #, python-format
 msgid "[1:%(item_count)s] datasets found"
-msgstr "Znaleziono [1:%(item_count)s] zbiorów danych"
+msgstr "βρέθηκαν [1:%(item_count)s] σύνολα δεδομένων"
 
 #: ../ckanext-ecportal/ckanext/ecportal/templates/publisher/index.html:6
 #: ../ckanext-ecportal/ckanext/ecportal/templates/publisher/index.html:7
 msgid "Publishers"
-msgstr "Wydawcy"
+msgstr "Εκδότες"
 
 #: ../ckanext-ecportal/ckanext/ecportal/templates/publisher/read.html:31
 msgid "Search publisher..."
-msgstr ""
+msgstr "Αναζήτηση εκδότη..."
 
 #: ../ckanext-ecportal/ckanext/ecportal/templates/publisher/read.html:55
 msgid "Administrators"
-msgstr "Administratorzy"
+msgstr "Διαχειριστές"
 
 #: ../ckanext-ecportal/ckanext/ecportal/templates/publisher/read.html:61
 msgid "Members"
-msgstr "Członkowie"
+msgstr ""
 
 #: ../ckanext-ecportal/ckanext/ecportal/templates/publisher/read.html:69
 msgid "Resource Formats"
-msgstr "Formaty źródeł"
+msgstr "Μορφότυποι πόρων"
 
 #: ../ckanext-ecportal/ckanext/ecportal/templates/publisher/read.html:73
 msgid "State"
-msgstr "Status"
+msgstr "Καθεστώς"
 
 #: ../ckanext-ecportal/ckanext/ecportal/templates/revision/diff.html:5
 msgid "Differences - Revisions"
-msgstr "Różnice – Wersje"
+msgstr "Διαφορές - Αναθεωρήσεις"
 
 #: ../ckanext-ecportal/ckanext/ecportal/templates/revision/diff.html:9
 msgid "Revision Differences"
-msgstr "Różnice między wersjami –"
+msgstr "Διαφορές αναθεώρησης"
 
 #: ../ckanext-ecportal/ckanext/ecportal/templates/revision/diff.html:21
 msgid "From:"
-msgstr "Od:"
+msgstr "Από:"
 
 #: ../ckanext-ecportal/ckanext/ecportal/templates/revision/diff.html:25
 msgid "To:"
-msgstr "Do:"
+msgstr "Έως:"
 
 #: ../ckanext-ecportal/ckanext/ecportal/templates/revision/diff.html:35
 msgid "Field"
-msgstr "Pole"
+msgstr "Πεδίο"
 
 #: ../ckanext-ecportal/ckanext/ecportal/templates/revision/diff.html:35
 msgid "Difference"
-msgstr "Różnica"
+msgstr "Διαφορά"
 
 #: ../ckanext-ecportal/ckanext/ecportal/templates/revision/diff.html:43
 msgid "No differences"
-msgstr "Brak różnic"
+msgstr "Καμία διαφορά"
 
 #: ../ckanext-ecportal/ckanext/ecportal/templates/snippets/recent_updates_package_list.html:14
 msgid "was updated on"
-msgstr "zaktualizowano dnia"
+msgstr "επικαιροποιήθηκε στις"
 
 #: ../ckanext-ecportal/ckanext/ecportal/templates/tag/read.html:6
 msgid "- Keyword"
-msgstr "Słowa kluczowe"
+msgstr "- Λέξη κλειδί"
 
 #: ../ckanext-ecportal/ckanext/ecportal/templates/tag/read.html:7
 msgid "Keyword:"
-msgstr ""
+msgstr "Λέξη κλειδί:"
 
 #: ../ckanext-ecportal/ckanext/ecportal/templates/tag/read.html:10
 #, python-format
 msgid "There are %(count)s datasets with the keyword [1:%(tagname)s]:"
-msgstr ""
+msgstr "Υπάρχουν %(count)s σύνολα δεδομένων με τη λέξη κλειδί [1:%(tagname)s]:"

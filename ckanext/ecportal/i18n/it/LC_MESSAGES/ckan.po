@@ -3,3886 +3,52 @@
 # This file is distributed under the same license as the ckan project.
 # 
 # Translators:
-#  <ecodptranslators@gmail.com>, 2013.
-# FIRST AUTHOR <EMAIL@ADDRESS>, 2012.
-#  <matteo.merlanti@gmail.com>, 2013.
+# odptranslator <ecodptranslators@gmail.com>, 2013
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2012
+# M2M <matteo.merlanti@gmail.com>, 2013
 msgid ""
 msgstr ""
 "Project-Id-Version: CKAN EU ODP \n"
-"Report-Msgid-Bugs-To: http://trac.ckan.org/\n"
-"POT-Creation-Date: 2013-03-13 14:07+0000\n"
-"PO-Revision-Date: 2013-03-26 17:05+0000\n"
+"Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
+"POT-Creation-Date: 2013-05-23 15:38+0000\n"
+"PO-Revision-Date: 2013-06-04 14:44+0000\n"
 "Last-Translator: odptranslator <ecodptranslators@gmail.com>\n"
 "Language-Team: Italian (http://www.transifex.com/projects/p/ckan-eu-odp/language/it/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Generated-By: Babel 0.9.4\n"
+"Generated-By: Babel 0.9.6\n"
 "Language: it\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:6
-msgid "Feed"
-msgstr "Feed"
-
-#: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:7
-msgid "Web Service"
-msgstr "Servizio Web"
-
-#: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:11
-msgid "Main Documentation"
-msgstr "Documentazione principale"
-
-#: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:12
-msgid "Related Documentation"
-msgstr "Documentazione correlata"
-
-#: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:13
-msgid "Related Web Page"
-msgstr "Pagina Web correlata"
-
-#: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:16
-msgid "Code List"
-msgstr "Lista codici"
-
-#: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:17
-msgid "Core Component"
-msgstr "Componente centrale"
-
-#: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:18
-msgid "Domain Model"
-msgstr "Modello di dominio"
-
-#: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:19
-msgid "Information Exchange Package Description"
-msgstr "Descrizione del pacchetto di scambio di informazioni"
-
-#: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:20
-msgid "Mapping"
-msgstr "Mappatura"
-
-#: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:21
-msgid "Name Authority List"
-msgstr "Elenco nomi autorità"
-
-#: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:22
-msgid "Ontology"
-msgstr "Ontologia"
-
-#: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:23
-msgid "Schema"
-msgstr "Schema"
-
-#: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:24
-msgid "Service Description"
-msgstr "Descrizione servizio"
-
-#: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:25
-msgid "Statistical"
-msgstr "Statistico"
-
-#: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:26
-msgid "Syntax Encoding Scheme"
-msgstr "Schema di codifica della sintassi"
-
-#: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:27
-msgid "Taxonomy"
-msgstr "Tassonomia"
-
-#: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:28
-msgid "Thesaurus"
-msgstr "Thesaurus"
-
-#: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:31
-msgid "Completed"
-msgstr "Completato"
-
-#: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:32
-msgid "Deprecated"
-msgstr "Non approvato"
-
-#: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:33
-msgid "Under Development"
-msgstr "In corso di sviluppo"
-
-#: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:34
-msgid "Withdrawn"
-msgstr "Ritirato"
-
-#: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:37
-#: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:45
-msgid "Never"
-msgstr "Mai"
-
-#: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:38
-#: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:46
-msgid "Discontinued"
-msgstr "Interrotto"
-
-#: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:39
-#: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:47
-msgid "Annual"
-msgstr "Annuale"
-
-#: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:40
-#: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:48
-msgid "Quarterly"
-msgstr "Trimestralmente"
-
-#: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:41
-#: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:49
-msgid "Monthly"
-msgstr "Mensilmente"
-
-#: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:42
-#: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:50
-msgid "Other - please specify"
-msgstr "Altro - specificare"
-
-#: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:53
-#: ../ckanext-ecportal/ckanext/ecportal/templates/layout_base.html:59
-#: ../ckanext-ecportal/ckanext/ecportal/templates/layout_base.html:158
-msgid "Legal notice"
-msgstr "Avviso legale"
-
-#: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:54
-#: ../ckanext-ecportal/ckanext/ecportal/templates/layout_base.html:60
-#: ../ckanext-ecportal/ckanext/ecportal/templates/layout_base.html:159
-msgid "Contact"
-msgstr "Contatti"
-
-#: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:57
-#: ../ckanext-ecportal/ckanext/ecportal/templates/layout_base.html:90
-#: ../ckanext-ecportal/ckanext/ecportal/templates/layout_base.html:97
-#: ../ckanext-ecportal/ckanext/ecportal/templates/home/index.html:7
-msgid "Data"
-msgstr "Dati"
-
-#: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:58
-#: ../ckanext-ecportal/ckanext/ecportal/templates/layout_base.html:98
-msgid "Applications"
-msgstr "Applicazioni"
-
-#: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:59
-#: ../ckanext-ecportal/ckanext/ecportal/templates/layout_base.html:99
-msgid "Linked Data"
-msgstr "Dati collegati"
-
-#: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:60
-msgid "Social Media"
-msgstr "Social network"
-
-#: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:62
-#: ../ckanext-ecportal/ckanext/ecportal/templates/publisher/index.html:6
-#: ../ckanext-ecportal/ckanext/ecportal/templates/publisher/index.html:7
-msgid "Publishers"
-msgstr "Publisher"
-
-#: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:63
-msgid "Data Portal"
-msgstr "Portale Open Data"
-
-#: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:64
-#: ../ckanext-ecportal/ckanext/ecportal/templates/layout_base.html:90
-msgid "Open Data Portal"
-msgstr "Portale Open Data"
-
-#: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:65
-msgid "The Open Data Hub of the European Union"
-msgstr "Il centro Open Data dell'Unione Europea"
-
-#: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:66
-msgid "European Commission"
-msgstr "Commissione Europea"
-
-#: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:69
-#: ../ckanext-ecportal/ckanext/ecportal/templates/layout_base.html:156
-msgid "Last update"
-msgstr "Ultimo aggiornamento"
-
-#: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:70
-#: ../ckanext-ecportal/ckanext/ecportal/templates/layout_base.html:160
-msgid "Top"
-msgstr "Torna su"
-
-#: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:74
-msgid "Top publishers"
-msgstr "Migliori publisher"
-
-#: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:75
-msgid "Recent updates"
-msgstr "Aggiornamenti recenti"
-
-#: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:78
-#: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:93
-#: ../ckanext-ecportal/ckanext/ecportal/templates/organization_apply_form.html:20
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read.html:23
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read_core.html:16
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/resource_read.html:92
-#: ../ckanext-ecportal/ckanext/ecportal/templates/publisher/read.html:22
-msgid "Publisher"
-msgstr "Publisher"
-
-#: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:79
-msgid "This dataset has been marked as deleted"
-msgstr "Questo set di dati è stato contrassegnato come eliminato"
-
-#: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:90
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/edit.html:23
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/new_package_form.html:340
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read.html:35
-#: ../ckanext-ecportal/ckanext/ecportal/templates/publisher/read.html:68
-msgid "Keywords"
-msgstr "Parole chiave"
-
-#: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:91
-msgid "Resource formats"
-msgstr "Formati risorsa"
-
-#: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:94
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/new_package_form.html:286
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read_core.html:125
-msgid "Language"
-msgstr "Lingua"
-
-#: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:95
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/new_package_form.html:268
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read_core.html:120
-msgid "Geographical Coverage"
-msgstr "Cpertura geografica"
-
-#: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:98
-#: ../ckanext-ecportal/ckanext/ecportal/templates/group/layout.html:34
-msgid "List Publishers"
-msgstr "Elenca publisher"
-
-#: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:99
-#: ../ckanext-ecportal/ckanext/ecportal/templates/group/layout.html:37
-msgid "Add a Publisher"
-msgstr "Aggiungi un publisher"
-
-#: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:100
-#: ../ckanext-ecportal/ckanext/ecportal/templates/organization_layout.html:28
-#: ../ckanext-ecportal/ckanext/ecportal/templates/group/layout.html:28
-#: ../ckanext-ecportal/ckanext/ecportal/templates/publisher/layout.html:25
-msgid "Join"
-msgstr "Partecipa"
-
-#: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:101
-#: ../ckanext-ecportal/ckanext/ecportal/templates/publisher/edit.html:50
-msgid "Image URL"
-msgstr "URL immagine"
-
-#: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:102
-#: ../ckanext-ecportal/ckanext/ecportal/templates/publisher/edit.html:68
-msgid "Parent Publisher"
-msgstr "Publisher principale"
-
-#: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:103
-msgid "Please choose a publisher"
-msgstr "Scegliere un publisher"
-
-#: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:106
-msgid "Key"
-msgstr "Chiave"
-
-#: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:108
-#: ../ckanext-ecportal/ckanext/ecportal/templates/publisher/edit.html:137
-msgid "Manage users"
-msgstr "Gestisci utenti"
-
-#: ../ckanext-ecportal/ckanext/ecportal/templates/group/layout.html:40
-msgid "Login to Add a Publisher"
-msgstr "Accedi per aggiungere un editore"
-
-#: ../ckanext-ecportal/ckanext/ecportal/templates/home/about.html:10
-msgid "Most of the data indexed at"
-msgstr "La maggior parte dei dati indicizzati su"
-
-#: ../ckanext-ecportal/ckanext/ecportal/templates/home/about.html:10
-msgid ""
-"is openly licensed, meaning anyone is free to use or re-use it however they "
-"like. You can read more about open data in the"
-msgstr "sono in licenza open: ciò significa che chiunque è libero di utilizzarli o riutilizzarli come desidera. Maggiori informazioni sugli open data sono disponibili nel"
-
-#: ../ckanext-ecportal/ckanext/ecportal/templates/home/about.html:10
-msgid "Open Data Manual"
-msgstr "Manuale Open Data"
-
-#: ../ckanext-ecportal/ckanext/ecportal/templates/home/about.html:11
-msgid ""
-"The [1:Open Knowledge Foundation] is a non-profit organisation [2:promoting]"
-" open knowledge."
-msgstr "La [1:Open Knowledge Foundation] è un'organizzazione non a scopo di lucro [2:che promuove] la conoscenza aperta."
-
-#: ../ckanext-ecportal/ckanext/ecportal/templates/home/index.html:14
-msgid "This field is required."
-msgstr "Campo obbligatorio"
-
-#: ../ckanext-ecportal/ckanext/ecportal/templates/home/index.html:16
-msgid "Find datasets..."
-msgstr ""
-
-#: ../ckanext-ecportal/ckanext/ecportal/templates/home/index.html:20
-msgid "that you can browse, learn about and download."
-msgstr "che è possibile esplorare, conoscerne informazioni e scaricare."
-
-#: ../ckanext-ecportal/ckanext/ecportal/templates/home/index.html:31
-msgid "Top Publishers"
-msgstr "Migliori publisher"
-
-#: ../ckanext-ecportal/ckanext/ecportal/templates/home/index.html:34
-msgid "view all publishers"
-msgstr "Visualizza tutti gli editori"
-
-#: ../ckanext-ecportal/ckanext/ecportal/templates/home/index.html:41
-#: ../ckanext-ecportal/ckanext/ecportal/templates/publisher/index.html:16
-msgid "datasets)"
-msgstr "set di dati)"
-
-#: ../ckanext-ecportal/ckanext/ecportal/templates/home/index.html:49
-msgid "Recent Updates"
-msgstr "Aggiornamenti recenti"
-
-#: ../ckanext-ecportal/ckanext/ecportal/templates/home/index.html:52
-msgid "view all datasets"
-msgstr "Visualizza tutti i dati"
-
-#: ../ckanext-ecportal/ckanext/ecportal/templates/js_strings.html:16
-msgid "Documentation: Main"
-msgstr "Documentazione: principale"
-
-#: ../ckanext-ecportal/ckanext/ecportal/templates/js_strings.html:16
-msgid "Documentation: Related"
-msgstr "Documentazione: correlata"
-
-#: ../ckanext-ecportal/ckanext/ecportal/templates/js_strings.html:16
-msgid "Documentation: Webpage"
-msgstr "Documentazione: pagina Web"
-
-#: ../ckanext-ecportal/ckanext/ecportal/templates/js_strings.html:16
-msgid "Distribution: Feed"
-msgstr "Distribuzione: Feed"
-
-#: ../ckanext-ecportal/ckanext/ecportal/templates/js_strings.html:16
-msgid "Distribution: Web Service"
-msgstr "Distribuzione: Servizio Web"
-
-#: ../ckanext-ecportal/ckanext/ecportal/templates/js_strings.html:16
-msgid "Distribution: Download"
-msgstr "Distribuzione: Download"
-
-#: ../ckanext-ecportal/ckanext/ecportal/templates/layout_base.html:66
-msgid "Menu Arrow"
-msgstr "Freccia menu"
-
-#: ../ckanext-ecportal/ckanext/ecportal/templates/layout_base.html:80
-#: ../ckanext-ecportal/ckanext/ecportal/templates/layout_base.html:81
-msgid "europa.eu"
-msgstr "europa.eu"
-
-#: ../ckanext-ecportal/ckanext/ecportal/templates/layout_base.html:90
-msgid "Europa"
-msgstr "Europa"
-
-#: ../ckanext-ecportal/ckanext/ecportal/templates/layout_base.html:107
-msgid "Data provider's area"
-msgstr "Area del fornitore di dati"
-
-#: ../ckanext-ecportal/ckanext/ecportal/templates/layout_base.html:157
-msgid "About this site"
-msgstr "Informazioni sul sito"
-
-#: ../ckanext-ecportal/ckanext/ecportal/templates/organization_apply.html:5
-msgid "Apply"
-msgstr ""
-
-#: ../ckanext-ecportal/ckanext/ecportal/templates/organization_apply.html:6
-msgid "Apply for membership"
-msgstr ""
-
-#: ../ckanext-ecportal/ckanext/ecportal/templates/organization_apply_form.html:31
-msgid "Reason"
-msgstr ""
-
-#: ../ckanext-ecportal/ckanext/ecportal/templates/organization_apply_form.html:41
-msgid "Send request"
-msgstr ""
-
-#: ../ckanext-ecportal/ckanext/ecportal/templates/organization_layout.html:34
-msgid "List Organizations"
-msgstr "Lista Organizzazioni"
-
-#: ../ckanext-ecportal/ckanext/ecportal/templates/organization_users.html:5
-#: ../ckanext-ecportal/ckanext/ecportal/templates/organization_users.html:6
-msgid "Users:"
-msgstr "Utenti"
-
-#: ../ckanext-ecportal/ckanext/ecportal/templates/organization_users_form.html:27
-msgid "Admin"
-msgstr ""
-
-#: ../ckanext-ecportal/ckanext/ecportal/templates/organization_users_form.html:28
-msgid "Editor"
-msgstr "Editore"
-
-#: ../ckanext-ecportal/ckanext/ecportal/templates/organization_users_form.html:37
-msgid "Add users"
-msgstr "Aggiungi utenti"
-
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/edit.html:24
-msgid "Contact Information"
-msgstr "Informazioni del contatto"
-
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/layout.html:21
-msgid "Online editing is disabled for imported datasets."
-msgstr ""
-
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/new_package_form.html:45
-msgid "A short descriptive title for the data set."
-msgstr "Breve titolo descrittivo per il set di dati."
-
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/new_package_form.html:46
-msgid ""
-"It should not be a description though - save that for the Description field."
-msgstr "Non dovrebbe essere una descrizione - tranne che per il campo Descrizione."
-
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/new_package_form.html:47
-msgid "Do not give a trailing full stop. Do not use allcaps."
-msgstr "Non assegnare un punto alla fine. Non utilizzare il maiuscolo."
-
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/new_package_form.html:61
-msgid "A unique identifier for the package."
-msgstr "Un identificatore unico per il pacchetto."
-
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/new_package_form.html:62
-msgid ""
-"It should be broadly humanly readable, in the spirit of Semantic Web URIs."
-msgstr "Dovrebbe poter essere leggibile da tutti, nello spirito degli URI del Web Semantico."
-
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/new_package_form.html:63
-msgid ""
-"Only use an acronym if it is widely recognised. Renaming is possible but "
-"discouraged."
-msgstr "Utilizzare soltanto acronimi se sono largamente conosciute. Si può rinominare ma la cosa è sconsigliata."
-
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/new_package_form.html:64
-msgid ""
-"2+ characters, lowercase, using only 'a-z0-9' and '-_' include date (yyyy-"
-"mm-dd) if a static dataset."
-msgstr "2+ caratteri, carattere minuscolo, utilizza solo 'a-z0-9' e 2-_' includono data (aaaa-mm-gg) se si tratta di un set di dati statico."
-
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/new_package_form.html:71
-msgid "The main description of the dataset ..."
-msgstr "La descrizione principale del set di dati ..."
-
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/new_package_form.html:73
-msgid ""
-"The main description of the dataset. It is often displayed with the package "
-"title."
-msgstr "La descrizione principale del set di dati. Spesso viene visualizzata con il titolo del pacchetto."
-
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/new_package_form.html:74
-msgid ""
-"In particular, it should start with a short sentence that describes the data set succinctly,\n"
-"        because the first few words alone may be used in some views of the data sets."
-msgstr "In particolare, dovrebbe iniziare con una breve frase che descriva il set di dati in maniera sintetica,\n        perché le prime poche parole da sole potrebbero essere utilizzare in alcune visualizzazioni dei set di dati."
-
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/new_package_form.html:80
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read_core.html:60
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/resource_read.html:184
-msgid "URL"
-msgstr "URL"
-
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/new_package_form.html:97
-msgid "The licence under which the dataset is released."
-msgstr "La licenza sotto la quale si rilascia il set di dati."
-
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/new_package_form.html:102
-msgid "Published By"
-msgstr "Pubblicato da"
-
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/new_package_form.html:109
-msgid "The publisher of the dataset."
-msgstr "L'utente che ha pubblicato il set di dati."
-
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/new_package_form.html:113
-msgid "Public"
-msgstr "Pubblico"
-
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/new_package_form.html:117
-msgid "Private"
-msgstr "Privato"
-
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/new_package_form.html:124
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read_core.html:70
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/resource_read.html:188
-msgid "Status"
-msgstr "Stato"
-
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/new_package_form.html:140
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read_core.html:65
-msgid "Alternative Title"
-msgstr "Titolo alternativo"
-
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/new_package_form.html:149
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read_core.html:75
-msgid "Identifier"
-msgstr "Identificatore"
-
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/new_package_form.html:153
-msgid "Literal identifiers."
-msgstr "Indentificatori letterali."
-
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/new_package_form.html:154
-msgid "e.g. CELEX number, etc."
-msgstr "es. numero CELEX, ecc."
-
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/new_package_form.html:160
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read_core.html:80
-msgid "Interoperability Level"
-msgstr "Livello interoperabilità"
-
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/new_package_form.html:169
-msgid "Interoperability level for which the dataset is relevant."
-msgstr "Livello di interoperabilità per il quale il set di dati è pertinente."
-
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/new_package_form.html:175
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read_core.html:85
-msgid "Type of Dataset"
-msgstr "Tipo do set di dati"
-
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/new_package_form.html:188
-msgid "The type of dataset."
-msgstr "Il tipo di set di dati."
-
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/new_package_form.html:193
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read_core.html:90
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/resource_read.html:196
-msgid "Release Date"
-msgstr "Data rilascio"
-
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/new_package_form.html:195
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/new_package_form.html:209
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/new_package_form.html:232
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/new_package_form.html:237
-msgid "YYYY-MM-DD, YYYY-MM or YYYY"
-msgstr "AAAA-MM-GG, AAAA-MM o AAAA"
-
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/new_package_form.html:200
-msgid "Date of formal issuance (e.g., publication) of the dataset."
-msgstr "Data di emissione formale (es. pubblicazione) del set di dati."
-
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/new_package_form.html:201
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/new_package_form.html:215
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/new_package_form.html:243
-msgid "Acceptable date formats: YYYY-MM-DD, YYYY-MM, YYYY."
-msgstr "Formati di data accettabili: AAAA-MM-GG. AAAA-MM, AAAA."
-
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/new_package_form.html:207
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read_core.html:95
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/resource_read.html:200
-msgid "Modified Date"
-msgstr "Data modificata"
-
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/new_package_form.html:214
-msgid ""
-"Most recent date on which the dataset was changed, updated or modified."
-msgstr "Data dell'ultimo cambio, aggiornamento o modifica al set di dati."
-
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/new_package_form.html:221
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read_core.html:100
-msgid "Accrual Periodicity"
-msgstr "Periodicità di raccolta"
-
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/new_package_form.html:225
-msgid "The frequency with which dataset is published."
-msgstr "La frequenza con la quale il set di dati viene pubblicato."
-
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/new_package_form.html:230
-msgid "Temporal Coverage"
-msgstr "Copertura temporale"
-
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/new_package_form.html:241
-msgid "The start and end of the temporal series used in this dataset."
-msgstr "L'inizio e la fine della serie temporale utilizzata nel set di dati."
-
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/new_package_form.html:242
-msgid "e.g. 2010-01-01 - 2012-01-01"
-msgstr "es. 01-01-2010 - 01-01-2012"
-
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/new_package_form.html:252
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read_core.html:115
-msgid "Temporal Granularity"
-msgstr "Granularità temporale"
-
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/new_package_form.html:262
-msgid ""
-"This should give the lowest level of temporal detail given in the dataset\n"
-"        if it is aggregated, expressed as an interval of time."
-msgstr "Dovrebbe assegnare il livello più basso di dettagli temporali dati nel set di dati\n        se è aggregato, espresso come intervallo di tempo."
-
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/new_package_form.html:281
-msgid "The geographical coverage of this dataset."
-msgstr "La copertura geografica di questo set di dati"
-
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/new_package_form.html:299
-msgid "The language coverage of this dataset."
-msgstr "La copertura linguistica di questo set di dati"
-
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/new_package_form.html:304
-msgid "Metadata Language"
-msgstr "Lingua metadati"
-
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/new_package_form.html:316
-msgid "The language the metadata is in."
-msgstr "La lingua in cui sono scritti i metadati."
-
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/new_package_form.html:330
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read_core.html:160
-msgid "Version Description"
-msgstr "Descrizione della versione"
-
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/new_package_form.html:333
-msgid ""
-"Description of changes between this version and the previous version of the "
-"dataset."
-msgstr "Descrizione delle modifiche tra questa versione e quella precedente del set di dati."
-
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/new_package_form.html:355
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read_core.html:130
-msgid "Contact Name"
-msgstr "Nome contatto"
-
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/new_package_form.html:360
-msgid "The name of the contact point."
-msgstr "Il nome del punto di contatto."
-
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/new_package_form.html:365
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read_core.html:135
-msgid "Contact E-mail"
-msgstr "E-mail contatto"
-
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/new_package_form.html:370
-msgid "The e-mail address of the contact point."
-msgstr "L'indirizzo e-mail del punto di contatto."
-
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/new_package_form.html:375
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read_core.html:140
-msgid "Contact Address"
-msgstr "Indirizzo contatto"
-
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/new_package_form.html:380
-msgid "The full address of the contact point."
-msgstr "L'indirizzo completo del punto di contatto."
-
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/new_package_form.html:385
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read_core.html:145
-msgid "Contact Telephone"
-msgstr "Telefono del contatto"
-
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/new_package_form.html:390
-msgid "The telephone number of the contact point."
-msgstr "Numero telefonico del punto di contatti."
-
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/new_package_form.html:395
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read_core.html:150
-msgid "Contact Web Page"
-msgstr "Pagina Web del contatto"
-
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/new_package_form.html:400
-msgid "The web page of the contact point."
-msgstr "La pagina Web del punto di contatto."
-
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/new_package_form.html:406
-msgid "This data will also appear under"
-msgstr "Questi dati appariranno anche sotto"
-
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read.html:80
-msgid "RDF/N3"
-msgstr "RDF/N3"
-
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read_core.html:12
-msgid "This dataset has been marked as deleted."
-msgstr "Questo set di dati è stato segnato come eliminato."
-
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read_core.html:105
-msgid "Temporal Coverage From"
-msgstr "Copertura temporanea da"
-
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read_core.html:110
-msgid "Temporal Coverage To"
-msgstr "Copertura temporanea a"
-
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/resource_read.html:85
-msgid "Dataset - Resource"
-msgstr "- Set di dati - Risorsa"
-
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/resource_read.html:106
-msgid "Licence:"
-msgstr "Licenza:"
-
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/resource_read.html:147
-msgid "(No description)"
-msgstr ""
-
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/resource_read.html:161
-msgid "From"
-msgstr ""
-
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/resource_read.html:192
-msgid "Size"
-msgstr ""
-
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/resource_read.html:203
-msgid "More Information"
-msgstr "Informazioni aggiuntive"
-
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/resource_read.html:218
-msgid "Back to dataset"
-msgstr "Torna al set di dati"
-
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/search.html:31
-msgid "Search datasets..."
-msgstr "Cerca un set di dati"
-
-#: ../ckanext-ecportal/ckanext/ecportal/templates/publisher/edit.html:53
-msgid "The URL for the image that is associated with this publisher."
-msgstr "L'URL per l'immagine associata con questo publisher."
-
-#: ../ckanext-ecportal/ckanext/ecportal/templates/publisher/edit.html:73
-msgid "No parent publisher"
-msgstr "Nessun publisher principale"
-
-#: ../ckanext-ecportal/ckanext/ecportal/templates/publisher/edit.html:149
-msgid "There are no users currently in this publisher."
-msgstr "Attualmente non esistono utenti in questo publisher."
-
-#: ../ckanext-ecportal/ckanext/ecportal/templates/publisher/history.html:54
-msgid "Publisher History"
-msgstr ""
-
-#: ../ckanext-ecportal/ckanext/ecportal/templates/publisher/read.html:31
-msgid "Search publisher..."
-msgstr ""
-
-#: ../ckanext-ecportal/ckanext/ecportal/templates/publisher/read.html:69
-msgid "Resource Formats"
-msgstr "Formati delle risorse"
-
-#: ../ckanext-ecportal/ckanext/ecportal/templates/revision/diff.html:9
-msgid "Revision Differences"
-msgstr ""
-
-#: ../ckanext-ecportal/ckanext/ecportal/templates/snippets/recent_updates_package_list.html:14
-msgid "was updated on"
-msgstr "aggiornato il"
-
-#: ../ckanext-ecportal/ckanext/ecportal/templates/tag/read.html:6
-msgid "- Keyword"
-msgstr "Parole chiave"
-
-#: ../ckanext-ecportal/ckanext/ecportal/templates/tag/read.html:7
-msgid "Keyword:"
-msgstr "Parole chiave"
-
-#: ../ckanext-ecportal/ckanext/ecportal/templates/tag/read.html:10
-#, python-format
-msgid "There are %(count)s datasets with the keyword [1:%(tagname)s]:"
-msgstr ""
-
-#: ../ckanext-ecportal/ckanext/ecportal/templates/user/login.html:21
-#: ../ckanext-ecportal/ckanext/ecportal/templates/user/login.html:23
-#: ../ckanext-ecportal/ckanext/ecportal/templates/user/login.html:24
-msgid "Access to data provider's area"
-msgstr "Accesso all’area del fornitore di dati"
-
-#: ../ckanext-ecportal/ckanext/ecportal/templates/user/login.html:44
-msgid "Remember me"
-msgstr "Memorizza credenziali:"
-
-#: ../ckanext-ecportal/ckanext/ecportal/templates/user/login.html:48
-msgid "Sign In"
-msgstr "Accedi"
-
-#: ../ckanext-ecportal/ckanext/ecportal/validators.py:199
-#, python-format
-msgid "Duplicate key for \"%s\" given"
-msgstr "Duplica chiave per \"%s\" assegnato"
-
-#: ../ckanext-ecportal/ckanext/ecportal/validators.py:226
-msgid "Publisher not found"
-msgstr "Publisher non trovato"
-
-#: ../ckanext-ecportal/ckanext/ecportal/validators.py:308
-msgid "Url must be alphanumeric (ascii) characters and these symbols: -_"
-msgstr "L'Url deve contenere caratteri alfanumerici (ascii) e questi simboli: -_"
-
-#: ../ckanext-ecportal/ckanext/ecportal/validators.py:320
-#, python-format
-msgid "Additional field required: %s"
-msgstr "Campo aggiuntivo richiesto: %s"
-
-#: ckan/controllers/admin.py:19
-msgid "Need to be system administrator to administer"
-msgstr "È necessario essere amministratori del sistema per amministrare"
-
-#: ckan/controllers/admin.py:105
-msgid "Changes Saved"
-msgstr "Modifiche salvate"
-
-#: ckan/controllers/admin.py:142 ckan/logic/action/get.py:1552
-msgid "unknown user:"
-msgstr "utente sconosciuto:"
-
-#: ckan/controllers/admin.py:152
-msgid "User Added"
-msgstr "Utente aggiunto"
-
-#: ckan/controllers/admin.py:159
-msgid "unknown authorization group:"
-msgstr "Gruppo di autorizzazione sconosciuto:"
-
-#: ckan/controllers/admin.py:169
-msgid "Authorization Group Added"
-msgstr "Gruppo di autorizzazione aggiunto"
-
-#: ckan/controllers/admin.py:270
-#, python-format
-msgid ""
-"Cannot purge package %s as associated revision %s includes non-deleted "
-"packages %s"
-msgstr "Impossibile ripulire il pacchetto %s perchè la revisione associata %s include pacchetti non eliminati %s"
-
-#: ckan/controllers/admin.py:289
-#, python-format
-msgid "Problem purging revision %s: %s"
-msgstr "Problema durante la pulizia della revisione %s: %s"
-
-#: ckan/controllers/admin.py:291
-msgid "Purge complete"
-msgstr "Pulizia completa"
-
-#: ckan/controllers/admin.py:293
-msgid "Action not implemented."
-msgstr "Azione non attuata."
-
-#: ckan/controllers/api.py:56 ckan/controllers/authorization_group.py:22
-#: ckan/controllers/group.py:89 ckan/controllers/home.py:22
-#: ckan/controllers/package.py:116 ckan/controllers/related.py:23
-#: ckan/controllers/revision.py:29 ckan/controllers/tag.py:22
-#: ckan/controllers/user.py:30 ckan/controllers/user.py:76
-#: ckan/controllers/user.py:97 ckan/logic/auth/get.py:18
-msgid "Not authorized to see this page"
-msgstr "Non autorizzato a visualizzare questa pagina"
-
-#: ckan/controllers/api.py:114 ckan/controllers/api.py:180
-msgid "Access denied"
-msgstr "Accesso negato"
-
-#: ckan/controllers/api.py:118 ckan/controllers/api.py:185
-#: ckan/lib/base.py:491 ckan/logic/validators.py:61
-#: ckan/logic/validators.py:72 ckan/logic/validators.py:87
-#: ckan/logic/validators.py:101 ckan/logic/validators.py:114
-#: ckan/logic/validators.py:136 ckan/logic/action/create.py:572
-msgid "Not found"
-msgstr "Non trovato"
-
-#: ckan/controllers/api.py:124
-msgid "Bad request"
-msgstr "Richiesta mal formulata"
-
-#: ckan/controllers/api.py:150
-#, python-format
-msgid "Action name not known: %s"
-msgstr "nome azione sconosciuto: %s"
-
-#: ckan/controllers/api.py:161 ckan/controllers/api.py:314
-#: ckan/controllers/api.py:368
-#, python-format
-msgid "JSON Error: %s"
-msgstr "Errore JSON: %s"
-
-#: ckan/controllers/api.py:166
-#, python-format
-msgid "Bad request data: %s"
-msgstr "Dati richiesta formulata male: %s"
-
-#: ckan/controllers/api.py:176 ckan/controllers/api.py:341
-#: ckan/controllers/api.py:389 ckan/controllers/group.py:317
-#: ckan/controllers/group.py:337 ckan/controllers/package.py:585
-#: ckan/controllers/package.py:614 ckan/controllers/user.py:162
-#: ckan/controllers/user.py:246 ckan/controllers/user.py:395
-msgid "Integrity Error"
-msgstr "Errore integrità"
-
-#: ckan/controllers/api.py:200
-msgid "Parameter Error"
-msgstr "Errore parametro"
-
-#: ckan/controllers/api.py:251 ckan/logic/action/get.py:1544
-#, python-format
-msgid "Cannot list entity of this type: %s"
-msgstr "Impossibile elencare entità di questo tipo: %s"
-
-#: ckan/controllers/api.py:281
-#, python-format
-msgid "Cannot read entity of this type: %s"
-msgstr "Impossibile leggere entità di questo tipo: %s"
-
-#: ckan/controllers/api.py:319
-#, python-format
-msgid "Cannot create new entity of this type: %s %s"
-msgstr "Impossibile creare nuova entità di questo tipo: %s %s"
-
-#: ckan/controllers/api.py:345
-msgid "Unable to add package to search index"
-msgstr "Impossibile aggiungere pacchetto all'indice di ricerca"
-
-#: ckan/controllers/api.py:373
-#, python-format
-msgid "Cannot update entity of this type: %s"
-msgstr "Impossibile aggiornare entità di questo tipo: %s"
-
-#: ckan/controllers/api.py:393
-msgid "Unable to update search index"
-msgstr "Impossibile aggiornare indice di ricerca"
-
-#: ckan/controllers/api.py:415
-#, python-format
-msgid "Cannot delete entity of this type: %s %s"
-msgstr "Impossibile eliminare entità di questo tipo: %s %s"
-
-#: ckan/controllers/api.py:438
-msgid "No revision specified"
-msgstr "Nessuna revisione specificata"
-
-#: ckan/controllers/api.py:442
-#, python-format
-msgid "There is no revision with id: %s"
-msgstr "Nessuna revisione con id: %s"
-
-#: ckan/controllers/api.py:452
-msgid "Missing search term ('since_id=UUID' or 'since_time=TIMESTAMP')"
-msgstr "Termine di ricerca mancante ('since_id=UUID' oppure 'since_time=TIMESTAMP')"
-
-#: ckan/controllers/api.py:460
-#, python-format
-msgid "Could not read parameters: %r"
-msgstr "Impossibile leggere i parametri: %r"
-
-#: ckan/controllers/api.py:507
-#, python-format
-msgid "Bad search option: %s"
-msgstr "Opzione di ricerca non appropriata: %s"
-
-#: ckan/controllers/api.py:510
-#, python-format
-msgid "Unknown register: %s"
-msgstr "Registro sconosciuto: %s"
-
-#: ckan/controllers/api.py:518
-msgid "Malformed qjson value"
-msgstr "Valore qjson formato male"
-
-#: ckan/controllers/api.py:527
-msgid "Request params must be in form of a json encoded dictionary."
-msgstr "I parametri richiesti devono essere espressi nella forma di dizionario codificato json"
-
-#: ckan/controllers/authorization_group.py:44
-#, python-format
-msgid "Not authorized to read %s"
-msgstr "Non autorizzato alla lettura %s"
-
-#: ckan/controllers/authorization_group.py:62 ckan/controllers/group.py:238
-#: ckan/controllers/group_formalchemy.py:36
-msgid "Unauthorized to create a group"
-msgstr "Non autorizzato alla creazione di un gruppo"
-
-#: ckan/controllers/authorization_group.py:107 ckan/controllers/group.py:393
-#, python-format
-msgid "User %r not authorized to edit %r"
-msgstr "Utente %r non autorizzato alla modifica %r"
-
-#: ckan/controllers/authorization_group.py:151 ckan/controllers/group.py:115
-#: ckan/controllers/group.py:271 ckan/controllers/group.py:315
-#: ckan/controllers/group.py:335 ckan/controllers/group.py:346
-#: ckan/controllers/group.py:391
-msgid "Group not found"
-msgstr "Gruppo non trovato"
-
-#: ckan/controllers/authorization_group.py:159 ckan/controllers/group.py:358
-#: ckan/controllers/package.py:663
-#, python-format
-msgid "User %r not authorized to edit %s authorizations"
-msgstr "Utente %r non autorizzato alla modifica %s delle autorizzazioni"
-
-#: ckan/controllers/datastore.py:30 ckan/controllers/datastore.py:41
-#: ckan/controllers/datastore.py:51 ckan/controllers/package.py:743
-#: ckan/controllers/package.py:775
-msgid "Resource not found"
-msgstr "Risorsa non trovata"
-
-#: ckan/controllers/datastore.py:32 ckan/controllers/datastore.py:53
-#: ckan/controllers/package.py:745 ckan/controllers/package.py:777
-#, python-format
-msgid "Unauthorized to read resource %s"
-msgstr "Non autorizzato a leggere la risorsa %s"
-
-#: ckan/controllers/group.py:117 ckan/controllers/group.py:273
-#: ckan/controllers/group.py:313 ckan/controllers/group.py:333
-#, python-format
-msgid "Unauthorized to read group %s"
-msgstr "Non autorizzato a leggere il gruppo %s"
-
-#: ckan/controllers/group.py:129
-msgid "Cannot render description"
-msgstr "Impossibile rilasciare la descrizione"
-
-#: ckan/controllers/group.py:281 ckan/controllers/group_formalchemy.py:93
-#: ckan/controllers/package.py:477 ckan/controllers/package_formalchemy.py:93
-#, python-format
-msgid "User %r not authorized to edit %s"
-msgstr "Utente %r non autorizzato alla modifica %s"
-
-#: ckan/controllers/group.py:375 ckan/controllers/package.py:350
-msgid "Select two revisions before doing the comparison."
-msgstr "Selezionare due revisioni prima di effettuare il confronto."
-
-#: ckan/controllers/group.py:400
-msgid "CKAN Group Revision History"
-msgstr "Cronologia della revisione del gruppo CKAN"
-
-#: ckan/controllers/group.py:402
-msgid "Recent changes to CKAN Group: "
-msgstr "Ultimi messaggi al gruppo CKAN:"
-
-#: ckan/controllers/group.py:420 ckan/controllers/package.py:395
-msgid "Log message: "
-msgstr "Messaggio di accesso:"
-
-#: ckan/controllers/home.py:30
-msgid "This site is currently off-line. Database is not initialised."
-msgstr "Il sito è off-line in questo momento. La banca dati non è inizializzata."
-
-#: ckan/controllers/home.py:68
-#, python-format
-msgid ""
-"Please <a href=\"%s\">update your profile</a> and add your email address and"
-" your full name. "
-msgstr "Aggiornare <a href=\"%s\">il profilo personale</a> e aggiungere l'indirizzo e-mail e il nome completo. "
-
-#: ckan/controllers/home.py:70 ckan/controllers/home.py:76
-#, python-format
-msgid "%s uses your email address if you need to reset your password."
-msgstr "%s utilizza l'indirizzo e-mail se è necessario ripristinare la password."
-
-#: ckan/controllers/home.py:74
-#, python-format
-msgid "Please <a href=\"%s\">update your profile</a> and add your email address. "
-msgstr "Aggiornare <a href=\"%s\"> il profilo personale </a> e aggiungere l'indirizzo e-mail. "
-
-#: ckan/controllers/home.py:80
-#, python-format
-msgid "Please <a href=\"%s\">update your profile</a> and add your full name."
-msgstr "Aggiornare <a href=\"%s\">il profilo personale</a> e aggiungere il nome completo."
-
-#: ckan/controllers/package.py:280 ckan/controllers/package.py:282
-#: ckan/controllers/package.py:284
-#, python-format
-msgid "Invalid revision format: %r"
-msgstr "Formato revisione non valido: %r"
-
-#: ckan/controllers/package.py:292 ckan/controllers/package.py:326
-#: ckan/controllers/package.py:369 ckan/controllers/package.py:469
-#: ckan/controllers/package.py:517 ckan/controllers/package.py:537
-#: ckan/controllers/package.py:583 ckan/controllers/package.py:612
-#: ckan/controllers/package.py:651 ckan/controllers/related.py:21
-#: ckan/controllers/related.py:30
-msgid "Dataset not found"
-msgstr "Set di dati non trovato"
-
-#: ckan/controllers/package.py:294 ckan/controllers/package.py:328
-#: ckan/controllers/package.py:367 ckan/controllers/package.py:467
-#: ckan/controllers/package.py:515 ckan/controllers/package.py:535
-#: ckan/controllers/package.py:581 ckan/controllers/package.py:610
-#: ckan/controllers/related.py:32
-#, python-format
-msgid "Unauthorized to read package %s"
-msgstr "Non autorizzato a leggere il pacchetto %s"
-
-#: ckan/controllers/package.py:376
-msgid "CKAN Dataset Revision History"
-msgstr "Cronologia della revisione del set di dati CKAN"
-
-#: ckan/controllers/package.py:378
-msgid "Recent changes to CKAN Dataset: "
-msgstr "Ultime modifiche al set di dati CKAN:"
-
-#: ckan/controllers/package.py:424 ckan/controllers/package_formalchemy.py:29
-msgid "Unauthorized to create a package"
-msgstr "Non autorizzato alla creazione del pacchetto"
-
-#: ckan/controllers/package.py:587
-msgid "Unable to add package to search index."
-msgstr "Impossibile aggiungere il pacchetto all'indice di ricerca."
-
-#: ckan/controllers/package.py:616
-msgid "Unable to update search index."
-msgstr "Impossibile aggiornare l'indice di ricerca."
-
-#: ckan/controllers/revision.py:40
-msgid "CKAN Repository Revision History"
-msgstr "Cronologia di revisione del repository CKAN"
-
-#: ckan/controllers/revision.py:42
-msgid "Recent changes to the CKAN repository."
-msgstr "Ultime modifiche al repository CKAN."
-
-#: ckan/controllers/revision.py:101
-#, python-format
-msgid "Datasets affected: %s.\n"
-msgstr "Set di dati interessato: %s.\n"
-
-#: ckan/controllers/revision.py:177
-msgid "Revision updated"
-msgstr "Revisione aggiornata"
-
-#: ckan/controllers/tag.py:54
-msgid "Other"
-msgstr "Altro"
-
-#: ckan/controllers/tag.py:67
-msgid "Tag not found"
-msgstr "Tag non trovato"
-
-#: ckan/controllers/user.py:132
-msgid "Unauthorized to create a user"
-msgstr "Non autorizzato alla creazione di utente"
-
-#: ckan/controllers/user.py:158
-#, python-format
-msgid "Unauthorized to create user %s"
-msgstr "Non autorizzato alla creazione dell'utente %s"
-
-#: ckan/controllers/user.py:160 ckan/controllers/user.py:215
-#: ckan/controllers/user.py:244 ckan/controllers/user.py:373
-#: ckan/controllers/user.py:393
-msgid "User not found"
-msgstr "Utente non trovato"
-
-#: ckan/controllers/user.py:164
-msgid "Bad Captcha. Please try again."
-msgstr "Captcha errato. Tentare di nuovo."
-
-#: ckan/controllers/user.py:181
-#, python-format
-msgid ""
-"User \"%s\" is now registered but you are still logged in as \"%s\" from "
-"before"
-msgstr "L'utente \"%s\" è ora registrato ma l'accesso è stato eseguito come \"%s\" precedentemente"
-
-#: ckan/controllers/user.py:194
-msgid "No user specified"
-msgstr "Nessun utente specificato"
-
-#: ckan/controllers/user.py:213 ckan/controllers/user.py:242
-#: ckan/controllers/user.py:391
-#, python-format
-msgid "Unauthorized to edit user %s"
-msgstr "Non autorizzato alla modifica dell'utente %s"
-
-#: ckan/controllers/user.py:220
-#, python-format
-msgid "User %s not authorized to edit %s"
-msgstr "Utente %s non autorizzato alla modifica %s"
-
-#: ckan/controllers/user.py:239
-msgid "Profile updated"
-msgstr "Profilo aggiornato"
-
-#: ckan/controllers/user.py:284
-#, python-format
-msgid "%s is now logged in"
-msgstr "%s ha ora effettuato l'accesso"
-
-#: ckan/controllers/user.py:287
-msgid "Login failed. Bad username or password."
-msgstr "Accesso non riuscito. Nome utente o password errata."
-
-#: ckan/controllers/user.py:289
-msgid " (Or if using OpenID, it hasn't been associated with a user account.)"
-msgstr " (oppure, se si utilizza OpenID, non è stato associato a un account utente.)"
-
-#: ckan/controllers/user.py:342
-#, python-format
-msgid "\"%s\" matched several users"
-msgstr "\"%s\" ha rilevato più utenti"
-
-#: ckan/controllers/user.py:344 ckan/controllers/user.py:346
-#, python-format
-msgid "No such user: %s"
-msgstr "Nessun utente di questo tipo: %s"
-
-#: ckan/controllers/user.py:351
-msgid "Please check your inbox for a reset code."
-msgstr "Controllare la casella di posta in arrivo per ripristinare il codice."
-
-#: ckan/controllers/user.py:354
-#, python-format
-msgid "Could not send reset link: %s"
-msgstr "Impossibile ripristinare il collegamento: %s"
-
-#: ckan/controllers/user.py:377
-msgid "Invalid reset key. Please try again."
-msgstr "Chieve di ripristino non valida. Tentare di nuovo."
-
-#: ckan/controllers/user.py:388
-msgid "Your password has been reset."
-msgstr "La password è stata ripristinata."
-
-#: ckan/controllers/user.py:410
-msgid "Error: Could not parse About text"
-msgstr "Errore: impossibile anallizzare Info sul testo"
-
-#: ckan/controllers/user.py:418
-msgid "Your password must be 4 characters or longer."
-msgstr "La password deve includere almeno 4 caratteri."
-
-#: ckan/controllers/user.py:420
-msgid "The passwords you entered do not match."
-msgstr "La password inserita non corrisponde."
-
-#: ckan/lib/base.py:471
-msgid "Updated"
-msgstr "Aggiornato"
-
-#: ckan/lib/base.py:483
-msgid "User role(s) added"
-msgstr "Ruolo(i) utente aggiunto(i)"
-
-#: ckan/lib/base.py:485
-msgid "Please supply a user name"
-msgstr "Fornire un nome utente"
-
-#: ckan/lib/helpers.py:545
-msgid "Update your avatar at gravatar.com"
-msgstr "Aggiornate il vostro avatar su gravatar.com"
-
-#: ckan/lib/helpers.py:738 ckan/templates/js_strings.html:16
-#: ../ckanext-ecportal/ckanext/ecportal/templates/js_strings.html:16
-msgid "Unknown"
-msgstr "Sconosciuto"
-
-#: ckan/lib/helpers.py:774
-msgid "no name"
-msgstr "nessun nome"
-
-#: ckan/lib/helpers.py:807
-msgid "Created new dataset."
-msgstr "Nuovo set di dati creato."
-
-#: ckan/lib/helpers.py:809
-msgid "Edited resources."
-msgstr "Risorse modificate."
-
-#: ckan/lib/helpers.py:811
-msgid "Edited settings."
-msgstr "Impostazioni modificate."
-
-#: ckan/lib/mailer.py:21
-#, python-format
-msgid "Dear %s,"
-msgstr "Gentile %s,"
-
-#: ckan/lib/mailer.py:34
-#, python-format
-msgid "%s <%s>"
-msgstr "%s <%s>"
-
-#: ckan/lib/mailer.py:58
-msgid "No recipient email address available!"
-msgstr "Nessun indirizzo e-mail destinatario disponibile!"
-
-#: ckan/lib/mailer.py:63
-#, python-format
-msgid ""
-"You have requested your password on %(site_title)s to be reset.\n"
-"\n"
-"Please click the following link to confirm this request:\n"
-"\n"
-"   %(reset_link)s\n"
-msgstr "Avete richiesto di ripristinare la password per %(site_title)s.\n\nFate clic sul collegamento seguente per confermare la richiesta:\n\n   %(reset_link)s\n"
-
-#: ckan/lib/mailer.py:95 ckan/templates/user/perform_reset.html:6
-#: ckan/templates/user/perform_reset.html:14
-msgid "Reset your password"
-msgstr "Ripristinate la password"
-
-#: ckan/lib/navl/dictization_functions.py:8
-#: ckan/lib/navl/dictization_functions.py:10
-#: ckan/lib/navl/dictization_functions.py:12
-#: ckan/lib/navl/dictization_functions.py:14
-#: ckan/lib/navl/dictization_functions.py:16
-#: ckan/lib/navl/dictization_functions.py:18
-#: ckan/lib/navl/dictization_functions.py:20
-#: ckan/lib/navl/dictization_functions.py:22 ckan/lib/navl/validators.py:17
-#: ckan/lib/navl/validators.py:24 ckan/lib/navl/validators.py:44
-#: ckan/logic/__init__.py:247 ckan/logic/validators.py:407
-msgid "Missing value"
-msgstr "Valore mancante"
-
-#: ckan/lib/navl/validators.py:54
-#, python-format
-msgid "The input field %(name)s was not expected."
-msgstr "Il campo di inserimento %(name)s non era previsto."
-
-#: ckan/lib/navl/validators.py:93
-msgid "Please enter an integer value"
-msgstr "Inserire un valore intero"
-
-#: ckan/lib/package_saver.py:29
-#: ../ckanext-ecportal/ckanext/ecportal/helpers.py:43
-msgid "Cannot render package description"
-msgstr "Impossibile rilasciare la descrizione del pacchetto"
-
-#: ckan/lib/package_saver.py:34
-msgid "No web page given"
-msgstr "Nessuna pagina Web data"
-
-#: ckan/lib/package_saver.py:47
-msgid "Author not given"
-msgstr "Autore non dato"
-
-#: ckan/lib/package_saver.py:60
-msgid "Maintainer not given"
-msgstr "Manutentore non dato"
-
-#: ckan/lib/package_saver.py:118 ckan/logic/validators.py:51
-msgid "No links are allowed in the log_message."
-msgstr "Nessun collegamento consentito nel messaggio_accesso."
-
-#: ckan/logic/__init__.py:159
-msgid "No valid API key provided."
-msgstr "Chiave API fornita non valida."
-
-#: ckan/logic/action/__init__.py:56
-msgid "Package resource(s) invalid"
-msgstr "Risorsa(e) del pacchetto non valida(e)"
-
-#: ckan/logic/action/__init__.py:56 ckan/templates/package/layout.html:19
-#: ckan/templates/package/read_core.html:26
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read_core.html:33
-msgid "Resources"
-msgstr "Risorse"
-
-#: ckan/logic/action/__init__.py:58
-msgid "Missing Value"
-msgstr "Valore mancante"
-
-#: ckan/logic/action/__init__.py:58 ckan/logic/action/__init__.py:60
-#: ckan/templates/group/new_group_form.html:65
-#: ckan/templates/package/edit.html:23
-#: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:104
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/edit.html:25
-#: ../ckanext-ecportal/ckanext/ecportal/templates/publisher/edit.html:89
-msgid "Extras"
-msgstr "Extra"
-
-#: ckan/logic/action/create.py:140 ckan/logic/action/create.py:491
-#, python-format
-msgid "REST API: Create object %s"
-msgstr "API REST: Crea oggetto %s"
-
-#: ckan/logic/action/create.py:337
-#, python-format
-msgid "REST API: Create package relationship: %s %s %s"
-msgstr "API RESt: Crea relazione pacchetto: %s %s %s"
-
-#: ckan/logic/action/create.py:376
-#, python-format
-msgid "REST API: Create member object %s"
-msgstr "API REST: Crea oggetto membro %s"
-
-#: ckan/logic/action/create.py:559
-msgid "You must supply a package id or name (parameter \"package\")."
-msgstr "Dovete fornire un nome o ID pacchetto (parametro \"package\")."
-
-#: ckan/logic/action/create.py:561
-msgid "You must supply a rating (parameter \"rating\")."
-msgstr "Dovete fornire una valutazione (parametro \"rating\")."
-
-#: ckan/logic/action/create.py:566
-msgid "Rating must be an integer value."
-msgstr "La valutazione deve essere un valore intero."
-
-#: ckan/logic/action/create.py:570
-#, python-format
-msgid "Rating must be between %i and %i."
-msgstr "La valutazione deve essere compresa tra %i e %i."
-
-#: ckan/logic/action/delete.py:34
-#, python-format
-msgid "REST API: Delete Package: %s"
-msgstr "API REST: Elimina pacchetto: %s"
-
-#: ckan/logic/action/delete.py:83 ckan/logic/action/delete.py:169
-#, python-format
-msgid "REST API: Delete %s"
-msgstr "API REST: Elimina %s"
-
-#: ckan/logic/action/delete.py:215 ckan/logic/action/delete.py:241
-#: ckan/logic/action/get.py:1611 ckan/logic/action/update.py:774
-msgid "id not in data"
-msgstr "ID non presente nei dati"
-
-#: ckan/logic/action/delete.py:219 ckan/logic/action/get.py:1614
-#: ckan/logic/action/update.py:778
-#, python-format
-msgid "Could not find vocabulary \"%s\""
-msgstr "Could not find vocabulary \"%s\""
-
-#: ckan/logic/action/delete.py:249
-#, python-format
-msgid "Could not find tag \"%s\""
-msgstr "Impossibile trovare il tag \"%s\""
-
-#: ckan/logic/action/update.py:133
-msgid "Related was not found."
-msgstr "Correlato non trovato."
-
-#: ckan/logic/action/update.py:175
-msgid "Resource was not found."
-msgstr "Risorsa non trovata."
-
-#: ckan/logic/action/update.py:190 ckan/logic/action/update.py:262
-#: ckan/logic/action/update.py:429
-#, python-format
-msgid "REST API: Update object %s"
-msgstr "API REST: aggiorna oggetto %s"
-
-#: ckan/logic/action/update.py:228 ckan/logic/action/update.py:284
-msgid "Package was not found."
-msgstr "Pacchetto non trovato."
-
-#: ckan/logic/action/update.py:315
-#, python-format
-msgid "REST API: Update package relationship: %s %s %s"
-msgstr "API REST: aggiorna relazione pacchetto: %s %s %s"
-
-#: ckan/logic/action/update.py:581
-msgid "TaskStatus was not found."
-msgstr "TaskStatus non trovato."
-
-#: ckan/logic/auth/create.py:11
-#, python-format
-msgid "User %s not authorized to create packages"
-msgstr "Utente %s non autorizzato alla creazione di pacchetti"
-
-#: ckan/logic/auth/create.py:16 ckan/logic/auth/update.py:23
-#, python-format
-msgid "User %s not authorized to edit these groups"
-msgstr "Utente %s non autorizzato alla modifica di questi gruppi"
-
-#: ckan/logic/auth/create.py:28 ckan/logic/auth/publisher/create.py:47
-msgid "You must be logged in to add a related item"
-msgstr "Dovete aver effettuato l'accesso per aggiungere un elemento correlato"
-
-#: ckan/logic/auth/create.py:48 ckan/logic/auth/publisher/create.py:76
-#, python-format
-msgid "User %s not authorized to edit these packages"
-msgstr "Utente %s non autorizzato alla modifica di questi pacchetti"
-
-#: ckan/logic/auth/create.py:58 ckan/logic/auth/publisher/create.py:104
-#: ckan/logic/auth/publisher/create.py:108
-#, python-format
-msgid "User %s not authorized to create groups"
-msgstr "Utente %s non autorizzato alla creazione di gruppi"
-
-#: ckan/logic/auth/create.py:68
-#, python-format
-msgid "User %s not authorized to create authorization groups"
-msgstr "Utente %s non autorizzaro alla creazione di gruppi di autorizzazione"
-
-#: ckan/logic/auth/create.py:82
-#, python-format
-msgid "User %s not authorized to create users"
-msgstr "Utente %s non autorizzato alla creazione di utenti"
-
-#: ckan/logic/auth/create.py:111
-msgid "Group was not found."
-msgstr "Gruppo non trovato"
-
-#: ckan/logic/auth/create.py:131 ckan/logic/auth/publisher/create.py:130
-msgid "Valid API key needed to create a package"
-msgstr "Chiave API valida necessaria per la creazione di un pacchetto"
-
-#: ckan/logic/auth/create.py:139 ckan/logic/auth/publisher/create.py:138
-msgid "Valid API key needed to create a group"
-msgstr "Chiave API valida necessaria per la creazione di un gruppo"
-
-#: ckan/logic/auth/delete.py:14
-#, python-format
-msgid "User %s not authorized to delete package %s"
-msgstr "Utente %s non autorizzato all'eliminazione del pacchetto %s"
-
-#: ckan/logic/auth/delete.py:23 ckan/logic/auth/delete.py:40
-#: ckan/logic/auth/publisher/delete.py:40
-#: ckan/logic/auth/publisher/delete.py:54
-msgid "Only the owner can delete a related item"
-msgstr "Soltanto il proprietario può eliminare un elemento correlato"
-
-#: ckan/logic/auth/delete.py:56
-#, python-format
-msgid "User %s not authorized to delete relationship %s"
-msgstr "Utente %s non autorizzato all'eliminazione della relazione %s"
-
-#: ckan/logic/auth/delete.py:67 ckan/logic/auth/publisher/delete.py:80
-#, python-format
-msgid "User %s not authorized to delete group %s"
-msgstr "Utente %s non autorizzato all'eliminazione del gruppo %s"
-
-#: ckan/logic/auth/delete.py:83 ckan/logic/auth/publisher/delete.py:96
-#, python-format
-msgid "User %s not authorized to delete task_status"
-msgstr "Utente %s non autorizzato all'eliminazione dello stato_attività"
-
-#: ckan/logic/auth/get.py:79
-#, python-format
-msgid "User %s not authorized to read these packages"
-msgstr "Utente %s non autorizzato alla lettura di questi pacchetti"
-
-#: ckan/logic/auth/get.py:90 ckan/logic/auth/publisher/get.py:85
-#: ckan/logic/auth/publisher/get.py:117
-#, python-format
-msgid "User %s not authorized to read package %s"
-msgstr "Utente %s non autorizzato alla lettura del pacchetto %s"
-
-#: ckan/logic/auth/get.py:110 ckan/logic/auth/update.py:39
-msgid "No package found for this resource, cannot check auth."
-msgstr "nessun pacchetto trovato per questa risorsa, impossiibile verificare aut."
-
-#: ckan/logic/auth/get.py:116 ckan/logic/auth/publisher/get.py:115
-#, python-format
-msgid "User %s not authorized to read resource %s"
-msgstr "Utente non autorizzato %s alla lettura della risorsa %s"
-
-#: ckan/logic/auth/get.py:131
-#, python-format
-msgid "User %s not authorized to read group %s"
-msgstr "Utente %s non autorizzato alla lettura del gruppo %s"
-
-#: ckan/logic/auth/publisher/create.py:32
-#: ckan/logic/auth/publisher/update.py:29
-#, python-format
-msgid "User %s not authorized to edit packages in these groups"
-msgstr "Utente %s non autorizzato alla modifica dei pacchetti in questi gruppi"
-
-#: ckan/logic/auth/publisher/create.py:68
-msgid "Two package IDs are required"
-msgstr "Richiesti due ID pacchetto"
-
-#: ckan/logic/auth/publisher/create.py:90
-#: ../ckanext-ecportal/ckanext/ecportal/auth.py:22
-#: ../ckanext-ecportal/ckanext/ecportal/auth.py:28
-msgid "User is not authorized to create groups"
-msgstr "L'utente non è autorizzato alla creazione di gruppi"
-
-#: ckan/logic/auth/publisher/create.py:113
-msgid "Authorization groups not implemented in this profile"
-msgstr "I gruppi di autorizzazione non sono previsti in questo profilo"
-
-#: ckan/logic/auth/publisher/delete.py:30
-#, python-format
-msgid "User %s not authorized to delete packages in these group"
-msgstr "Utente %s non autorizzato all'eliminazione dei pacchetti in questo gruppo"
-
-#: ckan/logic/auth/publisher/delete.py:68
-#: ckan/logic/auth/publisher/delete.py:76
-msgid "Only members of this group are authorized to delete this group"
-msgstr "Soltanto i membri di questo gruppo sono sutorizzati a eliminare questo gruppo"
-
-#: ckan/logic/auth/publisher/get.py:82
-#, python-format
-msgid "User not authorized to read package %s"
-msgstr "Utente non autorizzato alla lettura del pacchetto %s"
-
-#: ckan/logic/auth/publisher/get.py:137
-#, python-format
-msgid "User %s not authorized to show group %s"
-msgstr "Utente %s non autorizzato alla visualizzazione del gruppo %s"
-
-#: ckan/logic/auth/publisher/update.py:47
-#: ckan/logic/auth/publisher/update.py:50
-#, python-format
-msgid "User %s not authorized to edit resources in this package"
-msgstr "Utente %s non autorizzato alla modifica delle risorse in questo pacchetto"
-
-#: ckan/logic/auth/publisher/update.py:62
-msgid "Package edit permissions is not available"
-msgstr "Permessi di modifica del pacchetto non disponibili"
-
-#: ckan/logic/auth/publisher/update.py:74
-msgid "Only members of this group are authorized to edit this group"
-msgstr "Soltanto i membri di questo gruppo sono autorizzati a modificare questo gruppo"
-
-#: ckan/logic/auth/publisher/update.py:83
-#, python-format
-msgid "Could not find user %s"
-msgstr "Impossibile trovare utente %s"
-
-#: ckan/logic/auth/publisher/update.py:87
-#, python-format
-msgid "User %s not authorized to edit this group"
-msgstr "Utente %s non autorizzato alla modifica di questo gruppo"
-
-#: ckan/logic/auth/publisher/update.py:108
-msgid "Group edit permissions is not implemented"
-msgstr "Permessi di modifica gruppo non attuati"
-
-#: ckan/logic/auth/publisher/update.py:111
-#: ckan/logic/auth/publisher/update.py:115
-msgid "Authorization group update not implemented"
-msgstr "Aggiornamento gruppo di autorizzazione non attuato"
-
-#: ckan/logic/auth/update.py:19
-#, python-format
-msgid "User %s not authorized to edit package %s"
-msgstr "Utente %s non autorizzato alla modifica del pacchetto %s"
-
-#: ckan/logic/auth/update.py:45
-#, python-format
-msgid "User %s not authorized to read edit %s"
-msgstr "Utente %s non autorizzato alla lettura della modifica %s"
-
-#: ckan/logic/auth/update.py:59
-#, python-format
-msgid "User %s not authorized to change state of package %s"
-msgstr "Utente %s non autorizzato alla modifica dello stato del pacchetto %s"
-
-#: ckan/logic/auth/update.py:70
-#, python-format
-msgid "User %s not authorized to edit permissions of package %s"
-msgstr "Utente %s non autorizzato alla modifica dei permessi del pacchetto %s"
-
-#: ckan/logic/auth/update.py:81
-#, python-format
-msgid "User %s not authorized to edit group %s"
-msgstr "Utente %s non autorizzato alla modifica del gruppo %s"
-
-#: ckan/logic/auth/update.py:89 ckan/logic/auth/update.py:94
-#: ckan/logic/auth/publisher/update.py:95
-#: ckan/logic/auth/publisher/update.py:100
-msgid "Only the owner can update a related item"
-msgstr "Solo il proprietario può aggiornare un elemento correlato"
-
-#: ckan/logic/auth/update.py:106
-#, python-format
-msgid "User %s not authorized to change state of group %s"
-msgstr "Utente %s non autorizzato alla modifica dello stato del gruppo %s"
-
-#: ckan/logic/auth/update.py:117
-#, python-format
-msgid "User %s not authorized to edit permissions of group %s"
-msgstr "Utente %s non autorizzato alla modifica dei permessi del gruppo %s"
-
-#: ckan/logic/auth/update.py:128 ckan/logic/auth/update.py:139
-#, python-format
-msgid "User %s not authorized to edit permissions of authorization group %s"
-msgstr "Utente %s non autorizzato alla modifica dei permessi del gruppo di autorizzazione %s"
-
-#: ckan/logic/auth/update.py:150 ckan/logic/auth/publisher/update.py:124
-#, python-format
-msgid "User %s not authorized to edit user %s"
-msgstr "Utente %s non autorizzato alla modifica dell'utente %s"
-
-#: ckan/logic/auth/update.py:160 ckan/logic/auth/publisher/update.py:134
-#, python-format
-msgid "User %s not authorized to change state of revision"
-msgstr "Utente %s non autorizzato alla modifica dello stato della revisione"
-
-#: ckan/logic/auth/update.py:173 ckan/logic/auth/publisher/update.py:147
-#, python-format
-msgid "User %s not authorized to update task_status table"
-msgstr "Utente %s non autorizzato all'aggiornamento della tabella stato_attività"
-
-#: ckan/logic/auth/update.py:191 ckan/logic/auth/publisher/update.py:161
-#, python-format
-msgid "User %s not authorized to update term_translation table"
-msgstr "Utente %s non autorizzato all'aggiornamento della tabella traduzione_termine"
-
-#: ckan/logic/auth/update.py:201 ckan/logic/auth/publisher/update.py:174
-msgid "Valid API key needed to edit a package"
-msgstr "Chiave API valida necessaria per modificare un pacchetto"
-
-#: ckan/logic/auth/update.py:209 ckan/logic/auth/publisher/update.py:182
-msgid "Valid API key needed to edit a group"
-msgstr "Chiave API valida necessaria per modificare un gruppo"
-
-#: ckan/logic/converters.py:59 ckan/logic/converters.py:74
-#: ../ckanext-ecportal/ckanext/ecportal/validators.py:340
-#, python-format
-msgid "Tag vocabulary \"%s\" does not exist"
-msgstr "Il vocabolario del tag \"%s\" non esiste"
-
-#: ckan/logic/validators.py:32
-msgid "Invalid integer"
-msgstr "Intero non valido"
-
-#: ckan/logic/validators.py:42
-msgid "Date format incorrect"
-msgstr "Formato data non corretto"
-
-#: ckan/logic/validators.py:61 ckan/logic/validators.py:87
-#: ckan/templates/group/new_group_form.html:118
-msgid "Dataset"
-msgstr "Set di dati"
-
-#: ckan/logic/validators.py:101 ckan/templates/_util.html:181
-#: ckan/templates/_util.html:251
-#: ../ckanext-ecportal/ckanext/ecportal/templates/organization_users_form.html:39
-msgid "User"
-msgstr "Utente"
-
-#: ckan/logic/validators.py:114
-msgid "Group"
-msgstr "Gruppo"
-
-#: ckan/logic/validators.py:124
-msgid "That group name or ID does not exist."
-msgstr "Il nome gruppo o ID non esiste."
-
-#: ckan/logic/validators.py:136
-msgid "Activity type"
-msgstr "Tipo di attività"
-
-#: ckan/logic/validators.py:182
-#: ../ckanext-ecportal/ckanext/ecportal/validators.py:301
-msgid "That name cannot be used"
-msgstr "Il nome non può essere utilizzato"
-
-#: ckan/logic/validators.py:185 ckan/logic/validators.py:420
-#: ../ckanext-ecportal/ckanext/ecportal/validators.py:303
-#, python-format
-msgid "Name must be at least %s characters long"
-msgstr "Il nomoe deve includere almeno %s caratteri"
-
-#: ckan/logic/validators.py:187 ckan/logic/validators.py:423
-#: ../ckanext-ecportal/ckanext/ecportal/validators.py:305
-#, python-format
-msgid "Name must be a maximum of %i characters long"
-msgstr "Il nome deve includere massimo %i caratteri"
-
-#: ckan/logic/validators.py:190
-msgid ""
-"Url must be purely lowercase alphanumeric (ascii) characters and these "
-"symbols: -_"
-msgstr "L'URL deve includere esclusivamente caratteri alfanumerici minuscoli (ascii) e questi simboli: -_"
-
-#: ckan/logic/validators.py:208
-msgid "That URL is already in use."
-msgstr "URL già in uso."
-
-#: ckan/logic/validators.py:213
-#, python-format
-msgid "Name \"%s\" length is less than minimum %s"
-msgstr "La lunghezza del nome \"%s\" è inferiore al minimo di %s"
-
-#: ckan/logic/validators.py:217
-#, python-format
-msgid "Name \"%s\" length is more than maximum %s"
-msgstr "La lunghezza del nome \"%s\" è superiore al massimo di %s"
-
-#: ckan/logic/validators.py:223
-#, python-format
-msgid "Version must be a maximum of %i characters long"
-msgstr "La vesrione deve includere un massimo di %i caratteri"
-
-#: ckan/logic/validators.py:239
-#, python-format
-msgid "Duplicate key \"%s\""
-msgstr "Chiave duplicata \"%s\""
-
-#: ckan/logic/validators.py:255
-msgid "Group name already exists in database"
-msgstr "Il nome del gruppo esiste già nella banca dati"
-
-#: ckan/logic/validators.py:261
-#, python-format
-msgid "Tag \"%s\" length is less than minimum %s"
-msgstr "La lunghezza del tag \"%s\" è inferiore al minimo %s"
-
-#: ckan/logic/validators.py:265
-#, python-format
-msgid "Tag \"%s\" length is more than maximum %i"
-msgstr "La lunghezza del tag \"%s\" è superiore al massimo di %i"
-
-#: ckan/logic/validators.py:273
-#, python-format
-msgid "Tag \"%s\" must be alphanumeric characters or symbols: -_."
-msgstr "Il tag \"%s\" deve essere composto da caratteri alfanumerici o simboli: -_."
-
-#: ckan/logic/validators.py:281
-#, python-format
-msgid "Tag \"%s\" must not be uppercase"
-msgstr "Il tag \"%s\" non deve essere in maiuscole"
-
-#: ckan/logic/validators.py:372
-msgid "That login name is not available."
-msgstr "Il nome di accesso non è disponibile."
-
-#: ckan/logic/validators.py:381
-msgid "Please enter both passwords"
-msgstr "Inserire entrambe le password"
-
-#: ckan/logic/validators.py:387
-msgid "Your password must be 4 characters or longer"
-msgstr "La password deve includere almeno 4 caratteri"
-
-#: ckan/logic/validators.py:395
-msgid "The passwords you entered do not match"
-msgstr "Le password inserite non corrispondono"
-
-#: ckan/logic/validators.py:411
-msgid ""
-"Edit not allowed as it looks like spam. Please avoid links in your "
-"description."
-msgstr "Modifica non consentita in quanto sembra spam. Evitare collegamenti nella descrizione."
-
-#: ckan/logic/validators.py:428
-msgid "That vocabulary name is already in use."
-msgstr "Nome del vocabolario già in uso."
-
-#: ckan/logic/validators.py:434
-#, python-format
-msgid "Cannot change value of key from %s to %s. This key is read-only"
-msgstr "Impossibile modificare il valore della chiave da %s a %s. La chiave è di sola lettura"
-
-#: ckan/logic/validators.py:443
-msgid "Tag vocabulary was not found."
-msgstr "Vocabolario tag non trovato"
-
-#: ckan/logic/validators.py:456
-#, python-format
-msgid "Tag %s does not belong to vocabulary %s"
-msgstr "Il tag %s non appartiene al vocabolario %s"
-
-#: ckan/logic/validators.py:462
-msgid "No tag name"
-msgstr "Nessun nome tag"
-
-#: ckan/logic/validators.py:475
-#, python-format
-msgid "Tag %s already belongs to vocabulary %s"
-msgstr "Il tag %s appartiene già al vocabolario %s"
-
-#: ckan/model/license.py:59
-msgid "License Not Specified"
-msgstr "Licenza non specificata"
-
-#: ckan/model/license.py:164
-msgid "Other (Open)"
-msgstr "Altro (aperto)"
-
-#: ckan/model/license.py:178
-msgid "Other (Public Domain)"
-msgstr "Altro (dominio pubblico)"
-
-#: ckan/model/license.py:192
-msgid "Other (Attribution)"
-msgstr "Altro (attribuzione)"
-
-#: ckan/model/license.py:232
-msgid "Other (Non-Commercial)"
-msgstr "Altro (non commerciale)"
-
-#: ckan/model/license.py:246
-msgid "Other (Not Open)"
-msgstr "Altro (non aperto)"
-
-#: ckan/model/package_relationship.py:48
-#, python-format
-msgid "depends on %s"
-msgstr "dipende da %s"
-
-#: ckan/model/package_relationship.py:48
-#, python-format
-msgid "is a dependency of %s"
-msgstr "è una dipendenza di %s"
-
-#: ckan/model/package_relationship.py:49
-#, python-format
-msgid "derives from %s"
-msgstr "deriva da %s"
-
-#: ckan/model/package_relationship.py:49
-#, python-format
-msgid "has derivation %s"
-msgstr "ha origine %s"
-
-#: ckan/model/package_relationship.py:50
-#, python-format
-msgid "links to %s"
-msgstr "si collega a %s"
-
-#: ckan/model/package_relationship.py:50
-#, python-format
-msgid "is linked from %s"
-msgstr "è collegato da %s"
-
-#: ckan/model/package_relationship.py:51
-#, python-format
-msgid "is a child of %s"
-msgstr "è figlio di %s"
-
-#: ckan/model/package_relationship.py:51
-#, python-format
-msgid "is a parent of %s"
-msgstr "è genitore di %s"
-
-#: ckan/model/package_relationship.py:55
-#, python-format
-msgid "has sibling %s"
-msgstr "è fratello di %s"
-
-#: ckan/new_authz.py:19
-#, python-format
-msgid "Authorization function not found: %s"
-msgstr "Funzione di autorizzazione non trovata: %s"
-
-#: ckan/templates/_util.html:11 ckan/templates/js_strings.html:16
-#: ckan/templates/authorization_group/layout.html:16
-#: ckan/templates/group/layout.html:24
-#: ../ckanext-ecportal/ckanext/ecportal/templates/js_strings.html:16
-#: ../ckanext-ecportal/ckanext/ecportal/templates/organization_layout.html:25
-#: ../ckanext-ecportal/ckanext/ecportal/templates/group/layout.html:25
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/layout.html:14
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/layout.html:21
-#: ../ckanext-ecportal/ckanext/ecportal/templates/publisher/layout.html:22
-msgid "Edit"
-msgstr "Modifica"
-
-#: ckan/templates/_util.html:12 ckan/templates/js_strings.html:16
-#: ckan/templates/package/resource_read.html:173
-#: ckan/templates/snippets/data-viewer-embed-dialog.html:27
-#: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:86
-#: ../ckanext-ecportal/ckanext/ecportal/templates/js_strings.html:16
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/resource_read.html:169
-msgid "Preview"
-msgstr "Anteprima"
-
-#: ckan/templates/_util.html:18
-msgid "You can use"
-msgstr "Potete utilizzare"
-
-#: ckan/templates/_util.html:18
-msgid "Markdown formatting"
-msgstr "la formattazione Markdown"
-
-#: ckan/templates/_util.html:18
-msgid "here."
-msgstr "qui."
-
-#: ckan/templates/_util.html:69 ckan/templates/_util.html:82
-msgid "Number of datasets"
-msgstr "Numero di set di dati"
-
-#: ckan/templates/_util.html:69 ckan/templates/_util.html:82
-#: ckan/templates/_util.html:95 ckan/templates/group/new_group_form.html:22
-#: ckan/templates/package/new_package_form.html:36
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/new_package_form.html:36
-#: ../ckanext-ecportal/ckanext/ecportal/templates/publisher/edit.html:24
-msgid "Title"
-msgstr "Titolo"
-
-#: ckan/templates/_util.html:69 ckan/templates/_util.html:82
-#: ckan/templates/js_strings.html:16
-#: ckan/templates/group/new_group_form.html:41
-#: ckan/templates/package/new_package_form.html:86
-#: ../ckanext-ecportal/ckanext/ecportal/templates/js_strings.html:16
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/new_package_form.html:69
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read_core.html:24
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/resource_read.html:145
-#: ../ckanext-ecportal/ckanext/ecportal/templates/publisher/edit.html:44
-msgid "Description"
-msgstr "Descrizione"
-
-#: ckan/templates/_util.html:95
-msgid "Number of members"
-msgstr "NUmero di membri"
-
-#: ckan/templates/_util.html:115
-msgid "View dataset resources"
-msgstr "Visualizza risorse del set di dati"
-
-#: ckan/templates/_util.html:115
-msgid "DOWNLOAD"
-msgstr "DOWNLOAD"
-
-#: ckan/templates/_util.html:118
-msgid "No downloadable resources."
-msgstr "Nessuna risorsa scaricabile"
-
-#: ckan/templates/_util.html:139
-msgid "No description for this item"
-msgstr "Nessuna descrizione per questo elemento"
-
-#: ckan/templates/_util.html:140
-msgid "View this related item"
-msgstr "Visualizza questo elemento correlato"
-
-#: ckan/templates/_util.html:162
-msgid "no ratings yet"
-msgstr "ancora nessuna valutazione"
-
-#: ckan/templates/_util.html:163
-msgid ""
-"–\n"
-"    rate it now"
-msgstr "–\n    valuta ora"
-
-#: ckan/templates/_util.html:216 ckan/templates/_util.html:272
-msgid "User Group"
-msgstr "Gruppo utente"
-
-#: ckan/templates/activity_streams/added_tag.html:8
-msgid "{actor} added the tag {object} to the dataset {target}"
-msgstr "{actor} ha aggiunto il tag {object} al set di dati {target}"
-
-#: ckan/templates/activity_streams/changed_group.html:8
-msgid "{actor} updated the group {object}"
-msgstr "{actor} ha aggiornato il gruppo {object}"
-
-#: ckan/templates/activity_streams/changed_package.html:8
-msgid "{actor} updated the dataset {object}"
-msgstr "{actor} ha aggiornato il set di dati {object}"
-
-#: ckan/templates/activity_streams/changed_package_extra.html:8
-msgid "{actor} changed the extra {object} of the dataset {target}"
-msgstr "{actor} ha modificato l'{object} extra del set di dati {target}"
-
-#: ckan/templates/activity_streams/changed_resource.html:8
-msgid "{actor} updated the resource {object} in the dataset {target}"
-msgstr "{actor} ha aggiornato l'{object} risorsa nel set di dati {target}"
-
-#: ckan/templates/activity_streams/changed_user.html:8
-msgid "{actor} updated their profile"
-msgstr "{actor} ha aggiornato il loro profilo"
-
-#: ckan/templates/activity_streams/deleted_group.html:8
-msgid "{actor} deleted the group {object}"
-msgstr "{actor} ha cancellato il gruppo {object}"
-
-#: ckan/templates/activity_streams/deleted_package.html:8
-msgid "{actor} deleted the dataset {object}"
-msgstr "{actor} ha cancellato il set di dati {object}"
-
-#: ckan/templates/activity_streams/deleted_package_extra.html:8
-msgid "{actor} deleted the extra {object} from the dataset {target}"
-msgstr "{actor} ha eliminato l'{object} extra dal set di dati {target}"
-
-#: ckan/templates/activity_streams/deleted_resource.html:8
-msgid "{actor} deleted the resource {object} from the dataset {target}"
-msgstr "{actor} ha eliminato l'{object} risorsa dal set di dati {target}"
-
-#: ckan/templates/activity_streams/new_group.html:8
-msgid "{actor} created the group {object}"
-msgstr "{actor} ha creato il gruppo {object}"
-
-#: ckan/templates/activity_streams/new_package.html:8
-msgid "{actor} created the dataset {object}"
-msgstr "{actor} ha creato il set di dati {object}"
-
-#: ckan/templates/activity_streams/new_package_extra.html:8
-msgid "{actor} added the extra {object} to the dataset {target}"
-msgstr "{actor} ha aggiunto l'{object} extra al set di dati {target}"
-
-#: ckan/templates/activity_streams/new_resource.html:8
-msgid "{actor} added the resource {object} to the dataset {target}"
-msgstr "{actor} ha aggiunto l'{object} risorsa al set di dati {target}"
-
-#: ckan/templates/activity_streams/new_user.html:8
-msgid "{actor} signed up"
-msgstr "{actor} si è registrato"
-
-#: ckan/templates/activity_streams/removed_tag.html:8
-msgid "{actor} removed the tag {object} from the dataset {target}"
-msgstr "{actor} ha rimosso il tag {object} dal set di dati {target}"
-
-#: ckan/templates/admin/authz.html:6 ckan/templates/admin/authz.html:7
-msgid "Administration - Authorization"
-msgstr "Amministrazione - Autorizzazione"
-
-#: ckan/templates/admin/authz.html:10
-#: ckan/templates/authorization_group/authz.html:15
-#: ckan/templates/group/authz.html:9 ckan/templates/package/authz.html:9
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/authz.html:9
-msgid "Update Existing Roles"
-msgstr "Aggiorna ruoli esistenti"
-
-#: ckan/templates/admin/authz.html:14 ckan/templates/admin/authz.html:34
-#: ckan/templates/group/authz.html:13 ckan/templates/group/authz.html:33
-#: ckan/templates/group/new_group_form.html:126
-#: ckan/templates/package/authz.html:13 ckan/templates/package/authz.html:33
-#: ckan/templates/package/new_package_form.html:305
-#: ckan/templates/user/edit_user_form.html:70
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/authz.html:13
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/authz.html:32
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/new_package_form.html:527
-#: ../ckanext-ecportal/ckanext/ecportal/templates/publisher/edit.html:154
-#: ../ckanext-ecportal/ckanext/ecportal/templates/user/edit_user_form.html:67
-msgid "Save Changes"
-msgstr "Salva modifiche"
-
-#: ckan/templates/admin/authz.html:20
-#: ckan/templates/authorization_group/authz.html:24
-#: ckan/templates/group/authz.html:19 ckan/templates/package/authz.html:19
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/authz.html:19
-msgid "Add Roles for Any User"
-msgstr "Aggiungi ruoli per ogni utente"
-
-#: ckan/templates/admin/authz.html:23 ckan/templates/admin/authz.html:42
-#: ckan/templates/group/authz.html:22 ckan/templates/group/authz.html:41
-#: ckan/templates/package/authz.html:22 ckan/templates/package/authz.html:41
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/authz.html:22
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/authz.html:40
-msgid "Add Role"
-msgstr "Aggiungi ruolo"
-
-#: ckan/templates/admin/authz.html:30
-#: ckan/templates/authorization_group/authz.html:33
-msgid "Existing Roles for Authorization Groups"
-msgstr "Ruoli esistenti per gruppo di autorizzazione"
-
-#: ckan/templates/admin/authz.html:38
-#: ckan/templates/authorization_group/authz.html:42
-#: ckan/templates/group/authz.html:37 ckan/templates/package/authz.html:37
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/authz.html:36
-msgid "Add Roles for Any Authorization Group"
-msgstr "Aggiungi ruoli per ogni gruppo di autorizzazione"
-
-#: ckan/templates/admin/index.html:6 ckan/templates/admin/index.html:7
-msgid "Administration Dashboard"
-msgstr "Pannello Amministratore"
-
-#: ckan/templates/admin/index.html:10
-msgid "Current Sysadmins"
-msgstr "Amministratori sistema correnti"
-
-#: ckan/templates/admin/index.html:11
-msgid "You can change sysadmins on the"
-msgstr "Potete cambiare gli amministratori del sistema sulla"
-
-#: ckan/templates/admin/index.html:13
-msgid "authorization page"
-msgstr "pagina di autorizzazione"
-
-#: ckan/templates/admin/layout.html:10
-#: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:56
-#: ../ckanext-ecportal/ckanext/ecportal/templates/layout_base.html:96
-msgid "Home"
-msgstr "Home"
-
-#: ckan/templates/admin/layout.html:13
-#: ckan/templates/authorization_group/layout.html:19
-#: ckan/templates/group/layout.html:27 ckan/templates/package/layout.html:52
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/layout.html:27
-msgid "Authorization"
-msgstr "Autorizzazione"
-
-#: ckan/templates/admin/layout.html:16
-msgid "Trash"
-msgstr "Cestino"
-
-#: ckan/templates/admin/trash.html:6 ckan/templates/admin/trash.html:7
-msgid "Administration - Trash"
-msgstr "Amministrazione - Cestino"
-
-#: ckan/templates/admin/trash.html:10
-msgid "Deleted Revisions"
-msgstr "Revisioni eliminate"
-
-#: ckan/templates/admin/trash.html:21 ckan/templates/admin/trash.html:39
-msgid "Purge them all (forever and irreversibly)"
-msgstr "Pulisci tutto (in maniera definitiva e irreversibile)"
-
-#: ckan/templates/admin/trash.html:27
-msgid "Deleted Datasets"
-msgstr "Set di dati eliminati"
-
-#: ckan/templates/admin/trash.html:29
-#: ckan/templates/package/new_package_form.html:111
-msgid "(None)"
-msgstr "(nessuno)"
-
-#: ckan/templates/authorization_group/authz.html:5
-msgid "- Authorization - AuthorizationGroups"
-msgstr "- Autorizzazione - GruppiAutorizzazione"
-
-#: ckan/templates/authorization_group/authz.html:6
-#: ckan/templates/group/authz.html:5 ckan/templates/group/authz.html:6
-#: ckan/templates/package/authz.html:5 ckan/templates/package/authz.html:6
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/authz.html:5
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/authz.html:6
-msgid "Authorization:"
-msgstr "Autorizzazione:"
-
-#: ckan/templates/authorization_group/authz.html:10
-#: ckan/templates/authorization_group/edit.html:10
-#: ckan/templates/authorization_group/index.html:11
-#: ckan/templates/authorization_group/new.html:10
-#: ckan/templates/authorization_group/read.html:11
-msgid ""
-"Warning: Authorization groups are deprecated and no longer supported. They will be removed\n"
-"        completely on the next CKAN release."
-msgstr "Attenzione: i gruppi di autorizzazione non sono ammessi e non più supportati. Verranno rimossi\n        completamente nella prossima versione di CKAN."
-
-#: ckan/templates/authorization_group/authz.html:19
-#: ckan/templates/authorization_group/authz.html:37
-#: ckan/templates/authorization_group/edit_form.html:30
-#: ckan/templates/group/edit_form.html:23
-#: ckan/templates/package/edit_form.html:28
-#: ../ckanext-ecportal/ckanext/ecportal/templates/organization_users_form.html:47
-msgid "Save"
-msgstr "Salva"
-
-#: ckan/templates/authorization_group/authz.html:28
-#: ckan/templates/authorization_group/authz.html:46
-#: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:105
-msgid "Add"
-msgstr "Aggiungi"
-
-#: ckan/templates/authorization_group/edit.html:5
-msgid "- Edit - Authorization Groups"
-msgstr "- Modifica - Gruppi di autorizzazione"
-
-#: ckan/templates/authorization_group/edit.html:6
-#: ckan/templates/group/edit.html:5 ckan/templates/group/edit.html:6
-#: ckan/templates/package/edit.html:7
-#: ../ckanext-ecportal/ckanext/ecportal/templates/group/edit.html:5
-#: ../ckanext-ecportal/ckanext/ecportal/templates/group/edit.html:6
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/edit.html:7
-msgid "Edit:"
-msgstr "Modifica:"
-
-#: ckan/templates/authorization_group/edit_form.html:23
-msgid "There are no users currently in this group."
-msgstr "Al momento non ci sono utenti in questo gruppo."
-
-#: ckan/templates/authorization_group/index.html:6
-#: ckan/templates/authorization_group/index.html:7
-#: ckan/templates/authorization_group/layout.html:27
-msgid "Authorization Groups"
-msgstr "Gruppi di autorizzazione"
-
-#: ckan/templates/authorization_group/index.html:16
-#, python-format
-msgid "There are [1:%(item_count)s] authorization groups."
-msgstr "Ci sono [1:%(item_count)s] gruppi di autorizzazione."
-
-#: ckan/templates/authorization_group/layout.html:11
-#: ckan/templates/revision/layout.html:9
-msgid "List"
-msgstr "Elenca"
-
-#: ckan/templates/authorization_group/layout.html:14
-#: ckan/templates/group/layout.html:12 ckan/templates/package/layout.html:10
-#: ckan/templates/package/resource_read.html:98
-#: ckan/templates/package/resource_read.html:99
-#: ckan/templates/revision/layout.html:12
-#: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:82
-#: ../ckanext-ecportal/ckanext/ecportal/templates/organization_layout.html:18
-#: ../ckanext-ecportal/ckanext/ecportal/templates/group/layout.html:18
-msgid "View"
-msgstr "Visualizza"
-
-#: ckan/templates/authorization_group/layout.html:28
-msgid ""
-"Instead of specifying the privileges of specific users on a dataset or group,\n"
-"          you can also specify a set of users that will share the same rights. To do that, an    \n"
-"          [1:authorization group] can be set-up and users can be added to it."
-msgstr "Piuttosto che specificare i privilegi di utenti specifici su un set di dati o gruppo,\n          potete anche specificare un insieme di utenti che condivideranno gli stessi diritti. Per farlo, un    \n          [1:gruppo di autorizzazione] può essere impostato e vi si possono aggiungere gli utenti."
-
-#: ckan/templates/authorization_group/layout.html:32
-msgid "To create a new authorization group, please first [1:login]."
-msgstr "Per creare un nuovo gruppo di autorizzazione, prima [1:effettuare l'accesso]."
-
-#: ckan/templates/authorization_group/layout.html:36
-msgid "Create a new authorization group"
-msgstr "Crea un nuovo gruppo di autorizzazione"
-
-#: ckan/templates/authorization_group/new.html:5
-msgid "New - Authorization Groups"
-msgstr "Nuovo - Gruppi di autorizzazione"
-
-#: ckan/templates/authorization_group/new.html:6
-msgid "New Authorization Group"
-msgstr "Nuovo gruppo di autorizzazione"
-
-#: ckan/templates/authorization_group/read.html:6
-msgid "- Authorization Groups"
-msgstr "- Gruppi di autorizzazione"
-
-#: ckan/templates/authorization_group/read.html:16
-#: ../ckanext-ecportal/ckanext/ecportal/templates/publisher/read.html:61
-msgid "Members"
-msgstr "Membri"
-
-#: ckan/templates/authorization_group/read.html:17
-#, python-format
-msgid "There are %(item_count)s users in this authorization group."
-msgstr "Ci sono %(item_count)s utenti in questo gruppo di autorizzazione."
-
 #: ckan/templates/error_document_template.html:5
-#: ../ckanext-ecportal/ckanext/ecportal/templates/publisher/history.html:25
 msgid "Error"
 msgstr "Errore"
 
-#: ckan/templates/facets.html:162
-msgid "(facet_item['count'])"
-msgstr "(facet_item['count'])"
-
-#: ckan/templates/group/authz.html:29 ckan/templates/package/authz.html:29
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/authz.html:28
-msgid "Update Existing Roles for Authorization Groups"
-msgstr "Aggiorna ruoli esistenti per i gruppi di autorizzazione"
-
-#: ckan/templates/group/edit_form.html:10
-#: ckan/templates/group/new_group_form.html:101
-#: ckan/templates/group/read.html:45 ckan/templates/revision/read.html:45
-#: ckan/templates/user/read.html:55 ckan/templates/user/read.html:71
-msgid "Datasets"
-msgstr "Set di dati"
-
-#: ckan/templates/group/edit_form.html:17
-#: ckan/templates/group/new_group_form.html:114
-msgid "There are no datasets currently in this group."
-msgstr "Al momento non ci sono set di dati in questo gruppo."
-
-#: ckan/templates/group/history.html:5 ckan/templates/group/history.html:6
-#: ckan/templates/package/history.html:7
-#: ../ckanext-ecportal/ckanext/ecportal/templates/publisher/history.html:5
-#: ../ckanext-ecportal/ckanext/ecportal/templates/publisher/history.html:6
-msgid "History:"
-msgstr "Cronologia"
-
-#: ckan/templates/group/history.html:24 ckan/templates/package/history.html:17
-#: ckan/templates/package/new.html:18
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/new.html:18
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/new_package_form.html:44
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/new_package_form.html:58
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/new_package_form.html:72
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/new_package_form.html:83
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/new_package_form.html:133
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/new_package_form.html:144
-msgid "Error:"
-msgstr "Errore:"
-
-#: ckan/templates/group/history.html:32 ckan/templates/package/history.html:25
-#: ckan/templates/package/new_package_form.html:194
-#: ckan/templates/package/read_core.html:68
-#: ckan/templates/snippets/revision_list.html:11
-#: ../ckanext-ecportal/ckanext/ecportal/templates/publisher/history.html:32
-msgid "Author"
-msgstr "Autore"
-
-#: ckan/templates/group/history.html:32 ckan/templates/package/history.html:25
-#: ckan/templates/revision/read.html:5
-#: ckan/templates/snippets/revision_list.html:11
-#: ../ckanext-ecportal/ckanext/ecportal/templates/publisher/history.html:32
-msgid "Revision"
-msgstr "Revisione"
-
-#: ckan/templates/group/history.html:32 ckan/templates/package/history.html:25
-#: ckan/templates/snippets/revision_list.html:11
-#: ../ckanext-ecportal/ckanext/ecportal/templates/publisher/history.html:32
-msgid "Timestamp"
-msgstr "Marca temporale"
-
-#: ckan/templates/group/history.html:32 ckan/templates/package/history.html:25
-#: ckan/templates/snippets/revision_list.html:11
-#: ../ckanext-ecportal/ckanext/ecportal/templates/publisher/history.html:32
-msgid "Log Message"
-msgstr "Messaggio di accesso"
-
-#: ckan/templates/group/history.html:49 ckan/templates/package/history.html:43
-#: ../ckanext-ecportal/ckanext/ecportal/templates/publisher/history.html:49
-msgid "Compare »"
-msgstr "Confronta »"
-
-#: ckan/templates/group/history.html:54
-msgid "Group History"
-msgstr "Cronologia gruppo"
-
-#: ckan/templates/group/index.html:6 ckan/templates/group/index.html:7
-msgid "Groups of Datasets"
-msgstr "Gruppi di set di dati"
-
-#: ckan/templates/group/index.html:11
-msgid "What Are Groups?"
-msgstr "Cosa sono i gruppi?"
-
-#: ckan/templates/group/index.html:12
-msgid ""
-"Whilst tags are great at collecting datasets together, there are occasions "
-"when you want to restrict users from editing a collection. A [1:group] can "
-"be set-up to specify which users have permission to add or remove datasets "
-"from it."
-msgstr "I tag funzionano perfettamente per raggruppare i set di dati, tuttavia a volte si desidera vietare agli utenti di modificare una raccolta. Un [1:gruppo] può essere impostato per specificare quali utenti hanno il permesso di aggiungere o eliminare i set di dati da esso."
-
-#: ckan/templates/group/layout.html:13 ckan/templates/package/layout.html:43
-#: ../ckanext-ecportal/ckanext/ecportal/templates/organization_layout.html:19
-#: ../ckanext-ecportal/ckanext/ecportal/templates/group/layout.html:19
-msgid "History"
-msgstr "Cronologia"
-
-#: ckan/templates/group/layout.html:18
-msgid "New Dataset..."
-msgstr "Nuovo set di dati..."
-
-#: ckan/templates/group/layout.html:19
-msgid "Existing Dataset..."
-msgstr "Set di dati esistente..."
-
-#: ckan/templates/group/layout.html:32
-msgid "List Groups"
-msgstr "Elenca gruppi"
-
-#: ckan/templates/group/layout.html:35
-msgid "Add a Group"
-msgstr "Aggiungi gruppo"
-
-#: ckan/templates/group/layout.html:38
-msgid "Login to Add a Group"
-msgstr "Accedi per modificare un gruppo"
-
-#: ckan/templates/group/new.html:5 ckan/templates/group/new.html:6
-msgid "Add A Group"
-msgstr "Aggiungi un gruppo"
-
-#: ckan/templates/group/new_group_form.html:13
-#: ckan/templates/package/form.html:7
-#: ckan/templates/package/new_package_form.html:13
-#: ckan/templates/user/edit_user_form.html:13
-#: ckan/templates/user/new_user_form.html:11
-#: ../ckanext-ecportal/ckanext/ecportal/templates/organization_apply_form.html:8
-#: ../ckanext-ecportal/ckanext/ecportal/templates/organization_users_form.html:8
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/new_package_form.html:13
-#: ../ckanext-ecportal/ckanext/ecportal/templates/publisher/edit.html:15
-#: ../ckanext-ecportal/ckanext/ecportal/templates/user/edit_user_form.html:13
-msgid "Errors in form"
-msgstr "Errori nel modulo"
-
-#: ckan/templates/group/new_group_form.html:14
-#: ckan/templates/package/form.html:8
-#: ckan/templates/package/new_package_form.html:14
-#: ckan/templates/user/edit_user_form.html:14
-#: ckan/templates/user/new_user_form.html:12
-#: ../ckanext-ecportal/ckanext/ecportal/templates/organization_apply_form.html:9
-#: ../ckanext-ecportal/ckanext/ecportal/templates/organization_users_form.html:9
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/new_package_form.html:14
-#: ../ckanext-ecportal/ckanext/ecportal/templates/publisher/edit.html:16
-#: ../ckanext-ecportal/ckanext/ecportal/templates/user/edit_user_form.html:14
-msgid "The form contains invalid entries:"
-msgstr "Il modulo contiene voci non valide:"
-
-#: ckan/templates/group/new_group_form.html:35
-#: ckan/templates/package/new_package_form.html:56
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/new_package_form.html:60
-#: ../ckanext-ecportal/ckanext/ecportal/templates/publisher/edit.html:38
-msgid "Warning: URL is very long. Consider changing it to something shorter."
-msgstr "Attenzione: l'URL è molto lungo. Renderlo più breve."
-
-#: ckan/templates/group/new_group_form.html:36
-#: ckan/templates/package/new_package_form.html:57
-#: ../ckanext-ecportal/ckanext/ecportal/templates/publisher/edit.html:39
-msgid "2+ characters, lowercase, using only 'a-z0-9' and '-_'"
-msgstr "2+ caratteri, minuscole, utilizzando solo 'a-z0-9' e '-_'"
-
-#: ckan/templates/group/new_group_form.html:43
-#: ckan/templates/package/new_package_form.html:88
-#: ../ckanext-ecportal/ckanext/ecportal/templates/publisher/edit.html:46
-msgid "Start with a summary sentence ..."
-msgstr "iniziare con una frase riepilogativa ..."
-
-#: ckan/templates/group/new_group_form.html:47
-msgid "Image URL:"
-msgstr "URL immagine:"
-
-#: ckan/templates/group/new_group_form.html:50
-msgid "The URL for the image that is associated with this group."
-msgstr "URL per l'immagine associata a questo gruppo."
-
-#: ckan/templates/group/new_group_form.html:54
-#: ckan/templates/package/read_core.html:88
-#: ../ckanext-ecportal/ckanext/ecportal/templates/publisher/edit.html:57
-#: ../ckanext-ecportal/ckanext/ecportal/templates/publisher/read.html:73
-msgid "State"
-msgstr "Stato"
-
-#: ckan/templates/group/new_group_form.html:57
-#: ckan/templates/package/new_package_form.html:275
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/new_package_form.html:448
-#: ../ckanext-ecportal/ckanext/ecportal/templates/publisher/edit.html:60
-msgid "active"
-msgstr "attiva"
-
-#: ckan/templates/group/new_group_form.html:58
-#: ckan/templates/package/new_package_form.html:276
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/new_package_form.html:449
-#: ../ckanext-ecportal/ckanext/ecportal/templates/publisher/edit.html:61
-msgid "deleted"
-msgstr "eliminato"
-
-#: ckan/templates/group/new_group_form.html:75
-#: ckan/templates/package/edit.html:24
-#: ckan/templates/package/form_extra_fields.html:22
-#: ckan/templates/package/new_package_form.html:243
-#: ckan/templates/package/new_package_form.html:269
-#: ckan/templates/revision/read.html:20
-#: ckan/templates/snippets/revision_list.html:36
-#: ../ckanext-ecportal/ckanext/ecportal/templates/organization_users_form.html:30
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/edit.html:26
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/new_package_form.html:416
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/new_package_form.html:442
-#: ../ckanext-ecportal/ckanext/ecportal/templates/publisher/edit.html:99
-msgid "Delete"
-msgstr "Elimina"
-
-#: ckan/templates/group/new_group_form.html:83
-#: ckan/templates/package/new_package_form.html:251
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/new_package_form.html:424
-#: ../ckanext-ecportal/ckanext/ecportal/templates/publisher/edit.html:107
-msgid "Add..."
-msgstr "Aggiungi"
-
-#: ckan/templates/group/new_group_form.html:86
-#: ckan/templates/package/new_package_form.html:254
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/new_package_form.html:427
-#: ../ckanext-ecportal/ckanext/ecportal/templates/publisher/edit.html:110
-msgid "Key ="
-msgstr "Chiave ="
-
-#: ckan/templates/group/new_group_form.html:90
-#: ckan/templates/package/new_package_form.html:258
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/new_package_form.html:431
-#: ../ckanext-ecportal/ckanext/ecportal/templates/publisher/edit.html:114
-msgid "Value ="
-msgstr "Valore ="
-
-#: ckan/templates/group/new_group_form.html:116
-msgid "Add datasets"
-msgstr "Aggiungi set di dati"
-
-#: ckan/templates/group/read.html:20
-#: ../ckanext-ecportal/ckanext/ecportal/templates/publisher/read.html:55
-msgid "Administrators"
-msgstr "Amministratori"
-
-#: ckan/templates/group/read.html:33
-msgid "State:"
-msgstr "Stato:"
-
-#: ckan/templates/group/read.html:49
-#, python-format
-msgid "[1:You searched for \"%(query)s\". ]%(number_of_results)s datasets found."
-msgstr "[1:Avete cercato \"%(query)s\". ]%(number_of_results)s insiemi di dati trovati."
-
-#: ckan/templates/home/about.html:14
-msgid ""
-"What was the [1:average price] of a house in the UK in 1935? When will "
-"India's projected population [2:overtake] that of China? Where can you see "
-"[3:publicly-funded art] in Seattle? Data to answer many, many questions like"
-" these is out there on the Internet somewhere - but it is not always easy to"
-" find."
-msgstr "Qual era il [1:prezzo medio] di un'abitazione nel Regno Unito nel 1935? Quando avverrà il [2:sorpasso] previsto della popolazione dell'India rispetto a quella della Cina? Dove si può ammirare l'[3:arte finanziana dallo stato] a Seattle? Lì da qualche parte su Internet esistono dati in grado di rispondere a moltissime domande di questo yipo - ma non sempre sono facili da trovare."
-
-#: ckan/templates/home/about.html:16
-#, python-format
-msgid ""
-"%(site_title)s is a community-run catalogue of useful sets of data on the "
-"Internet. You can collect links here to data from around the web for "
-"yourself and others to use, or search for data that others have collected. "
-"Depending on the type of data (and its conditions of use), %(site_title)s "
-"may also be able to store a copy of the data or host it in a database, and "
-"provide some basic visualisation tools."
-msgstr "%(site_title)s è un catalogo di set di dati utili  gestito dalla comunità su Internet. Da qui potete raccogliere link ai dati di tutto il Web, che tutti possono utilizzare: sia voi che gli altri, oppure cercare raccolti da altri. In base al tipo di dati (e alle condizioni d'uso), %(site_title)s potrebbe essere anche in grado di memorizzare una copia dei dati o di ospitarla in un database, fornendo alcuni strumenti di visualizzazione."
-
-#: ckan/templates/home/about.html:23
-msgid "How it works"
-msgstr "Come funziona"
-
-#: ckan/templates/home/about.html:25
-msgid ""
-"This site is running a powerful piece of open-source data cataloguing "
-"software called [1:CKAN], written and maintained by the [2:Open Knowledge "
-"Foundation]. Each 'dataset' record on CKAN contains a description of the "
-"data and other useful information, such as what formats it is available in, "
-"who owns it and whether it is freely available, and what subject areas the "
-"data is about. Other users can improve or add to this information (CKAN "
-"keeps a fully versioned history)."
-msgstr "Questo sito è dotato di un software di catalogazione di dati open-source chiamato [1:CKAN], scritto e gestito dalla [2:Open Knowledge Foundation]. Ogni voce 'dataset' su CKAN contiene una descrizione dei dati e altre informazioni utili, ad esempio quali formati sono disponibili, il titolare e se disponibile gratuitamente, nonché di che mbito fanno parte i dati. Altri utenti possono migliorare o aggiungere queste informazioni (CKAN mantiene una cronologia completa)."
-
-#: ckan/templates/home/about.html:27
-msgid ""
-"CKAN powers a number of data catalogues on the Internet. [1:The Data Hub] is"
-" an openly editable open data catalogue, in the style of Wikipedia. The UK "
-"Government uses CKAN to run [2:data.gov.uk], which currently lists 8,000 "
-"government datasets. Official public data from most European countries is "
-"listed in a CKAN catalogue at [3:publicdata.eu]. There is a comprehensive "
-"list of catalogues like these around the world at [4:datacatalogs.org], "
-"which is itself powered by CKAN."
-msgstr "CKAN gestisce una serie di cataloghi di dati su Internet. [1:Il Centro Dati] è un catalogo open editabile, nello stile Wikipedia. Il Governo Britannico utilizza CKAN per il sito [2:data.gov.uk], che vanta 8.000 set di dati governativi. I dati ufficiali pubblici della maggior parte dei Paesi europei sono elencati in un catalogo CKAN su [3:publicdata.eu]. Esiste una lista complessiva di cataloghi come questo nel mondo su [4:datacatalogs.org], anch'esso creato con CKAN."
-
-#: ckan/templates/home/about.html:30
-msgid "Open data and the Open Knowledge Foundation"
-msgstr "Open data e la Open Knowledge Foundation"
-
-#: ckan/templates/home/about.html:32
-#, python-format
-msgid ""
-"Most of the data indexed at %(site_title)s is openly licensed, meaning "
-"anyone is free to use or re-use it however they like. Perhaps someone will "
-"take that nice dataset of a city's public art that you found, and add it to "
-"a tourist map - or even make a neat app for your phone that'll help you find"
-" artworks when you visit the city. Open data means more enterprise, "
-"collaborative science and transparent government. You can read more about "
-"open data in the [1:Open Data Handbook]."
-msgstr "La maggior parte dei dati indicizzati su %(site_title) sono in licenza open: ciò significa che chiunque è libero di utilizzarli o riutilizzarli come desidera. Forse qualcuno prenderà quel set di dati che avete raccolto sull'arte pubblica di una città e lo aggiungerà a una mappa turistica - o addirittura creerà un'applicazione curata per il vostro telefono che vi aiuterà a cercare le opere d'arte quando visitate una città. Open data vuol dire più impresa, scienza collaborativa e governo trasparentere. Per saperne di più sugli open data, conservate la [1:Guida Open Data]."
-
-#: ckan/templates/home/about.html:34
-msgid ""
-"The [1:Open Knowledge Foundation] is a non-profit organisation [2:promoting]"
-" open knowledge: writing and improving CKAN is one of the ways we do that. "
-"If you want to get involved with its design or code, join the discussion or "
-"development [3:mailing lists], or take a look at the [4:OKFN] site to find "
-"out about our other projects."
-msgstr "La [1:Open Knowledge Foundation] è un'organizzazione non a scopo di lucro [2:che promuove] la conoscenza aperta: scrivere e migliorare CKAN è uno dei modi in cui lo facciamo. Se volete partecipare alla progettazione o conoscerne il codice, iscrivetevi alla [3:mailing list] discussione o sviluppo, oppure visitate il sito [4:OKFN] per conoscere altri progetti."
-
-#: ckan/templates/home/index.html:9
-msgid "Welcome"
-msgstr "Benvenuti"
-
-#: ckan/templates/home/index.html:13
-msgid "Welcome to"
-msgstr "Benvenuti a"
-
-#: ckan/templates/home/index.html:19
-#: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:73
-msgid "Find data"
-msgstr "Cerca data"
-
-#: ckan/templates/home/index.html:24
-msgid ""
-"that you can \n"
-"            browse, learn about and download."
-msgstr "potete stare \n esplorare          esplorare, ottenere informazioni  scaricare."
-
-#: ckan/templates/home/index.html:24
-#: ../ckanext-ecportal/ckanext/ecportal/templates/home/index.html:19
-msgid "contains"
-msgstr "contiene"
-
-#: ckan/templates/home/index.html:24
-#: ../ckanext-ecportal/ckanext/ecportal/templates/home/index.html:20
-#: ../ckanext-ecportal/ckanext/ecportal/templates/publisher/read.html:11
-msgid "datasets"
-msgstr "set di dati"
-
-#: ckan/templates/home/index.html:32
-msgid "Share data"
-msgstr "Condividi dati"
-
-#: ckan/templates/home/index.html:32
-msgid ""
-"Add your own datasets to share them with others and\n"
-"        to find other people interested in your data."
-msgstr "Aggiungete il set di dati per condividerli con gli altri e\n        trovare persone interessate ai vostri dati."
-
-#: ckan/templates/home/index.html:38
-msgid "Create a dataset »"
-msgstr "Crea un set di dati »"
-
-#: ckan/templates/home/index.html:40
-msgid "Sign up »"
-msgstr "Registrati »"
-
-#: ckan/templates/home/index.html:49
-msgid "Collaborate"
-msgstr "Collaborare"
-
-#: ckan/templates/home/index.html:49
-msgid ""
-"Find out more about working with open data by exploring \n"
-"        these resources:"
-msgstr "Scoprite maggiori dettagli sul lavoro con i dati aperti esplorando \n        queste risorse:"
-
-#: ckan/templates/home/index.html:54
-msgid "GetTheData.org"
-msgstr "GetTheData.org"
-
-#: ckan/templates/home/index.html:55
-msgid "DataPatterns.org"
-msgstr "DataPatterns.org"
-
-#: ckan/templates/home/index.html:56
-msgid "Open Data Handbook"
-msgstr "Guida Open Data"
-
-#: ckan/templates/home/index.html:64
-msgid "Who else is here?"
-msgstr "Chi altro c'è?"
-
-#: ckan/templates/home/index.html:75
-msgid "has"
-msgstr "ha"
-
-#: ckan/templates/home/index.html:75
-msgid "datasets."
-msgstr "set di dati."
-
-#: ckan/templates/js_strings.html:16
-#: ../ckanext-ecportal/ckanext/ecportal/templates/js_strings.html:16
-msgid "Checking..."
-msgstr "Verifica in corso..."
-
-#: ckan/templates/js_strings.html:16
-#: ../ckanext-ecportal/ckanext/ecportal/templates/js_strings.html:16
-msgid "Type at least two characters..."
-msgstr "Digitare almeno due caratteri..."
-
-#: ckan/templates/js_strings.html:16
-#: ../ckanext-ecportal/ckanext/ecportal/templates/js_strings.html:16
-msgid "This is the current URL."
-msgstr "Questo è l'URL corrente"
-
-#: ckan/templates/js_strings.html:16
-#: ../ckanext-ecportal/ckanext/ecportal/templates/js_strings.html:16
-msgid "This URL is available!"
-msgstr "URL disponibile!"
-
-#: ckan/templates/js_strings.html:16
-#: ../ckanext-ecportal/ckanext/ecportal/templates/js_strings.html:16
-msgid "This URL is already used, please use a different one."
-msgstr "URL già in uso, utilizzarne uno diverso."
-
-#: ckan/templates/js_strings.html:16
-#: ../ckanext-ecportal/ckanext/ecportal/templates/js_strings.html:16
-msgid "Failed to save, possibly due to invalid data "
-msgstr "Impossibile salvare, probabilmente a causa di dati non validi"
-
-#: ckan/templates/js_strings.html:16
-#: ../ckanext-ecportal/ckanext/ecportal/templates/js_strings.html:16
-msgid "Add Group"
-msgstr "Aggiungi gruppo"
-
-#: ckan/templates/js_strings.html:16
-#: ../ckanext-ecportal/ckanext/ecportal/templates/js_strings.html:16
-msgid ""
-"You have unsaved changes. Make sure to click 'Save Changes' below before "
-"leaving this page."
-msgstr "Ci sono modifiche non salvate. Accertarsi di cliccare su 'Salva modifiche' prima di lasciare questa pagina."
-
-#: ckan/templates/js_strings.html:16
-#: ../ckanext-ecportal/ckanext/ecportal/templates/js_strings.html:16
-msgid "Loading..."
-msgstr "Caricamento..."
-
-#: ckan/templates/js_strings.html:16
-#: ../ckanext-ecportal/ckanext/ecportal/templates/js_strings.html:16
-msgid "(no name)"
-msgstr "(nessun nome)"
-
-#: ckan/templates/js_strings.html:16
-#: ../ckanext-ecportal/ckanext/ecportal/templates/js_strings.html:16
-msgid "Delete the resource '%name%'?"
-msgstr "Eliminare la risorsa '%name%'?"
-
-#: ckan/templates/js_strings.html:16
-#: ../ckanext-ecportal/ckanext/ecportal/templates/js_strings.html:16
-msgid "Preview not available for data type: "
-msgstr "Anteprima non disponibile per tipo di dati:"
-
-#: ckan/templates/js_strings.html:16
-#: ../ckanext-ecportal/ckanext/ecportal/templates/js_strings.html:16
-msgid "Failed to get credentials for storage upload. Upload cannot proceed"
-msgstr "Impossibile ottenere le credenziali per caricare la memoria. Il caricamento non può continuare"
-
-#: ckan/templates/js_strings.html:16
-#: ../ckanext-ecportal/ckanext/ecportal/templates/js_strings.html:16
-msgid "Checking upload permissions ..."
-msgstr "Verifica permessi di upload in corso..."
-
-#: ckan/templates/js_strings.html:16
-#: ../ckanext-ecportal/ckanext/ecportal/templates/js_strings.html:16
-msgid "Uploading file ..."
-msgstr "Caricamento file in corso..."
-
-#: ckan/templates/js_strings.html:16
-#: ../ckanext-ecportal/ckanext/ecportal/templates/js_strings.html:16
-msgid "Data File"
-msgstr "File dati"
-
-#: ckan/templates/js_strings.html:16
-#: ../ckanext-ecportal/ckanext/ecportal/templates/js_strings.html:16
-msgid "Visualization"
-msgstr "Visualizzazione"
-
-#: ckan/templates/js_strings.html:16
-#: ../ckanext-ecportal/ckanext/ecportal/templates/js_strings.html:16
-msgid "Image"
-msgstr "Immagine"
-
-#: ckan/templates/js_strings.html:16
-#: ../ckanext-ecportal/ckanext/ecportal/templates/js_strings.html:16
-msgid "Metadata"
-msgstr "Metadati"
-
-#: ckan/templates/js_strings.html:16
-#: ../ckanext-ecportal/ckanext/ecportal/templates/js_strings.html:16
-msgid "Documentation"
-msgstr "Documentazione"
-
-#: ckan/templates/js_strings.html:16
-#: ../ckanext-ecportal/ckanext/ecportal/templates/js_strings.html:16
-msgid "Code"
-msgstr "Codice"
-
-#: ckan/templates/js_strings.html:16
-#: ../ckanext-ecportal/ckanext/ecportal/templates/js_strings.html:16
-msgid "Example"
-msgstr "Esempio"
-
-#: ckan/templates/js_strings.html:16
-#: ../ckanext-ecportal/ckanext/ecportal/templates/js_strings.html:16
-msgid "Resource Type"
-msgstr "Tipo risorsa"
-
-#: ckan/templates/js_strings.html:16
-#: ../ckanext-ecportal/ckanext/ecportal/templates/js_strings.html:16
-msgid "DataStore enabled"
-msgstr "DataStore attivato"
-
-#: ckan/templates/js_strings.html:16
-#: ../ckanext-ecportal/ckanext/ecportal/templates/js_strings.html:16
-msgid "Size (Bytes)"
-msgstr "Dimensione (byte)"
-
-#: ckan/templates/js_strings.html:16
-#: ../ckanext-ecportal/ckanext/ecportal/templates/js_strings.html:16
-msgid "Mimetype"
-msgstr "Mime type"
-
-#: ckan/templates/js_strings.html:16
-#: ../ckanext-ecportal/ckanext/ecportal/templates/js_strings.html:16
-msgid "Created"
-msgstr "Creato"
-
-#: ckan/templates/js_strings.html:16
-#: ../ckanext-ecportal/ckanext/ecportal/templates/js_strings.html:16
-msgid "Last Modified"
-msgstr "Ultima modifica"
-
-#: ckan/templates/js_strings.html:16
-#: ../ckanext-ecportal/ckanext/ecportal/templates/js_strings.html:16
-msgid "Mimetype (Inner)"
-msgstr "Mime type (interno)"
-
-#: ckan/templates/js_strings.html:16
-#: ../ckanext-ecportal/ckanext/ecportal/templates/js_strings.html:16
-msgid "Hash"
-msgstr "Hash"
-
-#: ckan/templates/js_strings.html:16
-#: ../ckanext-ecportal/ckanext/ecportal/templates/js_strings.html:16
-msgid "ID"
-msgstr "ID"
-
-#: ckan/templates/js_strings.html:16
-#: ../ckanext-ecportal/ckanext/ecportal/templates/js_strings.html:16
-msgid "Done"
-msgstr "fatto"
-
-#: ckan/templates/js_strings.html:16
-#: ../ckanext-ecportal/ckanext/ecportal/templates/js_strings.html:16
-msgid "This resource has unsaved changes."
-msgstr "Questa risorsa contiene modifiche non salvate."
-
-#: ckan/templates/js_strings.html:16
-#: ../ckanext-ecportal/ckanext/ecportal/templates/js_strings.html:16
-msgid "e.g. csv, html, xls, rdf, ..."
-msgstr "per es. csv, html, xls, rdf, ..."
-
-#: ckan/templates/js_strings.html:16
-#: ../ckanext-ecportal/ckanext/ecportal/templates/js_strings.html:16
-msgid "Extra Fields"
-msgstr "Campi extrai"
-
-#: ckan/templates/js_strings.html:16
-#: ../ckanext-ecportal/ckanext/ecportal/templates/js_strings.html:16
-msgid "Add Extra Field"
-msgstr "Aggiungi campi extra"
-
-#: ckan/templates/js_strings.html:16
-#: ../ckanext-ecportal/ckanext/ecportal/templates/js_strings.html:16
-msgid "Delete Resource"
-msgstr "Elimina risorsa"
-
-#: ckan/templates/js_strings.html:16
-#: ../ckanext-ecportal/ckanext/ecportal/templates/js_strings.html:16
-msgid "You can use %aMarkdown formatting%b here."
-msgstr "Qui potete utilizzare %ala formattazione Markdown%b."
-
-#: ckan/templates/js_strings.html:16
-#: ../ckanext-ecportal/ckanext/ecportal/templates/js_strings.html:16
-msgid ""
-"Should a %aDataStore table and Data API%b be enabled for this resource?"
-msgstr "Abilitare una %atabella DataStore e dati API%b per questa risorsa?"
-
-#: ckan/templates/js_strings.html:16
-#: ../ckanext-ecportal/ckanext/ecportal/templates/js_strings.html:16
-#, python-format
-msgid ""
-"Dates are in %aISO Format%b — eg. %c2012-12-25%d or %c2010-05-31T14:30%d."
-msgstr "Le date sono nel %aformato ISO%b — per es. %c2012-12-25%d oppure %c2010-05-31T14:30%d."
-
-#: ckan/templates/js_strings.html:16
-#: ../ckanext-ecportal/ckanext/ecportal/templates/js_strings.html:16
-msgid "Data File (Uploaded)"
-msgstr "File dait (caricato)"
-
-#: ckan/templates/js_strings.html:16 ckan/templates/group/layout.html:16
-#: ../ckanext-ecportal/ckanext/ecportal/templates/js_strings.html:16
-#: ../ckanext-ecportal/ckanext/ecportal/templates/organization_layout.html:22
-#: ../ckanext-ecportal/ckanext/ecportal/templates/group/layout.html:22
-#: ../ckanext-ecportal/ckanext/ecportal/templates/publisher/layout.html:19
-msgid "Add Dataset"
-msgstr "Aggiungi set di dati"
-
-#: ckan/templates/js_strings.html:16
-#: ckan/templates/group/new_group_form.html:28
-#: ckan/templates/package/new_package_form.html:49
-#: ../ckanext-ecportal/ckanext/ecportal/templates/js_strings.html:16
-#: ../ckanext-ecportal/ckanext/ecportal/templates/publisher/edit.html:30
-msgid "Url"
-msgstr "URL"
-
-#: ckan/templates/js_strings.html:16
-#: ckan/templates/group/new_group_form.html:128
-#: ckan/templates/package/new_package_form.html:307
-#: ckan/templates/user/edit_user_form.html:71
-#: ../ckanext-ecportal/ckanext/ecportal/templates/js_strings.html:16
-#: ../ckanext-ecportal/ckanext/ecportal/templates/organization_apply_form.html:43
-#: ../ckanext-ecportal/ckanext/ecportal/templates/organization_users_form.html:49
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/new_package_form.html:529
-#: ../ckanext-ecportal/ckanext/ecportal/templates/publisher/edit.html:156
-#: ../ckanext-ecportal/ckanext/ecportal/templates/user/edit_user_form.html:68
-msgid "Cancel"
-msgstr "Annulla"
-
-#: ckan/templates/js_strings.html:16 ckan/templates/layout_base.html:144
-#: ckan/templates/package/search.html:37
-#: ../ckanext-ecportal/ckanext/ecportal/templates/js_strings.html:16
-msgid "API"
-msgstr "API"
-
-#: ckan/templates/js_strings.html:16
-#: ckan/templates/package/resource_read.html:129
-#: ../ckanext-ecportal/ckanext/ecportal/templates/js_strings.html:16
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/resource_read.html:152
-msgid "Format"
-msgstr "Formato"
-
-#: ckan/templates/js_strings.html:16 ckan/templates/storage/index.html:6
-#: ckan/templates/storage/index.html:15 ckan/templates/storage/success.html:6
-#: ../ckanext-ecportal/ckanext/ecportal/templates/js_strings.html:16
-msgid "Upload"
-msgstr "Upload"
-
-#: ckan/templates/js_strings.html:16 ckan/templates/user/read.html:23
-#: ../ckanext-ecportal/ckanext/ecportal/templates/js_strings.html:16
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/new_package_form.html:52
-msgid "Name"
-msgstr "Nome"
-
-#: ckan/templates/layout_base.html:56 ckan/templates/user/logout.html:7
-#: ../ckanext-ecportal/ckanext/ecportal/templates/layout_base.html:104
-msgid "Logout"
-msgstr "Logout"
-
-#: ckan/templates/layout_base.html:59 ckan/templates/user/layout.html:20
-#: ckan/templates/user/new_user_form.html:19
-#: ../ckanext-ecportal/ckanext/ecportal/templates/user/layout.html:20
-#: ../ckanext-ecportal/ckanext/ecportal/templates/user/login.html:35
-msgid "Login"
-msgstr "Accesso"
-
-#: ckan/templates/layout_base.html:60
-msgid "Register"
-msgstr "Registrati"
-
-#: ckan/templates/layout_base.html:72 ckan/templates/home/index.html:22
-msgid "Find datasets"
-msgstr "Trova set di dati"
-
-#: ckan/templates/layout_base.html:76 ckan/templates/package/search.html:15
-#: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:61
-msgid "Add a dataset"
-msgstr "Aggiungi un set di dati"
-
-#: ckan/templates/layout_base.html:77
-#: ckan/templates/package/search_form.html:10 ckan/templates/tag/index.html:13
-#: ckan/templates/user/list.html:13
-#: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:55
-#: ../ckanext-ecportal/ckanext/ecportal/templates/layout_base.html:61
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/search.html:17
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/search_form.html:10
-msgid "Search"
-msgstr "Cerca"
-
-#: ckan/templates/layout_base.html:78
-#: ckan/templates/package/new_package_form.html:93
-#: ckan/templates/package/read.html:49 ckan/templates/revision/read.html:64
-#: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:92
-msgid "Groups"
-msgstr "Gruppi"
-
-#: ckan/templates/layout_base.html:79 ckan/templates/layout_base.html:137
-#: ckan/templates/layout_base.html:140 ckan/templates/home/about.html:6
-#: ckan/templates/home/about.html:9 ckan/templates/user/edit_user_form.html:39
-#: ckan/templates/user/read.html:28
-#: ../ckanext-ecportal/ckanext/ecportal/templates/layout_base.html:100
-#: ../ckanext-ecportal/ckanext/ecportal/templates/home/about.html:6
-#: ../ckanext-ecportal/ckanext/ecportal/templates/home/about.html:9
-#: ../ckanext-ecportal/ckanext/ecportal/templates/user/edit_user_form.html:45
-msgid "About"
-msgstr "Info"
-
-#: ckan/templates/layout_base.html:94
-msgid "Page Logo"
-msgstr "Logo pagina"
-
-#: ckan/templates/layout_base.html:112
-#: ../ckanext-ecportal/ckanext/ecportal/templates/layout_base.html:136
-msgid "Master content template placeholder … please replace me."
-msgstr "Variabile metasintattica contenuto template principale ... sostituirmi."
-
-#: ckan/templates/layout_base.html:142
-msgid "Twitter @ckanproject"
-msgstr "Twitter @ckanproject"
-
-#: ckan/templates/layout_base.html:145 ckan/templates/package/search.html:38
-msgid "API Docs"
-msgstr "Docunenti API"
-
-#: ckan/templates/layout_base.html:147
-msgid "Contact Us"
-msgstr "Contatti"
-
-#: ckan/templates/layout_base.html:150
-msgid "Privacy Policy"
-msgstr "Politica sulla privacy"
-
-#: ckan/templates/layout_base.html:156
-msgid "Sections"
-msgstr "Sezioni"
-
-#: ckan/templates/layout_base.html:160
-#: ckan/templates/authorization_group/edit_form.html:13
-#: ckan/templates/user/list.html:6 ckan/templates/user/list.html:7
-#: ../ckanext-ecportal/ckanext/ecportal/templates/organization_users_form.html:18
-#: ../ckanext-ecportal/ckanext/ecportal/templates/publisher/edit.html:136
-msgid "Users"
-msgstr "Utenti"
-
-#: ckan/templates/layout_base.html:165
-#: ckan/templates/package/new_package_form.html:122
-#: ckan/templates/package/read.html:44 ckan/templates/tag/index.html:6
-#: ckan/templates/tag/index.html:9
-#: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:89
-msgid "Tags"
-msgstr "Tag"
-
-#: ckan/templates/layout_base.html:170
-msgid "Statistics"
-msgstr "Statistiche"
-
-#: ckan/templates/layout_base.html:175 ckan/templates/group/history.html:9
-#: ckan/templates/package/history.html:11
-#: ../ckanext-ecportal/ckanext/ecportal/templates/publisher/history.html:9
-msgid "Revisions"
-msgstr "Revisioni"
-
-#: ckan/templates/layout_base.html:180
-msgid "Site Admin"
-msgstr "Ammin. sito"
-
-#: ckan/templates/layout_base.html:188
-msgid "Languages"
-msgstr "Lingue"
-
-#: ckan/templates/layout_base.html:203
-msgid "Meta"
-msgstr "Meta"
-
-#: ckan/templates/layout_base.html:207
-msgid "Open Knowledge Foundation"
-msgstr "Open Knowledge Foundation"
-
-#: ckan/templates/layout_base.html:207
-msgid "Licensed under the"
-msgstr "Concesso in licenza secondo la"
-
-#: ckan/templates/layout_base.html:208
-#: ckan/templates/package/new_package_form.html:309
-msgid "Open Database License"
-msgstr "Open Database License"
-
-#: ckan/templates/layout_base.html:209
-msgid "This Content and Data is Open"
-msgstr "Questo contenuto e i dati sono aperti"
-
-#: ckan/templates/layout_base.html:211
-#: ckan/templates/snippets/data-viewer-embed-branded-link.html:10
-msgid "Powered by"
-msgstr "Creato da"
-
-#: ckan/templates/layout_base.html:212
-msgid "CKAN"
-msgstr "CKAN"
-
-#: ckan/templates/layout_base.html:212
-msgid "v"
-msgstr "v"
-
 #: ckan/templates/package/comments.html:5
-#: ckan/templates/package/history.html:6
 msgid "- Datasets - History"
 msgstr "- Set di dati - Cronologia"
 
-#: ckan/templates/package/edit.html:6
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/edit.html:6
-msgid "- Edit - Datasets"
-msgstr "- Modifica - Set di dati"
-
-#: ckan/templates/package/edit.html:21
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/edit.html:21
-msgid "Basic Information"
-msgstr "Informazioni di base"
-
-#: ckan/templates/package/edit.html:22
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/edit.html:22
-msgid "Further Information"
-msgstr "Ulteriori informazioni"
-
-#: ckan/templates/package/edit_form.html:13
-msgid "Edit summary (briefly describe the changes you have made)"
-msgstr "Riassunto modifice (descrivete brevemente le modifiche apportate)"
-
-#: ckan/templates/package/edit_form.html:17
-#: ckan/templates/package/edit_form.html:20
-#: ckan/templates/package/new_package_form.html:294
-#: ckan/templates/package/new_package_form.html:297
-#: ckan/templates/revision/read.html:36
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/new_package_form.html:516
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/new_package_form.html:519
-msgid "Author:"
-msgstr "Autore:"
-
-#: ckan/templates/package/edit_form.html:21
-msgid "Since you have not signed in this will just be your IP address."
-msgstr "A causa del mancato accesso, il vostro Indirizzo IP sarà questo. "
-
-#: ckan/templates/package/edit_form.html:23
-msgid "Click here to sign in"
-msgstr "Fate clic qui per effettuare l'accesso"
-
-#: ckan/templates/package/edit_form.html:23
-msgid "before saving (opens in new window)."
-msgstr "prima di salvare (apre una nuova finestra)."
-
-#: ckan/templates/package/edit_form.html:31
-msgid ""
-"[1:Important:] By submitting content, you agree to release your "
-"contributions under the [2:Open Database License]. Please [3:refrain] from "
-"editing this page if you are [4:not] happy to do this."
-msgstr "[1:Importante:] inserendo contenuti accettate il rilascio dei vostri contributi ai sensi della [2:Licenza Open Database]. SI prega di [3:rinunciare] a modificare la pagine se [4:non] sei d'accordo."
-
-#: ckan/templates/package/editresources.html:6
-msgid "- Edit Resources - Datasets"
-msgstr "- Modifica risorse - Banche dati"
-
-#: ckan/templates/package/editresources.html:7
-msgid "Edit Resources:"
-msgstr "Modifica risorse:"
-
-#: ckan/templates/package/form_extra_fields.html:12
-msgid "New key"
-msgstr "Nuova chiave"
-
-#: ckan/templates/package/form_extra_fields.html:26
-msgid "with value"
-msgstr "con valore"
-
-#: ckan/templates/package/history.html:37
-#, python-format
-msgid "Read dataset as of %s"
-msgstr "Leggi il set di dati a partire dal %s"
-
-#: ckan/templates/package/history.html:48 ckan/templates/package/read.html:104
-#: ckan/templates/package/related_list.html:69
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read.html:85
-msgid "Dataset History"
-msgstr "Cronologia set di dati"
-
-#: ckan/templates/package/layout.html:14
-msgid "Resources (0)"
-msgstr "Risorse (0)"
-
-#: ckan/templates/package/layout.html:23
-msgid "Add / Edit resources"
-msgstr "Aggiungi / Modifica risorse"
-
-#: ckan/templates/package/layout.html:37
-msgid "Related"
-msgstr "Correlati"
-
-#: ckan/templates/package/layout.html:47
-msgid "Settings"
-msgstr "Impostazioni"
-
-#: ckan/templates/package/new.html:6
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/new.html:6
-msgid "Add - Datasets"
-msgstr "Aggiungi - Set di dati"
-
-#: ckan/templates/package/new.html:7
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/new.html:7
-msgid "Add a Dataset"
-msgstr "Aggiungi un set di dati"
-
-#: ckan/templates/package/new_package_form.html:20
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/new_package_form.html:20
-msgid "Resource"
-msgstr "Risorsa"
-
-#: ckan/templates/package/new_package_form.html:38
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/new_package_form.html:38
-msgid "A short descriptive title for the dataset"
-msgstr "Breve titolo descrittivo per il set di dati"
-
-#: ckan/templates/package/new_package_form.html:63
-msgid "Home Page"
-msgstr "Home Page"
-
-#: ckan/templates/package/new_package_form.html:66
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/new_package_form.html:84
-msgid "The URL for the web page describing the data (not the data itself)."
-msgstr "L'URL della pagina Web che descrive i dati (non  i dati stessi)."
-
-#: ckan/templates/package/new_package_form.html:67
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/new_package_form.html:85
-msgid "e.g. http://www.example.com/growth-figures.html"
-msgstr "per es. http://www.example.com/growth-figures.html"
-
-#: ckan/templates/package/new_package_form.html:73
-msgid "License"
-msgstr "Licenza"
-
-#: ckan/templates/package/new_package_form.html:80
-msgid ""
-"(Don't worry if you don't know which license the data has been released "
-"under)."
-msgstr "(non vi preoccupate se non sapete sotto quale licenza sono stati rilasciati i dati)."
-
-#: ckan/templates/package/new_package_form.html:96
-msgid "Member of:"
-msgstr "Membro di:"
-
-#: ckan/templates/package/new_package_form.html:109
-msgid "Add to:"
-msgstr "Aggiungi a:"
-
-#: ckan/templates/package/new_package_form.html:116
-msgid "Cannot add any groups."
-msgstr "Impossibile aggiungere gruppi."
-
-#: ckan/templates/package/new_package_form.html:126
-msgid ""
-"Comma-separated terms that may link this dataset to similar ones. For more "
-"information on conventions, see [1:this wiki page]."
-msgstr "Termini separati da virgola che possono collegare questo set di dati ad altri simili. Per maggiorni informazioni sulle convenzioni, fare riferimento a [1:questa pagina wiki]."
-
-#: ckan/templates/package/new_package_form.html:127
-msgid "e.g. pollution, rivers, water quality"
-msgstr "per es. inquinamento, fiumi, qualità delle acque"
-
-#: ckan/templates/package/new_package_form.html:134
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/new_package_form.html:457
-msgid "Add Resources"
-msgstr "Aggiungi risorse"
-
-#: ckan/templates/package/new_package_form.html:136
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/new_package_form.html:459
-msgid ""
-"Upload or link data files, APIs and other materials related to your dataset."
-msgstr "Caricate o collegate file di dati, API e altro materiale relativo al vostro set di dati."
-
-#: ckan/templates/package/new_package_form.html:143
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/new_package_form.html:466
-msgid "New resource..."
-msgstr "Nuova risorsa..."
-
-#: ckan/templates/package/new_package_form.html:148
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/new_package_form.html:471
-msgid "x"
-msgstr "x"
-
-#: ckan/templates/package/new_package_form.html:151
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/new_package_form.html:474
-msgid "Link to a file"
-msgstr "Collega a un file"
-
-#: ckan/templates/package/new_package_form.html:152
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/new_package_form.html:475
-msgid "Link to an API"
-msgstr "Collega a un API"
-
-#: ckan/templates/package/new_package_form.html:153
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/new_package_form.html:476
-msgid "Upload a file"
-msgstr "Carica un file"
-
-#: ckan/templates/package/new_package_form.html:158
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/new_package_form.html:481
-msgid "File URL"
-msgstr "URL del file"
-
-#: ckan/templates/package/new_package_form.html:165
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/new_package_form.html:488
-msgid "API URL"
-msgstr "URL API"
-
-#: ckan/templates/package/new_package_form.html:197
-msgid ""
-"The name of the main contact, for enquiries about this particular dataset, "
-"using the e-mail address in the following field."
-msgstr "Il nome del contatto principale, per domande su questo particolare set di dati, utilizzando l'indirizzo e-mail nel campo seguente."
-
-#: ckan/templates/package/new_package_form.html:202
-msgid "Author email"
-msgstr "E-mail autore"
-
-#: ckan/templates/package/new_package_form.html:209
-#: ckan/templates/package/read_core.html:73
-msgid "Maintainer"
-msgstr "Manutentore"
-
-#: ckan/templates/package/new_package_form.html:212
-msgid ""
-"If there is another important contact person (in addition to the person in "
-"the Author field) then provide details here."
-msgstr "Se esiste un altro contatto importante (oltre alla persona nel campo Autore) fornirne i dettagli qui. "
-
-#: ckan/templates/package/new_package_form.html:217
-msgid "Maintainer email"
-msgstr "E-mail manutentore"
-
-#: ckan/templates/package/new_package_form.html:224
-#: ckan/templates/package/read_core.html:78
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/new_package_form.html:321
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read_core.html:155
-msgid "Version"
-msgstr "Versione"
-
-#: ckan/templates/package/new_package_form.html:227
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/new_package_form.html:324
-msgid "A number representing the version (if applicable)"
-msgstr "Un numero che rappresenta la versione (se del caso)"
-
-#: ckan/templates/package/new_package_form.html:228
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/new_package_form.html:325
-msgid "e.g. 1.2.0"
-msgstr "es. 1.2.0"
-
-#: ckan/templates/package/new_package_form.html:234
-msgid ""
-"Adding custom fields to the dataset such as \"location:uk\" can help users "
-"find it in the search engine. This data will also appear under"
-msgstr "L'aggiunta di campi personalizzati al set di dati, ad esempio \"location:uk\", può agevolare gli utenti nel ricercarlo nel motore di ricerca. Tali dati appariranno anche sotto"
-
-#: ckan/templates/package/new_package_form.html:234
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/new_package_form.html:406
-msgid "when viewing the dataset."
-msgstr "quando viene visualizzato il set di dati."
-
-#: ckan/templates/package/new_package_form.html:234
-#: ckan/templates/package/read_core.html:49
-#: ckan/templates/package/resource_read.html:182
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/new_package_form.html:406
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read_core.html:56
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/resource_read.html:179
-msgid "Additional Information"
-msgstr "Informazioni aggiuntive"
-
-#: ckan/templates/package/new_package_form.html:271
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/new_package_form.html:444
-msgid "Do you really want to change the state of this dataset?"
-msgstr "Sei sicuro di voler modificare lo stato di questo set di dati?"
-
-#: ckan/templates/package/new_package_form.html:271
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/new_package_form.html:444
-msgid "Yes!"
-msgstr "Sì!"
-
-#: ckan/templates/package/new_package_form.html:272
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/new_package_form.html:445
-msgid "This dataset is"
-msgstr "Questo set di dati è"
-
-#: ckan/templates/package/new_package_form.html:285
-msgid "Summary"
-msgstr "Riassunto"
-
-#: ckan/templates/package/new_package_form.html:287
-msgid "Briefly describe the changes you have made..."
-msgstr "Descrivete brevemente le modifiche effettuate..."
-
-#: ckan/templates/package/new_package_form.html:298
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/new_package_form.html:520
-msgid ""
-"Since you have not signed in this will just be your IP address.\n"
-"    [1:Click here to sign in] before saving (opens in new window)."
-msgstr "A causa del mancato accesso, il vostro Indirizzo IP sarà questo.\n    [1:Fate clic qui per effettuare l'accesso] prima di salvare (si apre in una nuova finestra)."
-
-#: ckan/templates/package/new_package_form.html:309
-msgid "Important:"
-msgstr "Importante:"
-
-#: ckan/templates/package/new_package_form.html:309
-msgid ""
-"By submitting content, you agree to release your contributions under the"
-msgstr "Inserendo contenuti accettate il rilascio dei vostri contributi ai sensi della"
-
-#: ckan/templates/package/new_package_form.html:309
-msgid ". Please"
-msgstr ". Prego"
-
-#: ckan/templates/package/new_package_form.html:309
-msgid "refrain"
-msgstr "evitare"
-
-#: ckan/templates/package/new_package_form.html:309
-msgid "from editing this page if you are"
-msgstr "di modificare la pagina se non"
-
-#: ckan/templates/package/new_package_form.html:309
-msgid "not"
-msgstr "ne siete"
-
-#: ckan/templates/package/new_package_form.html:309
-msgid "happy to do this."
-msgstr "soddisfatti."
-
-#: ckan/templates/package/read.html:14
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read.html:14
-msgid "- Datasets"
-msgstr "- Set di dati"
-
-#: ckan/templates/package/read.html:24
-msgid "License:"
-msgstr "Licenza"
-
-#: ckan/templates/package/read.html:32
-#: ckan/templates/package/resource_read.html:143
-#: ckan/templates/snippets/package_list.html:31
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/resource_read.html:115
-msgid "This dataset satisfies the Open Definition."
-msgstr "Il set di dati rispetta la Open Definition."
-
-#: ckan/templates/package/read.html:33
-#: ckan/templates/package/resource_read.html:144
-#: ckan/templates/snippets/package_list.html:32
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/resource_read.html:116
-msgid "[Open Data]"
-msgstr "[Open Data]"
-
-#: ckan/templates/package/read.html:58
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read.html:49
-msgid "Related Datasets"
-msgstr "Set di dati correlati"
-
-#: ckan/templates/package/read.html:86
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read.html:67
-msgid "This is an old revision of this dataset, as edited"
-msgstr "Si tratta di una vecchia revisione del set di dati, come modificato"
-
-#: ckan/templates/package/read.html:86
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read.html:67
-msgid ". It may differ significantly from the"
-msgstr ". Potrebbe variare in modo significativo dalla"
-
-#: ckan/templates/package/read.html:86
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read.html:67
-msgid "current revision"
-msgstr "revisione corrente"
-
-#: ckan/templates/package/read.html:86 ckan/templates/package/read.html:87
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read.html:67
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read.html:68
-msgid "at"
-msgstr "su"
-
-#: ckan/templates/package/read.html:87
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read.html:68
-msgid "This is the current revision of this dataset, as edited"
-msgstr "Questa è la revisione attuale del set di dati, come modificato"
-
-#: ckan/templates/package/read.html:98
-#: ckan/templates/package/related_list.html:63
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read.html:79
-msgid "RDF/XML"
-msgstr "RDF/XML"
-
-#: ckan/templates/package/read.html:99
-#: ckan/templates/package/related_list.html:64
-msgid "RDF/Turtle"
-msgstr "RDF/Turtle"
-
-#: ckan/templates/package/read_core.html:28
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read_core.html:35
-msgid "(edit)"
-msgstr "(modifica)"
-
-#: ckan/templates/package/read_core.html:41
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read_core.html:46
-msgid "(none)"
-msgstr "(nessuno)"
-
-#: ckan/templates/package/read_core.html:51
-msgid "(settings)"
-msgstr "(impostazioni)"
-
-#: ckan/templates/package/read_core.html:57
-#: ckan/templates/package/resource_read.html:186
-#: ckan/templates/revision/diff.html:32
-#: ../ckanext-ecportal/ckanext/ecportal/templates/revision/diff.html:35
-msgid "Field"
-msgstr "Campo"
-
-#: ckan/templates/package/read_core.html:58
-#: ckan/templates/package/resource_read.html:187
-#: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:107
-msgid "Value"
-msgstr "Valore"
-
-#: ckan/templates/package/read_core.html:63
-msgid "Source"
-msgstr "Fonte"
-
-#: ckan/templates/package/read_core.html:83
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read_core.html:165
-msgid "Country"
-msgstr "Paese"
-
-#: ckan/templates/package/read_core.html:93
-msgid "Harvest Source"
-msgstr "Fonte di provenienza"
-
-#: ckan/templates/package/read_core.html:94
-#, python-format
-msgid ""
-"[1:Dataset page] on \n"
-"            [2:%(harvest_catalogue_name)s]"
-msgstr "[1:Pagina del set di dati] su \n            [2:%(harvest_catalogue_name)s]"
-
-#: ckan/templates/package/related_list.html:14
-#: ../ckanext-ecportal/ckanext/ecportal/templates/home/index.html:6
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/edit.html:8
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/new.html:9
-#: ../ckanext-ecportal/ckanext/ecportal/templates/publisher/index.html:8
-msgid "no-sidebar"
-msgstr "no-sidebar"
-
-#: ckan/templates/package/related_list.html:17
-#: ckan/templates/package/related_list.html:21
-msgid "- Related"
-msgstr "- Correlati"
-
-#: ckan/templates/package/related_list.html:26
-msgid "Related items"
-msgstr "Elementi correlati"
-
-#: ckan/templates/package/related_list.html:26
-msgid "Add related item"
-msgstr "Aggiungi elemento correlato"
-
-#: ckan/templates/package/related_list.html:28
-msgid "There are no related items here yet"
-msgstr "Qui non esistono ancora elementi correlati"
-
-#: ckan/templates/package/related_list.html:29
-msgid ", why not"
-msgstr ", perché no"
-
-#: ckan/templates/package/related_list.html:29
-msgid "add one"
-msgstr "aggiungi uno"
-
 #: ckan/templates/package/resource_embedded_dataviewer.html:78
-#: ckan/templates/package/resource_read.html:85
 msgid "- Dataset - Resource"
 msgstr "- Set di dati - Risorsa"
-
-#: ckan/templates/package/resource_read.html:100
-#: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:83
-msgid "API Endpoint"
-msgstr "Endpoint ADI"
-
-#: ckan/templates/package/resource_read.html:103
-#: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:8
-#: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:84
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read_core.html:41
-msgid "Download"
-msgstr "Scarica"
-
-#: ckan/templates/package/resource_read.html:111
-#: ckan/templates/package/resource_read.html:114
-#: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:85
-msgid "Data API"
-msgstr "DATA API"
-
-#: ckan/templates/package/resource_read.html:114
-msgid "Data API is unavailable for this resource as DataStore is disabled"
-msgstr "API dati non è disponibile per questa risorsa dato che DataStore è disabilitato"
-
-#: ckan/templates/package/resource_read.html:127
-msgid "Last updated"
-msgstr "Ultimo aggiornamento"
-
-#: ckan/templates/package/resource_read.html:133
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/new_package_form.html:90
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read.html:40
-msgid "Licence"
-msgstr "Licenza"
-
-#: ckan/templates/package/resource_read.html:140
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/resource_read.html:112
-msgid "License unknown"
-msgstr "Licenza sconosciuta"
-
-#: ckan/templates/package/resource_read.html:164
-msgid "From the [1:Dataset]:"
-msgstr "Dal [1:Set di dati]:"
-
-#: ckan/templates/package/resource_read.html:174
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/resource_read.html:170
-msgid "Cannot embed as resource is private."
-msgstr "Impossibile incorporare perché la risorsa è privata."
-
-#: ckan/templates/package/resource_read.html:174
-#: ckan/templates/package/resource_read.html:175
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/resource_read.html:170
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/resource_read.html:171
-msgid "Embed"
-msgstr "Incorpora"
-
-#: ckan/templates/package/resources.html:2
-msgid "Someresources"
-msgstr "Alcune risorse"
-
-#: ckan/templates/package/search.html:9 ckan/templates/package/search.html:10
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/search.html:10
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/search.html:12
-msgid "Search -"
-msgstr "Cerca -"
-
-#: ckan/templates/package/search.html:16
-msgid "Do you know of a dataset that should be added to"
-msgstr "Conosci un set di dati che dovrebbe essere aggiunto"
-
-#: ckan/templates/package/search.html:20
-msgid "Register it now"
-msgstr "Registralo ora"
-
-#: ckan/templates/package/search.html:29
-msgid "Other access"
-msgstr "Altro accesso"
-
-#: ckan/templates/package/search.html:35
-msgid "You can also access this registry using the"
-msgstr "Inoltre potete accedere a questo registro utilizzando il"
-
-#: ckan/templates/package/search.html:37
-msgid "(see"
-msgstr "(vedi"
-
-#: ckan/templates/package/search.html:38
-msgid "or download a"
-msgstr "oppure scarca una"
-
-#: ckan/templates/package/search.html:39
-msgid "full"
-msgstr "completo"
-
-#: ckan/templates/package/search.html:39
-msgid "dump"
-msgstr "dump"
-
-#: ckan/templates/package/search.html:50
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/search.html:46
-msgid ""
-"[1:There was an error while searching.] \n"
-"            Please try again."
-msgstr "[1:Si è verificato un errore nella ricerca.] \n            Riprovare."
-
-#: ckan/templates/package/search.html:54
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/search.html:50
-#, python-format
-msgid "[1:%(item_count)s] datasets found"
-msgstr "[1:%(item_count)s] set di dati trovati"
-
-#: ckan/templates/package/search.html:57
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/search.html:53
-msgid "Would you like to [1:create a new dataset?]"
-msgstr "Volete [1:creare un nuovo set di dati?]"
 
 #: ckan/templates/package/search_form.html:9
 #: ../ckanext-ecportal/ckanext/ecportal/templates/package/search_form.html:9
 msgid "Search..."
 msgstr "Cerca..."
 
-#: ckan/templates/revision/diff.html:5
-#: ../ckanext-ecportal/ckanext/ecportal/templates/revision/diff.html:5
-msgid "Differences - Revisions"
-msgstr "Differenze - Revisioni"
+#: ckan/templates/package/search_form.html:10 ckan/templates/tag/index.html:13
+#: ../ckanext-ecportal/ckanext/ecportal/templates/layout_base.html:61
+#: ../ckanext-ecportal/ckanext/ecportal/templates/package/search.html:17
+#: ../ckanext-ecportal/ckanext/ecportal/templates/package/search_form.html:10
+msgid "Search"
+msgstr "Cerca"
 
-#: ckan/templates/revision/diff.html:9
-msgid "Revision Differences -"
-msgstr "Differenza di revisione -"
-
-#: ckan/templates/revision/diff.html:21
-#: ../ckanext-ecportal/ckanext/ecportal/templates/revision/diff.html:21
-msgid "From:"
-msgstr "Da:"
-
-#: ckan/templates/revision/diff.html:25
-#: ../ckanext-ecportal/ckanext/ecportal/templates/revision/diff.html:25
-msgid "To:"
-msgstr "A:"
-
-#: ckan/templates/revision/diff.html:32
-#: ../ckanext-ecportal/ckanext/ecportal/templates/revision/diff.html:35
-msgid "Difference"
-msgstr "Differenza"
-
-#: ckan/templates/revision/diff.html:40
-#: ../ckanext-ecportal/ckanext/ecportal/templates/revision/diff.html:43
-msgid "No differences"
-msgstr "Nessuna differenza"
-
-#: ckan/templates/revision/list.html:5 ckan/templates/revision/list.html:6
-msgid "Revision History"
-msgstr "Cronologia revisioni"
-
-#: ckan/templates/revision/list.html:10
-msgid ""
-"Track the most recent changes to the system, with most recent\n"
-"    changes first."
-msgstr "Tenete traccia delle modifiche al sistema più recenti, conservando per prime \n    quelle più recenti."
-
-#: ckan/templates/revision/read.html:6
-msgid "Revision:"
-msgstr "Revisione:"
-
-#: ckan/templates/revision/read.html:10
-msgid "Revision Actions"
-msgstr "Azioni di revisione"
-
-#: ckan/templates/revision/read.html:23
-#: ckan/templates/snippets/revision_list.html:39
-msgid "Undelete"
-msgstr "Ripristina"
-
-#: ckan/templates/revision/read.html:39
-msgid "Timestamp:"
-msgstr "Timestamp:"
-
-#: ckan/templates/revision/read.html:41
-msgid "Log Message:"
-msgstr "Messaggio di registro:"
-
-#: ckan/templates/revision/read.html:44
-msgid "Changes"
-msgstr "Modifiche"
-
-#: ckan/templates/revision/read.html:54
-msgid "Datasets' Tags"
-msgstr "Tag dei set di dati"
-
-#: ckan/templates/revision/read.html:57
-msgid "Dataset -"
-msgstr "Set di dati -"
-
-#: ckan/templates/revision/read.html:58
-msgid ""
-",\n"
-"      Tag -"
-msgstr ",\n      Tag -"
-
-#: ckan/templates/snippets/data-viewer-embed-dialog.html:13
-msgid "Embed Data Viewer"
-msgstr "Incorpora visualizzatore di dati"
-
-#: ckan/templates/snippets/data-viewer-embed-dialog.html:19
-msgid "Embed this view"
-msgstr "Incorpora questa vista"
-
-#: ckan/templates/snippets/data-viewer-embed-dialog.html:19
-msgid "by copying this into your webpage:"
-msgstr "copiandola sulla vostra pagina Web:"
-
-#: ckan/templates/snippets/data-viewer-embed-dialog.html:21
-msgid "Choose width and height in pixels:"
-msgstr "Scegliete larghezza e altezza in pixel:"
-
-#: ckan/templates/snippets/data-viewer-embed-dialog.html:22
-msgid "Width:"
-msgstr "Larghezza:"
-
-#: ckan/templates/snippets/data-viewer-embed-dialog.html:24
-msgid "Height:"
-msgstr "Altezza:"
-
-#: ckan/templates/snippets/package_list.html:39
-msgid "Not Openly Licensed"
-msgstr "No licenza open"
-
-#: ckan/templates/snippets/revision_list.html:11
-msgid "Entity"
-msgstr "Ente"
-
-#: ckan/templates/storage/index.html:17
-msgid ""
-"This upload form is valid for a limited time (usually 1h or so). If the\n"
-"    form expires please reload the page."
-msgstr "Questo modulo di caricamenteo è valido per un tempo limitato (solitamente 1 ore circa). Se il\n    modulo scade, ricaricate la pagina."
-
-#: ckan/templates/storage/index.html:33
-msgid "File:"
-msgstr "File:"
-
-#: ckan/templates/storage/success.html:12
-msgid "Upload - Successful"
-msgstr "Caricamento - A buon fine"
-
-#: ckan/templates/storage/success.html:14
-msgid "Filed uploaded to:"
-msgstr "File caricato su:"
-
-#: ckan/templates/storage/success.html:17
-msgid "Upload another »"
-msgstr "Carica un altro »"
+#: ckan/templates/tag/index.html:6 ckan/templates/tag/index.html:9
+#: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:21
+msgid "Tags"
+msgstr "Tag"
 
 #: ckan/templates/tag/index.html:20 ckan/templates/tag/index.html:23
 msgid "There are"
@@ -3917,272 +83,556 @@ msgstr "Tag:"
 msgid "There are %(count)s datasets tagged with [1:%(tagname)s]:"
 msgstr "Ci sono %(count)s set di dati con tag [1:%(tagname)s]:"
 
-#: ckan/templates/user/edit.html:6
-msgid "- Edit - User"
-msgstr "- Modifica - Utente"
+#: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:16
+msgid "Data Portal"
+msgstr "Portale Open Data"
 
-#: ckan/templates/user/edit.html:7
-msgid "Edit User:"
-msgstr "Modifica utente:"
+#: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:17
+#: ../ckanext-ecportal/ckanext/ecportal/templates/layout_base.html:90
+msgid "Open Data Portal"
+msgstr "Portale Open Data"
 
-#: ckan/templates/user/edit_user_form.html:21
-#: ../ckanext-ecportal/ckanext/ecportal/templates/user/edit_user_form.html:27
-msgid "Full name"
-msgstr "Nome completo"
+#: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:18
+msgid "European Union Open Data Portal"
+msgstr "Portale Open Data dell'Unione europea"
 
-#: ckan/templates/user/edit_user_form.html:27
-#: ../ckanext-ecportal/ckanext/ecportal/templates/user/edit_user_form.html:33
-msgid "E-mail"
-msgstr "E-mail"
+#: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:22
+#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read.html:35
+#: ../ckanext-ecportal/ckanext/ecportal/templates/publisher/read.html:68
+msgid "Keywords"
+msgstr "Parole chiave"
 
-#: ckan/templates/user/edit_user_form.html:33
-#: ../ckanext-ecportal/ckanext/ecportal/templates/user/edit_user_form.html:39
-msgid "OpenId"
-msgstr "OpenId"
+#: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:23
+msgid "Resource formats"
+msgstr "Formati risorsa"
 
-#: ckan/templates/user/edit_user_form.html:41
-#: ../ckanext-ecportal/ckanext/ecportal/templates/user/edit_user_form.html:47
-msgid "A little about you..."
-msgstr "Qualche informazione su di te..."
+#: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:24
+#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read.html:23
+#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read_core.html:16
+#: ../ckanext-ecportal/ckanext/ecportal/templates/package/resource_read.html:92
+#: ../ckanext-ecportal/ckanext/ecportal/templates/publisher/read.html:22
+msgid "Publisher"
+msgstr "Publisher"
 
-#: ckan/templates/user/edit_user_form.html:46
-#: ../ckanext-ecportal/ckanext/ecportal/templates/user/edit_user_form.html:52
-msgid "Change your password"
-msgstr "Modifica la tua password"
+#: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:25
+#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read_core.html:125
+msgid "Language"
+msgstr "Lingua"
 
-#: ckan/templates/user/edit_user_form.html:48
-#: ckan/templates/user/new_user_form.html:40
-#: ../ckanext-ecportal/ckanext/ecportal/templates/user/edit_user_form.html:54
-#: ../ckanext-ecportal/ckanext/ecportal/templates/user/login.html:38
-msgid "Password"
-msgstr "Password"
+#: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:26
+#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read_core.html:120
+msgid "Geographical Coverage"
+msgstr "Cpertura geografica"
 
-#: ckan/templates/user/edit_user_form.html:54
-#: ckan/templates/user/new_user_form.html:47
-#: ../ckanext-ecportal/ckanext/ecportal/templates/user/edit_user_form.html:60
-msgid "Password (repeat)"
-msgstr "Password (ripeti)"
+#: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:30
+msgid "Number of datasets"
+msgstr "Numero di set di dati"
 
-#: ckan/templates/user/edit_user_form.html:61
-msgid "Change your username"
-msgstr "Cambia il nome utente"
+#: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:31
+msgid "View dataset resources"
+msgstr "Visualizza risorse del set di dati"
 
-#: ckan/templates/user/edit_user_form.html:63
-#: ../ckanext-ecportal/ckanext/ecportal/templates/user/edit_user_form.html:21
-msgid "Username"
-msgstr "Nome utente"
+#: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:32
+msgid "No downloadable resources."
+msgstr "Nessuna risorsa scaricabile"
 
-#: ckan/templates/user/layout.html:11
-#: ../ckanext-ecportal/ckanext/ecportal/templates/user/layout.html:11
-msgid "My Profile"
-msgstr "Profilo personale"
+#: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:33
+msgid "No description for this item"
+msgstr "Nessuna descrizione per questo elemento"
 
-#: ckan/templates/user/layout.html:12
-#: ../ckanext-ecportal/ckanext/ecportal/templates/user/layout.html:12
-msgid "Edit Profile"
-msgstr "Modifica profilo"
+#: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:36
+msgid "Not authorized to see this page"
+msgstr "Non autorizzato a visualizzare questa pagina"
 
-#: ckan/templates/user/layout.html:13
-#: ../ckanext-ecportal/ckanext/ecportal/templates/user/layout.html:13
-msgid "Log out"
-msgstr "Esci"
-
-#: ckan/templates/user/layout.html:17
-#: ../ckanext-ecportal/ckanext/ecportal/templates/user/layout.html:17
-msgid "View Profile"
-msgstr "Visualizza profilo"
-
-#: ckan/templates/user/layout.html:21
-msgid "Register Account"
-msgstr "Registra account"
-
-#: ckan/templates/user/list.html:15
+#: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:37
 #, python-format
-msgid "[1:%(item_count)s] users found."
-msgstr "[1:%(item_count)s] utente trovato."
+msgid "Unauthorized to read package %s"
+msgstr "Non autorizzato a leggere il pacchetto %s"
 
-#: ckan/templates/user/list.html:24
-msgid "Sort by name"
-msgstr "Ordina per nome"
+#: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:38
+#, python-format
+msgid "Unauthorized to read resource %s"
+msgstr "Non autorizzato a leggere la risorsa %s"
 
-#: ckan/templates/user/list.html:27
-msgid "Sort by edits"
-msgstr "Ordina per modifiche"
+#: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:39
+msgid "The resource could not be found."
+msgstr ""
 
-#: ckan/templates/user/list.html:40
-msgid "Member for"
-msgstr "Membro per"
+#: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:40
+msgid "Dataset not found"
+msgstr "Set di dati non trovato"
 
-#: ckan/templates/user/login.html:19
-msgid "Login - User"
-msgstr "Accesso - Utente"
+#: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:41
+msgid "Tag not found"
+msgstr "Tag non trovato"
 
-#: ckan/templates/user/login.html:20
-msgid "Login to"
-msgstr "Accedi a"
+#: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:44
+msgid "URI"
+msgstr ""
 
-#: ckan/templates/user/login.html:28
-msgid "Login:"
-msgstr "Login:"
+#: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:45
+#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read_core.html:90
+#: ../ckanext-ecportal/ckanext/ecportal/templates/package/resource_read.html:181
+msgid "Release Date"
+msgstr "Data rilascio"
 
-#: ckan/templates/user/login.html:31 ckan/templates/user/perform_reset.html:15
-msgid "Password:"
-msgstr "Password:"
+#: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:46
+msgid "Added to open-data.europa.eu"
+msgstr ""
 
-#: ckan/templates/user/login.html:35
-msgid "Remember me:"
-msgstr "Memorizza credenziali:"
+#: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:47
+msgid "Updated on open-data.europa.eu"
+msgstr ""
 
-#: ckan/templates/user/login.html:41
-msgid "Forgot your password?"
-msgstr "Hai dimenticato la password?"
+#: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:48
+msgid "Popular terms"
+msgstr ""
 
-#: ckan/templates/user/login.html:49
-#: ../ckanext-ecportal/ckanext/ecportal/templates/user/login.html:56
-msgid "Login using Open ID"
-msgstr "Effettua l'accesso tramite Open ID"
+#: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:49
+msgid "Most viewed datasets"
+msgstr ""
 
-#: ckan/templates/user/login.html:50
-#: ../ckanext-ecportal/ckanext/ecportal/templates/user/login.html:57
+#: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:50
+msgid "Recently updated datasets"
+msgstr ""
+
+#: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:51
+msgid "Recent updates"
+msgstr ""
+
+#: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:52
+msgid "Show results with"
+msgstr ""
+
+#: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:53
+msgid "all of these words"
+msgstr ""
+
+#: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:54
+msgid "any of these words"
+msgstr ""
+
+#: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:55
+msgid "the exact phrase"
+msgstr ""
+
+#: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:56
+msgid "views"
+msgstr ""
+
+#: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:57
+msgid "Suggest a dataset"
+msgstr ""
+
+#: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:58
+msgid "Is there a dataset from the EU that you could not find in this portal?"
+msgstr ""
+
+#: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:59
+msgid "Please request the dataset"
+msgstr ""
+
+#: ../ckanext-ecportal/ckanext/ecportal/helpers.py:43
+msgid "Cannot render package description"
+msgstr "Impossibile rilasciare la descrizione del pacchetto"
+
+#: ../ckanext-ecportal/ckanext/ecportal/templates/layout_base.html:59
+#: ../ckanext-ecportal/ckanext/ecportal/templates/layout_base.html:160
+msgid "Legal notice"
+msgstr "Avviso legale"
+
+#: ../ckanext-ecportal/ckanext/ecportal/templates/layout_base.html:60
+#: ../ckanext-ecportal/ckanext/ecportal/templates/layout_base.html:161
+msgid "Contact"
+msgstr "Contatti"
+
+#: ../ckanext-ecportal/ckanext/ecportal/templates/layout_base.html:66
+msgid "Menu Arrow"
+msgstr "Freccia menu"
+
+#: ../ckanext-ecportal/ckanext/ecportal/templates/layout_base.html:80
+#: ../ckanext-ecportal/ckanext/ecportal/templates/layout_base.html:81
+msgid "europa.eu"
+msgstr "europa.eu"
+
+#: ../ckanext-ecportal/ckanext/ecportal/templates/layout_base.html:90
+msgid "Europa"
+msgstr "Europa"
+
+#: ../ckanext-ecportal/ckanext/ecportal/templates/layout_base.html:90
+#: ../ckanext-ecportal/ckanext/ecportal/templates/layout_base.html:97
+#: ../ckanext-ecportal/ckanext/ecportal/templates/home/index.html:7
+msgid "Data"
+msgstr "Dati"
+
+#: ../ckanext-ecportal/ckanext/ecportal/templates/layout_base.html:96
+msgid "Home"
+msgstr "Home"
+
+#: ../ckanext-ecportal/ckanext/ecportal/templates/layout_base.html:98
+msgid "Applications"
+msgstr "Applicazioni"
+
+#: ../ckanext-ecportal/ckanext/ecportal/templates/layout_base.html:99
+msgid "Linked Data"
+msgstr "Dati collegati"
+
+#: ../ckanext-ecportal/ckanext/ecportal/templates/layout_base.html:100
+msgid "About"
+msgstr "Info"
+
+#: ../ckanext-ecportal/ckanext/ecportal/templates/layout_base.html:104
+msgid "Add dataset"
+msgstr ""
+
+#: ../ckanext-ecportal/ckanext/ecportal/templates/layout_base.html:105
+msgid "Logout"
+msgstr "Logout"
+
+#: ../ckanext-ecportal/ckanext/ecportal/templates/layout_base.html:108
+msgid "Data provider's area"
+msgstr "Area del fornitore di dati"
+
+#: ../ckanext-ecportal/ckanext/ecportal/templates/layout_base.html:138
+msgid "Master content template placeholder … please replace me."
+msgstr "Variabile metasintattica contenuto template principale ... sostituirmi."
+
+#: ../ckanext-ecportal/ckanext/ecportal/templates/layout_base.html:158
+msgid "Last update"
+msgstr "Ultimo aggiornamento"
+
+#: ../ckanext-ecportal/ckanext/ecportal/templates/layout_base.html:159
+msgid "About this site"
+msgstr "Informazioni sul sito"
+
+#: ../ckanext-ecportal/ckanext/ecportal/templates/layout_base.html:162
+msgid "Top"
+msgstr "Torna su"
+
+#: ../ckanext-ecportal/ckanext/ecportal/templates/home/index.html:6
+#: ../ckanext-ecportal/ckanext/ecportal/templates/publisher/index.html:8
+msgid "no-sidebar"
+msgstr "no-sidebar"
+
+#: ../ckanext-ecportal/ckanext/ecportal/templates/home/index.html:14
+msgid "This field is required."
+msgstr "Campo obbligatorio"
+
+#: ../ckanext-ecportal/ckanext/ecportal/templates/home/index.html:16
+msgid "Find datasets..."
+msgstr ""
+
+#: ../ckanext-ecportal/ckanext/ecportal/templates/home/index.html:19
+msgid "contains"
+msgstr "contiene"
+
+#: ../ckanext-ecportal/ckanext/ecportal/templates/home/index.html:20
+#: ../ckanext-ecportal/ckanext/ecportal/templates/home/index.html:41
+#: ../ckanext-ecportal/ckanext/ecportal/templates/publisher/index.html:16
+#: ../ckanext-ecportal/ckanext/ecportal/templates/publisher/read.html:11
+msgid "datasets"
+msgstr "set di dati"
+
+#: ../ckanext-ecportal/ckanext/ecportal/templates/home/index.html:20
+msgid "that you can browse, learn about and download."
+msgstr "che è possibile esplorare, conoscerne informazioni e scaricare."
+
+#: ../ckanext-ecportal/ckanext/ecportal/templates/home/index.html:31
+msgid "Top Publishers"
+msgstr "Migliori publisher"
+
+#: ../ckanext-ecportal/ckanext/ecportal/templates/home/index.html:34
+msgid "view all publishers"
+msgstr "Visualizza tutti gli editori"
+
+#: ../ckanext-ecportal/ckanext/ecportal/templates/home/index.html:49
+msgid "Recent Updates"
+msgstr "Aggiornamenti recenti"
+
+#: ../ckanext-ecportal/ckanext/ecportal/templates/home/index.html:52
+msgid "view all datasets"
+msgstr "Visualizza tutti i dati"
+
+#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read.html:14
+msgid "- Datasets"
+msgstr "- Set di dati"
+
+#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read.html:40
+msgid "Licence"
+msgstr "Licenza"
+
+#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read.html:49
+msgid "Related Datasets"
+msgstr "Set di dati correlati"
+
+#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read.html:67
+msgid "This is an old revision of this dataset, as edited at"
+msgstr ""
+
+#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read.html:68
+msgid ". It may differ significantly from the"
+msgstr ". Potrebbe variare in modo significativo dalla"
+
+#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read.html:68
+msgid "current revision"
+msgstr "revisione corrente"
+
+#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read.html:70
+msgid "This is the current revision of this dataset, as edited at"
+msgstr ""
+
+#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read.html:82
+msgid "RDF/XML"
+msgstr "RDF/XML"
+
+#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read.html:83
+msgid "RDF/N3"
+msgstr "RDF/N3"
+
+#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read.html:88
+msgid "Dataset History"
+msgstr "Cronologia set di dati"
+
+#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read_core.html:12
+msgid "This dataset has been marked as deleted."
+msgstr "Questo set di dati è stato segnato come eliminato."
+
+#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read_core.html:24
+#: ../ckanext-ecportal/ckanext/ecportal/templates/package/resource_read.html:138
+msgid "Description"
+msgstr "Descrizione"
+
+#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read_core.html:33
+msgid "Resources"
+msgstr "Risorse"
+
+#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read_core.html:35
+msgid "(edit)"
+msgstr "(modifica)"
+
+#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read_core.html:41
+#: ../ckanext-ecportal/ckanext/ecportal/templates/package/resource_read.html:127
+msgid "Download"
+msgstr "Scarica"
+
+#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read_core.html:46
+msgid "(none)"
+msgstr "(nessuno)"
+
+#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read_core.html:56
+#: ../ckanext-ecportal/ckanext/ecportal/templates/package/resource_read.html:172
+msgid "Additional Information"
+msgstr "Informazioni aggiuntive"
+
+#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read_core.html:60
+#: ../ckanext-ecportal/ckanext/ecportal/templates/package/resource_read.html:177
+msgid "URL"
+msgstr "URL"
+
+#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read_core.html:65
+msgid "Alternative Title"
+msgstr "Titolo alternativo"
+
+#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read_core.html:70
+msgid "Status"
+msgstr "Stato"
+
+#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read_core.html:75
+msgid "Identifier"
+msgstr "Identificatore"
+
+#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read_core.html:80
+msgid "Interoperability Level"
+msgstr "Livello interoperabilità"
+
+#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read_core.html:85
+msgid "Type of Dataset"
+msgstr "Tipo do set di dati"
+
+#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read_core.html:95
+#: ../ckanext-ecportal/ckanext/ecportal/templates/package/resource_read.html:185
+msgid "Modified Date"
+msgstr "Data modificata"
+
+#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read_core.html:100
+msgid "Accrual Periodicity"
+msgstr "Periodicità di raccolta"
+
+#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read_core.html:105
+msgid "Temporal Coverage From"
+msgstr "Copertura temporanea da"
+
+#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read_core.html:110
+msgid "Temporal Coverage To"
+msgstr "Copertura temporanea a"
+
+#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read_core.html:115
+msgid "Temporal Granularity"
+msgstr "Granularità temporale"
+
+#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read_core.html:130
+msgid "Contact Name"
+msgstr "Nome contatto"
+
+#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read_core.html:135
+msgid "Contact E-mail"
+msgstr "E-mail contatto"
+
+#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read_core.html:140
+msgid "Contact Address"
+msgstr "Indirizzo contatto"
+
+#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read_core.html:145
+msgid "Contact Telephone"
+msgstr "Telefono del contatto"
+
+#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read_core.html:150
+msgid "Contact Web Page"
+msgstr "Pagina Web del contatto"
+
+#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read_core.html:155
+msgid "Version"
+msgstr "Versione"
+
+#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read_core.html:160
+msgid "Version Description"
+msgstr "Descrizione della versione"
+
+#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read_core.html:165
+msgid "Country"
+msgstr "Paese"
+
+#: ../ckanext-ecportal/ckanext/ecportal/templates/package/resource_read.html:85
+msgid "Dataset - Resource"
+msgstr "- Set di dati - Risorsa"
+
+#: ../ckanext-ecportal/ckanext/ecportal/templates/package/resource_read.html:106
+msgid "Licence:"
+msgstr "Licenza:"
+
+#: ../ckanext-ecportal/ckanext/ecportal/templates/package/resource_read.html:112
+msgid "License unknown"
+msgstr "Licenza sconosciuta"
+
+#: ../ckanext-ecportal/ckanext/ecportal/templates/package/resource_read.html:140
+msgid "(No description)"
+msgstr ""
+
+#: ../ckanext-ecportal/ckanext/ecportal/templates/package/resource_read.html:145
+msgid "Format"
+msgstr "Formato"
+
+#: ../ckanext-ecportal/ckanext/ecportal/templates/package/resource_read.html:154
+msgid "From"
+msgstr ""
+
+#: ../ckanext-ecportal/ckanext/ecportal/templates/package/resource_read.html:162
+msgid "Preview"
+msgstr "Anteprima"
+
+#: ../ckanext-ecportal/ckanext/ecportal/templates/package/resource_read.html:163
+msgid "Cannot embed as resource is private."
+msgstr "Impossibile incorporare perché la risorsa è privata."
+
+#: ../ckanext-ecportal/ckanext/ecportal/templates/package/resource_read.html:163
+#: ../ckanext-ecportal/ckanext/ecportal/templates/package/resource_read.html:164
+msgid "Embed"
+msgstr "Incorpora"
+
+#: ../ckanext-ecportal/ckanext/ecportal/templates/package/resource_read.html:190
+msgid "Resource Type"
+msgstr ""
+
+#: ../ckanext-ecportal/ckanext/ecportal/templates/package/resource_read.html:217
+msgid "Back to dataset"
+msgstr "Torna al set di dati"
+
+#: ../ckanext-ecportal/ckanext/ecportal/templates/package/search.html:10
+#: ../ckanext-ecportal/ckanext/ecportal/templates/package/search.html:12
+msgid "Search -"
+msgstr "Cerca -"
+
+#: ../ckanext-ecportal/ckanext/ecportal/templates/package/search.html:31
+msgid "Search datasets..."
+msgstr "Cerca un set di dati"
+
+#: ../ckanext-ecportal/ckanext/ecportal/templates/package/search.html:45
 msgid ""
-"NB: To set-up your OpenID for this site, you first need to [1:Register] and "
-"then edit your Profile to provide your OpenID."
-msgstr "Nota: per configurare il tuo OpenID per questo sito, devi prima [1:Registrarti] e successivamente modificare il Profilo per fornire il tuo OpenID."
+"[1:There was an error while searching.]\n"
+"      Please try again."
+msgstr ""
 
-#: ckan/templates/user/login.html:52
-#: ../ckanext-ecportal/ckanext/ecportal/templates/user/login.html:59
-msgid "Please click your account provider:"
-msgstr "Fai clic sul provider del tuo account:"
+#: ../ckanext-ecportal/ckanext/ecportal/templates/package/search.html:49
+#, python-format
+msgid "[1:%(item_count)s] datasets found"
+msgstr "[1:%(item_count)s] set di dati trovati"
 
-#: ckan/templates/user/login.html:56
-#: ../ckanext-ecportal/ckanext/ecportal/templates/user/login.html:63
-msgid "OpenID Identifier:"
-msgstr "Indentificatore OpenID:"
+#: ../ckanext-ecportal/ckanext/ecportal/templates/publisher/index.html:6
+#: ../ckanext-ecportal/ckanext/ecportal/templates/publisher/index.html:7
+msgid "Publishers"
+msgstr "Publisher"
 
-#: ckan/templates/user/login.html:60
-#: ../ckanext-ecportal/ckanext/ecportal/templates/user/login.html:67
-msgid "Don't have an OpenID?"
-msgstr "Non possiedi un OpenID?"
+#: ../ckanext-ecportal/ckanext/ecportal/templates/publisher/read.html:31
+msgid "Search publisher..."
+msgstr "Scegliere un publisher"
 
-#: ckan/templates/user/login.html:61
-#: ../ckanext-ecportal/ckanext/ecportal/templates/user/login.html:68
-msgid ""
-"OpenID is service that allows you to log-on to many different websites\n"
-"          using a single identity. Find out [1:more\n"
-"          about OpenID] and [2:how to get an\n"
-"          OpenID enabled account]. Probably the simplest way is sign up with a\n"
-"          free OpenID provider such as [3:https://www.myopenid.com/]."
-msgstr "OpenID è il servizio che consente di effettuare l'accesso a diversi siti Web\n          utilizzando un'unica identità. Scopri [1:maggiori informazioni\n          sull'OpenID] e [2:come ottenete un\n          account abilitato OpenID]. Il modo più semplice potrebbe essere registrarsi con un\n          provider OpenID gratuito come [3:https://www.myopenid.com/]."
+#: ../ckanext-ecportal/ckanext/ecportal/templates/publisher/read.html:55
+msgid "Administrators"
+msgstr "Amministratori"
 
-#: ckan/templates/user/login.html:71
-#: ../ckanext-ecportal/ckanext/ecportal/templates/user/login.html:78
-msgid "Sign in with OpenID"
-msgstr "Registrati con OpenID"
+#: ../ckanext-ecportal/ckanext/ecportal/templates/publisher/read.html:61
+msgid "Members"
+msgstr "Membri"
 
-#: ckan/templates/user/logout.html:5
-msgid "Logout - User"
-msgstr "Esci - Utente"
+#: ../ckanext-ecportal/ckanext/ecportal/templates/publisher/read.html:69
+msgid "Resource Formats"
+msgstr "Formati delle risorse"
 
-#: ckan/templates/user/logout.html:8
-msgid "Logout from"
-msgstr "Esci da"
+#: ../ckanext-ecportal/ckanext/ecportal/templates/publisher/read.html:73
+msgid "State"
+msgstr "Stato"
 
-#: ckan/templates/user/logout.html:11
-msgid "You have logged out successfully."
-msgstr "Logout avvenuto con successo"
+#: ../ckanext-ecportal/ckanext/ecportal/templates/revision/diff.html:5
+msgid "Differences - Revisions"
+msgstr "Differenze - Revisioni"
 
-#: ckan/templates/user/logout_first.html:6
-msgid "Logged in - User"
-msgstr "Accesso effettuato - Utente"
+#: ../ckanext-ecportal/ckanext/ecportal/templates/revision/diff.html:9
+msgid "Revision Differences"
+msgstr ""
 
-#: ckan/templates/user/logout_first.html:7
-msgid "Logged into"
-msgstr "Accesso effettuato a"
+#: ../ckanext-ecportal/ckanext/ecportal/templates/revision/diff.html:21
+msgid "From:"
+msgstr "Da:"
 
-#: ckan/templates/user/logout_first.html:12
-msgid "is currently logged in"
-msgstr "attualmente collegato"
+#: ../ckanext-ecportal/ckanext/ecportal/templates/revision/diff.html:25
+msgid "To:"
+msgstr "A:"
 
-#: ckan/templates/user/logout_first.html:15
-msgid "To register or log in as another user, you need to"
-msgstr "Per registrarti o effettuare l'accesso come altro utente, è necessario"
+#: ../ckanext-ecportal/ckanext/ecportal/templates/revision/diff.html:35
+msgid "Field"
+msgstr "Campo"
 
-#: ckan/templates/user/logout_first.html:17
-msgid "logout"
-msgstr "uscire"
+#: ../ckanext-ecportal/ckanext/ecportal/templates/revision/diff.html:35
+msgid "Difference"
+msgstr "Differenza"
 
-#: ckan/templates/user/logout_first.html:17
-msgid "first."
-msgstr "prima."
+#: ../ckanext-ecportal/ckanext/ecportal/templates/revision/diff.html:43
+msgid "No differences"
+msgstr "Nessuna differenza"
 
-#: ckan/templates/user/new.html:5
-msgid "Register - User"
-msgstr "Registra - Utente"
+#: ../ckanext-ecportal/ckanext/ecportal/templates/snippets/recent_updates_package_list.html:14
+msgid "was updated on"
+msgstr "aggiornato il"
 
-#: ckan/templates/user/new.html:6
-msgid "Register for a new Account"
-msgstr "Registra per nuovo account"
+#: ../ckanext-ecportal/ckanext/ecportal/templates/tag/read.html:6
+msgid "- Keyword"
+msgstr "Parole chiave"
 
-#: ckan/templates/user/new_user_form.html:22
-msgid "3+ chars, using only 'a-z0-9' and '-_'"
-msgstr "3+ caratteri,utilizzando solo 'a-z0-9' e '-_'"
+#: ../ckanext-ecportal/ckanext/ecportal/templates/tag/read.html:7
+msgid "Keyword:"
+msgstr "Parole chiave"
 
-#: ckan/templates/user/new_user_form.html:27
-msgid "Full name (optional)"
-msgstr "Nome completo (facoltativo)"
-
-#: ckan/templates/user/new_user_form.html:34
-msgid "E-Mail"
-msgstr "E-Mail"
-
-#: ckan/templates/user/new_user_form.html:65
-msgid "Register now"
-msgstr "Registrati ora"
-
-#: ckan/templates/user/perform_reset.html:18
-msgid "Password (repeat):"
-msgstr "Password (ripeti):"
-
-#: ckan/templates/user/read.html:5
-msgid "- User"
-msgstr "- Utente"
-
-#: ckan/templates/user/read.html:25
-msgid "Member since"
-msgstr "Membro da"
-
-#: ckan/templates/user/read.html:32
-msgid "Email"
-msgstr "E-mail"
-
-#: ckan/templates/user/read.html:37
-msgid "No email"
-msgstr "Nessuna e-mail"
-
-#: ckan/templates/user/read.html:42
-msgid "API Key"
-msgstr "Chiave API"
-
-#: ckan/templates/user/read.html:46
-msgid "– Note: your API key is visible only to you!"
-msgstr "– Nota: solo tu puoi visualizzare la chiave API!"
-
-#: ckan/templates/user/read.html:59
-msgid "Edits"
-msgstr "Modifiche"
-
-#: ckan/templates/user/read.html:77
-msgid "Public Activity"
-msgstr "Attività pubblica"
-
-#: ckan/templates/user/request_reset.html:6
-msgid "Reset password"
-msgstr "Reimposta password"
-
-#: ckan/templates/user/request_reset.html:7
-msgid "Request a password reset"
-msgstr "Richiedi la reimpostazione della password"
-
-#: ckan/templates/user/request_reset.html:13
-msgid "User name:"
-msgstr "Nome dell'utente:"
+#: ../ckanext-ecportal/ckanext/ecportal/templates/tag/read.html:10
+#, python-format
+msgid "There are %(count)s datasets with the keyword [1:%(tagname)s]:"
+msgstr ""
