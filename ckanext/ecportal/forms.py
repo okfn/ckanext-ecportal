@@ -1,3 +1,4 @@
+import logging
 import operator
 import pylons
 from ckan.lib.base import c, model
@@ -34,17 +35,18 @@ from validators import (ecportal_name_validator,
                         map_licenses,
                         reduce_list,
                         group_name_unchanged)
-import helpers
 
-import logging
+import ckanext.ecportal.helpers as helpers
+import ckanext.ecportal.unicode_sort as unicode_sort
+
 log = logging.getLogger(__name__)
-
 GEO_VOCAB_NAME = u'geographical_coverage'
 DATASET_TYPE_VOCAB_NAME = u'dataset_type'
 LANGUAGE_VOCAB_NAME = u'language'
 STATUS_VOCAB_NAME = u'status'
 INTEROP_VOCAB_NAME = u'interoperability_level'
 TEMPORAL_VOCAB_NAME = u'temporal_granularity'
+UNICODE_SORT = unicode_sort.UNICODE_SORT
 
 
 def _translate(terms, lang, fallback_lang):
@@ -142,24 +144,30 @@ class ECPortalDatasetForm(p.SingletonPlugin):
 
         # publisher IDs and name translations
         if c.is_sysadmin:
-            group_type = pylons.config.get('ckan.default.group_type', 'organization')
-            groups = logic.get_action('group_list')(context, {'all_fields': True})
-            groups = [group for group in groups if group.get('type') == group_type]
+            group_type = pylons.config.get('ckan.default.group_type',
+                                           'organization')
+            groups = logic.get_action('group_list')(
+                context, {'all_fields': True})
+            groups = [group for group in groups
+                      if group.get('type') == group_type]
         elif c.userobj:
-            groups = [dictization.table_dictize(obj, context) for obj in c.userobj.get_groups()]
+            groups = [dictization.table_dictize(obj, context)
+                      for obj in c.userobj.get_groups()]
         else:
             groups = []
 
-        group_translations = _translate([group.get('title') for group in groups],
-                                        ckan_lang, ckan_lang_fallback)
-        c.publishers = []
+        group_translations = _translate(
+            [group.get('display_name') for group in groups],
+            ckan_lang, ckan_lang_fallback)
 
-        for group in groups:
-            name = group['name']
-            value = group_translations[group.get('title')] or group.get('name')
-            c.publishers.append((name, value))
+        def sort_translations(key):
+            return key[1].translate(UNICODE_SORT)
 
-        c.publishers.sort(key=lambda group: group[1])
+        c.publishers = [
+            (group['name'],
+             group_translations[group.get('display_name')] or group['name'])
+            for group in groups]
+        c.publishers.sort(key=sort_translations)
 
         # get new group name if group ID in query string
         new_group_id = pylons.request.params.get('groups__0__id')
