@@ -139,5 +139,7 @@ class ECPortalPlugin(p.SingletonPlugin):
 
     def before_index(self, pkg_dict):
         title = pkg_dict.get('title', pkg_dict.get('name'))
-        pkg_dict['title_sort'] = title.translate(UNICODE_SORT)
+        # strip accents first and if equivilant do next stage comparison.
+        # leaving space and concatonating is to avoid having todo a real 2 level sort.
+        pkg_dict['title_sort'] = (unicode_sort.strip_accents(title) + '   ' + title).translate(UNICODE_SORT)
         return pkg_dict
