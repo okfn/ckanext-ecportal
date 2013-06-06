@@ -1,5 +1,3 @@
-import operator
-
 import ckan.logic as logic
 import ckan.plugins as plugins
 import ckan.lib.dictization as d
@@ -176,8 +174,10 @@ def group_show(context, data_dict):
 
     return group_dict
 
+
 def sort_group(key):
     return key.get('display_name', '').translate(UNICODE_SORT)
+
 
 def group_list(context, data_dict):
     '''Return a list of the names of the site's groups.
