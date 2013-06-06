@@ -1,7 +1,5 @@
 import datetime
 import logging
-from pylons import config
-import ckan.plugins as p
 import ckan.lib.base as base
 
 log = logging.getLogger(__name__)
@@ -138,11 +136,7 @@ def install_tables(Session, out):
 
 
 def generate_unapproved_list(Session, days=30):
-    Session.execute(
-        '''
-        DELETE FROM search_popular_latest;
-        '''
-    )
+    Session.execute('DELETE FROM search_popular_latest;')
     Session.execute(
         '''
         INSERT INTO search_popular_latest (lang, search_string, count) (

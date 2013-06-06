@@ -112,14 +112,13 @@ class ECPortalSearchCloudAdminController(base.BaseController):
     def download(self):
         self._sysadmin_or_abort()
         data = searchcloud.get_latest(model.Session)
+        # We don't know when the script is run, so let's assume just
+        # after midnight and use today's date
+        date = datetime.datetime.now().strftime('%Y-%m-%d')
         response.charset = 'utf8'
         response.content_type = 'application/json'
         response.headers['Content-Disposition'] = \
-            'attachment; filename="ecodp-searchcloud-latest-%s.json"' % (
-                # We don't know when the script is run, so let's assume just
-                # after midnight and use today's date
-                datetime.datetime.now().strftime('%Y-%m-%d')
-            )
+            'attachment; filename="ecodp-searchcloud-latest-%s.json"' % date
         return json.dumps(data, indent=4)
 
 

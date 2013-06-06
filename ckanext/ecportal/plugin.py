@@ -1,5 +1,5 @@
+import logging
 import sqlalchemy.exc
-from pylons.i18n.translation import get_lang
 
 import ckan.model as model
 import ckan.plugins as p
@@ -8,11 +8,12 @@ import ckan.config.routing as routing
 import ckanext.ecportal.logic as ecportal_logic
 import ckanext.ecportal.auth as ecportal_auth
 import ckanext.ecportal.searchcloud as searchcloud
+import ckanext.ecportal.helpers as helpers
 import ckanext.ecportal.unicode_sort as unicode_sort
 
-import logging
 log = logging.getLogger(__file__)
 UNICODE_SORT = unicode_sort.UNICODE_SORT
+
 
 class ECPortalPlugin(p.SingletonPlugin):
     p.implements(p.IConfigurable)
@@ -87,27 +88,19 @@ class ECPortalPlugin(p.SingletonPlugin):
         return map
 
     def before_search(self, search_params):
-
         search_string = search_params.get('q') or ''
         if not search_string and not search_params.get('sort'):
             search_params['sort'] = 'title_sort asc'
 
-        #For search cloud we don't make any changes to the search_params, just log
-        #the search string to the database for later analysis.
+        # for search cloud we don't make any changes to the search_params,
+        # just log the search string to the database for later analysis.
 
         # do some clean up of the search string so that the analysis
         # will be easier later
         search_string = searchcloud.unify_terms(search_string, max_length=200)
         if not search_string:
             return search_params
-        # Let's get the current langauge via Pylons (then this plugin
-        # is robust to URL changes)
-        lang = get_lang()
-        if lang is not None:
-            # get_lang returns a list of languages
-            lang = lang[0]
-        else:
-            lang = 'default'
+        lang = str(helpers.current_locale())
         try:
             # Unfortunately a nested sessin doesn't behave the way we want,
             # failing to actually commit the change made.
@@ -148,4 +141,3 @@ class ECPortalPlugin(p.SingletonPlugin):
         title = pkg_dict.get('title', pkg_dict.get('name'))
         pkg_dict['title_sort'] = title.translate(UNICODE_SORT)
         return pkg_dict
-
