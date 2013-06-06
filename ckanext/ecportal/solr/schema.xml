@@ -449,9 +449,9 @@
     <field name="title_pl" type="text_pl" indexed="true" stored="true"/>
     <field name="title_string_pl" type="string" indexed="true" stored="true"/>
 
-    <field name="text_other" type="text_other" indexed="true" stored="true"/>
-    <field name="title_other" type="text_other" indexed="true" stored="true"/>
-    <field name="title_string_other" type="string" indexed="true" stored="true"/>
+    <dynamicField name="text_*" type="text_other" indexed="true" stored="true"/>
+    <dynamicField name="title_*" type="text_other" indexed="true" stored="true"/>
+    <dynamicField name="title_string_*" type="string" indexed="true" stored="true"/>
 
     <field name="data_dict" type="string" indexed="false" stored="true" />
 
