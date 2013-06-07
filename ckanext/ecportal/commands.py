@@ -794,7 +794,7 @@ class ECPortalCommand(cli.CkanCommand):
 
     def import_csv_translation(self):
         file_name = os.path.dirname(os.path.abspath(__file__)) + '/../../data/odp-vocabulary-translate.csv'
-        voc_translate = file('odp-vocabulary-translate.csv')
+        voc_translate = file(file_name)
         voc_dicts = csv.DictReader(voc_translate)
         translations = []
 
@@ -803,7 +803,7 @@ class ECPortalCommand(cli.CkanCommand):
             for key in line:
                 translations.append({'term': term,
                                   'lang_code': key,
-                                  'term_translation': line['key'].decode('utf8')}
+                                  'term_translation': line[key].decode('utf8')}
                                 )
 
         context = {'model': model, 'session': model.Session,
