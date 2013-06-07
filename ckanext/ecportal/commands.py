@@ -2,6 +2,7 @@ import collections
 import os
 import sys
 import re
+import csv
 import json
 import urllib
 import lxml.etree
@@ -30,6 +31,7 @@ class ECPortalCommand(cli.CkanCommand):
         paster ecportal update-publishers -c <config>
         paster ecportal migrate-publisher <source> <target> -c <config>
         paster ecportal export-datasets <folder> -c <config>
+        paster ecportal import-csv-translations -c <config>
 
         paster ecportal create-geo-vocab -c <config>
         paster ecportal create-dataset-type-vocab -c <config>
@@ -173,6 +175,9 @@ class ECPortalCommand(cli.CkanCommand):
 
         elif cmd == 'searchcloud-generate-unapproved-search-list':
             self.searchcloud_generate_unapproved_search_list()
+
+        elif cmd == 'import-csv-translations':
+            self.import_csv_translation()
 
         else:
             log.error('Command "%s" not recognized' % (cmd,))
@@ -786,6 +791,28 @@ class ECPortalCommand(cli.CkanCommand):
 
     def delete_temporal_vocab(self):
         self._delete_vocab(forms.TEMPORAL_VOCAB_NAME)
+
+    def import_csv_translation(self):
+        file_name = os.path.dirname(os.path.abspath(__file__)) + '/../../data/odp-vocabulary-translate.csv'
+        voc_translate = file('odp-vocabulary-translate.csv')
+        voc_dicts = csv.DictReader(voc_translate)
+        translations = []
+
+        for line in voc_dicts:
+            term = line.pop('en')
+            for key in line:
+                translations.append({'term': term,
+                                  'lang_code': key,
+                                  'term_translation': line['key'].decode('utf8')}
+                                )
+
+        context = {'model': model, 'session': model.Session,
+                    'user': self.user_name, 'extras_as_string': True}
+
+        logic.get_action('term_translation_update_many')(
+            context, {'data': translations}
+        )
+
 
     def create_all_vocabs(self):
         self.import_publishers()
