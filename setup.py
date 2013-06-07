@@ -25,6 +25,7 @@ setup(
         ecportal_form = ckanext.ecportal.forms:ECPortalDatasetForm
         ecportal_publisher_form = ckanext.ecportal.forms:ECPortalPublisherForm
         ecportal_controller = ckanext.ecportal.controllers:ECPortalDatasetController
+        ecportal_multilingual_dataset = ckanext.ecportal.plugin:MulitlingualDataset
 
         [paste.paster_command]
         ecportal=ckanext.ecportal.commands:ECPortalCommand

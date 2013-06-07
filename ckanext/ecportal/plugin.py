@@ -1,9 +1,12 @@
 import logging
 import sqlalchemy.exc
+import pylons.config
+import pylons
 
 import ckan.model as model
 import ckan.plugins as p
 import ckan.config.routing as routing
+import ckanext.multilingual.plugin as multilingual
 
 import ckanext.ecportal.logic as ecportal_logic
 import ckanext.ecportal.auth as ecportal_auth
@@ -14,6 +17,107 @@ import ckanext.ecportal.unicode_sort as unicode_sort
 log = logging.getLogger(__file__)
 UNICODE_SORT = unicode_sort.UNICODE_SORT
 
+LANGS = ['en', 'fr', 'de', 'it', 'es', 'pl', 'ga', 'lv', 'bg',
+         'lt', 'cs', 'da', 'nl', 'et', 'fi', 'el', 'hu', 'mt', 
+         'pt', 'ro', 'sk', 'sl', 'sv', 'hr']
+
+KEYS_TO_IGNORE = ['state', 'revision_id', 'id', #title done seperately
+                  'metadata_created', 'metadata_modified', 'site_id', 'data_dict', 'rdf']
+
+class MulitlingualDataset(multilingual.MultilingualDataset):
+
+    def before_index(self, search_data):
+        ##same code as in ckanext multilingual except language codes and where mareked
+
+        default_lang = search_data.get(
+            'lang_code', 
+             pylons.config.get('ckan.locale_default', 'en')
+        )
+
+        ## translate title
+        title = search_data.get('title')
+        search_data['title_' + default_lang] = title 
+        title_translations = p.toolkit.get_action('term_translation_show')(
+                          {'model': model},
+                          {'terms': [title],
+                              'lang_codes': LANGS})
+
+        for translation in title_translations:
+            title_field = 'title_' + translation['lang_code']
+            search_data[title_field] = translation['term_translation']
+        
+
+        # EC change add sort order field.
+        for lang in LANGS:
+            title_field = 'title_' + lang
+            title_value = search_data.get(title_field) 
+            title_string_field = 'title_string_' + lang
+            if not title_value:
+                title_value = title
+
+            # strip accents first and if equivilant do next stage comparison.
+            # leaving space and concatonating is to avoid having todo a real 2 level sort.
+            sortable_title = unicode_sort.strip_accents(title_value) + '   ' + title_value
+            search_data[title_string_field] = sortable_title.translate(UNICODE_SORT)
+        ##########################################
+
+        ## translate rest
+        all_terms = []
+        for key, value in search_data.iteritems():
+            if key in KEYS_TO_IGNORE or key.startswith('title'):
+                continue
+            if isinstance(value, list):
+                all_terms.extend(value)
+            elif not isinstance(value, basestring):
+                continue
+            else:
+                all_terms.append(value)
+
+        field_translations = p.toolkit.get_action('term_translation_show')(
+                          {'model': model},
+                          {'terms': all_terms,
+                              'lang_codes': LANGS})
+
+        text_field_items = dict(('text_' + lang, []) for lang in LANGS)
+        
+        text_field_items['text_' + default_lang].extend(all_terms)
+
+        for translation in sorted(field_translations):
+            lang_field = 'text_' + translation['lang_code']
+            text_field_items[lang_field].append(translation['term_translation'])
+
+        for key, value in text_field_items.iteritems():
+            search_data[key] = ' '.join(value)
+        
+        return search_data
+
+    def before_search(self, search_params):
+        lang_set = set(LANGS)
+        current_lang = pylons.request.environ['CKAN_LANG']
+        # fallback to default locale if locale not in suported langs
+        if not current_lang in lang_set:
+            current_lang = config.get('ckan.locale_default')
+        # fallback to english if default locale is not supported
+        if not current_lang in lang_set:
+            current_lang = 'en'
+        # treat current lang differenly so remove from set
+        lang_set.remove(current_lang)
+
+        # weight current lang more highly
+        query_fields = 'title_%s^8 text_%s^4' % (current_lang, current_lang)
+
+        for lang in lang_set:
+            query_fields += ' title_%s^2 text_%s' % (lang, lang)
+
+        search_params['qf'] = query_fields
+
+        search_string = search_params.get('q') or ''
+        if not search_string and not search_params.get('sort'):
+            search_params['sort'] = 'title_string_%s asc' % current_lang
+
+        return search_params
+    
+ 
 
 class ECPortalPlugin(p.SingletonPlugin):
     p.implements(p.IConfigurable)
@@ -89,8 +193,6 @@ class ECPortalPlugin(p.SingletonPlugin):
 
     def before_search(self, search_params):
         search_string = search_params.get('q') or ''
-        if not search_string and not search_params.get('sort'):
-            search_params['sort'] = 'title_sort asc'
 
         # for search cloud we don't make any changes to the search_params,
         # just log the search string to the database for later analysis.
