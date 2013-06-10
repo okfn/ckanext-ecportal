@@ -177,9 +177,12 @@ def group_show(context, data_dict):
 
 def sort_group(key):
     display_name = key.get('display_name', '')
-    # strip accents first and if equivilant do next stage comparison.
-    # leaving space and concatonating is to avoid having todo a real 2 level sort.
-    return (unicode_sort.strip_accents(display_name) + '   ' + display_name).translate(UNICODE_SORT)
+    # Strip accents first and if equivilant do next stage comparison.
+    # Leaving space and concatenating is to avoid having todo a real
+    # 2 level sort.
+    return (unicode_sort.strip_accents(display_name) +
+            '   ' +
+            display_name).translate(UNICODE_SORT)
 
 
 def group_list(context, data_dict):

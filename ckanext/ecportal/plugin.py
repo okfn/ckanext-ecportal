@@ -18,47 +18,52 @@ log = logging.getLogger(__file__)
 UNICODE_SORT = unicode_sort.UNICODE_SORT
 
 LANGS = ['en', 'fr', 'de', 'it', 'es', 'pl', 'ga', 'lv', 'bg',
-         'lt', 'cs', 'da', 'nl', 'et', 'fi', 'el', 'hu', 'mt', 
+         'lt', 'cs', 'da', 'nl', 'et', 'fi', 'el', 'hu', 'mt',
          'pt', 'ro', 'sk', 'sl', 'sv', 'hr']
 
-KEYS_TO_IGNORE = ['state', 'revision_id', 'id', #title done seperately
-                  'metadata_created', 'metadata_modified', 'site_id', 'data_dict', 'rdf']
+KEYS_TO_IGNORE = ['state', 'revision_id', 'id',  # title done seperately
+                  'metadata_created', 'metadata_modified', 'site_id',
+                  'data_dict', 'rdf']
+
 
 class MulitlingualDataset(multilingual.MultilingualDataset):
-
     def before_index(self, search_data):
-        ##same code as in ckanext multilingual except language codes and where mareked
+        # same code as in ckanext multilingual except language codes and
+        # where mareked
 
         default_lang = search_data.get(
-            'lang_code', 
-             pylons.config.get('ckan.locale_default', 'en')
+            'lang_code',
+            pylons.config.get('ckan.locale_default', 'en')
         )
 
-        ## translate title
+        # translate title
         title = search_data.get('title')
-        search_data['title_' + default_lang] = title 
+        search_data['title_' + default_lang] = title
         title_translations = p.toolkit.get_action('term_translation_show')(
-                          {'model': model},
-                          {'terms': [title],
-                              'lang_codes': LANGS})
+            {'model': model},
+            {'terms': [title],
+             'lang_codes': LANGS})
 
         for translation in title_translations:
             title_field = 'title_' + translation['lang_code']
             search_data[title_field] = translation['term_translation']
-        
 
         # EC change add sort order field.
         for lang in LANGS:
             title_field = 'title_' + lang
-            title_value = search_data.get(title_field) 
+            title_value = search_data.get(title_field)
             title_string_field = 'title_string_' + lang
             if not title_value:
                 title_value = title
 
-            # strip accents first and if equivilant do next stage comparison.
-            # leaving space and concatonating is to avoid having todo a real 2 level sort.
-            sortable_title = unicode_sort.strip_accents(title_value) + '   ' + title_value
-            search_data[title_string_field] = sortable_title.translate(UNICODE_SORT)
+            # Strip accents first and if equivilant do next stage comparison.
+            # Leaving space and concatonating is to avoid having todo a real
+            # 2 level sort.
+            sortable_title = \
+                unicode_sort.strip_accents(title_value) + '   ' + title_value
+            search_data[title_string_field] = \
+                sortable_title.translate(UNICODE_SORT)
+
         ##########################################
 
         ## translate rest
@@ -74,21 +79,22 @@ class MulitlingualDataset(multilingual.MultilingualDataset):
                 all_terms.append(value)
 
         field_translations = p.toolkit.get_action('term_translation_show')(
-                          {'model': model},
-                          {'terms': all_terms,
-                              'lang_codes': LANGS})
+            {'model': model},
+            {'terms': all_terms,
+             'lang_codes': LANGS})
 
         text_field_items = dict(('text_' + lang, []) for lang in LANGS)
-        
+
         text_field_items['text_' + default_lang].extend(all_terms)
 
         for translation in sorted(field_translations):
             lang_field = 'text_' + translation['lang_code']
-            text_field_items[lang_field].append(translation['term_translation'])
+            text_field_items[lang_field].append(
+                translation['term_translation'])
 
         for key, value in text_field_items.iteritems():
             search_data[key] = ' '.join(value)
-        
+
         return search_data
 
     def before_search(self, search_params):
@@ -96,7 +102,7 @@ class MulitlingualDataset(multilingual.MultilingualDataset):
         current_lang = pylons.request.environ['CKAN_LANG']
         # fallback to default locale if locale not in suported langs
         if not current_lang in lang_set:
-            current_lang = config.get('ckan.locale_default')
+            current_lang = pylons.config.get('ckan.locale_default')
         # fallback to english if default locale is not supported
         if not current_lang in lang_set:
             current_lang = 'en'
@@ -116,8 +122,7 @@ class MulitlingualDataset(multilingual.MultilingualDataset):
             search_params['sort'] = 'title_string_%s asc' % current_lang
 
         return search_params
-    
- 
+
 
 class ECPortalPlugin(p.SingletonPlugin):
     p.implements(p.IConfigurable)
@@ -241,7 +246,10 @@ class ECPortalPlugin(p.SingletonPlugin):
 
     def before_index(self, pkg_dict):
         title = pkg_dict.get('title', pkg_dict.get('name'))
-        # strip accents first and if equivilant do next stage comparison.
-        # leaving space and concatonating is to avoid having todo a real 2 level sort.
-        pkg_dict['title_sort'] = (unicode_sort.strip_accents(title) + '   ' + title).translate(UNICODE_SORT)
+        # Strip accents first and if equivilant do next stage comparison.
+        # Leaving space and concatenating is to avoid having todo a real
+        # 2 level sort.
+        pkg_dict['title_sort'] = (unicode_sort.strip_accents(title) +
+                                  '   '
+                                  + title).translate(UNICODE_SORT)
         return pkg_dict
