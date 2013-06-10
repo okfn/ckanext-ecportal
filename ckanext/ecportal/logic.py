@@ -207,19 +207,14 @@ def group_list(context, data_dict):
     groups = logic.action.get.group_list(context, data_dict)
 
     if context.get('for_view', False):
-        # In the context of the web interface, and if the request comes from an
-        # anonymous user, then only present publishers with published datasets.
+        # in the web UI only list publishers with published datasets
 
-        model = context['model']
-        userobj = model.User.get(context['user'])
-
-        if not userobj:  # anonymous user
-            # Depending upon the context, group['packages'] may be either a
-            # count of the packages, or the actual list of packages.
-            if groups and isinstance(groups[0]['packages'], int):
-                groups = [g for g in groups if g['packages'] > 0]
-            else:
-                groups = [g for g in groups if len(g['packages']) > 0]
+        # depending upon the context, group['packages'] may be either a
+        # count of the packages, or the actual list of packages
+        if groups and isinstance(groups[0]['packages'], int):
+            groups = [g for g in groups if g['packages'] > 0]
+        else:
+            groups = [g for g in groups if len(g['packages']) > 0]
 
     return sorted(groups, key=sort_group)
 
