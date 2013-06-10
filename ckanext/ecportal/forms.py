@@ -111,13 +111,16 @@ class ECPortalDatasetForm(p.SingletonPlugin):
     def package_types(self):
         return ['dataset']
 
-    def setup_template_variables(self, context, data_dict=None, package_type=None):
-        ckan_lang = pylons.request.environ['CKAN_LANG']
-        ckan_lang_fallback = pylons.config.get('ckan.locale_default', 'en')
+    def setup_template_variables(self, context, data_dict=None,
+                                 package_type=None):
+        ckan_lang = helpers.current_locale()
+        ckan_lang_fallback = helpers.fallback_locale()
 
         c.licences = sorted(model.Package.get_license_options(),
                             key=operator.itemgetter(1))
-        default_licence = ("Europa Legal Notice", "http://ec.europa.eu/open-data/kos/licence/EuropeanCommission")
+        default_licence = (
+            "Europa Legal Notice",
+            "http://ec.europa.eu/open-data/kos/licence/EuropeanCommission")
         c.licences = filter(lambda l: l != default_licence, c.licences)
         c.licences.insert(0, default_licence)
 
@@ -161,10 +164,9 @@ class ECPortalDatasetForm(p.SingletonPlugin):
             ckan_lang, ckan_lang_fallback)
 
         def sort_translations(key):
-            # strip accents first and if equivilant do next stage comparison
-            #
+            # Strip accents first and if equivilant do next stage comparison.
             # leaving space and concatenating is to avoid having todo a real
-            # 2 level sort
+            # 2 level sort.
             display_name = key[1]
             return (unicode_sort.strip_accents(display_name) +
                     '   ' +

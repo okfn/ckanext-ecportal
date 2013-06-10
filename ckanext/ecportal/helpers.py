@@ -17,7 +17,11 @@ def current_url():
 
 def current_locale():
     return i18n.get_locales_dict().get(p.toolkit.request.environ['CKAN_LANG'])\
-        or i18n.get_locales_dict().get(config.get('ckan.locale_default', 'en'))
+        or fallback_locale()
+
+
+def fallback_locale():
+    return i18n.get_locales_dict().get(config.get('ckan.locale_default', 'en'))
 
 
 def root_url():

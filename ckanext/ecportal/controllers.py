@@ -1,3 +1,4 @@
+import logging
 import datetime
 import sqlalchemy.exc
 from pylons import response
@@ -8,10 +9,9 @@ import ckan.model as model
 import ckan.plugins as p
 import ckan.lib.navl.dictization_functions
 import ckan.lib.helpers
-import forms
+import ckanext.ecportal.forms as forms
 import ckanext.ecportal.searchcloud as searchcloud
 import ckanext.ecportal.mostviewed as mostviewed
-import logging
 
 log = logging.getLogger(__name__)
 _validate = ckan.lib.navl.dictization_functions.validate
