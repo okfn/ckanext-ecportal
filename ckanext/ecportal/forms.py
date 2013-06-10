@@ -161,7 +161,14 @@ class ECPortalDatasetForm(p.SingletonPlugin):
             ckan_lang, ckan_lang_fallback)
 
         def sort_translations(key):
-            return key[1].translate(UNICODE_SORT)
+            # strip accents first and if equivilant do next stage comparison
+            #
+            # leaving space and concatenating is to avoid having todo a real
+            # 2 level sort
+            display_name = key[1]
+            return (unicode_sort.strip_accents(display_name) +
+                    '   ' +
+                    display_name).translate(UNICODE_SORT)
 
         c.publishers = [
             (group['name'],
