@@ -792,6 +792,23 @@ class ECPortalCommand(cli.CkanCommand):
     def delete_temporal_vocab(self):
         self._delete_vocab(forms.TEMPORAL_VOCAB_NAME)
 
+    def _lookup_term(self, en_translation):
+        '''
+        Lookup existing term in term_translation table that has the given
+        English translation. If none found, return the English translation.
+        '''
+        engine = model.meta.engine
+        sql = '''
+            SELECT term FROM term_translation
+            WHERE term_translation=%s
+            AND lang_code='en';
+        '''
+        result = engine.execute(sql, en_translation).fetchone()
+        if not result:
+            return en_translation
+        else:
+            return result[0]
+
     def import_csv_translation(self):
         file_name = os.path.dirname(os.path.abspath(__file__)) + '/../../data/odp-vocabulary-translate.csv'
         voc_translate = file(file_name)
@@ -801,18 +818,17 @@ class ECPortalCommand(cli.CkanCommand):
         for line in voc_dicts:
             term = line.pop('en')
             for key in line:
-                translations.append({'term': term,
-                                  'lang_code': key,
-                                  'term_translation': line[key].decode('utf8')}
-                                )
+                translations.append(
+                    {'term': self._lookup_term(term),
+                     'lang_code': key,
+                     'term_translation': line[key].decode('utf8')})
 
         context = {'model': model, 'session': model.Session,
-                    'user': self.user_name, 'extras_as_string': True}
+                   'user': self.user_name, 'extras_as_string': True}
 
         logic.get_action('term_translation_update_many')(
             context, {'data': translations}
         )
-
 
     def create_all_vocabs(self):
         self.import_publishers()
@@ -822,6 +838,7 @@ class ECPortalCommand(cli.CkanCommand):
         self.create_status_vocab()
         self.create_interop_vocab()
         self.create_temporal_vocab()
+        self.import_csv_translation()
 
     def delete_all_vocabs(self):
         log.warn('Not deleting publisher info (not yet implemented)')
