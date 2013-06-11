@@ -113,8 +113,8 @@ class ECPortalDatasetForm(p.SingletonPlugin):
 
     def setup_template_variables(self, context, data_dict=None,
                                  package_type=None):
-        ckan_lang = helpers.current_locale()
-        ckan_lang_fallback = helpers.fallback_locale()
+        ckan_lang = str(helpers.current_locale())
+        ckan_lang_fallback = str(helpers.fallback_locale())
 
         c.licences = sorted(model.Package.get_license_options(),
                             key=operator.itemgetter(1))
