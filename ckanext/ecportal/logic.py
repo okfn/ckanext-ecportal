@@ -296,10 +296,7 @@ def purge_package_extra_revision(context, data_dict):
     '''
     Purge old data from the package_extra_revision table.
 
-    :param group: the name or id of the publisher
-    :type group: string
-
-    :returns: number of resources and revisions purged.
+    :returns: number of revisions purged.
     :rtype: dictionary
     '''
     logic.check_access('purge_package_extra_revision', context, data_dict)
