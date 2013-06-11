@@ -2,7 +2,6 @@
 Customised authorization for the ecportal extension.
 '''
 
-from ckan.lib.base import _
 import ckan.authz as authz
 import ckan.logic.auth as ckan_auth
 import ckan.logic.auth.publisher as publisher_auth
@@ -29,13 +28,13 @@ def group_create(context, data_dict=None):
 
     if not user:
         return {'success': False,
-                'msg': _('User is not authorized to create groups')}
+                'msg': 'User is not authorized to create groups'}
 
     if user and authz.Authorizer.is_sysadmin(user):
         return {'success': True}
     else:
         return {'success': False,
-                'msg': _('User is not authorized to create groups')}
+                'msg': 'User is not authorized to create groups'}
 
 
 def package_update(context, data_dict):
@@ -48,7 +47,8 @@ def package_update(context, data_dict):
 
     RDF-imported packages are identified by having an 'rdf' field.
     '''
-    authorised_by_core = publisher_auth.update.package_update(context, data_dict)
+    authorised_by_core = publisher_auth.update.package_update(
+        context, data_dict)
     if authorised_by_core['success'] is False:
         return authorised_by_core
     elif 'api_version' in context:
@@ -58,8 +58,8 @@ def package_update(context, data_dict):
         if 'rdf' in package.extras:
             return {
                 'success': False,
-                'msg': _('Not authorized to edit RDF-imported datasets by hand.  '
-                         'Please re-import this dataset instead.')
+                'msg': 'Not authorized to edit RDF-imported datasets by hand. '
+                       'Please re-import this dataset instead.'
             }
         else:
             return authorised_by_core
