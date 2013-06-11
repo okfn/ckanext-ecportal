@@ -140,7 +140,8 @@ class ECPortalPlugin(p.SingletonPlugin):
             'user_create': ecportal_auth.user_create,
             'purge_revision_history': ecportal_auth.purge_revision_history,
             'purge_package_extra_revision':
-            ecportal_auth.purge_revision_history
+            ecportal_auth.purge_revision_history,
+            'purge_task_data': ecportal_auth.purge_task_data
         }
 
     def get_actions(self):
@@ -151,6 +152,7 @@ class ECPortalPlugin(p.SingletonPlugin):
             'purge_revision_history': ecportal_logic.purge_revision_history,
             'purge_package_extra_revision':
             ecportal_logic.purge_package_extra_revision,
+            'purge_task_data': ecportal_logic.purge_task_data,
             'user_create': ecportal_logic.user_create,
             'user_update': ecportal_logic.user_update,
             'package_show': ecportal_logic.package_show

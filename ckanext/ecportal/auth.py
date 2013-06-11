@@ -79,6 +79,13 @@ def purge_package_extra_revision(context, data_dict):
     return _sysadmins_only(context, 'purge package extra revision')
 
 
+def purge_task_data(context, data_dict):
+    '''
+    Only sysadmins can remove old task data.
+    '''
+    return _sysadmins_only(context, 'purge task data.')
+
+
 def show_package_edit_button(context, data_dict):
     '''
     Custom ecportal auth function.

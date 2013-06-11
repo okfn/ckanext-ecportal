@@ -50,6 +50,7 @@ class ECPortalCommand(cli.CkanCommand):
         paster ecportal delete-all-vocabs -c <config>
 
         paster ecportal purge-package-extra-revision -c <config>
+        paster ecportal purge-task-data -c <config>
 
         paster ecportal searchcloud-install-tables -c <config>
         paster ecportal searchcloud-generate-unapproved-search-list -c <config>
@@ -174,6 +175,9 @@ class ECPortalCommand(cli.CkanCommand):
 
         elif cmd == 'purge-package-extra-revision':
             self.purge_package_extra_revision()
+
+        elif cmd == 'purge-task-data':
+            self.purge_task_data()
 
         elif cmd == 'searchcloud-install-tables':
             self.searchcloud_install_tables()
@@ -858,6 +862,11 @@ class ECPortalCommand(cli.CkanCommand):
         context = {'model': model, 'session': model.Session,
                    'user': self.user_name}
         log.warn(logic.get_action('purge_package_extra_revision')(context, {}))
+
+    def purge_task_data(self):
+        context = {'model': model, 'session': model.Session,
+                   'user': self.user_name}
+        log.warn(logic.get_action('purge_task_data')(context, {}))
 
     def searchcloud_generate_unapproved_search_list(self):
         '''

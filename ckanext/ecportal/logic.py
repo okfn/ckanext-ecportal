@@ -283,13 +283,12 @@ def purge_revision_history(context, data_dict):
             DELETE_RESOURCES_SQL,
             group.name
         ).rowcount
-        return {
-            'number_revisions_deleted': number_revisions_deleted,
-            'number_resources_deleted': number_resources_deleted
-        }
 
     except Exception, e:
         raise logic.ActionError('Error executing sql: %s' % e)
+
+    return {'number_revisions_deleted': number_revisions_deleted,
+            'number_resources_deleted': number_resources_deleted}
 
 
 def purge_package_extra_revision(context, data_dict):
@@ -309,12 +308,43 @@ def purge_package_extra_revision(context, data_dict):
     '''
 
     try:
-        number_revisions_deleted = engine.execute(
+        revision_rows_deleted = engine.execute(
             delete_old_extra_revisions).rowcount
-        return {'number_revisions_deleted': number_revisions_deleted}
 
     except Exception, e:
         raise logic.ActionError('Error executing sql: %s' % e)
+
+    return {'revision_rows_deleted': revision_rows_deleted}
+
+
+def purge_task_data(context, data_dict):
+    '''
+    Purge data from the task_status and kombu_message tables
+    (used by CKAN tasks and Celery).
+
+    To just clear the Celery data (and not the task_status table),
+    see the 'celery clean' command in CKAN core.
+
+    :returns: number of task_status and Celery (kombu_message) rows deleted.
+    :rtype: dictionary
+    '''
+    logic.check_access('purge_task_data', context, data_dict)
+
+    model = context['model']
+    engine = model.meta.engine
+
+    purge_task_status = 'DELETE FROM task_status;'
+    purge_celery_data = 'DELETE FROM kombu_message;'
+
+    try:
+        task_status_rows_deleted = engine.execute(purge_task_status).rowcount
+        celery_rows_deleted = engine.execute(purge_celery_data).rowcount
+
+    except Exception, e:
+        raise logic.ActionError('Error executing sql: %s' % e)
+
+    return {'task_status_rows_deleted': task_status_rows_deleted,
+            'celery_rows_deleted': celery_rows_deleted}
 
 
 def user_create(context, data_dict):
