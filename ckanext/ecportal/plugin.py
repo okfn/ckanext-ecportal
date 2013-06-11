@@ -139,6 +139,8 @@ class ECPortalPlugin(p.SingletonPlugin):
             'group_create': ecportal_auth.group_create,
             'user_create': ecportal_auth.user_create,
             'purge_revision_history': ecportal_auth.purge_revision_history,
+            'purge_package_extra_revision':
+            ecportal_auth.purge_revision_history
         }
 
     def get_actions(self):
@@ -147,6 +149,8 @@ class ECPortalPlugin(p.SingletonPlugin):
             'group_update': ecportal_logic.group_update,
             'group_show': ecportal_logic.group_show,
             'purge_revision_history': ecportal_logic.purge_revision_history,
+            'purge_package_extra_revision':
+            ecportal_logic.purge_package_extra_revision,
             'user_create': ecportal_logic.user_create,
             'user_update': ecportal_logic.user_update,
             'package_show': ecportal_logic.package_show

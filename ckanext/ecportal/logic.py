@@ -292,6 +292,34 @@ def purge_revision_history(context, data_dict):
         raise logic.ActionError('Error executing sql: %s' % e)
 
 
+def purge_package_extra_revision(context, data_dict):
+    '''
+    Purge old data from the package_extra_revision table.
+
+    :param group: the name or id of the publisher
+    :type group: string
+
+    :returns: number of resources and revisions purged.
+    :rtype: dictionary
+    '''
+    logic.check_access('purge_package_extra_revision', context, data_dict)
+
+    model = context['model']
+    engine = model.meta.engine
+
+    delete_old_extra_revisions = '''
+        DELETE FROM package_extra_revision WHERE current=false;
+    '''
+
+    try:
+        number_revisions_deleted = engine.execute(
+            delete_old_extra_revisions).rowcount
+        return {'number_revisions_deleted': number_revisions_deleted}
+
+    except Exception, e:
+        raise logic.ActionError('Error executing sql: %s' % e)
+
+
 def user_create(context, data_dict):
     '''Create a new user.
 

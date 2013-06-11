@@ -1,6 +1,6 @@
-"""
+'''
 Customised authorization for the ecportal extension.
-"""
+'''
 
 from ckan.lib.base import _
 import ckan.authz as authz
@@ -8,13 +8,23 @@ import ckan.logic.auth as ckan_auth
 import ckan.logic.auth.publisher as publisher_auth
 
 
+def _sysadmins_only(context, action_string):
+    user = context['user']
+
+    if authz.Authorizer().is_sysadmin(unicode(user)):
+        return {'success': True}
+
+    return {'success': False,
+            'msg': 'You are not authorized to {0}'.format(action_string)}
+
+
 def group_create(context, data_dict=None):
-    """
+    '''
     Only sysadmins can create Groups.
 
     All the Groups are created through the API using a paster command.  So
     there's no need for non-sysadmin users to be able to create new Groups.
-    """
+    '''
     user = context['user']
 
     if not user:
@@ -29,7 +39,7 @@ def group_create(context, data_dict=None):
 
 
 def package_update(context, data_dict):
-    """
+    '''
     Customised package_update auth overrides default ckan behaviour.
 
     Packages that have been imported by the RDF importer should not be edited
@@ -37,7 +47,7 @@ def package_update(context, data_dict):
     API.
 
     RDF-imported packages are identified by having an 'rdf' field.
-    """
+    '''
     authorised_by_core = publisher_auth.update.package_update(context, data_dict)
     if authorised_by_core['success'] is False:
         return authorised_by_core
@@ -59,19 +69,18 @@ def purge_revision_history(context, data_dict):
     '''
     Only sysadmins can purge a publisher's revision history.
     '''
-    user = context['user']
+    return _sysadmins_only(context, 'purge revision history')
 
-    if user and authz.Authorizer.is_sysadmin(user):
-        return {'success': True}
-    else:
-        return {
-            'success': False,
-            'msg': _('User is not authorized to to purge revision history')
-        }
+
+def purge_package_extra_revision(context, data_dict):
+    '''
+    Only sysadmins can remove old data from the package_extra_revision table.
+    '''
+    return _sysadmins_only(context, 'purge package extra revision')
 
 
 def show_package_edit_button(context, data_dict):
-    """
+    '''
     Custom ecportal auth function.
 
     This auth function is only used in one place: on the package layout
@@ -82,18 +91,12 @@ def show_package_edit_button(context, data_dict):
     RDF-imported dataset (see `package_update` auth above).  This allows the
     edit button to be displayed, but de-activated: giving the user feedback
     on how to update the dataset (ie - re-running the import).
-    """
+    '''
     return publisher_auth.update.package_update(context, data_dict)
 
 
 def user_create(context, data_dict=None):
-    """
+    '''
     Only allow sysadmins to create new Users
-    """
-    user = context['user']
-
-    if authz.Authorizer().is_sysadmin(unicode(user)):
-        return {'success': True}
-
-    return {'success': False,
-            'msg': _('User not authorized to create new Users')}
+    '''
+    return _sysadmins_only(context, 'create new users')
