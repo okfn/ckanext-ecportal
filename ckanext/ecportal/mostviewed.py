@@ -1,8 +1,8 @@
+import logging
 from pylons import config
 
 import ckan.lib.base as base
 import ckan.plugins as p
-import logging
 
 log = logging.getLogger(__name__)
 
@@ -10,7 +10,8 @@ log = logging.getLogger(__name__)
 def get_most_viewed(Session, limit=None):
     def cache_most_popular():
         sql = '''
-        SELECT most_popular.url, most_popular.running_total, package.name, package.title
+        SELECT most_popular.url, most_popular.running_total,
+               package.name, package.title
         FROM (
             SELECT
                 url
@@ -20,7 +21,8 @@ def get_most_viewed(Session, limit=None):
             WHERE
                 running_total > 0
             AND url LIKE('%/dataset/%')
-            AND tracking_date = (select max(tracking_date) from tracking_summary)
+            AND tracking_date = (select max(tracking_date)
+                                 from tracking_summary)
             ) as most_popular
         LEFT JOIN package
         ON most_popular.name[array_length(most_popular.name, 1)] = package.name

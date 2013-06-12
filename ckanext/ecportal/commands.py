@@ -251,7 +251,8 @@ class ECPortalCommand(cli.CkanCommand):
         '''
         dataset = {}
         dataset['name'] = unicode(node.find('{%s}code' % namespace).text)
-        dataset['title'] = unicode(node.find('{%s}title[@language="en"]' % namespace).text)
+        dataset['title'] = unicode(
+            node.find('{%s}title[@language="en"]' % namespace).text)
         dataset['license_id'] = u'ec-eurostat'
         dataset['published_by'] = u'estat'
 
@@ -264,7 +265,8 @@ class ECPortalCommand(cli.CkanCommand):
         tc_from = self._isodate(node.find('{%s}dataStart' % namespace).text)
         if tc_from:
             dataset['temporal_coverage_from'] = tc_from
-            dataset['temporal_granularity'] = self._temporal_granularity(tc_from)
+            dataset['temporal_granularity'] = \
+                self._temporal_granularity(tc_from)
         tc_to = self._isodate(node.find('{%s}dataEnd' % namespace).text)
         if tc_to:
             dataset['temporal_coverage_to'] = tc_to
@@ -295,7 +297,7 @@ class ECPortalCommand(cli.CkanCommand):
         # add dataset to CKAN instance
         log.info('Adding dataset: %s' % dataset['name'])
         context = {'model': model, 'session': model.Session,
-                    'user': self.user_name, 'extras_as_string': True}
+                   'user': self.user_name, 'extras_as_string': True}
         try:
             logic.get_action('package_create')(context, dataset)
         except logic.ValidationError, ve:
@@ -307,7 +309,8 @@ class ECPortalCommand(cli.CkanCommand):
         translations = []
 
         for lang in self.data_import_langs:
-            lang_node = node.find('{%s}title[@language="%s"]' % (namespace, lang))
+            lang_node = node.find(
+                '{%s}title[@language="%s"]' % (namespace, lang))
             if lang_node is not None:
                 translations.append({
                     'term': dataset['title'],
@@ -332,7 +335,8 @@ class ECPortalCommand(cli.CkanCommand):
                 translations = []
 
                 for lang in self.data_import_langs:
-                    lang_node = node.find('{%s}title[@language="%s"]' % (namespace, lang))
+                    lang_node = node.find(
+                        '{%s}title[@language="%s"]' % (namespace, lang))
                     if lang_node is not None:
                         translations.append({
                             'term': unicode(title.text),
@@ -341,8 +345,10 @@ class ECPortalCommand(cli.CkanCommand):
                         })
 
                 if translations:
-                    context = {'model': model, 'session': model.Session,
-                                'user': self.user_name, 'extras_as_string': True}
+                    context = {'model': model,
+                               'session': model.Session,
+                               'user': self.user_name,
+                               'extras_as_string': True}
                     logic.get_action('term_translation_update_many')(
                         context, {'data': translations}
                     )
@@ -370,11 +376,15 @@ class ECPortalCommand(cli.CkanCommand):
         '''
         import urlparse
 
-        user = logic.get_action('get_site_user')({'model': model, 'ignore_auth': True}, {})
-        context = {'model': model, 'session': model.Session, 'user': user['name']}
+        user = logic.get_action('get_site_user')(
+            {'model': model, 'ignore_auth': True}, {})
+        context = {'model': model,
+                   'session': model.Session,
+                   'user': user['name']}
         dataset_names = logic.get_action('package_list')(context, {})
         for dataset_name in dataset_names:
-            dataset_dict = logic.get_action('package_show')(context, {'id': dataset_name})
+            dataset_dict = logic.get_action('package_show')(
+                context, {'id': dataset_name})
             if not dataset_dict['state'] == 'active':
                 continue
 
@@ -385,17 +395,19 @@ class ECPortalCommand(cli.CkanCommand):
             url = urlparse.urljoin(fetch_url, url[1:]) + '.rdf'
 
             try:
-                filename = os.path.join(output_folder, dataset_dict['name']) + ".rdf"
+                filename = os.path.join(
+                    output_folder, dataset_dict['name']) + '.rdf'
                 print filename
                 r = requests.get(url, auth=('ec', 'ecportal'))
                 with open(filename, 'wb') as f:
                     f.write(r.content)
             except IOError, ioe:
-                sys.stderr.write(str(ioe) + "\n")
+                sys.stderr.write(str(ioe) + '\n')
 
     def import_publishers(self):
         '''
-        Create publisher groups based on translations and structure JSON objects.
+        Create publisher groups based on translations and structure
+        JSON objects.
         '''
         # get group names and title translations
         log.info('Reading group structure and names/translations')
@@ -404,53 +416,55 @@ class ECPortalCommand(cli.CkanCommand):
         self._add_publishers(publishers)
 
     def _read_publishers_from_file(self):
-        file_name = os.path.dirname(os.path.abspath(__file__)) + '/../../data/po-corporate-bodies.json'
+        file_name = os.path.dirname(os.path.abspath(__file__)) + \
+            '/../../data/po-corporate-bodies.json'
         with open(file_name) as json_file:
             full_json = json.loads(json_file.read())
 
         return list(self._parse_publishers_from(full_json))
 
     def _add_publishers(self, publishers):
-
-        ### get out english 
-
         groups_title_lookup = {}
 
         log.info('Creating CKAN group objects')
-        user = logic.get_action('get_site_user')({'model': model, 'ignore_auth': True}, {})
+        user = logic.get_action('get_site_user')(
+            {'model': model, 'ignore_auth': True}, {})
 
         for publisher in publishers:
-            context = {'model': model, 'session': model.Session, 'user': user['name']}
+            context = {'model': model,
+                       'session': model.Session,
+                       'user': user['name']}
 
-            if publisher.lang_code == "en":
-                group = {
-                    'name': publisher.name,
-                    'title': publisher.title,
-                    'type': u'organization'
-                }
+            if publisher.lang_code == 'en':
+                group = {'name': publisher.name,
+                         'title': publisher.title,
+                         'type': u'organization'}
                 logic.get_action('group_create')(context, group)
-                log.info("Added new publisher: %s [%s]", publisher.title, publisher.name)
-                groups_title_lookup[publisher.name] = publisher.title or publisher.name
+                log.info('Added new publisher: %s [%s]',
+                         publisher.title, publisher.name)
+                groups_title_lookup[publisher.name] = \
+                    publisher.title or publisher.name
 
-        context = {'model': model, 'session': model.Session, 'user': user['name']}
+        context = {'model': model,
+                   'session': model.Session,
+                   'user': user['name']}
         self._update_translations(publishers, groups_title_lookup, context)
 
     _Publisher = collections.namedtuple('Publisher', 'name title lang_code')
-    
+
     def _parse_publishers_from(self, data):
-        
         for item in data['results']['bindings']:
             yield self._Publisher(
-                    name = item["term"]["value"].split('/')[-1].lower(),
-                    title = item["label"]["value"],
-                    lang_code = item["language"]["value"])
+                name=item['term']['value'].split('/')[-1].lower(),
+                title=item['label']['value'],
+                lang_code=item['language']['value'])
 
     def migrate_publisher(self, source_publisher_name, target_publisher_name):
         '''
         Migrate datasets and users from one publisher to another.
         '''
-
-        user = logic.get_action('get_site_user')({'model': model, 'ignore_auth': True}, {})
+        user = logic.get_action('get_site_user')(
+            {'model': model, 'ignore_auth': True}, {})
         context = {'model': model,
                    'session': model.Session,
                    'ecodp_with_package_list': True,
@@ -458,12 +472,10 @@ class ECPortalCommand(cli.CkanCommand):
                    'user': user['name']}
 
         source_publisher = logic.get_action('group_show')(
-                context,
-                {'id': source_publisher_name})
+            context, {'id': source_publisher_name})
 
         target_publisher = logic.get_action('group_show')(
-                context,
-                {'id': target_publisher_name})
+            context, {'id': target_publisher_name})
 
         # Migrate users
         source_users = self._extract_members(source_publisher['users'])
@@ -478,8 +490,8 @@ class ECPortalCommand(cli.CkanCommand):
         target_datasets = self._extract_members(target_publisher['packages'])
 
         source_publisher['packages'] = []
-        target_publisher['packages'] = self._migrate_dataset_lists(source_datasets,
-                                                                   target_datasets)
+        target_publisher['packages'] = self._migrate_dataset_lists(
+            source_datasets, target_datasets)
 
         # Perform the updates
         # TODO: make this one atomic action. (defer_commit)
@@ -488,10 +500,9 @@ class ECPortalCommand(cli.CkanCommand):
 
     def _extract_members(self, members):
         '''Strips redundant information from members of a group'''
-        return [ { 'name': member['name'],
-                   'capacity': member['capacity'] } \
-                           for member in members ]
-                    
+        return [{'name': member['name'],
+                 'capacity': member['capacity']}
+                for member in members]
 
     def _migrate_dataset_lists(self, source_datasets, target_datasets):
         '''Migrate datasets from source into target.
@@ -502,16 +513,15 @@ class ECPortalCommand(cli.CkanCommand):
         dataset is 'private' in either list, it will remain private in the
         result.
         '''
-
         VALID_CAPACITIES = ['private', 'public']
-        def user_capacity_merger(c1, c2):
 
+        def user_capacity_merger(c1, c2):
             assert c1 in VALID_CAPACITIES
             assert c2 in VALID_CAPACITIES
             if c1 == c2:
                 return c1
             else:
-                return 'private'  ## Assume just two valid capicities
+                return 'private'  # assume just two valid capicities
 
         return self._merge_members(source_datasets,
                                    target_datasets,
@@ -533,21 +543,20 @@ class ECPortalCommand(cli.CkanCommand):
               they will retain that capacity, regardless of capacity in the
               source list.
          '''
-
         VALID_CAPACITIES = ['admin', 'editor']
-        def user_capacity_merger(c1, c2):
 
+        def user_capacity_merger(c1, c2):
             assert c1 in VALID_CAPACITIES
             assert c2 in VALID_CAPACITIES
             if c1 == c2:
                 return c1
             else:
-                return 'admin'  ## Assume just two valid capicities
+                return 'admin'  # assume just two valid capicities
 
         return self._merge_members(source_users,
                                    target_users,
                                    user_capacity_merger)
- 
+
     def _merge_members(self, source_members, target_members, capacity_merger):
         '''Migrates members from source into target.
 
@@ -562,18 +571,17 @@ class ECPortalCommand(cli.CkanCommand):
         :param capacity_merger: Function
                 (source_capacity, target_capacity) -> merged_capacity
         '''
+        source_member_names = set(member['name'] for member in source_members)
+        target_member_names = set(member['name'] for member in target_members)
 
-        source_member_names = set( member['name'] for member in source_members)
-        target_member_names = set( member['name'] for member in target_members)
+        target_capacities = dict((member['name'], member['capacity'])
+                                 for member in target_members)
 
-        target_capacities = dict((member['name'], member['capacity']) \
-                                    for member in target_members)
+        result = [member.copy() for member in target_members
+                  if member['name'] not in source_member_names]
 
-        result = [ member.copy() for member in target_members \
-                               if member['name'] not in source_member_names ]
-
-        result += [ member.copy() for member in source_members \
-                                if member['name'] not in target_member_names ]
+        result += [member.copy() for member in source_members
+                   if member['name'] not in target_member_names]
 
         for member in source_members:
             name = member['name']
@@ -583,16 +591,17 @@ class ECPortalCommand(cli.CkanCommand):
             member = member.copy()
             source_capacity = member['capacity']
             target_capacity = target_capacities[name]
-            member['capacity'] = capacity_merger(source_capacity, target_capacity)
+            member['capacity'] = capacity_merger(source_capacity,
+                                                 target_capacity)
 
             if source_capacity != target_capacity:
-                log.warn('Mismatched member capacities: %s will be migrated as %s' % (
-                            name, member['capacity']))
+                log.warn('Mismatched member capacities: '
+                         '%s will be migrated as %s'
+                         % (name, member['capacity']))
 
             result.append(member)
-        
-        return result
 
+        return result
 
     def update_publishers(self):
         '''
@@ -603,37 +612,44 @@ class ECPortalCommand(cli.CkanCommand):
          - deleted publishers are left untouched
         '''
 
-        user = logic.get_action('get_site_user')({'model': model, 'ignore_auth': True}, {})
-        context = {'model': model, 'session': model.Session, 'user': user['name']}
+        user = logic.get_action('get_site_user')(
+            {'model': model, 'ignore_auth': True}, {})
+        context = {'model': model,
+                   'session': model.Session,
+                   'user': user['name']}
 
         group_list_context = context.copy()
         group_list_context['with_datasets'] = True
         existing_groups = logic.get_action('group_list')(
-                group_list_context,
-                {'groups': '', 'all_fields': True})
+            group_list_context, {'groups': '', 'all_fields': True})
 
         existing_groups = dict((g['name'], g) for g in existing_groups)
 
         publishers = self._read_publishers_from_file()
 
-        new_publishers = [ p for p in publishers if p.name not in existing_groups ]
-        existing_publishers = [ p for p in publishers if p.name in existing_groups ]
+        new_publishers = [p for p in publishers
+                          if p.name not in existing_groups]
+        existing_publishers = [p for p in publishers
+                               if p.name in existing_groups]
 
-        deleted_publishers = [ group_name for group_name in existing_groups.keys() \
-                                 if group_name not in set(p.name for p in publishers) ]
+        deleted_publishers = [
+            group_name for group_name in existing_groups.keys()
+            if group_name not in set(p.name for p in publishers)]
 
         self._add_publishers(new_publishers)
 
         # Update existing publishers
         groups_title_lookup = {}
         for publisher in existing_publishers:
-            context = {'model': model, 'session': model.Session, 'user': user['name']}
-            if publisher.lang_code != "en":
+            context = {'model': model,
+                       'session': model.Session,
+                       'user': user['name']}
+            if publisher.lang_code != 'en':
                 continue
             existing_group = existing_groups[publisher.name]
-            if existing_group["title"] != publisher.title:
+            if existing_group['title'] != publisher.title:
                 # Update the Group
-                log.info("Publisher required update: %s, [%s].  (Was: %s)",
+                log.info('Publisher required update: %s, [%s].  (Was: %s)',
                          publisher.title,
                          publisher.name,
                          existing_group['title'])
@@ -641,39 +657,49 @@ class ECPortalCommand(cli.CkanCommand):
                 group.update(title=publisher.title)
                 logic.get_action('group_update')(context, group)
             # Track the group titles
-            groups_title_lookup[publisher.name] = publisher.title or publisher.name
+            groups_title_lookup[publisher.name] = \
+                publisher.title or publisher.name
 
         # Update translations.
-        context = {'model': model, 'session': model.Session, 'user': user['name']}
-        self._update_translations(existing_publishers, groups_title_lookup, context)
+        context = {'model': model,
+                   'session': model.Session,
+                   'user': user['name']}
+        self._update_translations(existing_publishers, groups_title_lookup,
+                                  context)
 
         # Just log which publishers should be deleted.
         for group_name in deleted_publishers:
             group = existing_groups[group_name]
             if group['packages'] == 0:
-                log.info("Deleting old group %s as it has no datasets.", group['name'])
-                context = {'model': model, 'session': model.Session, 'user': user['name']}
+                log.info('Deleting old group %s as it has no datasets.',
+                         group['name'])
+                context = {'model': model,
+                           'session': model.Session,
+                           'user': user['name']}
                 logic.get_action('group_delete')(context, {'id': group['id']})
 
             else:
-                log.warn("Not deleting old publisher: %s because it has datasets associated with it.", group_name)
+                log.warn('Not deleting old publisher: %s because '
+                         'it has datasets associated with it.',
+                         group_name)
 
     def _update_translations(self, publishers, groups_title_lookup, context):
         translations = []
         for publisher in publishers:
-            if publisher.lang_code == "en":
+            if publisher.lang_code == 'en':
                 continue
             if not publisher.title:
                 continue
 
             if publisher.name not in groups_title_lookup:
-                log.warn("No english version of %s [%s].  Skipping", publisher.title, publisher.name)
+                log.warn('No english version of %s [%s].  Skipping',
+                         publisher.title, publisher.name)
                 continue
 
             translations.append({
-                "term": groups_title_lookup[publisher.name],
-                "term_translation": publisher.title,
-                "lang_code": publisher.lang_code
+                'term': groups_title_lookup[publisher.name],
+                'term_translation': publisher.title,
+                'lang_code': publisher.lang_code
             })
 
         logic.get_action('term_translation_update_many')(
@@ -699,8 +725,11 @@ class ECPortalCommand(cli.CkanCommand):
 
     def _delete_vocab(self, vocab_name):
         log.info('Deleting vocabulary "%s"' % vocab_name)
-        context = {'model': model, 'session': model.Session, 'user': self.user_name}
-        vocab = logic.get_action('vocabulary_show')(context, {'id': vocab_name})
+        context = {'model': model,
+                   'session': model.Session,
+                   'user': self.user_name}
+        vocab = logic.get_action('vocabulary_show')(
+            context, {'id': vocab_name})
         for tag in vocab.get('tags'):
             logic.get_action('tag_delete')(context, {'id': tag['id']})
         logic.get_action('vocabulary_delete')(context, {'id': vocab['id']})
@@ -717,85 +746,94 @@ class ECPortalCommand(cli.CkanCommand):
         tag_schema = ckan.logic.schema.default_create_tag_schema()
         tag_schema['name'] = [unicode]
 
-        user = logic.get_action('get_site_user')({'model': model, 'ignore_auth': True}, {})
+        user = logic.get_action('get_site_user')(
+            {'model': model, 'ignore_auth': True}, {})
 
         for item in full_json['results']['bindings']:
-            if item["language"]["value"] == "en":
-                context = {'model': model, 'session': model.Session, 'user': user['name'],
+            if item['language']['value'] == 'en':
+                context = {'model': model,
+                           'session': model.Session,
+                           'user': user['name'],
                            'schema': tag_schema}
 
-                if item["label"]["value"] == "Multilingual Code" and vocab_name == forms.LANGUAGE_VOCAB_NAME:
+                if (item['label']['value'] == 'Multilingual Code' and
+                        vocab_name == forms.LANGUAGE_VOCAB_NAME):
                     continue
 
-                term = item["term"]["value"]
-                tag = {
-                    'name': term,
-                    'vocabulary_id': vocab['id']
-                }
+                term = item['term']['value']
+                tag = {'name': term,
+                       'vocabulary_id': vocab['id']}
                 try:
                     logic.get_action('tag_create')(context, tag)
                 except logic.ValidationError, ve:
                     # ignore errors about the tag already belong to the vocab
                     # if it's a different error, reraise
-                    if not 'already belongs to vocabulary' in str(ve.error_dict):
+                    if not ('already belongs to vocabulary'
+                            in str(ve.error_dict)):
                         raise ve
                     log.info('Tag "%s" already belongs to vocab "%s"' %
                              (term, vocab_name))
 
         for item in full_json['results']['bindings']:
-            term = item["term"]["value"]
-            translation = item["label"]["value"]
-            if translation == "Multilingual Code" and vocab_name == forms.LANGUAGE_VOCAB_NAME:
+            term = item['term']['value']
+            translation = item['label']['value']
+            if (translation == 'Multilingual Code' and
+                    vocab_name == forms.LANGUAGE_VOCAB_NAME):
                 continue
             if not translation:
                 continue
 
-            translations.append({"term": term,
-                                "term_translation": translation,
-                                "lang_code": item["language"]["value"]
-                                })
+            translations.append({'term': term,
+                                 'term_translation': translation,
+                                 'lang_code': item['language']['value']})
 
         logic.get_action('term_translation_update_many')(
             context, {'data': translations}
         )
 
     def create_geo_vocab(self):
-        file_name = os.path.dirname(os.path.abspath(__file__)) + '/../../data/po-countries.json'
+        file_name = os.path.dirname(os.path.abspath(__file__)) + \
+            '/../../data/po-countries.json'
         self.create_vocab_from_file(forms.GEO_VOCAB_NAME, file_name)
 
     def delete_geo_vocab(self):
         self._delete_vocab(forms.GEO_VOCAB_NAME)
 
     def create_dataset_type_vocab(self):
-        file_name = os.path.dirname(os.path.abspath(__file__)) + '/../../data/odp-dataset-type.json'
+        file_name = os.path.dirname(os.path.abspath(__file__)) + \
+            '/../../data/odp-dataset-type.json'
         self.create_vocab_from_file(forms.DATASET_TYPE_VOCAB_NAME, file_name)
 
     def delete_dataset_type_vocab(self):
         self._delete_vocab(forms.DATASET_TYPE_VOCAB_NAME)
 
     def create_language_vocab(self):
-        file_name = os.path.dirname(os.path.abspath(__file__)) + '/../../data/po-languages.json'
+        file_name = os.path.dirname(os.path.abspath(__file__)) + \
+            '/../../data/po-languages.json'
         self.create_vocab_from_file(forms.LANGUAGE_VOCAB_NAME, file_name)
 
     def delete_language_vocab(self):
         self._delete_vocab(forms.LANGUAGE_VOCAB_NAME)
 
     def create_status_vocab(self):
-        file_name = os.path.dirname(os.path.abspath(__file__)) + '/../../data/odp-dataset-status.json'
+        file_name = os.path.dirname(os.path.abspath(__file__)) + \
+            '/../../data/odp-dataset-status.json'
         self.create_vocab_from_file(forms.STATUS_VOCAB_NAME, file_name)
 
     def delete_status_vocab(self):
         self._delete_vocab(forms.STATUS_VOCAB_NAME)
 
     def create_interop_vocab(self):
-        file_name = os.path.dirname(os.path.abspath(__file__)) + '/../../data/odp-interoperability-level.json'
+        file_name = os.path.dirname(os.path.abspath(__file__)) + \
+            '/../../data/odp-interoperability-level.json'
         self.create_vocab_from_file(forms.INTEROP_VOCAB_NAME, file_name)
 
     def delete_interop_vocab(self):
         self._delete_vocab(forms.INTEROP_VOCAB_NAME)
 
     def create_temporal_vocab(self):
-        file_name = os.path.dirname(os.path.abspath(__file__)) + '/../../data/odp-temporal-granularity.json'
+        file_name = os.path.dirname(os.path.abspath(__file__)) + \
+            '/../../data/odp-temporal-granularity.json'
         self.create_vocab_from_file(forms.TEMPORAL_VOCAB_NAME, file_name)
 
     def delete_temporal_vocab(self):
@@ -819,7 +857,8 @@ class ECPortalCommand(cli.CkanCommand):
             return result[0]
 
     def import_csv_translation(self):
-        file_name = os.path.dirname(os.path.abspath(__file__)) + '/../../data/odp-vocabulary-translate.csv'
+        file_name = os.path.dirname(os.path.abspath(__file__)) + \
+            '/../../data/odp-vocabulary-translate.csv'
         voc_translate = file(file_name)
         voc_dicts = csv.DictReader(voc_translate)
         translations = []

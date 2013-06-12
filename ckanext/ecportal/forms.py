@@ -1,8 +1,9 @@
 import logging
 import operator
 import pylons
-from ckan.lib.base import c, model
+
 from ckan.authz import Authorizer
+import ckan.model as model
 import ckan.logic as logic
 import ckan.logic.schema
 import ckan.lib.dictization as dictization
@@ -57,7 +58,8 @@ def _translate(terms, lang, fallback_lang):
 
     term_translations = {}
     for translation in translations:
-        term_translations[translation['term']] = translation['term_translation']
+        term_translations[translation['term']] = \
+            translation['term_translation']
 
     for term in terms:
         if not term in term_translations:
@@ -113,6 +115,8 @@ class ECPortalDatasetForm(p.SingletonPlugin):
 
     def setup_template_variables(self, context, data_dict=None,
                                  package_type=None):
+        c = p.toolkit.c
+
         ckan_lang = str(helpers.current_locale())
         ckan_lang_fallback = str(helpers.fallback_locale())
 
@@ -127,23 +131,17 @@ class ECPortalDatasetForm(p.SingletonPlugin):
         c.is_sysadmin = Authorizer().is_sysadmin(c.user)
 
         c.status = _tags_and_translations(
-            context, STATUS_VOCAB_NAME, ckan_lang, ckan_lang_fallback
-        )
+            context, STATUS_VOCAB_NAME, ckan_lang, ckan_lang_fallback)
         c.interoperability_levels = _tags_and_translations(
-            context, INTEROP_VOCAB_NAME, ckan_lang, ckan_lang_fallback
-        )
+            context, INTEROP_VOCAB_NAME, ckan_lang, ckan_lang_fallback)
         c.type_of_dataset = _tags_and_translations(
-            context, DATASET_TYPE_VOCAB_NAME, ckan_lang, ckan_lang_fallback
-        )
+            context, DATASET_TYPE_VOCAB_NAME, ckan_lang, ckan_lang_fallback)
         c.geographical_coverage = _tags_and_translations(
-            context, GEO_VOCAB_NAME, ckan_lang, ckan_lang_fallback
-        )
+            context, GEO_VOCAB_NAME, ckan_lang, ckan_lang_fallback)
         c.languages = _tags_and_translations(
-            context, LANGUAGE_VOCAB_NAME, ckan_lang, ckan_lang_fallback
-        )
+            context, LANGUAGE_VOCAB_NAME, ckan_lang, ckan_lang_fallback)
         c.temporal_granularity = [(u'', u'')] + _tags_and_translations(
-            context, TEMPORAL_VOCAB_NAME, ckan_lang, ckan_lang_fallback
-        )
+            context, TEMPORAL_VOCAB_NAME, ckan_lang, ckan_lang_fallback)
 
         # publisher IDs and name translations
         if c.is_sysadmin:
@@ -247,31 +245,42 @@ class ECPortalDatasetForm(p.SingletonPlugin):
             'url': [not_empty, unicode],
             'status': [not_empty, convert_to_tags(STATUS_VOCAB_NAME)],
             'identifier': [ignore_missing, unicode, convert_to_extras],
-            'interoperability_level': [ignore_missing, convert_to_tags(INTEROP_VOCAB_NAME)],
-            'type_of_dataset': [ignore_missing, convert_to_tags(DATASET_TYPE_VOCAB_NAME)],
+            'interoperability_level': [ignore_missing,
+                                       convert_to_tags(INTEROP_VOCAB_NAME)],
+            'type_of_dataset': [ignore_missing,
+                                convert_to_tags(DATASET_TYPE_VOCAB_NAME)],
             'published_by': [not_empty, unicode, publisher_exists,
                              convert_to_groups('name')],
             'capacity': [ignore_missing, unicode, default(u'private'),
                          convert_to_groups('capacity')],
-            'release_date': [ignore_missing, ecportal_date_to_db, convert_to_extras],
-            'modified_date': [ignore_missing, ecportal_date_to_db, convert_to_extras],
-            'accrual_periodicity': [ignore_missing, unicode, convert_to_extras],
+            'release_date': [ignore_missing, ecportal_date_to_db,
+                             convert_to_extras],
+            'modified_date': [ignore_missing, ecportal_date_to_db,
+                              convert_to_extras],
+            'accrual_periodicity': [ignore_missing, unicode,
+                                    convert_to_extras],
             'temporal_coverage_from': [ignore_missing, ecportal_date_to_db,
                                        convert_to_extras],
             'temporal_coverage_to': [ignore_missing, ecportal_date_to_db,
                                      convert_to_extras],
-            'temporal_granularity': [ignore_missing, convert_to_tags(TEMPORAL_VOCAB_NAME)],
-            'geographical_coverage': [ignore_missing, convert_to_tags(GEO_VOCAB_NAME)],
+            'temporal_granularity': [ignore_missing,
+                                     convert_to_tags(TEMPORAL_VOCAB_NAME)],
+            'geographical_coverage': [ignore_missing,
+                                      convert_to_tags(GEO_VOCAB_NAME)],
             'language': [ignore_missing, convert_to_tags(LANGUAGE_VOCAB_NAME)],
-            'metadata_language': [ignore_missing, member_of_vocab(LANGUAGE_VOCAB_NAME), convert_to_extras],
-            'version_description': [ignore_missing, unicode, convert_to_extras],
+            'metadata_language': [ignore_missing,
+                                  member_of_vocab(LANGUAGE_VOCAB_NAME),
+                                  convert_to_extras],
+            'version_description': [ignore_missing, unicode,
+                                    convert_to_extras],
             'rdf': [ignore_missing, unicode, update_rdf, convert_to_extras],
             'contact_name': [ignore_missing, unicode, convert_to_extras],
             'contact_email': [ignore_missing, requires_field('contact_name'),
                               unicode, convert_to_extras],
             'contact_address': [ignore_missing, requires_field('contact_name'),
                                 unicode, convert_to_extras],
-            'contact_telephone': [ignore_missing, requires_field('contact_name'),
+            'contact_telephone': [ignore_missing,
+                                  requires_field('contact_name'),
                                   unicode, convert_to_extras],
             'contact_webpage': [ignore_missing, requires_field('contact_name'),
                                 unicode, convert_to_extras],
@@ -313,8 +322,10 @@ class ECPortalDatasetForm(p.SingletonPlugin):
             'temporal_coverage_to': [convert_from_extras, ignore_missing],
             'temporal_granularity': [convert_from_tags(TEMPORAL_VOCAB_NAME),
                                      ignore_missing],
-            'geographical_coverage': [convert_from_tags(GEO_VOCAB_NAME), ignore_missing],
-            'language': [convert_from_tags(LANGUAGE_VOCAB_NAME), ignore_missing],
+            'geographical_coverage': [convert_from_tags(GEO_VOCAB_NAME),
+                                      ignore_missing],
+            'language': [convert_from_tags(LANGUAGE_VOCAB_NAME),
+                         ignore_missing],
             'metadata_language': [convert_from_extras, ignore_missing],
             'version_description': [convert_from_extras, ignore_missing],
             'rdf': [convert_from_extras, ignore_missing],
@@ -368,11 +379,14 @@ class ECPortalPublisherForm(p.SingletonPlugin):
 
     def before_map(self, map):
         controller = 'ckanext.organizations.controllers:OrganizationController'
-        map.connect('/publisher/users/{id}', controller=controller, action='users')
-        map.connect('/publisher/apply/{id}', controller=controller, action='apply')
+        map.connect('/publisher/users/{id}', controller=controller,
+                    action='users')
+        map.connect('/publisher/apply/{id}', controller=controller,
+                    action='apply')
         map.connect('/publisher/apply', controller=controller, action='apply')
         map.connect('/publisher/edit/{id}', controller='group', action='edit')
-        map.connect('/publisher/history/{id}', controller='group', action='history')
+        map.connect('/publisher/history/{id}', controller='group',
+                    action='history')
         map.connect('/publisher/new', controller='group', action='new')
         map.connect('/publisher/{id}', controller='group', action='read')
         map.connect('/publisher',  controller='group', action='index')
@@ -427,6 +441,8 @@ class ECPortalPublisherForm(p.SingletonPlugin):
         pass
 
     def setup_template_variables(self, context, data_dict):
+        c = p.toolkit.c
+
         c.user_groups = c.userobj.get_groups('organization')
         local_ctx = {'model': model, 'session': model.Session,
                      'user': c.user or c.author}
