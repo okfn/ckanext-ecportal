@@ -1,16 +1,14 @@
-import urlparse
+import logging
 import datetime
 import lxml.etree
-from pylons import g
+import pylons.config
 import ckan.lib.helpers as h
 try:
     import json
 except:
     import simplejson as json
 
-import logging
 log = logging.getLogger(__name__)
-
 Element = lxml.etree.Element
 
 
@@ -66,7 +64,9 @@ def update_rdf(source_rdf, name):
 
     # We can add elements like this knowing it will look up the uri in the
     # root nsmap before this element's map.
-    local_url = urlparse.urljoin(g.site_url, 'dataset/%s' % name)
+    root_path = h.url_for('/', qualified=False)
+    site_url = pylons.config['ckan.site_url'].rstrip('/') + root_path
+    local_url = site_url.rstrip('/') + '/dataset/{0}'.format(name)
 
     # Outer dcat:record
     record = Element('{http://www.w3.org/ns/dcat#}record',
