@@ -125,7 +125,6 @@ class MulitlingualDataset(multilingual.MultilingualDataset):
 
 
 class ECPortalPlugin(p.SingletonPlugin):
-    p.implements(p.IConfigurable)
     p.implements(p.IConfigurer)
     p.implements(p.IRoutes)
     p.implements(p.IActions)
@@ -157,17 +156,6 @@ class ECPortalPlugin(p.SingletonPlugin):
             'user_update': ecportal_logic.user_update,
             'package_show': ecportal_logic.package_show
         }
-
-    def configure(self, config):
-        self.site_url = config.get('ckan.site_url')
-
-        # do not automatically notify for now for performance reasons
-        def no_notify(entity, operation=None):
-            return
-
-        for plugin in p.PluginImplementations(p.IDomainObjectModification):
-            if plugin.name in ('QAPlugin', 'WebstorerPlugin'):
-                plugin.notify = no_notify
 
     def update_config(self, config):
         p.toolkit.add_template_directory(config, 'templates')
