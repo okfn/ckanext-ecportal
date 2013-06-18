@@ -43,12 +43,12 @@ CKAN.Utils = CKAN.Utils || {};
 
     var isResourceView = $('body.package.resource_read').length > 0;
     if (isResourceView) {
-      CKAN.DataPreview.loadPreviewDialog(preload_resource);
+      // CKAN.DataPreview.loadPreviewDialog(preload_resource);
     }
 
     var isEmbededDataviewer = $('body.package.resource_embedded_dataviewer').length > 0;
     if (isEmbededDataviewer) {
-      CKAN.DataPreview.loadEmbeddedPreview(preload_resource, reclineState);
+      // CKAN.DataPreview.loadEmbeddedPreview(preload_resource, reclineState);
     }
 
     if ($(document.body).hasClass('search')) {
