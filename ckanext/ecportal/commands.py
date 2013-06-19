@@ -702,9 +702,10 @@ class ECPortalCommand(cli.CkanCommand):
                 'lang_code': publisher.lang_code
             })
 
-        logic.get_action('term_translation_update_many')(
-            context, {'data': translations}
-        )
+        if translations:
+            logic.get_action('term_translation_update_many')(
+                context, {'data': translations}
+            )
 
     def _create_vocab(self, context, vocab_name):
         try:
