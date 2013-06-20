@@ -7,6 +7,7 @@ import ckan.model as model
 import ckan.plugins as p
 import ckan.lib.search as search
 import ckan.lib.i18n as i18n
+import ckan.logic as logic
 
 NUM_TOP_PUBLISHERS = 6
 
@@ -89,3 +90,9 @@ def group_facets_by_field(fields):
         else:
             facets[field] = [value]
     return facets
+
+def groups_available(user):
+    ''' return a list of available groups '''
+    context = {'model': model, 'session': model.Session, 'user': user}
+    data_dict = {'available_only': True}
+    return logic.get_action('group_list_authz')(context, data_dict)
