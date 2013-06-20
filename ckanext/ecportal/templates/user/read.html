@@ -84,8 +84,8 @@
             <h2>Publishers</h2>
             <ul>
               <li py:for="group in h.groups_available(c.user)">
-                <a href="${h.url_for(controller='group', action='read', id=group.name)}">
-                  ${group.name}
+                <a href="${h.url_for(controller='group', action='read', id=group[0])}">
+                  ${group[1]}
                 </a>
               </li>
             </ul>
