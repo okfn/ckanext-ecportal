@@ -50,35 +50,10 @@ TEMPORAL_VOCAB_NAME = u'temporal_granularity'
 UNICODE_SORT = unicode_sort.UNICODE_SORT
 
 
-def _translate(terms, lang, fallback_lang):
-    translations = logic.get_action('term_translation_show')(
-        {'model': model},
-        {'terms': terms, 'lang_codes': [lang]}
-    )
-
-    term_translations = {}
-    for translation in translations:
-        term_translations[translation['term']] = \
-            translation['term_translation']
-
-    for term in terms:
-        if not term in term_translations:
-            translation = logic.get_action('term_translation_show')(
-                {'model': model},
-                {'terms': [term], 'lang_codes': [fallback_lang]}
-            )
-            if translation:
-                term_translations[term] = translation[0]['term_translation']
-            else:
-                term_translations[term] = term
-
-    return term_translations
-
-
 def _tags_and_translations(context, vocab, lang, lang_fallback):
     try:
         tags = logic.get_action('tag_list')(context, {'vocabulary_id': vocab})
-        tag_translations = _translate(tags, lang, lang_fallback)
+        tag_translations = helpers.translate(tags, lang, lang_fallback)
         return sorted([(t, tag_translations[t]) for t in tags],
                       key=operator.itemgetter(1))
     except logic.NotFound:
@@ -144,37 +119,7 @@ class ECPortalDatasetForm(p.SingletonPlugin):
             context, TEMPORAL_VOCAB_NAME, ckan_lang, ckan_lang_fallback)
 
         # publisher IDs and name translations
-        if c.is_sysadmin:
-            group_type = pylons.config.get('ckan.default.group_type',
-                                           'organization')
-            groups = logic.get_action('group_list')(
-                context, {'all_fields': True})
-            groups = [group for group in groups
-                      if group.get('type') == group_type]
-        elif c.userobj:
-            groups = [dictization.table_dictize(obj, context)
-                      for obj in c.userobj.get_groups()]
-        else:
-            groups = []
-
-        group_translations = _translate(
-            [group.get('display_name') for group in groups],
-            ckan_lang, ckan_lang_fallback)
-
-        def sort_translations(key):
-            # Strip accents first and if equivilant do next stage comparison.
-            # leaving space and concatenating is to avoid having todo a real
-            # 2 level sort.
-            display_name = key[1]
-            return (unicode_sort.strip_accents(display_name) +
-                    '   ' +
-                    display_name).translate(UNICODE_SORT)
-
-        c.publishers = [
-            (group['name'],
-             group_translations[group.get('display_name')] or group['name'])
-            for group in groups]
-        c.publishers.sort(key=sort_translations)
+        c.publishers = helpers.groups_available(c.user)
 
         # get new group name if group ID in query string
         new_group_id = pylons.request.params.get('groups__0__id')
@@ -370,7 +315,8 @@ class ECPortalDatasetForm(p.SingletonPlugin):
                 'recent_updates': helpers.recent_updates,
                 'top_publishers': helpers.top_publishers,
                 'current_date': helpers.current_date,
-                'group_facets_by_field': helpers.group_facets_by_field}
+                'group_facets_by_field': helpers.group_facets_by_field,
+                'groups_available': helpers.groups_available}
 
 
 class ECPortalPublisherForm(p.SingletonPlugin):
