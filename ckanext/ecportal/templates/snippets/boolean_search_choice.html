@@ -8,19 +8,19 @@
 <strong>Show results with</strong>:
 <py:choose test="session.get('ext_boolean', 'all')">
   <py:when test="'any'">
-    <input type="radio" name="ext_boolean" value="all" /> ${_('all of these words')} |
-    <input type="radio" name="ext_boolean" value="any" checked="checked" /> ${_('any of these words')} |
-    <input type="radio" name="ext_boolean" value="exact" /> ${_('the exact phrase')}
+    <label class="inline"><input type="radio" name="ext_boolean" value="all" /> ${_('all of these words')} |</label>
+    <label class="inline"><input type="radio" name="ext_boolean" value="any" checked="checked" /> ${_('any of these words')} |</label>
+    <label class="inline"><input type="radio" name="ext_boolean" value="exact" /> ${_('the exact phrase')}</label>
   </py:when>
   <py:when test="'exact'">
-    <input type="radio" name="ext_boolean" value="all" /> ${_('all of these words')} |
-    <input type="radio" name="ext_boolean" value="any" /> ${_('any of these words')} |
-    <input type="radio" name="ext_boolean" value="exact" checked="checked" /> ${_('the exact phrase')}
+    <label class="inline"><input type="radio" name="ext_boolean" value="all" /> ${_('all of these words')} |</label>
+    <label class="inline"><input type="radio" name="ext_boolean" value="any" /> ${_('any of these words')} |</label>
+    <label class="inline"><input type="radio" name="ext_boolean" value="exact" checked="checked" /> ${_('the exact phrase')}</label>
   </py:when>
   <py:otherwise>
-    <input type="radio" name="ext_boolean" value="all" checked="checked" /> ${_('all of these words')} |
-    <input type="radio" name="ext_boolean" value="any" /> ${_('any of these words')} |
-    <input type="radio" name="ext_boolean" value="exact" /> ${_('the exact phrase')}
+    <label class="inline"><input type="radio" name="ext_boolean" value="all" checked="checked" /> ${_('all of these words')} |</label>
+    <label class="inline"><input type="radio" name="ext_boolean" value="any" /> ${_('any of these words')} |</label>
+    <label class="inline"><input type="radio" name="ext_boolean" value="exact" /> ${_('the exact phrase')}</label>
   </py:otherwise>
 </py:choose>
 </html>
