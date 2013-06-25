@@ -1510,6 +1510,15 @@ input.search {
   left: 588px;
 }
 
+.ie7 .ECPortalHomeController .form-submit {
+  left: 602px;
+  top: 36px !important;
+}
+.ie8 .ECPortalHomeController .form-submit {
+  left: 605px;
+  top: 35px !important;
+}
+
 .btn-primary,
 .btn-danger {
   color: white !important;
