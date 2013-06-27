@@ -92,6 +92,9 @@ def group_update(context, data_dict):
             packages.append({'name': member[0]})
         data_dict['packages'] = packages
 
+    # can't save display_name so remove it from data_dict
+    data_dict.pop('display_name', None)
+
     return logic.action.update.group_update(context, data_dict)
 
 
