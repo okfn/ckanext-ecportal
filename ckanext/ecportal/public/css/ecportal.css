@@ -1510,6 +1510,15 @@ input.search {
   left: 588px;
 }
 
+.ie7 .ECPortalHomeController .form-submit {
+  left: 602px;
+  top: 36px !important;
+}
+.ie8 .ECPortalHomeController .form-submit {
+  left: 605px;
+  top: 35px !important;
+}
+
 .btn-primary,
 .btn-danger {
   color: white !important;
@@ -1685,4 +1694,16 @@ body {
 
 #sidebar .widget-list .sidebar-section:first-child {
   margin-top: 0;
+}
+
+label.inline {
+  display: inline;
+  color: #333;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 18px;
+}
+label.inline input {
+  display: inline;
+  margin-top: -1px;
 }
