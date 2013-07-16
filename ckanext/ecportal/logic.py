@@ -179,7 +179,10 @@ def group_show(context, data_dict):
 
 
 def sort_group(key):
-    display_name = key.get('display_name', '')
+    if isinstance(key, basestring):
+        display_name = key
+    else:
+        display_name = key.get('display_name', '')
     # Strip accents first and if equivilant do next stage comparison.
     # Leaving space and concatenating is to avoid having todo a real
     # 2 level sort.
