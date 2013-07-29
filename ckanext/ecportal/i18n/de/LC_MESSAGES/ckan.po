@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: CKAN EU ODP \n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2013-05-23 15:38+0000\n"
-"PO-Revision-Date: 2013-06-14 15:05+0000\n"
+"PO-Revision-Date: 2013-07-09 07:43+0000\n"
 "Last-Translator: odptranslator <ecodptranslators@gmail.com>\n"
 "Language-Team: German (http://www.transifex.com/projects/p/ckan-eu-"
 "odp/language/de/)\n"
@@ -336,7 +336,7 @@ msgstr "die Sie durchsuchen, durchlesen und herunterladen können."
 
 #: ../ckanext-ecportal/ckanext/ecportal/templates/home/index.html:31
 msgid "Top Publishers"
-msgstr "Top-Publishers"
+msgstr "Wichtigste Datenlieferanten"
 
 #: ../ckanext-ecportal/ckanext/ecportal/templates/home/index.html:34
 msgid "view all publishers"
@@ -569,7 +569,7 @@ msgstr "[1:%(item_count)s] Datensätze gefunden"
 #: ../ckanext-ecportal/ckanext/ecportal/templates/publisher/index.html:6
 #: ../ckanext-ecportal/ckanext/ecportal/templates/publisher/index.html:7
 msgid "Publishers"
-msgstr "Publishers"
+msgstr "Datenlieferanten"
 
 #: ../ckanext-ecportal/ckanext/ecportal/templates/publisher/read.html:31
 msgid "Search publisher..."

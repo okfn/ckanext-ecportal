@@ -10,8 +10,8 @@ msgstr ""
 "Project-Id-Version: CKAN EU ODP \n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2013-05-23 15:38+0000\n"
-"PO-Revision-Date: 2013-06-04 14:46+0000\n"
-"Last-Translator: odptranslator <ecodptranslators@gmail.com>\n"
+"PO-Revision-Date: 2013-07-11 12:48+0000\n"
+"Last-Translator: odptranslatorFI <DGT-WEB-FI@ec.europa.eu>\n"
 "Language-Team: Finnish (http://www.transifex.com/projects/p/ckan-eu-"
 "odp/language/fi/)\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
@@ -84,7 +84,7 @@ msgstr "%(count)s datajoukkoa tagilla [1:%(tagname)s]:"
 
 #: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:16
 msgid "Data Portal"
-msgstr ""
+msgstr "Data Portal"
 
 #: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:17
 #: ../ckanext-ecportal/ckanext/ecportal/templates/layout_base.html:90
@@ -133,7 +133,7 @@ msgstr "Näytä datajoukon resurssit"
 
 #: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:32
 msgid "No downloadable resources."
-msgstr ""
+msgstr "No downloadable resources."
 
 #: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:33
 msgid "No description for this item"
@@ -247,7 +247,7 @@ msgstr "Yhteystiedot"
 
 #: ../ckanext-ecportal/ckanext/ecportal/templates/layout_base.html:66
 msgid "Menu Arrow"
-msgstr ""
+msgstr "Menu Arrow"
 
 #: ../ckanext-ecportal/ckanext/ecportal/templates/layout_base.html:80
 #: ../ckanext-ecportal/ckanext/ecportal/templates/layout_base.html:81
@@ -294,7 +294,7 @@ msgstr "Datan tuottajien osio"
 
 #: ../ckanext-ecportal/ckanext/ecportal/templates/layout_base.html:138
 msgid "Master content template placeholder … please replace me."
-msgstr ""
+msgstr "Master content template placeholder ... please replace me."
 
 #: ../ckanext-ecportal/ckanext/ecportal/templates/layout_base.html:158
 msgid "Last update"
@@ -306,7 +306,7 @@ msgstr "Tietoa tästä sivustosta"
 
 #: ../ckanext-ecportal/ckanext/ecportal/templates/layout_base.html:162
 msgid "Top"
-msgstr ""
+msgstr "Sivun alkuun"
 
 #: ../ckanext-ecportal/ckanext/ecportal/templates/home/index.html:14
 msgid "This field is required."

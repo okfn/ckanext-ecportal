@@ -10,8 +10,8 @@ msgstr ""
 "Project-Id-Version: CKAN EU ODP \n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2013-05-23 15:38+0000\n"
-"PO-Revision-Date: 2013-06-04 14:39+0000\n"
-"Last-Translator: odptranslator <ecodptranslators@gmail.com>\n"
+"PO-Revision-Date: 2013-07-09 09:31+0000\n"
+"Last-Translator: odptranslatorPT <DGT-WEB-PT@ec.europa.eu>\n"
 "Language-Team: Portuguese (http://www.transifex.com/projects/p/ckan-eu-"
 "odp/language/pt/)\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
@@ -306,7 +306,7 @@ msgstr "Acerca do portal"
 
 #: ../ckanext-ecportal/ckanext/ecportal/templates/layout_base.html:162
 msgid "Top"
-msgstr ""
+msgstr "Topo"
 
 #: ../ckanext-ecportal/ckanext/ecportal/templates/home/index.html:14
 msgid "This field is required."
@@ -373,7 +373,7 @@ msgstr "revisão em curso"
 
 #: ../ckanext-ecportal/ckanext/ecportal/templates/package/read.html:70
 msgid "This is the current revision of this dataset, as edited at"
-msgstr "Esta é a revisão em curso deste conjunto de dados, conforme alterado em"
+msgstr "Esta é a última revisão deste conjunto de dados, conforme alterado em"
 
 #: ../ckanext-ecportal/ckanext/ecportal/templates/package/read.html:82
 msgid "RDF/XML"

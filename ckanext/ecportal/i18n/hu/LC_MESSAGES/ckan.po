@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: CKAN EU ODP \n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2013-05-23 15:38+0000\n"
-"PO-Revision-Date: 2013-06-04 16:22+0000\n"
+"PO-Revision-Date: 2013-07-10 09:15+0000\n"
 "Last-Translator: odptranslatorHU <DGT-WEB-HU@ec.europa.eu>\n"
 "Language-Team: Hungarian (http://www.transifex.com/projects/p/ckan-eu-"
 "odp/language/hu/)\n"
@@ -133,7 +133,7 @@ msgstr "Adatforrások megtekintése"
 
 #: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:32
 msgid "No downloadable resources."
-msgstr ""
+msgstr "Nincs letölthető adatforrás."
 
 #: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:33
 msgid "No description for this item"
@@ -642,5 +642,5 @@ msgid "There are %(count)s datasets with the keyword [1:%(tagname)s]:"
 msgstr " %(count)s adatkészlet tartalmazza a(z) [1:%(tagname)s] kulcsszót:"
 
 #~ msgid "no-sidebar"
-#~ msgstr ""
+#~ msgstr "Nincs oldalsáv"
 

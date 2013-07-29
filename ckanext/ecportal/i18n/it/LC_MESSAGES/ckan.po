@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: CKAN EU ODP \n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2013-05-23 15:38+0000\n"
-"PO-Revision-Date: 2013-06-14 16:09+0000\n"
+"PO-Revision-Date: 2013-07-09 15:51+0000\n"
 "Last-Translator: odptranslator <ecodptranslators@gmail.com>\n"
 "Language-Team: Italian (http://www.transifex.com/projects/p/ckan-eu-"
 "odp/language/it/)\n"
@@ -52,7 +52,7 @@ msgstr "Tag"
 
 #: ckan/templates/tag/index.html:20 ckan/templates/tag/index.html:23
 msgid "There are"
-msgstr "Ci sono"
+msgstr "Trovati"
 
 #: ckan/templates/tag/index.html:21
 msgid "results for ‘"
@@ -64,15 +64,15 @@ msgstr "risultati per tag."
 
 #: ckan/templates/tag/index.html:34
 msgid "Clear search"
-msgstr "Cancellate la ricerca"
+msgstr "Cancella la ricerca"
 
 #: ckan/templates/tag/index.html:34
 msgid "and see all tags."
-msgstr "e visualizzate tutti i tag."
+msgstr "e visualizza tutti i tag."
 
 #: ckan/templates/tag/read.html:6
 msgid "- Tags"
-msgstr "Tag"
+msgstr "- Tag"
 
 #: ckan/templates/tag/read.html:7
 msgid "Tag:"
@@ -81,11 +81,11 @@ msgstr "Tag:"
 #: ckan/templates/tag/read.html:10
 #, python-format
 msgid "There are %(count)s datasets tagged with [1:%(tagname)s]:"
-msgstr "Ci sono %(count)s set di dati con tag [1:%(tagname)s]:"
+msgstr "Esistono %(count)s set di dati con il tag [1:%(tagname)s]:"
 
 #: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:16
 msgid "Data Portal"
-msgstr "Portale Open Data"
+msgstr "Portale Dati"
 
 #: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:17
 #: ../ckanext-ecportal/ckanext/ecportal/templates/layout_base.html:90
@@ -104,7 +104,7 @@ msgstr "Parole chiave"
 
 #: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:23
 msgid "Resource formats"
-msgstr "Formati risorsa"
+msgstr "Formati delle risorse"
 
 #: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:24
 #: ../ckanext-ecportal/ckanext/ecportal/templates/package/read.html:23
@@ -112,7 +112,7 @@ msgstr "Formati risorsa"
 #: ../ckanext-ecportal/ckanext/ecportal/templates/package/resource_read.html:92
 #: ../ckanext-ecportal/ckanext/ecportal/templates/publisher/read.html:22
 msgid "Publisher"
-msgstr "Publisher"
+msgstr "Editore"
 
 #: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:25
 #: ../ckanext-ecportal/ckanext/ecportal/templates/package/read_core.html:125
@@ -122,7 +122,7 @@ msgstr "Lingua"
 #: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:26
 #: ../ckanext-ecportal/ckanext/ecportal/templates/package/read_core.html:120
 msgid "Geographical Coverage"
-msgstr "Cpertura geografica"
+msgstr "Copertura geografica"
 
 #: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:30
 msgid "Number of datasets"
@@ -130,7 +130,7 @@ msgstr "Numero di set di dati"
 
 #: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:31
 msgid "View dataset resources"
-msgstr "Visualizza risorse del set di dati"
+msgstr "Visualizza le risorse del set di dati"
 
 #: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:32
 msgid "No downloadable resources."
@@ -156,7 +156,7 @@ msgstr "Non autorizzato a leggere la risorsa %s"
 
 #: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:39
 msgid "The resource could not be found."
-msgstr "L'informazione non è stata trovata."
+msgstr "La risorsa non è stata trovata."
 
 #: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:40
 msgid "Dataset not found"
@@ -174,11 +174,11 @@ msgstr "URI"
 #: ../ckanext-ecportal/ckanext/ecportal/templates/package/read_core.html:90
 #: ../ckanext-ecportal/ckanext/ecportal/templates/package/resource_read.html:181
 msgid "Release Date"
-msgstr "Data rilascio"
+msgstr "Data di pubblicazione"
 
 #: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:46
 msgid "Added to open-data.europa.eu"
-msgstr "Aggiunti in open-data.europa.eu"
+msgstr "Aggiunti a open-data.europa.eu"
 
 #: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:47
 msgid "Updated on open-data.europa.eu"
@@ -186,15 +186,15 @@ msgstr "Aggiornati in open-data.europa.eu"
 
 #: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:48
 msgid "Popular terms"
-msgstr "Termini populari"
+msgstr "Termini più richiesti"
 
 #: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:49
 msgid "Most viewed datasets"
-msgstr "Dataset più visitati"
+msgstr "Set di dati più visualizzati"
 
 #: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:50
 msgid "Recently updated datasets"
-msgstr "Dataset aggiornati recentemente"
+msgstr "Set di dati aggiornati recentemente"
 
 #: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:51
 msgid "Recent updates"
@@ -202,7 +202,7 @@ msgstr "Aggiornamenti recenti"
 
 #: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:52
 msgid "Show results with"
-msgstr "Risultati della ricerca con"
+msgstr "Mostra i risultati della ricerca con"
 
 #: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:53
 msgid "all of these words"
@@ -218,7 +218,7 @@ msgstr "la frase esatta"
 
 #: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:56
 msgid "views"
-msgstr "Visualizza"
+msgstr "visualizzazioni"
 
 #: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:57
 msgid "Suggest a dataset"
@@ -226,15 +226,15 @@ msgstr "Proponete un set di dati!"
 
 #: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:58
 msgid "Is there a dataset from the EU that you could not find in this portal?"
-msgstr "Proponete un dataset"
+msgstr "Non trovate un set di dati dell'UE?"
 
 #: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:59
 msgid "Please request the dataset"
-msgstr "Proponete un dataset"
+msgstr "Richiedetelo!"
 
 #: ../ckanext-ecportal/ckanext/ecportal/helpers.py:43
 msgid "Cannot render package description"
-msgstr "Impossibile rilasciare la descrizione del pacchetto"
+msgstr "Impossibile riprodurre la descrizione del pacchetto"
 
 #: ../ckanext-ecportal/ckanext/ecportal/templates/layout_base.html:59
 #: ../ckanext-ecportal/ckanext/ecportal/templates/layout_base.html:160
@@ -275,7 +275,7 @@ msgstr "Applicazioni"
 
 #: ../ckanext-ecportal/ckanext/ecportal/templates/layout_base.html:99
 msgid "Linked Data"
-msgstr "Dati collegati"
+msgstr "Linked data"
 
 #: ../ckanext-ecportal/ckanext/ecportal/templates/layout_base.html:100
 msgid "About"
@@ -283,7 +283,7 @@ msgstr "Info"
 
 #: ../ckanext-ecportal/ckanext/ecportal/templates/layout_base.html:104
 msgid "Add dataset"
-msgstr "Aggiungi un dataset"
+msgstr "Aggiungi un set di dati"
 
 #: ../ckanext-ecportal/ckanext/ecportal/templates/layout_base.html:105
 msgid "Logout"
@@ -295,7 +295,7 @@ msgstr "Area del fornitore di dati"
 
 #: ../ckanext-ecportal/ckanext/ecportal/templates/layout_base.html:138
 msgid "Master content template placeholder … please replace me."
-msgstr "Variabile metasintattica contenuto template principale ... sostituirmi."
+msgstr "Variabile metasintattica contenuto template principale ... da sostituire."
 
 #: ../ckanext-ecportal/ckanext/ecportal/templates/layout_base.html:158
 msgid "Last update"
@@ -307,7 +307,7 @@ msgstr "Informazioni sul sito"
 
 #: ../ckanext-ecportal/ckanext/ecportal/templates/layout_base.html:162
 msgid "Top"
-msgstr "Torna su"
+msgstr "Inizio pagina"
 
 #: ../ckanext-ecportal/ckanext/ecportal/templates/home/index.html:14
 msgid "This field is required."
@@ -315,7 +315,7 @@ msgstr "Campo obbligatorio"
 
 #: ../ckanext-ecportal/ckanext/ecportal/templates/home/index.html:16
 msgid "Find datasets..."
-msgstr "Cerca i dataset"
+msgstr "Trova set di dati ..."
 
 #: ../ckanext-ecportal/ckanext/ecportal/templates/home/index.html:19
 msgid "contains"
@@ -330,11 +330,11 @@ msgstr "set di dati"
 
 #: ../ckanext-ecportal/ckanext/ecportal/templates/home/index.html:20
 msgid "that you can browse, learn about and download."
-msgstr "che è possibile esplorare, conoscerne informazioni e scaricare."
+msgstr "che è possibile cercare, esplorare e scaricare."
 
 #: ../ckanext-ecportal/ckanext/ecportal/templates/home/index.html:31
 msgid "Top Publishers"
-msgstr "Migliori publisher"
+msgstr "Editori principali"
 
 #: ../ckanext-ecportal/ckanext/ecportal/templates/home/index.html:34
 msgid "view all publishers"
@@ -346,7 +346,7 @@ msgstr "Aggiornamenti recenti"
 
 #: ../ckanext-ecportal/ckanext/ecportal/templates/home/index.html:52
 msgid "view all datasets"
-msgstr "Visualizza tutti i dati"
+msgstr "Visualizza tutti i set di dati"
 
 #: ../ckanext-ecportal/ckanext/ecportal/templates/package/read.html:14
 msgid "- Datasets"
@@ -362,7 +362,7 @@ msgstr "Set di dati correlati"
 
 #: ../ckanext-ecportal/ckanext/ecportal/templates/package/read.html:67
 msgid "This is an old revision of this dataset, as edited at"
-msgstr "Questa è una vecchia versione del dataset, modificata alle"
+msgstr "Questa è una vecchia versione del set di dati, modificata alle"
 
 #: ../ckanext-ecportal/ckanext/ecportal/templates/package/read.html:68
 msgid ". It may differ significantly from the"
@@ -370,11 +370,11 @@ msgstr ". Potrebbe variare in modo significativo dalla"
 
 #: ../ckanext-ecportal/ckanext/ecportal/templates/package/read.html:68
 msgid "current revision"
-msgstr "revisione corrente"
+msgstr "attuale revisione"
 
 #: ../ckanext-ecportal/ckanext/ecportal/templates/package/read.html:70
 msgid "This is the current revision of this dataset, as edited at"
-msgstr "Questa è la versione attuale del dataset, modificata alle"
+msgstr "Questa è la versione attuale del set di dati, modificata alle"
 
 #: ../ckanext-ecportal/ckanext/ecportal/templates/package/read.html:82
 msgid "RDF/XML"
@@ -390,7 +390,7 @@ msgstr "Cronologia set di dati"
 
 #: ../ckanext-ecportal/ckanext/ecportal/templates/package/read_core.html:12
 msgid "This dataset has been marked as deleted."
-msgstr "Questo set di dati è stato segnato come eliminato."
+msgstr "Questo set di dati è stato contrassegnato come eliminato"
 
 #: ../ckanext-ecportal/ckanext/ecportal/templates/package/read_core.html:24
 #: ../ckanext-ecportal/ckanext/ecportal/templates/package/resource_read.html:138
@@ -417,7 +417,7 @@ msgstr "(nessuno)"
 #: ../ckanext-ecportal/ckanext/ecportal/templates/package/read_core.html:56
 #: ../ckanext-ecportal/ckanext/ecportal/templates/package/resource_read.html:172
 msgid "Additional Information"
-msgstr "Informazioni aggiuntive"
+msgstr "Ulteriori informazioni"
 
 #: ../ckanext-ecportal/ckanext/ecportal/templates/package/read_core.html:60
 #: ../ckanext-ecportal/ckanext/ecportal/templates/package/resource_read.html:177
@@ -438,16 +438,16 @@ msgstr "Identificatore"
 
 #: ../ckanext-ecportal/ckanext/ecportal/templates/package/read_core.html:80
 msgid "Interoperability Level"
-msgstr "Livello interoperabilità"
+msgstr "Livello di interoperabilità"
 
 #: ../ckanext-ecportal/ckanext/ecportal/templates/package/read_core.html:85
 msgid "Type of Dataset"
-msgstr "Tipo do set di dati"
+msgstr "Tipo di set di dati"
 
 #: ../ckanext-ecportal/ckanext/ecportal/templates/package/read_core.html:95
 #: ../ckanext-ecportal/ckanext/ecportal/templates/package/resource_read.html:185
 msgid "Modified Date"
-msgstr "Data modificata"
+msgstr "Data della modifica"
 
 #: ../ckanext-ecportal/ckanext/ecportal/templates/package/read_core.html:100
 msgid "Accrual Periodicity"
@@ -455,11 +455,11 @@ msgstr "Periodicità di raccolta"
 
 #: ../ckanext-ecportal/ckanext/ecportal/templates/package/read_core.html:105
 msgid "Temporal Coverage From"
-msgstr "Copertura temporanea da"
+msgstr "Copertura temporale dal"
 
 #: ../ckanext-ecportal/ckanext/ecportal/templates/package/read_core.html:110
 msgid "Temporal Coverage To"
-msgstr "Copertura temporanea a"
+msgstr "Copertura temporale fino al"
 
 #: ../ckanext-ecportal/ckanext/ecportal/templates/package/read_core.html:115
 msgid "Temporal Granularity"
@@ -467,15 +467,15 @@ msgstr "Granularità temporale"
 
 #: ../ckanext-ecportal/ckanext/ecportal/templates/package/read_core.html:130
 msgid "Contact Name"
-msgstr "Nome contatto"
+msgstr "Nome del contatto"
 
 #: ../ckanext-ecportal/ckanext/ecportal/templates/package/read_core.html:135
 msgid "Contact E-mail"
-msgstr "E-mail contatto"
+msgstr "E-mail del contatto"
 
 #: ../ckanext-ecportal/ckanext/ecportal/templates/package/read_core.html:140
 msgid "Contact Address"
-msgstr "Indirizzo contatto"
+msgstr "Indirizzo del contatto"
 
 #: ../ckanext-ecportal/ckanext/ecportal/templates/package/read_core.html:145
 msgid "Contact Telephone"
@@ -483,7 +483,7 @@ msgstr "Telefono del contatto"
 
 #: ../ckanext-ecportal/ckanext/ecportal/templates/package/read_core.html:150
 msgid "Contact Web Page"
-msgstr "Pagina Web del contatto"
+msgstr "Sito web del contatto"
 
 #: ../ckanext-ecportal/ckanext/ecportal/templates/package/read_core.html:155
 msgid "Version"
@@ -499,7 +499,7 @@ msgstr "Paese"
 
 #: ../ckanext-ecportal/ckanext/ecportal/templates/package/resource_read.html:85
 msgid "Dataset - Resource"
-msgstr "- Set di dati - Risorsa"
+msgstr "Set di dati - Risorsa"
 
 #: ../ckanext-ecportal/ckanext/ecportal/templates/package/resource_read.html:106
 msgid "Licence:"
@@ -549,13 +549,13 @@ msgstr "Cerca -"
 
 #: ../ckanext-ecportal/ckanext/ecportal/templates/package/search.html:31
 msgid "Search datasets..."
-msgstr "Cerca un set di dati"
+msgstr "Cerca un set di dati ..."
 
 #: ../ckanext-ecportal/ckanext/ecportal/templates/package/search.html:45
 msgid ""
 "[1:There was an error while searching.]\n"
 "      Please try again."
-msgstr "[1:Errore nell'esecuzione della query.]⏎ Riprova"
+msgstr "[1:Errore nell'esecuzione della query.]⏎ Riprovare"
 
 #: ../ckanext-ecportal/ckanext/ecportal/templates/package/search.html:49
 #, python-format
@@ -565,11 +565,11 @@ msgstr "[1:%(item_count)s] set di dati trovati"
 #: ../ckanext-ecportal/ckanext/ecportal/templates/publisher/index.html:6
 #: ../ckanext-ecportal/ckanext/ecportal/templates/publisher/index.html:7
 msgid "Publishers"
-msgstr "Publisher"
+msgstr "Editori"
 
 #: ../ckanext-ecportal/ckanext/ecportal/templates/publisher/read.html:31
 msgid "Search publisher..."
-msgstr "Scegliere un publisher"
+msgstr "Cerca un editore ..."
 
 #: ../ckanext-ecportal/ckanext/ecportal/templates/publisher/read.html:55
 msgid "Administrators"
@@ -621,17 +621,17 @@ msgstr "aggiornato il"
 
 #: ../ckanext-ecportal/ckanext/ecportal/templates/tag/read.html:6
 msgid "- Keyword"
-msgstr "Parole chiave"
+msgstr "- Parola chiave"
 
 #: ../ckanext-ecportal/ckanext/ecportal/templates/tag/read.html:7
 msgid "Keyword:"
-msgstr "Parole chiave"
+msgstr "Parola chiave:"
 
 #: ../ckanext-ecportal/ckanext/ecportal/templates/tag/read.html:10
 #, python-format
 msgid "There are %(count)s datasets with the keyword [1:%(tagname)s]:"
-msgstr "Ci sono %(count)s datasets con la parola chiave [1:%(tagname)s]:"
+msgstr "Esistono %(count)s set di dati con la parola chiave [1:%(tagname)s]:"
 
 #~ msgid "no-sidebar"
-#~ msgstr "no-sidebar"
+#~ msgstr "nessuna barra laterale"
 

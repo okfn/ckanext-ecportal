@@ -10,8 +10,8 @@ msgstr ""
 "Project-Id-Version: CKAN EU ODP \n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2013-05-23 15:38+0000\n"
-"PO-Revision-Date: 2013-06-14 14:01+0000\n"
-"Last-Translator: odptranslator <ecodptranslators@gmail.com>\n"
+"PO-Revision-Date: 2013-07-11 09:49+0000\n"
+"Last-Translator: odptranslatorET <DGT-WEB-ET@ec.europa.eu>\n"
 "Language-Team: Estonian (http://www.transifex.com/projects/p/ckan-eu-"
 "odp/language/et/)\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
@@ -84,7 +84,7 @@ msgstr " %(count)s andmekogu on sildistatud sildiga [1:%(tagname)s]:"
 
 #: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:16
 msgid "Data Portal"
-msgstr ""
+msgstr "andmete portaal"
 
 #: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:17
 #: ../ckanext-ecportal/ckanext/ecportal/templates/layout_base.html:90
@@ -177,23 +177,23 @@ msgstr "Avaldamise kuupäev"
 
 #: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:46
 msgid "Added to open-data.europa.eu"
-msgstr ""
+msgstr "Lisatud portaali open-data.europa.eu"
 
 #: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:47
 msgid "Updated on open-data.europa.eu"
-msgstr ""
+msgstr "Ajakohastatud portaalis open-data.europa.eu"
 
 #: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:48
 msgid "Popular terms"
-msgstr ""
+msgstr "Enimotsitud terminid"
 
 #: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:49
 msgid "Most viewed datasets"
-msgstr ""
+msgstr "Vaadatuimad andmekogud"
 
 #: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:50
 msgid "Recently updated datasets"
-msgstr ""
+msgstr "Hiljuti ajakohastatud andmekogud"
 
 #: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:51
 msgid "Recent updates"
@@ -201,23 +201,23 @@ msgstr "Viimased uuendused"
 
 #: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:52
 msgid "Show results with"
-msgstr ""
+msgstr "Kuva tulemused, kus"
 
 #: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:53
 msgid "all of these words"
-msgstr ""
+msgstr "leiduvad kõik need sõnad"
 
 #: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:54
 msgid "any of these words"
-msgstr ""
+msgstr "leidub mõni neist sõnadest"
 
 #: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:55
 msgid "the exact phrase"
-msgstr ""
+msgstr "leidub täpne väljend"
 
 #: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:56
 msgid "views"
-msgstr ""
+msgstr "kuvad"
 
 #: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:57
 msgid "Suggest a dataset"
@@ -225,15 +225,15 @@ msgstr "Soovitage andmekogu"
 
 #: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:58
 msgid "Is there a dataset from the EU that you could not find in this portal?"
-msgstr ""
+msgstr "Kas leidub mõni ELi andmekogu, mida te selles portaalis ei leidnud?"
 
 #: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:59
 msgid "Please request the dataset"
-msgstr ""
+msgstr "Pöörduge andmekogusse"
 
 #: ../ckanext-ecportal/ckanext/ecportal/helpers.py:43
 msgid "Cannot render package description"
-msgstr ""
+msgstr "Paketi kirjeldust ei ole võimalik esitada"
 
 #: ../ckanext-ecportal/ckanext/ecportal/templates/layout_base.html:59
 #: ../ckanext-ecportal/ckanext/ecportal/templates/layout_base.html:160
@@ -247,16 +247,16 @@ msgstr "Kontakt"
 
 #: ../ckanext-ecportal/ckanext/ecportal/templates/layout_base.html:66
 msgid "Menu Arrow"
-msgstr ""
+msgstr "Menüünool"
 
 #: ../ckanext-ecportal/ckanext/ecportal/templates/layout_base.html:80
 #: ../ckanext-ecportal/ckanext/ecportal/templates/layout_base.html:81
 msgid "europa.eu"
-msgstr ""
+msgstr "europa.eu"
 
 #: ../ckanext-ecportal/ckanext/ecportal/templates/layout_base.html:90
 msgid "Europa"
-msgstr ""
+msgstr "Europa"
 
 #: ../ckanext-ecportal/ckanext/ecportal/templates/layout_base.html:90
 #: ../ckanext-ecportal/ckanext/ecportal/templates/layout_base.html:97
@@ -306,7 +306,7 @@ msgstr "Selle saidi kohta"
 
 #: ../ckanext-ecportal/ckanext/ecportal/templates/layout_base.html:162
 msgid "Top"
-msgstr ""
+msgstr "Üles"
 
 #: ../ckanext-ecportal/ckanext/ecportal/templates/home/index.html:14
 msgid "This field is required."
@@ -377,11 +377,11 @@ msgstr "See on käesoleva andmekogu praegune redakstioon, redigeeritud"
 
 #: ../ckanext-ecportal/ckanext/ecportal/templates/package/read.html:82
 msgid "RDF/XML"
-msgstr ""
+msgstr "RDF/XML"
 
 #: ../ckanext-ecportal/ckanext/ecportal/templates/package/read.html:83
 msgid "RDF/N3"
-msgstr ""
+msgstr "RDF/N3"
 
 #: ../ckanext-ecportal/ckanext/ecportal/templates/package/read.html:88
 msgid "Dataset History"
@@ -402,7 +402,7 @@ msgstr "Ressursid"
 
 #: ../ckanext-ecportal/ckanext/ecportal/templates/package/read_core.html:35
 msgid "(edit)"
-msgstr ""
+msgstr "(muuda)"
 
 #: ../ckanext-ecportal/ckanext/ecportal/templates/package/read_core.html:41
 #: ../ckanext-ecportal/ckanext/ecportal/templates/package/resource_read.html:127
@@ -421,7 +421,7 @@ msgstr "Lisateave"
 #: ../ckanext-ecportal/ckanext/ecportal/templates/package/read_core.html:60
 #: ../ckanext-ecportal/ckanext/ecportal/templates/package/resource_read.html:177
 msgid "URL"
-msgstr ""
+msgstr "URL"
 
 #: ../ckanext-ecportal/ckanext/ecportal/templates/package/read_core.html:65
 msgid "Alternative Title"
@@ -578,7 +578,7 @@ msgstr "Haldajad"
 
 #: ../ckanext-ecportal/ckanext/ecportal/templates/publisher/read.html:61
 msgid "Members"
-msgstr ""
+msgstr "Liikmed"
 
 #: ../ckanext-ecportal/ckanext/ecportal/templates/publisher/read.html:69
 msgid "Resource Formats"

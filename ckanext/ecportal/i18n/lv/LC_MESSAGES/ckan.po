@@ -10,8 +10,8 @@ msgstr ""
 "Project-Id-Version: CKAN EU ODP \n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2013-05-23 15:38+0000\n"
-"PO-Revision-Date: 2013-06-14 14:05+0000\n"
-"Last-Translator: odptranslator <ecodptranslators@gmail.com>\n"
+"PO-Revision-Date: 2013-07-11 08:14+0000\n"
+"Last-Translator: odptranslatorLV <DGT-WEB-LV@ec.europa.eu>\n"
 "Language-Team: Latvian (http://www.transifex.com/projects/p/ckan-eu-"
 "odp/language/lv/)\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n != 0 ? 1 :"
@@ -52,15 +52,15 @@ msgstr "Tagi"
 
 #: ckan/templates/tag/index.html:20 ckan/templates/tag/index.html:23
 msgid "There are"
-msgstr "Ir atrasti(-i)"
+msgstr "Ir atrasts(-i)"
 
 #: ckan/templates/tag/index.html:21
 msgid "results for ‘"
-msgstr "rezultāti(-s) par šo tagu:"
+msgstr "rezultāts(-i) par šo tagu:"
 
 #: ckan/templates/tag/index.html:24
 msgid "results for tags."
-msgstr "rezultāti(-s) par tagiem."
+msgstr "rezultāts(-i) par tagiem."
 
 #: ckan/templates/tag/index.html:34
 msgid "Clear search"
@@ -178,59 +178,59 @@ msgstr "Publicēšanas datums"
 
 #: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:46
 msgid "Added to open-data.europa.eu"
-msgstr ""
+msgstr "Saturs, kas pievienots open-data.europa.eu"
 
 #: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:47
 msgid "Updated on open-data.europa.eu"
-msgstr ""
+msgstr "Saturs, kas atjaunināts open-data.europa.eu"
 
 #: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:48
 msgid "Popular terms"
-msgstr ""
+msgstr "Skatītākie termini"
 
 #: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:49
 msgid "Most viewed datasets"
-msgstr ""
+msgstr "Skatītākās datu kopas"
 
 #: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:50
 msgid "Recently updated datasets"
-msgstr ""
+msgstr "Nesen atjauninātās datu kopas"
 
 #: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:51
 msgid "Recent updates"
-msgstr ""
+msgstr "Jaunākās izmaiņas"
 
 #: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:52
 msgid "Show results with"
-msgstr ""
+msgstr "Rādīt rezultātus ar"
 
 #: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:53
 msgid "all of these words"
-msgstr ""
+msgstr "visiem šiem vārdiem"
 
 #: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:54
 msgid "any of these words"
-msgstr ""
+msgstr "jebkuru no šiem vārdiem"
 
 #: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:55
 msgid "the exact phrase"
-msgstr ""
+msgstr "tieši tādu frāzi"
 
 #: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:56
 msgid "views"
-msgstr ""
+msgstr "skatījumi"
 
 #: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:57
 msgid "Suggest a dataset"
-msgstr "Navrhnite množinu údajov!"
+msgstr "Ieteikt datu kopu"
 
 #: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:58
 msgid "Is there a dataset from the EU that you could not find in this portal?"
-msgstr ""
+msgstr "Vai ir kāda ES datu kopa, kuru neatradāt šajā portālā?"
 
 #: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:59
 msgid "Please request the dataset"
-msgstr ""
+msgstr "Pieprasiet datu kopu"
 
 #: ../ckanext-ecportal/ckanext/ecportal/helpers.py:43
 msgid "Cannot render package description"
@@ -362,7 +362,7 @@ msgstr "Saistītas datu kopas"
 
 #: ../ckanext-ecportal/ckanext/ecportal/templates/package/read.html:67
 msgid "This is an old revision of this dataset, as edited at"
-msgstr ""
+msgstr "Šī ir datu kopas versija, kas pārstrādāta sen:"
 
 #: ../ckanext-ecportal/ckanext/ecportal/templates/package/read.html:68
 msgid ". It may differ significantly from the"
@@ -370,15 +370,15 @@ msgstr ". Tā var būtiski atšķirties no"
 
 #: ../ckanext-ecportal/ckanext/ecportal/templates/package/read.html:68
 msgid "current revision"
-msgstr "pašreiz pārskatītā versijas"
+msgstr "pašreiz pārskatītās versijas"
 
 #: ../ckanext-ecportal/ckanext/ecportal/templates/package/read.html:70
 msgid "This is the current revision of this dataset, as edited at"
-msgstr ""
+msgstr "Šī ir datu kopas versija, kas pārstrādāta pavisam nesen:"
 
 #: ../ckanext-ecportal/ckanext/ecportal/templates/package/read.html:82
 msgid "RDF/XML"
-msgstr ""
+msgstr "RDF/XML"
 
 #: ../ckanext-ecportal/ckanext/ecportal/templates/package/read.html:83
 msgid "RDF/N3"
@@ -403,7 +403,7 @@ msgstr "Resursi"
 
 #: ../ckanext-ecportal/ckanext/ecportal/templates/package/read_core.html:35
 msgid "(edit)"
-msgstr ""
+msgstr "(rediģēt)"
 
 #: ../ckanext-ecportal/ckanext/ecportal/templates/package/read_core.html:41
 #: ../ckanext-ecportal/ckanext/ecportal/templates/package/resource_read.html:127
@@ -635,5 +635,5 @@ msgid "There are %(count)s datasets with the keyword [1:%(tagname)s]:"
 msgstr "Ir %(count)s datu kopa(-s) ar šo atslēgvārdu [1:%(tagname)s]:"
 
 #~ msgid "no-sidebar"
-#~ msgstr "sānjoslas nav"
+#~ msgstr "bez sānjoslas"
 

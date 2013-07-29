@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: CKAN EU ODP \n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2013-05-23 15:38+0000\n"
-"PO-Revision-Date: 2013-06-14 14:05+0000\n"
+"PO-Revision-Date: 2013-07-10 11:39+0000\n"
 "Last-Translator: odptranslator <ecodptranslators@gmail.com>\n"
 "Language-Team: Maltese (http://www.transifex.com/projects/p/ckan-eu-"
 "odp/language/mt/)\n"
@@ -71,7 +71,7 @@ msgstr "u ara t-teggs kollha"
 
 #: ckan/templates/tag/read.html:6
 msgid "- Tags"
-msgstr "Tags"
+msgstr "- Teggs"
 
 #: ckan/templates/tag/read.html:7
 msgid "Tag:"
@@ -93,7 +93,7 @@ msgstr "Portal tad-Dejta Miftuħa"
 
 #: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:18
 msgid "European Union Open Data Portal"
-msgstr ""
+msgstr "Portal tad-Dejta Miftuħa tal-Unjoni Ewropea"
 
 #: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:22
 #: ../ckanext-ecportal/ckanext/ecportal/templates/package/read.html:35
@@ -151,7 +151,7 @@ msgstr "Mhux awtorizzat biex taqra l-pakkett %s"
 #: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:38
 #, python-format
 msgid "Unauthorized to read resource %s"
-msgstr ""
+msgstr "Mhux awtorizzat biex taqra r-riżorsa %s"
 
 #: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:39
 msgid "The resource could not be found."
@@ -177,47 +177,47 @@ msgstr "Data tal-Pubblikazzjoni"
 
 #: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:46
 msgid "Added to open-data.europa.eu"
-msgstr ""
+msgstr "Miżjud f'open-data.europa.eu"
 
 #: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:47
 msgid "Updated on open-data.europa.eu"
-msgstr ""
+msgstr "Aġġornat f'open-data.europa.eu"
 
 #: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:48
 msgid "Popular terms"
-msgstr ""
+msgstr "Termini popolari"
 
 #: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:49
 msgid "Most viewed datasets"
-msgstr ""
+msgstr "Settijiet tad-dejta li ntwerew l-iktar"
 
 #: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:50
 msgid "Recently updated datasets"
-msgstr ""
+msgstr "Settijiet tad-dejta aġġornati reċentement"
 
 #: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:51
 msgid "Recent updates"
-msgstr ""
+msgstr "Aġġornamenti reċenti"
 
 #: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:52
 msgid "Show results with"
-msgstr ""
+msgstr "Uri r-riżultati bi"
 
 #: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:53
 msgid "all of these words"
-msgstr ""
+msgstr "dawn il-kelmiet kollha"
 
 #: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:54
 msgid "any of these words"
-msgstr ""
+msgstr "kwalunkwe waħda minn dawn il-kelmiet"
 
 #: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:55
 msgid "the exact phrase"
-msgstr ""
+msgstr "il-frażi eżatta"
 
 #: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:56
 msgid "views"
-msgstr ""
+msgstr "dehriet"
 
 #: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:57
 msgid "Suggest a dataset"
@@ -225,11 +225,11 @@ msgstr "Issuġġerixxi sett tad-dejta!"
 
 #: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:58
 msgid "Is there a dataset from the EU that you could not find in this portal?"
-msgstr ""
+msgstr "Hemm sett tad-dejta mill-UE li ma stajtx issib f'dan il-portal?"
 
 #: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:59
 msgid "Please request the dataset"
-msgstr ""
+msgstr "Jekk jogħġbok irrikjedi s-sett tad-dejta"
 
 #: ../ckanext-ecportal/ckanext/ecportal/helpers.py:43
 msgid "Cannot render package description"
@@ -294,7 +294,7 @@ msgstr "Żona tal-provveditur tad-dejta"
 
 #: ../ckanext-ecportal/ckanext/ecportal/templates/layout_base.html:138
 msgid "Master content template placeholder … please replace me."
-msgstr ""
+msgstr "N/A"
 
 #: ../ckanext-ecportal/ckanext/ecportal/templates/layout_base.html:158
 msgid "Last update"
@@ -349,7 +349,7 @@ msgstr "Ara s-settijiet tad-dejta kollha"
 
 #: ../ckanext-ecportal/ckanext/ecportal/templates/package/read.html:14
 msgid "- Datasets"
-msgstr "Settijiet tad-Dejta"
+msgstr "- Settijiet tad-Dejta"
 
 #: ../ckanext-ecportal/ckanext/ecportal/templates/package/read.html:40
 msgid "Licence"
@@ -373,11 +373,11 @@ msgstr "mir-reviżjoni kurrenti"
 
 #: ../ckanext-ecportal/ckanext/ecportal/templates/package/read.html:70
 msgid "This is the current revision of this dataset, as edited at"
-msgstr ""
+msgstr "Din hi r-reviżjoni kurrenti ta' dan is-sett tad-dejta, kif editjat fi"
 
 #: ../ckanext-ecportal/ckanext/ecportal/templates/package/read.html:82
 msgid "RDF/XML"
-msgstr ""
+msgstr "RDF/XML"
 
 #: ../ckanext-ecportal/ckanext/ecportal/templates/package/read.html:83
 msgid "RDF/N3"
@@ -486,7 +486,7 @@ msgstr "Paġna Web ta' Kuntatt"
 
 #: ../ckanext-ecportal/ckanext/ecportal/templates/package/read_core.html:155
 msgid "Version"
-msgstr ""
+msgstr "Verżjoni"
 
 #: ../ckanext-ecportal/ckanext/ecportal/templates/package/read_core.html:160
 msgid "Version Description"
