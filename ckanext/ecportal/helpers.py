@@ -96,7 +96,7 @@ def recent_updates(n):
                'session': model.Session,
                'user': p.toolkit.c.user or p.toolkit.c.author}
     data = {'rows': n,
-            'sort': u'metadata_modified desc',
+            'sort': u'modified_date desc',
             'facet': u'false',
             'fq': u'capacity: "public"'}
     try:
@@ -174,3 +174,20 @@ def groups_available(user):
     publishers.sort(key=sort_translations)
 
     return publishers
+
+
+def ecportal_date_to_iso(date_string):
+    '''
+    Expects a date in either YYYY, YYYY-MM or YYYY-MM-DD format.
+    Returns an ISO 8601 date string.
+    '''
+    if len(date_string) == len('YYYY'):
+        format = '%Y'
+    elif len(date_string) == len('YYYY-MM'):
+        format = '%Y-%m'
+    elif len(date_string) == len('YYYY-MM-DD'):
+        format = '%Y-%m-%d'
+    else:
+        return
+
+    return datetime.datetime.strptime(date_string, format).isoformat()
