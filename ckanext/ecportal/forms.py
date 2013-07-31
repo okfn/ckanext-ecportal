@@ -6,7 +6,6 @@ from ckan.authz import Authorizer
 import ckan.model as model
 import ckan.logic as logic
 import ckan.logic.schema
-import ckan.lib.dictization as dictization
 import ckan.plugins as p
 from ckan.logic.validators import (package_id_not_changed,
                                    package_name_validator)

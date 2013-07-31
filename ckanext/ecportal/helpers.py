@@ -15,6 +15,7 @@ import ckanext.ecportal.unicode_sort as unicode_sort
 NUM_TOP_PUBLISHERS = 6
 UNICODE_SORT = unicode_sort.UNICODE_SORT
 
+
 def translate(terms, lang, fallback_lang):
     translations = logic.get_action('term_translation_show')(
         {'model': model},
@@ -48,6 +49,7 @@ def tags_and_translations(context, vocab, lang, lang_fallback):
                       key=operator.itemgetter(1))
     except logic.NotFound:
         return []
+
 
 def current_url():
     return p.toolkit.request.environ['CKAN_CURRENT_URL'].encode('utf-8')
@@ -128,6 +130,7 @@ def group_facets_by_field(fields):
             facets[field] = [value]
     return facets
 
+
 def groups_available(user):
     context = {'model': model, 'session': model.Session, 'user': user}
     userobj = model.User.get(user)
@@ -145,9 +148,9 @@ def groups_available(user):
     elif userobj:
         groups = []
         for group in userobj.get_groups():
-             group_dict = dictization.table_dictize(group, context)
-             group_dict['display_name'] = group.display_name
-             groups.append(group_dict)
+            group_dict = dictization.table_dictize(group, context)
+            group_dict['display_name'] = group.display_name
+            groups.append(group_dict)
     else:
         groups = []
 
@@ -171,4 +174,3 @@ def groups_available(user):
     publishers.sort(key=sort_translations)
 
     return publishers
-
