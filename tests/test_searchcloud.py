@@ -1,16 +1,21 @@
 import cgi
+import urllib
+
 try:
     import json
 except ImportError:
     import simplejson as json
-import urllib
-from ckan import model
-import ckan.lib as lib
+
+import ckan.model as model
+import ckan.plugins as plugins
 import ckan.lib.search as search
+import ckan.lib.create_test_data
 import ckan.tests as tests
-import create_test_data as ctd
+
 import ckanext.ecportal.searchcloud as searchcloud
-from ckan import plugins
+import data
+
+_create_test_data = ckan.lib.create_test_data.CreateTestData
 
 
 def normalize_line_endings(text):
@@ -31,11 +36,13 @@ class TestSearchCloud(tests.TestController):
     def setup_class(cls):
         model.Session.remove()
         tests.setup_test_search_index()
-        ctd.CreateTestData.create_ecportal_search_test_data()
-        lib.create_test_data.CreateTestData.create('publisher')
+
+        _create_test_data.create_arbitrary(data.ecportal_search_items)
+        _create_test_data.create('publisher')
+
         cls.sysadmin_user = model.User.get('testsysadmin')
         model.Session.commit()
-        # Plugins
+
         for plugin in ['ecportal', 'ecportal_form', 'ecportal_publisher_form',
                        'ecportal_controller']:
             plugins.load(plugin)
@@ -44,7 +51,6 @@ class TestSearchCloud(tests.TestController):
     def teardown_class(cls):
         model.repo.rebuild_db()
         search.clear()
-        # Plugins
         plugins.reset()
 
     def test_00_no_tables(self):

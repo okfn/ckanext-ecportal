@@ -1,10 +1,12 @@
 import json
 import ckan.model as model
 import ckan.plugins as plugins
-import ckan.tests as tests
-import ckan.lib.helpers as h
 import ckan.logic as logic
-from create_test_data import CreateTestData
+import ckan.lib.helpers as h
+import ckan.lib.create_test_data
+import ckan.tests as tests
+
+_create_test_data = ckan.lib.create_test_data.CreateTestData
 
 
 def create_vocab(vocab_name, user_name):
@@ -29,7 +31,7 @@ def add_tag_to_vocab(tag_name, vocab_id, user_name):
 class TestAPI(tests.WsgiAppCase):
     @classmethod
     def setup_class(cls):
-        CreateTestData.create('publisher')
+        _create_test_data.create('publisher')
         model.repo.new_revision()
 
         usr = model.User(name="ectest", apikey="ectest", password=u'ectest')

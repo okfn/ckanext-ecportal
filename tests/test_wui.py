@@ -46,7 +46,8 @@ class Select(paste.fixture.Field):
     def value__set(self, value):
         if not value:
             self.selectedIndex = None
-            self.options = [(option, False) for (option, checked) in self.options]
+            self.options = [(option, False) for
+                            (option, checked) in self.options]
             return
 
         new_options = []
@@ -240,4 +241,5 @@ class TestWUI(tests.WsgiAppCase):
             if not isinstance(fv[k].value, list):
                 assert fv[k].value == dataset[k], (fv[k].value, dataset[k])
             else:
-                assert fv[k].value[0] == dataset[k], (fv[k].value[0], dataset[k])
+                assert fv[k].value[0] == dataset[k],\
+                    (fv[k].value[0], dataset[k])

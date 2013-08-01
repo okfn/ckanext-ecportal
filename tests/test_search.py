@@ -8,12 +8,15 @@ try:
 except ImportError:
     import simplejson as json
 
-from ckan import model
-import ckan.lib as lib
+import ckan.model as model
+import ckan.lib.create_test_data
 import ckan.lib.search as search
 import ckan.tests as tests
-import create_test_data as ctd
+
+import data
 import test_api
+
+_create_test_data = ckan.lib.create_test_data.CreateTestData
 
 
 class TestSearch(tests.TestController):
@@ -22,9 +25,10 @@ class TestSearch(tests.TestController):
     def setup_class(cls):
         model.Session.remove()
         tests.setup_test_search_index()
-        ctd.CreateTestData.create_ecportal_search_test_data()
 
-        lib.create_test_data.CreateTestData.create('publisher')
+        _create_test_data.create_arbitrary(data.ecportal_search_items)
+        _create_test_data.create('publisher')
+
         cls.sysadmin_user = model.User.get('testsysadmin')
         cls.extra_environ = {'Authorization': str(cls.sysadmin_user.apikey)}
 
@@ -83,8 +87,8 @@ class TestSearch(tests.TestController):
 
     def test_general(self):
         result = search.query_for(model.Package).run({'q': '*:*'})
-        assert len(result['results']) == len(ctd.ecportal_search_items) + 2
-        assert result['count'] == len(ctd.ecportal_search_items) + 2
+        assert len(result['results']) == len(data.ecportal_search_items) + 2
+        assert result['count'] == len(data.ecportal_search_items) + 2
 
     def test_non_latin_alphabet(self):
         # Search Greek word
