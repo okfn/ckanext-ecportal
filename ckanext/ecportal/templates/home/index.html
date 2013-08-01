@@ -75,7 +75,7 @@
           ${h.snippet('snippets/most_viewed_datasets.html', packages=c.most_viewed_datasets)}
           </div>
           <h2>
-            <a href="${h.url_for(controller='package', action='search')}">
+            <a href="${h.url_for(controller='package', action='search', sort='modified_date desc')}">
               <i class="resource"></i>
               ${_('view all datasets')} &raquo;
             </a>
