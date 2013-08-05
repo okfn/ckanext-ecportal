@@ -95,17 +95,6 @@ class MulitlingualDataset(multilingual.MultilingualDataset):
         for key, value in text_field_items.iteritems():
             search_data[key] = ' '.join(value)
 
-        # set 'metadata_modified' field to value of metadata_modified if
-        # not present (this field is used to sort datasets according to
-        # their last update date).
-        if not 'modified_date' in search_data:
-            search_data['modified_date'] = search_data['metadata_modified']
-        else:
-            # modify dates (SOLR is quite picky with dates, and only accepts
-            # ISO dates with UTC time (i.e trailing Z)
-            search_data['modified_date'] = helpers.ecportal_date_to_iso(
-                search_data['modified_date']) + 'Z'
-
         return search_data
 
     def before_search(self, search_params):
@@ -257,4 +246,16 @@ class ECPortalPlugin(p.SingletonPlugin):
         pkg_dict['title_sort'] = (unicode_sort.strip_accents(title) +
                                   '   '
                                   + title).translate(UNICODE_SORT)
+
+        # set 'metadata_modified' field to value of metadata_modified if
+        # not present (this field is used to sort datasets according to
+        # their last update date).
+        if not 'modified_date' in pkg_dict:
+            pkg_dict['modified_date'] = pkg_dict['metadata_modified']
+        else:
+            # modify dates (SOLR is quite picky with dates, and only accepts
+            # ISO dates with UTC time (i.e trailing Z)
+            pkg_dict['modified_date'] = helpers.ecportal_date_to_iso(
+                pkg_dict['modified_date']) + 'Z'
+
         return pkg_dict
