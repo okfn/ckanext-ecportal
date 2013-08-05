@@ -20,6 +20,8 @@ def update_rdf(source_rdf, name):
     '''
     rdf = source_rdf.replace('\\"', '"').strip()  # cleanup json junk
     try:
+        root = lxml.etree.fromstring(rdf.encode('utf-8'))
+    except UnicodeDecodeError:
         root = lxml.etree.fromstring(rdf)
     except lxml.etree.XMLSyntaxError, xmlerr:
         log.error(xmlerr)
