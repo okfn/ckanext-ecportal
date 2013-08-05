@@ -75,7 +75,7 @@
     <div class="package-box">
       <h3><i class="format"></i> ${_('Format')}</h3>
       <div class="inner faded">
-        ${c.resource['format'] or 'Unknown'}
+        ${c.resource['mimetype_inner'] or c.resource['format'] or 'Unknown'}
       </div>
     </div>
 
