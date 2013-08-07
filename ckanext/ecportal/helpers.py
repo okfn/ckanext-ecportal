@@ -118,6 +118,8 @@ def top_publishers(groups):
 def current_date():
     return datetime.date.today().strftime('%d/%m/%Y')
 
+def catalog_url():
+    return config.get('ckan.catalog_url', 'http://open-data.europa.eu/')
 
 def group_facets_by_field(fields):
     facets = {}

@@ -315,6 +315,7 @@ class ECPortalDatasetForm(p.SingletonPlugin):
                 'recent_updates': helpers.recent_updates,
                 'top_publishers': helpers.top_publishers,
                 'current_date': helpers.current_date,
+                'catalog_url': helpers.catalog_url,
                 'group_facets_by_field': helpers.group_facets_by_field,
                 'groups_available': helpers.groups_available}
 
