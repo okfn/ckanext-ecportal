@@ -1707,3 +1707,89 @@ label.inline input {
   display: inline;
   margin-top: -1px;
 }
+
+.table-box {
+  border: 1px solid #DDD;
+}
+.table-box h3 {
+  background-color: #F5F5F5;
+  border-bottom: 1px solid #DDD;
+  padding: 10px 20px;
+  margin-bottom: 0;
+}
+.table-box .inner {
+  padding: 10px 20px 5px 20px;
+}
+.table-box .resource-list li {
+  clear: both;
+  overflow: hidden;
+  padding-bottom: 5px;
+}
+.table-box .resource-list a.action {
+  display: block;
+  float: left;
+  margin-right: 20px;
+  min-width: 80px;
+  font-size: 11px;
+  text-transform: uppercase;
+  font-style: normal;
+  color: #3366CC;
+  border: 1px solid #BBB;
+  padding: 2px 4px 2px 3px;
+  line-height: 1;
+  white-space: nowrap;
+  border-radius: 3px;
+}
+.table-box .resource-list a.action:hover {
+  background-color: #5599FF;
+  border-color: #5599FF;
+  color: white;
+  text-decoration: none;
+}
+.table-box .resource-list a.action .icon {
+  display: block;
+  float: left;
+  margin: 1px 3px 0 1px;
+  width: 10px;
+  height: 10px;
+  background-image: url(/images/resource-icons.png);
+}
+.table-box .resource-list a.action .icon.download {
+  background-position: 0 0;
+}
+.table-box .resource-list a.action:hover .icon.download {
+  background-position: -10px 0;
+}
+.table-box .resource-list a.action .icon.graph {
+  background-position: 0 -10px;
+}
+.table-box .resource-list a.action:hover .icon.graph {
+  background-position: -10px -10px;
+}
+.table-box .resource-list a.action .icon.visit {
+  background-position: 0 -20px;
+}
+.table-box .resource-list a.action:hover .icon.visit {
+  background-position: -10px -20px;
+}
+
+.table-box .resource-list a.name {
+  font-style: normal;
+  font-size: 13px;
+  color: #444;
+}
+.table-box .resource-list a.name:hover {
+  color: #5599FF;
+  text-decoration: underline;
+}
+.table-box .resource-list .tag {
+  margin-left: 10px;
+  font-size: 10px;
+  text-transform: uppercase;
+  font-style: normal;
+  color: #999;
+  border: 1px solid #BBB;
+  padding: 1px 4px;
+  line-height: 1;
+  border-radius: 3px;
+}

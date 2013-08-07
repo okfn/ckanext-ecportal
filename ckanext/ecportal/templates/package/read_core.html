@@ -28,9 +28,9 @@
       </div>
 
       <!-- Resources -->
-      <div id="dataset-resources" class="package-box resources">
+      <div id="dataset-resources" class="table-box package-box resources">
         <h3>
-          <i class="resource"></i> ${_('Resources')}
+          ${_('Resources')}
         <py:if test="h.check_access('package_update',{'id':c.pkg.id})"> &nbsp;
           ${h.subnav_link(c, _('(edit)'), controller='package', action='editresources', id=c.pkg.name)}
         </py:if></h3>
@@ -38,9 +38,21 @@
           <ul class="resource-list unstyled">
             <py:for each="res in c.pkg_dict.get('resources', [])">
             <li>
-              <a href="${res['url']}" class="button button-primary download">${_('Download')}</a>
-              <a href="${h.url_for(controller='package', action='resource_read', id=c.pkg_dict['name'], resource_id=res['id'])}">${h.resource_display_name(res)} &raquo;</a>
-              </li>
+              <a href="${res['url']}" class="action">
+                <py:choose>
+                  <py:when test="res['format'] == 'html'">
+                    <i class="icon visit"></i>
+                    ${_('Visit page')}
+                  </py:when>
+                  <py:otherwise>
+                    <i class="icon download"></i>
+                    ${_('Download')}
+                  </py:otherwise>
+                </py:choose>
+              </a>
+              <a href="${h.url_for(controller='package', action='resource_read', id=c.pkg_dict['name'], resource_id=res['id'])}" class="name">${h.resource_display_name(res)}</a>
+              <span class="tag">${res['format']}</span>
+            </li>
             </py:for>
           </ul>
           <py:if test="not len(c.pkg_dict.get('resources', []))">
@@ -53,7 +65,6 @@
 
     <!-- Dataset Information Section -->
     <div class="package-box">
-      <h3><i class="info"></i> ${_('Additional Information')}</h3>
       <div id="dataset-information" class="inner">
         <div class="quick-info">
           <dl py:if="c.pkg.url">
