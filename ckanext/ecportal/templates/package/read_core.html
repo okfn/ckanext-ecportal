@@ -147,31 +147,6 @@
             <dd>${", ".join(c.pkg_dict['language'])}</dd>
           </dl>
 
-          <dl py:if="c.pkg_dict.get('contact_name')">
-            <dt>${_('Contact Name')}</dt>
-            <dd>${c.pkg_dict['contact_name']}</dd>
-          </dl>
-
-          <dl py:if="c.pkg_dict.get('contact_email')">
-            <dt>${_('Contact E-mail')}</dt>
-            <dd>${c.pkg_dict['contact_email']}</dd>
-          </dl>
-
-          <dl py:if="c.pkg_dict.get('contact_address')">
-            <dt>${_('Contact Address')}</dt>
-            <dd>${c.pkg_dict['contact_address']}</dd>
-          </dl>
-
-          <dl py:if="c.pkg_dict.get('contact_telephone')">
-            <dt>${_('Contact Telephone')}</dt>
-            <dd>${c.pkg_dict['contact_telephone']}</dd>
-          </dl>
-
-          <dl py:if="c.pkg_dict.get('contact_webpage')">
-            <dt>${_('Contact Web Page')}</dt>
-            <dd><a href="${c.pkg_dict['contact_webpage']}">${c.pkg_dict['contact_webpage']}</a></dd>
-          </dl>
-
           <dl py:if="c.pkg.version">
             <dt>${_('Version')}</dt>
             <dd>${c.pkg.version}</dd>
@@ -195,6 +170,26 @@
         </div>
       </div>
     </div>
+
+    <py:if test="c.pkg_dict.get('contact_name') or c.pkg_dict.get('contact_email') or c.pkg_dict.get('contact_address') or c.pkg_dict.get('contact_telephone') or c.pkg_dict.get('contact_webpage')">
+      <div id="dataset-contact" class="package-box">
+        <h2>${_('Contact')}</h2>
+        <h3 py:if="c.pkg_dict.get('contact_name')">${c.pkg_dict['contact_name']}</h3>
+        <p py:if="c.pkg_dict.get('contact_address')">
+          ${c.pkg_dict['contact_address']}
+        </p>
+        <p py:if="c.pkg_dict.get('contact_telephone')">
+          <span>${_('Tel:')}</span>
+          ${c.pkg_dict['contact_telephone']}
+        </p>
+        <p py:if="c.pkg_dict.get('contact_email')">
+          <a href="mailto:${c.pkg_dict['contact_email']}">${c.pkg_dict['contact_email']}</a>
+        </p>
+        <p py:if="c.pkg_dict.get('contact_webpage')">
+          <a href="${c.pkg_dict['contact_webpage']}">${c.pkg_dict['contact_webpage']}</a>
+        </p>
+      </div>
+    </py:if>
 
   </div> <!-- /dataset -->
 
