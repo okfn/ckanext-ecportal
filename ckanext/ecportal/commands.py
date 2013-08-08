@@ -30,7 +30,6 @@ class ECPortalCommand(cli.CkanCommand):
 
         paster ecportal import-data <data> <user> -c <config>
 
-        paster ecportal import-publishers -c <config>
         paster ecportal update-publishers -c <config>
         paster ecportal migrate-publisher <source> <target> -c <config>
 
@@ -139,9 +138,6 @@ class ECPortalCommand(cli.CkanCommand):
                 print ECPortalCommand.__doc__
                 return
             self.export_datasets(self.args[1], self.args[2])
-
-        elif cmd == 'import-publishers':
-            self.update_publishers()
 
         elif cmd == 'update-publishers':
             self.update_publishers()
