@@ -28,15 +28,15 @@ class ECPortalCommand(cli.CkanCommand):
 
         paster ecportal import-csv-translations -c <config>
 
-        paster ecportal create-all-vocabs -c <config>
+        paster ecportal update-all-vocabs -c <config>
         paster ecportal delete-all-vocabs -c <config>
 
-        paster ecportal create-geo-vocab <file (optional)> -c <config>
-        paster ecportal create-dataset-type-vocab <file (optional)> -c <config>
-        paster ecportal create-language-vocab <file (optional)> -c <config>
-        paster ecportal create-status-vocab <file (optional)> -c <config>
-        paster ecportal create-interop-vocab <file (optional)> -c <config>
-        paster ecportal create-temporal-vocab <file (optional)> -c <config>
+        paster ecportal update-geo-vocab <file (optional)> -c <config>
+        paster ecportal update-dataset-type-vocab <file (optional)> -c <config>
+        paster ecportal update-language-vocab <file (optional)> -c <config>
+        paster ecportal update-status-vocab <file (optional)> -c <config>
+        paster ecportal update-interop-vocab <file (optional)> -c <config>
+        paster ecportal update-temporal-vocab <file (optional)> -c <config>
 
         paster ecportal delete-geo-vocab -c <config>
         paster ecportal delete-dataset-type-vocab -c <config>
@@ -111,45 +111,45 @@ class ECPortalCommand(cli.CkanCommand):
                 return
             self.migrate_publisher(self.args[1], self.args[2])
 
-        elif cmd == 'create-geo-vocab':
-            self.create_vocab_from_file(forms.GEO_VOCAB_NAME, file_path)
+        elif cmd == 'update-geo-vocab':
+            self.update_vocab_from_file(forms.GEO_VOCAB_NAME, file_path)
 
         elif cmd == 'delete-geo-vocab':
             self._delete_vocab(forms.GEO_VOCAB_NAME)
 
-        elif cmd == 'create-dataset-type-vocab':
-            self.create_vocab_from_file(forms.DATASET_TYPE_VOCAB_NAME,
+        elif cmd == 'update-dataset-type-vocab':
+            self.update_vocab_from_file(forms.DATASET_TYPE_VOCAB_NAME,
                                         file_path)
 
         elif cmd == 'delete-dataset-type-vocab':
             self._delete_vocab(forms.DATASET_TYPE_VOCAB_NAME)
 
-        elif cmd == 'create-language-vocab':
-            self.create_vocab_from_file(forms.LANGUAGE_VOCAB_NAME, file_path)
+        elif cmd == 'update-language-vocab':
+            self.update_vocab_from_file(forms.LANGUAGE_VOCAB_NAME, file_path)
 
         elif cmd == 'delete-language-vocab':
             self._delete_vocab(forms.LANGUAGE_VOCAB_NAME)
 
-        elif cmd == 'create-status-vocab':
-            self.create_vocab_from_file(forms.STATUS_VOCAB_NAME, file_path)
+        elif cmd == 'update-status-vocab':
+            self.update_vocab_from_file(forms.STATUS_VOCAB_NAME, file_path)
 
         elif cmd == 'delete-status-vocab':
             self._delete_vocab(forms.STATUS_VOCAB_NAME)
 
-        elif cmd == 'create-interop-vocab':
-            self.create_vocab_from_file(forms.INTEROP_VOCAB_NAME, file_path)
+        elif cmd == 'update-interop-vocab':
+            self.update_vocab_from_file(forms.INTEROP_VOCAB_NAME, file_path)
 
         elif cmd == 'delete-interop-vocab':
             self._delete_vocab(forms.INTEROP_VOCAB_NAME)
 
-        elif cmd == 'create-temporal-vocab':
-            self.create_vocab_from_file(forms.TEMPORAL_VOCAB_NAME, file_path)
+        elif cmd == 'update-temporal-vocab':
+            self.update_vocab_from_file(forms.TEMPORAL_VOCAB_NAME, file_path)
 
         elif cmd == 'delete-temporal-vocab':
             self._delete_vocab(forms.TEMPORAL_VOCAB_NAME)
 
-        elif cmd == 'create-all-vocabs':
-            self.create_all_vocabs()
+        elif cmd == 'update-all-vocabs':
+            self.update_all_vocabs()
 
         elif cmd == 'delete-all-vocabs':
             self.delete_all_vocabs()
@@ -501,7 +501,7 @@ class ECPortalCommand(cli.CkanCommand):
         plugins.toolkit.get_action('vocabulary_delete')(
             context, {'id': vocab['id']})
 
-    def create_vocab_from_file(self, vocab_name, file_path=None):
+    def update_vocab_from_file(self, vocab_name, file_path=None):
         '''
         Create vocabularies and vocabulary tags using JSON files.
         If the vocabulary already exists, or the tag is already part
@@ -605,13 +605,13 @@ class ECPortalCommand(cli.CkanCommand):
             context, {'data': translations}
         )
 
-    def create_all_vocabs(self):
-        self.create_vocab_from_file(forms.GEO_VOCAB_NAME)
-        self.create_vocab_from_file(forms.DATASET_TYPE_VOCAB_NAME)
-        self.create_vocab_from_file(forms.LANGUAGE_VOCAB_NAME)
-        self.create_vocab_from_file(forms.STATUS_VOCAB_NAME)
-        self.create_vocab_from_file(forms.INTEROP_VOCAB_NAME)
-        self.create_vocab_from_file(forms.TEMPORAL_VOCAB_NAME)
+    def update_all_vocabs(self):
+        self.update_vocab_from_file(forms.GEO_VOCAB_NAME)
+        self.update_vocab_from_file(forms.DATASET_TYPE_VOCAB_NAME)
+        self.update_vocab_from_file(forms.LANGUAGE_VOCAB_NAME)
+        self.update_vocab_from_file(forms.STATUS_VOCAB_NAME)
+        self.update_vocab_from_file(forms.INTEROP_VOCAB_NAME)
+        self.update_vocab_from_file(forms.TEMPORAL_VOCAB_NAME)
         self.import_csv_translation()
 
     def delete_all_vocabs(self):
