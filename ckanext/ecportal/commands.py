@@ -2,11 +2,8 @@ import logging
 import collections
 import os
 import sys
-import re
 import csv
 import json
-import urllib
-import lxml.etree
 import requests
 
 import ckan
@@ -27,13 +24,10 @@ class InvalidDateFormat(Exception):
 class ECPortalCommand(cli.CkanCommand):
     '''
     Commands:
-
-        paster ecportal import-data <data> <user> -c <config>
+        paster ecportal export-datasets <folder> -c <config>
 
         paster ecportal update-publishers -c <config>
         paster ecportal migrate-publisher <source> <target> -c <config>
-
-        paster ecportal export-datasets <folder> -c <config>
 
         paster ecportal import-csv-translations -c <config>
 
@@ -70,17 +64,6 @@ class ECPortalCommand(cli.CkanCommand):
     '''
     summary = __doc__.split('\n')[0]
     usage = __doc__
-
-    # date formats used in data-import command
-    year = re.compile('\d\d\d\d\Z')
-    year_month = re.compile('\d\d\d\dM\d\d\Z')
-    year_month_day = re.compile('\d\d\d\dM\d\dD\d\d\Z')
-    year_quarter = re.compile('\d\d\d\dQ\d\Z')
-    year_half = re.compile('\d\d\d\dS\d\Z')
-    day_month_year = re.compile('\d\d\.\d\d\.\d\d\d\d\Z')
-
-    # data-import: languages with translations in the imported metadata file
-    data_import_langs = [u'fr', u'de']
 
     default_data_dir = os.path.dirname(os.path.abspath(__file__))
     default_file = {
@@ -119,21 +102,7 @@ class ECPortalCommand(cli.CkanCommand):
         # file_path is used by create-vocab commands
         file_path = self.args[1] if len(self.args) >= 2 else None
 
-        if cmd == 'import-data':
-            if not len(self.args) in [2, 3]:
-                print ECPortalCommand.__doc__
-                return
-
-            data = self.args[1]
-            if len(self.args) == 3:
-                self.user_name = self.args[2]
-
-            if 'http://' in data:
-                self.import_data(urllib.urlopen(data))
-            else:
-                self.import_data(data)
-
-        elif cmd == 'export-datasets':
+        if cmd == 'export-datasets':
             if not len(self.args) == 3:
                 print ECPortalCommand.__doc__
                 return
@@ -208,185 +177,6 @@ class ECPortalCommand(cli.CkanCommand):
 
         else:
             log.error('Command "%s" not recognized' % (cmd,))
-
-    def _temporal_granularity(self, isodate):
-        '''
-        Return the granularity (string) of isodate: year, month or day.
-        '''
-        if len(isodate) == 4:
-            return 'year'
-        elif len(isodate) == 7:
-            return 'month'
-        elif len(isodate) == 10:
-            return 'day'
-        else:
-            raise InvalidDateFormat
-
-    def _isodate(self, date):
-        '''
-        Return a unicode string consisting of date converted to ISO 8601 format
-        (YYYY-MM-DD, YYYY-MM or YYYY).
-        '''
-        if not date:
-            return None
-
-        isodate = None
-
-        if self.day_month_year.match(date):
-            dd = date.split('.')[0]
-            mm = date.split('.')[1]
-            yyyy = date.split('.')[2]
-            isodate = u'%s-%s-%s' % (yyyy, mm, dd)
-        elif self.year.match(date):
-            isodate = unicode(date)
-        elif self.year_month.match(date):
-            yyyy = date.split('M')[0]
-            mm = date.split('M')[1]
-            isodate = u'%s-%s' % (yyyy, mm)
-        elif self.year_month_day.match(date):
-            yyyy = date.split('M')[0]
-            mm_dd = date.split('M')[1]
-            mm = mm_dd.split('D')[0]
-            dd = mm_dd.split('D')[1]
-            isodate = u'%s-%s-%s' % (yyyy, mm, dd)
-        elif self.year_quarter.match(date):
-            yyyy = date.split('Q')[0]
-            q = int(date.split('Q')[1])
-            mm = ((q - 1) * 3) + 1
-            isodate = u'%s-%02d' % (yyyy, mm)
-        elif self.year_half.match(date):
-            yyyy = date.split('S')[0]
-            h = int(date.split('S')[1])
-            mm = ((h - 1) * 6) + 1
-            isodate = u'%s-%02d' % (yyyy, mm)
-
-        return isodate
-
-    def _import_dataset(self, node, parents, namespace=''):
-        '''
-        From a leaf node in the Eurostat metadata, create and add
-        a CKAN dataset.
-        '''
-        dataset = {}
-        dataset['name'] = unicode(node.find('{%s}code' % namespace).text)
-        dataset['title'] = unicode(
-            node.find('{%s}title[@language="en"]' % namespace).text)
-        dataset['license_id'] = u'ec-eurostat'
-        dataset['published_by'] = u'estat'
-
-        # modified date
-        modified = self._isodate(node.find('{%s}lastUpdate' % namespace).text)
-        if modified:
-            dataset['modified_date'] = modified
-
-        # temporal coverage and granularity
-        tc_from = self._isodate(node.find('{%s}dataStart' % namespace).text)
-        if tc_from:
-            dataset['temporal_coverage_from'] = tc_from
-            dataset['temporal_granularity'] = \
-                self._temporal_granularity(tc_from)
-        tc_to = self._isodate(node.find('{%s}dataEnd' % namespace).text)
-        if tc_to:
-            dataset['temporal_coverage_to'] = tc_to
-
-        url = node.find('{%s}metadata' % namespace).text
-        if url:
-            dataset['url'] = unicode(url)
-
-        # themes as extras
-        dataset['extras'] = []
-        themes = [n.find('{%s}title[@language="en"]' % namespace).text
-                  for n in parents[1:]]
-        for n, theme in enumerate(themes):
-            dataset['extras'].append({
-                'key': u'theme%d' % (n + 1),
-                'value': unicode(theme)
-            })
-
-        # add resources
-        dataset['resources'] = []
-        resources = node.findall('{%s}downloadLink' % namespace)
-        for resource in resources:
-            dataset['resources'].append({
-                'url': unicode(resource.text),
-                'format': unicode(resource.attrib['format'])
-            })
-
-        # add dataset to CKAN instance
-        log.info('Adding dataset: %s' % dataset['name'])
-        context = {'model': model, 'session': model.Session,
-                   'user': self.user_name, 'extras_as_string': True}
-        try:
-            plugins.toolkit.get_action('package_create')(context, dataset)
-        except logic.ValidationError, ve:
-            log.error('Could not add dataset %s: %s' %
-                      (dataset['name'], str(ve.error_dict)))
-
-        # add title translations to translation table
-        log.info('Updating translations for dataset %s' % dataset['name'])
-        translations = []
-
-        for lang in self.data_import_langs:
-            lang_node = node.find(
-                '{%s}title[@language="%s"]' % (namespace, lang))
-            if lang_node is not None:
-                translations.append({
-                    'term': dataset['title'],
-                    'term_translation': unicode(lang_node.text),
-                    'lang_code': lang
-                })
-
-        if translations:
-            plugins.toolkit.get_action('term_translation_update_many')(
-                context, {'data': translations}
-            )
-
-    def _import_data_node(self, node, parents, namespace=''):
-        if node.tag == ('{%s}leaf' % namespace):
-            self._import_dataset(node, parents, namespace)
-
-        elif node.tag == ('{%s}branch' % namespace):
-            # add title translations to translation table
-            title = node.find('{%s}title[@language="en"]' % namespace)
-            if title is not None:
-                log.info('Updating translations for theme %s' % title.text)
-                translations = []
-
-                for lang in self.data_import_langs:
-                    lang_node = node.find(
-                        '{%s}title[@language="%s"]' % (namespace, lang))
-                    if lang_node is not None:
-                        translations.append({
-                            'term': unicode(title.text),
-                            'term_translation': unicode(lang_node.text),
-                            'lang_code': lang
-                        })
-
-                if translations:
-                    context = {'model': model,
-                               'session': model.Session,
-                               'user': self.user_name,
-                               'extras_as_string': True}
-                    plugins.toolkit.get_action('term_translation_update_many')(
-                        context, {'data': translations}
-                    )
-
-            # add this node as a parent and import child nodes
-            for child in node:
-                self._import_data_node(child, parents + [node], namespace)
-
-        elif node.tag == ('{%s}children' % namespace):
-            for child in node:
-                self._import_data_node(child, parents, namespace)
-
-    def import_data(self, xml_file):
-        '''
-        Import datasets in the format of the Eurostat bulk downloads
-        metadata XML file.
-        '''
-        tree = lxml.etree.parse(xml_file)
-        namespace = tree.getroot().tag[1:].split('}')[0]
-        self._import_data_node(tree.getroot()[0], [], namespace)
 
     def export_datasets(self, output_folder, fetch_url):
         '''
