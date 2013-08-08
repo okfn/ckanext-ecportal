@@ -485,9 +485,9 @@ CKAN.View.Resource = Backbone.View.extend({
         num: this.options.position,
         resource_icon: CKAN.SITE_URL_NO_LOCALE + '/images/icons/page_white.png',
         resourceTypeOptions: [
-          ['http://ec.europa.eu/open-data/kos/documentation-type/MainDocumentation', CKAN.Strings.documentationMain],
-          ['http://ec.europa.eu/open-data/kos/documentation-type/RelatedDocumentation', CKAN.Strings.documentationRelated],
-          ['http://ec.europa.eu/open-data/kos/documentation-type/RelatedWebPage', CKAN.Strings.documentationWebpage],
+          ['http://open-data.europa.eu/kos/documentation-type/MainDocumentation', CKAN.Strings.documentationMain],
+          ['http://open-data.europa.eu/kos/documentation-type/RelatedDocumentation', CKAN.Strings.documentationRelated],
+          ['http://open-data.europa.eu/kos/documentation-type/RelatedWebPage', CKAN.Strings.documentationWebpage],
           ['http://www.w3.org/TR/vocab-dcat#Feed', CKAN.Strings.distributionFeed],
           ['http://www.w3.org/TR/vocab-dcat#WebService', CKAN.Strings.distributionWebService],
           ['http://www.w3.org/TR/vocab-dcat#Download', CKAN.Strings.distributionDownload],

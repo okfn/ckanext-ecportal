@@ -99,7 +99,7 @@ class ECPortalDatasetForm(p.SingletonPlugin):
                             key=operator.itemgetter(1))
         default_licence = (
             "Europa Legal Notice",
-            "http://ec.europa.eu/open-data/kos/licence/EuropeanCommission")
+            "http://open-data.europa.eu/kos/licence/EuropeanCommission")
         c.licences = filter(lambda l: l != default_licence, c.licences)
         c.licences.insert(0, default_licence)
 

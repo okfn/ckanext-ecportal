@@ -30,6 +30,7 @@ class ECPortalCommand(cli.CkanCommand):
         paster ecportal import-publishers -c <config>
         paster ecportal update-publishers -c <config>
         paster ecportal migrate-publisher <source> <target> -c <config>
+        paster ecportal migrate-odp-namespace <source> <target> -c <config>
         paster ecportal export-datasets <folder> -c <config>
         paster ecportal import-csv-translations -c <config>
 
@@ -127,6 +128,9 @@ class ECPortalCommand(cli.CkanCommand):
                 print ECPortalCommand.__doc__
                 return
             self.migrate_publisher(self.args[1], self.args[2])
+
+        elif cmd == 'migrate-odp-namespace':
+            self.odp_namespace()
 
         elif cmd == 'create-geo-vocab':
             if not len(self.args) == 1:
@@ -497,6 +501,19 @@ class ECPortalCommand(cli.CkanCommand):
         # TODO: make this one atomic action. (defer_commit)
         logic.get_action('group_update')(context, source_publisher)
         logic.get_action('group_update')(context, target_publisher)
+
+    def odp_namespace(self):
+        sql = '''
+        begin;
+        update tag set name = replace(name, 'http://ec.europa.eu/open-data', 'http://open-data.europa.eu') where name like '%http://ec.europa.eu/open-data%';
+        update term_translation set term = replace(term, 'http://ec.europa.eu/open-data', 'http://open-data.europa.eu') where term like '%http://ec.europa.eu/open-data%';
+        update resource set resource_type = replace(resource_type, 'http://ec.europa.eu/open-data', 'http://open-data.europa.eu') where resource_type like '%http://ec.europa.eu/open-data%';
+        update resource_revision set resource_type = replace(resource_type, 'http://ec.europa.eu/open-data', 'http://open-data.europa.eu') where resource_type like '%http://ec.europa.eu/open-data%';
+        update package_extra set value = replace(value, 'http://ec.europa.eu/open-data', 'http://open-data.europa.eu') where key <> 'rdf' and value like '%http://ec.europa.eu/open-data%';
+        commit;
+        '''
+        model.Session.execute(sql)
+
 
     def _extract_members(self, members):
         '''Strips redundant information from members of a group'''

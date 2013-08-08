@@ -5,22 +5,22 @@
   "results": {
     "bindings": [
       {
-        "term": { "type": "uri" , "value": "http://ec.europa.eu/open-data/kos/dataset-status/Completed" } ,
+        "term": { "type": "uri" , "value": "http://open-data.europa.eu/kos/dataset-status/Completed" } ,
         "label": { "type": "literal" , "value": "Completed" } ,
         "language": { "type": "literal" , "value": "en" }
       } ,
       {
-        "term": { "type": "uri" , "value": "http://ec.europa.eu/open-data/kos/dataset-status/Deprecated" } ,
+        "term": { "type": "uri" , "value": "http://open-data.europa.eu/kos/dataset-status/Deprecated" } ,
         "label": { "type": "literal" , "value": "Deprecated" } ,
         "language": { "type": "literal" , "value": "en" }
       } ,
       {
-        "term": { "type": "uri" , "value": "http://ec.europa.eu/open-data/kos/dataset-status/UnderDevelopment" } ,
+        "term": { "type": "uri" , "value": "http://open-data.europa.eu/kos/dataset-status/UnderDevelopment" } ,
         "label": { "type": "literal" , "value": "Under Development" } ,
         "language": { "type": "literal" , "value": "en" }
       } ,
       {
-        "term": { "type": "uri" , "value": "http://ec.europa.eu/open-data/kos/dataset-status/Withdrawn" } ,
+        "term": { "type": "uri" , "value": "http://open-data.europa.eu/kos/dataset-status/Withdrawn" } ,
         "label": { "type": "literal" , "value": "Withdrawn" } ,
         "language": { "type": "literal" , "value": "en" }
       }
