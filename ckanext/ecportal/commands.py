@@ -26,7 +26,7 @@ class ECPortalCommand(cli.CkanCommand):
     Commands:
         paster ecportal export-datasets <folder> -c <config>
 
-        paster ecportal update-publishers -c <config>
+        paster ecportal update-publishers <file (optional)> -c <config>
         paster ecportal migrate-publisher <source> <target> -c <config>
 
         paster ecportal import-csv-translations -c <config>
@@ -58,6 +58,8 @@ class ECPortalCommand(cli.CkanCommand):
         <data> = path to XML file (format of the Eurostat bulk import metadata)
         <user> = perform actions as this CKAN user (name)
         <folder> = Output folder for dataset export
+        <file> = (optional) path to input JSON or CSV file. If not specified,
+                 the default files in the /data directory are used.
         <config> = path to your ckan config file
 
     The commands should be run from the ckanext-ecportal directory.
@@ -80,7 +82,8 @@ class ECPortalCommand(cli.CkanCommand):
         forms.STATUS_VOCAB_NAME:
         default_data_dir + '/../../data/odp-dataset-status.json',
         forms.TEMPORAL_VOCAB_NAME:
-        default_data_dir + '/../../data/odp-temporal-granularity.json'
+        default_data_dir + '/../../data/odp-temporal-granularity.json',
+        'publishers': default_data_dir + '/../../data/po-corporate-bodies.json'
     }
 
     def command(self):
@@ -99,7 +102,7 @@ class ECPortalCommand(cli.CkanCommand):
         )
         self.user_name = user['name']
 
-        # file_path is used by create-vocab commands
+        # file_path is used by update-vocab and update-publishers commands
         file_path = self.args[1] if len(self.args) >= 2 else None
 
         if cmd == 'export-datasets':
@@ -109,7 +112,7 @@ class ECPortalCommand(cli.CkanCommand):
             self.export_datasets(self.args[1], self.args[2])
 
         elif cmd == 'update-publishers':
-            self.update_publishers()
+            self.update_publishers(file_path)
 
         elif cmd == 'migrate-publisher':
             if len(self.args) != 3:
@@ -210,10 +213,14 @@ class ECPortalCommand(cli.CkanCommand):
             except IOError, ioe:
                 sys.stderr.write(str(ioe) + '\n')
 
-    def _read_publishers_from_file(self):
-        file_name = os.path.dirname(os.path.abspath(__file__)) + \
-            '/../../data/po-corporate-bodies.json'
-        with open(file_name) as json_file:
+    def _read_publishers_from_file(self, file_path=None):
+        if not file_path:
+            file_path = self.default_file['publishers']
+        if not os.path.exists(file_path):
+            log.error('File {0} does not exist'.format(file_path))
+            sys.exit(1)
+
+        with open(file_path) as json_file:
             full_json = json.loads(json_file.read())
 
         return list(self._parse_publishers_from(full_json))
@@ -394,7 +401,7 @@ class ECPortalCommand(cli.CkanCommand):
 
         return result
 
-    def update_publishers(self):
+    def update_publishers(self, file_path=None):
         '''
         Update existing publisher groups.
 
@@ -414,7 +421,7 @@ class ECPortalCommand(cli.CkanCommand):
 
         existing_groups = dict((g['name'], g) for g in existing_groups)
 
-        publishers = self._read_publishers_from_file()
+        publishers = self._read_publishers_from_file(file_path)
 
         new_publishers = [p for p in publishers
                           if p.name not in existing_groups]
@@ -640,7 +647,6 @@ class ECPortalCommand(cli.CkanCommand):
         )
 
     def create_all_vocabs(self):
-        self.update_publishers()
         self.create_vocab_from_file(forms.GEO_VOCAB_NAME)
         self.create_vocab_from_file(forms.DATASET_TYPE_VOCAB_NAME)
         self.create_vocab_from_file(forms.LANGUAGE_VOCAB_NAME)
@@ -650,7 +656,6 @@ class ECPortalCommand(cli.CkanCommand):
         self.import_csv_translation()
 
     def delete_all_vocabs(self):
-        log.warn('Not deleting publisher info (not yet implemented)')
         self._delete_vocab(forms.GEO_VOCAB_NAME)
         self._delete_vocab(forms.DATASET_TYPE_VOCAB_NAME)
         self._delete_vocab(forms.LANGUAGE_VOCAB_NAME)
