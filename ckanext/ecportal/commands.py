@@ -4,7 +4,6 @@ import os
 import sys
 import csv
 import json
-import requests
 
 import ckan
 import ckan.plugins as plugins
@@ -24,8 +23,6 @@ class InvalidDateFormat(Exception):
 class ECPortalCommand(cli.CkanCommand):
     '''
     Commands:
-        paster ecportal export-datasets <folder> -c <config>
-
         paster ecportal update-publishers <file (optional)> -c <config>
         paster ecportal migrate-publisher <source> <target> -c <config>
 
@@ -105,13 +102,7 @@ class ECPortalCommand(cli.CkanCommand):
         # file_path is used by update-vocab and update-publishers commands
         file_path = self.args[1] if len(self.args) >= 2 else None
 
-        if cmd == 'export-datasets':
-            if not len(self.args) == 3:
-                print ECPortalCommand.__doc__
-                return
-            self.export_datasets(self.args[1], self.args[2])
-
-        elif cmd == 'update-publishers':
+        if cmd == 'update-publishers':
             self.update_publishers(file_path)
 
         elif cmd == 'migrate-publisher':
@@ -180,38 +171,6 @@ class ECPortalCommand(cli.CkanCommand):
 
         else:
             log.error('Command "%s" not recognized' % (cmd,))
-
-    def export_datasets(self, output_folder, fetch_url):
-        '''
-        Export datasets as RDF to an output folder.
-        '''
-        import urlparse
-
-        context = {'model': model,
-                   'session': model.Session,
-                   'user': self.user_name}
-        dataset_names = plugins.toolkit.get_action('package_list')(context, {})
-        for dataset_name in dataset_names:
-            dataset_dict = plugins.toolkit.get_action('package_show')(
-                context, {'id': dataset_name})
-            if not dataset_dict['state'] == 'active':
-                continue
-
-            url = ckan.lib.helpers.url_for(controller='package',
-                                           action='read',
-                                           id=dataset_dict['name'])
-
-            url = urlparse.urljoin(fetch_url, url[1:]) + '.rdf'
-
-            try:
-                filename = os.path.join(
-                    output_folder, dataset_dict['name']) + '.rdf'
-                print filename
-                r = requests.get(url, auth=('ec', 'ecportal'))
-                with open(filename, 'wb') as f:
-                    f.write(r.content)
-            except IOError, ioe:
-                sys.stderr.write(str(ioe) + '\n')
 
     def _read_publishers_from_file(self, file_path=None):
         if not file_path:
