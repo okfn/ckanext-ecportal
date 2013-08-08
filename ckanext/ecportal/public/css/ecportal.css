@@ -1820,3 +1820,27 @@ label.inline input {
 #dataset-contact p {
   margin: 0 0 5px 0;
 }
+
+.has-two-boxes {
+  margin-bottom: 20px;
+  background: transparent url(/images/homepage-boxes.png) 20px 100% no-repeat;
+}
+.has-one-box {
+  margin-bottom: 20px;
+  background: transparent url(/images/homepage-box.png) 20px 100% no-repeat;
+}
+
+.box {
+}
+.box h2 {
+  background-color: #F5F5F5;
+  border: 1px solid #BBB;
+  padding: 10px 10px 8px 20px;
+}
+.box .inner {
+  padding: 0 20px 10px 20px;
+}
+
+.block-box {
+  background-color: white;
+}
