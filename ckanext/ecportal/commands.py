@@ -524,6 +524,10 @@ class ECPortalCommand(cli.CkanCommand):
         tag_schema = ckan.logic.schema.default_create_tag_schema()
         tag_schema['name'] = [unicode]
 
+        existing_tags = plugins.toolkit.get_action('tag_list')(
+            context, {'vocabulary_id': vocab['id']})
+        updated_tags = []
+
         for item in full_json['results']['bindings']:
             if item['language']['value'] == 'en':
                 context = {'model': model,
@@ -536,18 +540,14 @@ class ECPortalCommand(cli.CkanCommand):
                     continue
 
                 term = item['term']['value']
-                tag = {'name': term,
-                       'vocabulary_id': vocab['id']}
-                try:
+
+                if not term in existing_tags:
+                    log.info('Creating tag "{0}"'.format(term))
+                    tag = {'name': term,
+                           'vocabulary_id': vocab['id']}
                     plugins.toolkit.get_action('tag_create')(context, tag)
-                except logic.ValidationError, ve:
-                    # ignore errors about the tag already belong to the vocab
-                    # if it's a different error, reraise
-                    if not ('already belongs to vocabulary'
-                            in str(ve.error_dict)):
-                        raise ve
-                    log.info('Tag "%s" already belongs to vocab "%s"' %
-                             (term, vocab_name))
+
+                updated_tags.append(term)
 
         for item in full_json['results']['bindings']:
             term = item['term']['value']
@@ -563,8 +563,16 @@ class ECPortalCommand(cli.CkanCommand):
                                  'lang_code': item['language']['value']})
 
         plugins.toolkit.get_action('term_translation_update_many')(
-            context, {'data': translations}
-        )
+            context, {'data': translations})
+
+        # remove deleted tags
+        # TODO: can we also remove translations of deleted tags?
+        tags_to_delete = [t for t in existing_tags if not t in updated_tags]
+        for tag_name in tags_to_delete:
+            log.info('Deleting tag "{0}"'.format(tag_name))
+            tag = {'id': tag_name,
+                   'vocabulary_id': vocab['id']}
+            plugins.toolkit.get_action('tag_delete')(context, tag)
 
     def _lookup_term(self, en_translation):
         '''
