@@ -101,16 +101,6 @@ CKAN.Templates.resourceDetails = ' \
         {{/if}} \
       </div> \
     </div> \
-    <div class="control-group datastore-enabled"> \
-      <label for="" class="control-label" property="rdfs:label">'+CKAN.Strings.datastoreEnabled+'</label> \
-      <div class="controls"> \
-        <label class="checkbox"> \
-          <input type="checkbox" class="js-datastore-enabled-checkbox" /> \
-          <input type="hidden" name="resources__${num}__webstore_url" value="${resource.webstore_url}" class="js-datastore-enabled-text" /> \
-          <span class="hint">'+shouldADataStoreBeEnabledString+'</span> \
-        </label> \
-      </div> \
-    </div> \
     <div class="control-group"> \
       <label for="" class="control-label" property="rdfs:label">'+CKAN.Strings.lastModified+'</label> \
       <div class="controls"> \
