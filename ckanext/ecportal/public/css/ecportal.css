@@ -1754,6 +1754,7 @@ label.inline input {
   height: 10px;
   background-image: url(/images/resource-icons.png);
 }
+
 .table-box .resource-list a.action .icon.download {
   background-position: 0 0;
 }
@@ -1782,7 +1783,9 @@ label.inline input {
   color: #5599FF;
   text-decoration: underline;
 }
-.table-box .resource-list .tag {
+
+/* Resource tag */
+.resource-tag {
   margin-left: 10px;
   font-size: 10px;
   text-transform: uppercase;
@@ -1793,14 +1796,26 @@ label.inline input {
   line-height: 1;
   border-radius: 3px;
 }
+a.item_link .resources {
+  display: block;
+  margin-top: 5px;
+}
+a.item_link .resources .resource-tag {
+  margin-left: 0;
+  margin-right: 5px;
+  font-weight: bold;
+}
+a.item_link:hover .resources .resource-tag {
+  color: #999 !important;
+}
 
+/* Contact box on dataset page */
 #dataset-contact {
   border: 1px solid #DDD;
   background-color: #FAFAFA;
   padding: 10px 20px;
   color: #888;
 }
-
 #dataset-contact h2 {
   font-family: "Lucida Grande", Tahoma, Verdana, Arial, sans-serif;
   font-style: italic;
@@ -1811,7 +1826,6 @@ label.inline input {
   padding: 0;
   font-size: 12px;
 }
-
 #dataset-contact h3 {
   font-size: 13px;
   padding: 0;
@@ -1821,6 +1835,7 @@ label.inline input {
   margin: 0 0 5px 0;
 }
 
+/* Homepage boxes (wrapper) */
 .has-two-boxes {
   margin-bottom: 20px;
   background: transparent url(/images/homepage-boxes.png) 20px 100% no-repeat;
@@ -1830,8 +1845,7 @@ label.inline input {
   background: transparent url(/images/homepage-box.png) 20px 100% no-repeat;
 }
 
-.box {
-}
+/* Homepage boxes */
 .box h2 {
   background-color: #F5F5F5;
   border: 1px solid #BBB;
