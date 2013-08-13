@@ -86,6 +86,13 @@ CKAN.Templates.resourceDetails = ' \
       </div> \
     </div> \
     <div class="control-group"> \
+      <label for="" class="control-label" property="rdfs:label">'+CKAN.Strings.mimetypeInner+'</label> \
+      <div class="controls"> \
+        <input class="long" name="resources__${num}__mimetype_inner" type="text" value="${resource.mimetype_inner}" /> \
+        <div class="hint"></div> \
+      </div> \
+    </div> \
+    <div class="control-group"> \
       <label for="" class="control-label" property="rdfs:label">'+CKAN.Strings.resourceType+'</label> \
       <div class="controls"> \
         {{if resource.resource_type=="file.upload"}} \
@@ -99,16 +106,6 @@ CKAN.Templates.resourceDetails = ' \
             {{/each}} \
           </select> \
         {{/if}} \
-      </div> \
-    </div> \
-    <div class="control-group datastore-enabled"> \
-      <label for="" class="control-label" property="rdfs:label">'+CKAN.Strings.datastoreEnabled+'</label> \
-      <div class="controls"> \
-        <label class="checkbox"> \
-          <input type="checkbox" class="js-datastore-enabled-checkbox" /> \
-          <input type="hidden" name="resources__${num}__webstore_url" value="${resource.webstore_url}" class="js-datastore-enabled-text" /> \
-          <span class="hint">'+shouldADataStoreBeEnabledString+'</span> \
-        </label> \
       </div> \
     </div> \
     <div class="control-group"> \
@@ -153,7 +150,6 @@ CKAN.Templates.resourceDetails = ' \
         </div> \
       </div> \
     <input name="resources__${num}__mimetype" type="hidden" value="${resource.mimetype}" /> \
-    <input name="resources__${num}__mimetype_inner" type="hidden" value="${resource.mimetype_inner}" /> \
     <button class="btn btn-danger resource-edit-delete js-resource-edit-delete">'+CKAN.Strings.deleteResource+'</button>\
   </div> \
 ';
