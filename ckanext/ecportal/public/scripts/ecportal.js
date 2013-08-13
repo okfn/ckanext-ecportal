@@ -1,4 +1,4 @@
-(function ($) {
+(function ($, window) {
 	$(function () {
 		var arrow_url = CKAN.SITE_URL_NO_LOCALE + '/images/arrow_{0}.gif';
 		var dropdown = $('#language-selector ul');
@@ -35,5 +35,22 @@
 		} else {
 			$('.more-meta').hide();
 		}
+
+		function sortby_dropdown() {
+			$('select[name="sort"]').on('change', function() {
+				$('input[name="sort"]').val($(this).val());
+				$('.page-search form').trigger('submit');
+			});
+		}
+		sortby_dropdown();
+
 	});
-}(jQuery));
+
+	// function sortby_dropdown() {
+	// 	$('select[name="sort"]').on('change', function() {
+	// 		$('input[name="sort"]').val($(this).val());
+	// 		$('.page-search form').trigger('submit');
+	// 	});
+	// }
+	// window.sortby_dropdown = sortby_dropdown;
+}(jQuery, window));
