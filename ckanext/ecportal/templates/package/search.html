@@ -9,13 +9,14 @@
 
   <py:def function="page_title">Search - ${g.site_title}</py:def>
   <py:def function="page_heading">
-    <a href="${h.url(controller='feed', action='custom')}?${c.search_url_params}" class="pull-right"><i class="rss"></i></a>
-    Search - ${g.site_title}
+    Search: <span class="search-term">${c.q}</span>
   </py:def>
   <py:def function="breadcrumbs_extra">
     <span class="seperator">&gt;</span>
     <a href="${h.url_for(controller='package', action='search')}">Search</a>
   </py:def>
+
+  <py:def function="body_class">search-results <py:if test="not request.params">empty-search</py:if></py:def>
 
   <py:match path="primarysidebar">
     ${h.snippet('snippets/suggest_box.html')}
@@ -43,15 +44,32 @@
   </div>
 
   <div py:match="content">
-    ${field_list()}   
-    
+
+    <div class="filter-box">
+      ${field_list()}
+
+      <div class="filter-total">
+        <py:if test="request.params">
+          <h4 i18n:msg="item_count"><strong>${c.page.item_count}</strong> datasets found</h4>
+        </py:if>
+        <a href="${h.url(controller='feed', action='custom')}?${c.search_url_params}"><i class="rss"></i></a>
+      </div>
+
+      <!-- TODO: Make this work -->
+      <div class="filter-sort">
+        ${_('Sort by:')}
+        <select>
+          <option>${_('updated date')}</option>
+        </select>
+      </div>
+
+    </div>
+
     <py:if test="c.query_error">
-    <p i18n:msg="item_count"><strong>There was an error while searching.</strong>
+      <p i18n:msg="item_count"><strong>There was an error while searching.</strong>
       Please try again.</p>
     </py:if>
-    <py:if test="request.params">
-    <h4 i18n:msg="item_count"><strong>${c.page.item_count}</strong> datasets found</h4>
-    </py:if>
+
     ${package_list_from_dict(c.page.items)}
     ${c.page.pager(q=c.q)}
   </div>

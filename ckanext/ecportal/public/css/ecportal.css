@@ -1288,35 +1288,42 @@ h2 a i {
 h2 { margin-bottom: 15px; }
 h3 { margin-bottom: 10px; }
 /* Fix for seeing search facets */
-.filter-list {
-  margin-bottom: 10px;
-  padding: 3px 5px;
-  background-color: #F1F5F8;
-  line-height: 20px;
+.filter-box {
+  border: 6px solid #EEE;
+  padding: 15px;
+  margin: 20px 0;
+}
+.filter-box h4 {
+  float: left;
+  font-weight: normal;
+  text-align: right;
+  color: #777;
+  font-size: 12px;
+  line-height: 32px;
+}
+.filter-box .filter-total {
+  line-height: 32px;
+  float: right;
 }
 .filter-entry {
   display: block;
   margin-right: 10px;
+  margin-bottom: 5px;
   font-style: italic;
 }
 .filter-entry .name {
   font-style: normal;
-  font-family: Georgia;
   font-weight: bold;
-  color: #999;
-  font-size: 14px;
-  line-height: 20px;
+  color: #666;
 }
 .filter-entry strong {
-  color: #b94a48;
   font-style: normal;
-  font-size: 18px;
-  line-height: 20px;
-  vertical-align: -2px;
+  font-size: 10px;
 }
 .filter-entry .value,
-.filter-entry a, .filter-entry a:visited {
-  color: #666;
+.filter-entry a,
+.filter-entry a:visited {
+  color: #4C79D2;
 }
 .filter-entry a:hover {
   color: #b94a48;
@@ -1330,6 +1337,14 @@ h3 { margin-bottom: 10px; }
 }
 .filter-entry a {
  padding: 2px 0; 
+}
+.filter-sort {
+  color: #888;
+  line-height: 32px;
+}
+.filter-sort select {
+  margin: 0 0 0 5px;
+  vertical-align: 1px;
 }
 /* Removes margin bottom from search inputs */
 input.search {
@@ -1857,4 +1872,16 @@ a.item_link:hover .resources .resource-tag {
 
 .block-box {
   background-color: white;
+}
+
+.search-results .page_heading {
+  font-size: 16px;
+}
+.search-results .page_heading .search-term {
+  color: #555;
+  font-size: 14px;
+  font-family: "Lucida Grande", Tahoma, Verdana, Arial, sans-serif;
+}
+.empty-search .page_heading {
+  display: none;
 }
