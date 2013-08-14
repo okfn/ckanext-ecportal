@@ -45,12 +45,4 @@
 		sortby_dropdown();
 
 	});
-
-	// function sortby_dropdown() {
-	// 	$('select[name="sort"]').on('change', function() {
-	// 		$('input[name="sort"]').val($(this).val());
-	// 		$('.page-search form').trigger('submit');
-	// 	});
-	// }
-	// window.sortby_dropdown = sortby_dropdown;
 }(jQuery, window));
