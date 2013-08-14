@@ -130,6 +130,7 @@ class ECPortalPlugin(p.SingletonPlugin):
     p.implements(p.IActions)
     p.implements(p.IAuthFunctions)
     p.implements(p.IPackageController, inherit=True)
+    p.implements(p.ITemplateHelpers)
 
     def get_auth_functions(self):
         return {
@@ -259,3 +260,15 @@ class ECPortalPlugin(p.SingletonPlugin):
                 pkg_dict['modified_date']) + 'Z'
 
         return pkg_dict
+
+    def get_helpers(self):
+        return {'current_url': helpers.current_url,
+                'current_locale': helpers.current_locale,
+                'root_url': helpers.root_url,
+                'format_description': helpers.format_description,
+                'recent_updates': helpers.recent_updates,
+                'top_publishers': helpers.top_publishers,
+                'current_date': helpers.current_date,
+                'group_facets_by_field': helpers.group_facets_by_field,
+                'groups_available': helpers.groups_available,
+                'ecportal_date_to_iso': helpers.ecportal_date_to_iso}
