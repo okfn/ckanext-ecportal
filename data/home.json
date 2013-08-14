@@ -1,0 +1,13 @@
+{
+    "title": {
+        "en": "Homepage content title (English)",
+        "de": "Homepage content title (German)",
+        "fr": "Homepage content title (French)"
+    },
+
+    "body": {
+        "en": "Homepage content body (English)",
+        "de": "Homepage content body (German)",
+        "fr": "Homepage content body (French)"
+    }
+}

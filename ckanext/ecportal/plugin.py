@@ -1,4 +1,5 @@
 import logging
+import json
 import sqlalchemy.exc
 import pylons.config
 import pylons
@@ -272,3 +273,40 @@ class ECPortalPlugin(p.SingletonPlugin):
                 'group_facets_by_field': helpers.group_facets_by_field,
                 'groups_available': helpers.groups_available,
                 'ecportal_date_to_iso': helpers.ecportal_date_to_iso}
+
+
+class ECPortalHomepagePlugin(p.SingletonPlugin):
+    p.implements(p.IConfigurable)
+    p.implements(p.ITemplateHelpers)
+
+    home_content = None
+
+    def _read_json_file(self, file_path):
+        try:
+            with open(file_path, 'r') as f:
+                return json.loads(f.read())
+        except IOError, e:
+            log.error('Cannot open homepage content JSON file {0}'.format(
+                file_path))
+            log.error(e)
+        except ValueError, e:
+            log.error('Cannot load homepage content JSON file {0}'.format(
+                file_path))
+            log.error(e)
+
+    def configure(self, config):
+        content_path = config.get('ckan.home.content')
+        if content_path:
+            log.info('Reading homepage content from {0}'.format(content_path))
+            self.home_content = self._read_json_file(content_path)
+
+    def get_helpers(self):
+        return {'homepage_content': self.homepage_content}
+
+    def homepage_content(self, language='en'):
+        if self.home_content:
+            title = (self.home_content.get('title', {}).get(language) or
+                     self.home_content.get('title', {}).get('en'))
+            body = (self.home_content.get('body', {}).get(language) or
+                    self.home_content.get('body', {}).get('en'))
+            return {'title': title, 'body': body}
