@@ -1229,7 +1229,8 @@ h2 a i {
 }
 /* Page heading stuff */
 .pre_page_heading,
-.page_heading {
+.page_heading,
+.content_heading {
   color: #505d8c;
   font-size: 21px;
   font-weight: bold;
@@ -1466,11 +1467,9 @@ input.search {
 
 
 /* In page searcher */
-.page-search {
+.page-search form {
   position: relative;
   padding: 20px 0 0 0;
-}
-.page-search form {
   margin-bottom: 0;
 }
 .page-search input[type="text"] {
