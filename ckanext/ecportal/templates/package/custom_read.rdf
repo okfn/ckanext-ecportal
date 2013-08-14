@@ -57,10 +57,8 @@
     </dct:temporal>
 
 <py:if test="c.pkg_dict.get('geographical_coverage', '')">
-    <py:for each="tag, trans in c.pkg_dict['geographical_coverage']">
-    <dct:spatial>
-      <skos:Concept rdf:about="http://publications.europa.eu/resource/authority/ntu/${tag}"/>
-    </dct:spatial>
+    <py:for each="item in c.pkg_dict['geographical_coverage']">
+    <dct:spatial rdf:resource="${item}"/>
     </py:for>
 </py:if>
 
@@ -98,9 +96,7 @@
       <skos:Concept rdf:about="${c.pkg_dict.get('status')}"/>
     </ecodp:datasetStatus>
 
-   <dct:publisher py:if="c.pkg_dict.get('published_by')">
-      <skos:Concept rdf:about="http://publications.europa.eu/resource/authority/corporate-body/${c.pkg_dict.get('published_by')}"/>
-    </dct:publisher>
+   <dct:publisher py:if="c.pkg_dict.get('published_by')" rdf:resource="http://publications.europa.eu/resource/authority/corporate-body/${c.pkg_dict.get('published_by')}"/>
 
 <py:for each="rsc_dict in c.pkg_dict.get('resources', [])">
     <py:choose test="rsc_dict.get('resource_type', '#').split('#')[-1] in ['Feed','WebService', 'Download']">
