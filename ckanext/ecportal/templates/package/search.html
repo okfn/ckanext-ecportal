@@ -9,11 +9,12 @@
 
   <?python
     sort = request.params.get('sort') or 'score desc'
+    locale = str(h.current_locale())
     sorting = [
       ["score desc", _("relevance"), ( sort == "score desc") ],
       ["views_total desc", _("views"), ( sort == "views_total desc") ],
-      ["title_string_XX asc", _("title ascending"), ( sort == "title_string_XX asc") ],
-      ["title_string_XX desc", _("title descending"), ( sort == "title_string_XX desc") ],
+      ["title_string_"+locale+" asc", _("title ascending"), ( sort == "title_string_"+locale+" asc") ],
+      ["title_string_"+locale+" desc", _("title descending"), ( sort == "title_string_"+locale+" desc") ],
       ["metadata_modified desc", _("date updated"), ( sort == "metadata_modified desc") ],
     ]
   ?>
