@@ -1931,3 +1931,15 @@ a.item_link:hover .resources .resource-tag {
   -moz-border-radius: 5px;
   border-radius: 5px;
 }
+
+/* Welcome message for the homepage */
+.intro-welcome {
+  padding: 10px 10px 5px 10px;
+  background-color: #EEE;
+  border: 1px solid #C7C7C7;
+}
+.intro-welcome .page_heading {
+  font-size: 16px;
+  padding-top: 0;
+  margin-bottom: 10px;
+}
