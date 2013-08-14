@@ -1,4 +1,4 @@
-(function ($, window) {
+(function ($) {
 	$(function () {
 		var arrow_url = CKAN.SITE_URL_NO_LOCALE + '/images/arrow_{0}.gif';
 		var dropdown = $('#language-selector ul');
@@ -45,4 +45,4 @@
 		sortby_dropdown();
 
 	});
-}(jQuery, window));
+}(jQuery));
