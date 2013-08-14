@@ -243,6 +243,10 @@ ul.menu li {
   margin-top:-4px;
 }
 
+.header #logo-root img{
+  margin-top: 0;
+}
+
 #header-title{
   /*position: absolute;*/
   /*top: 125px;*/
