@@ -28,14 +28,6 @@ Available paster commands
 
 Paster commands that are available when using the ecportal extension.
 
-export-datasets
-~~~~~~~~~~~~~~~
-
-export-datasets will export all of the active datasets in the installation and
-write them as RDF formatted output to the specified folder::
-
-  paster ecportal export-datasets /tmp_folder/ -c config.ini
-
 Search Cloud
 ------------
 
