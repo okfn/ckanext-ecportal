@@ -130,6 +130,7 @@ class ECPortalPlugin(p.SingletonPlugin):
     p.implements(p.IActions)
     p.implements(p.IAuthFunctions)
     p.implements(p.IPackageController, inherit=True)
+    p.implements(p.ITemplateHelpers)
 
     def get_auth_functions(self):
         return {
@@ -154,7 +155,8 @@ class ECPortalPlugin(p.SingletonPlugin):
             'purge_task_data': ecportal_logic.purge_task_data,
             'user_create': ecportal_logic.user_create,
             'user_update': ecportal_logic.user_update,
-            'package_show': ecportal_logic.package_show
+            'package_show': ecportal_logic.package_show,
+            'resource_show': ecportal_logic.resource_show
         }
 
     def update_config(self, config):
@@ -259,3 +261,7 @@ class ECPortalPlugin(p.SingletonPlugin):
                 pkg_dict['modified_date']) + 'Z'
 
         return pkg_dict
+
+    def get_helpers(self):
+        return {'resource_display_name': helpers.resource_display_name}
+

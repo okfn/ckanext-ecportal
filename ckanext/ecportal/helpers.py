@@ -191,3 +191,18 @@ def ecportal_date_to_iso(date_string):
         return
 
     return datetime.datetime.strptime(date_string, format).isoformat()
+# TODO: (?) support resource objects as well
+def resource_display_name(resource_dict):
+    name = resource_dict.get('name', None)
+    description = resource_dict.get('description', None)
+    if description:
+        description = description.split('.')[0]
+        max_len = 60;
+        if len(description)>max_len: description = description[:max_len]+'...'
+        return description
+    elif name:
+        return name
+    else:
+        noname_string = _('no name')
+        return '[%s] %s' % (noname_string, resource_dict['id'])
+
