@@ -5,6 +5,13 @@
   >
   <xi:include href="../_util.html" />
 
+  <?python
+    viz_resources = [r for r in c.pkg_dict.get('resources', [])
+                     if r.get('resource_type') == 'Visualization']
+    non_viz_resources = [r for r in c.pkg_dict.get('resources', [])
+                         if not r in viz_resources]
+  ?>
+
   <div id="dataset" class="dataset">
     <div id="dataset-overview">
 
@@ -28,11 +35,16 @@
       </div>
 
       <!-- Visualisations -->
-      <!-- <div id="dataset-visualisations" class="table-box package-box resources">
-        <h3>${_('Visualisations')}</h3>
+      <div id="dataset-visualisations" class="table-box package-box resources">
+        <h3>
+          ${_('Visualisations')}
+          <py:if test="h.check_access('package_update',{'id':c.pkg.id})"> &nbsp;
+          ${h.subnav_link(c, _('(edit)'), controller='package', action='editresources', id=c.pkg.name)}
+          </py:if>
+        </h3>
         <div class="inner">
           <ul class="resource-list unstyled">
-            <py:for each="res in c.pkg_dict.get('visualisations', [])">
+            <py:for each="res in viz_resources">
             <li>
               <a href="${res['url']}" class="action">
                 <i class="icon graph"></i>
@@ -42,22 +54,23 @@
             </li>
             </py:for>
           </ul>
-          <py:if test="not len(c.pkg_dict.get('visualisations', []))">
+          <py:if test="not len(viz_resources)">
             (none)
           </py:if>
         </div>
-      </div> -->
+      </div>
 
       <!-- Resources -->
       <div id="dataset-resources" class="table-box package-box resources">
         <h3>
           ${_('Resources')}
-        <py:if test="h.check_access('package_update',{'id':c.pkg.id})"> &nbsp;
+          <py:if test="h.check_access('package_update',{'id':c.pkg.id})"> &nbsp;
           ${h.subnav_link(c, _('(edit)'), controller='package', action='editresources', id=c.pkg.name)}
-        </py:if></h3>
+          </py:if>
+        </h3>
         <div class="inner">
           <ul class="resource-list unstyled">
-            <py:for each="res in c.pkg_dict.get('resources', [])">
+            <py:for each="res in non_viz_resources">
             <li>
               <a href="${res['url']}" class="action">
                 <py:choose>
@@ -76,7 +89,7 @@
             </li>
             </py:for>
           </ul>
-          <py:if test="not len(c.pkg_dict.get('resources', []))">
+          <py:if test="not len(non_viz_resources)">
             (none)
           </py:if>
         </div>
