@@ -52,13 +52,15 @@
           </div>
         </div>
       </div>
-      <div class="span6" py:with="homepage_content = h.homepage_content(str(h.current_locale()))">
+      <div class="span6">
+        <py:with vars="homepage_content = h.homepage_content(str(h.current_locale()))">
         <div py:if="homepage_content" class="intro-welcome">
           <h2>${homepage_content.get('title')}</h2>
           <div class="inner">
             <div id="homepage-content-body">${homepage_content.get('body')}</div>
           </div>
         </div>
+        </py:with>
         <div py:if="c.json" class="region-content block-box">
           <h2>${_('Popular terms')}</h2>
           <div id="searchcloud" style="width: 100%; height: 300px; border: 1px solid #fff;"></div>
