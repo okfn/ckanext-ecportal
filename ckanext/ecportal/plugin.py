@@ -280,6 +280,7 @@ class ECPortalHomepagePlugin(p.SingletonPlugin):
     p.implements(p.ITemplateHelpers)
 
     home_content = None
+    maintenance = None
 
     def _read_json_file(self, file_path):
         try:
@@ -300,8 +301,15 @@ class ECPortalHomepagePlugin(p.SingletonPlugin):
             log.info('Reading homepage content from {0}'.format(content_path))
             self.home_content = self._read_json_file(content_path)
 
+        maintenance_path = config.get('ckan.home.maintenance')
+        if maintenance_path:
+            log.info('Reading maintenance message from {0}'.format(
+                maintenance_path))
+            self.maintenance = self._read_json_file(maintenance_path)
+
     def get_helpers(self):
-        return {'homepage_content': self.homepage_content}
+        return {'homepage_content': self.homepage_content,
+                'maintenance_message': self.maintenance_message}
 
     def homepage_content(self, language='en'):
         if self.home_content:
@@ -310,3 +318,10 @@ class ECPortalHomepagePlugin(p.SingletonPlugin):
             body = (self.home_content.get('body', {}).get(language) or
                     self.home_content.get('body', {}).get('en'))
             return {'title': title, 'body': p.toolkit.literal(body)}
+
+    def maintenance_message(self, language='en'):
+        if self.maintenance:
+            message = (self.maintenance.get('message', {}).get(language) or
+                       self.maintenance.get('message', {}).get('en'))
+            maintenance_class = self.maintenance.get('class', 'red')
+            return {'message': message, 'class': maintenance_class}

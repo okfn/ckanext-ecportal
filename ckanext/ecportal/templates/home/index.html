@@ -7,9 +7,11 @@
   <py:def function="page_title">Data</py:def>
 
   <div py:match="//div[@id='search-header']" class="front-page">
-    <!-- <div class="message"><div class="red"> -->
-    <!--   Maintenance message. -->
-    <!-- </div></div> -->
+    <py:with vars="maintenance_message = h.maintenance_message(str(h.current_locale()))">
+    <div class="message" py:if="maintenance_message">
+      <div class="${maintenance_message.get('class')}">${maintenance_message.get('message')}</div>
+    </div>
+    </py:with>
     <div class="region region-tabdesc">
       <div class="row bootstrap-row">
         <div class="span8">
