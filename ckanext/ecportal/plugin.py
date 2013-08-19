@@ -176,10 +176,6 @@ class ECPortalPlugin(p.SingletonPlugin):
         map.redirect('/dataset/history/{url:.*}', '/not_found')
         map.redirect('/dataset/history_ajax/{url:.*}', '/not_found')
 
-        # home map
-        home_controller = 'ckanext.ecportal.controllers:ECPortalHomeController'
-        with routing.SubMapper(map, controller=home_controller) as m:
-            m.connect('home', '/', action='index')
         # search cloud map
         searchcloud_controller = \
             'ckanext.ecportal.controllers:ECPortalSearchCloudAdminController'
@@ -272,7 +268,9 @@ class ECPortalPlugin(p.SingletonPlugin):
                 'current_date': helpers.current_date,
                 'group_facets_by_field': helpers.group_facets_by_field,
                 'groups_available': helpers.groups_available,
-                'ecportal_date_to_iso': helpers.ecportal_date_to_iso}
+                'ecportal_date_to_iso': helpers.ecportal_date_to_iso,
+                'most_viewed_datasets': helpers.most_viewed_datasets,
+                'approved_search_terms': helpers.approved_search_terms}
 
 
 class ECPortalHomepagePlugin(p.SingletonPlugin):
