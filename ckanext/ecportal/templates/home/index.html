@@ -43,7 +43,7 @@
       <div class="span6">
         <div class="box" py:if="c.most_viewed_datasets">
           <h2>
-            <a href="${h.url_for(controller='package', action='search')}">
+            <a href="${h.url_for(controller='package', action='search', sort='views_total desc')}">
               <i class="resource"></i>
               ${_('view all')} &raquo;
             </a>
