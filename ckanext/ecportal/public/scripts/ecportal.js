@@ -35,5 +35,14 @@
 		} else {
 			$('.more-meta').hide();
 		}
+
+		function sortby_dropdown() {
+			$('select[name="sort"]').on('change', function() {
+				$('input[name="sort"]').val($(this).val());
+				$('.page-search form').trigger('submit');
+			});
+		}
+		sortby_dropdown();
+
 	});
 }(jQuery));

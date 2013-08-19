@@ -27,10 +27,31 @@
         </div>
       </div>
 
+      <!-- Visualisations -->
+      <!-- <div id="dataset-visualisations" class="table-box package-box resources">
+        <h3>${_('Visualisations')}</h3>
+        <div class="inner">
+          <ul class="resource-list unstyled">
+            <py:for each="res in c.pkg_dict.get('visualisations', [])">
+            <li>
+              <a href="${res['url']}" class="action">
+                <i class="icon graph"></i>
+                ${_('Visualise')}
+              </a>
+              <a href="${h.url_for(controller='package', action='resource_read', id=c.pkg_dict['name'], resource_id=res['id'])}" class="name">${h.resource_display_name(res)}</a>
+            </li>
+            </py:for>
+          </ul>
+          <py:if test="not len(c.pkg_dict.get('visualisations', []))">
+            (none)
+          </py:if>
+        </div>
+      </div> -->
+
       <!-- Resources -->
-      <div id="dataset-resources" class="package-box resources">
+      <div id="dataset-resources" class="table-box package-box resources">
         <h3>
-          <i class="resource"></i> ${_('Resources')}
+          ${_('Resources')}
         <py:if test="h.check_access('package_update',{'id':c.pkg.id})"> &nbsp;
           ${h.subnav_link(c, _('(edit)'), controller='package', action='editresources', id=c.pkg.name)}
         </py:if></h3>
@@ -38,9 +59,21 @@
           <ul class="resource-list unstyled">
             <py:for each="res in c.pkg_dict.get('resources', [])">
             <li>
-              <a href="${res['url']}" class="button button-primary download">${_('Download')}</a>
-              <a href="${h.url_for(controller='package', action='resource_read', id=c.pkg_dict['name'], resource_id=res['id'])}">${h.resource_display_name(res)} &raquo;</a>
-              </li>
+              <a href="${res['url']}" class="action">
+                <py:choose>
+                  <py:when test="res['format'] == 'html'">
+                    <i class="icon visit"></i>
+                    ${_('Visit page')}
+                  </py:when>
+                  <py:otherwise>
+                    <i class="icon download"></i>
+                    ${_('Download')}
+                  </py:otherwise>
+                </py:choose>
+              </a>
+              <a href="${h.url_for(controller='package', action='resource_read', id=c.pkg_dict['name'], resource_id=res['id'])}" class="name">${h.resource_display_name(res)}</a>
+              <span class="resource-tag">${res['format']}</span>
+            </li>
             </py:for>
           </ul>
           <py:if test="not len(c.pkg_dict.get('resources', []))">
@@ -53,7 +86,6 @@
 
     <!-- Dataset Information Section -->
     <div class="package-box">
-      <h3><i class="info"></i> ${_('Additional Information')}</h3>
       <div id="dataset-information" class="inner">
         <div class="quick-info">
           <dl py:if="c.pkg.url">
@@ -136,31 +168,6 @@
             <dd>${", ".join(c.pkg_dict['language'])}</dd>
           </dl>
 
-          <dl py:if="c.pkg_dict.get('contact_name')">
-            <dt>${_('Contact Name')}</dt>
-            <dd>${c.pkg_dict['contact_name']}</dd>
-          </dl>
-
-          <dl py:if="c.pkg_dict.get('contact_email')">
-            <dt>${_('Contact E-mail')}</dt>
-            <dd>${c.pkg_dict['contact_email']}</dd>
-          </dl>
-
-          <dl py:if="c.pkg_dict.get('contact_address')">
-            <dt>${_('Contact Address')}</dt>
-            <dd>${c.pkg_dict['contact_address']}</dd>
-          </dl>
-
-          <dl py:if="c.pkg_dict.get('contact_telephone')">
-            <dt>${_('Contact Telephone')}</dt>
-            <dd>${c.pkg_dict['contact_telephone']}</dd>
-          </dl>
-
-          <dl py:if="c.pkg_dict.get('contact_webpage')">
-            <dt>${_('Contact Web Page')}</dt>
-            <dd><a href="${c.pkg_dict['contact_webpage']}">${c.pkg_dict['contact_webpage']}</a></dd>
-          </dl>
-
           <dl py:if="c.pkg.version">
             <dt>${_('Version')}</dt>
             <dd>${c.pkg.version}</dd>
@@ -184,6 +191,26 @@
         </div>
       </div>
     </div>
+
+    <py:if test="c.pkg_dict.get('contact_name') or c.pkg_dict.get('contact_email') or c.pkg_dict.get('contact_address') or c.pkg_dict.get('contact_telephone') or c.pkg_dict.get('contact_webpage')">
+      <div id="dataset-contact" class="package-box">
+        <h2>${_('Contact')}</h2>
+        <h3 py:if="c.pkg_dict.get('contact_name')">${c.pkg_dict['contact_name']}</h3>
+        <p py:if="c.pkg_dict.get('contact_address')">
+          ${c.pkg_dict['contact_address']}
+        </p>
+        <p py:if="c.pkg_dict.get('contact_telephone')">
+          <span>${_('Tel:')}</span>
+          ${c.pkg_dict['contact_telephone']}
+        </p>
+        <p py:if="c.pkg_dict.get('contact_email')">
+          <a href="mailto:${c.pkg_dict['contact_email']}">${c.pkg_dict['contact_email']}</a>
+        </p>
+        <p py:if="c.pkg_dict.get('contact_webpage')">
+          <a href="${c.pkg_dict['contact_webpage']}">${c.pkg_dict['contact_webpage']}</a>
+        </p>
+      </div>
+    </py:if>
 
   </div> <!-- /dataset -->
 

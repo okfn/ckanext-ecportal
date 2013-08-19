@@ -7,15 +7,28 @@
 
   <xi:include href="../odp_facets.html" />
 
+  <?python
+    sort = request.params.get('sort') or 'score desc'
+    locale = str(h.current_locale())
+    sorting = [
+      ["score desc", _("relevance"), ( sort == "score desc") ],
+      ["views_total desc", _("views"), ( sort == "views_total desc") ],
+      ["title_string_"+locale+" asc", _("title ascending"), ( sort == "title_string_"+locale+" asc") ],
+      ["title_string_"+locale+" desc", _("title descending"), ( sort == "title_string_"+locale+" desc") ],
+      ["modified_date desc", _("date updated"), ( sort == "modified_date desc") ],
+    ]
+  ?>
+
   <py:def function="page_title">Search - ${g.site_title}</py:def>
   <py:def function="page_heading">
-    <a href="${h.url(controller='feed', action='custom')}?${c.search_url_params}" class="pull-right"><i class="rss"></i></a>
-    Search - ${g.site_title}
+    Search: <span class="search-term">${c.q}</span>
   </py:def>
   <py:def function="breadcrumbs_extra">
     <span class="seperator">&gt;</span>
     <a href="${h.url_for(controller='package', action='search')}">Search</a>
   </py:def>
+
+  <py:def function="body_class">search-results <py:if test="not c.q">empty-search</py:if></py:def>
 
   <py:match path="primarysidebar">
     ${h.snippet('snippets/suggest_box.html')}
@@ -27,6 +40,22 @@
   </py:match>
 
   <py:def function="search_value"><py:if test="c.q">${c.q}</py:if></py:def>
+
+  <py:def function="sortby_dropdown">
+    <select name="sort">
+      <py:for each="value, label, is_selected in sorting">
+        <py:choose test="is_selected">
+          <py:when test="True">
+            <option value="${value}" selected="selected">${label}</option>
+          </py:when>
+          <py:otherwise>
+            <option value="${value}">${label}</option>
+          </py:otherwise>
+        </py:choose>
+      </py:for>
+    </select>
+  </py:def>
+
   <div py:match="//div[@id='page-search']" class="page-search">
     <form>
       <input type="text" name="q" value="${search_value()}" placeholder="${_('Search datasets...')}" />
@@ -39,19 +68,34 @@
       <p style="padding-left: 10px; margin-top: 5px;">
         ${h.snippet('snippets/boolean_search_choice.html')}
       </p>
+      <input type="hidden" name="sort" value="${sort}" />
     </form>
   </div>
 
   <div py:match="content">
-    ${field_list()}   
-    
+
+    <div class="filter-box">
+      ${field_list()}
+
+      <div class="filter-total">
+        <py:if test="request.params">
+          <h4 i18n:msg="item_count"><strong>${c.page.item_count}</strong> datasets found</h4>
+        </py:if>
+        <a href="${h.url(controller='feed', action='custom')}?${c.search_url_params}"><i class="rss"></i></a>
+      </div>
+
+      <div class="filter-sort">
+        ${_('Sort by:')}
+        ${sortby_dropdown()}
+      </div>
+
+    </div>
+
     <py:if test="c.query_error">
-    <p i18n:msg="item_count"><strong>There was an error while searching.</strong>
+      <p i18n:msg="item_count"><strong>There was an error while searching.</strong>
       Please try again.</p>
     </py:if>
-    <py:if test="request.params">
-    <h4 i18n:msg="item_count"><strong>${c.page.item_count}</strong> datasets found</h4>
-    </py:if>
+
     ${package_list_from_dict(c.page.items)}
     ${c.page.pager(q=c.q)}
   </div>
