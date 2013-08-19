@@ -309,4 +309,4 @@ class ECPortalHomepagePlugin(p.SingletonPlugin):
                      self.home_content.get('title', {}).get('en'))
             body = (self.home_content.get('body', {}).get(language) or
                     self.home_content.get('body', {}).get('en'))
-            return {'title': title, 'body': body}
+            return {'title': title, 'body': p.toolkit.literal(body)}
