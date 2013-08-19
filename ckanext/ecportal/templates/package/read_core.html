@@ -35,7 +35,7 @@
       </div>
 
       <!-- Visualisations -->
-      <div id="dataset-visualisations" class="table-box package-box resources">
+      <div py:if="viz_resources" id="dataset-visualisations" class="table-box package-box resources">
         <h3>
           ${_('Visualisations')}
           <py:if test="h.check_access('package_update',{'id':c.pkg.id})"> &nbsp;
@@ -54,9 +54,6 @@
             </li>
             </py:for>
           </ul>
-          <py:if test="not len(viz_resources)">
-            (none)
-          </py:if>
         </div>
       </div>
 
