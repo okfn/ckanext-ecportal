@@ -1284,6 +1284,10 @@ h2 a i {
   border-bottom-width: 0;
   color: #4B5583;
 }
+.sidebar-section h3 {
+  font-size: 15px;
+  margin-bottom: 5px;
+}
 .sidebar-section .tags {
   margin: 0;
   padding: 0;
