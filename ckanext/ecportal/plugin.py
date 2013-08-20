@@ -1,4 +1,5 @@
 import logging
+import json
 import sqlalchemy.exc
 import pylons.config
 import pylons
@@ -130,6 +131,7 @@ class ECPortalPlugin(p.SingletonPlugin):
     p.implements(p.IActions)
     p.implements(p.IAuthFunctions)
     p.implements(p.IPackageController, inherit=True)
+    p.implements(p.ITemplateHelpers)
 
     def get_auth_functions(self):
         return {
@@ -174,10 +176,6 @@ class ECPortalPlugin(p.SingletonPlugin):
         map.redirect('/dataset/history/{url:.*}', '/not_found')
         map.redirect('/dataset/history_ajax/{url:.*}', '/not_found')
 
-        # home map
-        home_controller = 'ckanext.ecportal.controllers:ECPortalHomeController'
-        with routing.SubMapper(map, controller=home_controller) as m:
-            m.connect('home', '/', action='index')
         # search cloud map
         searchcloud_controller = \
             'ckanext.ecportal.controllers:ECPortalSearchCloudAdminController'
@@ -259,3 +257,70 @@ class ECPortalPlugin(p.SingletonPlugin):
                 pkg_dict['modified_date']) + 'Z'
 
         return pkg_dict
+
+    def get_helpers(self):
+        return {'current_url': helpers.current_url,
+                'current_locale': helpers.current_locale,
+                'root_url': helpers.root_url,
+                'format_description': helpers.format_description,
+                'recent_updates': helpers.recent_updates,
+                'top_publishers': helpers.top_publishers,
+                'current_date': helpers.current_date,
+                'group_facets_by_field': helpers.group_facets_by_field,
+                'catalog_url': helpers.catalog_url,
+                'groups_available': helpers.groups_available,
+                'ecportal_date_to_iso': helpers.ecportal_date_to_iso,
+                'most_viewed_datasets': helpers.most_viewed_datasets,
+                'approved_search_terms': helpers.approved_search_terms}
+
+
+class ECPortalHomepagePlugin(p.SingletonPlugin):
+    p.implements(p.IConfigurable)
+    p.implements(p.ITemplateHelpers)
+
+    home_content = None
+    maintenance = None
+
+    def _read_json_file(self, file_path):
+        try:
+            with open(file_path, 'r') as f:
+                return json.loads(f.read())
+        except IOError, e:
+            log.error('Cannot open homepage content JSON file {0}'.format(
+                file_path))
+            log.error(e)
+        except ValueError, e:
+            log.error('Cannot load homepage content JSON file {0}'.format(
+                file_path))
+            log.error(e)
+
+    def configure(self, config):
+        content_path = config.get('ckan.home.content')
+        if content_path:
+            log.info('Reading homepage content from {0}'.format(content_path))
+            self.home_content = self._read_json_file(content_path)
+
+        maintenance_path = config.get('ckan.home.maintenance')
+        if maintenance_path:
+            log.info('Reading maintenance message from {0}'.format(
+                maintenance_path))
+            self.maintenance = self._read_json_file(maintenance_path)
+
+    def get_helpers(self):
+        return {'homepage_content': self.homepage_content,
+                'maintenance_message': self.maintenance_message}
+
+    def homepage_content(self, language='en'):
+        if self.home_content:
+            title = (self.home_content.get('title', {}).get(language) or
+                     self.home_content.get('title', {}).get('en'))
+            body = (self.home_content.get('body', {}).get(language) or
+                    self.home_content.get('body', {}).get('en'))
+            return {'title': title, 'body': p.toolkit.literal(body)}
+
+    def maintenance_message(self, language='en'):
+        if self.maintenance:
+            message = (self.maintenance.get('message', {}).get(language) or
+                       self.maintenance.get('message', {}).get('en'))
+            maintenance_class = self.maintenance.get('class', 'red')
+            return {'message': message, 'class': maintenance_class}

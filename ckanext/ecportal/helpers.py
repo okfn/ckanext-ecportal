@@ -1,7 +1,10 @@
+import logging
 import datetime
 import operator
 import pylons.config as config
 import genshi
+import sqlalchemy.exc
+
 import ckan
 import ckan.model as model
 import ckan.plugins as p
@@ -11,9 +14,13 @@ import ckan.logic as logic
 import ckan.lib.dictization as dictization
 from ckan.authz import Authorizer
 import ckanext.ecportal.unicode_sort as unicode_sort
+import ckanext.ecportal.mostviewed as mostviewed
+import ckanext.ecportal.searchcloud as searchcloud
 
 NUM_TOP_PUBLISHERS = 6
+NUM_MOST_VIEWED_DATASETS = 10
 UNICODE_SORT = unicode_sort.UNICODE_SORT
+log = logging.getLogger(__file__)
 
 
 def translate(terms, lang, fallback_lang):
@@ -193,3 +200,23 @@ def ecportal_date_to_iso(date_string):
         return
 
     return datetime.datetime.strptime(date_string, format).isoformat()
+
+
+def most_viewed_datasets(num_datasets=NUM_MOST_VIEWED_DATASETS):
+    try:
+        return mostviewed.get_most_viewed(model.Session, num_datasets)
+    except sqlalchemy.exc.ProgrammingError:
+        log.error('Could not retrieve most viewed results from database. '
+                  'Do the tables exist? Rolling back the session.')
+        model.Session.rollback()
+
+
+def approved_search_terms():
+    try:
+        terms = searchcloud.get_approved(model.Session)
+        if terms:
+            return searchcloud.approved_to_json(terms)
+    except sqlalchemy.exc.ProgrammingError:
+        log.error('Could not retrieve search cloud results from database. '
+                  'Do the tables exist? Rolling back the session.')
+        model.Session.rollback()

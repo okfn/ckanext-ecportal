@@ -1,0 +1,9 @@
+{
+    "message": {
+        "en": "Maintenance message",
+        "de": "Maintenance message (German)",
+        "fr": "Maintenance message (French)"
+    },
+
+    "class": "red"
+}
