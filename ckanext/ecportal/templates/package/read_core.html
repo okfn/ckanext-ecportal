@@ -82,7 +82,7 @@
                 </py:choose>
               </a>
               <a href="${h.url_for(controller='package', action='resource_read', id=c.pkg_dict['name'], resource_id=res['id'])}" class="name">${h.resource_display_name(res)}</a>
-              <span test="res['format']" class="resource-tag" title="${res['format']}">${res['format']}</span>
+              <span py:if="res['format']" class="resource-tag" title="${res['format']}">${res['format']}</span>
             </li>
             </py:for>
           </ul>
