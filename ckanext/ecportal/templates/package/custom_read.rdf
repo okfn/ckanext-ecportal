@@ -15,7 +15,17 @@
     xmlns:dcam="http://purl.org/dc/dcam/"
     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#">
 
-<dcat:Dataset rdf:about="${c.pkg_dict.get('url','')}">
+<dcat:Catalog rdf:about="${h.catalog_url()}">
+    <dcat:record>
+        <dcat:CatalogRecord rdf:about="${c.dataset_url}">
+            <dct:modified>${c.pkg_dict.get('metadata_modified', '')}</dct:modified>
+            <dct:issued>${c.pkg_dict.get('metadata_created', '')}</dct:issued>
+            <foaf:primaryTopic>${c.pkg_dict.get('url').strip() or c.dataset_url}</foaf:primaryTopic>
+        </dcat:CatalogRecord>
+    </dcat:record>
+</dcat:Catalog>
+
+<dcat:Dataset rdf:about="${c.pkg_dict.get('url').strip() or c.dataset_url}">
 
     <dct:title xml:lang="en">${c.pkg_dict['title']}</dct:title>
     <dct:description xml:lang="en">${c.pkg_dict.get('description', '')}</dct:description>
@@ -28,13 +38,6 @@
     </py:for>
 </py:if>
 
-    <dcat:record>
-        <rdf:Description rdf:about="${c.dataset_url}">
-            <dcat:accessURL rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">${c.dataset_url}</dcat:accessURL>
-            <dct:modified>${c.pkg_dict.get('modified_date', '')}</dct:modified>
-            <dct:issued>${c.pkg_dict.get('release_date', '')}</dct:issued>
-        </rdf:Description>
-    </dcat:record>
 
     <dct:license py:if="c.pkg_dict.get('license_url', None)">
       <skos:Concept rdf:about="${c.pkg_dict['license_url']}"/>
