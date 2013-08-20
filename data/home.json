@@ -1,0 +1,13 @@
+{
+    "title": {
+        "en": "What is this data portal about?",
+        "de": "What is this data portal about? (German)",
+        "fr": "What is this data portal about? (French)"
+    },
+
+    "body": {
+        "en": "<p>Are you looking for easy access to EU Data? Do you want to reuse data for research, an article, an application or something else?</p><p>You have come to the right place. The EU Open Data Portal is your single point of access to a growing range of data produced by the institutions and other bodies of the European Union.</p><p>Data are free to use, reuse, link and redistribute for commercial or non-commercial purposes.</p>",
+        "de": "<p>Homepage content body (German).</p>",
+        "fr": "<p>Homepage content body (French).</p>"
+    }
+}
