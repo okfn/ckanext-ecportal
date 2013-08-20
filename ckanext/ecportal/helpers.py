@@ -200,7 +200,7 @@ def ecportal_date_to_iso(date_string):
         return
 
     return datetime.datetime.strptime(date_string, format).isoformat()
-<<<<<<< HEAD
+
 # TODO: (?) support resource objects as well
 def resource_display_name(resource_dict):
     name = resource_dict.get('name', None)
@@ -215,8 +215,6 @@ def resource_display_name(resource_dict):
     else:
         noname_string = _('no name')
         return '[%s] %s' % (noname_string, resource_dict['id'])
-
-=======
 
 
 def most_viewed_datasets(num_datasets=NUM_MOST_VIEWED_DATASETS):
@@ -237,4 +235,3 @@ def approved_search_terms():
         log.error('Could not retrieve search cloud results from database. '
                   'Do the tables exist? Rolling back the session.')
         model.Session.rollback()
->>>>>>> next
