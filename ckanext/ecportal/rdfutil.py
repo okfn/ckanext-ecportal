@@ -32,7 +32,7 @@ def update_rdf(source_rdf, name):
         'http://purl.org/dc/terms/#': 'dct',
         'http://www.w3.org/1999/02/22-rdf-syntax-ns#': 'rdf',
         'http://www.w3.org/ns/dcat#': 'dcat',
-        'http://ec.europa.eu/open-data/ontologies/ec-odp#': 'ecodp',
+        'http://open-data.europa.eu/ontologies/ec-odp#': 'ecodp',
         'http://xmlns.com/foaf/0.1/#': 'foaf'
     }
 
