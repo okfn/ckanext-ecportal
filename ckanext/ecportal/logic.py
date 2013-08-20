@@ -284,8 +284,8 @@ def package_show(context, data_dict):
     if 'resources' in result:
         result['resources'].sort(key=order_key)
 
-    for resource in result['resources']:
-        _change_resource_details(resource)
+        for resource in result['resources']:
+            _change_resource_details(resource)
 
     return result
 
