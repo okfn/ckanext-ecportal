@@ -78,9 +78,7 @@
       ${field_list()}
 
       <div class="filter-total">
-        <py:if test="request.params">
-          <h4 i18n:msg="item_count"><strong>${c.page.item_count}</strong> datasets found</h4>
-        </py:if>
+        <h4 i18n:msg="item_count"><strong>${c.page.item_count}</strong> datasets found</h4>
         <a href="${h.url(controller='feed', action='custom')}?${c.search_url_params}"><i class="rss"></i></a>
       </div>
 
