@@ -8,6 +8,7 @@ import pylons
 import urlparse
 
 import ckanext.ecportal.schema as schema
+import ckanext.ecportal.helpers as helpers
 import ckanext.ecportal.unicode_sort as unicode_sort 
 UNICODE_SORT = unicode_sort.UNICODE_SORT
 _RESOURCE_MAPPING = None
@@ -28,17 +29,6 @@ def _get_filename_and_extension(resource):
         return last_part, ending
     return '', ''
 
-def _get_resource_mapping():
-    global _RESOURCE_MAPPING
-    if not _RESOURCE_MAPPING:
-        file_location = pylons.config.get(
-             'ecportal.resource_mapping',
-             '/applications/ecodp/users/ecodp/ckan/conf/resource_mapping.json'
-        )
-        with open(file_location) as resource_file:
-            _RESOURCE_MAPPING = json.loads(resource_file.read())
-
-    return _RESOURCE_MAPPING
 
 
 # wrapper around group update, *always* adds on packages
@@ -254,20 +244,23 @@ def group_list(context, data_dict):
     return sorted(groups, key=sort_group)
 
 def _change_resource_details(resource):
-    formats = _get_resource_mapping().keys()
+    formats = helpers.resource_mapping().keys()
     resource_format = resource.get('format', '').lower().lstrip('.')
     filename, extension = _get_filename_and_extension(resource)
     if not resource_format:
         resource_format = extension
     if resource_format in formats:
-        resource['format'] = _get_resource_mapping()[resource_format][0]
+        resource['format'] = helpers.resource_mapping()[resource_format][0]
         if resource.get('name', '') in ['Unnamed resource', '', None]:
-            resource['name'] = _get_resource_mapping()[resource_format][1]
+            resource['name'] = helpers.resource_mapping()[resource_format][2]
             if filename:
                 resource['name'] = resource['name']
     elif resource.get('name', '') in ['Unnamed resource', '', None]:
         if extension and not resource_format:
-            resource['format'] = extension.upper()
+            if extension in formats:
+	        resource['format'] = helpers.resource_mapping()[extension][0]
+            else:
+                resource['format'] = extension.upper()
         resource['name'] = 'Web Page'
 
     if filename and not resource.get('description'):

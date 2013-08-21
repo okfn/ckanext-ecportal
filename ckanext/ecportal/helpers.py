@@ -4,6 +4,7 @@ import operator
 import pylons.config as config
 import genshi
 import sqlalchemy.exc
+import json
 
 import ckan
 import ckan.model as model
@@ -207,7 +208,7 @@ def resource_display_name(resource_dict):
     description = resource_dict.get('description', None)
     if description:
         description = description.split('.')[0]
-        max_len = 60;
+        max_len = 55;
         if len(description)>max_len: description = description[:max_len]+'...'
         return description
     elif name:
@@ -216,6 +217,41 @@ def resource_display_name(resource_dict):
         noname_string = _('no name')
         return '[%s] %s' % (noname_string, resource_dict['id'])
 
+
+
+_RESOURCE_DROPDOWN = None
+
+def resource_dropdown():
+    global _RESOURCE_DROPDOWN
+    if not _RESOURCE_DROPDOWN:
+        file_location = config.get(
+             'ecportal.resource_dropdown',
+             '/applications/ecodp/users/ecodp/ckan/ecportal/src/ckanext-ecportal/data/resource_dropdown.json'
+        )
+        with open(file_location) as resource_file:
+            _RESOURCE_DROPDOWN = json.loads(resource_file.read())
+
+    return _RESOURCE_DROPDOWN
+
+_RESOURCE_MAPPING = None
+
+def resource_mapping():
+    global _RESOURCE_MAPPING
+    if not _RESOURCE_MAPPING:
+        file_location = config.get(
+             'ecportal.resource_mapping',
+             '/applications/ecodp/users/ecodp/ckan/ecportal/src/ckanext-ecportal/data/resource_mapping.json'
+        )
+        with open(file_location) as resource_file:
+            _RESOURCE_MAPPING = json.loads(resource_file.read())
+
+    return _RESOURCE_MAPPING
+
+def resource_display_format(resource_dict):
+    format = resource_dict.get('format')
+    if format in resource_mapping():
+        format = resource_mapping()[format][1]
+    return format
 
 def most_viewed_datasets(num_datasets=NUM_MOST_VIEWED_DATASETS):
     try:

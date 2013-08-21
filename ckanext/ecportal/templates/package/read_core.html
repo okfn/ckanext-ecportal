@@ -71,7 +71,7 @@
             <li>
               <a href="${res['url']}" class="action">
                 <py:choose>
-                  <py:when test="res['format'] == 'html'">
+                  <py:when test="h.resource_display_format(res) == 'HTML'">
                     <i class="icon visit"></i>
                     ${_('Visit page')}
                   </py:when>
@@ -82,7 +82,7 @@
                 </py:choose>
               </a>
               <a href="${h.url_for(controller='package', action='resource_read', id=c.pkg_dict['name'], resource_id=res['id'])}" class="name">${h.resource_display_name(res)}</a>
-              <span test="res['format']" class="resource-tag" title="${res['format']}">${res['format']}</span>
+              <span test="h.resource_display_format(res)" class="resource-tag" title="${h.resource_display_format(res)}">${h.resource_display_format(res)}</span>
             </li>
             </py:for>
           </ul>
