@@ -225,13 +225,15 @@ def resource_dropdown():
     global _RESOURCE_DROPDOWN
     if not _RESOURCE_DROPDOWN:
         file_location = config.get(
-             'ecportal.resource_dropdown',
+             'ckan.resource_dropdown',
              '/applications/ecodp/users/ecodp/ckan/ecportal/src/ckanext-ecportal/data/resource_dropdown.json'
         )
         with open(file_location) as resource_file:
+            #load then dump to check if its valid early
             _RESOURCE_DROPDOWN = json.loads(resource_file.read())
+            
 
-    return _RESOURCE_DROPDOWN
+    return json.dumps(_RESOURCE_DROPDOWN)
 
 _RESOURCE_MAPPING = None
 
@@ -239,7 +241,7 @@ def resource_mapping():
     global _RESOURCE_MAPPING
     if not _RESOURCE_MAPPING:
         file_location = config.get(
-             'ecportal.resource_mapping',
+             'ckan.resource_mapping',
              '/applications/ecodp/users/ecodp/ckan/ecportal/src/ckanext-ecportal/data/resource_mapping.json'
         )
         with open(file_location) as resource_file:
