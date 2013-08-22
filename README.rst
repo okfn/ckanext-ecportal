@@ -83,8 +83,12 @@ into the summary table. For example::
   1 0 * * * /applications/ecodp/users/ecodp/ckan/lib/ecodp/pyenv/bin/paster --plugin=ckan tracking update -c /applications/ecodp/users/ecodp/ckan/etc/ecodp/ecodp.ini
 
 The datasets displayed on the homepage are based on the data in this summary
-table. The actual query extracts the URL from the table, calculates the dataset
-name and joins on ``package`` to find the top datasets. The query is cached.
+table.
+
+At query time, the data is fetched from the Solr index.
+Therefore, the **search index must be refreshed regularly** to update the view
+counts for each dataset. See the CKAN documentation for more information on
+how to refresh the search index.
 
 Boolean Search Operators
 ------------------------

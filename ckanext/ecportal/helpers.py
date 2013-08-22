@@ -15,7 +15,6 @@ import ckan.logic as logic
 import ckan.lib.dictization as dictization
 from ckan.authz import Authorizer
 import ckanext.ecportal.unicode_sort as unicode_sort
-import ckanext.ecportal.mostviewed as mostviewed
 import ckanext.ecportal.searchcloud as searchcloud
 
 NUM_TOP_PUBLISHERS = 6
@@ -128,8 +127,10 @@ def top_publishers(groups):
 def current_date():
     return datetime.date.today().strftime('%d/%m/%Y')
 
+
 def catalog_url():
     return config.get('ckan.catalog_url', 'http://open-data.europa.eu/')
+
 
 def group_facets_by_field(fields):
     facets = {}
@@ -257,11 +258,23 @@ def resource_display_format(resource_dict):
 
 def most_viewed_datasets(num_datasets=NUM_MOST_VIEWED_DATASETS):
     try:
-        return mostviewed.get_most_viewed(model.Session, num_datasets)
-    except sqlalchemy.exc.ProgrammingError:
-        log.error('Could not retrieve most viewed results from database. '
-                  'Do the tables exist? Rolling back the session.')
-        model.Session.rollback()
+        data = {'rows': num_datasets,
+                'sort': u'views_total desc',
+                'facet': u'false',
+                'fq': u'capacity: "public"',
+                'fl': 'id, name, title, views_total'}
+        # Ugly: going through ckan.lib.search directly
+        # (instead of get_action('package_search').
+        #
+        # TODO: Can we return views_total using package_search for internal
+        # use only (without outputting it during public API calls)?
+        query = search.query_for(model.Package)
+        result = query.run(data)
+        return [r for r in result.get('results', [])
+                if r.get('views_total', 0) > 0]
+    except search.SearchError, e:
+        log.error('Error searching for most viewed datasets')
+        log.error(e)
 
 
 def approved_search_terms():
