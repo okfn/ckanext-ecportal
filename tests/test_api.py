@@ -247,3 +247,34 @@ class TestAPI(tests.WsgiAppCase):
         result = json.loads(response.body)['result']
         assert result['count'] > 1
         assert result['results'][0]['name'] == dataset['name']
+
+    def test_blank_license_allowed(self):
+        dataset_json = json.dumps({
+            'name': u'test-blank-license-string',
+            'title': u'Test',
+            'description': u'test description',
+            'url': u'http://datahub.io',
+            'published_by': u'david',
+            'status': u'http://purl.org/adms/status/Completed',
+            'contact_email': u'contact@email.com',
+            'license_id': u''
+        })
+        self.app.post('/api/action/package_create',
+                      params=dataset_json,
+                      extra_environ={'Authorization': 'ectest'},
+                      status=409)
+
+        dataset_json = json.dumps({
+            'name': u'test-blank-license-list',
+            'title': u'Test',
+            'description': u'test description',
+            'url': u'http://datahub.io',
+            'published_by': u'david',
+            'status': u'http://purl.org/adms/status/Completed',
+            'contact_email': u'contact@email.com',
+            'license_id': []
+        })
+        self.app.post('/api/action/package_create',
+                      params=dataset_json,
+                      extra_environ={'Authorization': 'ectest'},
+                      status=409)

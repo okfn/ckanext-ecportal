@@ -60,6 +60,18 @@
       </ul>
     </li>
 
+    <li py:if="c.pkg_dict.get('metadata_created') or c.pkg_dict.get('metadata_modified')" class="sidebar-section">
+      <h3>${_('Catalogue  record')}</h3>
+      <ul class="unstyled" py:if="c.pkg_dict.get('metadata_created')">
+        <li>${_('Added to open-data.europa.eu')}</li>
+        <li><span>${h.render_datetime(c.pkg_dict['metadata_created'], '%Y-%m-%d')}</span></li>
+      </ul>
+      <ul class="unstyled" py:if="c.pkg_dict.get('metadata_modified')">
+        <li>${_('Updated on open-data.europa.eu')}</li>
+        <li><span>${h.render_datetime(c.pkg_dict['metadata_modified'], '%Y-%m-%d')}</span></li>
+      </ul>
+    </li>
+
     <li>
       ${h.snippet('snippets/suggest_box.html')}
     </li>

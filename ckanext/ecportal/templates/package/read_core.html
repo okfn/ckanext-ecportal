@@ -82,7 +82,7 @@
                 </py:choose>
               </a>
               <a href="${h.url_for(controller='package', action='resource_read', id=c.pkg_dict['name'], resource_id=res['id'])}" class="name">${h.resource_display_name(res)}</a>
-              <span test="h.resource_display_format(res)" class="resource-tag" title="${h.resource_display_format(res)}">${h.resource_display_format(res)}</span>
+              <span py:if="h.resource_display_format(res)" class="resource-tag" title="${h.resource_display_format(res)}">${h.resource_display_format(res)}</span>
             </li>
             </py:for>
           </ul>
@@ -136,16 +136,6 @@
           <dl py:if="c.pkg_dict.get('modified_date')">
             <dt>${_('Modified Date')}</dt>
             <dd>${c.pkg_dict['modified_date']}</dd>
-          </dl>
-
-          <dl py:if="c.pkg_dict.get('metadata_created')">
-            <dt>${_('Added to open-data.europa.eu')}</dt>
-            <dd>${h.render_datetime(c.pkg_dict['metadata_created'], '%Y-%m-%d')}</dd>
-          </dl>
-
-          <dl py:if="c.pkg_dict.get('metadata_modified')">
-            <dt>${_('Updated on open-data.europa.eu')}</dt>
-            <dd>${h.render_datetime(c.pkg_dict['metadata_modified'], '%Y-%m-%d')}</dd>
           </dl>
 
           <dl py:if="c.pkg_dict.get('accrual_periodicity')">

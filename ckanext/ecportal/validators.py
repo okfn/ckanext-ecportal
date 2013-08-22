@@ -366,6 +366,9 @@ def map_licenses(val, context):
     maps to
     http://www.opendefinition.org/licenses/cc-by-sa
     '''
+    if not val:
+        # val could be an empty list, which throws an error in re.match
+        return val
     if re.match(_cc_by_re, val):
         return 'http://www.opendefinition.org/licenses/cc-by'
     if re.match(_cc_by_sa_re, val):
