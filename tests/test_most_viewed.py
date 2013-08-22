@@ -1,20 +1,13 @@
-import paste.fixture
-import paste.deploy.loadwsgi
 import datetime
 import os
-try:
-    import json
-except ImportError:
-    import simplejson as json
 
+import ckan.model as model
+import ckan.plugins as plugins
 import ckan.lib.search as search
 import ckan.tests as tests
-import paste.fixture
 import test_api
 import ckanext.ecportal.searchcloud as searchcloud
-import ckanext.ecportal.mostviewed as mostviewed
-from ckan import plugins
-from ckan import model
+import ckanext.ecportal.helpers as helpers
 
 
 class TestMostViewed(tests.TestController):
@@ -35,20 +28,16 @@ class TestMostViewed(tests.TestController):
             name='mostviewed4', title='Most Viewed 4', group=g))
         model.Session.commit()
 
-        # Plugins
-        for plugin in [
-            'ecportal',
-            'ecportal_form',
-            'ecportal_publisher_form',
-            'ecportal_controller',
-        ]:
+        for plugin in ['ecportal',
+                       'ecportal_form',
+                       'ecportal_publisher_form',
+                       'ecportal_controller']:
             plugins.load(plugin)
 
     @classmethod
     def teardown_class(cls):
-        # model.repo.rebuild_db()
+        model.repo.rebuild_db()
         search.clear()
-        # Plugins
         plugins.reset()
 
     def test_00_tables_empty(self):
@@ -63,7 +52,7 @@ class TestMostViewed(tests.TestController):
 
     def test_01_viewing_datasets(self):
         '''No recent datasets displayed on home when summary table is empty'''
-        rows = mostviewed.get_most_viewed(model.Session, 10)
+        rows = helpers.most_viewed_datasets(10)
         self.assert_equal(rows, [])
         home_url = tests.url_for('home')
         res = self.app.get(home_url)
@@ -107,24 +96,8 @@ class TestMostViewed(tests.TestController):
     def test_02_viewing_datasets(self):
         '''Viewing datasets adds data to the tracking table
         and not the summary table'''
-        # @@@ This fails because the current code is not based on package
-        # read, but rather an explicit AJAX get, which these command
-        # line tests don't trigger
-        #
-        # for name in range(4):
-        #     dataset_url = test_api.h.url_for(
-        #         controller='package',
-        #         action='read',
-        #         id='mostviewed'+str(name+1)
-        # )
-        #     res = self.app.get(dataset_url, status=200)
-        # result = model.Session.execute(
-        #     'select count(*) from tracking_raw'
-        # ).fetchall()[0][0]
-        # self.assert_equal(int(result), 4)
-
-        # @@@ Instead, let's just call the tracking URL directly
-        # Check the results are what we wanted
+        # current code is not based on package read, but rather an AJAX get,
+        # so just call the tracking URL directly
         self._view_datasets(1)
         result = model.Session.execute(
             'select count(*) from tracking_raw'
@@ -134,7 +107,7 @@ class TestMostViewed(tests.TestController):
             'select count(*) from tracking_summary'
         ).fetchall()[0][0]
         self.assert_equal(int(result), 0)
-        #And that data still isn't on the homepage
+        # check that data still isn't on the homepage
         home_url = tests.url_for('home')
         res = self.app.get(home_url)
         self.assert_equal("Recently viewed datasets" in res, False)
@@ -148,15 +121,11 @@ class TestMostViewed(tests.TestController):
         result = model.Session.execute(
             'select url, running_total from tracking_summary order by url asc'
         ).fetchall()
-        self.assert_equal(
-            [x for x in result],
-            [
-                (u'/dataset/mostviewed1', 1),
-                (u'/dataset/mostviewed2', 2),
-                (u'/dataset/mostviewed3', 3),
-                (u'/dataset/mostviewed4', 4),
-            ]
-        )
+        self.assert_equal([x for x in result],
+                          [(u'/dataset/mostviewed1', 1),
+                           (u'/dataset/mostviewed2', 2),
+                           (u'/dataset/mostviewed3', 3),
+                           (u'/dataset/mostviewed4', 4)])
 
     def test_04_changing_data_and_rerunning_paster_command(self):
         '''Rerunning paster command re-builds summary table'''
@@ -168,31 +137,17 @@ class TestMostViewed(tests.TestController):
         result = model.Session.execute(
             'select url, running_total from tracking_summary order by url asc'
         ).fetchall()
-        self.assert_equal(
-            [x for x in result],
-            [
-                (u'/dataset/mostviewed1', 2),
-                (u'/dataset/mostviewed2', 4),
-                (u'/dataset/mostviewed3', 6),
-                (u'/dataset/mostviewed4', 8),
-            ]
-        )
+        self.assert_equal([x for x in result],
+                          [(u'/dataset/mostviewed1', 2),
+                           (u'/dataset/mostviewed2', 4),
+                           (u'/dataset/mostviewed3', 6),
+                           (u'/dataset/mostviewed4', 8)])
 
-    def test_05_most_viewed_present_when_summary_present(self):
-        '''Most viewed datasets dispalyed with summary present'''
-        # Check the old data is still there (ie empty)
-        home_url = tests.url_for('home')
-        res = self.app.get(home_url)
-        self.assert_equal("Most viewed datasets" in res, False)
-        # Now bypass the cache and check the new data is there
-        # To do this we'll have to set up our own test app
-        # with the cache disabled:
-        no_cache_app = paste.deploy.loadwsgi.loadapp(
-            'config:test-core.ini',
-            relative_to=os.getcwd(),
-            global_conf={'beaker.cache.enabled': 'False'},
-        )
-        # Now test
-        home_url = tests.url_for('home')
-        res = paste.fixture.TestApp(no_cache_app).get(home_url)
-        self.assert_equal("Most viewed datasets" in res, True)
+    def test_05_view_counts_updated(self):
+        search.rebuild()
+        datasets = helpers.most_viewed_datasets(10)
+        self.assert_equal([(d['title'], d['views_total']) for d in datasets],
+                          [('Most Viewed 4', 8),
+                           ('Most Viewed 3', 6),
+                           ('Most Viewed 2', 4),
+                           ('Most Viewed 1', 2)])
