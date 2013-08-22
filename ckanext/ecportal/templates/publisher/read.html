@@ -10,9 +10,9 @@
     locale = str(h.current_locale())
     sorting = [
       ["score desc", _("Relevance"), ( sort == "score desc") ],
-      ["views_total desc", _("Views"), ( sort == "views_total desc") ],
-      ["title_string_"+locale+" asc", _("Title ascending"), ( sort == "title_string_"+locale+" asc") ],
-      ["title_string_"+locale+" desc", _("Title descending"), ( sort == "title_string_"+locale+" desc") ],
+      ["views_total desc", _("Most viewed"), ( sort == "views_total desc") ],
+      ["title_string_"+locale+" asc", _("Title (A-Z)"), ( sort == "title_string_"+locale+" asc") ],
+      ["title_string_"+locale+" desc", _("Title (Z-A)"), ( sort == "title_string_"+locale+" desc") ],
       ["modified_date desc", _("Date updated"), ( sort == "modified_date desc") ],
     ]
   ?>
