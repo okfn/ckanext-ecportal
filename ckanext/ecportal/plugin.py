@@ -156,7 +156,8 @@ class ECPortalPlugin(p.SingletonPlugin):
             'purge_task_data': ecportal_logic.purge_task_data,
             'user_create': ecportal_logic.user_create,
             'user_update': ecportal_logic.user_update,
-            'package_show': ecportal_logic.package_show
+            'package_show': ecportal_logic.package_show,
+            'resource_show': ecportal_logic.resource_show
         }
 
     def update_config(self, config):
@@ -255,6 +256,15 @@ class ECPortalPlugin(p.SingletonPlugin):
             # ISO dates with UTC time (i.e trailing Z)
             pkg_dict['modified_date'] = helpers.ecportal_date_to_iso(
                 pkg_dict['modified_date']) + 'Z'
+        
+        resources = pkg_dict.get('res_format', [])
+        def change_format(format):
+            if format in helpers.resource_mapping():
+                format = helpers.resource_mapping()[format][1]
+            return format
+
+        pkg_dict['res_format'] = [change_format(format) for format in 
+                                  pkg_dict.get('res_format', [])]
 
         return pkg_dict
 
@@ -271,7 +281,11 @@ class ECPortalPlugin(p.SingletonPlugin):
                 'groups_available': helpers.groups_available,
                 'ecportal_date_to_iso': helpers.ecportal_date_to_iso,
                 'most_viewed_datasets': helpers.most_viewed_datasets,
-                'approved_search_terms': helpers.approved_search_terms}
+                'approved_search_terms': helpers.approved_search_terms,
+                'resource_display_name': helpers.resource_display_name,
+                'resource_display_format': helpers.resource_display_format,
+                'resource_dropdown': helpers.resource_dropdown
+               }
 
 
 class ECPortalHomepagePlugin(p.SingletonPlugin):

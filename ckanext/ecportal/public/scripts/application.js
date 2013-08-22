@@ -493,29 +493,15 @@ CKAN.View.Resource = Backbone.View.extend({
           ['http://www.w3.org/TR/vocab-dcat#Download', CKAN.Strings.distributionDownload],
           ['Visualization', CKAN.Strings.visualization]
         ],
-        formatTypeOptions: [
-          ['adp', 'adp'],
-          ['atom', 'atom'],
-          ['csv', 'csv'],
-          ['dbf', 'dbf'],
-          ['doc', 'doc'],
-          ['html', 'html'],
-          ['ods', 'ods'],
-          ['owl+xml', 'owl+xml'],
-          ['pdf', 'pdf'],
-          ['png', 'png'],
-          ['rdf+xml', 'rdf+xml'],
-          ['rss', 'rss'],
-          ['sparql-query', 'sparql-query'],
-          ['sparql-results+xml', 'sparql-results+xml'],
-          ['n3', 'n3'],
-          ['tiff', 'tiff'],
-          ['tsv', 'tsv'],
-          ['txt', 'txt'],
-          ['xls', 'xls'],
-          ['xml', 'xml']
-        ]
-    };
+        formatTypeOptions: resource_dropdown};
+
+
+    if (!(_.contains(_.map(resource_dropdown, function(l){return l[0];}), this.raw_resource.format))) {
+        resource_object.extra_format = this.raw_resource.format;
+    }
+    if (!(_.contains(_.map(resource_dropdown, function(l){return l[0];}), this.raw_resource.mimetype))) {
+        resource_object.extra_mimetype = this.raw_resource.mimetype;
+    }
     // Generate DOM elements
     this.li = $($.tmpl(CKAN.Templates.resourceEntry, resource_object));
     this.table = $($.tmpl(CKAN.Templates.resourceDetails, resource_object));

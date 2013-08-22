@@ -4,6 +4,7 @@ import operator
 import pylons.config as config
 import genshi
 import sqlalchemy.exc
+import json
 
 import ckan
 import ckan.model as model
@@ -202,6 +203,58 @@ def ecportal_date_to_iso(date_string):
 
     return datetime.datetime.strptime(date_string, format).isoformat()
 
+# TODO: (?) support resource objects as well
+def resource_display_name(resource_dict):
+    name = resource_dict.get('name', None)
+    description = resource_dict.get('description', None)
+    if description:
+        description = description.split('.')[0]
+        max_len = 55;
+        if len(description)>max_len: description = description[:max_len]+'...'
+        return description
+    elif name:
+        return name
+    else:
+        noname_string = _('no name')
+        return '[%s] %s' % (noname_string, resource_dict['id'])
+
+
+
+_RESOURCE_DROPDOWN = None
+
+def resource_dropdown():
+    global _RESOURCE_DROPDOWN
+    if not _RESOURCE_DROPDOWN:
+        file_location = config.get(
+             'ckan.resource_dropdown',
+             '/applications/ecodp/users/ecodp/ckan/ecportal/src/ckanext-ecportal/data/resource_dropdown.json'
+        )
+        with open(file_location) as resource_file:
+            #load then dump to check if its valid early
+            _RESOURCE_DROPDOWN = json.loads(resource_file.read())
+            
+
+    return json.dumps(_RESOURCE_DROPDOWN)
+
+_RESOURCE_MAPPING = None
+
+def resource_mapping():
+    global _RESOURCE_MAPPING
+    if not _RESOURCE_MAPPING:
+        file_location = config.get(
+             'ckan.resource_mapping',
+             '/applications/ecodp/users/ecodp/ckan/ecportal/src/ckanext-ecportal/data/resource_mapping.json'
+        )
+        with open(file_location) as resource_file:
+            _RESOURCE_MAPPING = json.loads(resource_file.read())
+
+    return _RESOURCE_MAPPING
+
+def resource_display_format(resource_dict):
+    format = resource_dict.get('format')
+    if format in resource_mapping():
+        format = resource_mapping()[format][1]
+    return format
 
 def most_viewed_datasets(num_datasets=NUM_MOST_VIEWED_DATASETS):
     try:
