@@ -382,8 +382,8 @@
     <field name="linked_from" type="text" indexed="true" stored="false" multiValued="true"/>
     <field name="child_of" type="text" indexed="true" stored="false" multiValued="true"/>
     <field name="parent_of" type="text" indexed="true" stored="false" multiValued="true"/>
-    <field name="views_total" type="int" indexed="true" stored="false"/>
-    <field name="views_recent" type="int" indexed="true" stored="false"/>
+    <field name="views_total" type="int" indexed="true" stored="true"/>
+    <field name="views_recent" type="int" indexed="true" stored="true"/>
     <field name="resources_accessed_total" type="int" indexed="true" stored="false"/>
     <field name="resources_accessed_recent" type="int" indexed="true" stored="false"/>
 
