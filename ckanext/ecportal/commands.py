@@ -25,7 +25,7 @@ class ECPortalCommand(cli.CkanCommand):
     Commands:
         paster ecportal update-publishers <file (optional)> -c <config>
         paster ecportal migrate-publisher <source> <target> -c <config>
-        paster ecportal migrate-odp-namespace <source> <target> -c <config>
+        paster ecportal migrate-odp-namespace -c <config>
         paster ecportal export-datasets <folder> -c <config>
         paster ecportal import-csv-translations -c <config>
 
