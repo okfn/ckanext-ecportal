@@ -65,6 +65,13 @@ def package_update(context, data_dict):
             return authorised_by_core
 
 
+def purge_publisher_datasets(context, data_dict):
+    '''
+    Only sysadmins can purge a publisher's deleted datasets.
+    '''
+    return _sysadmins_only(context, 'purge publisher datasets')
+
+
 def purge_revision_history(context, data_dict):
     '''
     Only sysadmins can purge a publisher's revision history.

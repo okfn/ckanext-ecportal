@@ -46,6 +46,7 @@ class ECPortalCommand(cli.CkanCommand):
         paster ecportal delete-interop-vocab -c <config>
         paster ecportal delete-temporal-vocab -c <config>
 
+        paster ecportal purge-publisher-datasets <publisher> -c <config>
         paster ecportal purge-package-extra-revision -c <config>
         paster ecportal purge-task-data -c <config>
 
@@ -55,6 +56,7 @@ class ECPortalCommand(cli.CkanCommand):
     Where:
         <data> = path to XML file (format of the Eurostat bulk import metadata)
         <user> = perform actions as this CKAN user (name)
+        <publisher> = a publisher name or ID
         <folder> = Output folder for dataset export
         <file> = (optional) path to input JSON or CSV file. If not specified,
                  the default files in the /data directory are used.
@@ -157,6 +159,12 @@ class ECPortalCommand(cli.CkanCommand):
 
         elif cmd == 'delete-all-vocabs':
             self.delete_all_vocabs()
+
+        elif cmd == 'purge-publisher-datasets':
+            if len(self.args) != 2:
+                print ECPortalCommand.__doc__
+                return
+            self.purge_publisher_datasets(self.args[1])
 
         elif cmd == 'purge-package-extra-revision':
             self.purge_package_extra_revision()
@@ -646,6 +654,12 @@ class ECPortalCommand(cli.CkanCommand):
         self._delete_vocab(forms.STATUS_VOCAB_NAME)
         self._delete_vocab(forms.INTEROP_VOCAB_NAME)
         self._delete_vocab(forms.TEMPORAL_VOCAB_NAME)
+
+    def purge_publisher_datasets(self, publisher_name):
+        context = {'model': model, 'session': model.Session,
+                   'user': self.user_name}
+        log.warn(plugins.toolkit.get_action('purge_publisher_datasets')(
+            context, {'name': publisher_name}))
 
     def purge_package_extra_revision(self):
         context = {'model': model, 'session': model.Session,

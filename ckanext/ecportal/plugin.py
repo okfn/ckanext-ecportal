@@ -139,6 +139,7 @@ class ECPortalPlugin(p.SingletonPlugin):
             'show_package_edit_button': ecportal_auth.show_package_edit_button,
             'group_create': ecportal_auth.group_create,
             'user_create': ecportal_auth.user_create,
+            'purge_publisher_datasets': ecportal_auth.purge_publisher_datasets,
             'purge_revision_history': ecportal_auth.purge_revision_history,
             'purge_package_extra_revision':
             ecportal_auth.purge_revision_history,
@@ -150,6 +151,8 @@ class ECPortalPlugin(p.SingletonPlugin):
             'group_list': ecportal_logic.group_list,
             'group_update': ecportal_logic.group_update,
             'group_show': ecportal_logic.group_show,
+            'purge_publisher_datasets':
+            ecportal_logic.purge_publisher_datasets,
             'purge_revision_history': ecportal_logic.purge_revision_history,
             'purge_package_extra_revision':
             ecportal_logic.purge_package_extra_revision,

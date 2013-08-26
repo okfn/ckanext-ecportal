@@ -288,6 +288,46 @@ def resource_show(context, data_dict):
     return resource
 
 
+def purge_publisher_datasets(context, data_dict):
+    '''
+    Purge all deleted datasets belonging to a given publisher.
+
+    :returns: number of revisions purged.
+    :rtype: dictionary
+    '''
+    logic.check_access('purge_publisher_datasets', context, data_dict)
+
+    model = context['model']
+    engine = model.meta.engine
+
+    publisher_name = logic.get_or_bust(data_dict, 'name')
+    group = model.Group.get(publisher_name)
+    if not group:
+        raise logic.NotFound('Publisher {0} not found'.format(publisher_name))
+
+    deleted_datasets = '''
+    SELECT package.id FROM package
+    INNER JOIN member ON (member.table_name='package' AND
+                          member.table_id=package.id)
+    INNER JOIN "group" ON ("group".id=member.group_id)
+    WHERE "group".name='{publisher_name}' AND package.state='deleted';
+    '''.format(publisher_name=publisher_name)
+
+    try:
+        datasets = engine.execute(deleted_datasets)
+        num_deleted_datasets = datasets.rowcount
+    except Exception, e:
+        raise logic.ActionError('Error executing sql: %s' % e)
+
+    model.repo.new_revision()
+    for result in datasets:
+        dataset = model.Package.get(result.id)
+        dataset.purge()
+    model.repo.commit_and_remove()
+
+    return {'publisher_datasets_deleted': num_deleted_datasets}
+
+
 def purge_revision_history(context, data_dict):
     '''
     Purge a given publisher's unused revision history.
@@ -302,11 +342,11 @@ def purge_revision_history(context, data_dict):
 
     model = context['model']
     engine = model.meta.engine
-    group_identifier = logic.get_or_bust(data_dict, 'group')
-    group = model.Group.get(group_identifier)
+    group_id = logic.get_or_bust(data_dict, 'group')
+    group = model.Group.get(group_id)
 
     if not group:
-        raise logic.NotFound
+        raise logic.NotFound('Publisher {0} not found'.format(group_id))
 
     RESOURCE_IDS_SQL = '''
         SELECT resource.id FROM resource

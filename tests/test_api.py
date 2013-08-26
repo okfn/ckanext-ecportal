@@ -278,3 +278,83 @@ class TestAPI(tests.WsgiAppCase):
                       params=dataset_json,
                       extra_environ={'Authorization': 'ectest'},
                       status=409)
+
+    def test_purge_publisher_datasets(self):
+        dataset = {'name': u'test-purge-publisher-datasets',
+                   'title': u'Test',
+                   'description': u'test description',
+                   'url': u'http://datahub.io',
+                   'published_by': u'david',
+                   'status': u'http://purl.org/adms/status/Completed'}
+        env = {'Authorization': 'ectest'}
+        self.app.post('/api/action/package_create',
+                      params=json.dumps(dataset),
+                      extra_environ=env)
+
+        params = {'id': dataset['name']}
+        self.app.post('/api/action/package_delete',
+                      params=json.dumps(params),
+                      extra_environ=env)
+
+        params = {'name': dataset['published_by']}
+        env = {'Authorization': str(self.sysadmin_user.apikey)}
+        response = self.app.post('/api/action/purge_publisher_datasets',
+                                 params=json.dumps(params),
+                                 extra_environ=env)
+
+        result = json.loads(response.body)['result']
+        assert result['publisher_datasets_deleted'] == 1
+
+    def test_purge_publisher_datasets_invalid_auth(self):
+        dataset = {'name': u'test-purge-publisher-datasets-invalid-auth',
+                   'title': u'Test',
+                   'description': u'test description',
+                   'url': u'http://datahub.io',
+                   'published_by': u'david',
+                   'status': u'http://purl.org/adms/status/Completed'}
+        env = {'Authorization': 'ectest'}
+        self.app.post('/api/action/package_create',
+                      params=json.dumps(dataset),
+                      extra_environ=env)
+
+        params = {'id': dataset['name']}
+        self.app.post('/api/action/package_delete',
+                      params=json.dumps(params),
+                      extra_environ=env)
+
+        # test no api key
+        params = {'name': dataset['published_by']}
+        self.app.post('/api/action/purge_publisher_datasets',
+                      params=json.dumps(params),
+                      status=403)
+
+        # test non-sysadmin api key
+        self.app.post('/api/action/purge_publisher_datasets',
+                      params=json.dumps(params),
+                      extra_environ=env,
+                      status=403)
+
+    def test_purge_publisher_datasets_invalid_publisher(self):
+        dataset = {'name': u'test-purge-publisher-datasets-invalid-publisher',
+                   'title': u'Test',
+                   'description': u'test description',
+                   'url': u'http://datahub.io',
+                   'published_by': u'david',
+                   'status': u'http://purl.org/adms/status/Completed'}
+        env = {'Authorization': 'ectest'}
+        self.app.post('/api/action/package_create',
+                      params=json.dumps(dataset),
+                      extra_environ=env)
+
+        params = {'id': dataset['name']}
+        self.app.post('/api/action/package_delete',
+                      params=json.dumps(params),
+                      extra_environ=env)
+
+        params = {'name': 'bad-publisher-name'}
+        env = {'Authorization': str(self.sysadmin_user.apikey)}
+
+        self.app.post('/api/action/purge_publisher_datasets',
+                      params=json.dumps(params),
+                      extra_environ=env,
+                      status=404)
