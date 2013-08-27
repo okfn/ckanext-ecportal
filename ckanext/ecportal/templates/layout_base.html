@@ -154,8 +154,8 @@
     </div>
   </div>
 
-  <div id="content-last-updated" class="footer">
-    ${_('Last update')}: ${h.current_date()} |
+  <div class="footer">
+    ${_('Last update')}: <span id="content-last-updated">${h.current_date()}</span> |
     <a href="${h.root_url()}about">${_('About this site')}</a> |
     <a href="http://ec.europa.eu/geninfo/legal_notices_en.htm">${_('Legal notice')}</a> |
     <a href="/contact">${_('Contact')}</a> |
@@ -216,26 +216,30 @@
 <py:if test="h.asbool(config.get('ckan.tracking_enabled', 'false'))">
 <script type="text/javascript">
 $(function (){
- // Tracking
- var url = location.pathname;
- // remove any site root from url
- url = url.substring(CKAN.SITE_URL.length, url.length);
- // trim any trailing /
- url = url.replace(/\/*$/, '');
- $.ajax({url : CKAN.SITE_URL_NO_LOCALE + '/_tracking',
-     type : 'POST',
-     data : {url:url, type:'page'},
-     timeout : 300 });
-         $('a.resource-url-analytics').click(function (e){
-                 var url = $(e.target).closest('a').attr('href');
-     $.ajax({url : CKAN.SITE_URL_NO_LOCALE + '/_tracking',
-           data : {url:url, type:'resource'},
-         type : 'POST',
-         complete : function () {location.href = url;},
-         timeout : 30});
-                 e.preventDefault();
-                 });
-         });
+  // Tracking
+  var url = location.pathname;
+  // remove any site root from url
+  url = url.substring(CKAN.SITE_URL.length, url.length);
+  // trim any trailing /
+  url = url.replace(/\/*$/, '');
+  $.ajax({
+    url : CKAN.SITE_URL_NO_LOCALE + '/_tracking',
+    type : 'POST',
+    data : {url:url, type:'page'},
+    timeout : 300
+   });
+  $('a.resource-url-analytics').click(function (e){
+    var url = $(e.target).closest('a').attr('href');
+    $.ajax({
+      url : CKAN.SITE_URL_NO_LOCALE + '/_tracking',
+      data : {url:url, type:'resource'},
+      type : 'POST',
+      complete : function () {location.href = url;},
+      timeout : 30
+    });
+    e.preventDefault();
+  });
+});
 </script>
 </py:if>
 

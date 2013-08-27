@@ -44,5 +44,13 @@
 		}
 		sortby_dropdown();
 
+    // last-updated date
+    $.ajax({
+      url : '/api/getUpdatedDate',
+      dataType: 'json',
+      timeout : 1000
+    }).done(function (data){
+      $("#content-last-updated").text(data.lastUpdate);
+    });
 	});
 }(jQuery));
