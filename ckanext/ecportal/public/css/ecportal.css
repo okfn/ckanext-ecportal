@@ -1868,11 +1868,11 @@ a.item_link:hover .resources .resource-tag {
 /* Homepage boxes (wrapper) */
 .has-two-boxes {
   margin-bottom: 20px;
-  background: transparent url(/images/homepage-boxes.png) 20px 100% no-repeat;
+  background: transparent url(../images/homepage-boxes.png) 20px 100% no-repeat;
 }
 .has-one-box {
   margin-bottom: 20px;
-  background: transparent url(/images/homepage-box.png) 20px 100% no-repeat;
+  background: transparent url(../images/homepage-box.png) 20px 100% no-repeat;
 }
 
 /* Homepage boxes */
