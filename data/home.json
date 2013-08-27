@@ -1,13 +1,72 @@
 {
-    "title": {
-        "en": "What is this data portal about?",
-        "de": "What is this data portal about? (German)",
-        "fr": "What is this data portal about? (French)"
-    },
+  "title": {
+    "bg":"За какво се отнася този портал с данни?",
+    "cs":"O čem je tento informační portál?",
+    "da":"Hvad er formålet med denne dataportal?",
+    "de":"Worum geht es bei diesem Datenportal?",
+    "el":"Τι είναι η Πύλη Δεδομένων;",
+    "en":"What is this Data Portal about?",
+    "es":"¿De qué trata este Portal de datos?",
+    "et":"Mis andmeportaal see on?",
+    "fi":"Mistä tietoportaalissa on kyse?",
+    "fr":"Description du portail de données",
+    "ga":"Cad é atá i gceist leis an Tairseach Sonraí seo?",
+    "hu":"Mi is ez az adatközpont?",
+    "it":"Cos’è il portale dati?",
+    "lt":"Kam skirtas šis duomenų portalas?",
+    "lv":"Kāds ir šī datu portāla mērķis?",
+    "mt":"X'inhu dan il-Portal tad-Dejta?",
+    "nl":"Wat is dit dataportaal?",
+    "pl":"Czym jest Portal danych?",
+    "pt":"O que é o Portal de Dados?",
+    "ro":"La ce se referă Portalul de Date?",
+    "sk":"O čom je tento informačný portál?",
+    "sl":"Kakšen je namen tega podatkovnega portala?",
+    "sv":"Vad är syftet med dataportalen?"
+  },
 
-    "body": {
-        "en": "<p>Are you looking for easy access to EU Data? Do you want to reuse data for research, an article, an application or something else?</p><p>You have come to the right place. The EU Open Data Portal is your single point of access to a growing range of data produced by the institutions and other bodies of the European Union.</p><p>Data are free to use, reuse, link and redistribute for commercial or non-commercial purposes.</p>",
-        "de": "<p>Homepage content body (German).</p>",
-        "fr": "<p>Homepage content body (French).</p>"
-    }
+  "body": {
+    "en": "<p>Are you looking for easy access to EU Data? Do you want to reuse data for research, an article, an application or something else?</p><p>You have come to the right place. The EU Open Data Portal is your single point of access to a growing range of data produced by the institutions and other bodies of the European Union.</p><p>Data are free to use, reuse, link and redistribute for commercial or non-commercial purposes.</p>",
+    "bg": "<p>Търсите лесен достъп до данни на ЕС? Желаете да използвате повторно данни за научно изследване, статия, приложение или нещо друго?</p>Намирате се на точното място. На портала за свободно достъпни данни на ЕС можете да намерите все по-голям набор от данни, изготвяни от институциите и органите на Съюза.</p><p>Данните могат да бъдат използвани свободно и многократно, да бъдат свързвани и преразпределяни с търговска или нетърговска цел.</p>Порталът има за цел да се популяризира новаторската употреба на подобен тип данни и да се установи връзка с потребителите на свободно достъпни данни на ЕС.</p>",
+    "cs": "<p>Hledáte snadný přístup k datům o EU? Potřebujete je pro výzkumnou práci, do článku nebo například pro svou softwarovou aplikaci?</p><p>Jste tu správně. Evropský portál veřejně přístupných dat je centralizované úložiště dat, jež produkují evropské instituce a další subjekty EU a jejichž objem neustále narůstá.</p><p>Data jsou poskytována zdarma pro další využití a distribuci pro komerční i nekomerční účely.</p><p>Cílem portálu je propagovat inovativní způsoby využívání dat a vyjít vstříc těm, kdo evropská data využívají.</p>",
+    "da":"<p>Vil du gerne have let adgang til EU-data? Vil du genanvende data til forskning, en artikel, en applikation eller noget helt andet?</p><p>Så er du kommet til det rette sted. EU's portal for åbne data er din indgang til den voksende mængde data fra EU's institutioner og andre organer.</p><p>Dataene kan frit ses, genanvendes, linkes til og videresendes til kommercielle eller ikke-kommercielle formål.</p><p>Portalen skal fremme innovativ anvendelse af EU's åbne data og gå i samspil med brugerne af disse data.</p>",
+
+    "de": "<p>Sie suchen einen einfachen Zugang zu EU-Daten? Möchten Sie Daten für Forschungszwecke, für einen Artikel, eine bestimmte Anwendung oder andere Zwecke weiterverwenden?</p><p>Dann sind Sie hier richtig. Das offene Datenportal der EU ist Ihre zentrale Anlaufstelle für ein zunehmend breites Spektrum an Daten der Institutionen und sonstigen Einrichtungen der Europäischen Union.</p><p>Sie können die Daten nach Belieben für gewerbliche und nichtgewerbliche Zwecke nutzen, weiterverwenden, verlinken oder verbreiten.</p><p>Das Portal soll die innovative Nutzung dieser Daten fördern und als Kontaktstelle für die Nutzergemeinde dienen.</p>",
+
+    "el":"<p>Αναζητάτε τρόπους εύκολης πρόσβασης στα δεδομένα της ΕΕ; Θέλετε να επαναχρησιμοποιήσετε δεδομένα για ερευνητικούς σκοπούς, για ένα άρθρο, μια εφαρμογή ή κάτι άλλο;</p><p>Βρίσκεστε στο κατάλληλο μέρος. Η Πύλη Δημόσιων Δεδομένων της ΕΕ είναι το ενιαίο σημείο πρόσβασης στα συνεχώς αυξανόμενα και ποικίλα δεδομένα που παράγουν τα όργανα και οι οργανισμοί της Ευρωπαϊκής Ένωσης.</p><p>Τα δεδομένα αυτά μπορούν να χρησιμοποιηθούν, να επαναχρησιμοποιηθούν, να διαδοθούν μέσω συνδέσμων και να αναδημοσιευθούν για εμπορικούς ή μη σκοπούς, δωρεάν.</p><p>Σκοπός της πύλης είναι να προωθήσει την καινοτόμο χρήση των συγκεκριμένων δεδομένων και να δημιουργήσει μια διαδραστική σχέση με τους χρήστες δημόσιων δεδομένων της ΕΕ.</p>",
+
+    "es":"<p>¿Está buscando una manera de acceder fácilmente a los datos de la UE? ¿Quiere volver a utilizar los datos para una investigación, un artículo, una aplicación o cualquier otra cosa?</p><p>Ha llegado al sitio adecuado. El Portal de datos abiertos de la UE es un punto de acceso único a gran variedad de datos elaborados por las instituciones y otros organismos de la Unión Europea.</p><p>Los datos se pueden utilizar, reutilizar, enlazar y redistribuir gratuitamente con fines comerciales o no comerciales.</p><p>El Portal tiene por objeto fomentar una utilización innovadora de los datos y establecer una relación con la comunidad de usuarios para los datos abiertos de la UE.</p>",
+
+    "et":"<p>Kas vajate lihtsat juurdepääsu ELi andmetele? Kas tahate andmeid taaskasutada uurimustöö, artikli, rakenduse või mõne muu projekti jaoks? </p><p>Siis olete õiges kohas. ELi avatud andmete portaal on keskne veebisait, mille kaudu pääseb ligi ELi institutsioonide ja muude asutuste üha suurenevale andmehulgale.</p><p>Andmete kasutamine, taaskasutamine, linkimine ning levitamine nii ärilistel kui ka mitteärilistel eesmärkidel on tasuta.</p><p>Portaali eesmärk on edendada kõnealuste andmete innovatiivset kasutust ning teha koostööd nende kasutajaskonnaga. </p>",
+
+    "fi":"<p>Tarvitsetko EU-dataa helppokäyttöisessä muodossa? Haluatko käyttää sitä tutkimuksessa, artikkelissa, sovelluksessa tai muualla?</p><p>Olet oikeassa paikassa – EU:n avoimen datan portaali tarjoaa keskitetyn pääsyn EU:n toimielinten ja laitosten tuottamaan jatkuvasti kasvavaan datavarantoon.</p><p>Data on vapaasti käytettävissä, uudelleenkäytettävissä, linkitettävissä ja jaeltavissa kaupallista tai ei-kaupallista käyttöä varten.</p><p>Portaalin tarkoituksena on edistää datan innovatiivista käyttöä ja tukea EU:n avoimen datan käyttäjäyhteisöä.</p>",
+
+    "fr": "<p>Vous cherchez à accéder facilement à des données de l'UE? Vous voudriez réutiliser ces données pour vos recherches, pour un article, pour créer une application, etc.?</p><p>Ne cherchez plus: le portail «Données ouvertes» de l'UE est un point d'accès unique à un éventail croissant de données produites par les institutions et organes de l'Union européenne.</p><p>Ces données peuvent être utilisées, liées et diffusées gratuitement à des fins commerciales ou non.</p><p>La raison d'être du portail est de promouvoir une utilisation innovante de ces données et de favoriser l'interaction avec les utilisateurs de bases de données ouvertes.</p>",
+
+    "ga":"<p>An dteastaíonn uait fáil a bheith agat go héasca ar shonraí AE? An dteastaíonn uait sonraí a athúsáid do thaighde, d’alt, d’fheidhmchlár nó do chuspóir éigin eile?</p><p>Tá tú san áit cheart. Tá Tairseach Sonraí Oscailte an AE ina pointe amháin rochtana ar réimse leathan sonraí a thiomsaíonn institiúidí agus comhlachtaí eile an Aontais Eorpaigh.</p><p>Níl aon chostas ar shonraí a úsáid, a athúsáid, a nascadh ná a athdháileadh chun críocha tráchtála nó neamhthráchtála.</p><p>Tá an tairseach dírithe ar úsáid nuálach na sonraí sin a spreagadh agus teagmháil a dhéanamh le pobal úsáideoirí sonraí oscailte an AE.</p>",
+
+    "hu":"<p>Könnyen hozzáférhető uniós vonatkozású statisztikai adatokra kíváncsi? Fel szeretne használni már rendelkezésre álló adatokat kutatáshoz, újságcikk megírásához, saját alkalmazás kifejlesztéséhez?</p><p>Nálunk jó helyen jár. A nyílt hozzáférésű adatok európai uniós portálja egyablakos hozzáférést biztosít az Európai Unió intézményei és szervei által létrehozott és folyamatosan bővített adatbázisokhoz.</p><p>A webhelyünkön rendelkezésre álló adatok – akár kereskedelmi, akár más célból – szabadon felhasználhatók, összekapcsolhatók és továbbíthatók.</p><p>Célunk, hogy minden érdeklődő számára lehetővé tegyük az EU által létrehozott, nyílt hozzáférésű adatok újszerű, testre szabott felhasználását.</p>",
+
+    "it":"<p>Cercate un accesso facile ai dati dell'UE? Volete riutilizzare dei dati a fini di ricerca, per un articolo, un'applicazione o altro?</p><p>Questo è il sito che fa per voi. Il portale Open Data dell'UE è il punto unico di accesso ad una serie sempre più ampia di dati prodotti dalle istituzioni e da altri organi dell'Unione europea.</p><p>I dati possono essere liberamente utilizzati, riutilizzati, collegati tramite link e ridistribuiti a fini commerciali o non commerciali.</p><p>Il portale mira a promuovere l'uso innovativo di questi dati e ad interagire con la comunità degli utenti interessati agli open data dell'UE.</p>",
+
+    "lt":"<p>Ieškote paprastos prieigos prie ES duomenų? Norėtumėte jais pasinaudoti savo moksliniame tyrime, straipsnyje, programoje ar kur nors kitur?</p><p>Jūs tinkamoje vietoje. ES atvirųjų duomenų portale suteikiama bendra prieiga prie nuolat gausėjančių duomenų, kuriuos pateikia Europos Sąjungos institucijos ir kitos įstaigos.</p><p>Duomenimis galima laisvai naudotis, juos naudoti pakartotinai, sieti ir platinti komerciniais arba nekomerciniais tikslais.</p><p>Portalo tikslas – skatinti naujoviškai naudotis šiais duomenimis ir megzti ryšius su ES atvirųjų duomenų naudotojų bendruomene.</p>",
+
+    "lv":"<p>Meklējat ērtu piekļuvi ES datiem? Vēlaties datus izmantot izpētei, raksta sagatavošanai, lietojumprogrammai vai kam citam?</p><p>Šeit ir īstā vieta, kur to var izdarīt. ES atklāto datu portālā var ērti atrast aizvien vairāk datu, kurus sagatavojušas Eiropas Savienības iestādes un citas struktūras.</p><p>Datus var brīvi izmantot vairākkārtīgi, sasaistīt un izplatīt komerciāliem vai nekomerciāliem mērķiem.</p><p>Portāla mērķis ir sekmēt šo datu radošu izmantošanu, un tas noder par kontaktpunktu ES atklāto datu izmantotājiem.</p>",
+
+    "mt":"<p>Qed tfittex aċċess faċli għal dejta tal-UE? Trid tuża d-dejta mill-ġdid għar-riċerka, għal artiklu, għal applikazzjoni jew għal xi ħaġa oħra?</p><p>Tinsab fil-post it-tajjeb. Il-portal tad-dejta miftuħa tal-UE huwa l-uniku mod li jagħtik aċċess għal firxa dejjem ikbar ta’ dejta prodotta mill-istituzzjonijiet u l-entitajiet l-oħrajn tal-Unjoni Ewropea.</p><p>Ma jintalab l-ebda ħlas biex id-dejta tużaha, tużaha mill-ġdid, tillinkjaha u tqassamha mill-ġdid għal finijiet kummerċjali jew mhux kummerċjali.</p><p>Il-portal għandu l-għan li jippromwovi l-użu innovattiv ta’ din id-dejta u li joħloq kuntatt mal-komunità tal-utenti tad-dejta miftuħa tal-UE.</p>",
+
+    "nl":"<p>Bent u op zoek naar EU-gegevens over een bepaald onderwerp? Wilt u zo'n dataset gebruiken voor een onderzoek, een artikel of een applicatie, of heeft u een ander origineel idee? Dan bent u hier aan het juiste adres.</p><p>Op dit portaal van de EU vindt u tal van datasets van de Europese Commissie en andere EU-instanties. Er komen bovendien regelmatig nieuwe gegevensverzamelingen bij.</p><p>U mag die gegevens gratis downloaden, verwerken, combineren en verspreiden, ook voor commerciële doeleinden.</p><p>Met dit Open Data-portaal wil de EU gebruikers van dienst zijn en vooral innovatief gebruik van haar open data stimuleren.</p>",
+
+    "pl":"<p>Szukasz łatwego dostępu do unijnych danych? Chcesz wykorzystać dane na potrzeby badań, artykułu, aplikacji lub w innych celach?</p><p>Dobrze trafiłeś - unijny portal otwartych danych to uniwersalny punkt dostępu do coraz bogatszego zakresu danych publikowanych przez instytucje i inne organy Unii Europejskiej.</p><p>Dane te można swobodnie wykorzystywać, łączyć i rozpowszechniać do celów komercyjnych i niekomercyjnych.</p><p>Portal ma propagować innowacyjne wykorzystywanie tych danych oraz stanowić platformę współpracy z użytkownikami otwartych danych UE.</p>",
+
+    "pt":"<p>Gostaria de aceder facilmente aos dados da UE? Pretende reutilizar os dados para, por exemplo, realizar um trabalho de investigação, redigir um artigo ou desenvolver uma aplicação ? </p><p>Então está no sítio certo. O Portal de Dados Abertos da UE serve de ponto de acesso único a um número crescente de dados produzidos pelas instituições e outros organismos da União Europeia.</p><p>Pode utilizar e reutilizar os dados, criar ligações para os mesmos ou redistribuí los para fins comerciais e não comerciais. </p><p>O Portal visa promover uma utilização inovadora destes dados e sensibilizar a comunidade de utilizadores para os dados abertos da UE.</p>",
+
+    "ro":"<p>Doriţi să accesaţi uşor datele UE? Doriţi să reutilizaţi datele pentru a realiza studii, articole sau pentru a crea o aplicaţie?</p><p>Aţi ajuns unde trebuie. Portalul de Date Deschise al UE este punctul unic de acces la date diverse produse de instituţiile Uniunii Europene şi de alte organisme ale acesteia.</p><p>Datele pot fi utilizate, reutilizate, corelate şi difuzate gratuit, în scopuri comerciale sau necomerciale.</p><p>Portalul îşi propune să promoveze o utilizare inovatoare a acestor date şi să favorizeze interacţiunea cu utilizatorii de baze de date deschise.</p>",
+
+    "sk":"<p>Hľadáte jednoduchý prístup k údajom EÚ? Chcete ich opätovne použiť pre svoj výskum, článok alebo aplikáciu?</p><p>Ste na správnom mieste. Portál pre voľné údaje EÚ je jednotným prístupovým miestom k rastúcemu množstvu údajov z inštitúcií a iných orgánov Európskej únie.</p><p>Tieto údaje môžte bezplatne použiť na komerčné aj nekomerčné účely.</p><p>Cieľom služby je podporiť inovatívne používanie týchto údajov a nadviazať spoluprácu s používateľskou komunitou.</p>",
+
+    "sl":"<p>Ali potrebujete enostaven dostop do podatkov EU? Želite podatke uporabiti za raziskave, članek, aplikacijo ali kaj drugega?</p><p>Ste na pravem mestu. Portal odprtih podatkov EU je enotna točka dostopa do vedno večjega števila podatkov, ki jih zbirajo institucije in drugi organi Evropske unije.</p><p>Podatke lahko brezplačno uporabite, ponovno uporabite, povežete in razširjate za komercialne ali druge namene.</p><p>Namen portala je spodbujanje inovativne uporabe podatkov in sodelovanje z uporabniki odprtih podatkov EU.</p>",
+
+    "sv":"<p>Vill du få tillgång till EU:s öppna data? Vill du återanvända uppgifterna i din forskning, för en artikel, ett program eller något helt annat?</p><p>Då har du kommit rätt. I EU:s portal för öppna data finns en växande mängd uppgifter från EU:s institutioner och organ.</p><p>Datan är gratis att använda, återvända, länka till och vidarebefordra för kommersiella eller icke-kommersiella ändamål.</p><p>Portalen ska stimulera innovativ användning av EU:s öppna data och fungera som kontaktpunkt för användarna av uppgifterna.</p>"
+  }
 }
