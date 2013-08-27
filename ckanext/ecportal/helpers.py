@@ -133,12 +133,16 @@ def catalog_url():
 
 
 def group_facets_by_field(fields):
+    facet_order = {'tags': 0,
+                   'res_format': 1}
     facets = {}
     for field, value in fields:
         if field in facets:
             facets[field].append(value)
         else:
             facets[field] = [value]
+    return sorted(facets.items(),
+                  key=lambda x: facet_order.get(x[0], len(facet_order)))
     return facets
 
 
