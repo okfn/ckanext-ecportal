@@ -259,14 +259,13 @@ class ECPortalPlugin(p.SingletonPlugin):
             # ISO dates with UTC time (i.e trailing Z)
             pkg_dict['modified_date'] = helpers.ecportal_date_to_iso(
                 pkg_dict['modified_date']) + 'Z'
-        
-        resources = pkg_dict.get('res_format', [])
+
         def change_format(format):
             if format in helpers.resource_mapping():
                 format = helpers.resource_mapping()[format][1]
             return format
 
-        pkg_dict['res_format'] = [change_format(format) for format in 
+        pkg_dict['res_format'] = [change_format(format) for format in
                                   pkg_dict.get('res_format', [])]
 
         return pkg_dict
