@@ -286,8 +286,9 @@ class ECPortalPlugin(p.SingletonPlugin):
                 'approved_search_terms': helpers.approved_search_terms,
                 'resource_display_name': helpers.resource_display_name,
                 'resource_display_format': helpers.resource_display_format,
-                'resource_dropdown': helpers.resource_dropdown
-               }
+                'resource_dropdown': helpers.resource_dropdown,
+                'format_display_name': helpers.format_display_name,
+                'dataset_resource_formats': helpers.dataset_resource_formats}
 
 
 class ECPortalHomepagePlugin(p.SingletonPlugin):

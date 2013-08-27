@@ -12,15 +12,11 @@
         <i class="resource"></i>
         <strong>${package.get('title') or package.get('name')}</strong><br />
         <span class="additional">${h.markdown_extract(package.get('description', u''))}</span>
-        <py:if test="package.get('resources')">
-          <span class="resources">
-            <py:for each="resource in package.get('resources')">
-              <py:if test="resource.get('format')">
-                <span class="resource-tag">${h.resource_display_format(resource)}</span>
-              </py:if>
-            </py:for>
-          </span>
-        </py:if>
+        <span py:if="package.get('resources')" class="resources">
+          <py:for each="format in h.dataset_resource_formats(package.get('resources'))">
+          <span class="resource-tag">${h.format_display_name(format)}</span>
+          </py:for>
+        </span>
       </a>
     </li>
   </ul>

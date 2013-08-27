@@ -258,10 +258,24 @@ def resource_mapping():
 
 
 def resource_display_format(resource_dict):
-    format = resource_dict.get('format')
+    return format_display_name(resource_dict.get('format'))
+
+
+def format_display_name(format):
     if format in resource_mapping():
         format = resource_mapping()[format][1]
     return format
+
+
+def dataset_resource_formats(resources):
+    '''
+    Return a list of dataset resource formats.
+    Will only return each format once.
+
+    For example: if a dataset has 5 resources, 2 zip files and 3 csv files,
+    this will return ['zip', 'csv']
+    '''
+    return list(set([r['format'] for r in resources if r.get('format')]))
 
 
 def most_viewed_datasets(num_datasets=NUM_MOST_VIEWED_DATASETS):
