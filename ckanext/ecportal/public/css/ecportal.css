@@ -1209,7 +1209,7 @@ h3,
 h4,
 h2 a,
 .page_heading small {
-  font-family: "Lucida Grande", Tahoma, Verdana, Arial, sans-serif;
+  font-family: "Lucida Sans Unicode", "Lucida Grande", Tahoma, Verdana, Arial, sans-serif;
   line-height: 1.5;
 }
 h1,
@@ -1782,7 +1782,7 @@ label.inline input {
   margin: 1px 3px 0 1px;
   width: 10px;
   height: 10px;
-  background-image: url(/images/resource-icons.png);
+  background-image: url(../images/resource-icons.png);
 }
 
 .table-box .resource-list a.action .icon.download {
@@ -1847,7 +1847,7 @@ a.item_link:hover .resources .resource-tag {
   color: #888;
 }
 #dataset-contact h2 {
-  font-family: "Lucida Grande", Tahoma, Verdana, Arial, sans-serif;
+  font-family: "Lucida Sans Unicode", "Lucida Grande", Tahoma, Verdana, Arial, sans-serif;
   font-style: italic;
   font-weight: normal;
   color: #444;
@@ -1895,7 +1895,7 @@ a.item_link:hover .resources .resource-tag {
 .search-results .page_heading .search-term {
   color: #555;
   font-size: 14px;
-  font-family: "Lucida Grande", Tahoma, Verdana, Arial, sans-serif;
+  font-family: "Lucida Sans Unicode", "Lucida Grande", Tahoma, Verdana, Arial, sans-serif;
 }
 .empty-search .page_heading {
   display: none;
@@ -1952,9 +1952,22 @@ a.item_link:hover .resources .resource-tag {
   padding: 10px 10px 5px 10px;
   background-color: #EEE;
   border: 1px solid #C7C7C7;
+  margin-bottom: 15px;
 }
 .intro-welcome .page_heading {
   font-size: 16px;
   padding-top: 0;
   margin-bottom: 10px;
 }
+
+/* Homepage tag cloud */
+.home div.jqcloud {
+  font-family: "Lucida Sans Unicode", "Lucida Grande", Tahoma, Verdana, Arial, sans-serif;
+}
+.home div.jqcloud span {
+  color: #0099CC !important;
+}
+.home div.jqcloud span:hover {
+  text-decoration: underline;
+}
+
