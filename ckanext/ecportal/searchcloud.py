@@ -18,14 +18,6 @@ def update_approved(Session, rows):
             {'search_string': row[0], 'count': row[1]},
         )
 
-    # TODO: should we also check for beaker.cache.enabled in config here?
-    try:
-        approved_cache = base.cache.get_cache('approved', type="memory")
-        if approved_cache:
-            approved_cache.clear()
-    except Exception, e:
-        log.error('Couldn\'t clear the cache: %r' % (str(e)))
-
 
 def get_latest(Session):
     results = Session.execute(
@@ -159,30 +151,10 @@ def generate_unapproved_list(Session, days=30):
 
 
 def get_approved(Session):
-    def approved():
-        results = Session.execute(
-            'SELECT search_string, count FROM search_popular_approved;'
-        )
-        # return the results in a form that can be JSON-serialised
-        return [list(row) for row in results]
-
-    # TODO: fix this - tests fail when cache is used
-    #
-    # if p.toolkit.asbool(config.get('beaker.cache.enabled', 'True')):
-    #     try:
-    #         approved_cache = base.cache.get_cache('approved', type="memory")
-    #         return approved_cache.get_value(
-    #             key='all',  # We don't need a key, but get_value requires one
-    #             createfunc=approved,
-    #             expiretime=60 * 5
-    #         )
-    #     except Exception, e:
-    #         log.error('Couldn\'t use the cache: %r' % (str(e)))
-    #         return approved()
-    # else:
-    #     return approved()
-
-    return approved()
+    results = Session.execute(
+        'SELECT search_string, count FROM search_popular_approved;')
+    # return the results in a form that can be JSON-serialised
+    return [list(row) for row in results]
 
 
 def track_term(Session, lang, search_string):
