@@ -301,6 +301,18 @@ class ECPortalCommand(cli.CkanCommand):
                     'http://open-data.europa.eu')
         where key <> 'rdf' and value like '%http://ec.europa.eu/open-data%';
 
+        update package set license_id =
+            replace(license_id,
+                    'http://ec.europa.eu/open-data',
+                    'http://open-data.europa.eu')
+        where license_id like '%http://ec.europa.eu/open-data%';
+
+        update package_revision set license_id =
+            replace(license_id,
+                    'http://ec.europa.eu/open-data',
+                    'http://open-data.europa.eu')
+        where license_id like '%http://ec.europa.eu/open-data%';
+
         commit;
         '''
         model.Session.execute(sql)
