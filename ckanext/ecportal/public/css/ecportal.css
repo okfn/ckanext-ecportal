@@ -108,6 +108,11 @@ h2 a:hover{
   margin: 0px 0 0 -23px;
 }
 
+.resource-actions {
+  clear: both;
+  overflow: hidden;
+}
+
 
 h2 a:hover .resource, a.item_link:hover .resource {
   background: url("../images/icons.png") -17px -17px no-repeat;
@@ -1209,7 +1214,7 @@ h3,
 h4,
 h2 a,
 .page_heading small {
-  font-family: "Lucida Grande", Tahoma, Verdana, Arial, sans-serif;
+  font-family: "Lucida Sans Unicode", "Lucida Grande", Tahoma, Verdana, Arial, sans-serif;
   line-height: 1.5;
 }
 h1,
@@ -1755,7 +1760,9 @@ label.inline input {
   overflow: hidden;
   padding-bottom: 5px;
 }
-.table-box .resource-list a.action {
+
+/* New simple boxed style buttons */
+a.button-box {
   display: block;
   float: left;
   margin-right: 20px;
@@ -1770,37 +1777,37 @@ label.inline input {
   white-space: nowrap;
   border-radius: 3px;
 }
-.table-box .resource-list a.action:hover {
+a.button-box:hover {
   background-color: #5599FF;
   border-color: #5599FF;
-  color: white;
+  color: #FFFFFF !important;
   text-decoration: none;
 }
-.table-box .resource-list a.action .icon {
+a.button-box .icon {
   display: block;
   float: left;
   margin: 1px 3px 0 1px;
   width: 10px;
   height: 10px;
-  background-image: url(/images/resource-icons.png);
+  background-image: url(../images/resource-icons.png);
 }
 
-.table-box .resource-list a.action .icon.download {
+.button-box .icon.download {
   background-position: 0 0;
 }
-.table-box .resource-list a.action:hover .icon.download {
+.button-box:hover .icon.download {
   background-position: -10px 0;
 }
-.table-box .resource-list a.action .icon.graph {
+.button-box .icon.graph {
   background-position: 0 -10px;
 }
-.table-box .resource-list a.action:hover .icon.graph {
+.button-box:hover .icon.graph {
   background-position: -10px -10px;
 }
-.table-box .resource-list a.action .icon.visit {
+.button-box .icon.visit {
   background-position: 0 -20px;
 }
-.table-box .resource-list a.action:hover .icon.visit {
+.button-box:hover .icon.visit {
   background-position: -10px -20px;
 }
 
@@ -1847,7 +1854,7 @@ a.item_link:hover .resources .resource-tag {
   color: #888;
 }
 #dataset-contact h2 {
-  font-family: "Lucida Grande", Tahoma, Verdana, Arial, sans-serif;
+  font-family: "Lucida Sans Unicode", "Lucida Grande", Tahoma, Verdana, Arial, sans-serif;
   font-style: italic;
   font-weight: normal;
   color: #444;
@@ -1895,7 +1902,7 @@ a.item_link:hover .resources .resource-tag {
 .search-results .page_heading .search-term {
   color: #555;
   font-size: 14px;
-  font-family: "Lucida Grande", Tahoma, Verdana, Arial, sans-serif;
+  font-family: "Lucida Sans Unicode", "Lucida Grande", Tahoma, Verdana, Arial, sans-serif;
 }
 .empty-search .page_heading {
   display: none;
@@ -1952,9 +1959,22 @@ a.item_link:hover .resources .resource-tag {
   padding: 10px 10px 5px 10px;
   background-color: #EEE;
   border: 1px solid #C7C7C7;
+  margin-bottom: 15px;
 }
 .intro-welcome .page_heading {
   font-size: 16px;
   padding-top: 0;
   margin-bottom: 10px;
 }
+
+/* Homepage tag cloud */
+.home div.jqcloud {
+  font-family: "Lucida Sans Unicode", "Lucida Grande", Tahoma, Verdana, Arial, sans-serif;
+}
+.home div.jqcloud span {
+  color: #0099CC !important;
+}
+.home div.jqcloud span:hover {
+  text-decoration: underline;
+}
+

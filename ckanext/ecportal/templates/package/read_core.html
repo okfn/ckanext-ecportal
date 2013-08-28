@@ -69,7 +69,7 @@
           <ul class="resource-list unstyled">
             <py:for each="res in non_viz_resources">
             <li>
-              <a href="${res['url']}" class="action">
+              <a href="${res['url']}" class="button-box">
                 <py:choose>
                   <py:when test="h.resource_display_format(res) == 'HTML'">
                     <i class="icon visit"></i>
