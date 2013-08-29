@@ -3,10 +3,7 @@
 **Notice**: Vim users please check the tests README file before
             editing this file.
 '''
-try:
-    import json
-except ImportError:
-    import simplejson as json
+import json
 
 import ckan.model as model
 import ckan.lib.create_test_data
@@ -30,14 +27,19 @@ class TestSearch(tests.TestController):
         _create_test_data.create('publisher')
 
         cls.sysadmin_user = model.User.get('testsysadmin')
-        cls.extra_environ = {'Authorization': str(cls.sysadmin_user.apikey)}
+        cls.sysadmin_env = {'Authorization': str(cls.sysadmin_user.apikey)}
 
         model.repo.new_revision()
+
+        usr = model.User(name="ectest", apikey="ectest", password=u'ectest')
+        model.Session.add(usr)
+        model.Session.commit()
+
         g = model.Group.get('david')
         g.type = 'organization'
         model.Session.add(g)
-        mu = model.Member(table_id=cls.sysadmin_user.id,
-                          table_name='user', group=g)
+
+        mu = model.Member(table_id=usr.id, table_name='user', group=g)
         model.Session.add(mu)
         model.Session.commit()
 
@@ -62,7 +64,7 @@ class TestSearch(tests.TestController):
             })
             response = cls.app.post('/api/action/term_translation_update',
                                     params=params,
-                                    extra_environ=cls.extra_environ)
+                                    extra_environ=cls.sysadmin_env)
             assert json.loads(response.body)['success']
 
     @classmethod
@@ -140,7 +142,7 @@ class TestSearch(tests.TestController):
 
         params = json.dumps(dataset)
         response = self.app.post('/api/action/package_update', params=params,
-                                 extra_environ=self.extra_environ)
+                                 extra_environ={'Authorization': 'ectest'})
 
         params = json.dumps({
             'q': u'warandpeace',
@@ -152,3 +154,43 @@ class TestSearch(tests.TestController):
 
         assert geo_facets[0]['count'] == 1
         assert geo_facets[0]['name'] == 'uk'
+
+    def test_search_by_modified(self):
+        # create a new dataset
+        dataset = {'name': u'new-test-dataset',
+                   'title': u'title',
+                   'description': u'description',
+                   'url': u'http://datahub.io',
+                   'published_by': u'david',
+                   'status': u'http://purl.org/adms/status/Completed'}
+        self.app.post('/api/action/package_create',
+                      params=json.dumps(dataset),
+                      extra_environ={'Authorization': 'ectest'})
+
+        # check that new dataset is first result when sorting by
+        # modified_date (should default to same value as CKAN's
+        # metadata_modified field)
+        search_query = {'sort': 'modified_date desc'}
+        response = self.app.post('/api/action/package_search',
+                                 params=json.dumps(search_query),
+                                 extra_environ={'Authorization': 'ectest'})
+        result = json.loads(response.body)['result']
+        assert result['count'] > 1
+        assert result['results'][0]['name'] == dataset['name']
+
+        # set the modified_date field to a time before the rest
+        # of the datasets were created
+        dataset['modified_date'] = u'2013-01-01'
+        self.app.post('/api/action/package_update',
+                      params=json.dumps(dataset),
+                      extra_environ={'Authorization': 'ectest'})
+
+        # check that dataset is now the first result when sorting
+        # by modified_date (ascending)
+        search_query = {'sort': 'modified_date asc'}
+        response = self.app.post('/api/action/package_search',
+                                 params=json.dumps(search_query),
+                                 extra_environ={'Authorization': 'ectest'})
+        result = json.loads(response.body)['result']
+        assert result['count'] > 1
+        assert result['results'][0]['name'] == dataset['name']

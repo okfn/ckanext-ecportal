@@ -208,46 +208,6 @@ class TestAPI(tests.WsgiAppCase):
                       extra_environ={'Authorization': 'ectest'},
                       status=409)
 
-    def test_search_by_modified(self):
-        # create a new dataset
-        dataset = {'name': u'new-test-dataset',
-                   'title': u'title',
-                   'description': u'description',
-                   'url': u'http://datahub.io',
-                   'published_by': u'david',
-                   'status': u'http://purl.org/adms/status/Completed'}
-        self.app.post('/api/action/package_create',
-                      params=json.dumps(dataset),
-                      extra_environ={'Authorization': 'ectest'})
-
-        # check that new dataset is first result when sorting by
-        # modified_date (should default to same value as CKAN's
-        # metadata_modified field)
-        search_query = {'sort': 'modified_date desc'}
-        response = self.app.post('/api/action/package_search',
-                                 params=json.dumps(search_query),
-                                 extra_environ={'Authorization': 'ectest'})
-        result = json.loads(response.body)['result']
-        assert result['count'] > 1
-        assert result['results'][0]['name'] == dataset['name']
-
-        # set the modified_date field to a time before the rest
-        # of the datasets were created
-        dataset['modified_date'] = u'2013-01-01'
-        self.app.post('/api/action/package_update',
-                      params=json.dumps(dataset),
-                      extra_environ={'Authorization': 'ectest'})
-
-        # check that dataset is now the first result when sorting
-        # by modified_date (ascending)
-        search_query = {'sort': 'modified_date asc'}
-        response = self.app.post('/api/action/package_search',
-                                 params=json.dumps(search_query),
-                                 extra_environ={'Authorization': 'ectest'})
-        result = json.loads(response.body)['result']
-        assert result['count'] > 1
-        assert result['results'][0]['name'] == dataset['name']
-
     def test_blank_license_allowed(self):
         dataset_json = json.dumps({
             'name': u'test-blank-license-string',
