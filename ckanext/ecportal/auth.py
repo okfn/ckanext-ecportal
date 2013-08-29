@@ -109,6 +109,19 @@ def show_package_edit_button(context, data_dict):
     return publisher_auth.update.package_update(context, data_dict)
 
 
+def package_search_private_datasets(context, data_dict):
+    '''
+    Custom ecportal auth function.
+
+    Used in ecportal package_search to see if a user has permission to
+    view private datasets in group search listings.
+
+    Only applies to sysadmins for now, as group members can already
+    see private datasets in the search listing (sysadmins cannot).
+    '''
+    return _sysadmins_only(context, 'view private datasets')
+
+
 def user_create(context, data_dict=None):
     '''
     Only allow sysadmins to create new Users

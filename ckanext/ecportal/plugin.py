@@ -137,6 +137,8 @@ class ECPortalPlugin(p.SingletonPlugin):
         return {
             'package_update': ecportal_auth.package_update,
             'show_package_edit_button': ecportal_auth.show_package_edit_button,
+            'package_search_private_datasets':
+            ecportal_auth.package_search_private_datasets,
             'group_create': ecportal_auth.group_create,
             'user_create': ecportal_auth.user_create,
             'purge_publisher_datasets': ecportal_auth.purge_publisher_datasets,
@@ -160,6 +162,7 @@ class ECPortalPlugin(p.SingletonPlugin):
             'user_create': ecportal_logic.user_create,
             'user_update': ecportal_logic.user_update,
             'package_show': ecportal_logic.package_show,
+            'package_search': ecportal_logic.package_search,
             'resource_show': ecportal_logic.resource_show
         }
 
@@ -205,7 +208,7 @@ class ECPortalPlugin(p.SingletonPlugin):
             return search_params
         lang = str(helpers.current_locale())
         try:
-            # Unfortunately a nested sessin doesn't behave the way we want,
+            # Unfortunately a nested session doesn't behave the way we want,
             # failing to actually commit the change made.
             # We can either create a separate connection for this
             # functionality on each request (potentially costly),
@@ -238,6 +241,7 @@ class ECPortalPlugin(p.SingletonPlugin):
                 ' and committed successfully',
                 search_string
             )
+
         return search_params
 
     def before_index(self, pkg_dict):

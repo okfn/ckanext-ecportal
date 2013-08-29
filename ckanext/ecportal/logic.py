@@ -267,7 +267,15 @@ def _change_resource_details(resource):
 
 
 def package_show(context, data_dict):
-    '''Override package_show to sort the resources by name'''
+    '''Return the metadata of a dataset (package) and its resources.
+
+    :param id: the id or name of the dataset
+    :type id: string
+
+    :rtype: dictionary
+
+    '''
+    # Override package_show to sort the resources by name
     result = logic.action.get.package_show(context, data_dict)
 
     def order_key(resource):
@@ -280,6 +288,114 @@ def package_show(context, data_dict):
             _change_resource_details(resource)
 
     return result
+
+
+def package_search(context, data_dict):
+    '''
+    Searches for packages satisfying a given search criteria.
+
+    This action accepts solr search query parameters (details below), and
+    returns a dictionary of results, including dictized datasets that match
+    the search criteria, a search count and also facet information.
+
+    **Solr Parameters:**
+
+    For more in depth treatment of each paramter, please read the `Solr
+    Documentation <http://wiki.apache.org/solr/CommonQueryParameters>`_.
+
+    This action accepts a *subset* of solr's search query parameters:
+
+    :param q: the solr query.  Optional.  Default: `"*:*"`
+    :type q: string
+    :param fq: any filter queries to apply.  Note: `+site_id:{ckan_site_id}`
+        is added to this string prior to the query being executed.
+    :type fq: string
+    :param rows: the number of matching rows to return.
+    :type rows: int
+    :param sort: sorting of the search results.  Optional.  Default:
+        "score desc, name asc".  As per the solr documentation, this is a
+        comma-separated string of field names and sort-orderings.
+    :type sort: string
+    :param start: the offset in the complete result for where the set of
+        returned datasets should begin.
+    :type start: int
+    :param qf: the dismax query fields to search within, including boosts.  See
+      the `Solr Dismax Documentation
+      <http://wiki.apache.org/solr/DisMaxQParserPlugin#qf_.28Query_Fields.29>`_
+      for further details.
+    :type qf: string
+    :param facet: whether to enable faceted results.  Default: "true".
+    :type facet: string
+    :param facet.mincount: the minimum counts for facet fields should be
+        included in the results.
+    :type facet.mincount: int
+    :param facet.limit: the maximum number of constraint counts that should be
+        returned for the facet fields. A negative value means unlimited
+    :type facet.limit: int
+    :param facet.field: the fields to facet upon.  Default empty.  If empty,
+        then the returned facet information is empty.
+    :type facet.field: list of strings
+
+    **Results:**
+
+    The result of this action is a dict with the following keys:
+
+    :rtype: A dictionary with the following keys
+    :param count: the number of results found.  Note, this is the total number
+        of results found, not the total number of results returned (which is
+        affected by limit and row parameters used in the input).
+    :type count: int
+    :param results: ordered list of datasets matching the query, where the
+        ordering defined by the sort parameter used in the query.
+    :type results: list of dictized datasets.
+    :param facets: DEPRECATED.  Aggregated information about facet counts.
+    :type facets: DEPRECATED dict
+    :param search_facets: aggregated information about facet counts.  The outer
+        dict is keyed by the facet field name (as used in the search query).
+        Each entry of the outer dict is itself a dict, with a "title" key, and
+        an "items" key.  The "items" key's value is a list of dicts, each with
+        "count", "display_name" and "name" entries.  The display_name is a
+        form of the name that can be used in titles.
+    :type search_facets: nested dict of dicts.
+
+    An example result: ::
+
+     {'count': 2,
+      'results': [ { <snip> }, { <snip> }],
+      'search_facets': {u'tags': {'items': [{'count': 1,
+                                             'display_name': u'tolstoy',
+                                             'name': u'tolstoy'},
+                                            {'count': 2,
+                                             'display_name': u'russian',
+                                             'name': u'russian'}
+                                           ]
+                                 }
+                       }
+     }
+
+    **Limitations:**
+
+    The full solr query language is not exposed, including.
+
+    fl
+        The parameter that controls which fields are returned in the solr
+        query cannot be changed.  CKAN always returns the matched datasets as
+        dictionary objects.
+    '''
+    # Override package_search to show private datasets to authorized users
+    # (sysadmins) when searching in a group.
+    if context.get('user') and context.get('group'):
+        try:
+            plugins.toolkit.check_access(
+                'package_search_private_datasets', context, data_dict)
+            # quite ugly, but these values are set in the group
+            # read controller in core for users that are part of a group
+            context['ignore_capacity_check'] = True
+            data_dict['fq'] = 'groups:"{0}"'.format(context['group'].name)
+        except plugins.toolkit.NotAuthorized:
+            pass
+
+    return logic.action.get.package_search(context, data_dict)
 
 
 def resource_show(context, data_dict):
