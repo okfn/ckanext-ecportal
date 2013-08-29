@@ -179,6 +179,10 @@ class ECPortalPlugin(p.SingletonPlugin):
         map.redirect('/user/reset', '/not_found')
         map.redirect('/user/register', '/not_found')
 
+        # map dashboard to profile page
+        with routing.SubMapper(map, controller='user') as m:
+            m.connect('/user/dashboard', action='read')
+
         # disable dataset history page
         map.redirect('/dataset/history/{url:.*}', '/not_found')
         map.redirect('/dataset/history_ajax/{url:.*}', '/not_found')
