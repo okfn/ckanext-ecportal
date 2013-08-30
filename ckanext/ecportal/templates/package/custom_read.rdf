@@ -20,7 +20,7 @@
         <dcat:CatalogRecord rdf:about="${c.dataset_url}">
             <dct:modified>${c.pkg_dict.get('metadata_modified', '')}</dct:modified>
             <dct:issued>${c.pkg_dict.get('metadata_created', '')}</dct:issued>
-            <foaf:primaryTopic>${c.pkg_dict.get('url').strip() or c.dataset_url}</foaf:primaryTopic>
+            <foaf:primaryTopic rdf:resource="${c.pkg_dict.get('url').strip() or c.dataset_url}" />
         </dcat:CatalogRecord>
     </dcat:record>
 </dcat:Catalog>
@@ -96,7 +96,7 @@
       <skos:Concept rdf:about="${c.pkg_dict.get('status')}"/>
     </ecodp:datasetStatus>
 
-   <dct:publisher py:if="c.pkg_dict.get('published_by')" rdf:resource="http://publications.europa.eu/resource/authority/corporate-body/${c.pkg_dict.get('published_by')}"/>
+   <dct:publisher py:if="c.pkg_dict.get('published_by')" rdf:resource="http://publications.europa.eu/resource/authority/corporate-body/${c.pkg_dict.get('published_by').upper()}"/>
 
 <py:for each="rsc_dict in c.pkg_dict.get('resources', [])">
     <py:choose test="rsc_dict.get('resource_type', '#').split('#')[-1] in ['Feed','WebService', 'Download']">
