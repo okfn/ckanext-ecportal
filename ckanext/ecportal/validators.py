@@ -282,7 +282,7 @@ def update_rdf(key, data, errors, context):
     '''
     rdf = data.get(key, '')
     name = data.get((u'name',), '')
-    if (not rdf) or ('package' in context):
+    if not rdf:
         return
 
     origin_url, xml = rdfutil.update_rdf(rdf, name)
