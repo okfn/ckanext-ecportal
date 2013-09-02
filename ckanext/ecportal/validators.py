@@ -285,7 +285,7 @@ def update_rdf(key, data, errors, context):
     if not rdf:
         return
 
-    origin_url, xml = rdfutil.update_rdf(rdf, name)
+    origin_url, xml = rdfutil.update_rdf(rdf, name, context)
     data[key] = xml
 
     if origin_url:

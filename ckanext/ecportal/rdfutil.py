@@ -13,7 +13,7 @@ log = logging.getLogger(__name__)
 Element = lxml.etree.Element
 
 
-def update_rdf(source_rdf, name):
+def update_rdf(source_rdf, name, context):
     '''
     Checks that the source_rdf is valid and whether it contains the local
     triples we want, and if not adds them.  The adding of the triples will
@@ -41,7 +41,6 @@ def update_rdf(source_rdf, name):
         if v in local_namespaces:
             local_namespaces[v] = k
 
-    modified_text = datetime.datetime.now().date().isoformat()
 
     origin_url = ''
     new_root = None
@@ -86,13 +85,24 @@ def update_rdf(source_rdf, name):
     )
     primary_topic.text = origin_url
 
+    created_text = datetime.datetime.now().isoformat()
+    modified_text = created_text
+
+    model = context['model']
+    package = model.Package.get(name)
+
+    if package:
+        created_text = package.metadata_created.isoformat()
+        modified_text = package.metadata_modified.isoformat()
+
+
     modified = Element('{http://purl.org/dc/terms/#}modified',
                        nsmap=local_ns)
     modified.text = modified_text
 
     issued = Element('{http://purl.org/dc/terms/#}issued',
                      nsmap=local_ns)
-    issued.text = modified_text
+    issued.text = created_text
 
     catalog_record.append(primary_topic)
     catalog_record.append(modified)
