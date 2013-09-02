@@ -18,6 +18,7 @@
 "pdf": ["application/pdf", "PDF", "PDF File"],
 "application/x-msdownload": ["application/x-msdownload", "EXE", "Windows Executable Program"],
 "exe": ["application/x-msdownload", "EXE", "Windows Executable Program"],
+"application/x-msdos-program": ["application/x-msdownload","EXE","Windows Executable Program"],
 "application/rdf+xml": ["application/rdf+xml", "RDF", "RDF"],
 "rdf/xml": ["application/rdf+xml", "RDF", "RDF"],
 "rdf": ["application/rdf+xml", "RDF", "RDF"],
@@ -79,5 +80,23 @@
 "application/octet-stream": ["application/octet-stream", "Binary Data", "Binary Data"],
 "application/ms-word": ["application/ms-word", "DOC", "Word Document"],
 "doc": ["application/ms-word", "DOC", "Word Document"],
-"application/atom+xml": ["application/atom+xml", "Atom Feed", "Atom Feed"]
+"application/atom+xml": ["application/atom+xml", "Atom Feed", "Atom Feed"],
+
+"application/x-e00": ["application/x-e00","E00"," ARC/INFO interchange file format"],
+"application/x-javascript": ["application/x-javascript","JS","JavaSript"],
+"application/x-director": ["application/x-director","DCR","Adobe Shockwave format"],
+"application/x-mxd": ["application/x-mxd","MXD","ESRI ArcGIS project file"],
+"application/xslt+xml": ["application/xslt+xml","XSLT","Extensible Stylesheet Language Transformations"],
+"chemical/x-mopac-input": ["chemical/x-mopac-input","MOP","MOPAC Input format"],
+"application/vnd.oasis.opendocument.database": ["application/vnd.oasis.opendocument.database","ODB","OpenDocument Database"],
+"application/vnd.oasis.opendocument.chart": ["application/vnd.oasis.opendocument.chart","ODC","OpenDocument Chart"],
+"application/vnd.oasis.opendocument.formula": ["application/vnd.oasis.opendocument.formula","ODF","OpenDocument Math Formula"],
+"application/vnd.oasis.opendocument.graphics": ["application/vnd.oasis.opendocument.graphics","ODG","OpenDocument Image"],
+"application/vnd.oasis.opendocument.spreadsheet": ["application/vnd.oasis.opendocument.spreadsheet","ODS","OpenDocument Spreadsheet"],
+"application/vnd.oasis.opendocument.text": ["application/vnd.oasis.opendocument.text","ODT","OpenDocument Text"],
+"application/owl+xml": ["application/owl+xml","OWL","Web Ontology Language"],
+"application/vnd.ms-powerpoint": ["application/vnd.ms-powerpoint","PPT","Powerpoint Presentation"],
+"application/vnd.openxmlformats-officedocument.spreadsheetml.sheet": ["application/vnd.openxmlformats-officedocument.spreadsheetml.sheet","XLSX"," Open Office XML Spreadsheet"],
+"application/vnd.openxmlformats-officedocument.wordprocessingml.document": ["application/vnd.openxmlformats-officedocument.wordprocessingml.document","DOCX","Open Office XML Document"],
+"application/vnd.openxmlformats-officedocument.presentationml.presentation": ["application/vnd.openxmlformats-officedocument.presentationml.presentation","PPTX"," Open Office XML Presentation"]
 }
