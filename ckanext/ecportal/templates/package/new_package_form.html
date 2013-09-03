@@ -77,12 +77,12 @@
   </div>
 
   <div class="control-group homepage-field">
-    <label class="control-label" for="url"><span class="field_required">*</span> URL</label>
+    <label class="control-label" for="url"><span class="field_required">*</span> URI</label>
     <div class="controls">
       <input id="url" name="url" type="text" value="${data.get('url', '')}"/>
       <p class="field_error" py:if="errors.get('url', '')">Error: ${errors.get('url', '')}</p>
-      <p>The URL for the web page describing the data (not the data itself).</p>
-      <p>e.g. http://www.example.com/growth-figures.html</p>
+      <p>This identifier is the universal and main identification of the dataset maintained by the publisher.</p>
+      <p>e.g. http://ec.europa.eu/id/uri-1</p>
     </div>
   </div>
 
