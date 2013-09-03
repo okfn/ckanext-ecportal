@@ -16,14 +16,12 @@
         <py:if test="c.id">
           <li class="${'active' if c.action=='read' else ''}"><a href="${h.url_for(controller='user', action='read', id=c.user_dict.name)}">${_('View Profile')}</a></li>
         </py:if>
-        <py:if test="not c.id">
+        <py:if test="not c.id and not c.user">
           <li class="${'active' if c.action=='login' else ''}"><a href="${h.url_for(controller='user', action='login')}">${_('Login')}</a></li>
         </py:if>
       </py:otherwise>
     </ul>
   </py:match>
-  
 
   <xi:include href="../layout.html" />
 </html>
-
