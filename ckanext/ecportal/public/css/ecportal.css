@@ -1677,7 +1677,13 @@ h2 {
 }
 
 .ie7 #dataset-search {
-  right: 352px;
+  top: 36px;
+  right: 353px;
+}
+
+.ie8 #dataset-search {
+  right: 349px;
+  top: 36px;
 }
 
 .menu {
@@ -1976,5 +1982,12 @@ a.item_link:hover .resources .resource-tag {
 }
 .home div.jqcloud span:hover {
   text-decoration: underline;
+}
+
+.nav-pills > li > a {
+  background-color: #EEE;
+}
+.nav-pills > li > a:hover {
+  background-color: #DDD;
 }
 
