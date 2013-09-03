@@ -6,7 +6,6 @@ from ckan.authz import Authorizer
 import ckan.model as model
 import ckan.logic as logic
 import ckan.logic.schema
-import ckan.lib.dictization as dictization
 import ckan.plugins as p
 from ckan.logic.validators import (package_id_not_changed,
                                    package_name_validator)
@@ -62,7 +61,6 @@ def _tags_and_translations(context, vocab, lang, lang_fallback):
 
 class ECPortalDatasetForm(p.SingletonPlugin):
     p.implements(p.IDatasetForm, inherit=True)
-    p.implements(p.ITemplateHelpers)
 
     def package_form(self):
         return 'package/new_package_form.html'
@@ -99,7 +97,7 @@ class ECPortalDatasetForm(p.SingletonPlugin):
                             key=operator.itemgetter(1))
         default_licence = (
             "Europa Legal Notice",
-            "http://ec.europa.eu/open-data/kos/licence/EuropeanCommission")
+            "http://open-data.europa.eu/kos/licence/EuropeanCommission")
         c.licences = filter(lambda l: l != default_licence, c.licences)
         c.licences.insert(0, default_licence)
 
@@ -306,17 +304,6 @@ class ECPortalDatasetForm(p.SingletonPlugin):
 
     def check_data_dict(self, data_dict):
         return
-
-    def get_helpers(self):
-        return {'current_url': helpers.current_url,
-                'current_locale': helpers.current_locale,
-                'root_url': helpers.root_url,
-                'format_description': helpers.format_description,
-                'recent_updates': helpers.recent_updates,
-                'top_publishers': helpers.top_publishers,
-                'current_date': helpers.current_date,
-                'group_facets_by_field': helpers.group_facets_by_field,
-                'groups_available': helpers.groups_available}
 
 
 class ECPortalPublisherForm(p.SingletonPlugin):

@@ -40,7 +40,7 @@
   <py:match path="primarysidebar">
 
     <li py:if="c.pkg_dict.get('license_id')" id="dataset-license" class="sidebar-section">
-      <strong>Licence:</strong>
+      <h3>Licence:</h3>
         <py:choose test="">
           <span py:when="c.pkg.license and c.pkg.license.url"><a
               href="${c.pkg.license.url}" rel="dc:rights">${c.pkg.license.title.split('::')[-1]}</a></span>
@@ -60,8 +60,20 @@
         <i class="resource"></i>
         ${h.resource_display_name(c.resource)}
       </h3>
-      <div class="inner faded resource-actions">
-        <a py:if="c.resource.get('url')" class="button button-primary resource-url-analytics resource-type-${c.resource.get('resource_type')}" href="${c.resource.get('url')}">${_('Download')}</a>
+      <div py:if="c.resource.get('url')" class="inner faded resource-actions">
+        <a href="${c.resource.get('url')}" class="button-box resource-url-analytics resource-type-${c.resource.get('resource_type')}">
+          <py:choose>
+            <py:when test="c.resource.get('format') == 'html'">
+              <i class="icon visit"></i>
+              ${_('Visit page')}
+            </py:when>
+            <py:otherwise>
+              <i class="icon download"></i>
+              ${_('Download')}
+            </py:otherwise>
+          </py:choose>
+        </a>
+        <!--<a py:if="c.resource.get('url')" class="button button-primary resource-url-analytics resource-type-${c.resource.get('resource_type')}" href="${c.resource.get('url')}">${_('Download')}</a>-->
       </div>
     </div>
 
@@ -75,7 +87,7 @@
     <div class="package-box">
       <h3><i class="format"></i> ${_('Format')}</h3>
       <div class="inner faded">
-        ${c.resource['format'] or 'Unknown'}
+        ${h.resource_display_format(c.resource) or 'Unknown'}
       </div>
     </div>
 

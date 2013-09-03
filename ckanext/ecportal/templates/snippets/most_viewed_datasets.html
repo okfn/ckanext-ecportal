@@ -7,11 +7,11 @@
   >
 
   <ul class="datasets unstyled">
-    <li py:for="package in packages">
-      <a href="${h.url_for(controller='package', action='read', id=package.name)}" class="item_link">
+    <li py:for="dataset in datasets">
+      <a href="${h.url_for(controller='package', action='read', id=dataset['name'])}" class="item_link">
         <i class="resource"></i>
-        <strong>${package.title}</strong><br />
-        <span class="additional">(${package.running_total} ${_('views')}</span>)
+        <strong>${dataset.get('title') or dataset['name']}</strong><br />
+        <span class="additional">(${dataset['views_total']} ${_('views')}</span>)
       </a>
     </li>
   </ul>

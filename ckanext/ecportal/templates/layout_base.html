@@ -87,14 +87,13 @@
   </div>
 
   <div class="breadcrumb-custom">
-    <a href="http://europa.eu/index_${h.current_locale()}.htm">${_('Europa')}</a><span class="seperator">&gt;</span><a href="${h.root_url()}" class="active">${_('Open Data Portal')}</a><span class="seperator">&gt;</span><a href="${h.url('home')}">${_('Data')}</a><span py:if="defined('breadcrumbs_extra')">${breadcrumbs_extra()}</span>
+    <a href="http://europa.eu/index_${h.current_locale()}.htm">${_('EUROPA')}</a><span class="seperator">&gt;</span><a href="${h.root_url()}" class="active">${_('Open Data Portal')}</a><span class="seperator">&gt;</span><a href="${h.url('home')}">${_('Data')}</a><span py:if="defined('breadcrumbs_extra')">${breadcrumbs_extra()}</span>
   </div>
 
   <div class="menu">
     <div class="region region-menu">
       <ul class="menu">
-        <li class="first leaf"><a href="${h.root_url()}">${_('Home')}</a></li>
-        <li class="leaf"><a href="${h.url('home')}" class="active">${_('Data')}</a></li>
+        <li class="first leaf"><a href="${h.url('home')}" class="active">${_('Data')}</a></li>
         <li class="leaf"><a href="${h.root_url()}apps">${_('Applications')}</a></li>
         <li class="leaf"><a href="${h.root_url()}linked-data">${_('Linked Data')}</a></li>
         <li class="last leaf"><a href="${h.root_url()}about">${_('About')}</a></li>
@@ -155,8 +154,8 @@
     </div>
   </div>
 
-  <div id="content-last-updated" class="footer">
-    ${_('Last update')}: ${h.current_date()} |
+  <div class="footer">
+    ${_('Last update')}: <span id="content-last-updated">${h.current_date()}</span> |
     <a href="${h.root_url()}about">${_('About this site')}</a> |
     <a href="http://ec.europa.eu/geninfo/legal_notices_en.htm">${_('Legal notice')}</a> |
     <a href="/contact">${_('Contact')}</a> |
@@ -217,26 +216,30 @@
 <py:if test="h.asbool(config.get('ckan.tracking_enabled', 'false'))">
 <script type="text/javascript">
 $(function (){
- // Tracking
- var url = location.pathname;
- // remove any site root from url
- url = url.substring(CKAN.SITE_URL.length, url.length);
- // trim any trailing /
- url = url.replace(/\/*$/, '');
- $.ajax({url : CKAN.SITE_URL_NO_LOCALE + '/_tracking',
-     type : 'POST',
-     data : {url:url, type:'page'},
-     timeout : 300 });
-         $('a.resource-url-analytics').click(function (e){
-                 var url = $(e.target).closest('a').attr('href');
-     $.ajax({url : CKAN.SITE_URL_NO_LOCALE + '/_tracking',
-           data : {url:url, type:'resource'},
-         type : 'POST',
-         complete : function () {location.href = url;},
-         timeout : 30});
-                 e.preventDefault();
-                 });
-         });
+  // Tracking
+  var url = location.pathname;
+  // remove any site root from url
+  url = url.substring(CKAN.SITE_URL.length, url.length);
+  // trim any trailing /
+  url = url.replace(/\/*$/, '');
+  $.ajax({
+    url : CKAN.SITE_URL_NO_LOCALE + '/_tracking',
+    type : 'POST',
+    data : {url:url, type:'page'},
+    timeout : 300
+   });
+  $('a.resource-url-analytics').click(function (e){
+    var url = $(e.target).closest('a').attr('href');
+    $.ajax({
+      url : CKAN.SITE_URL_NO_LOCALE + '/_tracking',
+      data : {url:url, type:'resource'},
+      type : 'POST',
+      complete : function () {location.href = url;},
+      timeout : 30
+    });
+    e.preventDefault();
+  });
+});
 </script>
 </py:if>
 

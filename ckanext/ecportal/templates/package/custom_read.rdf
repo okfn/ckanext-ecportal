@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <rdf:RDF
     xmlns:py="http://genshi.edgewall.org/"
-    xmlns:ecodp="http://ec.europa.eu/open-data/ontologies/ec-odp#"
+    xmlns:ecodp="http://open-data.europa.eu/ontologies/ec-odp#"
     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
     xmlns:foaf="http://xmlns.com/foaf/0.1/"
     xmlns:dct="http://purl.org/dc/terms/"
@@ -9,13 +9,23 @@
     xmlns:skos="http://www.w3.org/2004/02/skos/core#"
     xmlns:dcat="http://www.w3.org/ns/dcat#"
     xmlns:dc="http://purl.org/dc/elements/1.1/"
-    xmlns="http://ec.europa.eu/open-data/ontologies/ec-odp-example#"
+    xmlns="http://open-data.europa.eu/ontologies/ec-odp-example#"
     xmlns:owl="http://www.w3.org/2002/07/owl#"
     xmlns:skos-xl="http://www.w3.org/2008/05/skos-xl#"
     xmlns:dcam="http://purl.org/dc/dcam/"
     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#">
 
-<dcat:Dataset rdf:about="${c.pkg_dict.get('url','')}">
+<dcat:Catalog rdf:about="${h.catalog_url()}">
+    <dcat:record>
+        <dcat:CatalogRecord rdf:about="${c.dataset_url}">
+            <dct:modified>${c.pkg_dict.get('metadata_modified', '')}</dct:modified>
+            <dct:issued>${c.pkg_dict.get('metadata_created', '')}</dct:issued>
+            <foaf:primaryTopic rdf:resource="${c.pkg_dict.get('url').strip() or c.dataset_url}" />
+        </dcat:CatalogRecord>
+    </dcat:record>
+</dcat:Catalog>
+
+<dcat:Dataset rdf:about="${c.pkg_dict.get('url').strip() or c.dataset_url}">
 
     <dct:title xml:lang="en">${c.pkg_dict['title']}</dct:title>
     <dct:description xml:lang="en">${c.pkg_dict.get('description', '')}</dct:description>
@@ -28,13 +38,6 @@
     </py:for>
 </py:if>
 
-    <dcat:record>
-        <rdf:Description rdf:about="${c.dataset_url}">
-            <dcat:accessURL rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">${c.dataset_url}</dcat:accessURL>
-            <dct:modified>${c.pkg_dict.get('modified_date', '')}</dct:modified>
-            <dct:issued>${c.pkg_dict.get('release_date', '')}</dct:issued>
-        </rdf:Description>
-    </dcat:record>
 
     <dct:license py:if="c.pkg_dict.get('license_url', None)">
       <skos:Concept rdf:about="${c.pkg_dict['license_url']}"/>
@@ -54,10 +57,8 @@
     </dct:temporal>
 
 <py:if test="c.pkg_dict.get('geographical_coverage', '')">
-    <py:for each="tag, trans in c.pkg_dict['geographical_coverage']">
-    <dct:spatial>
-      <skos:Concept rdf:about="http://publications.europa.eu/resource/authority/ntu/${tag}"/>
-    </dct:spatial>
+    <py:for each="item in c.pkg_dict['geographical_coverage']">
+    <dct:spatial rdf:resource="${item}"/>
     </py:for>
 </py:if>
 
@@ -95,9 +96,7 @@
       <skos:Concept rdf:about="${c.pkg_dict.get('status')}"/>
     </ecodp:datasetStatus>
 
-   <dct:publisher py:if="c.pkg_dict.get('published_by')">
-      <skos:Concept rdf:about="http://publications.europa.eu/resource/authority/corporate-body/${c.pkg_dict.get('published_by')}"/>
-    </dct:publisher>
+   <dct:publisher py:if="c.pkg_dict.get('published_by')" rdf:resource="http://publications.europa.eu/resource/authority/corporate-body/${c.pkg_dict.get('published_by').upper()}"/>
 
 <py:for each="rsc_dict in c.pkg_dict.get('resources', [])">
     <py:choose test="rsc_dict.get('resource_type', '#').split('#')[-1] in ['Feed','WebService', 'Download']">

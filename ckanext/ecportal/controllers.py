@@ -1,6 +1,5 @@
 import logging
 import datetime
-import sqlalchemy.exc
 from pylons import response
 
 import ckan.lib.base as base
@@ -11,7 +10,6 @@ import ckan.lib.navl.dictization_functions
 import ckan.lib.helpers
 import ckanext.ecportal.forms as forms
 import ckanext.ecportal.searchcloud as searchcloud
-import ckanext.ecportal.mostviewed as mostviewed
 
 log = logging.getLogger(__name__)
 _validate = ckan.lib.navl.dictization_functions.validate
@@ -120,35 +118,6 @@ class ECPortalSearchCloudAdminController(base.BaseController):
         response.headers['Content-Disposition'] = \
             'attachment; filename="ecodp-searchcloud-latest-%s.json"' % date
         return json.dumps(data, indent=4)
-
-
-class ECPortalHomeController(ckan.controllers.home.HomeController):
-    '''
-    Overrides the index() method to add the data needed to render the search
-    cloud on the homepage
-    '''
-    def index(self):
-        p.toolkit.c.most_viewed_datasets = None
-        try:
-            rows = mostviewed.get_most_viewed(model.Session, 10)
-        except sqlalchemy.exc.ProgrammingError:
-            log.error('Could not retrieve most viewed results from database. '
-                      'Do the tables exist? Rolling back the session.')
-            model.Session.rollback()
-        else:
-            if rows:
-                p.toolkit.c.most_viewed_datasets = rows
-        p.toolkit.c.json = None
-        try:
-            rows = searchcloud.get_approved(model.Session)
-        except sqlalchemy.exc.ProgrammingError:
-            log.error('Could not retrieve search cloud results from database. '
-                      'Do the tables exist? Rolling back the session.')
-            model.Session.rollback()
-        else:
-            if rows:
-                p.toolkit.c.json = searchcloud.approved_to_json(rows)
-        return ckan.controllers.home.HomeController.index(self)
 
 
 def _vocabularies(tag_name):

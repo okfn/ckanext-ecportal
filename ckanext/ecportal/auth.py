@@ -65,6 +65,13 @@ def package_update(context, data_dict):
             return authorised_by_core
 
 
+def purge_publisher_datasets(context, data_dict):
+    '''
+    Only sysadmins can purge a publisher's deleted datasets.
+    '''
+    return _sysadmins_only(context, 'purge publisher datasets')
+
+
 def purge_revision_history(context, data_dict):
     '''
     Only sysadmins can purge a publisher's revision history.
@@ -100,6 +107,19 @@ def show_package_edit_button(context, data_dict):
     on how to update the dataset (ie - re-running the import).
     '''
     return publisher_auth.update.package_update(context, data_dict)
+
+
+def package_search_private_datasets(context, data_dict):
+    '''
+    Custom ecportal auth function.
+
+    Used in ecportal package_search to see if a user has permission to
+    view private datasets in group search listings.
+
+    Only applies to sysadmins for now, as group members can already
+    see private datasets in the search listing (sysadmins cannot).
+    '''
+    return _sysadmins_only(context, 'view private datasets')
 
 
 def user_create(context, data_dict=None):

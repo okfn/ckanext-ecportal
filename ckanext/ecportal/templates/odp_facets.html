@@ -19,7 +19,7 @@
 
   <py:def function="field_list()">
   <div class="filter-list" py:if="c.fields">
-    <div class="filter-entry" py:for="field, values in h.group_facets_by_field(c.fields).iteritems()">
+    <div class="filter-entry" py:for="field, values in h.group_facets_by_field(c.fields)">
       <span class="name">${_(h.facet_title(field))}:</span>
       <span py:for="value in values">
         <span class="value" py:choose="">
@@ -32,7 +32,7 @@
               ${value}
               </py:otherwise>
             </span>
-            <strong>-</strong>
+            <strong>&times;</strong>
           </a>
         </span>
       </span>

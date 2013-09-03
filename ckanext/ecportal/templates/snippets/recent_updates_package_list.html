@@ -11,7 +11,10 @@
       <a href="${h.url_for(controller='package', action='read', id=package.get('name'))}" class="item_link">
         <i class="resource"></i>
         <strong>${package.get('title') or package.get('name')}</strong><br />
-        <span class="additional">${_('was updated on')} ${h.render_datetime(package['metadata_modified'], '%d/%m/%y')}.</span>
+        <span class="additional">${_('was updated on')}
+          <span py:if="package.get('modified_date')">${h.render_datetime(h.ecportal_date_to_iso(package['modified_date'].strip('"')), '%d/%m/%y')}</span>
+          <span py:if="not package.get('modified_date')">${h.render_datetime(package['metadata_modified'], '%d/%m/%y')}.</span>
+        </span>
       </a>
     </li>
   </ul>

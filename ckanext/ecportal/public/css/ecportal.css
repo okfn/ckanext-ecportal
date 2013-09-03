@@ -108,6 +108,11 @@ h2 a:hover{
   margin: 0px 0 0 -23px;
 }
 
+.resource-actions {
+  clear: both;
+  overflow: hidden;
+}
+
 
 h2 a:hover .resource, a.item_link:hover .resource {
   background: url("../images/icons.png") -17px -17px no-repeat;
@@ -241,6 +246,10 @@ ul.menu li {
 
 .header .logo img{
   margin-top:-4px;
+}
+
+.header #logo-root img{
+  margin-top: 0;
 }
 
 #header-title{
@@ -1205,7 +1214,7 @@ h3,
 h4,
 h2 a,
 .page_heading small {
-  font-family: "Lucida Grande", Tahoma, Verdana, Arial, sans-serif;
+  font-family: "Lucida Sans Unicode", "Lucida Grande", Tahoma, Verdana, Arial, sans-serif;
   line-height: 1.5;
 }
 h1,
@@ -1229,7 +1238,8 @@ h2 a i {
 }
 /* Page heading stuff */
 .pre_page_heading,
-.page_heading {
+.page_heading,
+.content_heading {
   color: #505d8c;
   font-size: 21px;
   font-weight: bold;
@@ -1279,6 +1289,10 @@ h2 a i {
   border-bottom-width: 0;
   color: #4B5583;
 }
+.sidebar-section h3 {
+  font-size: 15px;
+  margin-bottom: 5px;
+}
 .sidebar-section .tags {
   margin: 0;
   padding: 0;
@@ -1288,35 +1302,42 @@ h2 a i {
 h2 { margin-bottom: 15px; }
 h3 { margin-bottom: 10px; }
 /* Fix for seeing search facets */
-.filter-list {
-  margin-bottom: 10px;
-  padding: 3px 5px;
-  background-color: #F1F5F8;
-  line-height: 20px;
+.filter-box {
+  border: 6px solid #EEE;
+  padding: 15px;
+  margin: 20px 0;
+}
+.filter-box h4 {
+  float: left;
+  font-weight: normal;
+  text-align: right;
+  color: #777;
+  font-size: 12px;
+  line-height: 32px;
+}
+.filter-box .filter-total {
+  line-height: 32px;
+  float: right;
 }
 .filter-entry {
   display: block;
   margin-right: 10px;
+  margin-bottom: 5px;
   font-style: italic;
 }
 .filter-entry .name {
   font-style: normal;
-  font-family: Georgia;
   font-weight: bold;
-  color: #999;
-  font-size: 14px;
-  line-height: 20px;
+  color: #666;
 }
 .filter-entry strong {
-  color: #b94a48;
   font-style: normal;
-  font-size: 18px;
-  line-height: 20px;
-  vertical-align: -2px;
+  font-size: 10px;
 }
 .filter-entry .value,
-.filter-entry a, .filter-entry a:visited {
-  color: #666;
+.filter-entry a,
+.filter-entry a:visited {
+  color: #4C79D2;
 }
 .filter-entry a:hover {
   color: #b94a48;
@@ -1330,6 +1351,22 @@ h3 { margin-bottom: 10px; }
 }
 .filter-entry a {
  padding: 2px 0; 
+}
+.filter-sort {
+  color: #888;
+  line-height: 32px;
+}
+.filter-sort select {
+  margin: 0 0 0 5px;
+  vertical-align: 1px;
+}
+.ie7 .filter-box h4 {
+  float: none;
+  display: inline;
+}
+.ie7 .filter-box .filter-total .rss {
+  float: none;
+  display: inline-block;
 }
 /* Removes margin bottom from search inputs */
 input.search {
@@ -1451,11 +1488,9 @@ input.search {
 
 
 /* In page searcher */
-.page-search {
+.page-search form {
   position: relative;
   padding: 20px 0 0 0;
-}
-.page-search form {
   margin-bottom: 0;
 }
 .page-search input[type="text"] {
@@ -1642,7 +1677,13 @@ h2 {
 }
 
 .ie7 #dataset-search {
-  right: 352px;
+  top: 36px;
+  right: 353px;
+}
+
+.ie8 #dataset-search {
+  right: 349px;
+  top: 36px;
 }
 
 .menu {
@@ -1707,3 +1748,246 @@ label.inline input {
   display: inline;
   margin-top: -1px;
 }
+
+.table-box {
+  border: 1px solid #DDD;
+}
+.table-box h3 {
+  background-color: #F5F5F5;
+  border-bottom: 1px solid #DDD;
+  padding: 10px 20px;
+  margin-bottom: 0;
+}
+.table-box .inner {
+  padding: 10px 20px 5px 20px;
+}
+.table-box .resource-list li {
+  clear: both;
+  overflow: hidden;
+  padding-bottom: 5px;
+}
+
+/* New simple boxed style buttons */
+a.button-box {
+  display: block;
+  float: left;
+  margin-right: 20px;
+  min-width: 80px;
+  font-size: 11px;
+  text-transform: uppercase;
+  font-style: normal;
+  color: #3366CC;
+  border: 1px solid #BBB;
+  padding: 2px 4px 2px 3px;
+  line-height: 1;
+  white-space: nowrap;
+  border-radius: 3px;
+}
+a.button-box:hover {
+  background-color: #5599FF;
+  border-color: #5599FF;
+  color: #FFFFFF !important;
+  text-decoration: none;
+}
+a.button-box .icon {
+  display: block;
+  float: left;
+  margin: 1px 3px 0 1px;
+  width: 10px;
+  height: 10px;
+  background-image: url(../images/resource-icons.png);
+}
+
+.button-box .icon.download {
+  background-position: 0 0;
+}
+.button-box:hover .icon.download {
+  background-position: -10px 0;
+}
+.button-box .icon.graph {
+  background-position: 0 -10px;
+}
+.button-box:hover .icon.graph {
+  background-position: -10px -10px;
+}
+.button-box .icon.visit {
+  background-position: 0 -20px;
+}
+.button-box:hover .icon.visit {
+  background-position: -10px -20px;
+}
+
+.table-box .resource-list a.name {
+  font-style: normal;
+  font-size: 13px;
+  color: #444;
+}
+.table-box .resource-list a.name:hover {
+  color: #5599FF;
+  text-decoration: underline;
+}
+
+/* Resource tag */
+.resource-tag {
+  margin-left: 10px;
+  font-size: 10px;
+  text-transform: uppercase;
+  font-style: normal;
+  color: #999;
+  border: 1px solid #BBB;
+  padding: 1px 4px;
+  line-height: 1;
+  border-radius: 3px;
+}
+a.item_link .resources {
+  display: block;
+  margin-top: 5px;
+}
+a.item_link .resources .resource-tag {
+  margin-left: 0;
+  margin-right: 5px;
+  font-weight: bold;
+}
+a.item_link:hover .resources .resource-tag {
+  color: #999 !important;
+}
+
+/* Contact box on dataset page */
+#dataset-contact {
+  border: 1px solid #DDD;
+  background-color: #FAFAFA;
+  padding: 10px 20px;
+  color: #888;
+}
+#dataset-contact h2 {
+  font-family: "Lucida Sans Unicode", "Lucida Grande", Tahoma, Verdana, Arial, sans-serif;
+  font-style: italic;
+  font-weight: normal;
+  color: #444;
+  border-bottom-width: 0;
+  margin: 0 0 10px 0;
+  padding: 0;
+  font-size: 12px;
+}
+#dataset-contact h3 {
+  font-size: 13px;
+  padding: 0;
+  margin-bottom: 10px;
+}
+#dataset-contact p {
+  margin: 0 0 5px 0;
+}
+
+/* Homepage boxes (wrapper) */
+.has-two-boxes {
+  margin-bottom: 20px;
+  background: transparent url(../images/homepage-boxes.png) 20px 100% no-repeat;
+}
+.has-one-box {
+  margin-bottom: 20px;
+  background: transparent url(../images/homepage-box.png) 20px 100% no-repeat;
+}
+
+/* Homepage boxes */
+.box h2 {
+  background-color: #F5F5F5;
+  border: 1px solid #BBB;
+  padding: 10px 10px 8px 20px;
+}
+.box .inner {
+  padding: 0 20px 10px 20px;
+}
+
+.block-box {
+  background-color: white;
+}
+
+.search-results .page_heading {
+  font-size: 16px;
+}
+.search-results .page_heading .search-term {
+  color: #555;
+  font-size: 14px;
+  font-family: "Lucida Sans Unicode", "Lucida Grande", Tahoma, Verdana, Arial, sans-serif;
+}
+.empty-search .page_heading {
+  display: none;
+}
+
+/* Maintenance message */
+.message {
+  font-size: 14px;
+  text-align: center;
+  position:relative;
+  margin: 20px 0 0 0;
+}
+.message .green {
+  background: #45ff30;
+  background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iIzQ1ZmYzMCIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiMwMGFhMDAiIHN0b3Atb3BhY2l0eT0iMSIvPgogIDwvbGluZWFyR3JhZGllbnQ+CiAgPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+);
+  background: -moz-linear-gradient(top,  #45ff30 0%, #00aa00 100%);
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#45ff30), color-stop(100%,#00aa00));
+  background: -webkit-linear-gradient(top,  #45ff30 0%,#00aa00 100%);
+  background: -o-linear-gradient(top,  #45ff30 0%,#00aa00 100%);
+  background: -ms-linear-gradient(top,  #45ff30 0%,#00aa00 100%);
+  background: linear-gradient(to bottom,  #45ff30 0%,#00aa00 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#45ff30', endColorstr='#00aa00',GradientType=0 );
+  color:#fff;
+  display: inline-block;
+  zoom: 1;
+  *display: inline;
+  padding:5px 20px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+}
+.message .red {
+  background: #ff3030;
+  background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2ZmMzAzMCIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiNhYTAwMDAiIHN0b3Atb3BhY2l0eT0iMSIvPgogIDwvbGluZWFyR3JhZGllbnQ+CiAgPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+);
+  background: -moz-linear-gradient(top,  #ff3030 0%, #aa0000 100%);
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ff3030), color-stop(100%,#aa0000));
+  background: -webkit-linear-gradient(top,  #ff3030 0%,#aa0000 100%);
+  background: -o-linear-gradient(top,  #ff3030 0%,#aa0000 100%);
+  background: -ms-linear-gradient(top,  #ff3030 0%,#aa0000 100%);
+  background: linear-gradient(to bottom,  #ff3030 0%,#aa0000 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ff3030', endColorstr='#aa0000',GradientType=0 );
+  color:#fff;
+  display: inline-block;
+  zoom: 1;
+  *display: inline;
+  padding:5px 20px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+}
+
+/* Welcome message for the homepage */
+.intro-welcome {
+  padding: 10px 10px 5px 10px;
+  background-color: #EEE;
+  border: 1px solid #C7C7C7;
+  margin-bottom: 15px;
+}
+.intro-welcome .page_heading {
+  font-size: 16px;
+  padding-top: 0;
+  margin-bottom: 10px;
+}
+
+/* Homepage tag cloud */
+.home div.jqcloud {
+  font-family: "Lucida Sans Unicode", "Lucida Grande", Tahoma, Verdana, Arial, sans-serif;
+}
+.home div.jqcloud span {
+  color: #0099CC !important;
+}
+.home div.jqcloud span:hover {
+  text-decoration: underline;
+}
+
+.nav-pills > li > a {
+  background-color: #EEE;
+}
+.nav-pills > li > a:hover {
+  background-color: #DDD;
+}
+

@@ -1,4 +1,5 @@
 import logging
+import json
 import sqlalchemy.exc
 import pylons.config
 import pylons
@@ -130,13 +131,17 @@ class ECPortalPlugin(p.SingletonPlugin):
     p.implements(p.IActions)
     p.implements(p.IAuthFunctions)
     p.implements(p.IPackageController, inherit=True)
+    p.implements(p.ITemplateHelpers)
 
     def get_auth_functions(self):
         return {
             'package_update': ecportal_auth.package_update,
             'show_package_edit_button': ecportal_auth.show_package_edit_button,
+            'package_search_private_datasets':
+            ecportal_auth.package_search_private_datasets,
             'group_create': ecportal_auth.group_create,
             'user_create': ecportal_auth.user_create,
+            'purge_publisher_datasets': ecportal_auth.purge_publisher_datasets,
             'purge_revision_history': ecportal_auth.purge_revision_history,
             'purge_package_extra_revision':
             ecportal_auth.purge_revision_history,
@@ -148,13 +153,17 @@ class ECPortalPlugin(p.SingletonPlugin):
             'group_list': ecportal_logic.group_list,
             'group_update': ecportal_logic.group_update,
             'group_show': ecportal_logic.group_show,
+            'purge_publisher_datasets':
+            ecportal_logic.purge_publisher_datasets,
             'purge_revision_history': ecportal_logic.purge_revision_history,
             'purge_package_extra_revision':
             ecportal_logic.purge_package_extra_revision,
             'purge_task_data': ecportal_logic.purge_task_data,
             'user_create': ecportal_logic.user_create,
             'user_update': ecportal_logic.user_update,
-            'package_show': ecportal_logic.package_show
+            'package_show': ecportal_logic.package_show,
+            'package_search': ecportal_logic.package_search,
+            'resource_show': ecportal_logic.resource_show
         }
 
     def update_config(self, config):
@@ -170,14 +179,14 @@ class ECPortalPlugin(p.SingletonPlugin):
         map.redirect('/user/reset', '/not_found')
         map.redirect('/user/register', '/not_found')
 
+        # map dashboard to profile page
+        with routing.SubMapper(map, controller='user') as m:
+            m.connect('/user/dashboard', action='read')
+
         # disable dataset history page
         map.redirect('/dataset/history/{url:.*}', '/not_found')
         map.redirect('/dataset/history_ajax/{url:.*}', '/not_found')
 
-        # home map
-        home_controller = 'ckanext.ecportal.controllers:ECPortalHomeController'
-        with routing.SubMapper(map, controller=home_controller) as m:
-            m.connect('home', '/', action='index')
         # search cloud map
         searchcloud_controller = \
             'ckanext.ecportal.controllers:ECPortalSearchCloudAdminController'
@@ -203,7 +212,7 @@ class ECPortalPlugin(p.SingletonPlugin):
             return search_params
         lang = str(helpers.current_locale())
         try:
-            # Unfortunately a nested sessin doesn't behave the way we want,
+            # Unfortunately a nested session doesn't behave the way we want,
             # failing to actually commit the change made.
             # We can either create a separate connection for this
             # functionality on each request (potentially costly),
@@ -236,6 +245,7 @@ class ECPortalPlugin(p.SingletonPlugin):
                 ' and committed successfully',
                 search_string
             )
+
         return search_params
 
     def before_index(self, pkg_dict):
@@ -246,4 +256,96 @@ class ECPortalPlugin(p.SingletonPlugin):
         pkg_dict['title_sort'] = (unicode_sort.strip_accents(title) +
                                   '   '
                                   + title).translate(UNICODE_SORT)
+
+        # set 'metadata_modified' field to value of metadata_modified if
+        # not present (this field is used to sort datasets according to
+        # their last update date).
+        if not 'modified_date' in pkg_dict:
+            pkg_dict['modified_date'] = pkg_dict['metadata_modified']
+        else:
+            # modify dates (SOLR is quite picky with dates, and only accepts
+            # ISO dates with UTC time (i.e trailing Z)
+            pkg_dict['modified_date'] = helpers.ecportal_date_to_iso(
+                pkg_dict['modified_date']) + 'Z'
+
+        def change_format(format):
+            if format in helpers.resource_mapping():
+                format = helpers.resource_mapping()[format][1]
+            return format
+
+        pkg_dict['res_format'] = [change_format(format) for format in
+                                  pkg_dict.get('res_format', [])]
+
         return pkg_dict
+
+    def get_helpers(self):
+        return {'current_url': helpers.current_url,
+                'current_locale': helpers.current_locale,
+                'root_url': helpers.root_url,
+                'format_description': helpers.format_description,
+                'recent_updates': helpers.recent_updates,
+                'top_publishers': helpers.top_publishers,
+                'current_date': helpers.current_date,
+                'group_facets_by_field': helpers.group_facets_by_field,
+                'catalog_url': helpers.catalog_url,
+                'groups_available': helpers.groups_available,
+                'ecportal_date_to_iso': helpers.ecportal_date_to_iso,
+                'most_viewed_datasets': helpers.most_viewed_datasets,
+                'approved_search_terms': helpers.approved_search_terms,
+                'resource_display_name': helpers.resource_display_name,
+                'resource_display_format': helpers.resource_display_format,
+                'resource_dropdown': helpers.resource_dropdown,
+                'format_display_name': helpers.format_display_name,
+                'dataset_resource_formats': helpers.dataset_resource_formats}
+
+
+class ECPortalHomepagePlugin(p.SingletonPlugin):
+    p.implements(p.IConfigurable)
+    p.implements(p.ITemplateHelpers)
+
+    home_content = None
+    maintenance = None
+
+    def _read_json_file(self, file_path):
+        try:
+            with open(file_path, 'r') as f:
+                return json.loads(f.read())
+        except IOError, e:
+            log.error('Cannot open homepage content JSON file {0}'.format(
+                file_path))
+            log.error(e)
+        except ValueError, e:
+            log.error('Cannot load homepage content JSON file {0}'.format(
+                file_path))
+            log.error(e)
+
+    def configure(self, config):
+        content_path = config.get('ckan.home.content')
+        if content_path:
+            log.info('Reading homepage content from {0}'.format(content_path))
+            self.home_content = self._read_json_file(content_path)
+
+        maintenance_path = config.get('ckan.home.maintenance')
+        if maintenance_path:
+            log.info('Reading maintenance message from {0}'.format(
+                maintenance_path))
+            self.maintenance = self._read_json_file(maintenance_path)
+
+    def get_helpers(self):
+        return {'homepage_content': self.homepage_content,
+                'maintenance_message': self.maintenance_message}
+
+    def homepage_content(self, language='en'):
+        if self.home_content:
+            title = (self.home_content.get('title', {}).get(language) or
+                     self.home_content.get('title', {}).get('en'))
+            body = (self.home_content.get('body', {}).get(language) or
+                    self.home_content.get('body', {}).get('en'))
+            return {'title': title, 'body': p.toolkit.literal(body)}
+
+    def maintenance_message(self, language='en'):
+        if self.maintenance:
+            message = (self.maintenance.get('message', {}).get(language) or
+                       self.maintenance.get('message', {}).get('en'))
+            maintenance_class = self.maintenance.get('class', 'red')
+            return {'message': message, 'class': maintenance_class}

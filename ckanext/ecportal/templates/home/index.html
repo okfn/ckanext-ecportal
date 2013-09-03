@@ -3,10 +3,19 @@
   xmlns:xi="http://www.w3.org/2001/XInclude"
   py:strip="">
 
+  <?python
+    maintenance_message = h.maintenance_message(str(h.current_locale()))
+    homepage_content = h.homepage_content(str(h.current_locale()))
+    approved_search_terms = h.approved_search_terms()
+  ?>
+
   <py:def function="body_class">no-sidebar</py:def>
   <py:def function="page_title">Data</py:def>
 
   <div py:match="//div[@id='search-header']" class="front-page">
+    <div class="message" py:if="maintenance_message">
+      <div class="${maintenance_message.get('class')}">${maintenance_message.get('message')}</div>
+    </div>
     <div class="region region-tabdesc">
       <div class="row bootstrap-row">
         <div class="span8">
@@ -34,16 +43,59 @@
   </div>
 
   <div py:match="//div[@id='wrapper']" class="front-page">
-    <div class="row bootstrap-row">
+    <div class="row bootstrap-row has-one-box">
+      <div class="span6" py:with="most_viewed_datasets = h.most_viewed_datasets()">
+        <div class="box" py:if="most_viewed_datasets">
+          <h2>
+            <a href="${h.url_for(controller='package', action='search', sort='views_total desc')}">
+              <i class="resource"></i>
+              ${_('view all')} &raquo;
+            </a>
+            ${_('Most viewed datasets')}
+          </h2>
+          <div class="inner">
+            ${h.snippet('snippets/most_viewed_datasets.html', datasets=most_viewed_datasets)}
+          </div>
+        </div>
+      </div>
       <div class="span6">
-        <div class="region-content">
+        <div py:if="homepage_content" class="intro-welcome">
+          <h2>${homepage_content.get('title')}</h2>
+          <div class="inner">
+            <div id="homepage-content-body">${homepage_content.get('body')}</div>
+          </div>
+        </div>
+        <div py:if="approved_search_terms" class="region-content block-box">
+          <h2>${_('Popular terms')}</h2>
+          <div id="searchcloud" style="width: 100%; height: 300px; border: 1px solid #fff;"></div>
+        </div>
+      </div>
+    </div>
+    <div class="row bootstrap-row has-two-boxes">
+      <div class="span6">
+        <div class="box">
+          <h2>
+            <a href="${h.url_for(controller='package', action='search', sort='modified_date desc')}">
+              <i class="resource"></i>
+              ${_('view all')} &raquo;
+            </a>
+            ${_('Recently updated datasets')}
+          </h2>
+          <div class="inner">
+          ${h.snippet('snippets/recent_updates_package_list.html', packages=h.recent_updates(10))}
+          </div>
+        </div>
+      </div>
+      <div class="span6">
+        <div class="box">
           <h2>
             <a href="${h.url_for(controller='group', action='index')}">
               <i class="publisher"></i>
-              ${_('view all publishers')} &raquo;
+              ${_('view all')} &raquo;
             </a>
             ${_('Top Publishers')}
           </h2>
+          <div class="inner">
           <py:for each="i, group_dict in enumerate(h.top_publishers(c.groups))">
             <a py:if="group_dict['packages']" href="${h.url_for(controller='group', action='read', id=group_dict['name'])}" class="item_link">
               <i class="publisher"></i>
@@ -51,37 +103,7 @@
               <span class="additional">(${group_dict['packages']} ${_('datasets')})</span>
             </a>
           </py:for>
-
-        </div>
-        <div py:if="c.json" class="region-content">
-
-          <h2>
-            ${_('Popular terms')}
-          </h2>
-
-          <div id="searchcloud" style="width: 100%; height: 300px; border: 1px solid #fff;"></div>
-        </div>
-      </div>
-      <div class="span6">
-        <div class="region-content">
-          <div py:if="c.most_viewed_datasets">
-          <h2>
-            <a href="${h.url_for(controller='package', action='search')}">
-              <i class="resource"></i>
-              ${_('view all datasets')} &raquo;
-            </a>
-            ${_('Most viewed datasets')}
-          </h2>
-          ${h.snippet('snippets/most_viewed_datasets.html', packages=c.most_viewed_datasets)}
           </div>
-          <h2>
-            <a href="${h.url_for(controller='package', action='search')}">
-              <i class="resource"></i>
-              ${_('view all datasets')} &raquo;
-            </a>
-            ${_('Recently updated datasets')}
-          </h2>
-          ${h.snippet('snippets/recent_updates_package_list.html', packages=h.recent_updates(10))}
         </div>
       </div>
     </div>
@@ -89,13 +111,13 @@
   </div>
 
   <py:def function="optional_head">
-    <link py:if="c.json" rel="stylesheet" href="${h.url_for_static('/css/vendor/jqcloud/1.0.4/jqcloud.css')}"/>
+    <link py:if="approved_search_terms" rel="stylesheet" href="${h.url_for_static('/css/vendor/jqcloud/1.0.4/jqcloud.css')}"/>
   </py:def>
 
   <py:def function="optional_footer">
-    <script py:if="c.json" type="text/javascript" src="${h.url_for_static('/scripts/vendor/jqcloud/1.0.4/jqcloud-1.0.4.min.js')}"></script>
-    <script py:if="c.json" type="text/javascript">
-      var word_array = ${c.json}
+    <script py:if="approved_search_terms" type="text/javascript" src="${h.url_for_static('/scripts/vendor/jqcloud/1.0.4/jqcloud-1.0.4.min.js')}"></script>
+    <script py:if="approved_search_terms" type="text/javascript">
+      var word_array = ${approved_search_terms}
       $(function() {
         $("#searchcloud").jQCloud(word_array, {removeOverflowing: false});
         $('#searchcloud').bind('click', function(event) {

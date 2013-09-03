@@ -32,18 +32,22 @@
 
   <py:match path="primarysidebar">
 
+    <li py:if="c.pkg_dict.get('license_id')" id="dataset-license" class="sidebar-section">
+      <h3>${_('Licence')}:</h3>
+        <?python
+          license_title = c.pkg_dict.get('license_title')
+          license_url = c.pkg_dict.get('license_url') if c.pkg_dict.get('license_url') else license_title if ( license_title.find('http://') >= 0 ) else False
+        ?>
+        <py:choose test="">
+          <span py:when="license_url == False" property="dc:rights">${c.pkg_dict.get('license_title')}</span>
+          <span py:otherwise=""><a
+              href="${license_url}" rel="dc:rights">${c.pkg_dict.get('license_title')}</a></span>
+        </py:choose>
+    </li>
+
     <li py:if="[tag for tag in c.pkg_dict.get('keywords', []) if not tag.get('vocabulary_id')]" class="sidebar-section">
       <h3>${_('Keywords')}</h3>
       ${tag_list(c.pkg_dict.get('keywords', ''))}
-    </li>
-
-    <li py:if="c.pkg_dict.get('license_id')" id="dataset-license" class="sidebar-section">
-      <strong>${_('Licence')}:</strong>
-        <py:choose test="">
-          <span py:when="c.pkg_dict.get('license_url')"><a
-              href="${c.pkg_dict.get('license_url')}" rel="dc:rights">${c.pkg_dict.get('license_title')}</a></span>
-          <span py:when="c.pkg_dict.get('license_id')" property="dc:rights">${c.pkg_dict.get('license_title')}</span>
-        </py:choose>
     </li>
 
     <li py:if="c.package_relationships" class="sidebar-section">
@@ -58,6 +62,22 @@
           </li>
         </py:for>
       </ul>
+    </li>
+
+    <li py:if="c.pkg_dict.get('metadata_created') or c.pkg_dict.get('metadata_modified')" class="sidebar-section">
+      <h3>${_('Catalogue  record')}</h3>
+      <ul class="unstyled" py:if="c.pkg_dict.get('metadata_created')">
+        <li>${_('Added to open-data.europa.eu')}</li>
+        <li><span>${h.render_datetime(c.pkg_dict['metadata_created'], '%Y-%m-%d')}</span></li>
+      </ul>
+      <ul class="unstyled" py:if="c.pkg_dict.get('metadata_modified')">
+        <li>${_('Updated on open-data.europa.eu')}</li>
+        <li><span>${h.render_datetime(c.pkg_dict['metadata_modified'], '%Y-%m-%d')}</span></li>
+      </ul>
+    </li>
+
+    <li>
+      ${h.snippet('snippets/suggest_box.html')}
     </li>
 
   </py:match>

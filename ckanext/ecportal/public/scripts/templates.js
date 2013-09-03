@@ -75,12 +75,24 @@ CKAN.Templates.resourceDetails = ' \
           &nbsp;&nbsp;<img class="js-resource-icon inline-icon resource-icon" src="${resource_icon}" /> </label>\
       <div class="controls"> \
         <select id="resources__${num}__format" name="resources__${num}__format" class="long js-resource-edit-format" placeholder="'+CKAN.Strings.resourceFormatPlaceholder+'"> \
-          {{if _.contains(_.map(formatTypeOptions, function(l){return l[0];}))}} \
-          {{else}} \
+          {{if extra_format}} \
             <option value="${resource.format}" selected="selected">${resource.format}</option> \
           {{/if}} \
           {{each formatTypeOptions}} \
             <option value="${$value[0]}" {{if $value[0]==resource.format}}selected="selected"{{/if}}>${$value[1]}</option> \
+          {{/each}} \
+        </select> \
+      </div> \
+    </div> \
+    <div class="control-group"> \
+      <label for="" class="control-label" property="rdfs:label">'+CKAN.Strings.mimetype+'</label> \
+      <div class="controls"> \
+        <select id="resources__${num}__mimetype" name="resources__${num}__mimetype" class="long js-resource-edit-format" placeholder="'+CKAN.Strings.mimetype+'"> \
+          {{if extra_mimetype}} \
+            <option value="${resource.mimetype}" selected="selected">${resource.mimetype}</option> \
+          {{/if}} \
+          {{each formatTypeOptions}} \
+            <option value="${$value[0]}" {{if $value[0]==resource.mimetype}}selected="selected"{{/if}}>${$value[1]}</option> \
           {{/each}} \
         </select> \
       </div> \
@@ -99,16 +111,6 @@ CKAN.Templates.resourceDetails = ' \
             {{/each}} \
           </select> \
         {{/if}} \
-      </div> \
-    </div> \
-    <div class="control-group datastore-enabled"> \
-      <label for="" class="control-label" property="rdfs:label">'+CKAN.Strings.datastoreEnabled+'</label> \
-      <div class="controls"> \
-        <label class="checkbox"> \
-          <input type="checkbox" class="js-datastore-enabled-checkbox" /> \
-          <input type="hidden" name="resources__${num}__webstore_url" value="${resource.webstore_url}" class="js-datastore-enabled-text" /> \
-          <span class="hint">'+shouldADataStoreBeEnabledString+'</span> \
-        </label> \
       </div> \
     </div> \
     <div class="control-group"> \
@@ -152,7 +154,6 @@ CKAN.Templates.resourceDetails = ' \
         <div class="dynamic-extras"> \
         </div> \
       </div> \
-    <input name="resources__${num}__mimetype" type="hidden" value="${resource.mimetype}" /> \
     <input name="resources__${num}__mimetype_inner" type="hidden" value="${resource.mimetype_inner}" /> \
     <button class="btn btn-danger resource-edit-delete js-resource-edit-delete">'+CKAN.Strings.deleteResource+'</button>\
   </div> \

@@ -5,17 +5,42 @@
 
   <xi:include href="../odp_facets.html" />
 
+  <?python
+    sort = request.params.get('sort') or 'score desc'
+    locale = str(h.current_locale())
+    sorting = [
+      ["score desc", _("Relevance"), ( sort == "score desc") ],
+      ["views_total desc", _("Most viewed"), ( sort == "views_total desc") ],
+      ["title_string_"+locale+" asc", _("Title (A-Z)"), ( sort == "title_string_"+locale+" asc") ],
+      ["title_string_"+locale+" desc", _("Title (Z-A)"), ( sort == "title_string_"+locale+" desc") ],
+      ["modified_date desc", _("Date updated"), ( sort == "modified_date desc") ],
+    ]
+  ?>
+
+  <py:def function="body_class">search-results <py:if test="not c.q">empty-search</py:if></py:def>
   <py:def function="page_title">${c.group_dict.display_name}</py:def>
+
   <py:def function="page_heading">
-    <div class="pull-right">
-      <small>(${c.page.item_count} ${_('datasets')})</small>
-      <a href="${h.url_for(controller='feed', action='group', id=c.group_dict.name)}?${c.search_url_params}"><i class="rss"></i></a>
-    </div>
-    ${c.group_dict.display_name}
+    Search: <span class="search-term">${c.q}</span>
   </py:def>
   <py:if test="c.group.image_url">
     <py:def function="page_logo">${c.group.image_url}</py:def>
   </py:if>
+
+  <py:def function="sortby_dropdown">
+    <select name="sort">
+      <py:for each="value, label, is_selected in sorting">
+        <py:choose test="is_selected">
+          <py:when test="True">
+            <option value="${value}" selected="selected">${label}</option>
+          </py:when>
+          <py:otherwise>
+            <option value="${value}">${label}</option>
+          </py:otherwise>
+        </py:choose>
+      </py:for>
+    </select>
+  </py:def>
 
   <py:def function="breadcrumbs_extra">
     <span class="seperator">&gt;</span>
@@ -27,12 +52,17 @@
   <py:def function="search_value"><py:if test="c.q">${c.q}</py:if></py:def>
 
   <div py:match="//div[@id='page-search']" class="page-search">
+    <h1 class="content_heading">${c.group_dict.display_name}</h1>
+    <div py:if="str(c.description_formatted).strip()">
+      ${c.description_formatted}
+    </div>
     <form>
-      <input type="text" name="q" value="${search_value()}" placeholder="${_('Search publisher...')}" />
+      <input type="text" name="q" value="${search_value()}" placeholder="${_('Search for datasets within ') + c.group_dict.display_name}" />
       <input type="submit" value="" />
       <p style="padding-left: 10px; margin-top: 5px;">
         ${h.snippet('snippets/boolean_search_choice.html')}
       </p>
+      <input type="hidden" name="sort" value="${sort}" />
     </form>
   </div>
 
@@ -44,11 +74,21 @@
 
   <py:match path="content">
     <h3 py:if="c.group['state'] != 'active'">${_('State')}: ${c.group['state']}</h3>
-    <div py:if="str(c.description_formatted).strip()">
-      ${c.description_formatted}
+    <div class="filter-box">
+      ${field_list()}
+
+      <div class="filter-total">
+        <h4 i18n:msg="item_count"><strong>${c.page.item_count}</strong> datasets found</h4>
+        <a href="${h.url(controller='feed', action='custom')}?${c.search_url_params}"><i class="rss"></i></a>
+      </div>
+
+      <div class="filter-sort">
+        ${_('Sort by:')}
+        ${sortby_dropdown()}
+      </div>
+
     </div>
     <div class="group-dataset-list">
-      ${field_list()}
       ${package_list_from_dict(c.page.items)}
       ${c.page.pager()}
     </div>

@@ -282,10 +282,10 @@ def update_rdf(key, data, errors, context):
     '''
     rdf = data.get(key, '')
     name = data.get((u'name',), '')
-    if (not rdf) or ('package' in context):
+    if not rdf:
         return
 
-    origin_url, xml = rdfutil.update_rdf(rdf, name)
+    origin_url, xml = rdfutil.update_rdf(rdf, name, context)
     data[key] = xml
 
     if origin_url:
@@ -366,6 +366,9 @@ def map_licenses(val, context):
     maps to
     http://www.opendefinition.org/licenses/cc-by-sa
     '''
+    if not val:
+        # val could be an empty list, which throws an error in re.match
+        return val
     if re.match(_cc_by_re, val):
         return 'http://www.opendefinition.org/licenses/cc-by'
     if re.match(_cc_by_sa_re, val):
