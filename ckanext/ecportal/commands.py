@@ -297,7 +297,13 @@ class ECPortalCommand(cli.CkanCommand):
             replace(value,
                     'http://ec.europa.eu/open-data',
                     'http://open-data.europa.eu')
-        where key <> 'rdf' and value like '%http://ec.europa.eu/open-data%';
+        where value like '%http://ec.europa.eu/open-data%';
+
+        update package_extra_revision set value =
+            replace(value,
+                    'http://ec.europa.eu/open-data',
+                    'http://open-data.europa.eu')
+        where value like '%http://ec.europa.eu/open-data%';
 
         update package set license_id =
             replace(license_id,
