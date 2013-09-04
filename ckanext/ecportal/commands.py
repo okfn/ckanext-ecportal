@@ -71,8 +71,6 @@ class ECPortalCommand(cli.CkanCommand):
     default_file = {
         forms.DATASET_TYPE_VOCAB_NAME:
         default_data_dir + '/../../data/odp-dataset-type.json',
-        forms.DATASET_TYPE_VOCAB_NAME:
-        default_data_dir + '/../../data/odp-dataset-type.json',
         forms.GEO_VOCAB_NAME:
         default_data_dir + '/../../data/po-countries.json',
         forms.INTEROP_VOCAB_NAME:
