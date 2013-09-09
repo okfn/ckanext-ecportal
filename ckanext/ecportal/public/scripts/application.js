@@ -491,7 +491,7 @@ CKAN.View.Resource = Backbone.View.extend({
           ['http://www.w3.org/TR/vocab-dcat#Feed', CKAN.Strings.distributionFeed],
           ['http://www.w3.org/TR/vocab-dcat#WebService', CKAN.Strings.distributionWebService],
           ['http://www.w3.org/TR/vocab-dcat#Download', CKAN.Strings.distributionDownload],
-          ['Visualization', CKAN.Strings.visualization]
+          ['http://open-data.europa.eu/kos/documentation-type/Visualization', CKAN.Strings.visualization]
         ],
         formatTypeOptions: resource_dropdown};
 

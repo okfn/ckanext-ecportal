@@ -7,7 +7,7 @@
 
   <?python
     viz_resources = [r for r in c.pkg_dict.get('resources', [])
-                     if r.get('resource_type') == 'Visualization']
+                     if r.get('resource_type') == 'http://open-data.europa.eu/kos/documentation-type/Visualization']
     non_viz_resources = [r for r in c.pkg_dict.get('resources', [])
                          if not r in viz_resources]
   ?>

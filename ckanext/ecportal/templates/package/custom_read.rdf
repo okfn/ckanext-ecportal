@@ -113,12 +113,7 @@
         <py:when test="0">
               <ecodp:isDocumentedBy rdf:parseType="Resource">
                     <ecodp:documentationType>
-                    <py:if test="rsc_dict.get('resource_type', '') == 'Visualization'">
-                       <skos:Concept rdf:about="http://open-data.europa.eu/kos/documentation-type/Visualization"/>
-                    </py:if>
-                    <py:if test="rsc_dict.get('resource_type', '') != 'Visualization'">
-                       <skos:Concept rdf:about="${rsc_dict.get('resource_type', '')}"/>
-                    </py:if>
+                    <skos:Concept rdf:about="${rsc_dict.get('resource_type', '')}"/>
                     </ecodp:documentationType>
                     <dcat:accessURL rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">${rsc_dict.get('url', '')}</dcat:accessURL>
                     <dct:title xml:lang="en">${rsc_dict.get('description', '')}</dct:title>

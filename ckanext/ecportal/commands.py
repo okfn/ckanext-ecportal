@@ -293,6 +293,14 @@ class ECPortalCommand(cli.CkanCommand):
                     'http://open-data.europa.eu')
         where resource_type like '%http://ec.europa.eu/open-data%';
 
+        update resource set resource_type = 
+               'http://open-data.europa.eu/kos/documentation-type/Visualization' 
+        where resource_type = 'Visualization';
+
+        update resource_revision set resource_type = 
+               'http://open-data.europa.eu/kos/documentation-type/Visualization' 
+        where resource_type = 'Visualization';
+
         update package_extra set value =
             replace(value,
                     'http://ec.europa.eu/open-data',
