@@ -1,7 +1,7 @@
-# Hungarian translations for ckan.
+# Translations template for ckan.
 # Copyright (C) 2013 ORGANIZATION
 # This file is distributed under the same license as the ckan project.
-#
+# 
 # Translators:
 # odptranslator <ecodptranslators@gmail.com>, 2013
 # odptranslatorHU <DGT-WEB-HU@ec.europa.eu>, 2013
@@ -9,16 +9,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: CKAN EU ODP \n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2013-05-23 15:38+0000\n"
-"PO-Revision-Date: 2013-07-10 09:15+0000\n"
-"Last-Translator: odptranslatorHU <DGT-WEB-HU@ec.europa.eu>\n"
-"Language-Team: Hungarian (http://www.transifex.com/projects/p/ckan-eu-"
-"odp/language/hu/)\n"
-"Plural-Forms: nplurals=2; plural=(n != 1)\n"
+"POT-Creation-Date: 2013-08-22 12:45+0200\n"
+"PO-Revision-Date: 2013-09-05 15:02+0000\n"
+"Last-Translator: odptranslator <ecodptranslators@gmail.com>\n"
+"Language-Team: Hungarian (http://www.transifex.com/projects/p/ckan-eu-odp/language/hu/)\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=utf-8\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 0.9.6\n"
+"Language: hu\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: ckan/templates/error_document_template.html:5
 msgid "Error"
@@ -28,7 +28,7 @@ msgstr "Hiba"
 msgid "- Datasets - History"
 msgstr "Adatkészletek - Előzmények"
 
-#: ckan/templates/package/resource_embedded_dataviewer.html:78
+#: ckan/templates/package/resource_embedded_dataviewer.html:87
 msgid "- Dataset - Resource"
 msgstr "- Adatkészlet - Adatforrás"
 
@@ -39,7 +39,7 @@ msgstr "Keresés..."
 
 #: ckan/templates/package/search_form.html:10 ckan/templates/tag/index.html:13
 #: ../ckanext-ecportal/ckanext/ecportal/templates/layout_base.html:61
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/search.html:17
+#: ../ckanext-ecportal/ckanext/ecportal/templates/package/search.html:28
 #: ../ckanext-ecportal/ckanext/ecportal/templates/package/search_form.html:10
 msgid "Search"
 msgstr "Keresés"
@@ -84,20 +84,20 @@ msgstr "%(count)s adatkészlet tartalmazza a(z) [1:%(tagname)s] kifejezést:"
 
 #: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:16
 msgid "Data Portal"
-msgstr ""
+msgstr "Adatportál"
 
 #: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:17
 #: ../ckanext-ecportal/ckanext/ecportal/templates/layout_base.html:90
 msgid "Open Data Portal"
-msgstr "Nyílt hozzáférésű adatok európai uniós portálja"
+msgstr "A nyílt hozzáférésű adatok európai uniós portálja"
 
 #: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:18
 msgid "European Union Open Data Portal"
 msgstr "A nyílt hozzáférésű adatok európai uniós portálja"
 
 #: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:22
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read.html:35
-#: ../ckanext-ecportal/ckanext/ecportal/templates/publisher/read.html:68
+#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read.html:45
+#: ../ckanext-ecportal/ckanext/ecportal/templates/publisher/read.html:71
 msgid "Keywords"
 msgstr "Kulcsszavak"
 
@@ -107,19 +107,19 @@ msgstr "Adatforrás-formátumok"
 
 #: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:24
 #: ../ckanext-ecportal/ckanext/ecportal/templates/package/read.html:23
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read_core.html:16
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/resource_read.html:92
-#: ../ckanext-ecportal/ckanext/ecportal/templates/publisher/read.html:22
+#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read_core.html:23
+#: ../ckanext-ecportal/ckanext/ecportal/templates/package/resource_read.html:29
+#: ../ckanext-ecportal/ckanext/ecportal/templates/publisher/read.html:47
 msgid "Publisher"
 msgstr "Adatközlő intézmény vagy szerv"
 
 #: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:25
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read_core.html:125
+#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read_core.html:167
 msgid "Language"
 msgstr "Nyelv"
 
 #: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:26
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read_core.html:120
+#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read_core.html:162
 msgid "Geographical Coverage"
 msgstr "Földrajzi lefedettség"
 
@@ -165,75 +165,7 @@ msgstr "Az adatkészlet nem található"
 msgid "Tag not found"
 msgstr "Címke nem található"
 
-#: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:44
-msgid "URI"
-msgstr "URI"
-
-#: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:45
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read_core.html:90
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/resource_read.html:181
-msgid "Release Date"
-msgstr "Közzététel dátuma"
-
-#: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:46
-msgid "Added to open-data.europa.eu"
-msgstr "Az adatkészlet felvétele megtörtént"
-
-#: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:47
-msgid "Updated on open-data.europa.eu"
-msgstr "Az adatkészlet frissítése megtörtént"
-
-#: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:48
-msgid "Popular terms"
-msgstr "Népszerű kifejezések"
-
-#: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:49
-msgid "Most viewed datasets"
-msgstr "A legtöbbször megjelenített adatkészletek"
-
-#: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:50
-msgid "Recently updated datasets"
-msgstr "Újabban frissített adatkészletek"
-
-#: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:51
-msgid "Recent updates"
-msgstr "Legújabb frissítések"
-
-#: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:52
-msgid "Show results with"
-msgstr "Azoknak a találatoknak a megjelenítése, amelyek tartalmazzák"
-
-#: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:53
-msgid "all of these words"
-msgstr "az összes szót"
-
-#: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:54
-msgid "any of these words"
-msgstr "néhányat a szavak közül"
-
-#: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:55
-msgid "the exact phrase"
-msgstr "a pontos kifejezést"
-
-#: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:56
-msgid "views"
-msgstr "Megjelenítés"
-
-#: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:57
-msgid "Suggest a dataset"
-msgstr "Adatkészlet ajánlása"
-
-#: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:58
-msgid "Is there a dataset from the EU that you could not find in this portal?"
-msgstr ""
-"Tudomása van Önnek olyan EU-vonatkozású adatkészletről, amely nem "
-"található a portálon?"
-
-#: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:59
-msgid "Please request the dataset"
-msgstr "Kérje az adatkészlet felvételét"
-
-#: ../ckanext-ecportal/ckanext/ecportal/helpers.py:43
+#: ../ckanext-ecportal/ckanext/ecportal/helpers.py:93
 msgid "Cannot render package description"
 msgstr "A csomag leírása nem elérhető"
 
@@ -244,12 +176,13 @@ msgstr "Jogi nyilatkozat"
 
 #: ../ckanext-ecportal/ckanext/ecportal/templates/layout_base.html:60
 #: ../ckanext-ecportal/ckanext/ecportal/templates/layout_base.html:161
+#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read_core.html:197
 msgid "Contact"
 msgstr "Kapcsolat"
 
 #: ../ckanext-ecportal/ckanext/ecportal/templates/layout_base.html:66
 msgid "Menu Arrow"
-msgstr ""
+msgstr "Menu Arrow"
 
 #: ../ckanext-ecportal/ckanext/ecportal/templates/layout_base.html:80
 #: ../ckanext-ecportal/ckanext/ecportal/templates/layout_base.html:81
@@ -257,35 +190,29 @@ msgid "europa.eu"
 msgstr "europa.eu"
 
 #: ../ckanext-ecportal/ckanext/ecportal/templates/layout_base.html:90
-msgid "Europa"
-msgstr "Europa"
+msgid "EUROPA"
+msgstr "EUROPA"
 
 #: ../ckanext-ecportal/ckanext/ecportal/templates/layout_base.html:90
-#: ../ckanext-ecportal/ckanext/ecportal/templates/layout_base.html:97
-#: ../ckanext-ecportal/ckanext/ecportal/templates/home/index.html:7
+#: ../ckanext-ecportal/ckanext/ecportal/templates/layout_base.html:96
+#: ../ckanext-ecportal/ckanext/ecportal/templates/home/index.html:13
 msgid "Data"
 msgstr "Adatok"
 
-#: ../ckanext-ecportal/ckanext/ecportal/templates/layout_base.html:96
-msgid "Home"
-msgstr "Főoldal"
-
-#: ../ckanext-ecportal/ckanext/ecportal/templates/layout_base.html:98
+#: ../ckanext-ecportal/ckanext/ecportal/templates/layout_base.html:97
 msgid "Applications"
 msgstr "Alkalmazások"
 
-#: ../ckanext-ecportal/ckanext/ecportal/templates/layout_base.html:99
+#: ../ckanext-ecportal/ckanext/ecportal/templates/layout_base.html:98
 msgid "Linked Data"
 msgstr "Kapcsolt adatok"
 
-#: ../ckanext-ecportal/ckanext/ecportal/templates/layout_base.html:100
+#: ../ckanext-ecportal/ckanext/ecportal/templates/layout_base.html:99
 msgid "About"
 msgstr "Az adatközpontról"
 
+#: ../ckanext-ecportal/ckanext/ecportal/templates/layout_base.html:103
 #: ../ckanext-ecportal/ckanext/ecportal/templates/layout_base.html:104
-msgid "Add dataset"
-msgstr "Adatkészlet felvétele"
-
 #: ../ckanext-ecportal/ckanext/ecportal/templates/layout_base.html:105
 msgid "Logout"
 msgstr "Kijelentkezés"
@@ -296,7 +223,7 @@ msgstr "Az adatszolgáltató felülete"
 
 #: ../ckanext-ecportal/ckanext/ecportal/templates/layout_base.html:138
 msgid "Master content template placeholder … please replace me."
-msgstr ""
+msgstr "Master content template placeholder … please replace me."
 
 #: ../ckanext-ecportal/ckanext/ecportal/templates/layout_base.html:158
 msgid "Last update"
@@ -310,289 +237,319 @@ msgstr "A webhelyről"
 msgid "Top"
 msgstr "Az oldal tetejére"
 
-#: ../ckanext-ecportal/ckanext/ecportal/templates/home/index.html:14
+#: ../ckanext-ecportal/ckanext/ecportal/templates/home/index.html:12
+#: ../ckanext-ecportal/ckanext/ecportal/templates/publisher/index.html:8
+#: ../ckanext-ecportal/ckanext/ecportal/templates/home/index.html:25
 msgid "This field is required."
 msgstr " Ennek a mezőnek a kitöltése kötelező"
 
-#: ../ckanext-ecportal/ckanext/ecportal/templates/home/index.html:16
+#: ../ckanext-ecportal/ckanext/ecportal/templates/home/index.html:27
 msgid "Find datasets..."
 msgstr "Keresés az adatkészletek között"
 
-#: ../ckanext-ecportal/ckanext/ecportal/templates/home/index.html:19
+#: ../ckanext-ecportal/ckanext/ecportal/templates/home/index.html:33
 msgid "contains"
 msgstr "tartalmaz"
 
-#: ../ckanext-ecportal/ckanext/ecportal/templates/home/index.html:20
-#: ../ckanext-ecportal/ckanext/ecportal/templates/home/index.html:41
+#: ../ckanext-ecportal/ckanext/ecportal/templates/home/index.html:34
+#: ../ckanext-ecportal/ckanext/ecportal/templates/home/index.html:103
 #: ../ckanext-ecportal/ckanext/ecportal/templates/publisher/index.html:16
-#: ../ckanext-ecportal/ckanext/ecportal/templates/publisher/read.html:11
 msgid "datasets"
 msgstr "adatkészletet"
 
-#: ../ckanext-ecportal/ckanext/ecportal/templates/home/index.html:20
-msgid "that you can browse, learn about and download."
-msgstr ""
-"A portálon Ön tetszés szerint böngészhet az adatok között, illetve "
-"megtekintheti és letöltheti azokat."
-
-#: ../ckanext-ecportal/ckanext/ecportal/templates/home/index.html:31
-msgid "Top Publishers"
-msgstr "Fő adatközlő intézmények és szervek"
-
 #: ../ckanext-ecportal/ckanext/ecportal/templates/home/index.html:34
-msgid "view all publishers"
-msgstr "Valamennyi adatközlő intézmény és szerv megtekintése"
-
-#: ../ckanext-ecportal/ckanext/ecportal/templates/home/index.html:49
-msgid "Recent Updates"
-msgstr "Legújabb frissítések"
+msgid "that you can browse, learn about and download."
+msgstr "melyekben Ön tetszés szerint böngészhet, illetve megtekintheti és letöltheti azokat."
 
 #: ../ckanext-ecportal/ckanext/ecportal/templates/home/index.html:52
-msgid "view all datasets"
-msgstr "Az összes adatkészlet megtekintése"
+#: ../ckanext-ecportal/ckanext/ecportal/templates/home/index.html:80
+#: ../ckanext-ecportal/ckanext/ecportal/templates/home/index.html:94
+msgid "view all"
+msgstr "valamennyi megtekintése"
+
+#: ../ckanext-ecportal/ckanext/ecportal/templates/home/index.html:54
+msgid "Most viewed datasets"
+msgstr "A legtöbbször megjelenített adatkészletek"
+
+#: ../ckanext-ecportal/ckanext/ecportal/templates/home/index.html:69
+msgid "Popular terms"
+msgstr "Népszerű kifejezések"
+
+#: ../ckanext-ecportal/ckanext/ecportal/templates/home/index.html:82
+msgid "Recently updated datasets"
+msgstr "Újabban frissített adatkészletek"
+
+#: ../ckanext-ecportal/ckanext/ecportal/templates/home/index.html:96
+msgid "Top Publishers"
+msgstr "Fő adatközlő intézmények és szervek"
 
 #: ../ckanext-ecportal/ckanext/ecportal/templates/package/read.html:14
 msgid "- Datasets"
 msgstr "- Adatkészletek"
 
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read.html:40
+#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read.html:36
 msgid "Licence"
 msgstr "Engedély"
 
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read.html:49
+#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read.html:50
 msgid "Related Datasets"
 msgstr "Kapcsolódó adatkészletek"
 
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read.html:67
-msgid "This is an old revision of this dataset, as edited at"
-msgstr ""
-"Ez a változat az adatkészlet régebbi, nem módosított változata. "
-"Szerkesztésének időpontja:"
+#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read.html:64
+msgid "Catalogue  record"
+msgstr "A módosítások adatai"
 
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read.html:68
+#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read.html:66
+msgid "Added to open-data.europa.eu"
+msgstr "Az adatkészlet felvétele"
+
+#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read.html:70
+msgid "Updated on open-data.europa.eu"
+msgstr "Az adatkészlet frissítése"
+
+#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read.html:84
+msgid "This is an old revision of this dataset, as edited at"
+msgstr "Ez a változat az adatkészlet régebbi, nem módosított változata. Szerkesztésének időpontja:"
+
+#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read.html:85
 msgid ". It may differ significantly from the"
 msgstr ". A jelenlegi módosításhoz képest"
 
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read.html:68
+#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read.html:85
 msgid "current revision"
 msgstr "jelentős eltéréseket tartalmazhat."
 
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read.html:70
+#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read.html:87
 msgid "This is the current revision of this dataset, as edited at"
-msgstr ""
-"Ez a változat az adatkészlet jelenlegi, módosított változata. "
-"Szerkesztésének időpontja:"
+msgstr "Ez a változat az adatkészlet jelenlegi, módosított változata. Szerkesztésének időpontja:"
 
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read.html:82
+#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read.html:99
 msgid "RDF/XML"
 msgstr "RDF/XML"
 
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read.html:83
+#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read.html:100
 msgid "RDF/N3"
 msgstr "RDF/N3"
 
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read.html:88
+#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read.html:105
 msgid "Dataset History"
 msgstr "Adatkészlet - Előzmények"
 
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read_core.html:12
+#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read_core.html:19
 msgid "This dataset has been marked as deleted."
 msgstr "Ez az adatkészlet törölt adatkészletként van bejelölve."
 
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read_core.html:24
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/resource_read.html:138
+#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read_core.html:31
+#: ../ckanext-ecportal/ckanext/ecportal/templates/package/resource_read.html:69
 msgid "Description"
 msgstr "Leírás"
 
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read_core.html:33
+#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read_core.html:40
+msgid "Visualisations"
+msgstr "Megtekintések"
+
+#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read_core.html:42
+#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read_core.html:65
+#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read_core.html:51
+msgid "Visualise"
+msgstr "Megtekint"
+
+#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read_core.html:63
 msgid "Resources"
 msgstr "Adatforrások "
 
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read_core.html:35
-msgid "(edit)"
-msgstr "(szerkesztés)"
+#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read_core.html:76
+msgid "Visit page"
+msgstr "Lap felkeresése"
 
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read_core.html:41
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/resource_read.html:127
+#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read_core.html:80
+#: ../ckanext-ecportal/ckanext/ecportal/templates/package/resource_read.html:64
 msgid "Download"
 msgstr "Letöltés"
 
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read_core.html:46
+#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read_core.html:89
 msgid "(none)"
 msgstr "(nincs)"
 
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read_core.html:56
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/resource_read.html:172
-msgid "Additional Information"
-msgstr "További információk"
+#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read_core.html:102
+msgid "URI"
+msgstr "URI"
 
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read_core.html:60
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/resource_read.html:177
-msgid "URL"
-msgstr "URL"
-
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read_core.html:65
+#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read_core.html:107
 msgid "Alternative Title"
 msgstr "Alternatív cím"
 
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read_core.html:70
+#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read_core.html:112
 msgid "Status"
 msgstr "Állapot"
 
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read_core.html:75
+#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read_core.html:117
 msgid "Identifier"
 msgstr "Azonosító"
 
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read_core.html:80
+#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read_core.html:122
 msgid "Interoperability Level"
 msgstr "Interoperabilitási szint"
 
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read_core.html:85
+#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read_core.html:127
 msgid "Type of Dataset"
 msgstr "Adatkészlet típusa"
 
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read_core.html:95
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/resource_read.html:185
+#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read_core.html:132
+#: ../ckanext-ecportal/ckanext/ecportal/templates/package/resource_read.html:103
+msgid "Release Date"
+msgstr "Közzététel dátuma"
+
+#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read_core.html:137
+#: ../ckanext-ecportal/ckanext/ecportal/templates/package/resource_read.html:107
 msgid "Modified Date"
 msgstr "Módosítás dátuma"
 
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read_core.html:100
+#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read_core.html:142
 msgid "Accrual Periodicity"
 msgstr "Frissítések gyakorisága"
 
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read_core.html:105
+#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read_core.html:147
 msgid "Temporal Coverage From"
 msgstr "Időbeli lefedettség kezdete"
 
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read_core.html:110
+#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read_core.html:152
 msgid "Temporal Coverage To"
 msgstr "Időbeli lefedettség vége"
 
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read_core.html:115
+#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read_core.html:157
 msgid "Temporal Granularity"
 msgstr "Időbeli granularitás"
 
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read_core.html:130
-msgid "Contact Name"
-msgstr "Kapcsolattartó neve"
-
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read_core.html:135
-msgid "Contact E-mail"
-msgstr "Kapcsolattartó e-mail címe"
-
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read_core.html:140
-msgid "Contact Address"
-msgstr "Kapcsolattartó címe"
-
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read_core.html:145
-msgid "Contact Telephone"
-msgstr "Kapcsolattartó telefonszáma"
-
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read_core.html:150
-msgid "Contact Web Page"
-msgstr "Kapcsolattartó honlapja"
-
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read_core.html:155
+#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read_core.html:172
 msgid "Version"
 msgstr "Verziószám:"
 
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read_core.html:160
+#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read_core.html:177
 msgid "Version Description"
 msgstr "Verzió leírása"
 
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read_core.html:165
+#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read_core.html:182
 msgid "Country"
 msgstr "Ország"
 
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/resource_read.html:85
+#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read_core.html:203
+msgid "Tel:"
+msgstr "Tel.:"
+
+#: ../ckanext-ecportal/ckanext/ecportal/templates/package/resource_read.html:22
 msgid "Dataset - Resource"
 msgstr "Adatkészlet - Adatforrás"
 
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/resource_read.html:106
+#: ../ckanext-ecportal/ckanext/ecportal/templates/package/resource_read.html:43
 msgid "Licence:"
 msgstr "Engedély:"
 
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/resource_read.html:112
+#: ../ckanext-ecportal/ckanext/ecportal/templates/package/resource_read.html:49
 msgid "License unknown"
 msgstr "Engedély ismeretlen"
 
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/resource_read.html:140
+#: ../ckanext-ecportal/ckanext/ecportal/templates/package/resource_read.html:71
 msgid "(No description)"
 msgstr "(Nincs leírás)"
 
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/resource_read.html:145
+#: ../ckanext-ecportal/ckanext/ecportal/templates/package/resource_read.html:76
 msgid "Format"
 msgstr "Formátum"
 
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/resource_read.html:154
+#: ../ckanext-ecportal/ckanext/ecportal/templates/package/resource_read.html:85
 msgid "From"
 msgstr "Az adatforrást tartalmazó adatkészlet:"
 
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/resource_read.html:162
-msgid "Preview"
-msgstr "Előnézet"
+#: ../ckanext-ecportal/ckanext/ecportal/templates/package/resource_read.html:94
+msgid "Additional Information"
+msgstr "További információk"
 
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/resource_read.html:163
-msgid "Cannot embed as resource is private."
-msgstr "Beágyazás nem lehetséges, mert az adatforrás nem nyilvános."
+#: ../ckanext-ecportal/ckanext/ecportal/templates/package/resource_read.html:99
+msgid "URL"
+msgstr "URL"
 
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/resource_read.html:163
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/resource_read.html:164
-msgid "Embed"
-msgstr "Beágyazás"
-
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/resource_read.html:190
+#: ../ckanext-ecportal/ckanext/ecportal/templates/package/resource_read.html:112
 msgid "Resource Type"
 msgstr "Adatforrás típusa"
 
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/resource_read.html:217
+#: ../ckanext-ecportal/ckanext/ecportal/templates/package/resource_read.html:121
 msgid "Back to dataset"
 msgstr "Vissza az adatkészlethez"
 
 #: ../ckanext-ecportal/ckanext/ecportal/templates/package/search.html:10
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/search.html:12
+#: ../ckanext-ecportal/ckanext/ecportal/templates/publisher/read.html:8
+msgid "Relevance"
+msgstr "Relevancia"
+
+#: ../ckanext-ecportal/ckanext/ecportal/templates/package/search.html:10
+#: ../ckanext-ecportal/ckanext/ecportal/templates/publisher/read.html:8
+msgid "Most viewed"
+msgstr "Megtekintések száma"
+
+#: ../ckanext-ecportal/ckanext/ecportal/templates/package/search.html:10
+#: ../ckanext-ecportal/ckanext/ecportal/templates/publisher/read.html:8
+msgid "Title (A-Z)"
+msgstr "Cím (A-tól Z-ig)"
+
+#: ../ckanext-ecportal/ckanext/ecportal/templates/package/search.html:10
+#: ../ckanext-ecportal/ckanext/ecportal/templates/publisher/read.html:8
+msgid "Title (Z-A)"
+msgstr "Cím (Z-től A-ig)"
+
+#: ../ckanext-ecportal/ckanext/ecportal/templates/package/search.html:10
+#: ../ckanext-ecportal/ckanext/ecportal/templates/publisher/read.html:8
+msgid "Date updated"
+msgstr "A frissítés időpontja"
+
+#: ../ckanext-ecportal/ckanext/ecportal/templates/package/search.html:22
 msgid "Search -"
 msgstr "Keresés -"
 
+#: ../ckanext-ecportal/ckanext/ecportal/templates/package/search.html:23
+#: ../ckanext-ecportal/ckanext/ecportal/templates/publisher/read.html:23
+msgid "Search:"
+msgstr "Keresés:"
+
 #: ../ckanext-ecportal/ckanext/ecportal/templates/package/search.html:31
+#: ../ckanext-ecportal/ckanext/ecportal/templates/publisher/read.html:20
+#: ../ckanext-ecportal/ckanext/ecportal/templates/package/search.html:31
+#: ../ckanext-ecportal/ckanext/ecportal/templates/publisher/read.html:20
+#: ../ckanext-ecportal/ckanext/ecportal/templates/package/search.html:61
 msgid "Search datasets..."
 msgstr "Keresés az adatkészletek között"
 
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/search.html:45
-msgid ""
-"[1:There was an error while searching.]\n"
-"      Please try again."
-msgstr ""
-"[1:Hiba lépett fel a keresés során.]\n"
-"      Kérjük, próbálkozzon újra."
-
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/search.html:49
+#: ../ckanext-ecportal/ckanext/ecportal/templates/package/search.html:81
+#: ../ckanext-ecportal/ckanext/ecportal/templates/publisher/read.html:81
 #, python-format
 msgid "[1:%(item_count)s] datasets found"
 msgstr "Találatok száma: [1:%(item_count)s] adatkészlet"
+
+#: ../ckanext-ecportal/ckanext/ecportal/templates/package/search.html:86
+#: ../ckanext-ecportal/ckanext/ecportal/templates/publisher/read.html:86
+msgid "Sort by:"
+msgstr "Rendezés az alábbi szerint:"
+
+#: ../ckanext-ecportal/ckanext/ecportal/templates/package/search.html:93
+msgid ""
+"[1:There was an error while searching.]\n"
+"      Please try again."
+msgstr "[1:Hiba lépett fel a keresés során.]\n      Kérjük, próbálkozzon újra."
 
 #: ../ckanext-ecportal/ckanext/ecportal/templates/publisher/index.html:6
 #: ../ckanext-ecportal/ckanext/ecportal/templates/publisher/index.html:7
 msgid "Publishers"
 msgstr "Adatközlő intézmények és szervek"
 
-#: ../ckanext-ecportal/ckanext/ecportal/templates/publisher/read.html:31
-msgid "Search publisher..."
-msgstr "Keresés az adatközlő Intézmények és szervek között"
+#: ../ckanext-ecportal/ckanext/ecportal/templates/publisher/read.html:60
+msgid "Search for datasets within "
+msgstr "Adatkészletek keresése az alábbi szerint"
 
-#: ../ckanext-ecportal/ckanext/ecportal/templates/publisher/read.html:55
-msgid "Administrators"
-msgstr "Rendszergazdák"
-
-#: ../ckanext-ecportal/ckanext/ecportal/templates/publisher/read.html:61
-msgid "Members"
-msgstr ""
-
-#: ../ckanext-ecportal/ckanext/ecportal/templates/publisher/read.html:69
+#: ../ckanext-ecportal/ckanext/ecportal/templates/publisher/read.html:72
 msgid "Resource Formats"
 msgstr "Adatforrás-formátumok"
 
-#: ../ckanext-ecportal/ckanext/ecportal/templates/publisher/read.html:73
+#: ../ckanext-ecportal/ckanext/ecportal/templates/publisher/read.html:76
 msgid "State"
 msgstr "Állapot"
 
@@ -624,9 +581,47 @@ msgstr "Eltérés"
 msgid "No differences"
 msgstr "Nincs eltérés"
 
+#: ../ckanext-ecportal/ckanext/ecportal/templates/snippets/boolean_search_choice.html:8
+msgid "Show results with"
+msgstr "Azoknak a találatoknak a megjelenítése, amelyek tartalmazzák"
+
+#: ../ckanext-ecportal/ckanext/ecportal/templates/snippets/boolean_search_choice.html:11
+#: ../ckanext-ecportal/ckanext/ecportal/templates/snippets/boolean_search_choice.html:16
+#: ../ckanext-ecportal/ckanext/ecportal/templates/snippets/boolean_search_choice.html:21
+msgid "all of these words"
+msgstr "az összes szót"
+
+#: ../ckanext-ecportal/ckanext/ecportal/templates/snippets/boolean_search_choice.html:12
+#: ../ckanext-ecportal/ckanext/ecportal/templates/snippets/boolean_search_choice.html:17
+#: ../ckanext-ecportal/ckanext/ecportal/templates/snippets/boolean_search_choice.html:22
+msgid "any of these words"
+msgstr "néhányat a szavak közül"
+
+#: ../ckanext-ecportal/ckanext/ecportal/templates/snippets/boolean_search_choice.html:13
+#: ../ckanext-ecportal/ckanext/ecportal/templates/snippets/boolean_search_choice.html:18
+#: ../ckanext-ecportal/ckanext/ecportal/templates/snippets/boolean_search_choice.html:23
+msgid "the exact phrase"
+msgstr "a pontos kifejezést"
+
+#: ../ckanext-ecportal/ckanext/ecportal/templates/snippets/most_viewed_datasets.html:14
+msgid "views"
+msgstr "Megjelenítés"
+
 #: ../ckanext-ecportal/ckanext/ecportal/templates/snippets/recent_updates_package_list.html:14
 msgid "was updated on"
 msgstr "Frissítés dátuma:"
+
+#: ../ckanext-ecportal/ckanext/ecportal/templates/snippets/suggest_box.html:9
+msgid "Suggest a dataset"
+msgstr "Adatkészlet ajánlása"
+
+#: ../ckanext-ecportal/ckanext/ecportal/templates/snippets/suggest_box.html:10
+msgid "Is there a dataset from the EU that you could not find in this portal?"
+msgstr "Tudomása van Önnek olyan EU-vonatkozású adatkészletről, amely nem található a portálon?"
+
+#: ../ckanext-ecportal/ckanext/ecportal/templates/snippets/suggest_box.html:11
+msgid "Please request the dataset"
+msgstr "Kérje az adatkészlet felvételét"
 
 #: ../ckanext-ecportal/ckanext/ecportal/templates/tag/read.html:6
 msgid "- Keyword"
@@ -640,7 +635,3 @@ msgstr "Kulcsszó:"
 #, python-format
 msgid "There are %(count)s datasets with the keyword [1:%(tagname)s]:"
 msgstr " %(count)s adatkészlet tartalmazza a(z) [1:%(tagname)s] kulcsszót:"
-
-#~ msgid "no-sidebar"
-#~ msgstr "Nincs oldalsáv"
-
