@@ -57,7 +57,8 @@
       ${c.description_formatted}
     </div>
     <form>
-      <input type="text" name="q" value="${search_value()}" placeholder="${_('Search for datasets within ') + c.group_dict.display_name}" />
+      <!--! TODO: this string should not include whitespace at the end for formatting, translators are likely to miss it -->
+      <input type="text" name="q" value="${search_value()}" placeholder="${_('Search for datasets within ').strip()} ${c.group_dict.display_name}" />
       <input type="submit" value="" />
       <p style="padding-left: 10px; margin-top: 5px;">
         ${h.snippet('snippets/boolean_search_choice.html')}
