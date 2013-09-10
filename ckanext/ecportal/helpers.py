@@ -5,6 +5,7 @@ import pylons.config as config
 import genshi
 import sqlalchemy.exc
 import json
+import urllib
 
 import ckan
 import ckan.model as model
@@ -308,3 +309,17 @@ def approved_search_terms():
         log.error('Could not retrieve search cloud results from database. '
                   'Do the tables exist? Rolling back the session.')
         model.Session.rollback()
+
+
+def search_url_params(group_name=None):
+    # Parameter data is passed to the ckan.controllers.feed.custom.
+    # As this current adds search parameters that are not in
+    # ['q', 'page', 'sort'] and don't beging with '_' to the
+    # Solr 'fq' field, we need to remove ext_boolean here.
+    params = [(k, v) for k, v in p.toolkit.request.params.items()
+              if not k in ['page', 'ext_boolean']]
+    if group_name:
+        params.append(('groups', group_name))
+    return urllib.urlencode(
+        [(k, v.encode('utf-8') if isinstance(v, basestring) else str(v))
+         for k, v in params])

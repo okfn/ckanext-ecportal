@@ -296,7 +296,8 @@ class ECPortalPlugin(p.SingletonPlugin):
                 'resource_display_format': helpers.resource_display_format,
                 'resource_dropdown': helpers.resource_dropdown,
                 'format_display_name': helpers.format_display_name,
-                'dataset_resource_formats': helpers.dataset_resource_formats}
+                'dataset_resource_formats': helpers.dataset_resource_formats,
+                'search_url_params': helpers.search_url_params}
 
 
 class ECPortalHomepagePlugin(p.SingletonPlugin):
