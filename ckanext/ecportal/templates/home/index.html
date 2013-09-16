@@ -30,9 +30,7 @@
              ${h.snippet('snippets/boolean_search_choice.html')}
            </p>
            </div>
-           <p py:if="c.package_count">${g.site_title} contains
-             <a href="${h.url_for(controller='package', action='search')}">${c.package_count} datasets</a>
-             that you can browse, learn about and download.</p>
+           <p py:if="c.package_count" i18n:msg="site_title, num_datasets"> ${g.site_title} contains <a href="${h.url_for(controller='package', action='search')}">${c.package_count} datasets</a> that you can browse, learn about and download.</p>
           </form>
         </div>
         <div class="span4">
