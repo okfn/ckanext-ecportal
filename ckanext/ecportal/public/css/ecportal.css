@@ -916,6 +916,34 @@ form .field_required {
   list-style-type: none;
   padding: 0;
   margin: 0;
+  display: table;
+  width: 100%;
+}
+.resource-list li {
+  display: table-row;
+}
+.resource-list li .buttons,
+.resource-list li .context {
+  display: table-cell;
+  padding-bottom: 5px;
+}
+.resource-list li .buttons {
+  width: 0%;
+}
+.resource-list li .context {
+  width: 100%;
+}
+.resource-list li .buttons a.button-box {
+  display: block;
+  position: relative;
+  float: none;
+  white-space: nowrap;
+  padding-left: 20px;
+}
+.resource-list li .buttons a.button-box .icon {
+  float: none;
+  position: absolute;
+  left: 5px;
 }
 
 
