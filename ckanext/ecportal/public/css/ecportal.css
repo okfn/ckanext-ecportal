@@ -1280,6 +1280,8 @@ h2 a i {
   border-bottom: 1px solid #bbb;
   border-right:1px solid #bbb;
   background: #eee url("../images/box.png") 100% 100% no-repeat;
+  -ms-word-break: break-all;
+  word-break: break-all;
 }
 .sidebar-section h3,
 .suggest-box h2,
@@ -1382,6 +1384,8 @@ input.search {
 /* Adds margin to bottom of page */
 #wrapper,
 .front-page {
+  position: relative;
+  background-color: white;
   margin-bottom: 40px;
 }
 
@@ -1689,9 +1693,6 @@ h2 {
 .menu {
   position: relative;
 }
-.menu .first {
-  margin-left: 5px;
-}
 .account {
   position: absolute;
   bottom: 5px;
@@ -1743,6 +1744,7 @@ label.inline {
   font-weight: normal;
   font-size: 14px;
   line-height: 18px;
+  white-space: nowrap;
 }
 label.inline input {
   display: inline;
