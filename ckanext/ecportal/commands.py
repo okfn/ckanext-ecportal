@@ -289,7 +289,11 @@ class ECPortalCommand(cli.CkanCommand):
             result = model.Session.execute(sql)
             for id, package_id, rdf in result:
                 rdf = json.loads(rdf)
-                root = lxml.etree.fromstring(rdf.encode('utf-8'))
+                try:
+                    root = lxml.etree.fromstring(rdf.encode('utf-8'))
+                except lxml.etree.XMLSyntaxError:
+                    continue
+
                 namespaces = self.setup_namespaces(root)
                 results = root.xpath('//rdf:Description/dcat:record',
                                       namespaces=namespaces)
