@@ -1956,7 +1956,7 @@ a.item_link:hover .resources .resource-tag {
   font-size: 14px;
   text-align: center;
   position:relative;
-  margin: 20px 0 0 0;
+  padding: 20px 0 0 0;
 }
 .message .green {
   background: #45ff30;
