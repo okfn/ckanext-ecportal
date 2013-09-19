@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: CKAN EU ODP \n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2013-08-22 12:45+0200\n"
-"PO-Revision-Date: 2013-09-05 14:09+0000\n"
+"POT-Creation-Date: 2013-09-17 14:32+0200\n"
+"PO-Revision-Date: 2013-09-18 14:41+0000\n"
 "Last-Translator: odptranslator <ecodptranslators@gmail.com>\n"
 "Language-Team: Polish (http://www.transifex.com/projects/p/ckan-eu-odp/language/pl/)\n"
 "MIME-Version: 1.0\n"
@@ -96,8 +96,8 @@ msgid "European Union Open Data Portal"
 msgstr "Portal otwartych danych Unii Europejskiej"
 
 #: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:22
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read.html:45
-#: ../ckanext-ecportal/ckanext/ecportal/templates/publisher/read.html:71
+#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read.html:49
+#: ../ckanext-ecportal/ckanext/ecportal/templates/publisher/read.html:72
 msgid "Keywords"
 msgstr "Słowa kluczowe"
 
@@ -165,7 +165,7 @@ msgstr "Nie odnaleziono zbioru danych"
 msgid "Tag not found"
 msgstr "Nie odnaleziono tagu"
 
-#: ../ckanext-ecportal/ckanext/ecportal/helpers.py:93
+#: ../ckanext-ecportal/ckanext/ecportal/helpers.py:95
 msgid "Cannot render package description"
 msgstr "Nie można wyświetlić opisu pakietu"
 
@@ -248,40 +248,36 @@ msgid "Find datasets..."
 msgstr "Przeszukaj zbiory danych"
 
 #: ../ckanext-ecportal/ckanext/ecportal/templates/home/index.html:33
-msgid "contains"
-msgstr "zawiera"
+#, python-format
+msgid "Total datasets available: [1:%(num_datasets)s]"
+msgstr "Wszystkie zbiory danych dostępne: [1:%(num_datasets)s]"
 
-#: ../ckanext-ecportal/ckanext/ecportal/templates/home/index.html:34
-#: ../ckanext-ecportal/ckanext/ecportal/templates/home/index.html:103
-#: ../ckanext-ecportal/ckanext/ecportal/templates/publisher/index.html:16
-msgid "datasets"
-msgstr "zbiory danych"
-
-#: ../ckanext-ecportal/ckanext/ecportal/templates/home/index.html:34
-msgid "that you can browse, learn about and download."
-msgstr "które możesz przeglądać, czytać i pobierać."
-
-#: ../ckanext-ecportal/ckanext/ecportal/templates/home/index.html:52
-#: ../ckanext-ecportal/ckanext/ecportal/templates/home/index.html:80
-#: ../ckanext-ecportal/ckanext/ecportal/templates/home/index.html:94
+#: ../ckanext-ecportal/ckanext/ecportal/templates/home/index.html:50
+#: ../ckanext-ecportal/ckanext/ecportal/templates/home/index.html:78
+#: ../ckanext-ecportal/ckanext/ecportal/templates/home/index.html:92
 msgid "view all"
 msgstr "zobacz wszystkie"
 
-#: ../ckanext-ecportal/ckanext/ecportal/templates/home/index.html:54
+#: ../ckanext-ecportal/ckanext/ecportal/templates/home/index.html:52
 msgid "Most viewed datasets"
 msgstr "Najczęściej przeglądane zbiory danych"
 
-#: ../ckanext-ecportal/ckanext/ecportal/templates/home/index.html:69
+#: ../ckanext-ecportal/ckanext/ecportal/templates/home/index.html:67
 msgid "Popular terms"
 msgstr "Najczęściej wyszukiwane wyrażenia"
 
-#: ../ckanext-ecportal/ckanext/ecportal/templates/home/index.html:82
+#: ../ckanext-ecportal/ckanext/ecportal/templates/home/index.html:80
 msgid "Recently updated datasets"
 msgstr "Ostatnio zaktualizowane zbiory danych"
 
-#: ../ckanext-ecportal/ckanext/ecportal/templates/home/index.html:96
+#: ../ckanext-ecportal/ckanext/ecportal/templates/home/index.html:94
 msgid "Top Publishers"
 msgstr "Najważniejsi autorzy"
+
+#: ../ckanext-ecportal/ckanext/ecportal/templates/home/index.html:101
+#: ../ckanext-ecportal/ckanext/ecportal/templates/publisher/index.html:16
+msgid "datasets"
+msgstr "zbiory danych"
 
 #: ../ckanext-ecportal/ckanext/ecportal/templates/package/read.html:14
 msgid "- Datasets"
@@ -291,47 +287,47 @@ msgstr "– Zbiory danych"
 msgid "Licence"
 msgstr "Licencja"
 
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read.html:50
+#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read.html:54
 msgid "Related Datasets"
 msgstr "Powiązane zbiory danych"
 
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read.html:64
+#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read.html:68
 msgid "Catalogue  record"
 msgstr "Data dodania lub aktualizacji"
 
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read.html:66
+#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read.html:70
 msgid "Added to open-data.europa.eu"
 msgstr "Data dodania do open-data.europa.eu"
 
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read.html:70
+#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read.html:74
 msgid "Updated on open-data.europa.eu"
 msgstr "Data aktualizacji w open-data.europa.eu"
 
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read.html:84
+#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read.html:88
 msgid "This is an old revision of this dataset, as edited at"
 msgstr "To jest poprzednia wersja zbioru danych edytowanych w dniu"
 
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read.html:85
+#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read.html:89
 msgid ". It may differ significantly from the"
 msgstr ". Może ona znacznie różnić się od"
 
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read.html:85
+#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read.html:89
 msgid "current revision"
 msgstr "aktualnej wersji"
 
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read.html:87
+#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read.html:91
 msgid "This is the current revision of this dataset, as edited at"
 msgstr "To jest obecna wersja zbioru danych edytowanych w dniu"
 
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read.html:99
+#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read.html:103
 msgid "RDF/XML"
 msgstr "RDF/XML"
 
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read.html:100
+#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read.html:104
 msgid "RDF/N3"
 msgstr "RDF/N3"
 
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read.html:105
+#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read.html:109
 msgid "Dataset History"
 msgstr "Historia zbioru danych"
 
@@ -340,7 +336,7 @@ msgid "This dataset has been marked as deleted."
 msgstr "Ten zbiór danych został oznaczony jako usunięty."
 
 #: ../ckanext-ecportal/ckanext/ecportal/templates/package/read_core.html:31
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/resource_read.html:69
+#: ../ckanext-ecportal/ckanext/ecportal/templates/package/resource_read.html:81
 msgid "Description"
 msgstr "Opis"
 
@@ -359,11 +355,12 @@ msgid "Resources"
 msgstr "Źródła"
 
 #: ../ckanext-ecportal/ckanext/ecportal/templates/package/read_core.html:76
+#: ../ckanext-ecportal/ckanext/ecportal/templates/package/resource_read.html:68
 msgid "Visit page"
 msgstr "Otwórz stronę"
 
 #: ../ckanext-ecportal/ckanext/ecportal/templates/package/read_core.html:80
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/resource_read.html:64
+#: ../ckanext-ecportal/ckanext/ecportal/templates/package/resource_read.html:72
 msgid "Download"
 msgstr "Pobierz"
 
@@ -396,12 +393,12 @@ msgid "Type of Dataset"
 msgstr "Typ zbioru danych"
 
 #: ../ckanext-ecportal/ckanext/ecportal/templates/package/read_core.html:132
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/resource_read.html:103
+#: ../ckanext-ecportal/ckanext/ecportal/templates/package/resource_read.html:115
 msgid "Release Date"
 msgstr "Data opublikowania"
 
 #: ../ckanext-ecportal/ckanext/ecportal/templates/package/read_core.html:137
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/resource_read.html:107
+#: ../ckanext-ecportal/ckanext/ecportal/templates/package/resource_read.html:119
 msgid "Modified Date"
 msgstr "Data modyfikacji"
 
@@ -449,31 +446,31 @@ msgstr "Licencja:"
 msgid "License unknown"
 msgstr "Nieznana licencja"
 
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/resource_read.html:71
+#: ../ckanext-ecportal/ckanext/ecportal/templates/package/resource_read.html:83
 msgid "(No description)"
 msgstr "Brak opisu"
 
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/resource_read.html:76
+#: ../ckanext-ecportal/ckanext/ecportal/templates/package/resource_read.html:88
 msgid "Format"
 msgstr "Format"
 
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/resource_read.html:85
+#: ../ckanext-ecportal/ckanext/ecportal/templates/package/resource_read.html:97
 msgid "From"
 msgstr "Od"
 
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/resource_read.html:94
+#: ../ckanext-ecportal/ckanext/ecportal/templates/package/resource_read.html:106
 msgid "Additional Information"
 msgstr "Dodatkowe informacje"
 
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/resource_read.html:99
+#: ../ckanext-ecportal/ckanext/ecportal/templates/package/resource_read.html:111
 msgid "URL"
 msgstr "URL"
 
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/resource_read.html:112
+#: ../ckanext-ecportal/ckanext/ecportal/templates/package/resource_read.html:124
 msgid "Resource Type"
 msgstr "Rodzaj źródła"
 
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/resource_read.html:121
+#: ../ckanext-ecportal/ckanext/ecportal/templates/package/resource_read.html:133
 msgid "Back to dataset"
 msgstr "Wróć do zbioru danych"
 
@@ -520,13 +517,13 @@ msgid "Search datasets..."
 msgstr "Przeszukaj zbiór danych"
 
 #: ../ckanext-ecportal/ckanext/ecportal/templates/package/search.html:81
-#: ../ckanext-ecportal/ckanext/ecportal/templates/publisher/read.html:81
+#: ../ckanext-ecportal/ckanext/ecportal/templates/publisher/read.html:82
 #, python-format
 msgid "[1:%(item_count)s] datasets found"
 msgstr "Znaleziono [1:%(item_count)s] zbiorów danych"
 
 #: ../ckanext-ecportal/ckanext/ecportal/templates/package/search.html:86
-#: ../ckanext-ecportal/ckanext/ecportal/templates/publisher/read.html:86
+#: ../ckanext-ecportal/ckanext/ecportal/templates/publisher/read.html:87
 msgid "Sort by:"
 msgstr "Sortuj według:"
 
@@ -541,15 +538,15 @@ msgstr "[1:Wystąpił błąd podczas wyszukiwania.]⏎ Proszę spróbować jeszc
 msgid "Publishers"
 msgstr "Autorzy"
 
-#: ../ckanext-ecportal/ckanext/ecportal/templates/publisher/read.html:60
+#: ../ckanext-ecportal/ckanext/ecportal/templates/publisher/read.html:61
 msgid "Search for datasets within "
-msgstr "Szukaj zbiorów danych"
+msgstr "Szukaj zbiorów danych pochodzących z"
 
-#: ../ckanext-ecportal/ckanext/ecportal/templates/publisher/read.html:72
+#: ../ckanext-ecportal/ckanext/ecportal/templates/publisher/read.html:73
 msgid "Resource Formats"
 msgstr "Formaty źródeł"
 
-#: ../ckanext-ecportal/ckanext/ecportal/templates/publisher/read.html:76
+#: ../ckanext-ecportal/ckanext/ecportal/templates/publisher/read.html:77
 msgid "State"
 msgstr "Status"
 
@@ -605,7 +602,7 @@ msgstr "dokładnego wyrażenia"
 
 #: ../ckanext-ecportal/ckanext/ecportal/templates/snippets/most_viewed_datasets.html:14
 msgid "views"
-msgstr "liczba wyświetleń:"
+msgstr "wyświetleń"
 
 #: ../ckanext-ecportal/ckanext/ecportal/templates/snippets/recent_updates_package_list.html:14
 msgid "was updated on"

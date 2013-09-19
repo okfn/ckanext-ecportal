@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: CKAN EU ODP \n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2013-08-22 12:45+0200\n"
-"PO-Revision-Date: 2013-09-06 09:08+0000\n"
+"POT-Creation-Date: 2013-09-17 14:32+0200\n"
+"PO-Revision-Date: 2013-09-18 13:53+0000\n"
 "Last-Translator: odptranslator <ecodptranslators@gmail.com>\n"
 "Language-Team: Bulgarian (http://www.transifex.com/projects/p/ckan-eu-odp/language/bg/)\n"
 "MIME-Version: 1.0\n"
@@ -96,8 +96,8 @@ msgid "European Union Open Data Portal"
 msgstr "Портал за свободно достъпни данни на Европейския съюз"
 
 #: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:22
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read.html:45
-#: ../ckanext-ecportal/ckanext/ecportal/templates/publisher/read.html:71
+#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read.html:49
+#: ../ckanext-ecportal/ckanext/ecportal/templates/publisher/read.html:72
 msgid "Keywords"
 msgstr "Ключови думи"
 
@@ -165,7 +165,7 @@ msgstr "Набора от данни не е намерен"
 msgid "Tag not found"
 msgstr "Етикетът не е намерен"
 
-#: ../ckanext-ecportal/ckanext/ecportal/helpers.py:93
+#: ../ckanext-ecportal/ckanext/ecportal/helpers.py:95
 msgid "Cannot render package description"
 msgstr "Cannot render package description"
 
@@ -248,40 +248,36 @@ msgid "Find datasets..."
 msgstr "Търсене на набори от данни"
 
 #: ../ckanext-ecportal/ckanext/ecportal/templates/home/index.html:33
-msgid "contains"
-msgstr "съдържа"
+#, python-format
+msgid "Total datasets available: [1:%(num_datasets)s]"
+msgstr "Налични набори от данни: [1:%(num_datasets)s]"
 
-#: ../ckanext-ecportal/ckanext/ecportal/templates/home/index.html:34
-#: ../ckanext-ecportal/ckanext/ecportal/templates/home/index.html:103
-#: ../ckanext-ecportal/ckanext/ecportal/templates/publisher/index.html:16
-msgid "datasets"
-msgstr "набори от данни"
-
-#: ../ckanext-ecportal/ckanext/ecportal/templates/home/index.html:34
-msgid "that you can browse, learn about and download."
-msgstr "които можете да преглеждате, разучавате и изтегляте."
-
-#: ../ckanext-ecportal/ckanext/ecportal/templates/home/index.html:52
-#: ../ckanext-ecportal/ckanext/ecportal/templates/home/index.html:80
-#: ../ckanext-ecportal/ckanext/ecportal/templates/home/index.html:94
+#: ../ckanext-ecportal/ckanext/ecportal/templates/home/index.html:50
+#: ../ckanext-ecportal/ckanext/ecportal/templates/home/index.html:78
+#: ../ckanext-ecportal/ckanext/ecportal/templates/home/index.html:92
 msgid "view all"
 msgstr "Вижте всички"
 
-#: ../ckanext-ecportal/ckanext/ecportal/templates/home/index.html:54
+#: ../ckanext-ecportal/ckanext/ecportal/templates/home/index.html:52
 msgid "Most viewed datasets"
 msgstr "Най-разглеждани набори от данни"
 
-#: ../ckanext-ecportal/ckanext/ecportal/templates/home/index.html:69
+#: ../ckanext-ecportal/ckanext/ecportal/templates/home/index.html:67
 msgid "Popular terms"
 msgstr "Най-често търсени термини"
 
-#: ../ckanext-ecportal/ckanext/ecportal/templates/home/index.html:82
+#: ../ckanext-ecportal/ckanext/ecportal/templates/home/index.html:80
 msgid "Recently updated datasets"
 msgstr "Наскоро актуализирани набори от данни "
 
-#: ../ckanext-ecportal/ckanext/ecportal/templates/home/index.html:96
+#: ../ckanext-ecportal/ckanext/ecportal/templates/home/index.html:94
 msgid "Top Publishers"
 msgstr "Основни издатели"
+
+#: ../ckanext-ecportal/ckanext/ecportal/templates/home/index.html:101
+#: ../ckanext-ecportal/ckanext/ecportal/templates/publisher/index.html:16
+msgid "datasets"
+msgstr "набори от данни"
 
 #: ../ckanext-ecportal/ckanext/ecportal/templates/package/read.html:14
 msgid "- Datasets"
@@ -291,47 +287,47 @@ msgstr "- Набори от данни"
 msgid "Licence"
 msgstr "Лиценз"
 
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read.html:50
+#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read.html:54
 msgid "Related Datasets"
 msgstr "Свързани набори от данни"
 
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read.html:64
+#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read.html:68
 msgid "Catalogue  record"
 msgstr "Данни от каталога"
 
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read.html:66
+#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read.html:70
 msgid "Added to open-data.europa.eu"
 msgstr "Добавено към open-data.europa.eu"
 
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read.html:70
+#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read.html:74
 msgid "Updated on open-data.europa.eu"
 msgstr "Актуализирано на open-data.europa.eu"
 
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read.html:84
+#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read.html:88
 msgid "This is an old revision of this dataset, as edited at"
 msgstr "Това е стара ревизия на този набор данни, редактирана на"
 
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read.html:85
+#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read.html:89
 msgid ". It may differ significantly from the"
 msgstr ". Може да се различава съществено от"
 
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read.html:85
+#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read.html:89
 msgid "current revision"
 msgstr "настоящата ревизия"
 
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read.html:87
+#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read.html:91
 msgid "This is the current revision of this dataset, as edited at"
 msgstr "Това е настоящата ревизия на този набор данни, редактирана на"
 
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read.html:99
+#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read.html:103
 msgid "RDF/XML"
 msgstr "RDF/XML"
 
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read.html:100
+#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read.html:104
 msgid "RDF/N3"
 msgstr "RDF/N3"
 
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read.html:105
+#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read.html:109
 msgid "Dataset History"
 msgstr "Хронология на набора от данни"
 
@@ -340,7 +336,7 @@ msgid "This dataset has been marked as deleted."
 msgstr "Набора данни е означен като изтрит."
 
 #: ../ckanext-ecportal/ckanext/ecportal/templates/package/read_core.html:31
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/resource_read.html:69
+#: ../ckanext-ecportal/ckanext/ecportal/templates/package/resource_read.html:81
 msgid "Description"
 msgstr "Описание"
 
@@ -359,11 +355,12 @@ msgid "Resources"
 msgstr "Ресурси"
 
 #: ../ckanext-ecportal/ckanext/ecportal/templates/package/read_core.html:76
+#: ../ckanext-ecportal/ckanext/ecportal/templates/package/resource_read.html:68
 msgid "Visit page"
 msgstr "Разглеждане на страница"
 
 #: ../ckanext-ecportal/ckanext/ecportal/templates/package/read_core.html:80
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/resource_read.html:64
+#: ../ckanext-ecportal/ckanext/ecportal/templates/package/resource_read.html:72
 msgid "Download"
 msgstr "Изтегляне"
 
@@ -396,12 +393,12 @@ msgid "Type of Dataset"
 msgstr "Вид набор от данни"
 
 #: ../ckanext-ecportal/ckanext/ecportal/templates/package/read_core.html:132
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/resource_read.html:103
+#: ../ckanext-ecportal/ckanext/ecportal/templates/package/resource_read.html:115
 msgid "Release Date"
 msgstr "Дата на публикуване"
 
 #: ../ckanext-ecportal/ckanext/ecportal/templates/package/read_core.html:137
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/resource_read.html:107
+#: ../ckanext-ecportal/ckanext/ecportal/templates/package/resource_read.html:119
 msgid "Modified Date"
 msgstr "Дата на промяна"
 
@@ -449,31 +446,31 @@ msgstr "Лиценз:"
 msgid "License unknown"
 msgstr "Неизвестен лиценз"
 
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/resource_read.html:71
+#: ../ckanext-ecportal/ckanext/ecportal/templates/package/resource_read.html:83
 msgid "(No description)"
 msgstr "(няма описание)"
 
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/resource_read.html:76
+#: ../ckanext-ecportal/ckanext/ecportal/templates/package/resource_read.html:88
 msgid "Format"
 msgstr "Формат"
 
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/resource_read.html:85
+#: ../ckanext-ecportal/ckanext/ecportal/templates/package/resource_read.html:97
 msgid "From"
 msgstr "От"
 
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/resource_read.html:94
+#: ../ckanext-ecportal/ckanext/ecportal/templates/package/resource_read.html:106
 msgid "Additional Information"
 msgstr "Допълнителна информация"
 
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/resource_read.html:99
+#: ../ckanext-ecportal/ckanext/ecportal/templates/package/resource_read.html:111
 msgid "URL"
 msgstr "URL"
 
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/resource_read.html:112
+#: ../ckanext-ecportal/ckanext/ecportal/templates/package/resource_read.html:124
 msgid "Resource Type"
 msgstr "Вид ресурс"
 
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/resource_read.html:121
+#: ../ckanext-ecportal/ckanext/ecportal/templates/package/resource_read.html:133
 msgid "Back to dataset"
 msgstr "Назад към набора от данни"
 
@@ -520,13 +517,13 @@ msgid "Search datasets..."
 msgstr "Търсене на набори от данни"
 
 #: ../ckanext-ecportal/ckanext/ecportal/templates/package/search.html:81
-#: ../ckanext-ecportal/ckanext/ecportal/templates/publisher/read.html:81
+#: ../ckanext-ecportal/ckanext/ecportal/templates/publisher/read.html:82
 #, python-format
 msgid "[1:%(item_count)s] datasets found"
 msgstr "намерени са [1:%(item_count)s] набори данни"
 
 #: ../ckanext-ecportal/ckanext/ecportal/templates/package/search.html:86
-#: ../ckanext-ecportal/ckanext/ecportal/templates/publisher/read.html:86
+#: ../ckanext-ecportal/ckanext/ecportal/templates/publisher/read.html:87
 msgid "Sort by:"
 msgstr "Сортиране по:"
 
@@ -541,15 +538,15 @@ msgstr "[1:Възникна грешка при търсенето.]⏎\nМол�
 msgid "Publishers"
 msgstr "Издатели"
 
-#: ../ckanext-ecportal/ckanext/ecportal/templates/publisher/read.html:60
+#: ../ckanext-ecportal/ckanext/ecportal/templates/publisher/read.html:61
 msgid "Search for datasets within "
 msgstr "Търсене на набори от данни от"
 
-#: ../ckanext-ecportal/ckanext/ecportal/templates/publisher/read.html:72
+#: ../ckanext-ecportal/ckanext/ecportal/templates/publisher/read.html:73
 msgid "Resource Formats"
 msgstr "Формати на ресурса"
 
-#: ../ckanext-ecportal/ckanext/ecportal/templates/publisher/read.html:76
+#: ../ckanext-ecportal/ckanext/ecportal/templates/publisher/read.html:77
 msgid "State"
 msgstr "Статус"
 
@@ -613,7 +610,7 @@ msgstr "е актуализиран на"
 
 #: ../ckanext-ecportal/ckanext/ecportal/templates/snippets/suggest_box.html:9
 msgid "Suggest a dataset"
-msgstr "Предложете набор от данни!"
+msgstr "Предложете набор от данни"
 
 #: ../ckanext-ecportal/ckanext/ecportal/templates/snippets/suggest_box.html:10
 msgid "Is there a dataset from the EU that you could not find in this portal?"
