@@ -1314,8 +1314,6 @@ h2 a i {
   border-bottom: 1px solid #bbb;
   border-right:1px solid #bbb;
   background: #eee url("../images/box.png") 100% 100% no-repeat;
-  -ms-word-break: break-all;
-  word-break: break-all;
 }
 .sidebar-section h3,
 .suggest-box h2,
@@ -1522,6 +1520,8 @@ input.search {
   padding: 0;
   list-style-type: none;
   color: #999;
+  -ms-word-break: break-all;
+  word-break: break-all;
 }
 
 
