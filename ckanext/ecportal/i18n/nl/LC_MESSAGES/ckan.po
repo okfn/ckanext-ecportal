@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: CKAN EU ODP \n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2013-09-17 14:32+0200\n"
-"PO-Revision-Date: 2013-09-18 13:50+0000\n"
+"PO-Revision-Date: 2013-09-19 09:53+0000\n"
 "Last-Translator: odptranslator <ecodptranslators@gmail.com>\n"
 "Language-Team: Dutch (http://www.transifex.com/projects/p/ckan-eu-odp/language/nl/)\n"
 "MIME-Version: 1.0\n"
@@ -580,7 +580,7 @@ msgstr "Geen verschil"
 
 #: ../ckanext-ecportal/ckanext/ecportal/templates/snippets/boolean_search_choice.html:8
 msgid "Show results with"
-msgstr "Toon resultaten met:"
+msgstr "Toon resultaten met"
 
 #: ../ckanext-ecportal/ckanext/ecportal/templates/snippets/boolean_search_choice.html:11
 #: ../ckanext-ecportal/ckanext/ecportal/templates/snippets/boolean_search_choice.html:16
