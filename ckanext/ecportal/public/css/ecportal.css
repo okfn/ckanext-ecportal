@@ -952,6 +952,18 @@ form .field_required {
   left: 5px;
 }
 
+.ie7 .resource-list li {
+  display: block;
+}
+.ie7 .resource-list li .buttons {
+  float: left;
+  display: block;
+  width: auto;
+}
+.ie7 .resource-list li .context {
+  display: inline;
+  width: auto;
+}
 
 /****************************************************************************/
 /* Resource View Page
