@@ -266,7 +266,7 @@ class ECPortalCommand(cli.CkanCommand):
         # TODO: make this one atomic action. (defer_commit)
         plugins.toolkit.get_action('group_update')(context, source_publisher)
         plugins.toolkit.get_action('group_update')(context, target_publisher)
-    
+
     def setup_namespaces(self, root):
         local_namespaces = {
             'http://purl.org/dc/terms/#': 'dct',
@@ -282,9 +282,12 @@ class ECPortalCommand(cli.CkanCommand):
         return local_ns
 
     def odp_namespace(self):
-        ### remove all catalog records
+        # remove all catalog records
+        log.info('Starting ODP namespace migration')
+        log.info('Removing old catalog records (RDF)')
+
         for table in ['package_extra', 'package_extra_revision']:
-            sql = '''select id, package_id, value from %s 
+            sql = '''select id, package_id, value from %s
                      where key = 'rdf' and value like '%%record%%' ''' % table
             result = model.Session.execute(sql)
             for id, package_id, rdf in result:
@@ -296,35 +299,43 @@ class ECPortalCommand(cli.CkanCommand):
 
                 namespaces = self.setup_namespaces(root)
                 results = root.xpath('//rdf:Description/dcat:record',
-                                      namespaces=namespaces)
+                                     namespaces=namespaces)
                 for record in results:
                     description = record.getparent()
                     parent = description.getparent()
                     parent.remove(description)
 
                 results = root.xpath('//dcat:Catalog',
-                                      namespaces=namespaces)
+                                     namespaces=namespaces)
                 for record in results:
                     parent = record.getparent()
                     parent.remove(record)
+
                 sql = '''update %s set value = :value where id = :id''' % table
-             
-                model.Session.execute(sql, params={"value": json.dumps(lxml.etree.tostring(root)), "id": id})
+                model.Session.execute(sql, params={
+                    "value": json.dumps(lxml.etree.tostring(root)),
+                    "id": id})
                 model.Session.commit()
 
-        ### add catalog records back
+        # add catalog records back
+        log.info('Adding updated catalog records (RDF)')
+
         for table in ['package_extra', 'package_extra_revision']:
             sql = '''select pe.id, p.name, value from %s pe
-                     join package p on p.id = pe.package_id  where key = 'rdf' ''' % table
+                     join package p on p.id = pe.package_id
+                     where key = 'rdf' ''' % table
             result = model.Session.execute(sql)
             for id, name, rdf in result:
                 rdf = json.loads(rdf)
-                origin_url, updated_rdf = rdfutil.update_rdf(rdf, name, {'model': model})
+                origin_url, updated_rdf = rdfutil.update_rdf(
+                    rdf, name, {'model': model})
                 sql = '''update %s set value = :value where id = :id''' % table
                 if updated_rdf:
-                    model.Session.execute(sql, params={"value": json.dumps(updated_rdf), "id": id})
-        
-  
+                    model.Session.execute(sql, params={
+                        "value": json.dumps(updated_rdf),
+                        "id": id})
+
+        log.info('Updating metadata')
         sql = '''
         begin;
 
@@ -352,12 +363,12 @@ class ECPortalCommand(cli.CkanCommand):
                     'http://open-data.europa.eu')
         where resource_type like '%http://ec.europa.eu/open-data%';
 
-        update resource set resource_type = 
-               'http://open-data.europa.eu/kos/documentation-type/Visualization' 
+        update resource set resource_type =
+            'http://open-data.europa.eu/kos/documentation-type/Visualization'
         where resource_type = 'Visualization';
 
-        update resource_revision set resource_type = 
-               'http://open-data.europa.eu/kos/documentation-type/Visualization' 
+        update resource_revision set resource_type =
+            'http://open-data.europa.eu/kos/documentation-type/Visualization'
         where resource_type = 'Visualization';
 
         update package_extra set value =
