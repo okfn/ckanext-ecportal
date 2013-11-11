@@ -56,9 +56,9 @@
   <div class="header">
     <div id="header-menu" class="region region-header-menu">
       <ul class="menu">
-        <li class="first leaf"><a href="http://ec.europa.eu/geninfo/legal_notices_en.htm">${_('Legal notice')}</a></li>
+        <li class="first leaf"><a href="http://ec.europa.eu/geninfo/legal_notices_${h.current_locale()}.htm">${_('Legal notice')}</a></li>
         <li class="leaf"><a href="${h.root_url()}contact">${_('Contact')}</a></li>
-        <li class="last leaf"><a href="http://ec.europa.eu/geninfo/query/search_en.html">${_('Search')}</a></li>
+        <li class="last leaf"><a href="http://ec.europa.eu/geninfo/query/search_${h.current_locale()}.html">${_('Search')}</a></li>
       </ul>
       <div id="language-selector">
         <a href="#" class="root">
