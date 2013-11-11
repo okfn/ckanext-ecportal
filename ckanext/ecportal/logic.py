@@ -589,11 +589,9 @@ def user_create(context, data_dict):
     :returns: the newly created user
     :rtype: dictionary
     '''
-    if 'schema' not in context:
-        new_context = context.copy()  # Don't modify caller's context
-        new_context['schema'] = schema.default_update_user_schema()
-    else:
-        new_context = context
+    new_context = context.copy()  # Don't modify caller's context
+    user_schema = context.get('schema', logic.schema.default_user_schema())
+    new_context['schema'] = schema.default_user_schema(user_schema)
     return logic.action.create.user_create(new_context, data_dict)
 
 
@@ -612,9 +610,8 @@ def user_update(context, data_dict):
     :rtype: dictionary
 
     '''
-    if 'schema' not in context:
-        new_context = context.copy()  # Don't modify caller's context
-        new_context['schema'] = schema.default_update_user_schema()
-    else:
-        new_context = context
+    new_context = context.copy()  # Don't modify caller's context
+    user_schema = context.get('schema',
+                              logic.schema.default_update_user_schema())
+    new_context['schema'] = schema.default_update_user_schema(user_schema)
     return logic.action.update.user_update(new_context, data_dict)
