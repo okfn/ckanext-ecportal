@@ -13,7 +13,6 @@ def terms_for_translation():
     libraries, etc.
     '''
     # header
-    _('Data Portal')
     _('Open Data Portal')
     _('European Union Open Data Portal')
 
