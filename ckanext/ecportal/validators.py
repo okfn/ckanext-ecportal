@@ -286,6 +286,9 @@ def update_rdf(key, data, errors, context):
         return
 
     origin_url, xml = rdfutil.update_rdf(rdf, name, context)
+    if not xml:
+        raise df.Invalid('Could not parse RDF for dataset {0}'.format(name))
+
     data[key] = xml
 
     if origin_url:
