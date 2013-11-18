@@ -10,9 +10,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: CKAN EU ODP \n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2013-09-17 14:32+0200\n"
-"PO-Revision-Date: 2013-09-20 07:34+0000\n"
-"Last-Translator: odptranslator <ecodptranslators@gmail.com>\n"
+"POT-Creation-Date: 2013-11-18 11:34+0100\n"
+"PO-Revision-Date: 2013-11-18 10:38+0000\n"
+"Last-Translator: johng <john.glover@okfn.org>\n"
 "Language-Team: German (http://www.transifex.com/projects/p/ckan-eu-odp/language/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -39,14 +39,14 @@ msgid "Search..."
 msgstr "Suchen ..."
 
 #: ckan/templates/package/search_form.html:10 ckan/templates/tag/index.html:13
-#: ../ckanext-ecportal/ckanext/ecportal/templates/layout_base.html:61
+#: ../ckanext-ecportal/ckanext/ecportal/templates/layout_base.html:62
 #: ../ckanext-ecportal/ckanext/ecportal/templates/package/search.html:28
 #: ../ckanext-ecportal/ckanext/ecportal/templates/package/search_form.html:10
 msgid "Search"
 msgstr "Suche"
 
 #: ckan/templates/tag/index.html:6 ckan/templates/tag/index.html:9
-#: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:21
+#: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:20
 msgid "Tags"
 msgstr "Tags"
 
@@ -84,29 +84,26 @@ msgid "There are %(count)s datasets tagged with [1:%(tagname)s]:"
 msgstr "Es gibt %(count)s mit [1:%(tagname)s] getaggte Datensätze:"
 
 #: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:16
-msgid "Data Portal"
-msgstr "Open-Data-Portal"
-
-#: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:17
-#: ../ckanext-ecportal/ckanext/ecportal/templates/layout_base.html:90
+#: ../ckanext-ecportal/ckanext/ecportal/templates/layout_base.html:20
+#: ../ckanext-ecportal/ckanext/ecportal/templates/layout_base.html:91
 msgid "Open Data Portal"
 msgstr "Offenes Datenportal"
 
-#: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:18
+#: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:17
 msgid "European Union Open Data Portal"
 msgstr "Offenes Datenportal der Europäischen Union"
 
-#: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:22
+#: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:21
 #: ../ckanext-ecportal/ckanext/ecportal/templates/package/read.html:49
 #: ../ckanext-ecportal/ckanext/ecportal/templates/publisher/read.html:72
 msgid "Keywords"
 msgstr "Schlüsselwörter"
 
-#: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:23
+#: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:22
 msgid "Resource formats"
 msgstr "Ressourcenformate"
 
-#: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:24
+#: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:23
 #: ../ckanext-ecportal/ckanext/ecportal/templates/package/read.html:23
 #: ../ckanext-ecportal/ckanext/ecportal/templates/package/read_core.html:23
 #: ../ckanext-ecportal/ckanext/ecportal/templates/package/resource_read.html:29
@@ -114,55 +111,55 @@ msgstr "Ressourcenformate"
 msgid "Publisher"
 msgstr "Datenlieferant"
 
-#: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:25
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read_core.html:167
+#: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:24
+#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read_core.html:175
 msgid "Language"
 msgstr "Sprache"
 
-#: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:26
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read_core.html:162
+#: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:25
+#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read_core.html:170
 msgid "Geographical Coverage"
 msgstr "Geografische Abdeckung"
 
-#: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:30
+#: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:29
 msgid "Number of datasets"
 msgstr "Anzahl der Datensätze"
 
-#: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:31
+#: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:30
 msgid "View dataset resources"
 msgstr "Datensatz-Ressourcen anzeigen"
 
-#: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:32
+#: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:31
 msgid "No downloadable resources."
 msgstr "Keine herunterladbaren Ressourcen."
 
-#: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:33
+#: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:32
 msgid "No description for this item"
 msgstr "Keine Beschreibung für dieses Element"
 
-#: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:36
+#: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:35
 msgid "Not authorized to see this page"
 msgstr "Keine Berechtigung zum Anzeigen dieser Seite"
 
-#: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:37
+#: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:36
 #, python-format
 msgid "Unauthorized to read package %s"
 msgstr "Keine Berechtigung zum Lesen von Paket %s"
 
-#: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:38
+#: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:37
 #, python-format
 msgid "Unauthorized to read resource %s"
 msgstr "Keine Berechtigung zum Lesen von Ressource %s"
 
-#: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:39
+#: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:38
 msgid "The resource could not be found."
 msgstr "Ressource konnte nicht gefunden werden"
 
-#: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:40
+#: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:39
 msgid "Dataset not found"
 msgstr "Datensatz nicht gefunden"
 
-#: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:41
+#: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:40
 msgid "Tag not found"
 msgstr "Tag nicht gefunden"
 
@@ -170,71 +167,124 @@ msgstr "Tag nicht gefunden"
 msgid "Cannot render package description"
 msgstr "Erstellen von Paketbeschreibung nicht möglich"
 
-#: ../ckanext-ecportal/ckanext/ecportal/templates/layout_base.html:59
-#: ../ckanext-ecportal/ckanext/ecportal/templates/layout_base.html:160
-msgid "Legal notice"
-msgstr "Rechtlicher Hinweis"
+#: ../ckanext-ecportal/ckanext/ecportal/templates/layout_base.html:19
+msgid ""
+"The EU Open Data Portal provides, via a metadata catalogue, a single point "
+"of access to data of the EU institutions, agencies and bodies for anyone to "
+"reuse."
+msgstr "Das offene Datenportal der Europäischen Union bietet über einen Metadatenkatalog einen öffentlichen zentralen Zugangspunkt zu weiterverwendbaren  Daten der Institutionen, Einrichtungen und sonstigen Stellen der EU."
+
+#: ../ckanext-ecportal/ckanext/ecportal/templates/layout_base.html:20
+#: ../ckanext-ecportal/ckanext/ecportal/templates/layout_base.html:81
+#: ../ckanext-ecportal/ckanext/ecportal/templates/layout_base.html:82
+msgid "European Union"
+msgstr "Europäische Union"
+
+#: ../ckanext-ecportal/ckanext/ecportal/templates/layout_base.html:20
+msgid "Open data"
+msgstr "Offene Daten"
+
+#: ../ckanext-ecportal/ckanext/ecportal/templates/layout_base.html:20
+msgid "EU data"
+msgstr "EU-Daten"
+
+#: ../ckanext-ecportal/ckanext/ecportal/templates/layout_base.html:20
+msgid "Linked data"
+msgstr "Verknüpfte Daten"
+
+#: ../ckanext-ecportal/ckanext/ecportal/templates/layout_base.html:20
+msgid "Datasets"
+msgstr "Datensätze"
+
+#: ../ckanext-ecportal/ckanext/ecportal/templates/layout_base.html:20
+msgid "Bodies of the EU"
+msgstr "Einrichtungen der EU "
+
+#: ../ckanext-ecportal/ckanext/ecportal/templates/layout_base.html:20
+msgid "Free access to data"
+msgstr "kostenlosen Zugang zu den Daten "
+
+#: ../ckanext-ecportal/ckanext/ecportal/templates/layout_base.html:20
+msgid "Metadata catalogue"
+msgstr "Katalog mit Metadaten"
+
+#: ../ckanext-ecportal/ckanext/ecportal/templates/layout_base.html:20
+msgid "SPARQL Query"
+msgstr "SPARQL-Abfrage"
+
+#: ../ckanext-ecportal/ckanext/ecportal/templates/layout_base.html:20
+msgid "API"
+msgstr "API"
+
+#: ../ckanext-ecportal/ckanext/ecportal/templates/layout_base.html:20
+msgid "Statistics"
+msgstr "Statistik"
+
+#: ../ckanext-ecportal/ckanext/ecportal/templates/layout_base.html:20
+msgid "Metadata vocabulary"
+msgstr "Metadatenvokabular"
+
+#: ../ckanext-ecportal/ckanext/ecportal/templates/layout_base.html:20
+#: ../ckanext-ecportal/ckanext/ecportal/templates/layout_base.html:98
+msgid "Applications"
+msgstr "Anwendungen"
 
 #: ../ckanext-ecportal/ckanext/ecportal/templates/layout_base.html:60
 #: ../ckanext-ecportal/ckanext/ecportal/templates/layout_base.html:161
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read_core.html:197
+msgid "Legal notice"
+msgstr "Rechtlicher Hinweis"
+
+#: ../ckanext-ecportal/ckanext/ecportal/templates/layout_base.html:61
+#: ../ckanext-ecportal/ckanext/ecportal/templates/layout_base.html:162
+#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read_core.html:205
 msgid "Contact"
 msgstr "Kontakt"
 
-#: ../ckanext-ecportal/ckanext/ecportal/templates/layout_base.html:66
+#: ../ckanext-ecportal/ckanext/ecportal/templates/layout_base.html:67
 msgid "Menu Arrow"
 msgstr "Menüpfeil"
 
-#: ../ckanext-ecportal/ckanext/ecportal/templates/layout_base.html:80
-#: ../ckanext-ecportal/ckanext/ecportal/templates/layout_base.html:81
-msgid "europa.eu"
-msgstr "europa.eu"
-
-#: ../ckanext-ecportal/ckanext/ecportal/templates/layout_base.html:90
+#: ../ckanext-ecportal/ckanext/ecportal/templates/layout_base.html:91
 msgid "EUROPA"
 msgstr "EUROPA"
 
-#: ../ckanext-ecportal/ckanext/ecportal/templates/layout_base.html:90
-#: ../ckanext-ecportal/ckanext/ecportal/templates/layout_base.html:96
+#: ../ckanext-ecportal/ckanext/ecportal/templates/layout_base.html:91
+#: ../ckanext-ecportal/ckanext/ecportal/templates/layout_base.html:97
 #: ../ckanext-ecportal/ckanext/ecportal/templates/home/index.html:13
 msgid "Data"
 msgstr "Daten"
 
-#: ../ckanext-ecportal/ckanext/ecportal/templates/layout_base.html:97
-msgid "Applications"
-msgstr "Anwendungen"
-
-#: ../ckanext-ecportal/ckanext/ecportal/templates/layout_base.html:98
+#: ../ckanext-ecportal/ckanext/ecportal/templates/layout_base.html:99
 msgid "Linked Data"
 msgstr "Verknüpfte Daten"
 
-#: ../ckanext-ecportal/ckanext/ecportal/templates/layout_base.html:99
+#: ../ckanext-ecportal/ckanext/ecportal/templates/layout_base.html:100
 msgid "About"
 msgstr "Über"
 
-#: ../ckanext-ecportal/ckanext/ecportal/templates/layout_base.html:103
 #: ../ckanext-ecportal/ckanext/ecportal/templates/layout_base.html:104
 #: ../ckanext-ecportal/ckanext/ecportal/templates/layout_base.html:105
+#: ../ckanext-ecportal/ckanext/ecportal/templates/layout_base.html:106
 msgid "Logout"
 msgstr "Logout"
 
-#: ../ckanext-ecportal/ckanext/ecportal/templates/layout_base.html:108
+#: ../ckanext-ecportal/ckanext/ecportal/templates/layout_base.html:109
 msgid "Data provider's area"
 msgstr "Bereich für den Datenlieferanten"
 
-#: ../ckanext-ecportal/ckanext/ecportal/templates/layout_base.html:138
+#: ../ckanext-ecportal/ckanext/ecportal/templates/layout_base.html:139
 msgid "Master content template placeholder … please replace me."
 msgstr "Master content template placeholder ... bitte austauschen."
 
-#: ../ckanext-ecportal/ckanext/ecportal/templates/layout_base.html:158
+#: ../ckanext-ecportal/ckanext/ecportal/templates/layout_base.html:159
 msgid "Last update"
 msgstr "Letzte Aktualisierung"
 
-#: ../ckanext-ecportal/ckanext/ecportal/templates/layout_base.html:159
+#: ../ckanext-ecportal/ckanext/ecportal/templates/layout_base.html:160
 msgid "About this site"
 msgstr "Über dieses Portal"
 
-#: ../ckanext-ecportal/ckanext/ecportal/templates/layout_base.html:162
+#: ../ckanext-ecportal/ckanext/ecportal/templates/layout_base.html:163
 msgid "Top"
 msgstr "Seitenanfang"
 
@@ -346,92 +396,92 @@ msgid "Visualisations"
 msgstr "Visualisierungen"
 
 #: ../ckanext-ecportal/ckanext/ecportal/templates/package/read_core.html:42
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read_core.html:65
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read_core.html:51
+#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read_core.html:69
+#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read_core.html:52
 msgid "Visualise"
 msgstr "Visualisieren"
 
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read_core.html:63
+#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read_core.html:67
 msgid "Resources"
 msgstr "Ressourcen"
 
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read_core.html:76
+#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read_core.html:81
 #: ../ckanext-ecportal/ckanext/ecportal/templates/package/resource_read.html:68
 msgid "Visit page"
 msgstr "Seite aufsuchen"
 
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read_core.html:80
+#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read_core.html:85
 #: ../ckanext-ecportal/ckanext/ecportal/templates/package/resource_read.html:72
 msgid "Download"
 msgstr "Herunterladen"
 
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read_core.html:89
+#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read_core.html:97
 msgid "(none)"
 msgstr "(keine)"
 
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read_core.html:102
+#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read_core.html:110
 msgid "URI"
 msgstr "URI"
 
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read_core.html:107
+#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read_core.html:115
 msgid "Alternative Title"
 msgstr "Alternative Bezeichnung"
 
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read_core.html:112
+#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read_core.html:120
 msgid "Status"
 msgstr "Status"
 
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read_core.html:117
+#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read_core.html:125
 msgid "Identifier"
 msgstr "Kennung"
 
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read_core.html:122
+#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read_core.html:130
 msgid "Interoperability Level"
 msgstr "Interoperabilitätsebene"
 
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read_core.html:127
+#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read_core.html:135
 msgid "Type of Dataset"
 msgstr "Datensatztyp"
 
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read_core.html:132
+#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read_core.html:140
 #: ../ckanext-ecportal/ckanext/ecportal/templates/package/resource_read.html:115
 msgid "Release Date"
 msgstr "Datum der Veröffentlichung"
 
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read_core.html:137
+#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read_core.html:145
 #: ../ckanext-ecportal/ckanext/ecportal/templates/package/resource_read.html:119
 msgid "Modified Date"
 msgstr "Geändertes Datum"
 
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read_core.html:142
+#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read_core.html:150
 msgid "Accrual Periodicity"
 msgstr "Periodengerechte Periodizität"
 
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read_core.html:147
+#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read_core.html:155
 msgid "Temporal Coverage From"
 msgstr "Zeitlicher Rahmen vom"
 
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read_core.html:152
+#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read_core.html:160
 msgid "Temporal Coverage To"
 msgstr "Zeitlicher Rahmen bis"
 
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read_core.html:157
+#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read_core.html:165
 msgid "Temporal Granularity"
 msgstr "Zeitliche Granularität"
 
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read_core.html:172
+#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read_core.html:180
 msgid "Version"
 msgstr "Version"
 
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read_core.html:177
+#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read_core.html:185
 msgid "Version Description"
 msgstr "Versionsbeschreibung"
 
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read_core.html:182
+#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read_core.html:190
 msgid "Country"
 msgstr "Land"
 
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read_core.html:203
+#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read_core.html:211
 msgid "Tel:"
 msgstr "Tel.:"
 

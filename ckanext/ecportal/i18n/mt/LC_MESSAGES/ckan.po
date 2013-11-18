@@ -8,9 +8,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: CKAN EU ODP \n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2013-09-17 14:32+0200\n"
-"PO-Revision-Date: 2013-09-18 10:53+0000\n"
-"Last-Translator: odptranslator <ecodptranslators@gmail.com>\n"
+"POT-Creation-Date: 2013-11-18 11:34+0100\n"
+"PO-Revision-Date: 2013-11-18 10:38+0000\n"
+"Last-Translator: johng <john.glover@okfn.org>\n"
 "Language-Team: Maltese (http://www.transifex.com/projects/p/ckan-eu-odp/language/mt/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -37,14 +37,14 @@ msgid "Search..."
 msgstr "Fittex..."
 
 #: ckan/templates/package/search_form.html:10 ckan/templates/tag/index.html:13
-#: ../ckanext-ecportal/ckanext/ecportal/templates/layout_base.html:61
+#: ../ckanext-ecportal/ckanext/ecportal/templates/layout_base.html:62
 #: ../ckanext-ecportal/ckanext/ecportal/templates/package/search.html:28
 #: ../ckanext-ecportal/ckanext/ecportal/templates/package/search_form.html:10
 msgid "Search"
 msgstr "Fittex"
 
 #: ckan/templates/tag/index.html:6 ckan/templates/tag/index.html:9
-#: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:21
+#: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:20
 msgid "Tags"
 msgstr "Teggs"
 
@@ -82,29 +82,26 @@ msgid "There are %(count)s datasets tagged with [1:%(tagname)s]:"
 msgstr "Hemm %(count)s settijiet tad-dejta tteggjati bi [1:%(tagname)s]:"
 
 #: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:16
-msgid "Data Portal"
-msgstr "Portal tad-Dejta"
-
-#: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:17
-#: ../ckanext-ecportal/ckanext/ecportal/templates/layout_base.html:90
+#: ../ckanext-ecportal/ckanext/ecportal/templates/layout_base.html:20
+#: ../ckanext-ecportal/ckanext/ecportal/templates/layout_base.html:91
 msgid "Open Data Portal"
 msgstr "Portal tad-Dejta Miftuħa"
 
-#: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:18
+#: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:17
 msgid "European Union Open Data Portal"
 msgstr "Portal tad-Dejta Miftuħa tal-Unjoni Ewropea"
 
-#: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:22
+#: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:21
 #: ../ckanext-ecportal/ckanext/ecportal/templates/package/read.html:49
 #: ../ckanext-ecportal/ckanext/ecportal/templates/publisher/read.html:72
 msgid "Keywords"
 msgstr "Kelmiet ewlenin"
 
-#: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:23
+#: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:22
 msgid "Resource formats"
 msgstr "Formati tar-riżorsi"
 
-#: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:24
+#: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:23
 #: ../ckanext-ecportal/ckanext/ecportal/templates/package/read.html:23
 #: ../ckanext-ecportal/ckanext/ecportal/templates/package/read_core.html:23
 #: ../ckanext-ecportal/ckanext/ecportal/templates/package/resource_read.html:29
@@ -112,55 +109,55 @@ msgstr "Formati tar-riżorsi"
 msgid "Publisher"
 msgstr "Pubblikatur"
 
-#: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:25
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read_core.html:167
+#: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:24
+#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read_core.html:175
 msgid "Language"
 msgstr "Lingwa"
 
-#: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:26
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read_core.html:162
+#: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:25
+#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read_core.html:170
 msgid "Geographical Coverage"
 msgstr "Firxa Ġeografika"
 
-#: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:30
+#: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:29
 msgid "Number of datasets"
 msgstr "Numru ta' settijiet tad-dejta"
 
-#: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:31
+#: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:30
 msgid "View dataset resources"
 msgstr "Ara r-riżorsi tas-settijiet tad-dejta"
 
-#: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:32
+#: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:31
 msgid "No downloadable resources."
 msgstr "Ebda riżorsi li tista' tiddawnlowdja"
 
-#: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:33
+#: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:32
 msgid "No description for this item"
 msgstr "Ebda deskrizzjoni għal dan l-oġġett"
 
-#: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:36
+#: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:35
 msgid "Not authorized to see this page"
 msgstr "Mhux awtorizzat biex tara din il-paġna"
 
-#: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:37
+#: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:36
 #, python-format
 msgid "Unauthorized to read package %s"
 msgstr "Mhux awtorizzat biex taqra l-pakkett %s"
 
-#: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:38
+#: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:37
 #, python-format
 msgid "Unauthorized to read resource %s"
 msgstr "Mhux awtorizzat biex taqra r-riżorsa %s"
 
-#: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:39
+#: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:38
 msgid "The resource could not be found."
 msgstr "Ir-riżorsa ma setgħetx tinstab."
 
-#: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:40
+#: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:39
 msgid "Dataset not found"
 msgstr "Is-sett tad-dejta ma nstabx"
 
-#: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:41
+#: ../ckanext-ecportal/ckanext/ecportal/for_translation.py:40
 msgid "Tag not found"
 msgstr "It-tegg ma nsabitx"
 
@@ -168,71 +165,124 @@ msgstr "It-tegg ma nsabitx"
 msgid "Cannot render package description"
 msgstr "Ma tistax tingħata deskrizzjoni tal-pakkett"
 
-#: ../ckanext-ecportal/ckanext/ecportal/templates/layout_base.html:59
-#: ../ckanext-ecportal/ckanext/ecportal/templates/layout_base.html:160
-msgid "Legal notice"
-msgstr "Avviż legali"
+#: ../ckanext-ecportal/ckanext/ecportal/templates/layout_base.html:19
+msgid ""
+"The EU Open Data Portal provides, via a metadata catalogue, a single point "
+"of access to data of the EU institutions, agencies and bodies for anyone to "
+"reuse."
+msgstr "Il-Portal tad-Dejta Miftuħa tal-UE jipprovdi, permezz ta' katalgu ta' metadejta, punt uniku ta' aċċess għad-dejta tal-istituzzjonijiet, l-aġenziji u l-entitajiet tal-UE, biex jintużaw minn kulħadd."
+
+#: ../ckanext-ecportal/ckanext/ecportal/templates/layout_base.html:20
+#: ../ckanext-ecportal/ckanext/ecportal/templates/layout_base.html:81
+#: ../ckanext-ecportal/ckanext/ecportal/templates/layout_base.html:82
+msgid "European Union"
+msgstr "L-Unjoni Ewropea"
+
+#: ../ckanext-ecportal/ckanext/ecportal/templates/layout_base.html:20
+msgid "Open data"
+msgstr "Miftuħ tad-Dejta"
+
+#: ../ckanext-ecportal/ckanext/ecportal/templates/layout_base.html:20
+msgid "EU data"
+msgstr "dejta tal-UE"
+
+#: ../ckanext-ecportal/ckanext/ecportal/templates/layout_base.html:20
+msgid "Linked data"
+msgstr "Dejta Llinkjata"
+
+#: ../ckanext-ecportal/ckanext/ecportal/templates/layout_base.html:20
+msgid "Datasets"
+msgstr "dejtasett"
+
+#: ../ckanext-ecportal/ckanext/ecportal/templates/layout_base.html:20
+msgid "Bodies of the EU"
+msgstr "entitajiet tal-UE"
+
+#: ../ckanext-ecportal/ckanext/ecportal/templates/layout_base.html:20
+msgid "Free access to data"
+msgstr "aċċess ħieles għad-dejta"
+
+#: ../ckanext-ecportal/ckanext/ecportal/templates/layout_base.html:20
+msgid "Metadata catalogue"
+msgstr "katalgu ta’ metadejta"
+
+#: ../ckanext-ecportal/ckanext/ecportal/templates/layout_base.html:20
+msgid "SPARQL Query"
+msgstr "Mistoqsija Lingwistika SPARQL"
+
+#: ../ckanext-ecportal/ckanext/ecportal/templates/layout_base.html:20
+msgid "API"
+msgstr "API"
+
+#: ../ckanext-ecportal/ckanext/ecportal/templates/layout_base.html:20
+msgid "Statistics"
+msgstr "istatistika"
+
+#: ../ckanext-ecportal/ckanext/ecportal/templates/layout_base.html:20
+msgid "Metadata vocabulary"
+msgstr "Vokabularju għall-metadejta"
+
+#: ../ckanext-ecportal/ckanext/ecportal/templates/layout_base.html:20
+#: ../ckanext-ecportal/ckanext/ecportal/templates/layout_base.html:98
+msgid "Applications"
+msgstr "Applikazzjonijiet"
 
 #: ../ckanext-ecportal/ckanext/ecportal/templates/layout_base.html:60
 #: ../ckanext-ecportal/ckanext/ecportal/templates/layout_base.html:161
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read_core.html:197
+msgid "Legal notice"
+msgstr "Avviż legali"
+
+#: ../ckanext-ecportal/ckanext/ecportal/templates/layout_base.html:61
+#: ../ckanext-ecportal/ckanext/ecportal/templates/layout_base.html:162
+#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read_core.html:205
 msgid "Contact"
 msgstr "Kuntatt"
 
-#: ../ckanext-ecportal/ckanext/ecportal/templates/layout_base.html:66
+#: ../ckanext-ecportal/ckanext/ecportal/templates/layout_base.html:67
 msgid "Menu Arrow"
 msgstr "Menu Arrow"
 
-#: ../ckanext-ecportal/ckanext/ecportal/templates/layout_base.html:80
-#: ../ckanext-ecportal/ckanext/ecportal/templates/layout_base.html:81
-msgid "europa.eu"
-msgstr "europa.eu"
-
-#: ../ckanext-ecportal/ckanext/ecportal/templates/layout_base.html:90
+#: ../ckanext-ecportal/ckanext/ecportal/templates/layout_base.html:91
 msgid "EUROPA"
 msgstr "EUROPA"
 
-#: ../ckanext-ecportal/ckanext/ecportal/templates/layout_base.html:90
-#: ../ckanext-ecportal/ckanext/ecportal/templates/layout_base.html:96
+#: ../ckanext-ecportal/ckanext/ecportal/templates/layout_base.html:91
+#: ../ckanext-ecportal/ckanext/ecportal/templates/layout_base.html:97
 #: ../ckanext-ecportal/ckanext/ecportal/templates/home/index.html:13
 msgid "Data"
 msgstr "Dejta"
 
-#: ../ckanext-ecportal/ckanext/ecportal/templates/layout_base.html:97
-msgid "Applications"
-msgstr "Applikazzjonijiet"
-
-#: ../ckanext-ecportal/ckanext/ecportal/templates/layout_base.html:98
+#: ../ckanext-ecportal/ckanext/ecportal/templates/layout_base.html:99
 msgid "Linked Data"
 msgstr "Dejta Llinkjata"
 
-#: ../ckanext-ecportal/ckanext/ecportal/templates/layout_base.html:99
+#: ../ckanext-ecportal/ckanext/ecportal/templates/layout_base.html:100
 msgid "About"
 msgstr "Tagħrif"
 
-#: ../ckanext-ecportal/ckanext/ecportal/templates/layout_base.html:103
 #: ../ckanext-ecportal/ckanext/ecportal/templates/layout_base.html:104
 #: ../ckanext-ecportal/ckanext/ecportal/templates/layout_base.html:105
+#: ../ckanext-ecportal/ckanext/ecportal/templates/layout_base.html:106
 msgid "Logout"
 msgstr "Oħroġ"
 
-#: ../ckanext-ecportal/ckanext/ecportal/templates/layout_base.html:108
+#: ../ckanext-ecportal/ckanext/ecportal/templates/layout_base.html:109
 msgid "Data provider's area"
 msgstr "Spazju tal-provveditur tad-dejta"
 
-#: ../ckanext-ecportal/ckanext/ecportal/templates/layout_base.html:138
+#: ../ckanext-ecportal/ckanext/ecportal/templates/layout_base.html:139
 msgid "Master content template placeholder … please replace me."
 msgstr "N/A"
 
-#: ../ckanext-ecportal/ckanext/ecportal/templates/layout_base.html:158
+#: ../ckanext-ecportal/ckanext/ecportal/templates/layout_base.html:159
 msgid "Last update"
 msgstr "L-aħħar appdejt"
 
-#: ../ckanext-ecportal/ckanext/ecportal/templates/layout_base.html:159
+#: ../ckanext-ecportal/ckanext/ecportal/templates/layout_base.html:160
 msgid "About this site"
 msgstr "Dwar dan is-sit"
 
-#: ../ckanext-ecportal/ckanext/ecportal/templates/layout_base.html:162
+#: ../ckanext-ecportal/ckanext/ecportal/templates/layout_base.html:163
 msgid "Top"
 msgstr "Fuq"
 
@@ -344,92 +394,92 @@ msgid "Visualisations"
 msgstr "Viżwalizzazzjonijiet"
 
 #: ../ckanext-ecportal/ckanext/ecportal/templates/package/read_core.html:42
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read_core.html:65
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read_core.html:51
+#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read_core.html:69
+#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read_core.html:52
 msgid "Visualise"
 msgstr "Ivviżwalizza"
 
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read_core.html:63
+#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read_core.html:67
 msgid "Resources"
 msgstr "Riżorsi"
 
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read_core.html:76
+#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read_core.html:81
 #: ../ckanext-ecportal/ckanext/ecportal/templates/package/resource_read.html:68
 msgid "Visit page"
 msgstr "Żur il-paġna"
 
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read_core.html:80
+#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read_core.html:85
 #: ../ckanext-ecportal/ckanext/ecportal/templates/package/resource_read.html:72
 msgid "Download"
 msgstr "Iddawnlodja"
 
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read_core.html:89
+#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read_core.html:97
 msgid "(none)"
 msgstr "(ebda)"
 
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read_core.html:102
+#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read_core.html:110
 msgid "URI"
 msgstr "URI"
 
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read_core.html:107
+#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read_core.html:115
 msgid "Alternative Title"
 msgstr "Titlu alternattiv"
 
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read_core.html:112
+#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read_core.html:120
 msgid "Status"
 msgstr "Status"
 
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read_core.html:117
+#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read_core.html:125
 msgid "Identifier"
 msgstr "Identifikatur"
 
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read_core.html:122
+#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read_core.html:130
 msgid "Interoperability Level"
 msgstr "Livell ta' Interoperabilità"
 
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read_core.html:127
+#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read_core.html:135
 msgid "Type of Dataset"
 msgstr "Tip ta' Dejtasett"
 
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read_core.html:132
+#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read_core.html:140
 #: ../ckanext-ecportal/ckanext/ecportal/templates/package/resource_read.html:115
 msgid "Release Date"
 msgstr "Data tal-Pubblikazzjoni"
 
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read_core.html:137
+#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read_core.html:145
 #: ../ckanext-ecportal/ckanext/ecportal/templates/package/resource_read.html:119
 msgid "Modified Date"
 msgstr "Data Modifikata"
 
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read_core.html:142
+#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read_core.html:150
 msgid "Accrual Periodicity"
 msgstr "Frekwenza tal-Perjodiċità"
 
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read_core.html:147
+#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read_core.html:155
 msgid "Temporal Coverage From"
 msgstr "Perjodu ta' Żmien Minn"
 
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read_core.html:152
+#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read_core.html:160
 msgid "Temporal Coverage To"
 msgstr "Perjodu ta’ Żmien sa"
 
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read_core.html:157
+#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read_core.html:165
 msgid "Temporal Granularity"
 msgstr "Perjodu ta' żmien"
 
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read_core.html:172
+#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read_core.html:180
 msgid "Version"
 msgstr "Verżjoni"
 
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read_core.html:177
+#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read_core.html:185
 msgid "Version Description"
 msgstr "Deskrizzjoni tal-Verżjoni"
 
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read_core.html:182
+#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read_core.html:190
 msgid "Country"
 msgstr "Pajjiż"
 
-#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read_core.html:203
+#: ../ckanext-ecportal/ckanext/ecportal/templates/package/read_core.html:211
 msgid "Tel:"
 msgstr "Tel:"
 
