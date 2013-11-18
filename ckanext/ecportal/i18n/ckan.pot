@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ckan 1.8.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2013-11-14 12:15+0100\n"
+"POT-Creation-Date: 2013-11-18 11:34+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -171,6 +171,8 @@ msgid ""
 msgstr ""
 
 #: ../ckanext-ecportal/ckanext/ecportal/templates/layout_base.html:20
+#: ../ckanext-ecportal/ckanext/ecportal/templates/layout_base.html:81
+#: ../ckanext-ecportal/ckanext/ecportal/templates/layout_base.html:82
 msgid "European Union"
 msgstr ""
 
@@ -236,11 +238,6 @@ msgstr ""
 
 #: ../ckanext-ecportal/ckanext/ecportal/templates/layout_base.html:67
 msgid "Menu Arrow"
-msgstr ""
-
-#: ../ckanext-ecportal/ckanext/ecportal/templates/layout_base.html:81
-#: ../ckanext-ecportal/ckanext/ecportal/templates/layout_base.html:82
-msgid "European Union homepage"
 msgstr ""
 
 #: ../ckanext-ecportal/ckanext/ecportal/templates/layout_base.html:91
